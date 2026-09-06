@@ -2764,6 +2764,51 @@ body {
   margin-top: 3px;
 }
 
+/* Unified Coupon & SF+ Status Badges */
+.coupon-badge-join-sf {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #34d399;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 4px rgba(16, 185, 129, 0.15);
+}
+
+.coupon-badge-no-sf {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 4px rgba(245, 158, 11, 0.15);
+}
+
+.coupon-badge-tradeup {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 242, 254, 0.14);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  color: #38bdf8;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 242, 254, 0.15);
+}
+
 .quarantined-card {
   border: 1px solid rgba(239, 68, 68, 0.45) !important;
   box-shadow: 0 0 16px rgba(239, 68, 68, 0.15) !important;

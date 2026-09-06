@@ -622,6 +622,77 @@ function renderData() {
   }
 }
 
+// Helper: Unified Coupon & SF+ Status Badge
+function getSfPlusBadgeInfo(v, item) {
+  if (!v || !v.couponCode) return null;
+  const coupon = String(v.couponCode).trim();
+
+  if (coupon === "Studentcrd" || (v.saleMode === "STUDENT")) {
+    return {
+      type: "STUDENT",
+      badgeText: "🏷️ คูปอง Studentcrd",
+      pillClass: "badge-studentcrd",
+      sfText: null
+    };
+  }
+
+  if (coupon.startsWith("T-UP") || v.saleMode === "TRADE_UP") {
+    return {
+      type: "TRADE_UP",
+      badgeText: `🏷️ คูปอง ${coupon} • Trade Up`,
+      pillClass: "coupon-badge-tradeup",
+      sfText: null
+    };
+  }
+
+  const conds = v.conditions || [];
+  const modelText = (item && item.model) ? item.model : (v.model || "");
+
+  // Check explicit non-SF markers
+  const isExplicitNoSf =
+    conds.some(c => c.includes("ไม่ร่วม SF+") || c.includes("ราคานี้ไม่ร่วม SF+") || c.includes("ไม่ผ่อนกับ SF+")) ||
+    modelText.includes("ไม่ร่วม SF+") ||
+    modelText.includes("ไม่สามารถใช้ร่วมกับ SF+ ได้") ||
+    (v.allowedPaymentMethods && v.allowedPaymentMethods.length > 0 && !v.allowedPaymentMethods.includes("SF_PLUS"));
+
+  // Check explicit join-SF markers
+  const isExplicitJoinSf =
+    v.saleMode === "SF_PLUS" ||
+    conds.some(c => c.includes("ร่วม SF+") || c.includes("ร่วมผ่อนสินเชื่อ Samsung Finance+") || c.includes("ผ่อนกับ SF+")) ||
+    modelText.includes("ร่วม SF+");
+
+  if (isExplicitNoSf) {
+    return {
+      type: "NO_SF",
+      badgeText: `🏷️ คูปอง ${coupon} • ไม่ร่วม SF+`,
+      pillClass: "coupon-badge-no-sf",
+      sfText: "ไม่ร่วม SF+"
+    };
+  }
+
+  if (isExplicitJoinSf) {
+    let extra = "";
+    if (conds.some(c => c.includes("ดาวน์ไม่เกิน 10%") || c.includes("ดาวน์ ≤ 10%"))) {
+      extra = " (ดาวน์ ≤ 10%)";
+    } else if (conds.some(c => c.includes("เทรดอัพ") || c.includes("Trade Up"))) {
+      extra = " (+ Trade Up)";
+    }
+    return {
+      type: "JOIN_SF",
+      badgeText: `🏷️ คูปอง ${coupon} • ร่วม SF+${extra}`,
+      pillClass: "coupon-badge-join-sf",
+      sfText: `ร่วม SF+${extra}`
+    };
+  }
+
+  return {
+    type: "STANDARD",
+    badgeText: `🏷️ คูปอง ${coupon}`,
+    pillClass: "coupon-tag",
+    sfText: null
+  };
+}
+
 // Render Clean 8-Column Table View
 function renderTableView(items) {
   stockTableBody.innerHTML = items
@@ -706,16 +777,37 @@ function renderTableView(items) {
           </div>
         `;
 
-        // Special items: Coupon, Conditions, Gifts
+        // Special items: Accessory 50% pill
         if (compat) {
           specialHtml += `<span class="bundle-pill">⚡ แลกซื้อลด 50% (เฉพาะซื้อพร้อม Tablet)</span>`;
         }
-        if (v.couponCode) {
-          const isStd = v.couponCode === "Studentcrd";
-          specialHtml += `<span class="${isStd ? 'badge-studentcrd' : 'coupon-tag'}">🏷️ คูปอง ${v.couponCode}</span>`;
+
+        // UNIFIED COUPON & SF+ STATUS BADGE
+        const sfBadge = getSfPlusBadgeInfo(v, item);
+        if (sfBadge) {
+          specialHtml += `<span class="${sfBadge.pillClass}">${sfBadge.badgeText}</span>`;
         }
+
+        // Remaining conditions (deduplicating redundant SF/coupon strings already shown in the badge)
         if (v.conditions && v.conditions.length > 0) {
           v.conditions.forEach(cond => {
+            const trimmed = cond.trim();
+            if (
+              trimmed.includes("*ร่วม SF+") || 
+              trimmed.includes("*ไม่ร่วม SF+") || 
+              trimmed.includes("ร่วมผ่อนสินเชื่อ Samsung Finance+") ||
+              trimmed.includes("ราคานี้ไม่ร่วม SF+") ||
+              trimmed.startsWith("01 *") ||
+              trimmed.startsWith("02 *") ||
+              trimmed.startsWith("03 *") ||
+              trimmed.startsWith("04 *") ||
+              trimmed.startsWith("05 *") ||
+              trimmed.startsWith("06 *") ||
+              trimmed === "01" || trimmed === "02" || trimmed === "03" || trimmed === "04"
+            ) {
+              return;
+            }
+
             const isWarn = v.riskLevel === "MEDIUM" && (cond.includes("ไม่ร่วม") || cond.includes("ห้าม") || cond.includes("เลือก"));
             specialHtml += `<span class="${isWarn ? 'badge-risk-warning' : 'coupon-tag'}">${isWarn ? '⚠️ ' : ''}${cond}</span>`;
           });
@@ -848,11 +940,11 @@ function renderCardView(items) {
             ${v.discount > 0 ? `<span class="promo-discount">-฿${fmtNumber(v.discount)}</span>` : ''}
           </div>
         `;
-        if (v.couponCode) {
-          const isStd = v.couponCode === "Studentcrd";
-          cardSpecial += `<div class="${isStd ? 'badge-studentcrd' : 'coupon-tag'}" style="width: 100%;">🏷️ คูปอง ${v.couponCode}</div>`;
+        const sfBadge = getSfPlusBadgeInfo(v, item);
+        if (sfBadge) {
+          cardSpecial += `<div class="${sfBadge.pillClass}" style="width: 100%; justify-content: center;">${sfBadge.badgeText}</div>`;
         }
-        if (v.riskLevel === "MEDIUM") cardSpecial += `<div class="badge-risk-warning" style="width: 100%;">⚠️ มีเงื่อนไขเตือนพิเศษ</div>`;
+        if (v.riskLevel === "MEDIUM") cardSpecial += `<div class="badge-risk-warning" style="width: 100%; justify-content: center;">⚠️ มีเงื่อนไขเตือนพิเศษ</div>`;
       } else {
         cardPricing = `
           <div class="card-pricing-block">
@@ -1077,14 +1169,20 @@ function renderCashierSummary() {
   let couponHtml = "";
   if (v.couponCode) {
     const isStd = currentCashierSaleMode === "STUDENT" || v.couponCode === "Studentcrd";
+    const sfBadge = getSfPlusBadgeInfo(v, item);
+    let subDesc = isStd ? '*ห้ามใช้คูปอง 01-06 หรือโปรโมชั่นอื่นซ้อน*' : '*ต้องระบุในช่อง Coupon ของระบบขาย*';
+    if (sfBadge && sfBadge.sfText) {
+      subDesc += ` • ${sfBadge.sfText}`;
+    }
+
     couponHtml = `
       <div class="cashier-coupon-highlight ${isStd ? 'student' : ''}">
         <div>
-          <strong style="color: ${isStd ? '#d8b4fe' : 'var(--neon-emerald)'}; font-size: 0.9rem;">
-            ${isStd ? '🎓 คูปองโปรโมชั่นนักเรียน/นักศึกษา:' : '🏷️ คูปองตัดขายที่ต้องใช้:'}
+          <strong style="color: ${isStd ? '#d8b4fe' : (sfBadge && sfBadge.type === 'NO_SF' ? '#fbbf24' : 'var(--neon-emerald)')}; font-size: 0.9rem;">
+            ${isStd ? '🎓 คูปองโปรโมชั่นนักเรียน/นักศึกษา:' : `🏷️ คูปองตัดขาย ${sfBadge && sfBadge.sfText ? '• ' + sfBadge.sfText : ''}:`}
           </strong>
           <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 2px;">
-            ${isStd ? '*ห้ามใช้คูปอง 01-06 หรือโปรโมชั่นอื่นซ้อน*' : '*ต้องระบุในช่อง Coupon ของระบบขาย*'}
+            ${subDesc}
           </div>
         </div>
         <span class="cashier-coupon-code">${v.couponCode}</span>
@@ -1101,14 +1199,26 @@ function renderCashierSummary() {
 
   let condHtml = "";
   if (v.conditions && v.conditions.length > 0) {
-    condHtml = `
-      <div style="margin-top: 8px;">
-        <div style="font-size: 0.76rem; color: #94a3b8; margin-bottom: 4px;">เงื่อนไขสำคัญที่ต้องตรวจสอบ:</div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          ${v.conditions.map(c => `<span style="font-size: 0.8rem; color: #cbd5e1;">• ${c}</span>`).join('')}
+    const displayConds = v.conditions.filter(c => {
+      const t = c.trim();
+      return !t.includes("*ร่วม SF+") && 
+             !t.includes("*ไม่ร่วม SF+") && 
+             !t.includes("ร่วมผ่อนสินเชื่อ Samsung Finance+") && 
+             !t.includes("ราคานี้ไม่ร่วม SF+") &&
+             !t.startsWith("01 *") && !t.startsWith("02 *") && !t.startsWith("04 *") &&
+             t !== "01" && t !== "02" && t !== "04";
+    });
+
+    if (displayConds.length > 0) {
+      condHtml = `
+        <div style="margin-top: 8px;">
+          <div style="font-size: 0.76rem; color: #94a3b8; margin-bottom: 4px;">เงื่อนไขสำคัญที่ต้องตรวจสอบ:</div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            ${displayConds.map(c => `<span style="font-size: 0.8rem; color: #cbd5e1;">• ${c}</span>`).join('')}
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    }
   }
 
   let giftHtml = "";
