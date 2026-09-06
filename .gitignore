@@ -1,0 +1,11 @@
+# Temporary and extraction files
+*.zip
+*_extracted/
+excel_extracted/
+*.bak
+*.log
+.tempmediaStorage/
+.user_uploaded/
+.system_generated/
+*.ps1
+scratch/

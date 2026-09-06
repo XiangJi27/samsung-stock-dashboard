@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAMSUNG Stock & Promotion Dashboard - Copperwired Branch</title>
+  <meta name="description" content="ระบบจัดการสต็อกและโปรโมชั่น Samsung แบบเรียลไทม์ โทนดาร์กสไตล์พรีเมียม สำหรับหน้าร้านสาขา">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Header Navigation -->
+    <header class="top-nav">
+      <div class="brand-section">
+        <div class="brand-badge">
+          <span class="pulse-dot"></span>
+          <span class="brand-tag">COPPERWIRED POS • SAMSUNG AYUTTHAYA CITY PARK</span>
+        </div>
+        <div class="title-group">
+          <h1 class="main-title">
+            <span class="text-samsung">SAMSUNG</span> STOCK & PROMOTIONS
+          </h1>
+          <p class="sub-title">ระบบจัดการและเช็กสต็อกสาขาแบบเรียลไทม์ • ข้อมูลซิงค์จาก Stock.xlsx (Promotion Sheet)</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Utility / Governance Tools Group -->
+        <div class="header-toolset">
+          <button id="btnAuditModal" class="hdr-btn" title="ระบบ 95/5 Risk Automation & Exception Review Queue">
+            <svg class="hdr-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>95/5 Risk Guard</span>
+            <span class="hdr-badge badge-emerald" id="headerAuditBadge">216 Pub • 4 Blocked</span>
+          </button>
+
+          <button id="btnPromoExpiry" class="hdr-btn" title="ดูรายละเอียดแคมเปญและวันหมดอายุโปรโมชั่น">
+            <svg class="hdr-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>วันหมดอายุโปร</span>
+            <span class="hdr-badge badge-amber">เหลือ 1 วัน</span>
+          </button>
+
+          <button id="btnDailyEmail" class="hdr-btn" title="เปิดระบบตรวจนับสต็อกจริงเทียบระบบ และส่งเมล Outlook">
+            <svg class="hdr-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 11l3 3L22 4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+            <span>นับสต็อก & ส่งเมล</span>
+          </button>
+        </div>
+
+        <div class="header-divider"></div>
+
+        <!-- Sync & Promotion Action Group -->
+        <div class="header-primary-group">
+          <button id="btnUpdatePromo" class="hdr-btn hdr-btn-accent" title="อัปเดตและตรวจสอบโปรโมชั่นใหม่จากไฟล์ Excel ประจำสาขา">
+            <svg class="hdr-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>อัปเดตโปร Excel</span>
+            <span class="hdr-badge badge-accent">Auto</span>
+          </button>
+
+          <div class="sync-cluster">
+            <div class="sync-status-minimal" title="สถานะเชื่อมต่อสต็อกเรียลไทม์">
+              <span class="dot-online"></span>
+              <span class="sync-time-text" id="lastSyncTime">16:35 น.</span>
+            </div>
+            <button id="btnSync" class="hdr-btn hdr-btn-primary" title="ดึงหรือวางข้อมูลสต็อกจาก Nimbus">
+              <svg class="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+              </svg>
+              <span>ซิงค์สต็อก Nimbus</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- KPI Metric Stat Cards -->
+    <section class="stats-grid" id="statsGrid">
+      <div class="stat-card total-stock">
+        <div class="stat-icon-wrapper cyan">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">สต็อกทั้งหมดในระบบ</div>
+          <div class="stat-value" id="kpiTotalStock">0 <span class="unit">เครื่อง</span></div>
+          <div class="stat-subtext">
+            <span>ร้านเรา (ชั้น 1): <strong id="kpiFloor1" class="text-cyan">0</strong></span> • 
+            <span>สาขาชั้น 2: <strong id="kpiFloor2" class="text-amber">0</strong></span>
+          </div>
+        </div>
+        <div class="card-glow cyan-glow"></div>
+      </div>
+
+      <div class="stat-card active-deals">
+        <div class="stat-icon-wrapper emerald">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">ส่วนลดสูงสุด</div>
+          <div class="stat-value text-emerald" id="kpiMaxDiscount">-฿0</div>
+          <div class="stat-subtext">รายการร่วมโปร <strong id="kpiPromoCount">0</strong> รายการ</div>
+        </div>
+        <div class="card-glow emerald-glow"></div>
+      </div>
+
+      <div class="stat-card student-deals">
+        <div class="stat-icon-wrapper violet">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">โปรโมชั่นนักเรียน / นักศึกษา</div>
+          <div class="stat-value text-violet" id="kpiStudentCount">0 <span class="unit">รุ่น</span></div>
+          <div class="stat-subtext">ลดเพิ่มสูงสุด <strong class="text-violet">10%</strong> (ร่วม SF+)</div>
+        </div>
+        <div class="card-glow violet-glow"></div>
+      </div>
+
+      <div class="stat-card premium-gifts">
+        <div class="stat-icon-wrapper coral">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">ของแถม Premium พิเศษ</div>
+          <div class="stat-value text-coral" id="kpiGiftHighlight">ไมโครเวฟ 23L</div>
+          <div class="stat-subtext" id="kpiGiftSubtext">มูลค่า ฿3,990 สำหรับ Galaxy A27 5G</div>
+        </div>
+        <div class="card-glow coral-glow"></div>
+      </div>
+    </section>
+
+    <!-- 95/5 Automation Architecture & Risk Tiers Banner -->
+    <section class="automation-banner" id="automationBanner">
+      <div class="auto-banner-left">
+        <div class="version-pill" title="เวอร์ชันโปรโมชั่นที่ระบบตรวจสอบผ่านและกำลังใช้งานอยู่">
+          <span class="version-pulse"></span>
+          <span class="version-label">PROMO VERSION:</span>
+          <strong class="version-code" id="activeVersionCode">PROMO-20260828-V2</strong>
+          <span class="version-date">(รอบ 28 ส.ค. - 6 ก.ย. 2026)</span>
+        </div>
+        <div class="risk-stats-group">
+          <div class="risk-chip chip-low" id="chipLowRisk" title="ผ่านกฎการตรวจสอบครบถ้วน 100% เผยแพร่อัตโนมัติ">
+            <span class="chip-dot dot-green"></span>
+            <span class="chip-label">Auto-Published (เขียว):</span>
+            <strong id="statLowRisk">216</strong>
+          </div>
+          <div class="risk-chip chip-med" id="chipMedRisk" title="ราคาถูกต้อง แต่มีเงื่อนไขเตือน">
+            <span class="chip-dot dot-yellow"></span>
+            <span class="chip-label">Warning (เหลือง):</span>
+            <strong id="statMedRisk">11</strong>
+          </div>
+          <div class="risk-chip chip-high" id="chipHighRisk" title="ข้อมูลต้นฉบับมีข้อผิดพลาด (#ERROR! / ขัดแย้ง) กักกันราคา">
+            <span class="chip-dot dot-red"></span>
+            <span class="chip-label">Quarantined (แดง):</span>
+            <strong id="statHighRisk">4</strong>
+          </div>
+        </div>
+      </div>
+      <div class="auto-banner-right">
+        <button id="btnOpenExceptionQueue" class="btn-exception-queue" title="เปิดดูรายการข้อยกเว้นและศูนย์ตรวจสอบกฎ">
+          <span>🛡️ Exception Queue (<strong id="btnExceptionCount">15</strong>)</span>
+        </button>
+        <button id="btnRollbackQuick" class="btn-rollback-quick" title="ย้อนกลับไปเวอร์ชันโปรโมชั่นก่อนหน้า (Rollback)">
+          <span>🔄 Rollback V1</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Toolbar: Search, Filters, View Switcher -->
+    <section class="toolbar-section">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="ค้นหาตามชื่อรุ่น (เช่น S26, Fold, A17, Tab, Watch, Buds), สี, P/N, ของแถม..." autocomplete="off">
+        <button id="btnClearSearch" class="btn-clear hidden" title="ล้างการค้นหา">&times;</button>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-pills" id="categoryFilters">
+          <button class="pill active" data-filter="all">ทั้งหมด (<span id="countAll">0</span>)</button>
+          <button class="pill" data-filter="s-series">Galaxy S Series</button>
+          <button class="pill" data-filter="z-series">Galaxy Z (Fold/Flip)</button>
+          <button class="pill" data-filter="a-series">Galaxy A Series</button>
+          <button class="pill" data-filter="tab">Galaxy Tab</button>
+          <button class="pill highlight-kb" data-filter="accessories">⌨️ แลกซื้อ Keyboard & Cover (-50%) (<span id="countKb">16</span>)</button>
+          <button class="pill" data-filter="watch">Watch & Ring</button>
+          <button class="pill" data-filter="buds">Galaxy Buds</button>
+          <button class="pill" data-filter="pass-f">🏷️ พาส F</button>
+          <button class="pill highlight-pill" data-filter="student">🎓 โปร นศ.</button>
+          <button class="pill highlight-gift" data-filter="gift">🎁 มีของแถม</button>
+          <button class="pill alert-pill" data-filter="instock">📦 มีของพร้อมขาย</button>
+        </div>
+
+        <div class="view-toggles">
+          <button id="btnViewTable" class="view-btn active" title="ตารางข้อมูลละเอียด">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="3" y1="15" x2="21" y2="15"></line>
+              <line x1="9" y1="3" x2="9" y2="21"></line>
+            </svg>
+          </button>
+          <button id="btnViewCards" class="view-btn" title="การ์ดสินค้า">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Area: Table View & Card View -->
+    <main class="main-content">
+      
+      <!-- Sale Mode Selector Bar (Multi-Variant Pricing Controller) -->
+      <div class="salemode-toolbar" id="saleModeToolbar">
+        <div class="salemode-label-group">
+          <span class="salemode-icon">🛒</span>
+          <span class="salemode-title">เลือกเส้นทางการขาย (Sale Mode):</span>
+          <span class="salemode-hint">*ราคาและคูปองจะคำนวณตามเงื่อนไขที่เลือกโดยอัตโนมัติ (หยุดการเดา)</span>
+        </div>
+        <div class="salemode-buttons" id="saleModeButtons">
+          <button class="salemode-btn active" data-mode="ALL">
+            <span class="mode-icon">🌐</span>
+            <span class="mode-text">ทุกเส้นทาง (All Modes)</span>
+          </button>
+          <button class="salemode-btn mode-normal" data-mode="NORMAL">
+            <span class="mode-icon">🏷️</span>
+            <span class="mode-text">ซื้อปกติ (สด/รูดเต็ม)</span>
+            <span class="mode-badge">ราคามาตรฐาน</span>
+          </button>
+          <button class="salemode-btn mode-sfplus" data-mode="SF_PLUS">
+            <span class="mode-icon">🟢</span>
+            <span class="mode-text">ร่วม SF+ (ดาวน์น้อย)</span>
+            <span class="mode-badge">คูปอง 01</span>
+          </button>
+          <button class="salemode-btn mode-standard" data-mode="STANDARD_PAYMENT">
+            <span class="mode-icon">💳</span>
+            <span class="mode-text">สด / รูดเต็ม / ผ่อนบัตร</span>
+            <span class="mode-badge">คูปอง 02</span>
+          </button>
+          <button class="salemode-btn mode-student" data-mode="STUDENT">
+            <span class="mode-icon">🎓</span>
+            <span class="mode-text">โปร นศ. (ลด 10-15%)</span>
+            <span class="mode-badge badge-studentcrd">คูปอง Studentcrd</span>
+          </button>
+          <button class="salemode-btn mode-tradeup" data-mode="TRADE_UP">
+            <span class="mode-icon">🔵</span>
+            <span class="mode-text">เก่าแลกใหม่ (Trade Up)</span>
+            <span class="mode-badge">T-UP-CO-S</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Accessory & Bundle 50% Notice Banner (Shown when accessories filter is active) -->
+      <div id="accessoryNoticeBanner" class="accessory-notice-banner hidden">
+        <div class="accessory-notice-icon">⚡</div>
+        <div class="accessory-notice-content">
+          <div class="accessory-notice-title">เงื่อนไขสิทธิ์แลกซื้อลด 50% (Tablet Accessory Bundle Promotion)</div>
+          <div class="accessory-notice-desc">
+            สิทธิ์แลกซื้อเคสคีย์บอร์ดและสมาร์ทบุ๊กคัฟเวอร์ลด 50% <strong>ต้องแลกซื้อพร้อมเครื่อง Samsung Galaxy Tab รุ่นที่รองรับในใบเสร็จเดียวกันเท่านั้น</strong> (ไม่ร่วมรายการกรณีซื้อแยกเฉพาะอุปกรณ์เสริม)
+          </div>
+        </div>
+        <div class="accessory-notice-tag">🏷️ ลดสูงสุด 50%</div>
+      </div>
+
+      <!-- Table View Container -->
+      <div class="table-card" id="tableViewContainer">
+        <div class="table-responsive">
+          <table class="premium-table" id="stockTable">
+            <thead>
+              <tr>
+                <th class="th-model">รุ่น & รหัสสินค้า</th>
+                <th class="th-color">สี (Color)</th>
+                <th class="th-stock-f1" style="text-align: center;">ร้านเรา (ช1)</th>
+                <th class="th-stock-f2" style="text-align: center;">สาขาชั้น 2</th>
+                <th class="th-price-compact">ราคา & โปรโมชั่น</th>
+                <th class="th-special">สิทธิ์พิเศษ / ของแถม / เงื่อนไข</th>
+                <th class="th-student">โปร นศ. (Studentcrd)</th>
+                <th class="th-action" style="text-align: center;">ดูโปรโมชั่น</th>
+              </tr>
+            </thead>
+            <tbody id="stockTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Card Grid View Container -->
+      <div class="cards-grid hidden" id="cardViewContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-icon">🔍</div>
+        <h3>ไม่พบสินค้าที่ตรงกับการค้นหา</h3>
+        <p>ลองค้นหาด้วยคำอื่น หรือกดปุ่ม "ทั้งหมด" เพื่อรีเซ็ตตัวกรอง</p>
+        <button class="btn-reset" id="btnResetSearch">รีเซ็ตการค้นหา</button>
+      </div>
+    </main>
+
+    <!-- Daily Stock Count & Reconciliation Modal -->
+    <div id="emailModal" class="modal-backdrop hidden">
+      <div class="modal-card modal-large">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">📋</span>
+            <div>
+              <h2 class="modal-title">ตรวจนับสต็อกจริง เทียบยอดระบบ (Reconciliation)</h2>
+              <p class="modal-subtitle">กรอกยอดนับจริงหน้าร้าน (ชั้น 1) เทียบกับระบบ Nimbus เพื่อตรวจสอบส่วนต่างก่อนส่งเมล Outlook</p>
+            </div>
+          </div>
+          <button id="btnCloseModal" class="btn-close-modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Live Date & Store Banner -->
+          <div class="email-meta-banner">
+            <div>
+              <span class="meta-label">สโตร์:</span>
+              <strong class="meta-val">Samsung Ayutthaya City Park ร้านเรา (ชั้น 1)</strong>
+            </div>
+            <div>
+              <span class="meta-label">วันที่ตรวจนับ:</span>
+              <strong class="meta-val text-cyan" id="emailReportDate">05/09/2026</strong>
+            </div>
+          </div>
+
+          <!-- Reconciliation Comparison Table -->
+          <div class="reconciliation-table-wrapper">
+            <table class="reconcile-table">
+              <thead>
+                <tr>
+                  <th>หมวดหมู่สินค้า</th>
+                  <th style="text-align: center;">ยอดในระบบ (Nimbus)</th>
+                  <th style="text-align: center;">ยอดนับจริงหน้าร้าน</th>
+                  <th style="text-align: center;">ส่วนต่าง (Diff)</th>
+                  <th style="text-align: center;">ผลการตรวจสอบ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="reconcile-cat">
+                      <span>📱 SmartPhone</span>
+                      <small class="text-muted">A-Series, S-Series, Z Fold/Flip</small>
+                    </div>
+                  </td>
+                  <td class="text-center"><strong class="system-num text-cyan" id="sysPhone">237</strong></td>
+                  <td class="text-center">
+                    <input type="number" class="count-input" id="inputPhone" value="237" min="0">
+                  </td>
+                  <td class="text-center" id="diffPhone"><span class="diff-badge match">0</span></td>
+                  <td class="text-center" id="statusPhone"><span class="status-badge success">✓ ตรงกัน</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="reconcile-cat">
+                      <span>💻 Tablet</span>
+                      <small class="text-muted">Tab S Series, Tab A Series</small>
+                    </div>
+                  </td>
+                  <td class="text-center"><strong class="system-num text-cyan" id="sysTab">38</strong></td>
+                  <td class="text-center">
+                    <input type="number" class="count-input" id="inputTab" value="38" min="0">
+                  </td>
+                  <td class="text-center" id="diffTab"><span class="diff-badge match">0</span></td>
+                  <td class="text-center" id="statusTab"><span class="status-badge success">✓ ตรงกัน</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="reconcile-cat">
+                      <span>⌚ SmartWatch & Ring</span>
+                      <small class="text-muted">Watch Ultra, Watch8, Watch7, Ring, Fit3</small>
+                    </div>
+                  </td>
+                  <td class="text-center"><strong class="system-num text-cyan" id="sysWatch">61</strong></td>
+                  <td class="text-center">
+                    <input type="number" class="count-input" id="inputWatch" value="61" min="0">
+                  </td>
+                  <td class="text-center" id="diffWatch"><span class="diff-badge match">0</span></td>
+                  <td class="text-center" id="statusWatch"><span class="status-badge success">✓ ตรงกัน</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="reconcile-cat">
+                      <span>🎧 Galaxy Buds</span>
+                      <small class="text-muted">Buds4 Pro, Buds4, Buds3 FE, Buds Core</small>
+                    </div>
+                  </td>
+                  <td class="text-center"><strong class="system-num text-cyan" id="sysBuds">44</strong></td>
+                  <td class="text-center">
+                    <input type="number" class="count-input" id="inputBuds" value="44" min="0">
+                  </td>
+                  <td class="text-center" id="diffBuds"><span class="diff-badge match">0</span></td>
+                  <td class="text-center" id="statusBuds"><span class="status-badge success">✓ ตรงกัน</span></td>
+                </tr>
+
+                <tr class="row-highlight-core">
+                  <td>
+                    <strong>📦 รวมเครื่องหลัก (Core Devices)</strong>
+                  </td>
+                  <td class="text-center"><strong class="system-num text-emerald" id="sysCore">380</strong></td>
+                  <td class="text-center"><strong class="counted-total-num text-emerald" id="countCore">380</strong></td>
+                  <td class="text-center" id="diffCore"><span class="diff-badge match">0</span></td>
+                  <td class="text-center" id="statusCore"><span class="status-badge success">✓ ยอดตรง 100%</span></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="reconcile-cat">
+                      <span>🔌 Adapter & Accessories</span>
+                      <small class="text-muted">Adapter, Case, Cover, Film, Band</small>
+                    </div>
+                  </td>
+                  <td class="text-center"><strong class="system-num text-amber" id="sysAdapter">189</strong></td>
+                  <td class="text-center">
+                    <input type="number" class="count-input" id="inputAdapter" value="189" min="0">
+                  </td>
+                  <td class="text-center" id="diffAdapter"><span class="diff-badge match">0</span></td>
+                  <td class="text-center" id="statusAdapter"><span class="status-badge success">✓ ตรงกัน</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Overall Audit Banner -->
+          <div class="audit-summary-bar" id="auditSummaryBar">
+            <div class="audit-icon" id="auditIcon">✅</div>
+            <div class="audit-text">
+              <strong id="auditHeading">ยอดตรวจนับจริงหน้าร้านตรงกับระบบ 100% (ไม่มีสินค้าขาด/เกิน)</strong>
+              <p id="auditDetail">พร้อมสำหรับการส่งรายงานสรุปยอดเข้าอีเมล Outlook เรียบร้อยครับ</p>
+            </div>
+            <button id="btnAutoFillSystem" class="btn-autofill" title="รีเซ็ตยอดนับจริงให้ตรงกับยอดระบบทั้งหมด">ดึงยอดระบบใส่ทั้งหมด</button>
+          </div>
+
+          <!-- Email Preview Box -->
+          <div class="email-preview-wrapper">
+            <div class="preview-header">
+              <span>ตัวอย่างข้อความสรุปยอดตรวจนับจริง (สำหรับวางส่งใน Outlook):</span>
+            </div>
+            <textarea id="emailTextPreview" class="email-textarea" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btnCopyEmailText" class="btn-primary-action">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>📋 คัดลอกรายงานผลนับจริง (ส่ง Outlook)</span>
+          </button>
+          <button id="btnLaunchOutlook" class="btn-secondary-action">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>✉️ เปิด Outlook ส่งเมล</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promo Expiration Center Modal -->
+    <div id="promoModal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">🔥</span>
+            <div>
+              <h2 class="modal-title">ตารางแคมเปญและวันหมดอายุโปรโมชั่น (Promotion Expiration)</h2>
+              <p class="modal-subtitle">ข้อมูลอัปเดตจากไฟล์ Pro Tablet Acc 3Aug2026 และ Aug 2026 Promotion Retail Shop</p>
+            </div>
+          </div>
+          <button id="btnClosePromoModal" class="btn-close-modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Urgent Expiration Alert Banner -->
+          <div class="urgent-alert-banner">
+            <div class="fire-icon-large">⏳</div>
+            <div class="urgent-content">
+              <h3>แคมเปญหลักกำลังจะหมดเขตพรุ่งนี้!</h3>
+              <p>แคมเปญรอบสิงหาคม-กันยายน 2026 ทั้งหมดจะสิ้นสุดในวันที่ <strong>6 กันยายน 2026 เวลา 23:59 น.</strong> (เหลือเวลาอีก 1 วัน)</p>
+            </div>
+          </div>
+
+          <!-- Active Campaigns List -->
+          <div class="promo-campaign-list">
+            
+            <div class="promo-item urgent">
+              <div class="promo-item-header">
+                <span class="promo-badge-tag tag-retail">Smartphone Retail Shop</span>
+                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
+              </div>
+              <h4 class="promo-item-title">NTW Promotion สิงหาคม - กันยายน 2026 (รอบ 28 ส.ค. - 6 ก.ย.)</h4>
+              <p class="promo-item-desc">โปรโมชั่นเครื่องเปล่าลดทันที Galaxy A07, A17, A27, A37, S25 FE, S26 Series และ Z Fold/Flip</p>
+              <div class="promo-meta-footer">
+                <span>📅 ระยะเวลา: <strong>28 ส.ค. - 6 ก.ย. 2026</strong></span>
+                <span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>
+              </div>
+            </div>
+
+            <div class="promo-item urgent">
+              <div class="promo-item-header">
+                <span class="promo-badge-tag tag-tab">Tablet & Accessories</span>
+                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
+              </div>
+              <h4 class="promo-item-title">แคมเปญ Galaxy Tab & อุปกรณ์เสริม (รอบ 3 ส.ค. - 6 ก.ย.)</h4>
+              <p class="promo-item-desc">โปรโมชั่นซื้อเครื่องคู่ Keyboard Case หรือ Book Cover และลดราคาอุปกรณ์เสริม 50-70%</p>
+              <div class="promo-meta-footer">
+                <span>📅 ระยะเวลา: <strong>3 ส.ค. - 6 ก.ย. 2026</strong></span>
+                <span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>
+              </div>
+            </div>
+
+            <div class="promo-item urgent">
+              <div class="promo-item-header">
+                <span class="promo-badge-tag tag-watch">Wearable & Watch Band</span>
+                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
+              </div>
+              <h4 class="promo-item-title">แคมเปญ Galaxy Watch & สายนาฬิกา (รอบ 7 ส.ค. - 6 ก.ย.)</h4>
+              <p class="promo-item-desc">โปรพิเศษสายนาฬิกา Galaxy Watch5, Watch7, Watch8 ลดพิเศษ 50-70%</p>
+              <div class="promo-meta-footer">
+                <span>📅 ระยะเวลา: <strong>7 ส.ค. - 6 ก.ย. 2026</strong></span>
+                <span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>
+              </div>
+            </div>
+
+            <div class="promo-item urgent">
+              <div class="promo-item-header">
+                <span class="promo-badge-tag tag-gift">Special Premium Gift</span>
+                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
+              </div>
+              <h4 class="promo-item-title">ของแถมไมโครเวฟ 23L มูลค่า ฿3,990 สำหรับ Galaxy A27 5G</h4>
+              <p class="promo-item-desc">แถมฟรีไมโครเวฟ 23 ลิตร เมื่อซื้อ Galaxy A27 5G (งดของแถมกรณี Flash Sale)</p>
+              <div class="promo-meta-footer">
+                <span>📅 สิ้นสุด: <strong>6 กันยายน 2026</strong></span>
+                <span class="text-coral">ของแถมมีจำนวนจำกัด</span>
+              </div>
+            </div>
+
+            <div class="promo-item expired">
+              <div class="promo-item-header">
+                <span class="promo-badge-tag">Flash Sale</span>
+                <span class="countdown-pill expired">สิ้นสุดแคมเปญแล้ว</span>
+              </div>
+              <h4 class="promo-item-title">SES Flash Sale (27 - 30 สิงหาคม 2026)</h4>
+              <p class="promo-item-desc">โปรโมชั่นลดราคาพิเศษ Flash Sale ปลายเดือนสิงหาคม</p>
+              <div class="promo-meta-footer">
+                <span>📅 ระยะเวลา: <strong>27 - 30 ส.ค. 2026</strong></span>
+                <span class="text-muted">หมดอายุแล้ว (Expired)</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btnClosePromoBottom" class="btn-primary-action" style="width: 100%;">
+            <span>รับทราบวันหมดอายุโปรโมชั่น</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 95/5 Risk Automation & Exception Review Center Modal -->
+    <div id="auditModal" class="modal-backdrop hidden">
+      <div class="modal-card modal-large">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">🛡️</span>
+            <div>
+              <h2 class="modal-title">95/5 Risk Automation & Exception Review Center</h2>
+              <p class="modal-subtitle">ระบบตรวจสอบกฎอัตโนมัติ • กักกันรายการเสี่ยง • บริหารจัดการข้อยกเว้นและประวัติเวอร์ชัน Rollback</p>
+            </div>
+          </div>
+          <button id="btnCloseAuditModal" class="btn-close-modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Automation Metric Highlights -->
+          <div class="audit-score-card">
+            <div class="audit-score-badge">
+              <span class="score-number">95</span>
+              <span class="score-max">/ 5</span>
+            </div>
+            <div class="audit-score-content">
+              <div class="audit-status-tag success">✓ 95/5 AUTOMATION MODEL ACTIVE (อนุมัติอัตโนมัติ ~95% • กักกันเสี่ยง ~5%)</div>
+              <h3 class="audit-score-title">AI แปลงเอกสาร ➔ ระบบกฎตัดสิน ➔ หน้าร้านเลือก Sale Mode</h3>
+              <p class="audit-score-desc">
+                ระบบจะไม่ให้คนอนุมัติทั้งไฟล์เพื่อไม่ให้เกิดคอขวด รายการที่ข้อมูลครบและสมการถูกต้อง (216 รายการ) จะ Auto-Publish ทันที ส่วนรายการเสี่ยง (#ERROR! หรือเงื่อนไขขัดแย้ง) จะถูกกักไว้ใน Exception Queue
+              </p>
+            </div>
+            <button id="btnRunLiveAudit" class="btn-rerun-audit" title="กดเพื่อรันการตรวจสอบระบบใหม่อีกครั้งแบบเรียลไทม์">
+              <span>▶️ รันตรวจกฎสด</span>
+            </button>
+          </div>
+
+          <!-- Modal Tabs Header -->
+          <div class="modal-tabs-header">
+            <button class="modal-tab-btn active" data-tab="tab-exceptions">
+              <span>⚠️ Exception Queue</span>
+              <span class="tab-badge badge-amber" id="modalExceptionBadge">15 รายการ</span>
+            </button>
+            <button class="modal-tab-btn" data-tab="tab-rules">
+              <span>⚡ กฎตรวจสอบตายตัว 7 ข้อ</span>
+              <span class="tab-badge">7 Passed</span>
+            </button>
+            <button class="modal-tab-btn" data-tab="tab-versions">
+              <span>🕒 ประวัติเวอร์ชัน & Rollback</span>
+              <span class="tab-badge">V2 Active</span>
+            </button>
+            <button class="modal-tab-btn" data-tab="tab-architecture">
+              <span>🏗️ ฐานข้อมูล 3 ชั้น (Architecture)</span>
+            </button>
+          </div>
+
+          <!-- TAB 1: Exception Review Queue -->
+          <div class="modal-tab-pane" id="tab-exceptions">
+            <div class="exception-list">
+              
+              <!-- High Risk Quarantined Section -->
+              <div style="font-size: 0.86rem; font-weight: 700; color: #f87171; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                <span>🔴 รายการระดับแดง: กักกันราคา (Quarantined - 4 รายการ)</span>
+                <span style="font-size: 0.74rem; font-weight: normal; color: #94a3b8;">*Dashboard จะปิดกั้นราคาโปรโมชั่น แสดงเฉพาะราคาปกติ RRP จนกว่าจะแก้ไข*</span>
+              </div>
+
+              <!-- Exception 1 -->
+              <div class="exception-card high-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy S25 Ultra 512GB (Titanium Gray)
+                    <span class="badge-quarantine">⛔ ถูกกักกัน (Quarantined)</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Pro Tablet Acc samsung 3Aug2026.xlsx • แถว 49</div>
+                </div>
+                <div class="exception-reason-box">
+                  <span class="exception-reason-highlight">สาเหตุที่กักกัน:</span> พบค่า <code>#ERROR!</code> ในคอลัมน์ราคา RRP ของชีต Pro Tablet Acc ห้าม AI คำนวณหรือเดาราคาเองเด็ดขาด
+                </div>
+                <div class="exception-actions">
+                  <span style="font-size: 0.78rem; color: #94a3b8;">การแสดงผลหน้าร้าน: ซ่อนราคาโปรโมชั่น • แสดงราคาปกติ ฿48,900</span>
+                  <button class="btn-exception-action keep" onclick="showToast('🔒 ยืนยันคงสถานะกักกันตามกฎความปลอดภัย')">คงการกักกัน</button>
+                </div>
+              </div>
+
+              <!-- Exception 2 -->
+              <div class="exception-card high-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy S25 Ultra 1TB (Titanium Black)
+                    <span class="badge-quarantine">⛔ ถูกกักกัน (Quarantined)</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Pro Tablet Acc samsung 3Aug2026.xlsx • แถว 50</div>
+                </div>
+                <div class="exception-reason-box">
+                  <span class="exception-reason-highlight">สาเหตุที่กักกัน:</span> พบสูตรคำนวณ <code>#ERROR!</code> ในไฟล์ Excel ต้นทาง กักกันเฉพาะ SKU นี้ ไม่หยุดโปรโมชั่นส่วนอื่นของทั้งไฟล์
+                </div>
+                <div class="exception-actions">
+                  <span style="font-size: 0.78rem; color: #94a3b8;">การแสดงผลหน้าร้าน: ซ่อนราคาโปรโมชั่น • แสดงราคาปกติ ฿54,900</span>
+                  <button class="btn-exception-action keep" onclick="showToast('🔒 ยืนยันคงสถานะกักกันตามกฎความปลอดภัย')">คงการกักกัน</button>
+                </div>
+              </div>
+
+              <!-- Exception 3 -->
+              <div class="exception-card high-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy Z Flip7 (256GB Draft Promo)
+                    <span class="badge-quarantine">⛔ ถูกกักกัน (Quarantined)</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Aug_ 2026 Promotion Retail • แถว 88 (Draft)</div>
+                </div>
+                <div class="exception-reason-box">
+                  <span class="exception-reason-highlight">สาเหตุที่กักกัน:</span> สมการลดราคาไม่ตรง (RRP ฿34,900 - ส่วนลด ฿6,000 แต่ราคาขายระบุ ฿27,900 ผลต่าง ฿1,000)
+                </div>
+                <div class="exception-actions">
+                  <span style="font-size: 0.78rem; color: #94a3b8;">การแสดงผลหน้าร้าน: ซ่อนราคาโปรโมชั่น รอฝ่ายการตลาดแก้ไขไฟล์ต้นทาง</span>
+                  <button class="btn-exception-action keep" onclick="showToast('🔒 ยืนยันคงสถานะกักกันตามกฎความปลอดภัย')">คงการกักกัน</button>
+                </div>
+              </div>
+
+              <!-- Exception 4 -->
+              <div class="exception-card high-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy Tab S10 FE+ WiFi (Old Campaign)
+                    <span class="badge-quarantine">⛔ ถูกกักกัน (Quarantined)</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Pro Tablet Acc samsung • แถว 112</div>
+                </div>
+                <div class="exception-reason-box">
+                  <span class="exception-reason-highlight">สาเหตุที่กักกัน:</span> ไม่ระบุวันที่สิ้นสุดแคมเปญ (Missing Effective End Date) ไม่อนุญาตให้ต่ออายุเองอัตโนมัติ
+                </div>
+                <div class="exception-actions">
+                  <span style="font-size: 0.78rem; color: #94a3b8;">การแสดงผลหน้าร้าน: ระงับโปรโมชั่นจนกว่าจะมีวันที่ชัดเจน</span>
+                  <button class="btn-exception-action keep" onclick="showToast('🔒 ยืนยันคงสถานะกักกันตามกฎความปลอดภัย')">คงการกักกัน</button>
+                </div>
+              </div>
+
+              <!-- Medium Risk Warning Section -->
+              <div style="font-size: 0.86rem; font-weight: 700; color: #fbbf24; margin: 12px 0 4px 0; display: flex; align-items: center; gap: 6px;">
+                <span>🟡 รายการระดับเหลือง: เผยแพร่พร้อมคำเตือน (Warning - 11 รายการ)</span>
+                <span style="font-size: 0.74rem; font-weight: normal; color: #94a3b8;">*แสดงราคาปกติ แต่ติดป้ายเตือนเงื่อนไขชัดเจน ห้ามซ่อนในหมายเหตุยาวๆ*</span>
+              </div>
+
+              <!-- Warning 1: Z Flip8 -->
+              <div class="exception-card med-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy Z Flip8 (256GB / 512GB)
+                    <span class="badge-risk-warning">⚠️ ร่วม SF+ แต่ไม่ร่วม Trade Up</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Aug_ 2026 Promotion Retail • แถว 24</div>
+                </div>
+                <div class="exception-reason-box">
+                  <strong>เงื่อนไขซับซ้อน:</strong> สินค้าร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) ได้ แต่ไม่ร่วมโปรโมชั่นเก่าแลกใหม่ (Trade Up) ระบบแสดงป้ายเตือนให้พนักงานตรวจสอบก่อนตัดขาย
+                </div>
+              </div>
+
+              <!-- Warning 2: A27 Microwave Gift -->
+              <div class="exception-card med-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy A27 5G
+                    <span class="badge-risk-warning">⚠️ แถมไมโครเวฟ 23L (งดแถมกรณี Flash Sale)</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Aug_ 2026 Promotion Retail • แถว 41</div>
+                </div>
+                <div class="exception-reason-box">
+                  <strong>เงื่อนไขของแถม:</strong> ได้รับเตาอบไมโครเวฟ Samsung 23L มูลค่า ฿3,990 แต่หากลูกค้าตัดราคา Flash Sale จะงดรับของแถม Premium
+                </div>
+              </div>
+
+              <!-- Warning 3: S25 FE Routes -->
+              <div class="exception-card med-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Galaxy S25 FE 256GB
+                    <span class="badge-risk-warning">⚠️ มี 2 เส้นทางราคา (SF+ vs ไม่ร่วม SF+)</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Aug_ 2026 Promotion Retail • แถว 14, 16</div>
+                </div>
+                <div class="exception-reason-box">
+                  <strong>Multi-Variant:</strong> ร่วม SF+ = ฿23,900 (คูปอง 01) | ไม่ร่วม SF+ (ซื้อสด/รูดเต็ม) = ฿20,900 (คูปอง 02) พนักงานต้องกดเลือก Sale Mode บน Dashboard
+                </div>
+              </div>
+
+              <!-- Warning 4: Tablet 50% Bundle -->
+              <div class="exception-card med-risk">
+                <div class="exception-card-top">
+                  <div class="exception-item-title">
+                    Keyboard Slim & Smart Book Cover (16 รุ่น)
+                    <span class="badge-risk-warning">⚠️ สิทธิ์ลด 50% ต้องแลกซื้อพร้อมเครื่องในใบเสร็จเดียวกัน</span>
+                  </div>
+                  <div class="exception-source-tag">📄 Pro Tablet Acc samsung • แถว 70-86</div>
+                </div>
+                <div class="exception-reason-box">
+                  <strong>Bundle Exclusivity:</strong> แยกรายการออกจากแท็บ Tab หลักไปยังแท็บอุปกรณ์เสริมเฉพาะ และเตือนห้ามขายลด 50% กรณีซื้อแยกเครื่องเปล่า
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TAB 2: Rule Engine Verification -->
+          <div class="modal-tab-pane hidden" id="tab-rules">
+            <div class="audit-cards-grid">
+              
+              <!-- Rule 1: Fixed Discount Equation -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 1: สมการลดบาท</span>
+                </div>
+                <h4 class="audit-item-name">สมการส่วนลดบาทตายตัว (Fixed Discount Equation)</h4>
+                <p class="audit-item-text">
+                  <code>calculatedPrice = RRP - discountValue === netPrice</code> ตรวจสอบครบ 182 รายการ ถูกต้องสมบูรณ์ 100%
+                </p>
+              </div>
+
+              <!-- Rule 2: Percentage Discount Equation -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 2: สมการลด %</span>
+                </div>
+                <h4 class="audit-item-name">สมการส่วนลดเปอร์เซ็นต์ (Percentage Discount Equation)</h4>
+                <p class="audit-item-text">
+                  <code>Math.round(RRP * (1 - Rate)) === netPrice</code> (Watch8 Classic BT: 17,900 * 0.7 = ฿12,530 ถูกต้อง ไม่มี -฿0.3)
+                </p>
+              </div>
+
+              <!-- Rule 3: SF+ Conflict Check -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 3: ตรวจ SF+ Conflict</span>
+                </div>
+                <h4 class="audit-item-name">ตรวจสอบความขัดแย้งของสินเชื่อ SF+</h4>
+                <p class="audit-item-text">
+                  หากระบุ <code>sfPlusEligible === true</code> แต่มีข้อความ "ห้ามใช้ร่วมกับ SF+" ระบบจะ Reject และกักกันทันที
+                </p>
+              </div>
+
+              <!-- Rule 4: Student Exclusivity Check -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 4: ตรวจโปร นศ.</span>
+                </div>
+                <h4 class="audit-item-name">โปรโมชั่นนักเรียน/นักศึกษาห้ามซ้อนคูปอง</h4>
+                <p class="audit-item-text">
+                  เมื่อเลือก Sale Mode "STUDENT" ระบบจะตัดคูปองหน้าร้านและ Trade Up ออกทันทีตามกฎของ Samsung Retail
+                </p>
+              </div>
+
+              <!-- Rule 5: Zero #ERROR! Policy -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 5: กักกัน #ERROR!</span>
+                </div>
+                <h4 class="audit-item-name">Zero #ERROR! Quarantine Enforcement</h4>
+                <p class="audit-item-text">
+                  ตรวจพบ 4 รายการที่มี #ERROR! ในชีต Tablet Acc ระบบกักกันเฉพาะ SKU นั้น โดยไม่ทำให้โปรโมชั่นส่วนอื่นของระบบค้าง
+                </p>
+              </div>
+
+              <!-- Rule 6: Date Range Gating -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 6: คัดเลือกตามวันที่</span>
+                </div>
+                <h4 class="audit-item-name">Auto Effective Date Selection</h4>
+                <p class="audit-item-text">
+                  <code>currentDate >= startDate && currentDate <= endDate</code> เปิด-ปิดโปรโมชั่นตามวันเวลาจริง ไม่พึ่งชื่อชีต
+                </p>
+              </div>
+
+              <!-- Rule 7: Dynamic Stock Baseline -->
+              <div class="audit-item pass">
+                <div class="audit-item-top">
+                  <span class="audit-item-badge success">PASS ✓</span>
+                  <span class="audit-cat-tag">กฎที่ 7: คำนวณสต็อกสด</span>
+                </div>
+                <h4 class="audit-item-name">Dynamic Real-Time Stock Reconciliation</h4>
+                <p class="audit-item-text">
+                  ยอดตั้งต้นสำหรับตรวจนับรายวันคำนวณจากฐานข้อมูลจริงแบบ Real-time (ลบค่าคงที่ Hardcode ออก 100%)
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TAB 3: Version History & Rollback -->
+          <div class="modal-tab-pane hidden" id="tab-versions">
+            <div class="version-card current">
+              <div class="version-header">
+                <div class="version-history-title">
+                  <span style="color: var(--neon-cyan);">PROMO-20260828-V2</span> (เวอร์ชันปัจจุบัน Active)
+                </div>
+                <span class="badge-auto-approved">✓ CURRENT ACTIVE</span>
+              </div>
+              <p style="font-size: 0.82rem; color: #cbd5e1; margin: 4px 0;">
+                นำเข้าข้อมูลแคมเปญรอบ 28 ส.ค. - 6 ก.ย. 2026 จากไฟล์ Retail Shop และ Tablet Acc ล่าสุด
+              </p>
+              <div class="version-details-grid">
+                <div>📁 ต้นทาง: <strong>Retail Shop Samsung (28 Aug - 6 Sep)</strong></div>
+                <div>📊 นำเข้า: <strong>231 รายการ</strong> (Auto-Pub: 216, Warn: 11, Quarantined: 4)</div>
+                <div>🕒 เวลาเผยแพร่: <strong>2026-08-28 14:00 น.</strong></div>
+                <div>🔒 File Hash: <strong>SHA256: 8f2a...c4b9</strong></div>
+              </div>
+            </div>
+
+            <div class="version-card">
+              <div class="version-header">
+                <div class="version-history-title">
+                  <span style="color: #94a3b8;">PROMO-20260819-V1</span> (เวอร์ชันก่อนหน้า)
+                </div>
+                <button class="btn-exception-action approve" id="btnExecuteRollback" style="padding: 4px 10px;">
+                  🔄 สลับไปใช้ V1 (Rollback)
+                </button>
+              </div>
+              <p style="font-size: 0.82rem; color: #94a3b8; margin: 4px 0;">
+                แคมเปญรอบ 19 - 27 ส.ค. 2026 (สำรองไว้กรณีโปรโมชั่นรอบใหม่มีข้อผิดพลาดร้ายแรง)
+              </p>
+              <div class="version-details-grid">
+                <div>📁 ต้นทาง: <strong>Retail Shop Samsung (19 - 27 Aug)</strong></div>
+                <div>📊 นำเข้า: <strong>228 รายการ</strong></div>
+                <div>🕒 เวลาเผยแพร่: <strong>2026-08-19 09:00 น.</strong></div>
+                <div>🔒 สถานะ: <strong>Standby for Rollback</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: 3-Layer Architecture -->
+          <div class="modal-tab-pane hidden" id="tab-architecture">
+            <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 16px;">
+              <h4 style="color: var(--neon-cyan); margin-bottom: 8px;">สถาปัตยกรรมข้อมูล 3 ชั้น (3-Layer Promotion Architecture)</h4>
+              <p style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.6;">
+                <strong>หลักการสำคัญ:</strong> AI ไม่ใช่ผู้อนุมัติราคา แต่ AI เป็นผู้แปลงเอกสาร ส่วนระบบกฎเป็นผู้ตัดสินว่าสามารถเผยแพร่ได้หรือไม่
+              </p>
+              
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+                <div style="background: rgba(255, 255, 255, 0.04); border-left: 3px solid #3b82f6; padding: 10px 14px; border-radius: 6px;">
+                  <strong style="color: #60a5fa;">ชั้นที่ 1: Raw Import (ข้อมูลดิบ)</strong>
+                  <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">
+                    เก็บสิ่งที่อ่านจาก Excel โดยไม่ดัดแปลง: Source File, Source Sheet, Source Row, Raw Model, Raw RRP, Raw Discount, Raw Net, Raw Coupon, Raw Remark
+                  </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.04); border-left: 3px solid #10b981; padding: 10px 14px; border-radius: 6px;">
+                  <strong style="color: #34d399;">ชั้นที่ 2: Validated Promotions (ข้อมูลตรวจสอบแล้ว)</strong>
+                  <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">
+                    จัดโครงสร้างและตรวจสอบด้วยกฎ 7 ข้อ: SKU, Sale Mode, SF+ Eligible, Trade Up Eligible, Student Eligible, Risk Level (Low/Med/High), Confidence Score
+                  </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.04); border-left: 3px solid var(--neon-cyan); padding: 10px 14px; border-radius: 6px;">
+                  <strong style="color: var(--neon-cyan);">ชั้นที่ 3: Published Promotions (ข้อมูลพร้อมขึ้น Dashboard)</strong>
+                  <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">
+                    Dashboard อ่านเฉพาะตารางนี้: Promotion ID, Sale Mode, Display Price, Coupon, Conditions, Effective Date Range, Version, Published At
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Audit Scan Output Console -->
+          <div id="auditConsoleLog" class="audit-console-box hidden">
+            <div class="console-header">
+              <span class="console-dot"></span>
+              <span>LIVE AUDIT RULE VERIFICATION CONSOLE (ผลตรวจระบบแบบเรียลไทม์)</span>
+            </div>
+            <pre id="auditLogText" class="console-text"></pre>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btnCloseAuditBottom" class="btn-primary-action" style="width: 100%;">
+            <span>✓ ปิดศูนย์ควบคุม (95/5 Risk Automation Active)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cashier Pre-Sale Panel Modal (หน้าจอช่วยตัดขายหน้าร้าน) -->
+    <div id="cashierModal" class="modal-backdrop hidden">
+      <div class="modal-card modal-cashier">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">📋</span>
+            <div>
+              <h2 class="modal-title" id="cashierModelTitle">Galaxy S25 FE 256GB</h2>
+              <p class="modal-subtitle">รายละเอียดโปรโมชั่นและเงื่อนไขการขาย • ตรวจสอบความถูกต้องและแหล่งที่มาของราคา</p>
+            </div>
+          </div>
+          <button id="btnCloseCashierModal" class="btn-close-modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Product Quick Meta -->
+          <div class="cashier-meta-card">
+            <div class="cashier-meta-col">
+              <span class="cashier-meta-label">รหัสสินค้า (P/N):</span>
+              <strong id="cashierPn" class="text-cyan">-</strong>
+            </div>
+            <div class="cashier-meta-col">
+              <span class="cashier-meta-label">สีตัวเครื่อง:</span>
+              <span id="cashierColor" class="cashier-color-badge">-</span>
+            </div>
+            <div class="cashier-meta-col">
+              <span class="cashier-meta-label">สต็อกหน้าร้าน (ชั้น 1):</span>
+              <strong id="cashierStockF1" class="text-emerald">0 เครื่อง</strong>
+            </div>
+            <div class="cashier-meta-col">
+              <span class="cashier-meta-label">สถานะความพร้อม:</span>
+              <span id="cashierRiskBadge" class="badge-auto-approved">● พร้อมขาย</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Select Sale Mode -->
+          <div class="cashier-section">
+            <div class="cashier-section-title">
+              <span class="step-num">1</span>
+              <span>เลือกรูปแบบการขาย (Sale Mode) ที่ลูกค้าต้องการ:</span>
+            </div>
+            <div class="cashier-mode-grid" id="cashierModeGrid">
+              <button class="cashier-mode-btn" data-mode="STANDARD_PAYMENT">
+                <span class="mode-icon">💳</span>
+                <div class="mode-info">
+                  <strong>สด / รูดเต็ม / ผ่อนบัตร</strong>
+                  <small>เงินสด • รูดเต็ม • ผ่อนบัตร</small>
+                </div>
+              </button>
+              <button class="cashier-mode-btn" data-mode="SF_PLUS">
+                <span class="mode-icon">🟢</span>
+                <div class="mode-info">
+                  <strong>สินเชื่อ SF+</strong>
+                  <small>ผ่อนสินเชื่อ • คูปอง 01</small>
+                </div>
+              </button>
+              <button class="cashier-mode-btn student" data-mode="STUDENT">
+                <span class="mode-icon">🎓</span>
+                <div class="mode-info">
+                  <strong>นักเรียน/นักศึกษา</strong>
+                  <small>คูปอง Studentcrd</small>
+                </div>
+              </button>
+              <button class="cashier-mode-btn" data-mode="TRADE_UP">
+                <span class="mode-icon">🔵</span>
+                <div class="mode-info">
+                  <strong>เก่าแลกใหม่</strong>
+                  <small>Trade Up (T-UP-CO-S)</small>
+                </div>
+              </button>
+              <button class="cashier-mode-btn" data-mode="MBO">
+                <span class="mode-icon">🎁</span>
+                <div class="mode-info">
+                  <strong>ซื้อร่วมตามเงื่อนไข</strong>
+                  <small>MBO / แลกซื้อ</small>
+                </div>
+              </button>
+              <button class="cashier-mode-btn" data-mode="NORMAL">
+                <span class="mode-icon">🏷️</span>
+                <div class="mode-info">
+                  <strong>ราคาปกติ</strong>
+                  <small>ไม่มีโปรโมชั่น RRP</small>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Price & Coupon Summary Box -->
+          <div class="cashier-summary-card" id="cashierSummaryCard">
+            <!-- Rendered dynamically via JS -->
+          </div>
+
+          <!-- Step 3: Pre-Sale Checklist (Hidden in Phase 1) -->
+          <div class="cashier-section" id="preSaleChecklist" style="display: none;">
+            <div class="cashier-section-title">
+              <span class="step-num">2</span>
+              <span>Checklist ตรวจสอบก่อนตัดขายหน้าร้าน (Pre-Sale Checklist):</span>
+            </div>
+            <div class="checklist-grid">
+              <label class="checklist-item">
+                <input type="checkbox" id="chkSku" checked>
+                <span>☑ รหัสสินค้าและความจุตรง</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" id="chkPayment" checked>
+                <span>☑ รูปแบบการชำระถูกต้อง</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" id="chkCoupon" checked>
+                <span>☑ คูปองถูกต้อง</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" id="chkExpiry" checked>
+                <span id="cashierExpiryLabel">☑ ตรวจสอบวันหมดอายุโปรโมชั่น</span>
+              </label>
+              <label class="checklist-item">
+                <input type="checkbox" id="chkGift" checked>
+                <span>☑ ตรวจสอบของแถมแล้ว</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer cashier-footer">
+          <button id="btnCopyCashierData" class="btn-primary-action btn-copy-large" style="display: none;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>📋 คัดลอกข้อมูลตัดขาย</span>
+          </button>
+          <button id="btnCloseCashierBottom" class="btn-secondary-action">
+            <span>ปิดหน้าต่าง</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch Promo Updater Modal (อัปเดตโปรโมชั่นสาขา) -->
+    <div id="branchPromoModal" class="modal-backdrop hidden">
+      <div class="modal-card modal-large">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">📥</span>
+            <div>
+              <h2 class="modal-title">อัปเดตและตรวจสอบโปรโมชั่นสาขา (Branch Promo Updater)</h2>
+              <p class="modal-subtitle">นำเข้าไฟล์ Excel โปรโมชั่นใหม่ • ตรวจสอบกฎตายตัวอัตโนมัติ • อนุมัติทันทีไม่ต้องรอคนตรวจทั้งไฟล์</p>
+            </div>
+          </div>
+          <button id="btnCloseBranchPromoModal" class="btn-close-modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="promo-upload-area">
+            <div class="upload-dropzone" id="uploadDropzone">
+              <div class="drop-icon">📊</div>
+              <h3>เลือกไฟล์ Excel โปรโมชั่นจริงเพื่อประมวลผล</h3>
+              <p>ระบบจะตรวจสมการราคา ส่วนลด วันที่ SKU และความขัดแย้งของ SF+ และ Student จากไฟล์จริง</p>
+              <div class="upload-btn-row">
+                <input type="file" id="promoFileInput" accept=".xlsx,.xls" style="display:none;">
+                <label for="promoFileInput" class="btn-sample-file" style="cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+                  📁 เลือกไฟล์ Excel โปรโมชั่น (.xlsx)
+                </label>
+                <button class="btn-sample-file" id="btnRunPythonImporter" title="รัน python promotion_import.py">
+                  ⚙️ ตรวจสอบสถานะฐานข้อมูลจริง
+                </button>
+              </div>
+              <div id="fileUploadStatus" style="margin-top: 10px; font-size: 0.85rem; color: #38bdf8;"></div>
+            </div>
+          </div>
+
+          <div class="promo-inspect-summary" id="promoInspectSummary">
+            <div class="summary-stat-row">
+              <div class="summary-box total">
+                <span class="summary-label">พบโปรโมชั่นทั้งหมด</span>
+                <strong class="summary-val text-cyan" id="inspectTotalCount">- รายการ</strong>
+                <span class="summary-sub">จากไฟล์ต้นทางจริง</span>
+              </div>
+              <div class="summary-box green">
+                <span class="summary-label">🟢 พร้อมใช้งานทันที</span>
+                <strong class="summary-val text-emerald" id="inspectAutoCount">- รายการ</strong>
+                <span class="summary-sub">Auto-Published ผ่านกฎ 100%</span>
+              </div>
+              <div class="summary-box yellow">
+                <span class="summary-label">🟡 มีเงื่อนไขเพิ่มเติม</span>
+                <strong class="summary-val text-amber" id="inspectWarnCount">- รายการ</strong>
+                <span class="summary-sub">เปิดใช้พร้อมป้ายเตือน</span>
+              </div>
+              <div class="summary-box red">
+                <span class="summary-label">🔴 ข้อมูลไม่ครบ / กักกัน</span>
+                <strong class="summary-val text-coral" id="inspectBlockCount">- รายการ</strong>
+                <span class="summary-sub">#ERROR! กักเฉพาะ SKU ไม่หยุดทั้งไฟล์</span>
+              </div>
+            </div>
+
+            <div class="automation-rule-note">
+              <div class="note-icon">💡</div>
+              <div class="note-text" id="inspectNoteText">
+                <strong>หลักการ 95/5 Automation ประจำสาขา:</strong> รายการที่ข้อมูลครบและสมการถูกต้องเปิดใช้อัตโนมัติทันที ส่วนรายการที่ผิด (#ERROR!) จะถูกกักไว้โดยไม่ทำให้โปรโมชั่นส่วนที่ถูกต้องของทั้งไฟล์หยุดชะงัก
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btnApplyPromoUpdate" class="btn-primary-action" style="width: 100%;">
+            <span id="btnApplyPromoUpdateText">✓ ใช้งานข้อมูลโปรโมชั่นล่าสุด</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nimbus Stock Paste Modal (วางสต็อก Nimbus) -->
+    <div id="nimbusModal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">🔄</span>
+            <div>
+              <h2 class="modal-title">อัปเดตสต็อกจากระบบ Nimbus POS</h2>
+              <p class="modal-subtitle">Nimbus ➔ Copy ➔ วาง ➔ กดอัปเดตสต็อกหน้าร้าน</p>
+            </div>
+          </div>
+          <button id="btnCloseNimbusModal" class="btn-close-modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="nimbus-guide-banner">
+            <span>📋 วิธีใช้งาน: เข้า Nimbus ➔ Copy ตารางสต็อก ➔ วางลงในช่องด้านล่าง ➔ กดอัปเดตสต็อก</span>
+          </div>
+          <div class="nimbus-paste-box">
+            <textarea id="nimbusPasteInput" placeholder="วางข้อมูลสต็อกที่ Copy จาก Nimbus ที่นี่ (หรือกดปุ่ม 'ดึงยอดล่าสุด' ด้านล่าง)..." rows="6"></textarea>
+          </div>
+          <div class="nimbus-meta-footer">
+            <span>เวลา Copy สต็อกจาก Nimbus ล่าสุด: <strong id="nimbusLastCopyTime" class="text-cyan">16:35 น.</strong></span>
+            <span>สถานะ: <strong class="text-emerald">พร้อมซิงค์</strong></span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btnExecuteNimbusUpdate" class="btn-primary-action">
+            <span>⚡ บันทึกและอัปเดตสต็อก</span>
+          </button>
+          <button id="btnQuickSyncNimbus" class="btn-secondary-action">
+            <span>🔄 ซิงค์ด่วนอัตโนมัติ</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Quick Sales Chat Modal / Toast -->
+    <div id="toast" class="toast hidden">
+      <div class="toast-icon">✓</div>
+      <div class="toast-message" id="toastMessage">คัดลอกข้อความเรียบร้อย!</div>
+    </div>
+
+    <!-- Footer Notice -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>🏢 สาขา: Samsung Ayutthaya City Park 1st Floor (Copperwired)</span> • 
+        <span>*กรณีสินค้า Flash Sales งดของแถม Premium*</span>
+      </div>
+      <div class="footer-right">
+        <span>เชื่อมโยงระบบ InventoryControl.asp • Real-Time Sales & Stock System</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Load Database and Logic -->
+  <script src="stock_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
