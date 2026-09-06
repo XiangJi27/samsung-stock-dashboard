@@ -1,0 +1,74 @@
+{
+  "evaluationDate": "2026-09-06",
+  "importBatch": "IMPORT-20260906-001",
+  "totalTests": 8,
+  "passedTests": 8,
+  "failedTests": 0,
+  "overallStatus": "ALL_TESTS_PASSED",
+  "testResults": [
+    {
+      "testId": "REG-01",
+      "name": "Fold8 SM- Cross-Type & Trade Up Leakage Prevention",
+      "description": "Fold8 naked device (SM-F971, SM-F976) must NOT receive Pass F promo or Trade Up Net 64,900 as standard payment",
+      "passed": true,
+      "evidence": "All SM-F971 and SM-F976 have NORMAL sale mode with RRP (61,900 / 69,900 / 85,900). No 64,900 Net price leaks into standard/SF+.",
+      "testedVariantsCount": 18
+    },
+    {
+      "testId": "REG-02",
+      "name": "Fold8 Pass F Unproven Promo Quarantine",
+      "description": "F-NS971BLVGTHL showing SF_PLUS 64,900 must be BLOCKED with PROMOTION_TYPE_NOT_PROVEN",
+      "passed": true,
+      "evidence": "Variant STOCK-R121-FOLD8-UNPROVEN is BLOCKED with error PROMOTION_TYPE_NOT_PROVEN. Normal baseline RRP 69,900 remains available.",
+      "testedVariantsCount": 1
+    },
+    {
+      "testId": "REG-03",
+      "name": "S25 FE Separation of SF+ and Standard Payment",
+      "description": "S25 FE must have separate SF+ (Coupon 01, down <=10%) and Standard Payment (Coupon 02, Net 17,900/20,900 with warning 'ราคานี้ไม่ร่วม SF+')",
+      "passed": true,
+      "evidence": "S25 FE 128GB has SF+ Net 19,900 (Coupon 01) and Standard Net 17,900 (Coupon 02). Zero NON_SF legacy mode remains.",
+      "testedVariantsCount": 4
+    },
+    {
+      "testId": "REG-04",
+      "name": "Student Promo Strict Coupon & Source Rate Validation",
+      "description": "Student variants must strictly use Coupon 'Studentcrd', sfPlusEligible=false, tradeUpEligible=false, and rate strictly from source file",
+      "passed": true,
+      "evidence": "All Student variants have couponCode='Studentcrd', sfPlusEligible=False, and calculate netPrice strictly from source student rate.",
+      "testedVariantsCount": 138
+    },
+    {
+      "testId": "REG-05",
+      "name": "Tab A11 / A11+ SF+ Coupon 04 Support",
+      "description": "Tab A11/A11+ must separate Standard (Coupon 01/02) from SF+ (Coupon 04, down <=10%). Prohibit false 'Coupon 04 = Not SF+' rule.",
+      "passed": true,
+      "evidence": "Tab A11+ 5G has Standard 8,990 and SF+ 9,990 (Coupon 04). Tab A11 LTE has Standard 5,990 (Coupon 01) and SF+ 6,990 (Coupon 04).",
+      "testedVariantsCount": 6
+    },
+    {
+      "testId": "REG-06",
+      "name": "SmartTag2 Bundle 2 Qty Strict Policy",
+      "description": "SmartTag2 must be BUNDLE qty=2 for 1,590 with no coupon. Single item (qty=1) must not be sold for 795 (must use regular RRP 1,090).",
+      "passed": true,
+      "evidence": "SmartTag2 variant has saleMode='BUNDLE', netPrice=1590, couponCode=None, and condition explicitly prohibiting single item split.",
+      "testedVariantsCount": 1
+    },
+    {
+      "testId": "REG-07",
+      "name": "Accessory 75 Formula Error Quarantine",
+      "description": "75 accessory variants with #ERROR! in rows 70-144 must be BLOCKED with SOURCE_FORMULA_ERROR. Zero price guessing.",
+      "passed": true,
+      "evidence": "Exactly 75 variants are BLOCKED with validationErrors=['SOURCE_FORMULA_ERROR']. Net price is None/#ERROR!.",
+      "testedVariantsCount": 75
+    },
+    {
+      "testId": "REG-08",
+      "name": "Expired 2025 Premium Gift Rejection",
+      "description": "Premium gifts from sheet 'Promotion Premium Q2.2026' with 2025 dates (1 July - 30 Sep 2025) must be BLOCKED and not attached to 2026 items.",
+      "passed": true,
+      "evidence": "All 2025 premium variants are BLOCKED with EXPIRED_PREMIUM. Active 2026 inventory items have 0 expired premium gifts attached.",
+      "testedVariantsCount": 32
+    }
+  ]
+}

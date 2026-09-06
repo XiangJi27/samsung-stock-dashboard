@@ -1,0 +1,564 @@
+﻿Promo ID,P/N,Product Code Type,Model,Capacity,Sale Mode,RRP,Discount Value,Net Price,Coupon Code,SF+ Eligible,Trade Up Eligible,Conditions,Source File,Source Sheet,Source Row
+RET-อัพเดท-R4-SF_PLUS,-,STANDARD_SM,Galaxy S26 Ultra,1TB,SF_PLUS,66900.0,5000.0,61900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
+RET-อัพเดท-R4-SPECIAL-STD,-,STANDARD_SM,Galaxy S26 Ultra,1TB,STANDARD_PAYMENT,66900.0,9000.0,57900.0,01,FALSE,FALSE,"ราคานี้ไม่ร่วม SF+ | ไม่ร่วม Trade Up (ส่วนลดเงินสด/ผ่อนบัตร) | ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
+RET-อัพเดท-R4-TRADEUP,-,STANDARD_SM,Galaxy S26 Ultra,1TB,TRADE_UP,66900.0,10000.0,56900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 5,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
+RET-อัพเดท-R5-SF_PLUS,-,STANDARD_SM,Galaxy S26 Ultra,512GB,SF_PLUS,54900.0,5000.0,49900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R5-SPECIAL-STD,-,STANDARD_SM,Galaxy S26 Ultra,512GB,STANDARD_PAYMENT,54900.0,9000.0,45900.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ไม่ร่วม Trade Up (ส่วนลดเงินสด/ผ่อนบัตร) | โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R5-TRADEUP,-,STANDARD_SM,Galaxy S26 Ultra,512GB,TRADE_UP,54900.0,10000.0,44900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 5,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R5-STUDENT,-,STANDARD_SM,Galaxy S26 Ultra,512GB,STUDENT,54900.0,8235,46665,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 15% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R6-SF_PLUS,-,STANDARD_SM,Galaxy S26 Ultra,256GB,SF_PLUS,46900.0,5000.0,41900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R6-SPECIAL-STD,-,STANDARD_SM,Galaxy S26 Ultra,256GB,STANDARD_PAYMENT,46900.0,9000.0,37900.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ไม่ร่วม Trade Up (ส่วนลดเงินสด/ผ่อนบัตร) | โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R6-TRADEUP,-,STANDARD_SM,Galaxy S26 Ultra,256GB,TRADE_UP,46900.0,7000.0,39900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 2,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R6-STUDENT,-,STANDARD_SM,Galaxy S26 Ultra,256GB,STUDENT,46900.0,7035,39865,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 15% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R7-SF_PLUS,-,STANDARD_SM,Galaxy S26+,512GB,SF_PLUS,48900.0,12000.0,36900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,7
+RET-อัพเดท-R8-SF_PLUS,-,STANDARD_SM,Galaxy S26+,256GB,SF_PLUS,40900.0,10000.0,30900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,8
+RET-อัพเดท-R9-SF_PLUS,-,STANDARD_SM,Galaxy S26,512GB,SF_PLUS,41900.0,12000.0,29900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,9
+RET-อัพเดท-R10-SF_PLUS,-,STANDARD_SM,Galaxy S26,256GB,SF_PLUS,33900.0,6000.0,27900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,10
+RET-อัพเดท-R11-SF_PLUS,-,PASS_F,Galaxy S25 Ultra,256GB,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,11
+RET-อัพเดท-R12-SF_PLUS,-,STANDARD_SM,Galaxy S26 FE  NEW,256GB,SF_PLUS,28900.0,4000.0,24900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,12
+RET-อัพเดท-R14-SF_PLUS,-,STANDARD_SM,"Galaxy S25 FE
+(ร่วม SF+)",256GB,SF_PLUS,26900.0,3000.0,23900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | SF+ ดาวน์ไม่เกิน 10%,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,14
+RET-อัพเดท-R14-STUDENT,-,STANDARD_SM,"Galaxy S25 FE
+(ร่วม SF+)",256GB,STUDENT,26900.0,4035,22865,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 15% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,14
+RET-อัพเดท-R15-SF_PLUS,-,STANDARD_SM,"Galaxy S25 FE
+(ร่วม SF+)",128GB,SF_PLUS,22900.0,3000.0,19900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,15
+RET-อัพเดท-R15-STUDENT,-,STANDARD_SM,"Galaxy S25 FE
+(ร่วม SF+)",128GB,STUDENT,22900.0,3435,19465,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 15% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,15
+RET-อัพเดท-R16-STANDARD_PAYMENT,-,STANDARD_SM,"Galaxy S25 FE
+(ไม่ร่วม SF+)",256GB,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตรเครดิต / ผ่อนบัตรกดเงินสด,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,16
+RET-อัพเดท-R17-STANDARD_PAYMENT,-,STANDARD_SM,"Galaxy S25 FE
+(ไม่ร่วม SF+)",128GB,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตรเครดิต / ผ่อนบัตรกดเงินสด,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,17
+RET-อัพเดท-R18-TRADEUP,-,STANDARD_SM,Galaxy Z Fold8 Ultra,1TB,TRADE_UP,93900.0,7000.0,86900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 7,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,18
+RET-อัพเดท-R19-TRADEUP,-,STANDARD_SM,Galaxy Z Fold8 Ultra,512GB,TRADE_UP,77900.0,5000.0,72900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 5,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,19
+RET-อัพเดท-R20-TRADEUP,-,STANDARD_SM,Galaxy Z Fold8 Ultra,256GB,TRADE_UP,69900.0,5000.0,64900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 5,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,20
+RET-อัพเดท-R21-TRADEUP,-,STANDARD_SM,Galaxy Z Fold8,1TB,TRADE_UP,85900.0,7000.0,78900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 7,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,21
+RET-อัพเดท-R22-TRADEUP,-,STANDARD_SM,Galaxy Z Fold8,512GB,TRADE_UP,69900.0,5000.0,64900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 5,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,22
+RET-อัพเดท-R23-TRADEUP,-,STANDARD_SM,Galaxy Z Fold8,256GB,TRADE_UP,61900.0,5000.0,56900.0,T-UP-CO-S,FALSE,TRUE,"โปรโมชั่นเก่าแลกใหม่ (Trade Up) | รับส่วนลดเพิ่ม 5,000 บาท ด้วยคูปอง T-UP-CO-S | ต้องมีเครื่องเก่ามาแลก",Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,23
+RET-อัพเดท-R24-SF_PLUS,-,STANDARD_SM,Galaxy Z Flip8,512GB,SF_PLUS,50900.0,5000.0,45900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,24
+RET-อัพเดท-R25-SF_PLUS,-,STANDARD_SM,Galaxy Z Flip8,256GB,SF_PLUS,42900.0,5000.0,37900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,25
+RET-อัพเดท-R26-SF_PLUS,-,STANDARD_SM,Galaxy Z Fold 7,1TB,SF_PLUS,87900.0,18000.0,69900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,26
+RET-อัพเดท-R27-SF_PLUS,-,STANDARD_SM,Galaxy Z Fold 7,512GB,SF_PLUS,75900.0,18000.0,57900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,27
+RET-อัพเดท-R28-SF_PLUS,-,STANDARD_SM,Galaxy Z Fold 7,256GB,SF_PLUS,67900.0,18000.0,49900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,28
+RET-อัพเดท-R29-SF_PLUS,-,STANDARD_SM,Galaxy Z Flip7,512GB,SF_PLUS,48900.0,11000.0,37900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,29
+RET-อัพเดท-R30-SF_PLUS,-,STANDARD_SM,Galaxy Z Flip7,256GB,SF_PLUS,40900.0,11000.0,29900.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,30
+RET-อัพเดท-R31-STUDENT,-,STANDARD_SM,Galaxy A57 5G,12/512GB,STUDENT,20999.0,2520,18479,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 12% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,31
+RET-อัพเดท-R32-STUDENT,-,STANDARD_SM,Galaxy A57 5G,12/256GB,STUDENT,17999.0,2520,15479,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 14% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,32
+RET-อัพเดท-R33-STUDENT,-,STANDARD_SM,Galaxy A57 5G,8/256GB,STUDENT,16999.0,2550,14449,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 15% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,33
+RET-อัพเดท-R34-STANDARD_PAYMENT,-,STANDARD_SM,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",12/512GB,STANDARD_PAYMENT,20999.0,3000.0,17999.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตรเครดิต / ผ่อนบัตรกดเงินสด,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,34
+RET-อัพเดท-R34-STUDENT,-,STANDARD_SM,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",12/512GB,STUDENT,20999.0,2520,18479,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 12% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,34
+RET-อัพเดท-R35-STANDARD_PAYMENT,-,STANDARD_SM,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",12/256GB,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตรเครดิต / ผ่อนบัตรกดเงินสด,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,35
+RET-อัพเดท-R35-STUDENT,-,STANDARD_SM,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",12/256GB,STUDENT,17999.0,2520,15479,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 14% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,35
+RET-อัพเดท-R36-STANDARD_PAYMENT,-,STANDARD_SM,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",8/256GB,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตรเครดิต / ผ่อนบัตรกดเงินสด,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,36
+RET-อัพเดท-R36-STUDENT,-,STANDARD_SM,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",8/256GB,STUDENT,16999.0,2550,14449,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 15% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,36
+RET-อัพเดท-R37-STUDENT,-,STANDARD_SM,"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/256GB,STUDENT,13999.0,560,13439,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 4% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,37
+RET-อัพเดท-R38-SF_PLUS,-,STANDARD_SM,"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/128GB,SF_PLUS,10999.0,1000.0,9999.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,38
+RET-อัพเดท-R39-SF_PLUS,-,STANDARD_SM,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/256GB,SF_PLUS,10599.0,1600.0,8999.0,02,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
+RET-อัพเดท-R39-SPECIAL-STD,-,STANDARD_SM,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/256GB,STANDARD_PAYMENT,10599.0,1600.0,8999.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ไม่ร่วม Trade Up (ส่วนลดเงินสด/ผ่อนบัตร) | โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
+RET-อัพเดท-R39-STUDENT,-,STANDARD_SM,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/256GB,STUDENT,10599.0,1060,9539,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 10% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
+RET-อัพเดท-R40-SF_PLUS,-,STANDARD_SM,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/128GB,SF_PLUS,8999.0,1500.0,7499.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,40
+RET-อัพเดท-R41-SF_PLUS,-,STANDARD_SM,"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",8/128GB,SF_PLUS,7999.0,1000.0,6999.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,41
+RET-อัพเดท-R42-STUDENT,-,STANDARD_SM,"Galaxy A07 5G
+(SF+ campaign)",6/128GB,STUDENT,6999.0,700,6299,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 10% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,42
+RET-อัพเดท-R43-STANDARD_PAYMENT,-,STANDARD_SM,"Galaxy A07 5G
+(ไม่ร่วม SF+)",6/128GB,STANDARD_PAYMENT,6999.0,500.0,6499.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตรเครดิต / ผ่อนบัตรกดเงินสด,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,43
+RET-อัพเดท-R43-STUDENT,-,STANDARD_SM,"Galaxy A07 5G
+(ไม่ร่วม SF+)",6/128GB,STUDENT,6999.0,700,6299,Studentcrd,FALSE,FALSE,โปรโมชั่นนักเรียน/นักศึกษา ลด 10% | แสดงบัตรนักเรียน/นักศึกษาเพื่อรับสิทธิ์ | ห้ามใช้ร่วมกับส่วนลดหรือคูปองอื่น,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,43
+RET-อัพเดท-R44-SF_PLUS,-,STANDARD_SM,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",6/128GB,SF_PLUS,5999.0,1000.0,4999.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,44
+RET-อัพเดท-R45-SF_PLUS,-,STANDARD_SM,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",4/128GB,SF_PLUS,5299.0,1000.0,4299.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,45
+RET-อัพเดท-R46-SF_PLUS,-,STANDARD_SM,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",4/64GB,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+),Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,46
+TAB-R4-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S11  Ultra 5G,12/256GB,STANDARD_PAYMENT,48900.0,5000.0,43900.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,4
+TAB-R5-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S11 (5G),12/128GB,STANDARD_PAYMENT,33900.0,3500.0,30400.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,5
+TAB-R6-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S11  (WiFi),12/128GB,STANDARD_PAYMENT,28900.0,3500.0,25400.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,6
+TAB-R7-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 plus 5G,12/256GB,STANDARD_PAYMENT,43900.0,13000.0,30900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,7
+TAB-R8-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10ultra,12/512GB,STANDARD_PAYMENT,52900.0,10000.0,42900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,8
+TAB-R9-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 FE+ 5G,12/256GB,STANDARD_PAYMENT,30900.0,5000.0,25900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,9
+TAB-R10-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 FE+ WiFi,12/256GB,STANDARD_PAYMENT,27900.0,5000.0,22900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,10
+TAB-R11-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 FE 5G,8/128GB,STANDARD_PAYMENT,22900.0,3500.0,19400.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,11
+TAB-R12-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 FE WiFi,8/128GB,STANDARD_PAYMENT,19900.0,3500.0,16400.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,12
+TAB-R13-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),6/128GB,STANDARD_PAYMENT,16990.0,500.0,16490.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,13
+TAB-R14-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),6/128GB,STANDARD_PAYMENT,12990.0,500.0,12490.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,14
+TAB-R15-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,6/128GB,STANDARD_PAYMENT,16990.0,2500.0,14490.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,15
+TAB-R16-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,6/128GB,STANDARD_PAYMENT,12990.0,2500.0,10490.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,16
+TAB-R17-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S9 FE plus Wifi,8/128,STANDARD_PAYMENT,23900.0,2500.0,21400.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,17
+TAB-R18-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S9 FE plus 5G,8/128,STANDARD_PAYMENT,27900.0,12000.0,15900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,18
+TAB-R19-STANDARD_PAYMENT,-,STANDARD_SM,Galaxy Tab S9 5G,12/256,STANDARD_PAYMENT,35900.0,12000.0,23900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,19
+TAB-R20-SF_PLUS,-,STANDARD_SM,"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",6/128GB,SF_PLUS,10490.0,1500.0,8990.0,-,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,20
+TAB-R21-SF_PLUS,-,STANDARD_SM,"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",6/128GB,SF_PLUS,8490.0,1500.0,6990.0,-,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,21
+TAB-R22-SF_PLUS,-,STANDARD_SM,"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",6/128GB,SF_PLUS,10490.0,500.0,9990.0,04,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | ดาวน์ไม่เกิน 10% | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,22
+TAB-R23-SF_PLUS,-,STANDARD_SM,"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",6/128GB,SF_PLUS,8490.0,500.0,7990.0,-,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | ดาวน์ไม่เกิน 10% | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,23
+TAB-R24-SF_PLUS,-,STANDARD_SM,"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",8/128GB,SF_PLUS,7490.0,1500.0,5990.0,01,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,24
+TAB-R25-SF_PLUS,-,STANDARD_SM,"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",8/128GB,SF_PLUS,7490.0,500.0,6990.0,04,TRUE,FALSE,ร่วมผ่อนสินเชื่อ Samsung Finance+ (SF+) | ดาวน์ไม่เกิน 10% | สิทธิ์แลกซื้อ Keyboard / Book Cover ลด 50%,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,25
+TAB-R26-MBO,-,STANDARD_ACCESSORY,Watch Ultra 2,-,MBO,25900.0,7770.0,18130.0,03,FALSE,FALSE,Multi Buy Offer (MBO): ต้องซื้อร่วมกับเครื่องสมาร์ทโฟนที่กำหนดในวันและร้านเดียวกัน,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,26
+TAB-R27-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch Ultra (64GB),-,STANDARD_PAYMENT,24900.0,8715.0,16185.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,27
+TAB-R28-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch Ultra (32GB),-,STANDARD_PAYMENT,23900.0,11950.0,11950.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,28
+TAB-R29-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch8 Classic - LTE,-,STANDARD_PAYMENT,19900.0,5970.0,13930.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,29
+TAB-R30-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch8 Classic - BT,-,STANDARD_PAYMENT,17900.0,5370.0,12530.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,30
+TAB-R31-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch9 44mm,-,STANDARD_PAYMENT,14900.0,4470.0,10430.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,31
+TAB-R32-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch9 40mm,-,STANDARD_PAYMENT,12900.0,3870.0,9030.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,32
+TAB-R33-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch8 44mm,-,STANDARD_PAYMENT,13900.0,4000.0,9900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,33
+TAB-R34-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Watch8 40mm,-,STANDARD_PAYMENT,11900.0,4000.0,7900.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,34
+TAB-R35-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Buds4 Pro Black,-,STANDARD_PAYMENT,7990.0,2397.0,5593.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,35
+TAB-R36-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Buds4 Pro White,-,STANDARD_PAYMENT,7990.0,2397.0,5593.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,36
+TAB-R37-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Buds4 Pro Pink,-,STANDARD_PAYMENT,7990.0,2397.0,5593.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,37
+TAB-R38-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Buds4  Black,-,STANDARD_PAYMENT,5990.0,1797.0,4193.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,38
+TAB-R39-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Buds4  White,-,STANDARD_PAYMENT,5990.0,1797.0,4193.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,39
+TAB-R40-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Buds3 FE,-,STANDARD_PAYMENT,4290.0,1287.0,3003.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,40
+TAB-R41-BUDSCORE,-,STANDARD_ACCESSORY,Buds Core,-,STANDARD_PAYMENT,1490.0,200.0,1290.0,-,FALSE,FALSE,ส่วนลดทันที 200 บาท | ไม่ใช่ MBO 30% (ซื้อแยกได้โดยไม่ต้องมีโทรศัพท์ร่วม) | ไม่ต้องใส่คูปอง,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,41
+TAB-R42-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Ring,-,STANDARD_PAYMENT,14900.0,6705.0,8195.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,42
+TAB-R43-STANDARD_PAYMENT,-,STANDARD_ACCESSORY,Fit3,-,STANDARD_PAYMENT,1990.0,0,1990.0,-,FALSE,FALSE,ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,43
+TAB-R44-SMARTTAG2-BUNDLE,-,STANDARD_ACCESSORY,SmartTag2 (ชุด 2 ชิ้น),2 ชิ้น,BUNDLE,2180.0,590.0,1590.0,-,FALSE,FALSE,"ซื้อ 2 ชิ้น ราคาพิเศษ 1,590 บาท (ไม่ต้องใส่คูปอง) | Validate MCS S/O ภายในช่วงโปรโมชั่น | ซื้อ 1 ชิ้นคิดราคาปกติ 1,090 บาท (ห้ามหารเดี่ยว)",Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,44
+ACC-OK-R3,ET-SFR93SBEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,3
+ACC-OK-R4,ET-SFR93SSEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,4
+ACC-OK-R5,ET-SFR93SUEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,5
+ACC-OK-R6,ET-SFR93SNEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,6
+ACC-OK-R7,ET-SFR93SLEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,7
+ACC-OK-R8,ET-SFR93SMEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,8
+ACC-OK-R9,ET-SFR93SOEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,9
+ACC-OK-R10,ET-SHR94LBEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Hybrid Eco-Leather Band (M/L),-,STANDARD_PAYMENT,2090.0,1045.0,1045.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,10
+ACC-OK-R11,ET-SHR94LAEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Hybrid Eco-Leather Band (M/L),-,STANDARD_PAYMENT,2090.0,1045.0,1045.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,11
+ACC-OK-R12,ET-SHR94LNEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Hybrid Eco-Leather Band (M/L),-,STANDARD_PAYMENT,2090.0,1045.0,1045.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,12
+ACC-OK-R13,ET-SHR94LDEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Hybrid Eco-Leather Band (M/L),-,STANDARD_PAYMENT,2090.0,1045.0,1045.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,13
+ACC-OK-R14,ET-SVR93SBEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Feather Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,14
+ACC-OK-R15,ET-SVR93SUEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Feather Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,15
+ACC-OK-R16,ET-SVR93SVEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Feather Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,16
+ACC-OK-R17,ET-SXR93SBEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Extreme Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,17
+ACC-OK-R18,ET-SXR93SGEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Extreme Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,18
+ACC-OK-R19,ET-SXR93SVEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Extreme Sport Band (S/M),-,STANDARD_PAYMENT,1290.0,645.0,645.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,19
+ACC-OK-R20,ET-SHR93SLEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Hybrid Band Slim S/M,-,STANDARD_PAYMENT,2090.0,1045.0,1045.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,20
+ACC-OK-R21,ET-SHR93SUEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Hybrid Band Slim S/M,-,STANDARD_PAYMENT,2090.0,1045.0,1045.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,21
+ACC-OK-R22,ET-SFR90SJEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,22
+ACC-OK-R23,ET-SFR90SWEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,23
+ACC-OK-R24,ET-SFR90SLEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,24
+ACC-OK-R25,ET-SFR90SZEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,25
+ACC-OK-R26,ET-SFR90SVEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,26
+ACC-OK-R27,ET-STR90SNEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Two-tone Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,27
+ACC-OK-R28,ET-STR90SREGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Two-tone Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,1190.0,595.0,595.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,28
+ACC-OK-R29,ET-SFR92LJEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,2190.0,1095.0,1095.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,29
+ACC-OK-R30,ET-SFR92LBEGWW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) D-Buckle Sport Band - Galaxy Watch5,-,STANDARD_PAYMENT,2190.0,1095.0,1095.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,30
+ACC-OK-R31,GP-TYR905HCASW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Milanese Band - Galaxy Watch5,-,STANDARD_PAYMENT,2690.0,1345.0,1345.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,31
+ACC-OK-R32,GP-TYR940AMBBW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Marimekko Embossed Band,-,STANDARD_PAYMENT,1690.0,845.0,845.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,32
+ACC-OK-R33,GP-TYR940AMBUW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Marimekko Embossed Band,-,STANDARD_PAYMENT,1690.0,845.0,845.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,33
+ACC-OK-R34,GP-TYR940AMBPW,STANDARD_ACCESSORY,Watch Old Model Band (W7 beyond) Marimekko Embossed Band,-,STANDARD_PAYMENT,1690.0,845.0,845.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,34
+ACC-OK-R35,ET-SNL70MBEGWW,STANDARD_ACCESSORY,Watch Ultra Band Marine Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,35
+ACC-OK-R36,ET-SNL70MWEGWW,STANDARD_ACCESSORY,Watch Ultra Band Marine Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,36
+ACC-OK-R37,ET-SNL70MOEGWW,STANDARD_ACCESSORY,Watch Ultra Band Marine Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,37
+ACC-OK-R38,ET-SNL70MKEGWW,STANDARD_ACCESSORY,Watch Ultra Band Marine Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,38
+ACC-OK-R39,ET-SNL70MNEGWW,STANDARD_ACCESSORY,Watch Ultra Band Marine Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,39
+ACC-OK-R40,ET-SVL70MBEGWW,STANDARD_ACCESSORY,Watch Ultra Band Trail Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,40
+ACC-OK-R41,ET-SVL70MWEGWW,STANDARD_ACCESSORY,Watch Ultra Band Trail Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,41
+ACC-OK-R42,ET-SVL70MOEGWW,STANDARD_ACCESSORY,Watch Ultra Band Trail Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,42
+ACC-OK-R43,ET-SVL70MNEGWW,STANDARD_ACCESSORY,Watch Ultra Band Trail Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,43
+ACC-OK-R44,ET-SBL70MBEGWW,STANDARD_ACCESSORY,Watch Ultra Band PeakForm Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,44
+ACC-OK-R45,ET-SBL70MWEGWW,STANDARD_ACCESSORY,Watch Ultra Band PeakForm Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,45
+ACC-OK-R46,ET-SBL70MOEGWW,STANDARD_ACCESSORY,Watch Ultra Band PeakForm Band,-,STANDARD_PAYMENT,2390.0,1195.0,1195.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,46
+ACC-OK-R47,ET-SNL30SKEGWW,STANDARD_ACCESSORY,Watch7 Band Sport Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,47
+ACC-OK-R48,ET-SNL30SSEGWW,STANDARD_ACCESSORY,Watch7 Band Sport Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,48
+ACC-OK-R49,ET-SNL30SWEGWW,STANDARD_ACCESSORY,Watch7 Band Sport Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,49
+ACC-OK-R50,ET-SNL30SBEGWW,STANDARD_ACCESSORY,Watch7 Band Sport Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,50
+ACC-OK-R51,ET-SNL30SOEGWW,STANDARD_ACCESSORY,Watch7 Band Sport Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,51
+ACC-OK-R52,ET-SVL30SKEGWW,STANDARD_ACCESSORY,Watch7 Band Fabric Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,52
+ACC-OK-R53,ET-SVL30SEEGWW,STANDARD_ACCESSORY,Watch7 Band Fabric Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,53
+ACC-OK-R54,ET-SVL30SWEGWW,STANDARD_ACCESSORY,Watch7 Band Fabric Band (S/M),-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,54
+ACC-OK-R55,ET-SOL30SKEGWW,STANDARD_ACCESSORY,Watch7 Band Athleisure Band  (S/M),-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,55
+ACC-OK-R56,ET-SOL30SWEGWW,STANDARD_ACCESSORY,Watch7 Band Athleisure Band  (S/M),-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,56
+ACC-OK-R57,ET-SOL30SPEGWW,STANDARD_ACCESSORY,Watch7 Band Athleisure Band  (S/M),-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,57
+ACC-OK-R58,GP-TYL315SBCYW,STANDARD_ACCESSORY,Watch7 Band Sticky Monster Lab Stickers  Strap,-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,58
+ACC-OK-R59,GP-TYL315SBCBW,STANDARD_ACCESSORY,Watch7 Band Sticky Monster Lab Strap,-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,59
+ACC-OK-R60,GP-TYL315SBDBW,STANDARD_ACCESSORY,Watch7 Band Tom and Jerry Strap,-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,60
+ACC-OK-R61,GP-FPR630SBNAW,STANDARD_ACCESSORY,Buds3 Case Hershey’S Case,-,STANDARD_PAYMENT,1090.0,545.0,545.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,61
+ACC-OK-R62,GP-FPR630SBNPW,STANDARD_ACCESSORY,Buds3 Case Hershey’S Kisses Case,-,STANDARD_PAYMENT,1090.0,545.0,545.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,62
+ACC-OK-R63,GP-FPR630SBMYW,STANDARD_ACCESSORY,Buds3 Case Sticky Monster Lab Yellow Case,-,STANDARD_PAYMENT,1090.0,545.0,545.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,63
+ACC-OK-R64,GP-FPR630SBMRW,STANDARD_ACCESSORY,Buds3 Case Sticky Monster Lab Red Case,-,STANDARD_PAYMENT,1090.0,545.0,545.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,64
+ACC-OK-R65,GP-FPR630SBATW,STANDARD_ACCESSORY,Buds3 Case Keith Haring Clear Case,-,STANDARD_PAYMENT,990.0,495.0,495.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,65
+ACC-OK-R66,GP-FPR630SBCRW,STANDARD_ACCESSORY,Buds3 Case Stick Monster Lab Redmon Clear Case,-,STANDARD_PAYMENT,990.0,495.0,495.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,66
+ACC-OK-R67,GP-FPR630SBCYW,STANDARD_ACCESSORY,Buds3 Case Stick Monster Lab Yellowmon Clear Case,-,STANDARD_PAYMENT,990.0,495.0,495.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,67
+ACC-OK-R68,GP-FPR630SBKPW,STANDARD_ACCESSORY,Buds3 Case The Powerpuff Girls Pink Clear Case,-,STANDARD_PAYMENT,990.0,495.0,495.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,68
+ACC-OK-R69,GP-FPR630SBDTW,STANDARD_ACCESSORY,Buds3 Case Minions Bob Clear Case,-,STANDARD_PAYMENT,990.0,495.0,495.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,69
+ACC-OK-R145,EF-PA566CBEGWW,STANDARD_ACCESSORY,A56 Silicone Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,145
+ACC-OK-R146,EF-PA566CGEGWW,STANDARD_ACCESSORY,A56 Silicone Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,146
+ACC-OK-R147,EF-PA566CPEGWW,STANDARD_ACCESSORY,A56 Silicone Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,147
+ACC-OK-R148,EF-RA566CBEGWW,STANDARD_ACCESSORY,A56 Rugged Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,148
+ACC-OK-R149,EF-QA566CTEGWW,STANDARD_ACCESSORY,A56 Clear Case,-,STANDARD_PAYMENT,490.0,343.0,147.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,149
+ACC-OK-R150,EF-UA566CTEGWW,STANDARD_ACCESSORY,A56 Screen Protector,-,STANDARD_PAYMENT,390.0,273.0,117.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,150
+ACC-OK-R151,EF-PA366CBEGWW,STANDARD_ACCESSORY,A36 Silicone Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,151
+ACC-OK-R152,EF-PA366CGEGWW,STANDARD_ACCESSORY,A36 Silicone Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,152
+ACC-OK-R153,EF-PA366CVEGWW,STANDARD_ACCESSORY,A36 Silicone Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,153
+ACC-OK-R154,EF-RA366CBEGWW,STANDARD_ACCESSORY,A36 Rugged Case,-,STANDARD_PAYMENT,690.0,483.0,207.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,154
+ACC-OK-R155,EF-QA366CTEGWW,STANDARD_ACCESSORY,A36 Clear Case,-,STANDARD_PAYMENT,490.0,343.0,147.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,155
+ACC-OK-R156,EF-UA366CTEGWW,STANDARD_ACCESSORY,A36 Screen Protector,-,STANDARD_PAYMENT,390.0,273.0,117.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,156
+ACC-OK-R157,ET-SLL50LBEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Hybrid
+(S/M/L)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,157
+ACC-OK-R158,ET-SLL50LWEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Hybrid
+(S/M/L)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,158
+ACC-OK-R159,ET-SLL50LNEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Hybrid
+(S/M/L)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,159
+ACC-OK-R160,ET-SLL50LJEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Hybrid
+(S/M/L)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,160
+ACC-OK-R161,ET-SLL50LAEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Hybrid
+(S/M/L)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,161
+ACC-OK-R162,ET-SNL32SBEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Sport
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,162
+ACC-OK-R163,ET-SNL32SWEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Sport
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,163
+ACC-OK-R164,ET-SNL32SNEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Sport
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,164
+ACC-OK-R165,ET-SNL32SMEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Sport
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,165
+ACC-OK-R166,ET-SNL32SPEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Sport
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,166
+ACC-OK-R167,ET-SVL32SBEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Fabric
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,167
+ACC-OK-R168,ET-SVL32SWEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Fabric
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,168
+ACC-OK-R169,ET-SVL32SNEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Fabric
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,169
+ACC-OK-R170,ET-SVL32SMEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Fabric
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,170
+ACC-OK-R171,ET-SVL32SREGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Fabric
+(S/M)",-,STANDARD_PAYMENT,1490.0,745.0,745.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,171
+ACC-OK-R172,ET-SOL32SBEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Athleisure
+(S/M)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,172
+ACC-OK-R173,ET-SOL32SWEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Athleisure
+(S/M)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,173
+ACC-OK-R174,ET-SOL32SNEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Athleisure
+(S/M)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,174
+ACC-OK-R175,ET-SOL32SMEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Athleisure
+(S/M)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,175
+ACC-OK-R176,ET-SOL32SGEGWW,STANDARD_ACCESSORY,"Galaxy Watch8  Band Athleisure
+(S/M)",-,STANDARD_PAYMENT,1990.0,995.0,995.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 50% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,176
+ACC-OK-R177,EF-ZF766CTEGWW,STANDARD_ACCESSORY,Z Flip7 Case Flipsuit Case,-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,177
+ACC-OK-R178,EF-VF766PBEGWW,STANDARD_ACCESSORY,Z Flip7 Case Kindsuit Case,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,178
+ACC-OK-R179,EF-VF766PAEGWW,STANDARD_ACCESSORY,Z Flip7 Case Kindsuit Case,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,179
+ACC-OK-R180,EF-VF766PJEGWW,STANDARD_ACCESSORY,Z Flip7 Case Kindsuit Case,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,180
+ACC-OK-R181,EF-PF766TBEGWW,STANDARD_ACCESSORY,Z Flip7 Case Ring Case (Silicone),-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,181
+ACC-OK-R182,EF-PF766TNEGWW,STANDARD_ACCESSORY,Z Flip7 Case Ring Case (Silicone),-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,182
+ACC-OK-R183,EF-PF766TREGWW,STANDARD_ACCESSORY,Z Flip7 Case Ring Case (Silicone),-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,183
+ACC-OK-R184,EF-PF766TMEGWW,STANDARD_ACCESSORY,Z Flip7 Case Ring Case (Silicone),-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,184
+ACC-OK-R185,EF-QF766CTEGWW,STANDARD_ACCESSORY,Z Flip7 Case Ring Case (Clear),-,STANDARD_PAYMENT,1090.0,763.0,327.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,185
+ACC-OK-R186,EF-AF766CTEGWW,STANDARD_ACCESSORY,Z Flip7 Case Clear Case,-,STANDARD_PAYMENT,790.0,553.0,237.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,186
+ACC-OK-R187,EF-UF766CTEGWW,STANDARD_ACCESSORY,Z Flip7 Case Anti-reflecting Film,-,STANDARD_PAYMENT,590.0,413.0,177.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,187
+ACC-OK-R188,GP-FFF766YCATW,STANDARD_ACCESSORY,Z Flip7 SMAPP Case Clear Magnet Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,188
+ACC-OK-R189,GP-FPF766PGBTW,STANDARD_ACCESSORY,Z Flip7 SMAPP Case Capella,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,189
+ACC-OK-R190,GP-FPF766PGABW,STANDARD_ACCESSORY,Z Flip7 SMAPP Case ThinFit,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,190
+ACC-OK-R191,GP-FPF766HIBYW,STANDARD_ACCESSORY,Z Flip7 SMAPP Case Flipsuit Case with Card Esther Bunny Ribbon,-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,191
+ACC-OK-R192,GP-FPF766HICWW,STANDARD_ACCESSORY,Z Flip7 SMAPP Case Flipsuit Case with Card Joguman Rain,-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,192
+ACC-OK-R193,GP-FPF766HIDJW,STANDARD_ACCESSORY,Z Flip7 SMAPP Case Flipsuit Case with Card Ilyamilstein Daily Life,-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,193
+ACC-OK-R194,EF-XF966SBEGWW,STANDARD_ACCESSORY,Z Fold7 Case Carbon Shield Case,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,194
+ACC-OK-R195,EF-MF966CBEGWW,STANDARD_ACCESSORY,Z Fold7 Case Silicone Case,-,STANDARD_PAYMENT,1790.0,1253.0,537.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,195
+ACC-OK-R196,EF-MF966CNEGWW,STANDARD_ACCESSORY,Z Fold7 Case Silicone Case,-,STANDARD_PAYMENT,1790.0,1253.0,537.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,196
+ACC-OK-R197,EF-MF966CJEGWW,STANDARD_ACCESSORY,Z Fold7 Case Silicone Case,-,STANDARD_PAYMENT,1790.0,1253.0,537.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,197
+ACC-OK-R198,EF-MF966CMEGWW,STANDARD_ACCESSORY,Z Fold7 Case Silicone Case,-,STANDARD_PAYMENT,1790.0,1253.0,537.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,198
+ACC-OK-R199,EF-QF966CTEGWW,STANDARD_ACCESSORY,Z Fold7 Case Clear Grip Case,-,STANDARD_PAYMENT,1190.0,833.0,357.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,199
+ACC-OK-R200,EF-AF966CTEGWW,STANDARD_ACCESSORY,Z Fold7 Case Clear Case,-,STANDARD_PAYMENT,890.0,623.0,267.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,200
+ACC-OK-R201,EF-UF966CTEGWW,STANDARD_ACCESSORY,Z Fold7 Case Anti-reflecting Film,-,STANDARD_PAYMENT,590.0,413.0,177.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,201
+ACC-OK-R202,GP-FFF966YCATW,STANDARD_ACCESSORY,Z Fold7 SMAPP Case Clear Magnet Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,202
+ACC-OK-R203,GP-FPF966PGBTW,STANDARD_ACCESSORY,Z Fold7 SMAPP Case Capella,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,203
+ACC-OK-R204,GP-FPF966PGABW,STANDARD_ACCESSORY,Z Fold7 SMAPP Case ThinFit,-,STANDARD_PAYMENT,2190.0,1533.0,657.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,204
+ACC-OK-R205,EF-GS731CBEGWW,STANDARD_ACCESSORY,S25 FE Standing Grip Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,205
+ACC-OK-R206,EF-GS731CWEGWW,STANDARD_ACCESSORY,S25 FE Standing Grip Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,206
+ACC-OK-R207,EF-GS731CLEGWW,STANDARD_ACCESSORY,S25 FE Standing Grip Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,207
+ACC-OK-R208,EF-GS731CNEGWW,STANDARD_ACCESSORY,S25 FE Standing Grip Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,208
+ACC-OK-R209,EF-PS731CBEGWW,STANDARD_ACCESSORY,S25 FE Silicone Case,-,STANDARD_PAYMENT,790.0,553.0,237.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,209
+ACC-OK-R210,EF-PS731CWEGWW,STANDARD_ACCESSORY,S25 FE Silicone Case,-,STANDARD_PAYMENT,790.0,553.0,237.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,210
+ACC-OK-R211,EF-PS731CLEGWW,STANDARD_ACCESSORY,S25 FE Silicone Case,-,STANDARD_PAYMENT,790.0,553.0,237.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,211
+ACC-OK-R212,EF-PS731CNEGWW,STANDARD_ACCESSORY,S25 FE Silicone Case,-,STANDARD_PAYMENT,790.0,553.0,237.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,212
+ACC-OK-R213,EF-PS731CMEGWW,STANDARD_ACCESSORY,S25 FE Silicone Case,-,STANDARD_PAYMENT,790.0,553.0,237.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,213
+ACC-OK-R214,EF-VS731PBEGWW,STANDARD_ACCESSORY,S25 FE Kindsuit Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,214
+ACC-OK-R215,EF-VS731PNEGWW,STANDARD_ACCESSORY,S25 FE Kindsuit Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,215
+ACC-OK-R216,EF-VS731PAEGWW,STANDARD_ACCESSORY,S25 FE Kindsuit Case,-,STANDARD_PAYMENT,1290.0,903.0,387.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,216
+ACC-OK-R217,EF-QS731CTEGWW,STANDARD_ACCESSORY,S25 FE Clear Case,-,STANDARD_PAYMENT,590.0,413.0,177.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,217
+ACC-OK-R218,EF-US731CTEGWW,STANDARD_ACCESSORY,S25 FE Anti-reflecting Film,-,STANDARD_PAYMENT,590.0,413.0,177.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 70% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,218
+ACC-OK-R219,EF-PA576CJEGWW,STANDARD_ACCESSORY,A57 5G Silicone Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,219
+ACC-OK-R220,EF-PA576CNEGWW,STANDARD_ACCESSORY,A57 5G Silicone Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,220
+ACC-OK-R221,EF-PA576CVEGWW,STANDARD_ACCESSORY,A57 5G Silicone Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,221
+ACC-OK-R222,EF-QA576CTEGWW,STANDARD_ACCESSORY,A57 5G Clear Case,-,STANDARD_PAYMENT,490.0,98.0,392.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,222
+ACC-OK-R223,EF-RA576CBEGWW,STANDARD_ACCESSORY,A57 5G Rugged Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,223
+ACC-OK-R224,EF-UA576CTEGWW,STANDARD_ACCESSORY,A57 5G Screen Protector,-,STANDARD_PAYMENT,390.0,78.0,312.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,224
+ACC-OK-R225,EF-PA376CBEGWW,STANDARD_ACCESSORY,A37 5G Silicone Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,225
+ACC-OK-R226,EF-PA376CKEGWW,STANDARD_ACCESSORY,A37 5G Silicone Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,226
+ACC-OK-R227,EF-PA376CVEGWW,STANDARD_ACCESSORY,A37 5G Silicone Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,227
+ACC-OK-R228,EF-QA376CTEGWW,STANDARD_ACCESSORY,A37 5G Clear Case,-,STANDARD_PAYMENT,490.0,98.0,392.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,228
+ACC-OK-R229,EF-RA376CBEGWW,STANDARD_ACCESSORY,A37 5G Rugged Case,-,STANDARD_PAYMENT,690.0,138.0,552.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,229
+ACC-OK-R230,EF-KS942SNEGWW,STANDARD_ACCESSORY,S26 Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,230
+ACC-OK-R231,EF-KS942SCEGWW,STANDARD_ACCESSORY,S26 Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,231
+ACC-OK-R232,EF-KS942SSEGWW,STANDARD_ACCESSORY,S26 Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,232
+ACC-OK-R233,EF-KS942SREGWW,STANDARD_ACCESSORY,S26 Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,233
+ACC-OK-R234,EF-KS947SNEGWW,STANDARD_ACCESSORY,S26+ Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,234
+ACC-OK-R235,EF-KS947SCEGWW,STANDARD_ACCESSORY,S26+ Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,235
+ACC-OK-R236,EF-KS947SSEGWW,STANDARD_ACCESSORY,S26+ Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,236
+ACC-OK-R237,EF-KS947SREGWW,STANDARD_ACCESSORY,S26+ Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,237
+ACC-OK-R238,EF-KS948SNEGWW,STANDARD_ACCESSORY,S26 Ultra Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,238
+ACC-OK-R239,EF-KS948SCEGWW,STANDARD_ACCESSORY,S26 Ultra Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,239
+ACC-OK-R240,EF-KS948SSEGWW,STANDARD_ACCESSORY,S26 Ultra Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,240
+ACC-OK-R241,EF-KS948SREGWW,STANDARD_ACCESSORY,S26 Ultra Case Carbon Magnet Case,-,STANDARD_PAYMENT,2190.0,438.0,1752.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,241
+ACC-OK-R242,EF-SS942CBEGWW,STANDARD_ACCESSORY,S26 Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,242
+ACC-OK-R243,EF-SS942CVEGWW,STANDARD_ACCESSORY,S26 Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,243
+ACC-OK-R244,EF-SS942CLEGWW,STANDARD_ACCESSORY,S26 Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,244
+ACC-OK-R245,EF-SS942CJEGWW,STANDARD_ACCESSORY,S26 Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,245
+ACC-OK-R246,EF-SS947CBEGWW,STANDARD_ACCESSORY,S26+ Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,246
+ACC-OK-R247,EF-SS947CVEGWW,STANDARD_ACCESSORY,S26+ Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,247
+ACC-OK-R248,EF-SS947CLEGWW,STANDARD_ACCESSORY,S26+ Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,248
+ACC-OK-R249,EF-SS947CJEGWW,STANDARD_ACCESSORY,S26+ Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,249
+ACC-OK-R250,EF-SS948CBEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,250
+ACC-OK-R251,EF-SS948CVEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,251
+ACC-OK-R252,EF-SS948CLEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,252
+ACC-OK-R253,EF-SS948CJEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silm Magnet Case,-,STANDARD_PAYMENT,1590.0,318.0,1272.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,253
+ACC-OK-R254,EF-ES942CBEGWW,STANDARD_ACCESSORY,S26 Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,254
+ACC-OK-R255,EF-ES942CWEGWW,STANDARD_ACCESSORY,S26 Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,255
+ACC-OK-R256,EF-ES942CVEGWW,STANDARD_ACCESSORY,S26 Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,256
+ACC-OK-R257,EF-ES942CLEGWW,STANDARD_ACCESSORY,S26 Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,257
+ACC-OK-R258,EF-ES942CJEGWW,STANDARD_ACCESSORY,S26 Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,258
+ACC-OK-R259,EF-ES942COEGWW,STANDARD_ACCESSORY,S26 Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,259
+ACC-OK-R260,EF-ES947CBEGWW,STANDARD_ACCESSORY,S26+ Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,260
+ACC-OK-R261,EF-ES947CWEGWW,STANDARD_ACCESSORY,S26+ Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,261
+ACC-OK-R262,EF-ES947CVEGWW,STANDARD_ACCESSORY,S26+ Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,262
+ACC-OK-R263,EF-ES947CLEGWW,STANDARD_ACCESSORY,S26+ Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,263
+ACC-OK-R264,EF-ES947CJEGWW,STANDARD_ACCESSORY,S26+ Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,264
+ACC-OK-R265,EF-ES947COEGWW,STANDARD_ACCESSORY,S26+ Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,265
+ACC-OK-R266,EF-ES948CBEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,266
+ACC-OK-R267,EF-ES948CWEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,267
+ACC-OK-R268,EF-ES948CVEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,268
+ACC-OK-R269,EF-ES948CLEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,269
+ACC-OK-R270,EF-ES948CJEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,270
+ACC-OK-R271,EF-ES948COEGWW,STANDARD_ACCESSORY,S26 Ultra Case Silicone Magnet Case,-,STANDARD_PAYMENT,1290.0,258.0,1032.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,271
+ACC-OK-R272,EF-CS942CTEGWW,STANDARD_ACCESSORY,S26 Case Clear Magnet Case,-,STANDARD_PAYMENT,1090.0,218.0,872.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,272
+ACC-OK-R273,EF-CS947CTEGWW,STANDARD_ACCESSORY,S26+ Case Clear Magnet Case,-,STANDARD_PAYMENT,1090.0,218.0,872.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,273
+ACC-OK-R274,EF-CS948CTEGWW,STANDARD_ACCESSORY,S26 Ultra Case Clear Magnet Case,-,STANDARD_PAYMENT,1090.0,218.0,872.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,274
+ACC-OK-R275,EF-QS942CTEGWW,STANDARD_ACCESSORY,S26 Case Clear Case,-,STANDARD_PAYMENT,590.0,118.0,472.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,275
+ACC-OK-R276,EF-QS947CTEGWW,STANDARD_ACCESSORY,S26+ Case Clear Case,-,STANDARD_PAYMENT,590.0,118.0,472.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,276
+ACC-OK-R277,EF-QS948CTEGWW,STANDARD_ACCESSORY,S26 Ultra Case Clear Case,-,STANDARD_PAYMENT,590.0,118.0,472.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,277
+ACC-OK-R278,EF-RS942CBEGWW,STANDARD_ACCESSORY,S26 Case Rugged Magnet Case,-,STANDARD_PAYMENT,1790.0,358.0,1432.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,278
+ACC-OK-R279,EF-RS947CBEGWW,STANDARD_ACCESSORY,S26+ Case Rugged Magnet Case,-,STANDARD_PAYMENT,1790.0,358.0,1432.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,279
+ACC-OK-R280,EF-RS948CBEGWW,STANDARD_ACCESSORY,S26 Ultra Case Rugged Magnet Case,-,STANDARD_PAYMENT,1790.0,358.0,1432.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,280
+ACC-OK-R281,EF-US942CTEGWW,STANDARD_ACCESSORY,S26 Case Anti-reflecting Film,-,STANDARD_PAYMENT,590.0,118.0,472.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,281
+ACC-OK-R282,EF-US947CTEGWW,STANDARD_ACCESSORY,S26+ Case Anti-reflecting Film,-,STANDARD_PAYMENT,590.0,118.0,472.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,282
+ACC-OK-R283,EF-US948CTEGWW,STANDARD_ACCESSORY,S26 Ultra Case Anti-reflecting Film,-,STANDARD_PAYMENT,590.0,118.0,472.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,283
+ACC-OK-R284,GP-FPS942PGAJW,STANDARD_ACCESSORY,S26 Case Capella Magnet Case,-,STANDARD_PAYMENT,1190.0,238.0,952.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,284
+ACC-OK-R285,GP-FPS947PGAJW,STANDARD_ACCESSORY,S26+ Case Capella Magnet Case,-,STANDARD_PAYMENT,1190.0,238.0,952.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,285
+ACC-OK-R286,GP-FPS948PGAJW,STANDARD_ACCESSORY,S26 Ultra Case Capella Magnet Case,-,STANDARD_PAYMENT,1190.0,238.0,952.0,-,FALSE,FALSE,ส่วนลดอุปกรณ์เสริม 20% | ราคานี้ไม่ร่วม SF+,Pro Tablet Acc samsung 3Aug2026.xlsx,รายการสินค้าที่ลด 50-70%,286
+STOCK-R4-P1,SM-A075FLVDTHL,STANDARD_SM,Galaxy A07 4G 4/64 GB,-,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,4
+STOCK-R5-P1,SM-A075FZKDTHL,STANDARD_SM,,-,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,5
+STOCK-R6-P1,SM-A075FLVJTHL,STANDARD_SM,,-,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,6
+STOCK-R7-P1,SM-A075FZKJTHL,STANDARD_SM,,-,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,7
+STOCK-R8-P1,F-A074G064VDTH,PASS_F,Galaxy A07 4/64GB - BOM SET,-,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,8
+STOCK-R9-P1,F-A074G064KDTH,PASS_F,,-,SF_PLUS,4599.0,800.0,3799.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,9
+STOCK-R10-P1,F-A074G128VGTH,PASS_F,Galaxy A07 4/128GB - BOM SET,-,SF_PLUS,5299.0,1000.0,4299.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,10
+STOCK-R11-P1,F-A074G128KGTH,PASS_F,,-,SF_PLUS,5299.0,1000.0,4299.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,11
+STOCK-R12-P1,SM-A075FLVGTHL,STANDARD_SM,Galaxy A07 4/128GB,-,SF_PLUS,5299.0,1000.0,4299.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,12
+STOCK-R13-P1,SM-A075FZKGTHL,STANDARD_SM,,-,SF_PLUS,5299.0,1000.0,4299.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,13
+STOCK-R14-P1,SM-A075FLVHTHL,STANDARD_SM,Galaxy A07 6/128GB,-,SF_PLUS,5999.0,1000.0,4999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,14
+STOCK-R15-P1,SM-A075FZKHTHL,STANDARD_SM,,-,SF_PLUS,5999.0,1000.0,4999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,15
+STOCK-R16-P2,SM-A076BLVCTHL,STANDARD_SM,Galaxy A07 5G 6/128GB,-,STANDARD_PAYMENT,6999.0,500.0,6499.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร | 01            *ไม่ร่วม SF+,Stock.xlsx,Promotion,16
+STOCK-R16-STUDENT,SM-A076BLVCTHL,STANDARD_SM,Galaxy A07 5G 6/128GB,-,STUDENT,6999.0,699,6300.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,16
+STOCK-R17-P2,SM-A076BZKCTHL,STANDARD_SM,,-,STANDARD_PAYMENT,6999.0,500.0,6499.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,17
+STOCK-R17-STUDENT,SM-A076BZKCTHL,STANDARD_SM,,-,STUDENT,6999.0,699,6300.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,17
+STOCK-R18-P1,F-A174G128BDTH,PASS_F,Galaxy A17 LTE 8/128 GB,-,SF_PLUS,7999.0,1000.0,6999.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,18
+STOCK-R19-P1,F-A174G128KDTH,PASS_F,,-,SF_PLUS,7999.0,1000.0,6999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,19
+STOCK-R20-P1,SM-A175FLBDTHL,STANDARD_SM,,-,SF_PLUS,7999.0,1000.0,6999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,20
+STOCK-R21-P1,SM-A175FZKDTHL,STANDARD_SM,,-,SF_PLUS,7999.0,1000.0,6999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,21
+STOCK-R22-P1,SM-A176BZBJTHL,STANDARD_SM,Galaxy A17 5G 8/128 GB,-,SF_PLUS,8999.0,1500.0,7499.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,22
+STOCK-R23-P1,SM-A176BZKJTHL,STANDARD_SM,,-,SF_PLUS,8999.0,1500.0,7499.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,23
+STOCK-R24-P1,F-A175G128BLTH,PASS_F,,-,SF_PLUS,8999.0,1500.0,7499.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,24
+STOCK-R25-P1,F-A175G128BKTH,PASS_F,,-,SF_PLUS,8999.0,1500.0,7499.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,25
+STOCK-R26-P1,SM-A176BZBKTHL,STANDARD_SM,Galaxy A17 5G 8/256 GB,-,SF_PLUS,10599.0,1600.0,8999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,26
+STOCK-R26-STUDENT,SM-A176BZBKTHL,STANDARD_SM,Galaxy A17 5G 8/256 GB,-,STUDENT,10599.0,1059,9540.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,26
+STOCK-R27-P1,SM-A176BZKKTHL,STANDARD_SM,,-,SF_PLUS,10599.0,1600.0,8999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,27
+STOCK-R27-STUDENT,SM-A176BZKKTHL,STANDARD_SM,,-,STUDENT,10599.0,1059,9540.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,27
+STOCK-R28-P1,F-A175G256BLTH,PASS_F,,-,SF_PLUS,10599.0,1600.0,8999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,28
+STOCK-R28-STUDENT,F-A175G256BLTH,PASS_F,,-,STUDENT,10599.0,1059,9540.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,28
+STOCK-R29-P1,F-A175G256BKTH,PASS_F,,-,SF_PLUS,10599.0,1600.0,8999.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,29
+STOCK-R29-STUDENT,F-A175G256BKTH,PASS_F,,-,STUDENT,10599.0,1059,9540.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,29
+STOCK-R30-P2,SM-A276BLIGTHL,STANDARD_SM,Galaxy A27 5G 8/128GB,-,STANDARD_PAYMENT,10999.0,1000.0,9999.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร | 01             *ร่วม SF+,Stock.xlsx,Promotion,30
+STOCK-R31-P2,SM-A276BZKGTHL,STANDARD_SM,,-,STANDARD_PAYMENT,10999.0,1000.0,9999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,31
+STOCK-R32-STUDENT,SM-A376BDGTTHL,STANDARD_SM,Galaxy A37 5G 8/256GB,-,STUDENT,13999.0,559,13440.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,32
+STOCK-R33-STUDENT,SM-A376BLVTTHL,STANDARD_SM,,-,STUDENT,13999.0,559,13440.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,33
+STOCK-R34-STUDENT,SM-A376BZATTHL,STANDARD_SM,,-,STUDENT,13999.0,559,13440.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,34
+STOCK-R35-P2,SM-A576BDBSTHL,STANDARD_SM,Galaxy A57 5G 8/256GB,-,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร | 01            *ไม่ร่วม SF+,Stock.xlsx,Promotion,35
+STOCK-R35-STUDENT,SM-A576BDBSTHL,STANDARD_SM,Galaxy A57 5G 8/256GB,-,STUDENT,16999.0,2549,14450.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,35
+STOCK-R36-P2,SM-A576BZVSTHL,STANDARD_SM,,-,STANDARD_PAYMENT,16999.0,2000.0,14999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,36
+STOCK-R36-STUDENT,SM-A576BZVSTHL,STANDARD_SM,,-,STUDENT,16999.0,2549,14450.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,36
+STOCK-R37-P2,SM-A576BZASTHL,STANDARD_SM,,-,STANDARD_PAYMENT,16999.0,2000.0,14999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,37
+STOCK-R37-STUDENT,SM-A576BZASTHL,STANDARD_SM,,-,STUDENT,16999.0,2549,14450.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,37
+STOCK-R38-P2,SM-A576BDBTTHL,STANDARD_SM,Galaxy A57 5G 12/256GB,-,STANDARD_PAYMENT,17999.0,2000.0,15999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,38
+STOCK-R38-STUDENT,SM-A576BDBTTHL,STANDARD_SM,Galaxy A57 5G 12/256GB,-,STUDENT,17999.0,2519,15480.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,38
+STOCK-R39-P2,SM-A576BZVTTHL,STANDARD_SM,,-,STANDARD_PAYMENT,17999.0,2000.0,15999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,39
+STOCK-R39-STUDENT,SM-A576BZVTTHL,STANDARD_SM,,-,STUDENT,17999.0,2519,15480.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,39
+STOCK-R40-P2,SM-A576BZATTHL,STANDARD_SM,,-,STANDARD_PAYMENT,17999.0,2000.0,15999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,40
+STOCK-R40-STUDENT,SM-A576BZATTHL,STANDARD_SM,,-,STUDENT,17999.0,2519,15480.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,40
+STOCK-R41-P2,SM-A576BDBUTHL,STANDARD_SM,Galaxy A57 5G 12/512GB,-,STANDARD_PAYMENT,20999.0,2000.0,18999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร | 02            *ไม่ร่วม SF+,Stock.xlsx,Promotion,41
+STOCK-R41-STUDENT,SM-A576BDBUTHL,STANDARD_SM,Galaxy A57 5G 12/512GB,-,STUDENT,20999.0,2519,18480.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,41
+STOCK-R42-P2,SM-A576BZVUTHL,STANDARD_SM,,-,STANDARD_PAYMENT,20999.0,2000.0,18999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,42
+STOCK-R42-STUDENT,SM-A576BZVUTHL,STANDARD_SM,,-,STUDENT,20999.0,2519,18480.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,42
+STOCK-R43-P2,SM-A576BZAUTHL,STANDARD_SM,,-,STANDARD_PAYMENT,20999.0,2000.0,18999.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,43
+STOCK-R43-STUDENT,SM-A576BZAUTHL,STANDARD_SM,,-,STUDENT,20999.0,2519,18480.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,43
+STOCK-R44-P1,SM-S731BDBBTHL,STANDARD_SM,Galaxy S25 FE (8/128GB),-,SF_PLUS,22900.0,3000.0,19900.0,01,TRUE,FALSE,01             *ร่วม SF+ ดาวน์ไม่เกิน 10%,Stock.xlsx,Promotion,44
+STOCK-R44-P2,SM-S731BDBBTHL,STANDARD_SM,Galaxy S25 FE (8/128GB),-,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร | 02             *ไม่ร่วม SF+,Stock.xlsx,Promotion,44
+STOCK-R44-STUDENT,SM-S731BDBBTHL,STANDARD_SM,Galaxy S25 FE (8/128GB),-,STUDENT,22900.0,3435,19465.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,44
+STOCK-R45-P1,SM-S731BLBBTHL,STANDARD_SM,,-,SF_PLUS,22900.0,3000.0,19900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,45
+STOCK-R45-P2,SM-S731BLBBTHL,STANDARD_SM,,-,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,45
+STOCK-R45-STUDENT,SM-S731BLBBTHL,STANDARD_SM,,-,STUDENT,22900.0,3435,19465.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,45
+STOCK-R46-P1,SM-S731BZKBTHL,STANDARD_SM,,-,SF_PLUS,22900.0,3000.0,19900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,46
+STOCK-R46-P2,SM-S731BZKBTHL,STANDARD_SM,,-,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,46
+STOCK-R46-STUDENT,SM-S731BZKBTHL,STANDARD_SM,,-,STUDENT,22900.0,3435,19465.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,46
+STOCK-R47-P1,SM-S731BZWBTHL,STANDARD_SM,,-,SF_PLUS,22900.0,3000.0,19900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,47
+STOCK-R47-P2,SM-S731BZWBTHL,STANDARD_SM,,-,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,47
+STOCK-R47-STUDENT,SM-S731BZWBTHL,STANDARD_SM,,-,STUDENT,22900.0,3435,19465.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,47
+STOCK-R48-P1,SM-S731BDBCTHL,STANDARD_SM,Galaxy S25 FE (8/256GB),-,SF_PLUS,26900.0,3000.0,23900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,48
+STOCK-R48-P2,SM-S731BDBCTHL,STANDARD_SM,Galaxy S25 FE (8/256GB),-,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,48
+STOCK-R48-STUDENT,SM-S731BDBCTHL,STANDARD_SM,Galaxy S25 FE (8/256GB),-,STUDENT,26900.0,4035,22865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,48
+STOCK-R49-P1,SM-S731BLBCTHL,STANDARD_SM,,-,SF_PLUS,26900.0,3000.0,23900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,49
+STOCK-R49-P2,SM-S731BLBCTHL,STANDARD_SM,,-,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,49
+STOCK-R49-STUDENT,SM-S731BLBCTHL,STANDARD_SM,,-,STUDENT,26900.0,4035,22865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,49
+STOCK-R50-P1,SM-S731BZKCTHL,STANDARD_SM,,-,SF_PLUS,26900.0,3000.0,23900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,50
+STOCK-R50-P2,SM-S731BZKCTHL,STANDARD_SM,,-,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,50
+STOCK-R50-STUDENT,SM-S731BZKCTHL,STANDARD_SM,,-,STUDENT,26900.0,4035,22865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,50
+STOCK-R51-P1,SM-S731BZWCTHL,STANDARD_SM,,-,SF_PLUS,26900.0,3000.0,23900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,51
+STOCK-R51-P2,SM-S731BZWCTHL,STANDARD_SM,,-,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,51
+STOCK-R51-STUDENT,SM-S731BZWCTHL,STANDARD_SM,,-,STUDENT,26900.0,4035,22865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,51
+STOCK-R52-P1,F-N1938BZKBTHL,PASS_F,Galaxy S25 Ultra 5G 12/256GB,-,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,52
+STOCK-R53-P1,SM-S938BZKBTHL,STANDARD_SM,,-,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,53
+STOCK-R54-P1,SM-S938BZBBTHL,STANDARD_SM,,-,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,54
+STOCK-R55-P1,SM-S938BZTBTHL,STANDARD_SM,,-,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,55
+STOCK-R56-P1,SM-S938BZSBTHL,STANDARD_SM,,-,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,56
+STOCK-R57-P1,F-N1938BZBBTHL,PASS_F,,-,SF_PLUS,42900.0,12000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,57
+STOCK-R64-P1,SM-S942BZKCTHL,STANDARD_SM,Galaxy S26 5G 12/256GB,-,SF_PLUS,33900.0,6000.0,27900.0,01,TRUE,FALSE,01             *ร่วม SF+ ดาวน์ไม่เกิน 10%,Stock.xlsx,Promotion,64
+STOCK-R65-P1,SM-S942BLBCTHL,STANDARD_SM,,-,SF_PLUS,33900.0,6000.0,27900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,65
+STOCK-R66-P1,SM-S942BZVCTHL,STANDARD_SM,,-,SF_PLUS,33900.0,6000.0,27900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,66
+STOCK-R67-P1,SM-S942BZWCTHL,STANDARD_SM,,-,SF_PLUS,33900.0,6000.0,27900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,67
+STOCK-R68-P1,SM-S942BZKQTHL,STANDARD_SM,Galaxy S26 5G 12/512GB,-,SF_PLUS,41900.0,12000.0,29900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,68
+STOCK-R69-P1,SM-S942BLBQTHL,STANDARD_SM,,-,SF_PLUS,41900.0,12000.0,29900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,69
+STOCK-R70-P1,SM-S942BZVQTHL,STANDARD_SM,,-,SF_PLUS,41900.0,12000.0,29900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,70
+STOCK-R71-P1,SM-S942BZWQTHL,STANDARD_SM,,-,SF_PLUS,41900.0,12000.0,29900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,71
+STOCK-R72-P1,SM-S947BZKBTHL,STANDARD_SM,Galaxy S26+ 5G 12/256GB,-,SF_PLUS,40900.0,10000.0,30900.0,01,TRUE,FALSE,01             *ร่วม SF+ ดาวน์ไม่เกิน 10%,Stock.xlsx,Promotion,72
+STOCK-R73-P1,SM-S947BLBBTHL,STANDARD_SM,,-,SF_PLUS,40900.0,10000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,73
+STOCK-R74-P1,SM-S947BZVBTHL,STANDARD_SM,,-,SF_PLUS,40900.0,10000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,74
+STOCK-R75-P1,SM-S947BZWBTHL,STANDARD_SM,,-,SF_PLUS,40900.0,10000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,75
+STOCK-R76-P1,SM-S947BZKCTHL,STANDARD_SM,Galaxy S26+ 5G 12/512GB,-,SF_PLUS,48900.0,12000.0,36900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,76
+STOCK-R77-P1,SM-S947BLBCTHL,STANDARD_SM,,-,SF_PLUS,48900.0,12000.0,36900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,77
+STOCK-R78-P1,SM-S947BZVCTHL,STANDARD_SM,,-,SF_PLUS,48900.0,12000.0,36900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,78
+STOCK-R79-P1,SM-S947BZWCTHL,STANDARD_SM,,-,SF_PLUS,48900.0,12000.0,36900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,79
+STOCK-R80-P1,SM-S948BZKBTHL,STANDARD_SM,Galaxy S26 Ultra 5G 12/256GB,-,SF_PLUS,46900.0,5000.0,41900.0,01,TRUE,FALSE,01             *ร่วม SF+ และ เทรดอัพ,Stock.xlsx,Promotion,80
+STOCK-R80-STUDENT,SM-S948BZKBTHL,STANDARD_SM,Galaxy S26 Ultra 5G 12/256GB,-,STUDENT,46900.0,7035,39865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,80
+STOCK-R81-P1,SM-S948BLBBTHL,STANDARD_SM,,-,SF_PLUS,46900.0,5000.0,41900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,81
+STOCK-R81-STUDENT,SM-S948BLBBTHL,STANDARD_SM,,-,STUDENT,46900.0,7035,39865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,81
+STOCK-R82-P1,SM-S948BZVBTHL,STANDARD_SM,,-,SF_PLUS,46900.0,5000.0,41900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,82
+STOCK-R82-STUDENT,SM-S948BZVBTHL,STANDARD_SM,,-,STUDENT,46900.0,7035,39865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,82
+STOCK-R83-P1,SM-S948BZWBTHL,STANDARD_SM,,-,SF_PLUS,46900.0,5000.0,41900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,83
+STOCK-R83-STUDENT,SM-S948BZWBTHL,STANDARD_SM,,-,STUDENT,46900.0,7035,39865.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,83
+STOCK-R84-P1,SM-S948BZKCTHL,STANDARD_SM,Galaxy S26 Ultra 5G 12/512GB,-,SF_PLUS,54900.0,5000.0,49900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,84
+STOCK-R84-STUDENT,SM-S948BZKCTHL,STANDARD_SM,Galaxy S26 Ultra 5G 12/512GB,-,STUDENT,54900.0,8235,46665.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,84
+STOCK-R85-P1,SM-S948BLBCTHL,STANDARD_SM,,-,SF_PLUS,54900.0,5000.0,49900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,85
+STOCK-R85-STUDENT,SM-S948BLBCTHL,STANDARD_SM,,-,STUDENT,54900.0,8235,46665.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,85
+STOCK-R86-P1,SM-S948BZVCTHL,STANDARD_SM,,-,SF_PLUS,54900.0,5000.0,49900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,86
+STOCK-R86-STUDENT,SM-S948BZVCTHL,STANDARD_SM,,-,STUDENT,54900.0,8235,46665.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,86
+STOCK-R87-P1,SM-S948BZWCTHL,STANDARD_SM,,-,SF_PLUS,54900.0,5000.0,49900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,87
+STOCK-R87-STUDENT,SM-S948BZWCTHL,STANDARD_SM,,-,STUDENT,54900.0,8235,46665.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,87
+STOCK-R88-P1,SM-S948BZKQTHL,STANDARD_SM,Galaxy S26 Ultra 5G 12/1TB,-,SF_PLUS,66900.0,5000.0,61900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,88
+STOCK-R89-P1,SM-S948BLBQTHL,STANDARD_SM,,-,SF_PLUS,66900.0,5000.0,61900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,89
+STOCK-R90-P1,SM-S948BZVQTHL,STANDARD_SM,,-,SF_PLUS,66900.0,5000.0,61900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,90
+STOCK-R91-P1,SM-S948BZWQTHL,STANDARD_SM,,-,SF_PLUS,66900.0,5000.0,61900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,91
+STOCK-R92-P1,SM-F766BZRATHL,STANDARD_SM,Galaxy Z Flip7 12/256GB,-,SF_PLUS,40900.0,11000.0,29900.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,92
+STOCK-R93-P1,SM-F766BZKATHL,STANDARD_SM,,-,SF_PLUS,40900.0,11000.0,29900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,93
+STOCK-R94-P1,SM-F766BDBATHL,STANDARD_SM,,-,SF_PLUS,40900.0,11000.0,29900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,94
+STOCK-R95-P1,SM-F766BZRETHL,STANDARD_SM,Galaxy Z Flip7 12/512GB,-,SF_PLUS,48900.0,11000.0,37900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,95
+STOCK-R96-P1,SM-F766BZKETHL,STANDARD_SM,,-,SF_PLUS,48900.0,11000.0,37900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,96
+STOCK-R97-P1,SM-F766BDBETHL,STANDARD_SM,,-,SF_PLUS,48900.0,11000.0,37900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,97
+STOCK-R98-P1,F-NS776BLIATHL,PASS_F,Galaxy Z Flip 8 12/256GB  รหัส F,-,SF_PLUS,42900.0,8000.0,34900.0,01,TRUE,FALSE,01             *ร่วม SF+ โปรเครื่องเปล่า ไม่ร่วมเทรดอัพ,Stock.xlsx,Promotion,98
+STOCK-R99-P1,F-NS776BZKATHL,PASS_F,,-,SF_PLUS,42900.0,8000.0,34900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,99
+STOCK-R100-P1,F-NS776BZWATHL,PASS_F,,-,SF_PLUS,42900.0,8000.0,34900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,100
+STOCK-R101-P1,F-NS776BLIETHL,PASS_F,Galaxy Z Flip 8 12/512GB  รหัส F,-,SF_PLUS,50900.0,8000.0,42900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,101
+STOCK-R102-P1,F-NS776BZKETHL,PASS_F,,-,SF_PLUS,50900.0,8000.0,42900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,102
+STOCK-R103-P1,F-NS776BZWETHL,PASS_F,,-,SF_PLUS,50900.0,8000.0,42900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,103
+STOCK-R104-P1,SM-F776BLIATHL,STANDARD_SM,Galaxy Z Flip 8 12/256GB,-,SF_PLUS,42900.0,5000.0,37900.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,104
+STOCK-R105-P1,SM-F776BZKATHL,STANDARD_SM,,-,SF_PLUS,42900.0,5000.0,37900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,105
+STOCK-R106-P1,SM-F776BZWATHL,STANDARD_SM,,-,SF_PLUS,42900.0,5000.0,37900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,106
+STOCK-R107-P1,SM-F776BLIETHL,STANDARD_SM,Galaxy Z Flip 8 12/512GB,-,SF_PLUS,50900.0,5000.0,45900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,107
+STOCK-R108-P1,SM-F776BZKETHL,STANDARD_SM,,-,SF_PLUS,50900.0,5000.0,45900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,108
+STOCK-R109-P1,SM-F776BZWETHL,STANDARD_SM,,-,SF_PLUS,50900.0,5000.0,45900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,109
+STOCK-R110-P1,SM-F966BZKDTHL,STANDARD_SM,Galaxy Z Fold7 (12/256GB),-,SF_PLUS,67900.0,18000.0,49900.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,110
+STOCK-R111-P1,SM-F966BZSDTHL,STANDARD_SM,,-,SF_PLUS,67900.0,18000.0,49900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,111
+STOCK-R112-P1,SM-F966BDBDTHL,STANDARD_SM,,-,SF_PLUS,67900.0,18000.0,49900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,112
+STOCK-R113-P1,SM-F966BZKGTHL,STANDARD_SM,Galaxy Z Fold7 (12/512GB),-,SF_PLUS,75900.0,18000.0,57900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,113
+STOCK-R114-P1,SM-F966BZSGTHL,STANDARD_SM,,-,SF_PLUS,75900.0,18000.0,57900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,114
+STOCK-R115-P1,SM-F966BDBGTHL,STANDARD_SM,,-,SF_PLUS,75900.0,18000.0,57900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,115
+STOCK-R116-P1,SM-F966BZKHTHL,STANDARD_SM,Galaxy Z Fold7 (16/1TB),-,SF_PLUS,87900.0,18000.0,69900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,116
+STOCK-R117-P1,SM-F966BDBHTHL,STANDARD_SM,,-,SF_PLUS,87900.0,18000.0,69900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,117
+STOCK-R155-P1,SM-X936BZAATHL,STANDARD_SM,Galaxy Tab S11Ultra 5G 12/256GB,-,SF_PLUS,48900.0,5000.0,43900.0,01,TRUE,FALSE,01             *ร่วม SF+,Stock.xlsx,Promotion,155
+STOCK-R155-STUDENT,SM-X936BZAATHL,STANDARD_SM,Galaxy Tab S11Ultra 5G 12/256GB,-,STUDENT,48900.0,7335,41565.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,155
+STOCK-R156-P1,SM-X826BZAATHL,STANDARD_SM,Galaxy Tab S10Plus 5G,-,SF_PLUS,43900.0,13000.0,30900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,156
+STOCK-R158-P1,SM-X736BZAATHL,STANDARD_SM,Galaxy Tab S11 5G 12/128GB,-,SF_PLUS,33900.0,3500.0,30400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,158
+STOCK-R158-STUDENT,SM-X736BZAATHL,STANDARD_SM,Galaxy Tab S11 5G 12/128GB,-,STUDENT,33900.0,5085,28815.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,158
+STOCK-R159-P1,SM-X736BZSATHL,STANDARD_SM,,-,SF_PLUS,33900.0,3500.0,30400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,159
+STOCK-R159-STUDENT,SM-X736BZSATHL,STANDARD_SM,,-,STUDENT,33900.0,5085,28815.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,159
+STOCK-R160-P1,SM-X730NZAATHL,STANDARD_SM,Galaxy Tab S11 Wi-Fi 12/128GB,-,SF_PLUS,28900.0,3500.0,25400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,160
+STOCK-R160-STUDENT,SM-X730NZAATHL,STANDARD_SM,Galaxy Tab S11 Wi-Fi 12/128GB,-,STUDENT,28900.0,4335,24565.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,160
+STOCK-R161-P1,SM-X730NZSATHL,STANDARD_SM,,-,SF_PLUS,28900.0,3500.0,25400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,161
+STOCK-R161-STUDENT,SM-X730NZSATHL,STANDARD_SM,,-,STUDENT,28900.0,4335,24565.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,161
+STOCK-R162-P1,SM-X626BZAETHL,STANDARD_SM,Galaxy Tab S10FE Plus 5G 12/256GB,-,SF_PLUS,30900.0,5000.0,25900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,162
+STOCK-R162-STUDENT,SM-X626BZAETHL,STANDARD_SM,Galaxy Tab S10FE Plus 5G 12/256GB,-,STUDENT,30900.0,4635,26265.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,162
+STOCK-R163-P1,SM-X620NZAETHL,STANDARD_SM,Galaxy Tab S10FE Plus Wi-Fi 12/256GB,-,SF_PLUS,27900.0,5000.0,22900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,163
+STOCK-R163-STUDENT,SM-X620NZAETHL,STANDARD_SM,Galaxy Tab S10FE Plus Wi-Fi 12/256GB,-,STUDENT,27900.0,4185,23715.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,163
+STOCK-R164-P1,SM-X526BLBATHL,STANDARD_SM,Galaxy Tab S10 FE 5G 8/128GB,-,SF_PLUS,22900.0,3500.0,19400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,164
+STOCK-R164-STUDENT,SM-X526BLBATHL,STANDARD_SM,Galaxy Tab S10 FE 5G 8/128GB,-,STUDENT,22900.0,3435,19465.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,164
+STOCK-R165-P1,SM-X526BZAATHL,STANDARD_SM,,-,SF_PLUS,22900.0,3500.0,19400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,165
+STOCK-R165-STUDENT,SM-X526BZAATHL,STANDARD_SM,,-,STUDENT,22900.0,3435,19465.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,165
+STOCK-R166-P1,SM-X520NLBATHL,STANDARD_SM,Galaxy Tab S10 FE Wifi 8/128GB,-,SF_PLUS,19900.0,3500.0,16400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,166
+STOCK-R166-STUDENT,SM-X520NLBATHL,STANDARD_SM,Galaxy Tab S10 FE Wifi 8/128GB,-,STUDENT,19900.0,2985,16915.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,166
+STOCK-R167-P1,SM-X520NZAATHL,STANDARD_SM,,-,SF_PLUS,19900.0,3500.0,16400.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,167
+STOCK-R167-STUDENT,SM-X520NZAATHL,STANDARD_SM,,-,STUDENT,19900.0,2985,16915.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,167
+STOCK-R168-P1,F-X406BZAAFCX4,PASS_F,Galaxy Tab S10 Lite 5G 6/128GB แถม KB,-,SF_PLUS,16990.0,500.0,16490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,168
+STOCK-R168-STUDENT,F-X406BZAAFCX4,PASS_F,Galaxy Tab S10 Lite 5G 6/128GB แถม KB,-,STUDENT,16990.0,1699,15291.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,168
+STOCK-R169-P1,F-X406BZRAFCX4,PASS_F,,-,SF_PLUS,16990.0,500.0,16490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,169
+STOCK-R169-STUDENT,F-X406BZRAFCX4,PASS_F,,-,STUDENT,16990.0,1699,15291.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,169
+STOCK-R170-P1,SM-X406BZAATHL,STANDARD_SM,Galaxy Tab S10 Lite 5G 6/128GB,-,SF_PLUS,16990.0,2500.0,14490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,170
+STOCK-R170-STUDENT,SM-X406BZAATHL,STANDARD_SM,Galaxy Tab S10 Lite 5G 6/128GB,-,STUDENT,16990.0,1699,15291.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,170
+STOCK-R172-P1,F-X400NZAAFCX4,PASS_F,Galaxy Tab S10 Lite Wifi 6/128GB แถม KB,-,SF_PLUS,12990.0,500.0,12490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,172
+STOCK-R172-STUDENT,F-X400NZAAFCX4,PASS_F,Galaxy Tab S10 Lite Wifi 6/128GB แถม KB,-,STUDENT,12990.0,1299,11691.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,172
+STOCK-R173-P1,F-X400NZRAFCX4,PASS_F,,-,SF_PLUS,12990.0,500.0,12490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,173
+STOCK-R173-STUDENT,F-X400NZRAFCX4,PASS_F,,-,STUDENT,12990.0,1299,11691.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,173
+STOCK-R174-P1,SM-X400NZAATHL,STANDARD_SM,Galaxy Tab S10 Lite Wifi 6/128GB,-,SF_PLUS,12990.0,2500.0,10490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,174
+STOCK-R174-STUDENT,SM-X400NZAATHL,STANDARD_SM,Galaxy Tab S10 Lite Wifi 6/128GB,-,STUDENT,12990.0,1299,11691.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,174
+STOCK-R175-P1,SM-X400NZRATHL,STANDARD_SM,,-,SF_PLUS,12990.0,2500.0,10490.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,175
+STOCK-R175-STUDENT,SM-X400NZRATHL,STANDARD_SM,,-,STUDENT,12990.0,1299,11691.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,175
+STOCK-R176-P1,F-X236BZAAFBX2,PASS_F,Galaxy Tab A11Plus 5G 6/128GB,-,SF_PLUS,10490.0,500.0,9990.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,176
+STOCK-R176-P2,F-X236BZAAFBX2,PASS_F,Galaxy Tab A11Plus 5G 6/128GB,-,STANDARD_PAYMENT,10490.0,1500.0,8990.0,04,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร | 04             *ไม่ร่วม SF+,Stock.xlsx,Promotion,176
+STOCK-R176-STUDENT,F-X236BZAAFBX2,PASS_F,Galaxy Tab A11Plus 5G 6/128GB,-,STUDENT,10490.0,1573,8917.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,176
+STOCK-R177-P1,SM-X236BZAATHL,STANDARD_SM,Galaxy Tab A11Plus 5G 6/128GB,-,SF_PLUS,10490.0,500.0,9990.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,177
+STOCK-R177-P2,SM-X236BZAATHL,STANDARD_SM,Galaxy Tab A11Plus 5G 6/128GB,-,STANDARD_PAYMENT,10490.0,1500.0,8990.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,177
+STOCK-R177-STUDENT,SM-X236BZAATHL,STANDARD_SM,Galaxy Tab A11Plus 5G 6/128GB,-,STUDENT,10490.0,1573,8917.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,177
+STOCK-R178-P1,F-X230NZAAFBX2,PASS_F,Galaxy Tab A11Plus Wi-Fi 6/128GB,-,SF_PLUS,8490.0,500.0,7990.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,178
+STOCK-R178-P2,F-X230NZAAFBX2,PASS_F,Galaxy Tab A11Plus Wi-Fi 6/128GB,-,STANDARD_PAYMENT,8490.0,1500.0,6990.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,178
+STOCK-R178-STUDENT,F-X230NZAAFBX2,PASS_F,Galaxy Tab A11Plus Wi-Fi 6/128GB,-,STUDENT,8490.0,1273,7217.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,178
+STOCK-R179-P1,SM-X230NZAATHL,STANDARD_SM,Galaxy Tab A11Plus Wi-Fi 6/128GB,-,SF_PLUS,8490.0,500.0,7990.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,179
+STOCK-R179-P2,SM-X230NZAATHL,STANDARD_SM,Galaxy Tab A11Plus Wi-Fi 6/128GB,-,STANDARD_PAYMENT,8490.0,1500.0,6990.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,179
+STOCK-R179-STUDENT,SM-X230NZAATHL,STANDARD_SM,Galaxy Tab A11Plus Wi-Fi 6/128GB,-,STUDENT,8490.0,1273,7217.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,179
+STOCK-R180-P1,SM-X135GZAETHL,STANDARD_SM,Galaxy Tab A11 LTE 8/128GB,-,SF_PLUS,7490.0,500.0,6990.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,180
+STOCK-R180-P2,SM-X135GZAETHL,STANDARD_SM,Galaxy Tab A11 LTE 8/128GB,-,STANDARD_PAYMENT,7490.0,1500.0,5990.0,02,FALSE,FALSE,ราคานี้ไม่ร่วม SF+ | ชำระด้วยเงินสด / รูดเต็ม / ผ่อนบัตร,Stock.xlsx,Promotion,180
+STOCK-R180-STUDENT,SM-X135GZAETHL,STANDARD_SM,Galaxy Tab A11 LTE 8/128GB,-,STUDENT,7490.0,1123,6367.0,Studentcrd,FALSE,FALSE,แสดงบัตรนักเรียนหรือนักศึกษาเพื่อรับสิทธิ์ | ไม่ร่วมส่วนลดหรือโปรโมชั่นอื่น | ห้ามใช้คูปองโปรโมชั่นปกติ,Stock.xlsx,Promotion,180
+STOCK-R182-P1,SM-R410NZKAASA,STANDARD_SM,Samsung Galaxy Buds Core,-,SF_PLUS,1490.0,200.0,1290.0,03,TRUE,FALSE,03,Stock.xlsx,Promotion,182
+STOCK-R183-P1,SM-R410NZWAASA,STANDARD_SM,,-,SF_PLUS,1490.0,200.0,1290.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,183
+STOCK-R200-P1,SM-L320NDAAASA,STANDARD_SM,Samsung Galaxy Watch8 40mm BT,-,SF_PLUS,11900.0,4000.0,7900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,200
+STOCK-R201-P1,SM-L320NZSAASA,STANDARD_SM,,-,SF_PLUS,11900.0,4000.0,7900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,201
+STOCK-R202-P1,SM-L330NDAAASA,STANDARD_SM,Samsung Galaxy Watch8 44mm BT,-,SF_PLUS,13900.0,4000.0,9900.0,01,TRUE,FALSE,โปรโมชั่นสาขาประจำงวด,Stock.xlsx,Promotion,202

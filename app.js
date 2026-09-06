@@ -221,15 +221,13 @@ function getApprovedPromotion(item, saleMode = "ALL", targetDate = null) {
           : "โปรโมชั่น Student ในไฟล์ต้นทางมีข้อผิดพลาด"
       };
     }
-    activeStd.couponCode = "Studentcrd";
-    activeStd.sfPlusEligible = false;
-    activeStd.tradeUpEligible = false;
-    activeStd.studentEligible = true;
+    // Read-only Consumer: activeStd already has verified Studentcrd and flags from Importer
+    const safeStudentVariant = structuredClone ? structuredClone(activeStd) : JSON.parse(JSON.stringify(activeStd));
     return {
       isBlocked: false,
       isStudent: true,
-      variant: activeStd,
-      rrp: activeStd.rrp || item.srp
+      variant: safeStudentVariant,
+      rrp: safeStudentVariant.rrp || item.srp
     };
   }
 
@@ -540,6 +538,24 @@ function renderMetrics() {
   if (kpiStudentCount) kpiStudentCount.innerHTML = `${studentCount} <span class="unit">รุ่น</span>`;
   if (countAll) countAll.textContent = masterStockData.length;
   if (countKb) countKb.textContent = kbAccessoryCount;
+
+  // Dynamic 95/5 Governance & Risk Guard counters from PROMOTION_VARIANTS (Zero Hardcoded Counts)
+  const variants = window.PROMOTION_VARIANTS || [];
+  const cPassed = variants.filter(v => v.validationStatus === "PASSED_VALIDATION").length;
+  const cWarn = variants.filter(v => v.validationStatus === "WARNING").length;
+  const cBlocked = variants.filter(v => v.validationStatus === "BLOCKED").length;
+
+  const hdrBadge = document.getElementById("headerAuditBadge");
+  if (hdrBadge) hdrBadge.textContent = `${cPassed} ผ่าน • ${cBlocked} ระงับ`;
+
+  const statLow = document.getElementById("statLowRisk");
+  if (statLow) statLow.textContent = cPassed;
+  const statMed = document.getElementById("statMedRisk");
+  if (statMed) statMed.textContent = cWarn;
+  const statHigh = document.getElementById("statHighRisk");
+  if (statHigh) statHigh.textContent = cBlocked;
+  const modalExcBadge = document.getElementById("modalExceptionBadge");
+  if (modalExcBadge) modalExcBadge.textContent = `${cBlocked + cWarn} รายการ`;
 }
 
 // Filter Logic

@@ -1,0 +1,26 @@
+{
+  "evaluationDate": "2026-09-06",
+  "importBatch": "IMPORT-20260906-001",
+  "dashboardStatus": "DEVELOPMENT / VALIDATION",
+  "isSingleSourceOfTruth": false,
+  "officialAdvisory": "Do not use as single source of truth; verify with original Excel files until full sign-off.",
+  "totalVariants": 928,
+  "validationCounts": {
+    "PASSED_VALIDATION": 117,
+    "WARNING": 651,
+    "BLOCKED": 160
+  },
+  "temporalCounts": {
+    "ACTIVE": 640,
+    "EXPIRED": 288,
+    "FUTURE": 0
+  },
+  "activeUsableToday": 512,
+  "crossTypeLeaks": 0,
+  "formulaErrorBlockedCount": 75,
+  "fold8UnprovenBlockedCount": 18,
+  "expiredPremiumsCount": 32,
+  "regressionTestsPassed": 8,
+  "regressionTestsTotal": 8,
+  "regressionPassRate": "100.0%"
+}
