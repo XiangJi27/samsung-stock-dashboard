@@ -1,0 +1,139 @@
+{
+  "contractVersion": "1.0.0",
+  "exportId": "NBLM-EXPORT-20260907-001",
+  "generatedAt": "2026-09-07T16:09:59.158568",
+  "mode": "READ_ONLY",
+  "sourceEnvironment": "VALIDATED_PIPELINE",
+  "inputBatches": {
+    "stockBatchId": "IMPORT-20260906-002",
+    "promotionBatchId": "BATCH-20260907-105441",
+    "auditBatchId": "AUDIT-20260907-001"
+  },
+  "versions": {
+    "parserVersion": "2.1.0-LTR-MERGE",
+    "ruleEngineVersion": "2.5.0-STRICT",
+    "businessRulesVersion": "1.0.0",
+    "applicationCommit": "802a786"
+  },
+  "includedFiles": [
+    {
+      "file": "README_FIRST.md",
+      "sizeBytes": 1735,
+      "sha256": "92823d103633ef32e9ff3e5a3e084e43cdfd355d5260cf3ccb1f4b49158800ef",
+      "category": "root"
+    },
+    {
+      "file": "audit/audit_summary.md",
+      "sizeBytes": 680,
+      "sha256": "e80538e7b898aba7340850d667af0fd8b481a6d1d5bd4602c30343977813df21",
+      "category": "audit"
+    },
+    {
+      "file": "audit/blocked_variants.csv",
+      "sizeBytes": 147056,
+      "sha256": "931cbcf3ae02e3b0037ed906fac0217008f854c1784a68b05fe2b3811828eb65",
+      "category": "audit"
+    },
+    {
+      "file": "audit/regression_summary.md",
+      "sizeBytes": 563,
+      "sha256": "73d77b299353b4ce109c3f3f61540e43b7d9d631a4f20090ea5c85398f067f96",
+      "category": "audit"
+    },
+    {
+      "file": "audit/source_conflicts.csv",
+      "sizeBytes": 688,
+      "sha256": "21e27ed1d2b5e5f9fa6b96826c6a93d3f85f59dab43fb13ba1e7438c2903ae3e",
+      "category": "audit"
+    },
+    {
+      "file": "current/active_promotions.csv",
+      "sizeBytes": 56621,
+      "sha256": "79c02423863f3c7dfb8e328e5a35d227e13a429dd30468a0e5d05809034581ab",
+      "category": "current"
+    },
+    {
+      "file": "current/branch_confirmed_rules.md",
+      "sizeBytes": 11294,
+      "sha256": "135cc4312aebf9e7300bf751d453a50e2ddce8b0d57ab7f8189355c11b98a35f",
+      "category": "current"
+    },
+    {
+      "file": "current/coupon_guide.md",
+      "sizeBytes": 689,
+      "sha256": "71d4b19ee2b7656c706f5f5290d3af8bfab9507f4587d9200db7ff91134073d2",
+      "category": "current"
+    },
+    {
+      "file": "current/promotion_summary.md",
+      "sizeBytes": 357,
+      "sha256": "03f5adf0fbbd78fd61a874d43f6cfea94681024e5691361c5f2eed697cf0f2ed",
+      "category": "current"
+    },
+    {
+      "file": "current/sale_mode_guide.md",
+      "sizeBytes": 352,
+      "sha256": "879b2f228af94e16a00f9604040218e297a790c3a26b13a0f216038271e6af71",
+      "category": "current"
+    },
+    {
+      "file": "historical/expired_promotions.csv",
+      "sizeBytes": 240,
+      "sha256": "9963c69a45815dd3d8313ee1842565833afbfef68c2f2e281c37286b7ea938a6",
+      "category": "historical"
+    },
+    {
+      "file": "policies/notebooklm_answering_rules.md",
+      "sizeBytes": 7224,
+      "sha256": "3b3c82a12d68ace441d3ad40dc68fe05c1734e00111480c1349121a04b3dac09",
+      "category": "policies"
+    },
+    {
+      "file": "policies/notebooklm_data_scope.md",
+      "sizeBytes": 8272,
+      "sha256": "0ddd8a239c07c9903854e3cdbb8431f8c2d4991c0dce961887a04abb8809d817",
+      "category": "policies"
+    },
+    {
+      "file": "policies/notebooklm_readonly_contract.md",
+      "sizeBytes": 14547,
+      "sha256": "50ed0acff30834b59cbef1034435650b62b2aa8c99d7e51ca398c87598fb08da",
+      "category": "policies"
+    },
+    {
+      "file": "source-reference/header_path_mapping.csv",
+      "sizeBytes": 312,
+      "sha256": "2e4040a4e93a26c870598d88db33a0dbebc1efb73c01107769836aa595789313",
+      "category": "source-reference"
+    },
+    {
+      "file": "source-reference/source_document_index.md",
+      "sizeBytes": 512,
+      "sha256": "fcb3e5ed950fc487b83326de10fa202754cb6098310b784d3fe038af0d5fa990",
+      "category": "source-reference"
+    },
+    {
+      "file": "source-reference/source_mapping.csv",
+      "sizeBytes": 282,
+      "sha256": "a78a51bf455dddecb070e3a419cb9a59c28c77cc9ec0759d71087ff5231235ed",
+      "category": "source-reference"
+    }
+  ],
+  "excludedDataClasses": [
+    "CREDENTIALS",
+    "CUSTOMER_DATA",
+    "AUTH_SESSIONS",
+    "PRIVATE_TOKENS",
+    "RAW_ERROR_LOGS",
+    "INTERNAL_FILE_PATHS"
+  ],
+  "acceptedRisk": {
+    "riskAcknowledged": true,
+    "riskCategory": "COMPETITIVE_SENSITIVE_DATA_CLOUD_PROCESSING",
+    "acknowledgementStatement": "ทีมบริหารโครงการรับทราบและยอมรับความเสี่ยงว่า ข้อมูลโครงสร้างราคา ส่วนลด และเงื่อนไขโปรโมชั่น (ไม่รวม Credential/PII) จะถูกส่งไปประมวลผลบนบริการคลาวด์ภายนอก Google NotebookLM เพื่อสนับสนุนการค้นหาและอธิบายข้อมูลของพนักงานสาขา",
+    "decisionOwner": "Store Operations Lead & Project Technical Lead"
+  },
+  "sanitizationStatus": "PASSED",
+  "writeBackAllowed": false,
+  "dashboardPublishAllowed": false
+}

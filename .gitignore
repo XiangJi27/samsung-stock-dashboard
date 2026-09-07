@@ -17,3 +17,5 @@ credentials/
 *.key
 *.pem
 scratch/
+__pycache__/
+*.pyc

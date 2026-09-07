@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NotebookLMExportManifest",
+  "type": "object",
+  "required": [
+    "contractVersion",
+    "exportId",
+    "generatedAt",
+    "mode",
+    "sourceEnvironment",
+    "inputBatches",
+    "versions",
+    "includedFiles",
+    "excludedDataClasses",
+    "acceptedRisk",
+    "sanitizationStatus",
+    "writeBackAllowed",
+    "dashboardPublishAllowed"
+  ],
+  "properties": {
+    "contractVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "exportId": {
+      "type": "string",
+      "pattern": "^NBLM-EXPORT-[0-9]{8}-[0-9]{3,}$"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["READ_ONLY"]
+    },
+    "sourceEnvironment": {
+      "type": "string"
+    },
+    "inputBatches": {
+      "type": "object",
+      "required": ["stockBatchId", "promotionBatchId", "auditBatchId"],
+      "properties": {
+        "stockBatchId": { "type": "string" },
+        "promotionBatchId": { "type": "string" },
+        "auditBatchId": { "type": "string" }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "required": ["parserVersion", "ruleEngineVersion", "businessRulesVersion", "applicationCommit"],
+      "properties": {
+        "parserVersion": { "type": "string" },
+        "ruleEngineVersion": { "type": "string" },
+        "businessRulesVersion": { "type": "string" },
+        "applicationCommit": { "type": "string" }
+      }
+    },
+    "includedFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "sizeBytes", "sha256", "category"],
+        "properties": {
+          "file": { "type": "string" },
+          "sizeBytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "category": { "type": "string" }
+        }
+      }
+    },
+    "excludedDataClasses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "acceptedRisk": {
+      "type": "object",
+      "required": ["riskAcknowledged", "riskCategory", "acknowledgementStatement", "decisionOwner"],
+      "properties": {
+        "riskAcknowledged": { "type": "boolean", "const": true },
+        "riskCategory": { "type": "string" },
+        "acknowledgementStatement": { "type": "string" },
+        "decisionOwner": { "type": "string" }
+      }
+    },
+    "sanitizationStatus": {
+      "type": "string",
+      "enum": ["PASSED", "FAILED"]
+    },
+    "writeBackAllowed": {
+      "type": "boolean",
+      "const": false
+    },
+    "dashboardPublishAllowed": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

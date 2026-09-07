@@ -1,8 +1,8 @@
 {
   "gate": "BATCH_CONSISTENCY_GATE",
   "status": "PASSED",
-  "executedAt": "2026-09-07T15:46:40.253414",
-  "commitSha": "802a786",
+  "executedAt": "2026-09-07T16:12:01.263054",
+  "commitSha": "0c5ef9c",
   "verifiedInputs": {
     "stockBatchId": "IMPORT-20260906-002",
     "promotionBatchId": "BATCH-20260907-105441",

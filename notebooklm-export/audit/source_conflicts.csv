@@ -1,0 +1,3 @@
+﻿conflictId,model,field,excelValue,branchConfirmedValue,ruleEngineResult,sourceFileDisplayName,sourceSheet,sourceRow,status
+CONF-01-A07-RRP,Galaxy A07 4G 4/64GB,RRP / NetPrice,"RRP 4,599 (Discount 800, Net 3,799)","Net 3,999 (Referenced 4/128GB row)","SM-A075FLVDTHL Net=3,799 | SM-A075FLVGTHL Net=3,999 (Separated by Exact P/N)",Promotion Retail Aug 2026.xlsx,28 Aug - 6 Sep,52,SOURCE_CONFLICT
+CONF-02-ZFLIP8-ADAPTER,Galaxy Z Flip8 (Pass F),Adapter Benefit vs Discount,Free Samsung 45W Adapter (F-NS776),"Decline gift for 1,000 THB Copperwired discount",Both valid in separate contexts: Samsung Gift vs Store Cash Benefit,Promotion Retail Aug 2026.xlsx,28 Aug - 6 Sep,18,BOTH_MATCH
