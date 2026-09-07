@@ -1,19 +1,19 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-07T14:40:00+07:00",
+  "generatedAt": "2026-09-07T14:45:00+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "Production / Vercel Static Hosting",
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 19,
-    "totalSizeBytes": 6754840,
+    "totalSizeBytes": 6754842,
     "totalSizeMB": 6.44
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 102359,
-      "sha256": "fb2bd47c455abc8268f7dd2fe1fa4134a17e55a2fdeb41bdb3536c8726cf45b4",
+      "sizeBytes": 102361,
+      "sha256": "abc96ec5a83900819b255ca979a3ebad9866f88d4f1d778df8610c52cade6f79",
       "status": "REQUIRED_RUNTIME"
     },
     {
