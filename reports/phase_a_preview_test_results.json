@@ -1,0 +1,242 @@
+{
+  "testSuite": "Phase A Preview & Application Shell Test Suite",
+  "project": "Samsung Branch Operations System",
+  "branch": "feature/phase-a-application-shell",
+  "deploymentCommit": "ef7e7b049d5bfddcbb1365315ffb96919c72e2aa",
+  "executedAt": "2026-09-07T13:30:00+07:00",
+  "environment": {
+    "localDevelopment": "http://localhost:8080/#/",
+    "vercelPreviewTarget": "feature/phase-a-application-shell (Pending deployment protection check)",
+    "productionUrl": "https://samsung-stock-dashboard.vercel.app/ (DO NOT MERGE - Frozen at Milestone 1)"
+  },
+  "summary": {
+    "totalTests": 22,
+    "passed": 22,
+    "failed": 0,
+    "passRate": "100%",
+    "securityGateType": "UI_WORKFLOW_GATE_ONLY",
+    "stockIntegrityStatus": "PRICE_SOURCE_MISMATCH"
+  },
+  "tests": [
+    {
+      "testId": "AUTH-01",
+      "name": "Unauthenticated access redirect to /#/login",
+      "expected": "Direct navigation to / or /#/home or /#/stock without session redirects to /#/login",
+      "actual": "Window location hash automatically updated to #/login; auth.hasSession() returned false",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / DOM Inspection",
+      "executedAt": "2026-09-07T13:22:30+07:00",
+      "evidence": "URL: http://localhost:8080/#/login; DOM element #view-login has class 'active', #mainHeader has style 'display: none'"
+    },
+    {
+      "testId": "AUTH-02",
+      "name": "Empty Employee ID validation",
+      "expected": "Displays 'กรุณากรอกรหัสพนักงาน' alert message and halts login submission",
+      "actual": "Alert banner rendered with text 'กรุณากรอกรหัสพนักงาน'; submission halted without session creation",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Form Submit Event",
+      "executedAt": "2026-09-07T13:22:45+07:00",
+      "evidence": "DOM #loginAlert has textContent 'กรุณากรอกรหัสพนักงาน', className 'login-alert visible'"
+    },
+    {
+      "testId": "AUTH-03",
+      "name": "Empty Password validation",
+      "expected": "Displays 'กรุณากรอกรหัสผ่าน' alert message and halts login submission",
+      "actual": "Alert banner rendered with text 'กรุณากรอกรหัสผ่าน'; submission halted",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Form Submit Event",
+      "executedAt": "2026-09-07T13:22:55+07:00",
+      "evidence": "DOM #loginAlert has textContent 'กรุณากรอกรหัสผ่าน', sessionStorage.getItem('samsung_branch_session') === null"
+    },
+    {
+      "testId": "AUTH-04",
+      "name": "Development Login success",
+      "expected": "Redirects to /#/home and establishes sessionStorage session with user details",
+      "actual": "Navigated to /#/home, session established in sessionStorage with authMode='DEVELOPMENT'",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Form Submit",
+      "executedAt": "2026-09-07T13:23:10+07:00",
+      "evidence": "URL: http://localhost:8080/#/home; header user info displays 'EMP-001 • Somchai Branch'; sessionStorage contains valid JSON payload without password"
+    },
+    {
+      "testId": "AUTH-05",
+      "name": "Tab refresh preserves session",
+      "expected": "Session maintained within same browser tab across page reload without returning to login",
+      "actual": "Page reloaded at /#/stock; user remained authenticated at /#/stock; did NOT redirect to /#/login",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Window Reload Event",
+      "executedAt": "2026-09-07T13:23:30+07:00",
+      "evidence": "Post-reload location.hash === '#/stock'; sessionStorage.getItem('samsung_branch_session') intact; #view-stock is active"
+    },
+    {
+      "testId": "AUTH-06",
+      "name": "Logout clears session",
+      "expected": "Clicking logout button clears sessionStorage and redirects to /#/login",
+      "actual": "sessionStorage item removed; window.location.hash set to #/login; header and navigation hidden",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Click Event on #btnLogout",
+      "executedAt": "2026-09-07T13:24:00+07:00",
+      "evidence": "sessionStorage.getItem('samsung_branch_session') === null; #view-login active; #appWrapper has style 'display: none'"
+    },
+    {
+      "testId": "AUTH-07",
+      "name": "Route Guard protects /#/stock after logout",
+      "expected": "Direct URL manipulation to /#/stock while unauthenticated immediately redirects to /#/login",
+      "actual": "Router guard detected null session; intercepted navigation and reset window.location.hash to #/login",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Hash Change Simulation",
+      "executedAt": "2026-09-07T13:24:15+07:00",
+      "evidence": "Attempted hash: '#/stock' -> Guard intercepted -> Result hash: '#/login'; #view-stock display 'none'"
+    },
+    {
+      "testId": "AUTH-08",
+      "name": "Browser Back button after logout blocked",
+      "expected": "Pressing browser back button after logout cannot expose protected stock or home content",
+      "actual": "History popstate event triggered route guard; user redirected back to /#/login without showing protected data",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / History Back Simulation",
+      "executedAt": "2026-09-07T13:24:30+07:00",
+      "evidence": "window.history.back() executed -> location.hash re-evaluated -> redirected to #/login; protected views remain display: none"
+    },
+    {
+      "testId": "AUTH-09",
+      "name": "Close tab expires session",
+      "expected": "Closing browser tab and opening fresh tab/window results in expired session due to sessionStorage scoping",
+      "actual": "New browser context initialized; sessionStorage is empty by browser specification; unauthenticated check redirects to /#/login",
+      "status": "PASS",
+      "executionMethod": "Browser Context Isolation Test / New Incognito Window",
+      "executedAt": "2026-09-07T13:24:50+07:00",
+      "evidence": "Isolated context sessionStorage.length === 0; default route resolves to #/login"
+    },
+    {
+      "testId": "AUTH-10",
+      "name": "Corrupted session JSON handling",
+      "expected": "Invalid or tampered JSON in sessionStorage is discarded safely without throwing unhandled exceptions",
+      "actual": "auth.getSession() caught JSON.parse exception, invoked clearSession(), and redirected to /#/login",
+      "status": "PASS",
+      "executionMethod": "Unit Injection / sessionStorage.setItem('samsung_branch_session', '{bad_json...')",
+      "executedAt": "2026-09-07T13:25:10+07:00",
+      "evidence": "Console warning handled gracefully; corrupted key purged; user safely on #/login"
+    },
+    {
+      "testId": "SEC-01",
+      "name": "Zero Credentials in Source Code",
+      "expected": "No real passwords, tokens, API keys, or employee IDs in repository files",
+      "actual": "Repository scan found 0 hardcoded credentials; .env.example contains only dummy placeholders",
+      "status": "PASS",
+      "executionMethod": "Grep Pattern Analysis across repo",
+      "executedAt": "2026-09-07T13:25:30+07:00",
+      "evidence": "0 private keys, 0 production tokens; .gitignore contains .env, *.pem, *.key rules"
+    },
+    {
+      "testId": "SEC-02",
+      "name": "Password not stored in storage or logs",
+      "expected": "Password field strictly omitted from sessionStorage and console.log outputs",
+      "actual": "auth.js explicitly destructured credentials, omitting password from session object; 0 console logs containing password",
+      "status": "PASS",
+      "executionMethod": "Storage Inspection & Console Log Grep",
+      "executedAt": "2026-09-07T13:25:45+07:00",
+      "evidence": "sessionStorage payload: '{\"employeeId\":\"EMP-001\",\"name\":\"Somchai Branch\",\"branchCode\":\"COPPERWIRED-01\",\"role\":\"BRANCH_STAFF\",\"authMode\":\"DEVELOPMENT\"}'"
+    },
+    {
+      "testId": "HOME-01",
+      "name": "Sales KPI Placeholder (NOT_CONNECTED)",
+      "expected": "All sales metrics display 'NOT_CONNECTED' and 'รอเชื่อมต่อข้อมูล', no mock revenue numbers, no fake 0",
+      "actual": "All 5 sales cards render 'NOT_CONNECTED' with status badge 'รอเชื่อมต่อข้อมูล (Phase B)'",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / DOM Text Inspection",
+      "executedAt": "2026-09-07T13:26:00+07:00",
+      "evidence": "DOM #homeSalesKpis querySelectorAll('.kpi-placeholder-val') text === 'NOT_CONNECTED'; 0 mock currency values rendered"
+    },
+    {
+      "testId": "HOME-02",
+      "name": "Quick Action Stock navigation",
+      "expected": "Clicking 'ไปยังเมนูสต็อก' button on home page transitions router to /#/stock",
+      "actual": "Navigated to /#/stock; active navigation link changed to 'stock'; stock shell displayed",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Click on #btnQuickStock",
+      "executedAt": "2026-09-07T13:26:15+07:00",
+      "evidence": "Location hash === '#/stock'; #view-stock has class 'active'"
+    },
+    {
+      "testId": "STOCK-01",
+      "name": "Stock database availability",
+      "expected": "STOCK_DATABASE contains 218 verified records loaded into application shell",
+      "actual": "218 items present in window.STOCK_DATABASE and rendered in table rows",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / DOM Table Row Count",
+      "executedAt": "2026-09-07T13:26:30+07:00",
+      "evidence": "window.STOCK_DATABASE.length === 218; DOM #productTableBody rows count matches category filters"
+    },
+    {
+      "testId": "STOCK-02",
+      "name": "A07 stock counts per P/N",
+      "expected": "SM-A075FLVDTHL shows Model, Exact P/N, ร้านเรา ช1: 2, สาขา ช2: 5, รวม: 7, RRP: 4,599",
+      "actual": "Displayed row has Model 'Galaxy A07 4G 4/64 GB', P/N 'SM-A075FLVDTHL', F1=2, F2=5, Total=7, RRP=4,599",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / DOM Row Query for SM-A075FLVDTHL",
+      "executedAt": "2026-09-07T13:26:45+07:00",
+      "evidence": "DOM textContent: 'SM-A075FLVDTHL' | '2' | '5' | '7' | '฿4,599'; verified across Table View and Card View"
+    },
+    {
+      "testId": "STOCK-03",
+      "name": "Zero stock display formatting",
+      "expected": "Items with 0 stock display numeric '0' via <span class='stock-zero'>0</span>, never empty or '-'",
+      "actual": "All zero count cells render numeric '0' wrapped in .stock-zero span element",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / DOM Inspection on Row 5 (SM-A075FZKDTHL)",
+      "executedAt": "2026-09-07T13:27:00+07:00",
+      "evidence": "HTML snippet: '<span class=\"stock-zero\">0</span>'; computed text is '0', not whitespace or dash"
+    },
+    {
+      "testId": "ROUTE-01",
+      "name": "Hash router prevents static Vercel 404",
+      "expected": "Client-side hash routing prevents 404 on static hosting when navigating or reloading routes",
+      "actual": "Hash changes handled completely in client without triggering server-side HTTP requests for subpaths",
+      "status": "PASS",
+      "executionMethod": "Network Request Log Verification",
+      "executedAt": "2026-09-07T13:27:15+07:00",
+      "evidence": "Only index.html and static assets requested; 0 HTTP 404 errors logged across all router transitions"
+    },
+    {
+      "testId": "ROUTE-02",
+      "name": "Active navigation menu indicator",
+      "expected": "Current route applies .active class to matching navigation item and updates header title",
+      "actual": "When hash is #/stock, sidebar link #nav-stock has class 'active' and header shows 'สต็อกสาขา'",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / ClassList Check",
+      "executedAt": "2026-09-07T13:27:30+07:00",
+      "evidence": "DOM #nav-stock.classList.contains('active') === true; #pageTitle.textContent === 'สต็อกสาขา'"
+    },
+    {
+      "testId": "RESPONSIVE-01",
+      "name": "Mobile viewport 360px-375px and navigation non-obstruction",
+      "expected": "Mobile navigation bar is fixed at bottom; content has bottom padding so navigation never obscures stock table/cards",
+      "actual": "Mobile bottom navigation displayed at z-index 1000; .main-content has padding-bottom: 80px preventing overlap",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Viewport 375x812 Simulation & Scroll Check",
+      "executedAt": "2026-09-07T13:27:50+07:00",
+      "evidence": "Computed style .main-content paddingBottom === '80px'; last card and table bottom fully visible above 64px nav bar"
+    },
+    {
+      "testId": "RESPONSIVE-02",
+      "name": "Tablet viewport 768px layout",
+      "expected": "Navigation switches between compact sidebar and clean responsive stacking; 0 horizontal scroll overflow",
+      "actual": "Layout cleanly rendered at 768px; document.documentElement.scrollWidth === window.innerWidth",
+      "status": "PASS",
+      "executionMethod": "Automated Browser Subagent / Viewport 768x1024 Resize",
+      "executedAt": "2026-09-07T13:28:10+07:00",
+      "evidence": "scrollWidth === 768; 0 elements overflowing horizontally"
+    },
+    {
+      "testId": "CONSOLE-01",
+      "name": "Console errors and sensitive data leak prevention",
+      "expected": "0 uncaught runtime exceptions; 0 passwords or employee IDs printed to console",
+      "actual": "0 uncaught runtime errors; zero credential leaks in browser console logs",
+      "status": "PASS",
+      "executionMethod": "Browser Console Log Capture & Error Event Listener",
+      "executedAt": "2026-09-07T13:28:30+07:00",
+      "evidence": "Console error count: 0; Regex check for passwords/secrets in captured logs returned 0 matches"
+    }
+  ]
+}
