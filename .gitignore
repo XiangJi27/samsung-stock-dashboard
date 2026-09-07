@@ -8,4 +8,12 @@ excel_extracted/
 .user_uploaded/
 .system_generated/
 *.ps1
+# Environment and Secrets Protection
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.key
+*.pem
 scratch/
