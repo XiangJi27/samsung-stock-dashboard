@@ -6,8 +6,8 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 19,
-    "totalSizeBytes": 6754842,
-    "totalSizeMB": 6.44
+    "totalSizeBytes": 6765011,
+    "totalSizeMB": 6.45
   },
   "files": [
     {
@@ -96,8 +96,8 @@
     },
     {
       "file": "assets/js/data-service.js",
-      "sizeBytes": 7550,
-      "sha256": "1b946be0c7d2b4ec6d76a5ee1c5e222bdf4a7c63b018975f9ad6a0e3c9d3dff5",
+      "sizeBytes": 17719,
+      "sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
       "status": "REQUIRED_RUNTIME"
     },
     {

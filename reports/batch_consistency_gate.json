@@ -1,0 +1,16 @@
+{
+  "gate": "BATCH_CONSISTENCY_GATE",
+  "status": "PASSED",
+  "executedAt": "2026-09-07T15:46:40.253414",
+  "commitSha": "802a786",
+  "verifiedInputs": {
+    "stockBatchId": "IMPORT-20260906-002",
+    "promotionBatchId": "BATCH-20260907-105441",
+    "parserVersion": "2.1.0-LTR-MERGE",
+    "ruleEngineVersion": "2.5.0-STRICT",
+    "businessRulesVersion": "1.0.0",
+    "applicationCommit": "802a786"
+  },
+  "violationCount": 0,
+  "violations": []
+}

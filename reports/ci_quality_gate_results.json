@@ -1,54 +1,202 @@
 {
-  "gateStatus": "PASSED",
-  "passedCount": 11,
-  "warningCount": 0,
-  "violationCount": 0,
-  "passedChecks": [
+  "summary": {
+    "gateStatus": "PASSED",
+    "totalGatesEvaluated": 11,
+    "passedCount": 11,
+    "warningCount": 0,
+    "violationCount": 0,
+    "executedAt": "2026-09-07T15:46:40.253414",
+    "commitSha": "802a786"
+  },
+  "gates": [
     {
-      "check": "FILE-INTEGRITY",
-      "message": "Loaded 218 items from stock_full_data.json"
+      "ruleId": "RULE-01-FORMULA-ERROR",
+      "name": "Formula Error & Numeric Sanity",
+      "expected": "Zero formula errors in active promotions",
+      "actual": "0 formula errors found",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "errors": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "FILE-INTEGRITY",
-      "message": "Loaded 554 promotion variants from promotion_variants.json"
+      "ruleId": "RULE-02-PRICE-EQUATION",
+      "name": "Price Equation Consistency (Net = RRP - Discount)",
+      "expected": "Zero arithmetic price mismatches in standard payment",
+      "actual": "0 price equation mismatches",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "mismatches": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "QUARANTINE-AUDIT",
-      "message": "Verified 129 active promotions and 425 quarantined items"
+      "ruleId": "RULE-03-STUDENT-RULE",
+      "name": "Student Promotion Strict Validation (Studentcrd Only)",
+      "expected": "Zero illegal student coupon combinations",
+      "actual": "0 invalid student promotions",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "violations": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-01-FORMULA-ERROR",
-      "message": "Zero formula errors (#ERROR!, #REF!, NaN) detected across active promotions"
+      "ruleId": "RULE-04-PASS-F-ISOLATION",
+      "name": "Pass F (Memory Upgrade) Isolation",
+      "expected": "Zero cross-type classification leaks between SM- and F-",
+      "actual": "0 leaks detected",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "leaks": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-02-PRICE-EQUATION",
-      "message": "All active standard payment promotions satisfy arithmetic equation (Net = RRP - Discount)"
+      "ruleId": "RULE-05-TRADE-UP-ISOLATION",
+      "name": "Trade Up Isolation from Standard Payment",
+      "expected": "Zero Trade Up promotions categorized as Standard Payment",
+      "actual": "0 leaks detected",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "leaks": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-03-STUDENT-RULE",
-      "message": "Verified 14 Student promotions: 100% enforce 'Studentcrd' and zero prohibited combinations"
+      "ruleId": "RULE-06-STOCK-SUM",
+      "name": "Stock Arithmetic Integrity (Total = f1 + f2)",
+      "expected": "All 218 inventory records satisfy Total = f1 + f2",
+      "actual": "0 arithmetic errors in stock database",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "errors": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-04-PASS-F-ISOLATION",
-      "message": "Pass F (F- / Memory Upgrade) variants strictly decoupled from standard retail (SM-)"
+      "ruleId": "RULE-07-A07-GOLDEN",
+      "name": "Galaxy A07 8 Golden Cases Ground Truth",
+      "expected": "100% match with Stock.xlsx verified ground truth",
+      "actual": "0 Golden Case mismatches",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "verifiedCases": [
+          "SM-A075FLVDTHL",
+          "SM-A075FZKDTHL",
+          "SM-A075FLVGTHL",
+          "SM-A075FZKGTHL",
+          "SM-A075FLVHTHL",
+          "SM-A075FZKHTHL",
+          "SM-A076BLVCTHL",
+          "SM-A076BZKCTHL"
+        ],
+        "mismatches": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-05-TRADE-UP-ISOLATION",
-      "message": "Trade Up promotions strictly categorized under TRADE_UP mode"
+      "ruleId": "RULE-08-SECRET-LEAK",
+      "name": "Secret & Enterprise Credential Leak Scan",
+      "expected": "Zero secrets, passwords, or tokens in repository",
+      "actual": "0 credential leaks detected",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "leaks": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-06-STOCK-SUM",
-      "message": "All 218 inventory records satisfy stock equation (Total = f1 + f2)"
+      "ruleId": "GATE-EXACT-PN",
+      "name": "Exact P/N & Product Code Type Quality Gate",
+      "expected": "Zero PN_NOT_FOUND, EXACT_PN_MISMATCH, or PRODUCT_CODE_TYPE_MISMATCH across all variants",
+      "actual": "0 violations (Verified 18 exact PNs, 111 model scopes)",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "gate": "EXACT_PN_QUALITY_GATE",
+        "status": "PASSED",
+        "executedAt": "2026-09-07T15:46:40.253414",
+        "commitSha": "802a786",
+        "totalActiveVariantsEvaluated": 129,
+        "exactPnMatches": 18,
+        "modelCapacityScopeMatches": 111,
+        "violationCount": 0,
+        "violations": [],
+        "rulesEnforced": [
+          "PN_NOT_FOUND",
+          "EXACT_PN_MISMATCH",
+          "PRODUCT_CODE_TYPE_MISMATCH",
+          "CAPACITY_MISMATCH",
+          "CONNECTIVITY_MISMATCH",
+          "AMBIGUOUS_MODEL_MATCH"
+        ]
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-07-A07-GOLDEN",
-      "message": "All 8 Galaxy A07 Golden Cases match exact Stock.xlsx ground truth"
+      "ruleId": "GATE-BATCH-CONSISTENCY",
+      "name": "Import Batch Consistency & Provenance Gate",
+      "expected": "All runtime data files, business rules, and audit summaries reference synchronized batch IDs",
+      "actual": "0 batch discrepancies",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "gate": "BATCH_CONSISTENCY_GATE",
+        "status": "PASSED",
+        "executedAt": "2026-09-07T15:46:40.253414",
+        "commitSha": "802a786",
+        "verifiedInputs": {
+          "stockBatchId": "IMPORT-20260906-002",
+          "promotionBatchId": "BATCH-20260907-105441",
+          "parserVersion": "2.1.0-LTR-MERGE",
+          "ruleEngineVersion": "2.5.0-STRICT",
+          "businessRulesVersion": "1.0.0",
+          "applicationCommit": "802a786"
+        },
+        "violationCount": 0,
+        "violations": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     },
     {
-      "check": "RULE-08-SECRET-LEAK",
-      "message": "Zero real credentials, private keys, or API tokens detected in repository"
+      "ruleId": "GATE-RUNTIME-HASH",
+      "name": "Runtime Manifest SHA256 Hash Verification",
+      "expected": "All 19 files match runtime_manifest.json exactly",
+      "actual": "0 hash mismatches (19 verified files)",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "gate": "RUNTIME_HASH_VERIFICATION_GATE",
+        "status": "PASSED",
+        "executedAt": "2026-09-07T15:46:40.253414",
+        "commitSha": "802a786",
+        "totalManifestFiles": 19,
+        "verifiedFileCount": 19,
+        "violationCount": 0,
+        "violations": []
+      },
+      "executedAt": "2026-09-07T15:46:40.253414",
+      "commitSha": "802a786"
     }
-  ],
-  "warnings": [],
-  "violations": []
+  ]
 }

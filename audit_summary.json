@@ -1,5 +1,15 @@
 {
-  "evaluationDate": "2026-09-06",
+  "auditBatchId": "AUDIT-20260907-001",
+  "evaluationDate": "2026-09-07",
+  "generatedAt": "2026-09-07T15:30:00+07:00",
+  "inputs": {
+    "stockBatchId": "IMPORT-20260906-002",
+    "promotionBatchId": "BATCH-20260907-105441",
+    "parserVersion": "2.1.0-LTR-MERGE",
+    "ruleEngineVersion": "2.5.0-STRICT",
+    "businessRulesVersion": "1.0.0",
+    "applicationCommit": "802a786"
+  },
   "importBatch": "IMPORT-20260906-002",
   "dashboardStatus": "DEVELOPMENT / VALIDATION",
   "isSingleSourceOfTruth": false,
@@ -28,6 +38,8 @@
     "passed": 31,
     "failed": 0,
     "blockedByEvidence": 0,
-    "overallStatus": "PASSED_GOVERNANCE_CHECKS"
+    "overallStatus": "PASSED_GOVERNANCE_CHECKS",
+    "commitSha": "802a786",
+    "executedAt": "2026-09-07T15:30:00+07:00"
   }
 }

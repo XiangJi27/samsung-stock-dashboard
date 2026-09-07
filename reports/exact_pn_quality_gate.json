@@ -1,0 +1,19 @@
+{
+  "gate": "EXACT_PN_QUALITY_GATE",
+  "status": "PASSED",
+  "executedAt": "2026-09-07T15:46:40.253414",
+  "commitSha": "802a786",
+  "totalActiveVariantsEvaluated": 129,
+  "exactPnMatches": 18,
+  "modelCapacityScopeMatches": 111,
+  "violationCount": 0,
+  "violations": [],
+  "rulesEnforced": [
+    "PN_NOT_FOUND",
+    "EXACT_PN_MISMATCH",
+    "PRODUCT_CODE_TYPE_MISMATCH",
+    "CAPACITY_MISMATCH",
+    "CONNECTIVITY_MISMATCH",
+    "AMBIGUOUS_MODEL_MATCH"
+  ]
+}
