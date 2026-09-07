@@ -1,0 +1,128 @@
+{
+  "manifestVersion": "1.0.0",
+  "generatedAt": "2026-09-07T14:40:00+07:00",
+  "project": "Samsung Branch Operations System",
+  "environment": "Production / Vercel Static Hosting",
+  "gitBranch": "feature/phase-a-application-shell",
+  "summary": {
+    "totalFiles": 19,
+    "totalSizeBytes": 6754840,
+    "totalSizeMB": 6.44
+  },
+  "files": [
+    {
+      "file": "index.html",
+      "sizeBytes": 102359,
+      "sha256": "fb2bd47c455abc8268f7dd2fe1fa4134a17e55a2fdeb41bdb3536c8726cf45b4",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "app.js",
+      "sizeBytes": 165469,
+      "sha256": "328b14978098e7cb9ad4ec7c214e3157c6605a297ac672f57a41a37916b50e9c",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "style.css",
+      "sizeBytes": 96846,
+      "sha256": "be6db203a2b05f4f34a1f0b5e21cfb3db3136af6a7bbd664d8fe58be126be5b5",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "stock_data.js",
+      "sizeBytes": 4841550,
+      "sha256": "b87776743709471bc53177696695208b8039321f6bf4a2a4df70fbd4f1583673",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "promotion_variants.js",
+      "sizeBytes": 1475600,
+      "sha256": "e1cb478babe5cb189352d90c9d08b717b0505063d7dd3f9d126f54326a2e2b6e",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "vercel.json",
+      "sizeBytes": 77,
+      "sha256": "8b202658ee9a2426c40c5ba86da9d24246c7bc6bd89ae24b9e24c46b38d0fa68",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/css/shell.css",
+      "sizeBytes": 5284,
+      "sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/css/login.css",
+      "sizeBytes": 4773,
+      "sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/css/navigation.css",
+      "sizeBytes": 2981,
+      "sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/css/home.css",
+      "sizeBytes": 9028,
+      "sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/css/responsive.css",
+      "sizeBytes": 2341,
+      "sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/config.js",
+      "sizeBytes": 1182,
+      "sha256": "039be64f08faa6a9e4acd4dc1e92844f32a421dbbd0f8643e29c54fd6a7e68b2",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/auth.js",
+      "sizeBytes": 3227,
+      "sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/data-loader.js",
+      "sizeBytes": 3754,
+      "sha256": "09cdfba2e51e704875aa433016c950f4834446b7f3ef74b187efb3e94e0c2b5e",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/data-service.js",
+      "sizeBytes": 7550,
+      "sha256": "1b946be0c7d2b4ec6d76a5ee1c5e222bdf4a7c63b018975f9ad6a0e3c9d3dff5",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/router.js",
+      "sizeBytes": 5447,
+      "sha256": "c0101655a11943168921ee931c4302e8f7cf6e56d1db6faec6fc945d7caf7517",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/navigation.js",
+      "sizeBytes": 2913,
+      "sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/home.js",
+      "sizeBytes": 15790,
+      "sha256": "d0bee4b0ddb8cab56ec6a21284fa2c72d3d09e7056abad6063640069c5f2e084",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/modules.js",
+      "sizeBytes": 8669,
+      "sha256": "7c768dbefd34a331e5086a6cb022ce291013dc60378d6d07551e680404d9bd16",
+      "status": "REQUIRED_RUNTIME"
+    }
+  ]
+}

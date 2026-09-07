@@ -1,0 +1,54 @@
+{
+  "gateStatus": "PASSED",
+  "passedCount": 11,
+  "warningCount": 0,
+  "violationCount": 0,
+  "passedChecks": [
+    {
+      "check": "FILE-INTEGRITY",
+      "message": "Loaded 218 items from stock_full_data.json"
+    },
+    {
+      "check": "FILE-INTEGRITY",
+      "message": "Loaded 554 promotion variants from promotion_variants.json"
+    },
+    {
+      "check": "QUARANTINE-AUDIT",
+      "message": "Verified 129 active promotions and 425 quarantined items"
+    },
+    {
+      "check": "RULE-01-FORMULA-ERROR",
+      "message": "Zero formula errors (#ERROR!, #REF!, NaN) detected across active promotions"
+    },
+    {
+      "check": "RULE-02-PRICE-EQUATION",
+      "message": "All active standard payment promotions satisfy arithmetic equation (Net = RRP - Discount)"
+    },
+    {
+      "check": "RULE-03-STUDENT-RULE",
+      "message": "Verified 14 Student promotions: 100% enforce 'Studentcrd' and zero prohibited combinations"
+    },
+    {
+      "check": "RULE-04-PASS-F-ISOLATION",
+      "message": "Pass F (F- / Memory Upgrade) variants strictly decoupled from standard retail (SM-)"
+    },
+    {
+      "check": "RULE-05-TRADE-UP-ISOLATION",
+      "message": "Trade Up promotions strictly categorized under TRADE_UP mode"
+    },
+    {
+      "check": "RULE-06-STOCK-SUM",
+      "message": "All 218 inventory records satisfy stock equation (Total = f1 + f2)"
+    },
+    {
+      "check": "RULE-07-A07-GOLDEN",
+      "message": "All 8 Galaxy A07 Golden Cases match exact Stock.xlsx ground truth"
+    },
+    {
+      "check": "RULE-08-SECRET-LEAK",
+      "message": "Zero real credentials, private keys, or API tokens detected in repository"
+    }
+  ],
+  "warnings": [],
+  "violations": []
+}

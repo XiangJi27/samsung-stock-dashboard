@@ -1,0 +1,71 @@
+name: Samsung Branch Operations - CI/CD Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality-gate:
+    name: Automated Quality & Business Governance Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 1. Python Syntax & Compilation Verification
+        run: |
+          echo "Verifying Python scripts compilation..."
+          python -m py_compile scripts/ci_quality_gate.py
+          python -m py_compile test_golden_cases.py
+          if [ -f promotion_import.py ]; then python -m py_compile promotion_import.py; fi
+
+      - name: 2. JavaScript Syntax Verification (Node.js -c)
+        run: |
+          echo "Verifying JavaScript files syntax..."
+          node -c app.js
+          node -c assets/js/config.js
+          node -c assets/js/auth.js
+          node -c assets/js/data-loader.js
+          node -c assets/js/router.js
+          node -c assets/js/navigation.js
+          node -c assets/js/home.js
+          node -c assets/js/modules.js
+          if [ -f assets/js/data-service.js ]; then node -c assets/js/data-service.js; fi
+
+      - name: 3. Golden Business Cases Verification (17 Domains)
+        run: |
+          echo "Executing 17 Golden Business Test Cases..."
+          python test_golden_cases.py
+
+      - name: 4. Automated CI Quality Gate (8 Deployment-Blocking Rules)
+        run: |
+          echo "Enforcing 8 Deployment-Blocking Business Rules..."
+          python scripts/ci_quality_gate.py
+
+      - name: 5. Artifact & Manifest Verification
+        run: |
+          if [ -f runtime_manifest.json ]; then
+            echo "Verifying runtime manifest presence..."
+            python -c "import json; m=json.load(open('runtime_manifest.json')); print(f'Runtime manifest contains {len(m[\"files\"])} files.')"
+          fi

@@ -155,12 +155,13 @@ run_test("GTC-16", "Galaxy SmartTag2 Accessory Baseline", test_smarttag2)
 def test_mbo():
     # Check MBO rules from wearable_mbo_report.csv
     mbo_count = 0
-    if os.path.exists("wearable_mbo_report.csv"):
+    mbo_path = "wearable_mbo_report.csv" if os.path.exists("wearable_mbo_report.csv") else os.path.join("reports", "archive", "wearable_mbo_report.csv")
+    if os.path.exists(mbo_path):
         import csv
-        with open("wearable_mbo_report.csv", "r", encoding="utf-8") as f:
+        with open(mbo_path, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             mbo_count = sum(1 for row in reader if row.get("Sale Mode") == "MBO")
-    return mbo_count > 0, f"Verified {mbo_count} MBO cross-category promotional rules in wearable_mbo_report.csv"
+    return mbo_count > 0, f"Verified {mbo_count} MBO cross-category promotional rules in {mbo_path}"
 run_test("GTC-17", "MBO Cross-Category Rules", test_mbo)
 
 # Summary and Save

@@ -106,7 +106,7 @@
       "caseId": "GTC-17",
       "name": "MBO Cross-Category Rules",
       "status": "PASS",
-      "message": "Verified 22 MBO cross-category promotional rules in wearable_mbo_report.csv"
+      "message": "Verified 22 MBO cross-category promotional rules in reports\\archive\\wearable_mbo_report.csv"
     }
   ]
 }
