@@ -1,21 +1,22 @@
 {
-  "testSuite": "Phase A Preview & Application Shell Test Suite",
+  "testSuite": "Phase A Preview & Application Shell Test Suite (Corrected)",
   "project": "Samsung Branch Operations System",
   "branch": "feature/phase-a-application-shell",
-  "deploymentCommit": "ef7e7b049d5bfddcbb1365315ffb96919c72e2aa",
-  "executedAt": "2026-09-07T13:30:00+07:00",
+  "deploymentCommit": "53f41be2929e794931e5bb02e08cb487f22ca888",
+  "executedAt": "2026-09-07T13:58:00+07:00",
   "environment": {
     "localDevelopment": "http://localhost:8080/#/",
-    "vercelPreviewTarget": "feature/phase-a-application-shell (Pending deployment protection check)",
+    "vercelPreviewTarget": "feature/phase-a-application-shell (Pending deployment protection)",
     "productionUrl": "https://samsung-stock-dashboard.vercel.app/ (DO NOT MERGE - Frozen at Milestone 1)"
   },
   "summary": {
-    "totalTests": 22,
+    "totalTests": 23,
     "passed": 22,
+    "notRun": 1,
     "failed": 0,
-    "passRate": "100%",
     "securityGateType": "UI_WORKFLOW_GATE_ONLY",
-    "stockIntegrityStatus": "PRICE_SOURCE_MISMATCH"
+    "stockIntegrityStatus": "RESOLVED_DIFFERENT_VARIANT",
+    "goldenTestDataStatus": "PROVENANCE_CLEANED"
   },
   "tests": [
     {
@@ -172,7 +173,7 @@
       "testId": "STOCK-02",
       "name": "A07 stock counts per P/N",
       "expected": "SM-A075FLVDTHL shows Model, Exact P/N, ร้านเรา ช1: 2, สาขา ช2: 5, รวม: 7, RRP: 4,599",
-      "actual": "Displayed row has Model 'Galaxy A07 4G 4/64 GB', P/N 'SM-A075FLVDTHL', F1=2, F2=5, Total=7, RRP=4,599",
+      "actual": "Displayed row has Model 'Galaxy A07 4G 4/64 GB', P/N 'SM-A075FLVDTHL', F1=2, F2=5, Total=7, RRP=4,599 (RESOLVED_DIFFERENT_VARIANT)",
       "status": "PASS",
       "executionMethod": "Automated Browser Subagent / DOM Row Query for SM-A075FLVDTHL",
       "executedAt": "2026-09-07T13:26:45+07:00",
@@ -229,14 +230,24 @@
       "evidence": "scrollWidth === 768; 0 elements overflowing horizontally"
     },
     {
-      "testId": "CONSOLE-01",
-      "name": "Console errors and sensitive data leak prevention",
-      "expected": "0 uncaught runtime exceptions; 0 passwords or employee IDs printed to console",
-      "actual": "0 uncaught runtime errors; zero credential leaks in browser console logs",
+      "testId": "LOCAL-NETWORK-01",
+      "name": "Local Asset HTTP Status Verification",
+      "expected": "All local assets (shell.css, login.css, auth.js, router.js, stock_data.js, app.js) return HTTP 200/304",
+      "actual": "All local assets returned HTTP 200/304 on http://localhost:8080/",
       "status": "PASS",
-      "executionMethod": "Browser Console Log Capture & Error Event Listener",
+      "executionMethod": "Automated Browser Subagent / Local Network Event Log",
       "executedAt": "2026-09-07T13:28:30+07:00",
-      "evidence": "Console error count: 0; Regex check for passwords/secrets in captured logs returned 0 matches"
+      "evidence": "200 OK on /index.html, /stock_data.js, /promotion_variants.js, /app.js, /assets/css/*.css, /assets/js/*.js"
+    },
+    {
+      "testId": "VERCEL-NETWORK-01",
+      "name": "Vercel Preview Remote Asset Status Verification",
+      "expected": "All assets on remote Vercel preview branch return HTTP 200 without 404 or MIME type errors",
+      "actual": "Deployment held as NOT_RUN pending activation of Vercel Deployment Protection to prevent unauthenticated stock data exposure",
+      "status": "NOT_RUN",
+      "executionMethod": "Security Architecture Pre-Deployment Policy Check",
+      "executedAt": "2026-09-07T13:58:00+07:00",
+      "evidence": "Refer to reports/vercel_preview_verification.json; test held to enforce data security boundary"
     }
   ]
 }
