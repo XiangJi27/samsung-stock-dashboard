@@ -1,0 +1,260 @@
+{
+  "reportTitle": "Galaxy A07 DOM Ground-Truth Verification Report",
+  "generatedAt": "2026-09-07T14:18:00+07:00",
+  "project": "Samsung Branch Operations System",
+  "browserContext": "Chromium 130 Desktop (1920x945) & Mobile (375x812)",
+  "environment": "LOCAL (http://localhost:8080/#/stock)",
+  "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+  "stockBatchId": "BATCH-20260907-105441",
+  "sourceBaseline": "Stock.xlsx [Promotion Sheet Rows 4-17]",
+  "summary": {
+    "totalGoldenCases": 8,
+    "passed": 8,
+    "failed": 0,
+    "complianceRate": "100%",
+    "zeroFormattingEnforced": true,
+    "provenanceMatchingRule": "EXACT_PN_AND_SPEC_MANDATORY"
+  },
+  "goldenCases": [
+    {
+      "testId": "DOM-A07-01",
+      "exactPn": "SM-A075FLVDTHL",
+      "model": "Galaxy A07 4G 4/64 GB",
+      "color": "Light Violet",
+      "ram": "4GB",
+      "storage": "64GB",
+      "connectivity": "4G LTE",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 2,
+        "f2": 5,
+        "total": 7,
+        "rrp": 4599.0,
+        "standardNet": 3799.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 4G 4/64 GB",
+        "displayedPn": "SM-A075FLVDTHL",
+        "displayedColor": "Light Violet",
+        "displayedF1": "2",
+        "displayedF2": "5",
+        "displayedTotal": "7",
+        "displayedRrp": "฿4,599",
+        "zeroFormatted": false
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 4",
+      "evidence": "DOM text: 'SM-A075FLVDTHL' | F1: 2 | F2: 5 | Total: 7 | SRP: ฿4,599; matches Row 4"
+    },
+    {
+      "testId": "DOM-A07-02",
+      "exactPn": "SM-A075FZKDTHL",
+      "model": "Galaxy A07 4G 4/64 GB",
+      "color": "Black",
+      "ram": "4GB",
+      "storage": "64GB",
+      "connectivity": "4G LTE",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 0,
+        "f2": 0,
+        "total": 0,
+        "rrp": 4599.0,
+        "standardNet": 3799.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 4G 4/64 GB",
+        "displayedPn": "SM-A075FZKDTHL",
+        "displayedColor": "Black",
+        "displayedF1": "0",
+        "displayedF2": "0",
+        "displayedTotal": "0",
+        "displayedRrp": "฿4,599",
+        "zeroFormatted": true
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 5",
+      "evidence": "DOM text: 'SM-A075FZKDTHL' | F1: <span class='stock-zero'>0</span> | F2: <span class='stock-zero'>0</span> | Total: <span class='stock-zero'>0</span>; matches Row 5"
+    },
+    {
+      "testId": "DOM-A07-03",
+      "exactPn": "SM-A075FLVGTHL",
+      "model": "Galaxy A07 4/128GB",
+      "color": "Light Violet",
+      "ram": "4GB",
+      "storage": "128GB",
+      "connectivity": "4G LTE",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 0,
+        "f2": 1,
+        "total": 1,
+        "rrp": 5299.0,
+        "standardNet": 4299.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 4/128GB",
+        "displayedPn": "SM-A075FLVGTHL",
+        "displayedColor": "Light Violet",
+        "displayedF1": "0",
+        "displayedF2": "1",
+        "displayedTotal": "1",
+        "displayedRrp": "฿5,299",
+        "zeroFormatted": true
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 12",
+      "evidence": "DOM text: 'SM-A075FLVGTHL' | F1: 0 (stock-zero) | F2: 1 | Total: 1 | SRP: ฿5,299; matches Row 12"
+    },
+    {
+      "testId": "DOM-A07-04",
+      "exactPn": "SM-A075FZKGTHL",
+      "model": "Galaxy A07 4/128GB",
+      "color": "Black",
+      "ram": "4GB",
+      "storage": "128GB",
+      "connectivity": "4G LTE",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 0,
+        "f2": 12,
+        "total": 12,
+        "rrp": 5299.0,
+        "standardNet": 4299.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 4/128GB",
+        "displayedPn": "SM-A075FZKGTHL",
+        "displayedColor": "Black",
+        "displayedF1": "0",
+        "displayedF2": "12",
+        "displayedTotal": "12",
+        "displayedRrp": "฿5,299",
+        "zeroFormatted": true
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 13",
+      "evidence": "DOM text: 'SM-A075FZKGTHL' | F1: 0 (stock-zero) | F2: 12 | Total: 12 | SRP: ฿5,299; matches Row 13"
+    },
+    {
+      "testId": "DOM-A07-05",
+      "exactPn": "SM-A075FLVHTHL",
+      "model": "Galaxy A07 6/128GB",
+      "color": "Light Violet",
+      "ram": "6GB",
+      "storage": "128GB",
+      "connectivity": "4G LTE",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 4,
+        "f2": 3,
+        "total": 7,
+        "rrp": 5999.0,
+        "standardNet": 4999.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 6/128GB",
+        "displayedPn": "SM-A075FLVHTHL",
+        "displayedColor": "Light Violet",
+        "displayedF1": "4",
+        "displayedF2": "3",
+        "displayedTotal": "7",
+        "displayedRrp": "฿5,999",
+        "zeroFormatted": false
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 14",
+      "evidence": "DOM text: 'SM-A075FLVHTHL' | F1: 4 | F2: 3 | Total: 7 | SRP: ฿5,999; matches Row 14"
+    },
+    {
+      "testId": "DOM-A07-06",
+      "exactPn": "SM-A075FZKHTHL",
+      "model": "Galaxy A07 6/128GB",
+      "color": "Black",
+      "ram": "6GB",
+      "storage": "128GB",
+      "connectivity": "4G LTE",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 5,
+        "f2": 2,
+        "total": 7,
+        "rrp": 5999.0,
+        "standardNet": 4999.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 6/128GB",
+        "displayedPn": "SM-A075FZKHTHL",
+        "displayedColor": "Black",
+        "displayedF1": "5",
+        "displayedF2": "2",
+        "displayedTotal": "7",
+        "displayedRrp": "฿5,999",
+        "zeroFormatted": false
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 15",
+      "evidence": "DOM text: 'SM-A075FZKHTHL' | F1: 5 | F2: 2 | Total: 7 | SRP: ฿5,999; matches Row 15"
+    },
+    {
+      "testId": "DOM-A07-07",
+      "exactPn": "SM-A076BLVCTHL",
+      "model": "Galaxy A07 5G 6/128GB",
+      "color": "Light Violet",
+      "ram": "6GB",
+      "storage": "128GB",
+      "connectivity": "5G",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 6,
+        "f2": 5,
+        "total": 11,
+        "rrp": 6999.0,
+        "standardNet": 6499.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 5G 6/128GB",
+        "displayedPn": "SM-A076BLVCTHL",
+        "displayedColor": "Light Violet",
+        "displayedF1": "6",
+        "displayedF2": "5",
+        "displayedTotal": "11",
+        "displayedRrp": "฿6,999",
+        "zeroFormatted": false
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 16",
+      "evidence": "DOM text: 'SM-A076BLVCTHL' | F1: 6 | F2: 5 | Total: 11 | SRP: ฿6,999; confirms 6/5/11 belongs to this 5G model"
+    },
+    {
+      "testId": "DOM-A07-08",
+      "exactPn": "SM-A076BZKCTHL",
+      "model": "Galaxy A07 5G 6/128GB",
+      "color": "Black",
+      "ram": "6GB",
+      "storage": "128GB",
+      "connectivity": "5G",
+      "productCodeType": "STANDARD_RETAIL",
+      "expected": {
+        "f1": 5,
+        "f2": 7,
+        "total": 12,
+        "rrp": 6999.0,
+        "standardNet": 6499.0
+      },
+      "actualDom": {
+        "displayedModel": "Galaxy A07 5G 6/128GB",
+        "displayedPn": "SM-A076BZKCTHL",
+        "displayedColor": "Black",
+        "displayedF1": "5",
+        "displayedF2": "7",
+        "displayedTotal": "12",
+        "displayedRrp": "฿6,999",
+        "zeroFormatted": false
+      },
+      "status": "PASS",
+      "sourceCoordinates": "Stock.xlsx / Promotion / Row 17",
+      "evidence": "DOM text: 'SM-A076BZKCTHL' | F1: 5 | F2: 7 | Total: 12 | SRP: ฿6,999; matches Row 17"
+    }
+  ]
+}

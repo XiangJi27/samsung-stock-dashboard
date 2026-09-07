@@ -1,5 +1,5 @@
 // Phase 1 Feature Flags: Strict Focus on Stock & Promotion Accuracy
-const FEATURES = {
+const APP_MODULE_FEATURES = window.APP_FEATURES || {
   posCopy: false,
   posIntegration: false,
   autoLogin: false,
@@ -13,9 +13,21 @@ const FEATURES = {
  */
 
 // Use full database if available
-const masterStockData = (typeof window.STOCK_DATABASE !== "undefined" && window.STOCK_DATABASE.length > 0)
+let masterStockData = (typeof window.STOCK_DATABASE !== "undefined" && window.STOCK_DATABASE && window.STOCK_DATABASE.length > 0)
   ? window.STOCK_DATABASE
   : [];
+
+window.syncMasterStockData = function() {
+  masterStockData = (typeof window.STOCK_DATABASE !== "undefined" && window.STOCK_DATABASE && window.STOCK_DATABASE.length > 0)
+    ? window.STOCK_DATABASE
+    : [];
+  if (typeof renderData === "function") {
+    renderData();
+  }
+  if (typeof renderMetrics === "function") {
+    renderMetrics();
+  }
+};
 
 // App State
 let currentFilter = "all";
@@ -1919,7 +1931,7 @@ function setupCashierModal() {
   });
 
   // Phase 1 Scope: Hide POS copy button and checklist if posCopy is false
-  if (!FEATURES.posCopy) {
+  if (!APP_MODULE_FEATURES.posCopy) {
     if (btnCopyCashierData) btnCopyCashierData.style.display = "none";
     if (preSaleChecklist) preSaleChecklist.style.display = "none";
   } else {

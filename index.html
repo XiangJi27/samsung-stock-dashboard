@@ -1602,8 +1602,7 @@
   <!-- Phase A Architecture Scripts Loading Sequence -->
   <script src="assets/js/config.js?v=20260907-v1"></script>
   <script src="assets/js/auth.js?v=20260907-v1"></script>
-  <script src="stock_data.js?v=20260907-v1"></script>
-  <script src="promotion_variants.js?v=20260907-v1"></script>
+  <script src="assets/js/data-loader.js?v=20260907-v1"></script>
   <script src="app.js?v=20260907-v1"></script>
   <script src="assets/js/home.js?v=20260907-v1"></script>
   <script src="assets/js/modules.js?v=20260907-v1"></script>
@@ -1644,6 +1643,10 @@
 
           if (res.success) {
             pwInput.value = ""; // Clear password field immediately
+            // Load datasets on demand after successful authentication
+            if (window.DataLoader) {
+              await window.DataLoader.loadAuthenticatedDatasets();
+            }
             window.AppRouter.navigate("/home");
           } else {
             errText.textContent = res.error || "เกิดข้อผิดพลาดในการเข้าสู่ระบบ";

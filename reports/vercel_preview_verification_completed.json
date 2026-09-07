@@ -1,0 +1,120 @@
+{
+  "reportTitle": "Phase A.1 Protected Vercel Preview Verification Report",
+  "generatedAt": "2026-09-07T14:15:00+07:00",
+  "project": "Samsung Branch Operations System",
+  "branch": "feature/phase-a-application-shell",
+  "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+  "sourceFileHash": "e2a5f78198bbda7e53f19114f08c350bc8ec9823",
+  "stockBatchId": "BATCH-20260907-105441",
+  "browser": "Chromium 130 (Antigravity Autonomous Browser Subagent)",
+  "securityAuditStatus": {
+    "credentialScan": "PASSED (0 hardcoded secrets / 0 API keys)",
+    "developmentAuthWorkflow": "PASSED (per-tab sessionStorage, Route Guard active)",
+    "dataAccessProtection": "NOT_IMPLEMENTED (Static hosting lacks server-side authorization)",
+    "vercelDeploymentProtection": "NOT_CONFIGURED (Requires Vercel Dashboard Admin setup)",
+    "dataLoadingGate": "IMPLEMENTED (Assets deferred until after authentication)"
+  },
+  "officialFinalStatus": "NOT_RUN_PROTECTION_UNAVAILABLE",
+  "statusRationale": "In accordance with Rule 5 ('หากเปิด Protection ไม่ได้ ให้หยุดและห้าม Deploy ข้อมูลจริง'), remote Vercel Preview execution with live inventory data is held as NOT_RUN_PROTECTION_UNAVAILABLE until Vercel Deployment Protection or synthetic data masking is configured.",
+  "tests": [
+    {
+      "testId": "AUTH-PREV-01",
+      "name": "Unauthenticated initial landing state",
+      "expected": "Redirect to /#/login; stock_data.js and promotion_variants.js not loaded in memory",
+      "actual": "Redirected to /#/login; window.STOCK_DATABASE is null; Data Loading Gate held scripts",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:05:00+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "URL: http://localhost:8080/#/login; DOM #view-login visible; script[src*='stock_data.js'] count = 0"
+    },
+    {
+      "testId": "AUTH-PREV-02",
+      "name": "Development Login and on-demand data fetch",
+      "expected": "Login transitions to /#/home and dynamically initializes STOCK_DATABASE in memory",
+      "actual": "Navigated to /#/home; DataLoader loaded stock_data.js on demand; total stock items = 218",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:05:30+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "window.STOCK_DATABASE.length === 218; header displays 'EMP-001 • Somchai Branch'"
+    },
+    {
+      "testId": "AUTH-PREV-03",
+      "name": "Protected route redirect before login",
+      "expected": "Navigating directly to /#/stock without session redirects to /#/login",
+      "actual": "Route Guard intercepted request; redirected to /#/login",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:06:00+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "Hash reset to #/login; #view-stock remains hidden"
+    },
+    {
+      "testId": "AUTH-PREV-04",
+      "name": "Tab refresh preserves session",
+      "expected": "Refreshing /#/stock maintains session without returning to login",
+      "actual": "Reloaded page on /#/stock; user remained authenticated on /#/stock",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:06:30+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "location.hash === '#/stock'; sessionStorage valid"
+    },
+    {
+      "testId": "AUTH-PREV-05",
+      "name": "Logout purges session and memory datasets",
+      "expected": "Logout clears sessionStorage, removes STOCK_DATABASE from memory, redirects to /#/login",
+      "actual": "sessionStorage cleared; DataLoader purged window.STOCK_DATABASE (null); redirected to /#/login",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:07:00+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "window.STOCK_DATABASE === null; sessionStorage.length === 0; hash === '#/login'"
+    },
+    {
+      "testId": "AUTH-PREV-06",
+      "name": "Browser Back button after logout",
+      "expected": "Pressing back button after logout cannot expose protected stock or home content",
+      "actual": "Popstate route guard forced redirect back to /#/login; protected views remained hidden",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:07:30+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "Protected content display: none; user remains on #/login"
+    },
+    {
+      "testId": "STOCK-PREV-01",
+      "name": "Zero stock numeric formatting",
+      "expected": "Items with 0 stock display numeric '0' via <span class='stock-zero'>0</span>",
+      "actual": "All zero stock items render numeric '0' wrapped in .stock-zero span",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:08:00+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "SM-A075FZKDTHL rendered '<span class=\"stock-zero\">0</span>' for F1 and F2"
+    },
+    {
+      "testId": "STOCK-PREV-02",
+      "name": "Stock quantity derived from item.f1/item.f2 directly",
+      "expected": "Row counts are bound directly to item.f1 and item.f2, not KPI aggregates",
+      "actual": "DOM row cells strictly bound to item.f1, item.f2, and item.total per P/N",
+      "status": "PASS",
+      "environment": "LOCAL",
+      "executedAt": "2026-09-07T14:08:30+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "Table row <td> values correspond 1:1 to item.f1 and item.f2"
+    },
+    {
+      "testId": "VERCEL-PREV-01",
+      "name": "Remote Vercel Preview HTTP Asset Status",
+      "expected": "All assets on remote Vercel preview branch return HTTP 200 without 404 or MIME errors",
+      "actual": "Held as NOT_RUN_PROTECTION_UNAVAILABLE pending activation of Vercel Deployment Protection",
+      "status": "NOT_RUN",
+      "environment": "VERCEL_PREVIEW",
+      "executedAt": "2026-09-07T14:15:00+07:00",
+      "deploymentCommit": "3cc8f871de7cd47ad9cc34c0fba93d86289b1bbc",
+      "evidence": "Vercel Deployment Protection requires organization dashboard configuration before public deployment of proprietary stock files"
+    }
+  ]
+}

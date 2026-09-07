@@ -48,7 +48,7 @@ class AppRouter {
   /**
    * Route Guard & View Switcher
    */
-  handleRouting() {
+  async handleRouting() {
     let path = this.getHashPath();
 
     // Default root handling
@@ -73,6 +73,11 @@ class AppRouter {
     if (path === "/login" && isAuthed) {
       this.navigate("/home");
       return;
+    }
+
+    // DATA LOADING GATE: Load datasets on demand only after user is authenticated
+    if (routeConfig.isProtected && isAuthed && window.DataLoader) {
+      await window.DataLoader.loadAuthenticatedDatasets();
     }
 
     this.currentRoute = path;

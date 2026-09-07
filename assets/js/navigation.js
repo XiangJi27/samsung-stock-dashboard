@@ -45,6 +45,9 @@ class AppNavigation {
 
   handleLogout() {
     if (confirm("คุณต้องการออกจากระบบหรือไม่?")) {
+      if (window.DataLoader) {
+        window.DataLoader.purgeMemoryDatasets();
+      }
       window.AuthService.signOut();
       window.AppRouter.navigate("/login");
     }
