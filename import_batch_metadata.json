@@ -1,0 +1,20 @@
+{
+  "importBatchId": "BATCH-20260907-105441",
+  "timestamp": "2026-09-07T10:54:46.510631",
+  "importedAt": "2026-09-07",
+  "parserVersion": "2.1.0-LTR-MERGE",
+  "ruleEngineVersion": "2.5.0-STRICT",
+  "sourceFiles": {
+    "Stock.xlsx": "846c77d67f56916cfe9003eba5d21efa92163df75532720152b0050110abbb85",
+    "promo_retail.xlsx": "45d85a9fe78e9c6e4f38c3db464a4f666b906b26225907c7ff2b176443d6509c",
+    "promo_tablet.xlsx": "6e91888b88c87383ba75da97e08036c700aaa6e6fe44e0fc12365ef5895a2c4f"
+  },
+  "summary": {
+    "totalStockRecords": 230,
+    "totalVariantsProcessed": 554,
+    "validatedActiveVariants": 473,
+    "quarantinedBlockedVariants": 81,
+    "historicalArchiveGifts": 6,
+    "depletedLaunchSets": 0
+  }
+}
