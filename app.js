@@ -3138,6 +3138,10 @@ function setupEventListeners() {
   setupAuditModal();
 }
 
+// Global Exports for Application Shell Router
+window.renderData = renderData;
+window.renderMetrics = renderMetrics;
+
 // Initialize on Load
 document.addEventListener("DOMContentLoaded", () => {
   renderMetrics();
@@ -3145,3 +3149,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   setupExpiryBanner();
 });
+
