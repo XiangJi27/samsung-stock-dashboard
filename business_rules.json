@@ -1,0 +1,767 @@
+{
+  "version": "1.0.0",
+  "batchId": "IMPORT-20260906-002",
+  "confirmedAt": "2026-09-06T16:18:53+07:00",
+  "businessRuleSource": "BRANCH_CONFIRMED",
+  "securityStatement": "Zero Credentials Stored. No authentication tokens or passwords permitted.",
+  "rules": [
+    {
+      "ruleId": "BR-01-PASS-F-SPECIFICATION",
+      "name": "F- Prefix is Product Code Type PASS_F (Not Sale Mode)",
+      "description": "P/N starting with F- designates PASS_F (Launch sets, special promos, or special price items). It is a product classification, not a sale mode.",
+      "productCodeType": "PASS_F",
+      "applicableSaleModes": [
+        "STANDARD_PAYMENT",
+        "SF_PLUS",
+        "TRADE_UP"
+      ],
+      "campaignTypes": [
+        "LAUNCH",
+        "SPECIAL_PRICE",
+        "FREE_STORAGE_UPGRADE"
+      ],
+      "ruleGovernance": "PROHIBIT_UNIFORM_DISCOUNT_ACROSS_ALL_F",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-02-S26FE-LAUNCH-STORAGE-UPGRADE",
+      "name": "Galaxy S26 FE Launch Promo: Free Storage Upgrade & SF+",
+      "modelFamily": "Galaxy S26 FE",
+      "variants": [
+        {
+          "capacity": "128GB",
+          "productCodeType": "STANDARD_SM",
+          "price": 24900,
+          "sfPlusEligible": true,
+          "sfPlusMaxDownRate": 0.1,
+          "couponCode": null,
+          "tradeUpEligible": true,
+          "campaignType": "STANDARD"
+        },
+        {
+          "capacity": "256GB",
+          "productCodeType": "PASS_F",
+          "rrp": 28900,
+          "netPrice": 24900,
+          "campaignType": "FREE_STORAGE_UPGRADE",
+          "baseCapacity": "128GB",
+          "upgradedCapacity": "256GB",
+          "upgradeValue": 4000,
+          "couponCode": null,
+          "tradeUpEligible": false,
+          "sfPlusEligible": false,
+          "pnPrefixConstraint": "F-",
+          "conditionNotes": "Free Storage Upgrade from 128GB to 256GB during launch. Strictly for F- Pass F models. Prohibited from Trade Up and cash discount generalization."
+        }
+      ],
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-03-A57-PAYMENT-TIERS",
+      "name": "Galaxy A57 5G Pricing Tiers (Standard, SF+, Student)",
+      "modelFamily": "Galaxy A57 5G",
+      "capacities": {
+        "8/256GB": {
+          "standardNet": 14999,
+          "standardCoupon": "01",
+          "sfPlusNet": 16999,
+          "studentDiscountRate": 0.15,
+          "studentCoupon": "Studentcrd"
+        },
+        "12/256GB": {
+          "standardNet": 15999,
+          "standardCoupon": "01",
+          "sfPlusNet": 17999,
+          "studentDiscountRate": 0.14,
+          "studentCoupon": "Studentcrd"
+        },
+        "12/512GB": {
+          "standardNet": 17999,
+          "standardCoupon": "01",
+          "sfPlusNet": 20999,
+          "studentDiscountRate": 0.12,
+          "studentCoupon": "Studentcrd"
+        }
+      },
+      "governanceNotes": "Applies uniformly to all colors and P/Ns of the same capacity. studentDiscountRate and sfPlusMaxDownRate are strictly distinct fields.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-04-A37-SEPARATION",
+      "name": "Galaxy A37 5G SF+ and Student Separation",
+      "modelFamily": "Galaxy A37 5G",
+      "referencePrice": 13999,
+      "sfPlusEligible": true,
+      "sfPlusMaxDownRate": 0.06,
+      "studentDiscountRate": 0.04,
+      "studentCoupon": "Studentcrd",
+      "governanceNotes": "Separate SF+ from Student. Student discount of 4% must NOT bleed into STANDARD_PAYMENT. If no special standard discount in source, show RRP.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-05-A27-STANDARD-PAYMENT",
+      "name": "Galaxy A27 5G Standard Payment",
+      "modelFamily": "Galaxy A27 5G",
+      "rrp": 10999,
+      "standardDiscount": 1000,
+      "netPrice": 9999,
+      "couponCode": "01",
+      "saleMode": "STANDARD_PAYMENT",
+      "governanceNotes": "SF+ must be read independently from source file; do not presume eligibility without explicit source flag.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-06-A17-SERIES-TIERS",
+      "name": "Galaxy A17 Series Coupon and Variant Logic",
+      "modelFamily": "Galaxy A17",
+      "variants": [
+        {
+          "model": "Galaxy A17 5G 8/256GB",
+          "rrp": 10599,
+          "netPrice": 8999,
+          "couponCode": "02",
+          "hasStudent": true
+        },
+        {
+          "model": "Galaxy A17 5G 8/128GB",
+          "rrp": 8999,
+          "discount": 1500,
+          "netPrice": 7499,
+          "couponCode": "01",
+          "hasStudent": true
+        },
+        {
+          "model": "Galaxy A17 LTE",
+          "rrp": 7999,
+          "discount": 1000,
+          "netPrice": 6999,
+          "couponCode": "01",
+          "hasStudent": false
+        }
+      ],
+      "governanceNotes": "Prohibit auto-assigning Coupon 02 based solely on the presence of '256' in title. Coupon must come from confirmed tier.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-07-A07-FAMILY-SPECIFICATION",
+      "name": "Galaxy A07 Multi-Type Classification & Non-SF+ Pricing",
+      "modelFamily": "Galaxy A07",
+      "subTypes": [
+        "A07 4G/LTE 4/64GB",
+        "A07 4G/LTE 4/128GB",
+        "A07 4G/LTE 6/128GB",
+        "A07 5G 6/128GB"
+      ],
+      "sfPlusPolicy": {
+        "A07 5G": {
+          "maxDownRate": 0.13,
+          "discountOnSfPlus": 0,
+          "displayNote": "Shows RRP with down payment condition when no promotional cash discount applies."
+        }
+      },
+      "standardNonSfPlusNet": 6499,
+      "couponCode": "01",
+      "passFBomPnList": [
+        "F-A074G064VDTH",
+        "F-A074G064KDTH",
+        "F-A074G128VGTH",
+        "F-A074G128KGTH"
+      ],
+      "productCodeType": "BOM_SET",
+      "governanceNotes": "Never merge BOM/Pass F with bare SM- devices. Separate 4G from 5G, RAM, Storage, and P/N.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-08-S26U-256-SEQUENTIAL",
+      "name": "Galaxy S26 Ultra 256GB Sequential Discount & Expired Flash Sale",
+      "model": "Galaxy S26 Ultra 256GB",
+      "rrp": 46900,
+      "sequentialPricing": {
+        "step1StandardDiscount": 5000,
+        "standardNet": 41900,
+        "standardCoupon": "01",
+        "step2TradeUpDiscount": 2000,
+        "tradeUpNet": 39900,
+        "tradeUpCode": "T-UP-CO-S"
+      },
+      "flashSale": {
+        "dates": "2026-08-27 to 2026-08-30",
+        "discount": 9000,
+        "netPrice": 37900,
+        "tradeUpEligible": false,
+        "temporalStatus": "EXPIRED"
+      },
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-09-S26U-1TB-SEQUENTIAL",
+      "name": "Galaxy S26 Ultra 1TB Sequential Discount",
+      "model": "Galaxy S26 Ultra 1TB",
+      "rrp": 66900,
+      "sequentialPricing": {
+        "step1StandardDiscount": 5000,
+        "standardNet": 61900,
+        "standardCoupon": "01",
+        "step2TradeUpDiscount": 5000,
+        "tradeUpNet": 56900,
+        "tradeUpCode": "T-UP-CO-S"
+      },
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-10-S26U-512-CONFLICT-QUARANTINE",
+      "name": "Galaxy S26 Ultra 512GB Equation Check & Quarantine",
+      "model": "Galaxy S26 Ultra 512GB",
+      "rrp": 54900,
+      "step1StandardDiscount": 5000,
+      "standardNet": 49900,
+      "reportedFinalNet": 45900,
+      "reportedTradeUpDiscount": 5000,
+      "mathematicalConflict": {
+        "calculationWithReportedDiscount": 44900,
+        "calculationWithReportedNet": 4000,
+        "equation": "54900 - 5000 - tradeUpDiscount = 45900 => tradeUpDiscount MUST BE 4000 (not 5000)"
+      },
+      "status": "SOURCE_CONFLICT",
+      "governanceNotes": "Prohibited from Auto-Publish. Displays SOURCE_CONFLICT badge until source cell audit confirms whether Trade Up is 4,000 or standard discount is not 5,000.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00"
+    },
+    {
+      "ruleId": "BR-11-S26PLUS-PRICING",
+      "name": "Galaxy S26+ Standard Payment",
+      "modelFamily": "Galaxy S26+",
+      "capacities": {
+        "256GB": {
+          "rrp": 40900,
+          "netPrice": 30900,
+          "coupon": "01",
+          "tradeUpEligible": false
+        },
+        "512GB": {
+          "rrp": 48900,
+          "netPrice": 36900,
+          "coupon": "01",
+          "tradeUpEligible": false
+        }
+      },
+      "saleMode": "STANDARD_PAYMENT",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-12-S26-PRICING",
+      "name": "Galaxy S26 Standard Payment",
+      "modelFamily": "Galaxy S26",
+      "capacities": {
+        "256GB": {
+          "rrp": 33900,
+          "netPrice": 27900,
+          "tradeUpEligible": false
+        },
+        "512GB": {
+          "rrp": 41900,
+          "netPrice": 29900,
+          "tradeUpEligible": false
+        }
+      },
+      "saleMode": "STANDARD_PAYMENT",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-13-S25U-256-SFPLUS",
+      "name": "Galaxy S25 Ultra 256GB SF+ Support",
+      "model": "Galaxy S25 Ultra 256GB",
+      "rrp": 42900,
+      "netPrice": 30900,
+      "couponCode": "01",
+      "sfPlusEligible": true,
+      "tradeUpEligible": false,
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-14-FOLD8-TRADEUP-POLICY",
+      "name": "Galaxy Fold8 & Fold8 Ultra Trade Up Policy (SM- and F-)",
+      "tradeUpCode": "T-UP-CO-S",
+      "sfPlusEligible": true,
+      "applicableProductTypes": [
+        "STANDARD_SM",
+        "PASS_F"
+      ],
+      "models": {
+        "Galaxy Fold8": {
+          "256GB": {
+            "rrp": 61900,
+            "tradeUpDiscount": 5000,
+            "tradeUpNet": 56900
+          },
+          "512GB": {
+            "rrp": 69900,
+            "tradeUpDiscount": 5000,
+            "tradeUpNet": 64900
+          },
+          "1TB": {
+            "rrp": 85900,
+            "tradeUpDiscount": 7000,
+            "tradeUpNet": 78900
+          }
+        },
+        "Galaxy Fold8 Ultra": {
+          "256GB": {
+            "rrp": 69900,
+            "tradeUpDiscount": 5000,
+            "tradeUpNet": 64900
+          },
+          "512GB": {
+            "rrp": 77900,
+            "tradeUpDiscount": 5000,
+            "tradeUpNet": 72900
+          },
+          "1TB": {
+            "rrp": 93900,
+            "tradeUpDiscount": 7000,
+            "tradeUpNet": 86900
+          }
+        }
+      },
+      "governanceNotes": "Trade Up Net prices must NEVER be displayed as Standard Payment Net. Applies to both SM- and F- models under Trade Up Mode.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-15-FOLD8-PASSF-SPECIAL",
+      "name": "Galaxy Fold8 Pass F Special Discount & Decline Gift Rules",
+      "applicableProductType": "PASS_F",
+      "specialDiscount": 5000,
+      "giftPolicy": "Same gift as SM- in current cycle.",
+      "declineGiftDiscountPolicy": {
+        "allowedProductType": "PASS_F",
+        "prohibitedProductType": "STANDARD_SM",
+        "autoCombineWithTradeUp": false,
+        "description": "Decline gift discount applies strictly to PASS_F items. Prohibited from being applied to SM- or automatically aggregated with Trade Up."
+      },
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-16-SOURCE-TRACEABILITY",
+      "name": "Dual-Evidence Preservation & Non-Destructive Override",
+      "rule": "Branch Confirmed rules are recorded alongside Excel source evidence without overwriting raw source data.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-17-SOURCE-CONFLICT-RESOLUTION",
+      "name": "Source Conflict Quarantine Policy",
+      "rule": "When Branch Confirmed values conflict with Excel source data without documented reconciliation, flag variant as SOURCE_CONFLICT, present both values, and quarantine from automated publication.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-18-INDEPENDENT-RULE-STORE",
+      "name": "Independent Rule Configuration File",
+      "filePath": "business_rules.json",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-19-UI-SOURCE-BADGE-TAXONOMY",
+      "name": "UI Source Verification Badges",
+      "badges": [
+        {
+          "code": "BOTH_MATCH",
+          "label": "✓ ตรงกันทั้ง Excel & หน้าร้าน",
+          "color": "emerald"
+        },
+        {
+          "code": "BRANCH_CONFIRMED",
+          "label": "🏢 หน้าร้านยืนยัน (Branch)",
+          "color": "cyan"
+        },
+        {
+          "code": "EXCEL_CONFIRMED",
+          "label": "📊 ยืนยันจาก Excel",
+          "color": "slate"
+        },
+        {
+          "code": "SOURCE_CONFLICT",
+          "label": "⚠️ ข้อมูลขัดแย้ง (Conflict)",
+          "color": "amber"
+        }
+      ],
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-20-REGRESSION-EVIDENCE-SUITE",
+      "name": "Comprehensive Expected vs Actual Regression Verification",
+      "rule": "All 20 business rules must be validated with explicit Expected vs Actual assertions in regression test suite.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T16:18:53+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-21-ZFLIP8-TRADEUP",
+      "name": "Galaxy Z Flip8 Trade Up Pricing Tiers",
+      "modelFamily": "Galaxy Z Flip8",
+      "tiers": [
+        {
+          "capacity": "256GB",
+          "rrp": 42900,
+          "tradeUpDiscount": 5000,
+          "tradeUpNet": 37900
+        },
+        {
+          "capacity": "512GB",
+          "rrp": 50900,
+          "tradeUpDiscount": 5000,
+          "tradeUpNet": 45900
+        }
+      ],
+      "saleMode": "TRADE_UP",
+      "tradeUpPaymentCode": "T-UP-CO-S",
+      "sfPlusEligible": true,
+      "tradeUpEligible": true,
+      "governanceNotes": "Prices 37,900 and 45,900 are Trade Up Net prices, never to be displayed as Standard Payment Net.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-22-ZFLIP8-PASS-F-PROVIDER-SEPARATION",
+      "name": "Galaxy Z Flip8 Pass F Provider Separation (Samsung vs Copperwired)",
+      "modelFamily": "Galaxy Z Flip8",
+      "productCodeType": "PASS_F",
+      "exactPnRequired": true,
+      "manufacturerBenefits": [
+        {
+          "item": "Samsung Adapter",
+          "provider": "SAMSUNG",
+          "retainedWhenStoreGiftDeclined": true,
+          "exactPnRequired": true
+        }
+      ],
+      "storeBenefits": [
+        {
+          "item": "Copperwired Store Gift",
+          "provider": "COPPERWIRED",
+          "declinable": true,
+          "declineBenefitDiscount": 1000
+        }
+      ],
+      "governanceNotes": "Samsung Adapter is exclusive to F- P/Ns and remains intact even when customer declines Copperwired gift. Declining store gift grants ฿1,000 discount. Prohibited on bare SM-.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-23-ZFOLD7-BENEFITS-AND-PRICING",
+      "name": "Galaxy Z Fold7 Pricing and Screen Care Benefits",
+      "modelFamily": "Galaxy Z Fold7",
+      "tiers": [
+        {
+          "capacity": "256GB",
+          "rrp": 67900,
+          "discount": 18000,
+          "netPrice": 49900
+        },
+        {
+          "capacity": "512GB",
+          "rrp": 75900,
+          "discount": 18000,
+          "netPrice": 57900
+        },
+        {
+          "capacity": "1TB",
+          "rrp": 87900,
+          "discount": 18000,
+          "netPrice": 69900
+        }
+      ],
+      "couponCode": "01",
+      "benefits": [
+        {
+          "type": "SCREEN_CARE",
+          "duration": "2 Years",
+          "description": "คุ้มครองจอ 2 ปี"
+        },
+        {
+          "type": "FILM_REPLACEMENT",
+          "times": 1,
+          "description": "เปลี่ยนฟิล์ม ฟรี 1 ครั้ง"
+        }
+      ],
+      "governanceNotes": "Screen care and film replacement stored as Benefits, not price discounts.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-24-ZFLIP7-PRICING-AND-SFPLUS",
+      "name": "Galaxy Z Flip7 Pricing and SF+ Terms",
+      "modelFamily": "Galaxy Z Flip7",
+      "tiers": [
+        {
+          "capacity": "256GB",
+          "rrp": 40900,
+          "discount": 11000,
+          "netPrice": 29900
+        },
+        {
+          "capacity": "512GB",
+          "rrp": 48900,
+          "discount": 11000,
+          "netPrice": 37900
+        }
+      ],
+      "couponCode": "01",
+      "sfPlusEligible": true,
+      "sfPlusMaxDownRate": 0.1,
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-25-TAB-A11-SERIES-TIERS",
+      "name": "Galaxy Tab A11 / A11+ Pricing & Coupon Mapping",
+      "modelFamily": "Galaxy Tab A11 Series",
+      "models": {
+        "Tab A11+ 5G 6/128GB": {
+          "rrp": 10490,
+          "standardNet": 8990,
+          "standardCoupon": "01",
+          "sfPlusNet": 9990,
+          "sfPlusCoupon": "04",
+          "sfPlusMaxDownRate": 0.1
+        },
+        "Tab A11+ Wi-Fi 6/128GB": {
+          "rrp": 8490,
+          "standardNet": 6990,
+          "standardCoupon": "01",
+          "sfPlusNet": 7990,
+          "sfPlusCoupon": "04",
+          "sfPlusMaxDownRate": 0.1
+        },
+        "Tab A11 LTE 8/128GB": {
+          "rrp": 7490,
+          "standardNet": 5990,
+          "standardCoupon": "01",
+          "sfPlusNet": 6990,
+          "sfPlusCoupon": "04",
+          "sfPlusMaxDownRate": 0.1
+        }
+      },
+      "governanceNotes": "STANDARD_PAYMENT uses Coupon 01 (SF+ Eligible: NO). SF+ uses Coupon 04 (SF+ Eligible: YES, down <= 10%). Wi-Fi coupons verified from source cell.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-26-KEYBOARD-ADDON-50PCT",
+      "name": "Keyboard / Book Cover Add-on Purchase 50%",
+      "promotionType": "ADD_ON_PURCHASE",
+      "discountRate": 0.5,
+      "mainProductRequired": true,
+      "applicableMainCategories": [
+        "TAB FE",
+        "TAB-S",
+        "TAB-A"
+      ],
+      "couponCode": "02",
+      "connectorLogic": "ONE_OR_MORE",
+      "governanceNotes": "Keyboard and/or Book Cover 50% discount. Customer may purchase Keyboard, Book Cover, or both per conditions.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-27-TAB-S10-LITE-KEYBOARD-VS-BARE",
+      "name": "Galaxy Tab S10 Lite Pass F (with Keyboard) vs SM- (Bare)",
+      "modelFamily": "Galaxy Tab S10 Lite",
+      "variants": [
+        {
+          "pnPrefix": "F-X406",
+          "name": "Tab S10 Lite 5G Pass F",
+          "rrp": 16990,
+          "netPrice": 16490,
+          "hasKeyboard": true,
+          "keyboardPart": "GP-FCX400RLABH",
+          "productCodeType": "PASS_F"
+        },
+        {
+          "pnPrefix": "F-X400",
+          "name": "Tab S10 Lite WiFi Pass F",
+          "rrp": 12990,
+          "netPrice": 12490,
+          "hasKeyboard": true,
+          "keyboardPart": "GP-FCX400RLABH",
+          "productCodeType": "PASS_F"
+        },
+        {
+          "pnPrefix": "SM-X406",
+          "name": "Tab S10 Lite 5G Bare SM-",
+          "rrp": 16990,
+          "netPrice": 14490,
+          "hasKeyboard": false,
+          "productCodeType": "STANDARD_SM"
+        },
+        {
+          "pnPrefix": "SM-X400",
+          "name": "Tab S10 Lite WiFi Bare SM-",
+          "rrp": 12990,
+          "netPrice": 10490,
+          "hasKeyboard": false,
+          "productCodeType": "STANDARD_SM"
+        }
+      ],
+      "governanceNotes": "F- series comes with free Keyboard Cover. Bare SM- series has higher discount (2,500) but no Keyboard.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-28-TAB-S10-FE-SERIES-PRICING",
+      "name": "Galaxy Tab S10 FE Series Price Coupon 01 Verification",
+      "modelFamily": "Galaxy Tab S10 FE Series",
+      "models": [
+        {
+          "model": "Galaxy Tab S10 FE+ 5G",
+          "capacity": "12/256GB",
+          "rrp": 30900,
+          "netPrice": 25900,
+          "coupon": "01"
+        },
+        {
+          "model": "Galaxy Tab S10 FE+ WiFi",
+          "capacity": "12/256GB",
+          "rrp": 27900,
+          "netPrice": 22900,
+          "coupon": "01"
+        },
+        {
+          "model": "Galaxy Tab S10 FE 5G",
+          "capacity": "8/128GB",
+          "rrp": 22900,
+          "netPrice": 19400,
+          "coupon": "01"
+        },
+        {
+          "model": "Galaxy Tab S10 FE WiFi",
+          "capacity": "8/128GB",
+          "rrp": 19900,
+          "netPrice": 16400,
+          "coupon": "01"
+        }
+      ],
+      "priceCoupon": "01",
+      "governanceNotes": "Price Coupon 01 applies across all confirmed S10 FE models. Gifts must align with merged row positions.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-29-TAB-S11-SERIES-PRICING",
+      "name": "Galaxy Tab S11 Series Price Coupon 01 Verification",
+      "modelFamily": "Galaxy Tab S11 Series",
+      "models": [
+        {
+          "model": "Galaxy Tab S11 Ultra 5G",
+          "capacity": "12/256GB",
+          "rrp": 48900,
+          "netPrice": 43900,
+          "coupon": "01"
+        },
+        {
+          "model": "Galaxy Tab S11 5G",
+          "capacity": "12/128GB",
+          "rrp": 33900,
+          "netPrice": 30400,
+          "coupon": "01"
+        },
+        {
+          "model": "Galaxy Tab S11 WiFi",
+          "capacity": "12/128GB",
+          "rrp": 28900,
+          "netPrice": 25400,
+          "coupon": "01"
+        }
+      ],
+      "priceCoupon": "01",
+      "governanceNotes": "Price Coupon 01 is primary device coupon.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-30-BENEFIT-COUPON-06-DECOUPLING",
+      "name": "Decoupling Benefit Coupon 06 from Price Coupon 01",
+      "description": "Coupon 06 in Col M is associated with Premium gift claiming, not device price. Must be kept in benefitCoupons with purpose=NEEDS_CONFIRMATION and not overwrite Price Coupon 01.",
+      "priceCoupon": "01",
+      "benefitCoupons": [
+        {
+          "code": "06",
+          "purpose": "NEEDS_CONFIRMATION"
+        }
+      ],
+      "governanceNotes": "Prohibit slash combination 01/06.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    },
+    {
+      "ruleId": "BR-31-GIFT-TEXT-CONNECTOR-LOGIC",
+      "name": "Gift Text Natural Language Connector Grammar",
+      "grammar": {
+        "CONJUNCTION_ALL": [
+          "กับ",
+          "และ"
+        ],
+        "DISJUNCTION_ONE": [
+          "หรือ"
+        ],
+        "FLEXIBLE_DISJUNCTION": [
+          "และ/หรือ"
+        ]
+      },
+      "actions": {
+        "ALL": "Include all connected items in required gifts",
+        "SELECT_ONE": "Require customer/cashier to select exactly one gift",
+        "ONE_OR_MORE": "Allow customer to select one or more gifts",
+        "COMPOUND": "Decompose into giftGroups with REQUIRED_ALL and SELECT_ONE"
+      },
+      "governanceNotes": "Always retain rawGiftText. If ambiguous, flag status=NEEDS_RULE_CONFIRMATION.",
+      "businessRuleSource": "BRANCH_CONFIRMED",
+      "confirmedAt": "2026-09-06T18:22:06+07:00",
+      "status": "ACTIVE"
+    }
+  ]
+}

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260907-v1">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
@@ -76,20 +76,23 @@
           </button>
 
           <div class="sync-cluster">
-            <div class="sync-status-minimal" title="สถานะเชื่อมต่อสต็อกเรียลไทม์">
-              <span class="dot-online"></span>
-              <span class="sync-time-text" id="lastSyncTime">16:35 น.</span>
+            <div class="sync-status-minimal" title="แหล่งข้อมูล: Stock.xlsx Snapshot">
+              <span class="dot-online" style="background: var(--neon-cyan);"></span>
+              <span class="sync-time-text" id="lastSyncTime">Stock.xlsx Snapshot (06/09/2026 13:07)</span>
             </div>
-            <button id="btnSync" class="hdr-btn hdr-btn-primary" title="ดึงหรือวางข้อมูลสต็อกจาก Nimbus">
+            <button id="btnSync" class="hdr-btn hdr-btn-primary" title="รีเฟรชการแสดงผลหน้าจอ (ข้อมูล Snapshot จาก Stock.xlsx)">
               <svg class="icon-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
               </svg>
-              <span>ซิงค์สต็อก Nimbus</span>
+              <span>รีเฟรชหน้าจอ</span>
             </button>
           </div>
         </div>
       </div>
     </header>
+
+    <!-- Stock Data Integrity & Error Banner Container -->
+    <div id="stockErrorBannerContainer"></div>
 
     <!-- KPI Metric Stat Cards -->
     <section class="stats-grid" id="statsGrid">
@@ -101,11 +104,11 @@
           </svg>
         </div>
         <div class="stat-content">
-          <div class="stat-label">สต็อกทั้งหมดในระบบ</div>
-          <div class="stat-value" id="kpiTotalStock">0 <span class="unit">เครื่อง</span></div>
+          <div class="stat-label">เครื่องหลักรวม (F1 + F2)</div>
+          <div class="stat-value" id="kpiTotalStock">760 <span class="unit">เครื่อง</span></div>
           <div class="stat-subtext">
-            <span>ร้านเรา (ชั้น 1): <strong id="kpiFloor1" class="text-cyan">0</strong></span> • 
-            <span>สาขาชั้น 2: <strong id="kpiFloor2" class="text-amber">0</strong></span>
+            <span>ร้านเรา (ช1): <strong id="kpiFloor1" class="text-cyan">379</strong></span> • 
+            <span>สาขา (ช2): <strong id="kpiFloor2" class="text-amber">381</strong></span>
           </div>
         </div>
         <div class="card-glow cyan-glow"></div>
@@ -157,6 +160,52 @@
           <div class="stat-subtext" id="kpiGiftSubtext">มูลค่า ฿3,990 สำหรับ Galaxy A27 5G</div>
         </div>
         <div class="card-glow coral-glow"></div>
+      </div>
+    </section>
+
+    <!-- Stock Reconciliation KPI Bar (Separates Core Devices, Promotion Accessory, and Adapter) -->
+    <div class="inventory-breakdown-bar" id="inventoryBreakdownBar" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 18px; margin: 16px 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.2rem;">📊</span>
+        <strong style="color: #f8fafc; font-size: 0.92rem;">ยอดสต็อกแยกหมวดกระทบยอด:</strong>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+        <div class="inv-chip" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 8px; padding: 5px 12px; font-size: 0.84rem;">
+          <span style="color: #94a3b8;">📱 เครื่องหลัก:</span>
+          <strong id="kpiBreakdownCore" style="color: #00f0ff; margin-left: 4px;">760</strong> <span style="font-size: 0.76rem; color: #64748b;">เครื่อง (F1: 379 / F2: 381)</span>
+        </div>
+        <div class="inv-chip" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 5px 12px; font-size: 0.84rem;">
+          <span style="color: #94a3b8;">⌨️ Accessory ในชีต Promotion:</span>
+          <strong id="kpiBreakdownPromoAcc" style="color: #f59e0b; margin-left: 4px;">1</strong> <span style="font-size: 0.76rem; color: #64748b;">ชิ้น (P/N GP-FCX626NNCBH, F1: 1 / F2: 0)</span>
+        </div>
+        <div class="inv-chip" style="background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.25); border-radius: 8px; padding: 5px 12px; font-size: 0.84rem;">
+          <span style="color: #94a3b8;">📑 รายการทั้งหมดในชีต Promotion:</span>
+          <strong id="kpiBreakdownPromoSheet" style="color: #cbd5e1; margin-left: 4px;">761</strong> <span style="font-size: 0.76rem; color: #64748b;">รายการ (380 + 381)</span>
+        </div>
+        <div class="inv-chip" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 5px 12px; font-size: 0.84rem;">
+          <span style="color: #94a3b8;">🔌 Samsung Adapter:</span>
+          <strong id="kpiBreakdownAdapter" style="color: #10b981; margin-left: 4px;">312</strong> <span style="font-size: 0.76rem; color: #64748b;">ชิ้น (F1: 189 / F2: 123)</span>
+        </div>
+        <div class="inv-chip" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 5px 12px; font-size: 0.84rem;">
+          <span style="color: #94a3b8;">📦 รวม Inventory ที่นำเข้าแล้ว:</span>
+          <strong id="kpiBreakdownGrandTotal" style="color: #c084fc; margin-left: 4px;">1,073</strong> <span style="font-size: 0.76rem; color: #64748b;">ชิ้น</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auto-Expiry Warning Banner -->
+    <section class="expiry-banner" id="expiryBanner">
+      <div class="expiry-banner-inner">
+        <div class="expiry-icon-pulse">
+          <span class="expiry-icon">⏰</span>
+        </div>
+        <div class="expiry-content">
+          <div class="expiry-title" id="expiryTitle">โปรโมชั่นรอบ 28 ส.ค. - 6 ก.ย. 2026</div>
+          <div class="expiry-countdown" id="expiryCountdown">กำลังคำนวณ...</div>
+        </div>
+        <div class="expiry-status" id="expiryStatus">
+          <span class="expiry-badge badge-active">ACTIVE</span>
+        </div>
       </div>
     </section>
 
@@ -309,7 +358,8 @@
                 <th class="th-model">รุ่น & รหัสสินค้า</th>
                 <th class="th-color">สี (Color)</th>
                 <th class="th-stock-f1" style="text-align: center;">ร้านเรา (ช1)</th>
-                <th class="th-stock-f2" style="text-align: center;">สาขาชั้น 2</th>
+                <th class="th-stock-f2" style="text-align: center;">สาขา (ช2)</th>
+                <th class="th-stock-total" style="text-align: center;">รวม</th>
                 <th class="th-price-compact">ราคา & โปรโมชั่น</th>
                 <th class="th-special">สิทธิ์พิเศษ / ของแถม / เงื่อนไข</th>
                 <th class="th-student">โปร นศ. (Studentcrd)</th>
@@ -399,9 +449,9 @@
                       <small class="text-muted">Tab S Series, Tab A Series</small>
                     </div>
                   </td>
-                  <td class="text-center"><strong class="system-num text-cyan" id="sysTab">38</strong></td>
+                  <td class="text-center"><strong class="system-num text-cyan" id="sysTab">37</strong></td>
                   <td class="text-center">
-                    <input type="number" class="count-input" id="inputTab" value="38" min="0">
+                    <input type="number" class="count-input" id="inputTab" value="37" min="0">
                   </td>
                   <td class="text-center" id="diffTab"><span class="diff-badge match">0</span></td>
                   <td class="text-center" id="statusTab"><span class="status-badge success">✓ ตรงกัน</span></td>
@@ -439,10 +489,11 @@
 
                 <tr class="row-highlight-core">
                   <td>
-                    <strong>📦 รวมเครื่องหลัก (Core Devices)</strong>
+                    <strong>📦 เครื่องหลักรวม (Core Devices F1)</strong>
+                    <div style="font-size: 0.72rem; color: #94a3b8;">SmartPhone (237) + Tablet (37) + Watch (61) + Buds (44)</div>
                   </td>
-                  <td class="text-center"><strong class="system-num text-emerald" id="sysCore">380</strong></td>
-                  <td class="text-center"><strong class="counted-total-num text-emerald" id="countCore">380</strong></td>
+                  <td class="text-center"><strong class="system-num text-emerald" id="sysCore">379</strong></td>
+                  <td class="text-center"><strong class="counted-total-num text-emerald" id="countCore">379</strong></td>
                   <td class="text-center" id="diffCore"><span class="diff-badge match">0</span></td>
                   <td class="text-center" id="statusCore"><span class="status-badge success">✓ ยอดตรง 100%</span></td>
                 </tr>
@@ -450,8 +501,8 @@
                 <tr>
                   <td>
                     <div class="reconcile-cat">
-                      <span>🔌 Adapter & Accessories</span>
-                      <small class="text-muted">Adapter, Case, Cover, Film, Band</small>
+                      <span>🔌 Samsung Adapter (ชีตแยก)</span>
+                      <small class="text-muted">ข้อมูลจากชีต 'Adapter&สาย&Flim' <span style="background: rgba(245,158,11,0.15); color: #f59e0b; padding: 1px 4px; border-radius: 3px; font-size: 0.7rem;">NOT_IMPORTED ในฐานข้อมูลหลัก</span></small>
                     </div>
                   </td>
                   <td class="text-center"><strong class="system-num text-amber" id="sysAdapter">189</strong></td>
@@ -641,7 +692,15 @@
 
           <!-- Modal Tabs Header -->
           <div class="modal-tabs-header">
-            <button class="modal-tab-btn active" data-tab="tab-exceptions">
+            <button class="modal-tab-btn active" data-tab="tab-audit-dashboard">
+              <span>📊 Audit Dashboard</span>
+              <span class="tab-badge badge-cyan" id="modalAuditTotalBadge">928</span>
+            </button>
+            <button class="modal-tab-btn" data-tab="tab-blocked">
+              <span>🔴 Blocked Items</span>
+              <span class="tab-badge badge-coral" id="modalBlockedBadge">160</span>
+            </button>
+            <button class="modal-tab-btn" data-tab="tab-exceptions">
               <span>⚠️ Exception Queue</span>
               <span class="tab-badge badge-amber" id="modalExceptionBadge">15 รายการ</span>
             </button>
@@ -658,8 +717,24 @@
             </button>
           </div>
 
+          <!-- TAB 0: Audit Dashboard (NEW) -->
+          <div class="modal-tab-pane" id="tab-audit-dashboard">
+            <div class="audit-dashboard-grid" id="auditDashboardContent">
+              <!-- Rendered dynamically by JS -->
+              <div style="text-align:center; padding: 40px; color: var(--text-muted);">⏳ กำลังโหลดข้อมูล Audit...</div>
+            </div>
+          </div>
+
+          <!-- TAB 0.5: Blocked Items (NEW) -->
+          <div class="modal-tab-pane hidden" id="tab-blocked">
+            <div id="blockedItemsContent">
+              <!-- Rendered dynamically by JS -->
+              <div style="text-align:center; padding: 40px; color: var(--text-muted);">⏳ กำลังโหลดรายการ Blocked...</div>
+            </div>
+          </div>
+
           <!-- TAB 1: Exception Review Queue -->
-          <div class="modal-tab-pane" id="tab-exceptions">
+          <div class="modal-tab-pane hidden" id="tab-exceptions">
             <div class="exception-list">
               
               <!-- High Risk Quarantined Section -->
@@ -1252,14 +1327,15 @@
         <span>*กรณีสินค้า Flash Sales งดของแถม Premium*</span>
       </div>
       <div class="footer-right">
-        <span>เชื่อมโยงระบบ InventoryControl.asp • Real-Time Sales & Stock System</span>
+        <span>เชื่อมโยงระบบ InventoryControl.asp • ระบบตรวจสอบสต็อก & โปรโมชั่นสาขา (Snapshot จาก Stock.xlsx)</span>
       </div>
     </footer>
 
   </div>
 
-  <!-- Load Database and Logic -->
-  <script src="stock_data.js"></script>
-  <script src="app.js"></script>
+  <!-- Load Database and Logic (Strict Order: stock_data.js -> promotion_variants.js -> app.js) -->
+  <script src="stock_data.js?v=20260907-v1"></script>
+  <script src="promotion_variants.js?v=20260907-v1"></script>
+  <script src="app.js?v=20260907-v1"></script>
 </body>
 </html>

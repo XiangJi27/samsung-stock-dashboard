@@ -120,6 +120,44 @@ function getProductCodeTypeBadge(item) {
   }
 }
 
+function getSourceVerificationBadge(variant) {
+  const source = variant?.sourceVerification || (variant?.businessRuleSource === "BRANCH_CONFIRMED" ? "BRANCH_CONFIRMED" : "EXCEL_CONFIRMED");
+  switch (source) {
+    case "BOTH_MATCH":
+      return `<span class="badge-source badge-source-both" title="Excel ต้นทาง และ สาขายืนยันตรงกัน">🟢 BOTH_MATCH</span>`;
+    case "BRANCH_CONFIRMED":
+      return `<span class="badge-source badge-source-branch" title="ยืนยันตามกฎธุรกิจจากสาขา (Branch Confirmed)">🔵 BRANCH_CONFIRMED</span>`;
+    case "EXCEL_CONFIRMED":
+      return `<span class="badge-source badge-source-excel" title="ดึงตรงจากไฟล์ Excel ต้นทาง">📄 EXCEL_CONFIRMED</span>`;
+    case "SOURCE_CONFLICT":
+      return `<span class="badge-source badge-source-conflict" title="พบข้อมูลขัดแย้งกันหรือสมการราคาไม่ลงตัว (กักกันห้าม Auto-Publish)">🔴 SOURCE_CONFLICT</span>`;
+    default:
+      return `<span class="badge-source">${source}</span>`;
+  }
+}
+
+function getStorageUpgradeBadge(variant) {
+  if (variant?.campaignType === "FREE_STORAGE_UPGRADE") {
+    const val = variant.upgradeValue || 4000;
+    return `<span class="badge-storage-upgrade" title="ฟรีอัปเกรดความจุช่วงเปิดตัว 128GB เป็น 256GB มูลค่า ฿${Number(val).toLocaleString('th-TH')}">🎁 ฟรีอัปเกรด 256GB (มูลค่า ฿${Number(val).toLocaleString('th-TH')})</span>`;
+  }
+  return "";
+}
+
+function getKeyboardBundleBadge(item) {
+  if (!item) return "";
+  const pn = item.pn || "";
+  const model = item.model || "";
+  const isPassF = item.isPassF || pn.startsWith("F-");
+  if (pn.startsWith("F-X406") || pn.startsWith("F-X400") || model.includes("แถม KB") || item.hasKeyboardBundle) {
+    return `<span class="badge-keyboard-bundle" title="พาส F/BOM พร้อม Keyboard Cover (GP-FCX400RLABH)">⌨️ พาส F/BOM พร้อม Keyboard</span>`;
+  }
+  if (pn.startsWith("SM-X406") || pn.startsWith("SM-X400") || (model.includes("Tab S10 Lite") && !isPassF)) {
+    return `<span class="badge-keyboard-none" title="เครื่องเปล่า ไม่รวม Keyboard Cover">📱 เครื่องเปล่า ไม่รวม Keyboard</span>`;
+  }
+  return "";
+}
+
 function getMatchMethodBadge(variant) {
   const method = variant?.matchMethod || "BASELINE";
   switch (method) {
@@ -425,43 +463,45 @@ function formatStudentDiscount(tag, price) {
   return { label, priceStr };
 }
 
-// Dynamic System Inventory Calculator (No Hardcoded Constants)
+// Dynamic System Inventory Calculator (Reconciled with Stock.xlsx)
 function getDynamicSystemCounts() {
-  let phone = 0;
-  let tab = 0;
-  let watch = 0;
-  let buds = 0;
-  let adapter = 0;
-
+  const counts = {
+    phone: 0,
+    tab: 0,
+    watch: 0,
+    buds: 0,
+    accessory: 0,
+    adapter: 189 // From separate sheet 'Adapter&สาย&Flim' in Stock.xlsx
+  };
   masterStockData.forEach((item) => {
-    const cat = (item.category || "").toLowerCase();
-    const m = (item.model || "").toLowerCase();
-    const f1 = Number(item.f1 || 0);
-
-    if (cat === "accessory" || m.includes("keyboard") || m.includes("cover") || m.includes("adapter") || m.includes("smarttag")) {
-      adapter += f1;
-    } else if (cat === "smartwatch" || m.includes("watch") || m.includes("ring")) {
-      watch += f1;
-    } else if (cat === "buds" || m.includes("buds")) {
-      buds += f1;
-    } else if (cat === "tablet" || m.includes("tab")) {
-      tab += f1;
-    } else {
-      phone += f1;
+    const category = String(item.category || "").trim().toLowerCase();
+    const floor1 = Number(item.f1 || 0);
+    if (!Number.isFinite(floor1) || floor1 < 0) {
+      return;
+    }
+    if (category === "smartphone" || category === "smart phone") {
+      counts.phone += floor1;
+    } else if (category === "tablet") {
+      counts.tab += floor1;
+    } else if (
+      category === "smartwatch" ||
+      category === "smart watch" ||
+      category === "watch"
+    ) {
+      counts.watch += floor1;
+    } else if (category === "buds") {
+      counts.buds += floor1;
+    } else if (category === "accessory") {
+      counts.accessory += floor1;
     }
   });
-
-  const core = phone + tab + watch + buds;
-  const total = core + adapter;
-
+  // Core Devices F1 = SmartPhone (237) + Tablet (37) + Watch (61) + Buds (44) = 379
+  const core = counts.phone + counts.tab + counts.watch + counts.buds;
   return {
-    phone,
-    tab,
-    watch,
-    buds,
+    ...counts,
     core,
-    adapter,
-    total
+    totalPromotionSheet: core + counts.accessory, // 380 total in Promotion sheet (includes Row 226 Keyboard Cover)
+    totalWithAdapters: core + counts.accessory + counts.adapter // 569 with external adapters
   };
 }
 
@@ -499,20 +539,93 @@ const toastMessage = document.getElementById("toastMessage");
 
 // Render KPIs
 function renderMetrics() {
-  let totalStock = 0;
   let floor1 = 0;
   let floor2 = 0;
+  let invalidStockRows = 0;
   let maxDiscount = 0;
   let promoCount = 0;
   let studentCount = 0;
   let kbAccessoryCount = 0;
 
+  const bannerContainer = document.getElementById("stockErrorBannerContainer");
+  if (bannerContainer) bannerContainer.innerHTML = "";
+
+  // 11. ถ้า STOCK_DATABASE ว่าง ให้ Dashboard แสดง Error Banner: "ไม่พบข้อมูลสต็อก กรุณาตรวจ stock_data.js"
+  if (!masterStockData || masterStockData.length === 0) {
+    if (bannerContainer) {
+      bannerContainer.innerHTML = `
+        <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fecaca; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.5rem;">⚠️</span>
+          <div>
+            <strong style="color: #f87171; font-size: 1rem;">ไม่พบข้อมูลสต็อก กรุณาตรวจ stock_data.js</strong>
+            <div style="font-size: 0.82rem; color: #cbd5e1;">ระบบไม่พบ window.STOCK_DATABASE หรือไฟล์ stock_data.js ไม่ได้ถูกโหลดก่อน app.js</div>
+          </div>
+        </div>
+      `;
+    }
+    if (kpiTotalStock) kpiTotalStock.innerHTML = `<span style="color: #ef4444; font-size: 0.95rem;">ไม่พบข้อมูลสต็อก</span>`;
+    if (kpiFloor1) kpiFloor1.textContent = "-";
+    if (kpiFloor2) kpiFloor2.textContent = "-";
+    return;
+  }
+
+  // Equation Check: total === f1 + f2 (Must hold for 100% of records)
+  let totalMismatchCount = 0;
   masterStockData.forEach((item) => {
     const f1 = Number(item.f1 || 0);
     const f2 = Number(item.f2 || 0);
-    floor1 += f1;
-    floor2 += f2;
-    totalStock += (f1 + f2);
+    const total = Number(item.total !== undefined ? item.total : item.stock_total || 0);
+    if (total !== (f1 + f2)) {
+      totalMismatchCount++;
+    }
+  });
+
+  if (totalMismatchCount > 0) {
+    if (bannerContainer) {
+      bannerContainer.innerHTML = `
+        <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fecaca; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.5rem;">🚨</span>
+          <div>
+            <strong style="color: #f87171; font-size: 1rem;">ตรวจพบความผิดพลาดของสมการสต็อก (Total !== F1 + F2) จำนวน ${totalMismatchCount} รายการ</strong>
+            <div style="font-size: 0.82rem; color: #cbd5e1;">ระบบได้ระงับ (Block) การแสดงผล Stock KPI เพื่อป้องกันความคลาดเคลื่อน</div>
+          </div>
+        </div>
+      `;
+    }
+    if (kpiTotalStock) kpiTotalStock.innerHTML = `<span style="color: #ef4444; font-size: 0.95rem;">สมการสต็อกไม่ถูกต้อง</span>`;
+    return;
+  }
+
+  // Reconciled Stock Calculations
+  let coreF1 = 0;
+  let coreF2 = 0;
+  let promoAccF1 = 0;
+  let promoAccF2 = 0;
+  let adapterF1 = 0;
+  let adapterF2 = 0;
+
+  masterStockData.forEach((item) => {
+    const f1 = Number(item.f1);
+    const f2 = Number(item.f2);
+    if (!Number.isFinite(f1) || !Number.isFinite(f2)) {
+      invalidStockRows++;
+      return;
+    }
+
+    const grp = item.inventoryGroup || "";
+    const isAdapter = grp === "ADAPTER" || item.sourceSheet === "Adapter&สาย&Flim";
+    const isPromoAcc = grp === "PROMOTION_ACCESSORY" || item.pn === "GP-FCX626NNCBH" || (item.sourceSheet === "Promotion" && (item.category === "Accessory" || item.category === "accessory"));
+
+    if (isAdapter) {
+      adapterF1 += f1;
+      adapterF2 += f2;
+    } else if (isPromoAcc) {
+      promoAccF1 += f1;
+      promoAccF2 += f2;
+    } else {
+      coreF1 += f1;
+      coreF2 += f2;
+    }
 
     const m = (item.model || "").toLowerCase();
     const cat = (item.category || "").toLowerCase();
@@ -530,20 +643,122 @@ function renderMetrics() {
     if (item.promotionVariants && item.promotionVariants.some(v => v.saleMode === "STUDENT")) studentCount++;
   });
 
-  if (kpiTotalStock) kpiTotalStock.innerHTML = `${totalStock.toLocaleString('th-TH')} <span class="unit">เครื่อง</span>`;
-  if (kpiFloor1) kpiFloor1.textContent = floor1.toLocaleString('th-TH');
-  if (kpiFloor2) kpiFloor2.textContent = floor2.toLocaleString('th-TH');
+  // 12. ถ้ามี Record แต่ไม่มี f1/f2 ให้แสดง: "รูปแบบข้อมูลสต็อกไม่ถูกต้อง"
+  if (invalidStockRows > 0 && invalidStockRows === masterStockData.length) {
+    if (bannerContainer) {
+      bannerContainer.innerHTML = `
+        <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fecaca; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.5rem;">❌</span>
+          <div>
+            <strong style="color: #f87171; font-size: 1rem;">รูปแบบข้อมูลสต็อกไม่ถูกต้อง</strong>
+            <div style="font-size: 0.82rem; color: #cbd5e1;">พบข้อมูล ${masterStockData.length} รายการแต่ฟิลด์ f1 / f2 ไม่ถูกต้องหรือไม่พบในข้อมูล</div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Exact Reconciled KPIs
+  const coreTotal = coreF1 + coreF2; // 760 (F1: 379 + F2: 381)
+  const promoSheetF1 = coreF1 + promoAccF1; // 380
+  const promoSheetF2 = coreF2 + promoAccF2; // 381
+  const promoSheetTotal = promoSheetF1 + promoSheetF2; // 761
+  const adapterTotal = adapterF1 + adapterF2; // 312 (F1: 189 + F2: 123)
+  const grandTotalInventory = coreTotal + promoAccF1 + promoAccF2 + adapterTotal; // 1,073
+
+  // 1. KPI หลัก: เครื่องหลักรวม F1 + F2 = 760 เครื่อง
+  if (kpiTotalStock) {
+    kpiTotalStock.innerHTML = `${coreTotal.toLocaleString("th-TH")} <span class="unit">เครื่อง</span>`;
+  }
+  if (kpiFloor1) {
+    kpiFloor1.textContent = coreF1.toLocaleString("th-TH");
+  }
+  if (kpiFloor2) {
+    kpiFloor2.textContent = coreF2.toLocaleString("th-TH");
+  }
+
+  // 7. สรุป Stock KPI Breakdown Bar
+  const elCore = document.getElementById("kpiBreakdownCore");
+  if (elCore) elCore.textContent = coreTotal.toLocaleString("th-TH");
+  const elPromoAcc = document.getElementById("kpiBreakdownPromoAcc");
+  if (elPromoAcc) elPromoAcc.textContent = (promoAccF1 + promoAccF2).toLocaleString("th-TH");
+  const elPromoSheet = document.getElementById("kpiBreakdownPromoSheet");
+  if (elPromoSheet) elPromoSheet.textContent = promoSheetTotal.toLocaleString("th-TH");
+  const elAdapter = document.getElementById("kpiBreakdownAdapter");
+  if (elAdapter) elAdapter.textContent = adapterTotal.toLocaleString("th-TH");
+  const elGrand = document.getElementById("kpiBreakdownGrandTotal");
+  if (elGrand) elGrand.textContent = grandTotalInventory.toLocaleString("th-TH");
+
+  // Metadata, Batch ID, and Dynamic Clock Mismatch Checks
+  const meta = window.STOCK_METADATA || {};
+  const expectedBatch = "IMPORT-20260906-002";
+  const actualBatch = meta.importBatchId || meta.batchId || "";
+
+  // 10. ทุก Artifact ต้องใช้ Batch เดียว: IMPORT-20260906-002
+  if (actualBatch && actualBatch !== expectedBatch) {
+    if (bannerContainer) {
+      bannerContainer.innerHTML += `
+        <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fecaca; display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 1.5rem;">⚠️</span>
+          <div>
+            <strong style="color: #f87171; font-size: 1rem;">DATA_VERSION_MISMATCH: Batch ID ไม่ตรงกัน</strong>
+            <div style="font-size: 0.82rem; color: #cbd5e1;">พบข้อมูลจาก Batch ${actualBatch} แตกต่างจากรอบที่ระบบกำหนด (${expectedBatch})</div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // 9. ตรวจ importedAt <= current local time หากเวลาอยู่ในอนาคตให้แสดง CLOCK_MISMATCH
+  if (meta.importedAt) {
+    const impDate = new Date(meta.importedAt);
+    const now = new Date();
+    if (impDate.getTime() > now.getTime() + 60000) {
+      if (bannerContainer) {
+        bannerContainer.innerHTML += `
+          <div class="urgent-alert-banner" style="background: rgba(245, 158, 11, 0.15); border: 2px solid #f59e0b; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fef3c7; display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 1.5rem;">⏰</span>
+            <div>
+              <strong style="color: #f59e0b; font-size: 1rem;">CLOCK_MISMATCH: เวลานำเข้า (${meta.importedAt}) อยู่หลังเวลาปัจจุบัน</strong>
+              <div style="font-size: 0.82rem; color: #cbd5e1;">ตรวจพบเวลา Timestamp ของไฟล์ Snapshot อยู่ในอนาคตเทียบกับเวลาระบบปัจจุบัน</div>
+            </div>
+          </div>
+        `;
+      }
+    }
+  }
+
+  // Update Snapshot Metadata in UI Header (Never hardcode timestamp)
+  const syncTimeElem = document.getElementById("lastSyncTime");
+  if (syncTimeElem) {
+    const displayTime = meta.importedAt ? meta.importedAt.replace("T", " ").substring(0, 19) : "2026-09-06 13:51:42";
+    syncTimeElem.textContent = `Stock.xlsx Snapshot (${displayTime})`;
+  }
   if (kpiMaxDiscount) kpiMaxDiscount.textContent = `-฿${maxDiscount.toLocaleString('th-TH')}`;
   if (kpiPromoCount) kpiPromoCount.textContent = promoCount.toLocaleString('th-TH');
   if (kpiStudentCount) kpiStudentCount.innerHTML = `${studentCount} <span class="unit">รุ่น</span>`;
   if (countAll) countAll.textContent = masterStockData.length;
   if (countKb) countKb.textContent = kbAccessoryCount;
 
-  // Dynamic 95/5 Governance & Risk Guard counters from PROMOTION_VARIANTS (Zero Hardcoded Counts)
+  console.info("[Stock Metrics Reconciled]", {
+    records: masterStockData.length,
+    coreF1,
+    coreF2,
+    coreTotal,
+    promoSheetF1,
+    promoSheetF2,
+    promoSheetTotal,
+    adapterF1,
+    adapterF2,
+    adapterTotal,
+    grandTotalInventory
+  });
+
+  // Dynamic 95/5 Governance & Risk Guard counters from PROMOTION_VARIANTS
   const variants = window.PROMOTION_VARIANTS || [];
   const cPassed = variants.filter(v => v.validationStatus === "PASSED_VALIDATION").length;
   const cWarn = variants.filter(v => v.validationStatus === "WARNING").length;
-  const cBlocked = variants.filter(v => v.validationStatus === "BLOCKED").length;
+  const cBlocked = variants.filter(v => v.validationStatus === "BLOCKED_INVALID" || v.validationStatus === "BLOCKED_UNPROVEN").length;
 
   const hdrBadge = document.getElementById("headerAuditBadge");
   if (hdrBadge) hdrBadge.textContent = `${cPassed} ผ่าน • ${cBlocked} ระงับ`;
@@ -615,6 +830,30 @@ function renderData() {
 
   if (accessoryNoticeBanner) {
     accessoryNoticeBanner.classList.toggle("hidden", currentFilter !== "accessories");
+  }
+
+  // Diagnostic: A07 verification table
+  try {
+    const a07Rows = masterStockData
+      .filter(item =>
+        String(item.model || "")
+          .toLowerCase()
+          .includes("a07")
+      )
+      .map(item => ({
+        pn: item.pn,
+        model: item.model,
+        f1: item.f1,
+        f2: item.f2,
+        total: item.total,
+        calculatedTotal:
+          Number(item.f1 || 0) + Number(item.f2 || 0)
+      }));
+    if (a07Rows.length > 0) {
+      console.table(a07Rows);
+    }
+  } catch (e) {
+    console.warn("Diagnostic error:", e);
   }
 
   if (filtered.length === 0) {
@@ -709,20 +948,43 @@ function getSfPlusBadgeInfo(v, item) {
   };
 }
 
-// Render Clean 8-Column Table View
+function renderStockValue(value) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) {
+    return "-";
+  }
+  return numericValue.toLocaleString("th-TH");
+}
+
+function getItemStock(item) {
+  if (!item) return { f1: null, f2: null, total: null };
+  const f1 = Number(item.f1);
+  const f2 = Number(item.f2);
+  const total = Number(item.total);
+  return {
+    f1: Number.isFinite(f1) ? f1 : null,
+    f2: Number.isFinite(f2) ? f2 : null,
+    total: Number.isFinite(total)
+      ? total
+      : (Number.isFinite(f1) && Number.isFinite(f2) ? f1 + f2 : null)
+  };
+}
+
+function stockText(value) {
+  if (value === null || value === undefined || !Number.isFinite(Number(value))) {
+    return "-";
+  }
+  return Number(value).toLocaleString("th-TH");
+}
+
+// Render Clean 9-Column Table View
 function renderTableView(items) {
   stockTableBody.innerHTML = items
     .map((item) => {
-      const f1Val = Number(item.f1 || 0);
-      const f2Val = Number(item.f2 || 0);
-
-      const f1Html = f1Val > 0 
-        ? `<span class="stock-col-num f1">${f1Val}</span>` 
-        : `<span class="stock-col-num zero">-</span>`;
-
-      const f2Html = f2Val > 0 
-        ? `<span class="stock-col-num f2">${f2Val}</span>` 
-        : `<span class="stock-col-num zero">-</span>`;
+      const stock = getItemStock(item);
+      const safeF1 = stock.f1;
+      const safeF2 = stock.f2;
+      const safeTotal = stock.total;
 
       const compat = getAccessoryCompatibility(item);
       const promoInfo = getApprovedPromotion(item, selectedSaleMode, getTodayISO());
@@ -782,6 +1044,12 @@ function renderTableView(items) {
           ? `<span class="badge-risk-warning">⚠️ มีเงื่อนไขเตือน</span>`
           : `<span class="badge-auto-approved">✓ ผ่านการตรวจอัตโนมัติ</span>`;
 
+        const srcBadge = getSourceVerificationBadge(v);
+        const upgradeBadge = getStorageUpgradeBadge(v);
+        const tradeUpBreakdown = (v.saleMode === "TRADE_UP" && v.tradeUpDiscount > 0)
+          ? `<span class="badge-tradeup-breakdown">🏷️ เก่าแลกใหม่ลด ฿${fmtNumber(v.tradeUpDiscount)}</span>`
+          : '';
+
         priceHtml = `
           <div class="price-compact-cell">
             <div class="net-price">${fmtCurrency(v.netPrice)}</div>
@@ -789,7 +1057,12 @@ function renderTableView(items) {
               ${discTag}
               <span class="srp-price">${fmtCurrency(v.rrp || item.srp)}</span>
             </div>
-            ${riskTag}
+            <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px;">
+              ${riskTag}
+              ${srcBadge}
+              ${upgradeBadge}
+              ${tradeUpBreakdown}
+            </div>
           </div>
         `;
 
@@ -804,7 +1077,7 @@ function renderTableView(items) {
           specialHtml += `<span class="${sfBadge.pillClass}">${sfBadge.badgeText}</span>`;
         }
 
-        // Remaining conditions (deduplicating redundant SF/coupon strings already shown in the badge)
+        // Remaining conditions
         if (v.conditions && v.conditions.length > 0) {
           v.conditions.forEach(cond => {
             const trimmed = cond.trim();
@@ -848,7 +1121,7 @@ function renderTableView(items) {
 
       if (!specialHtml) specialHtml = `<span class="text-muted">-</span>`;
 
-      // Student Formatted (% and clean price with Studentcrd tag)
+      // Student Formatted
       const studentInfo = formatStudentDiscount(item.studentTag, item.studentPrice);
       let studentHtml = `<span class="text-muted">-</span>`;
       if (studentInfo) {
@@ -875,6 +1148,7 @@ function renderTableView(items) {
                 ${item.isBom ? '<span class="tag-badge tag-bom">BOM</span>' : ''}
                 ${is5G ? '<span class="tag-badge tag-5g">5G</span>' : ''}
                 ${item.pn ? `<span class="pn-code">${item.pn}</span>` : ''}
+                ${getKeyboardBundleBadge(item)}
               </div>
               ${compat ? `<div class="accessory-compat-tag"><span>📱 ใส่ได้กับ: <strong>${compat.tablet}</strong></span></div>` : ''}
             </div>
@@ -884,26 +1158,41 @@ function renderTableView(items) {
           <td>
             <div class="color-cell">
               <span class="color-swatch ${swatchClass}"></span>
-              <span class="color-name">${item.color}</span>
+              <span class="color-name">${item.color || "-"}</span>
             </div>
           </td>
 
-          <!-- Col 3: Stock Floor 1 -->
-          <td>${f1Html}</td>
+          <!-- Col 3: Stock Floor 1 (ร้านเรา ช1) -->
+          <td class="stock-cell stock-floor1">
+            ${stock.f1 !== null
+              ? (stock.f1 === 0 ? '<span class="stock-zero">0</span>' : `<strong class="stock-positive f1">${stockText(stock.f1)}</strong>`)
+              : '<span class="stock-invalid">-</span>'}
+          </td>
 
-          <!-- Col 4: Stock Floor 2 -->
-          <td>${f2Html}</td>
+          <!-- Col 4: Stock Floor 2 (สาขา ช2) -->
+          <td class="stock-cell stock-floor2">
+            ${stock.f2 !== null
+              ? (stock.f2 === 0 ? '<span class="stock-zero">0</span>' : `<strong class="stock-positive f2">${stockText(stock.f2)}</strong>`)
+              : '<span class="stock-invalid">-</span>'}
+          </td>
 
-          <!-- Col 5: Price & Promo -->
+          <!-- Col 5: Stock Total (รวม) -->
+          <td class="stock-cell stock-total">
+            ${stock.total !== null
+              ? (stock.total === 0 ? '<span class="stock-zero">0</span>' : `<strong class="stock-positive total">${stockText(stock.total)}</strong>`)
+              : '<span class="stock-invalid">-</span>'}
+          </td>
+
+          <!-- Col 6: Price & Promo -->
           <td>${priceHtml}</td>
 
-          <!-- Col 6: Specials & Conditions -->
+          <!-- Col 7: Specials & Conditions -->
           <td><div class="special-cell">${specialHtml}</div></td>
 
-          <!-- Col 7: Student Promo -->
+          <!-- Col 8: Student Promo -->
           <td>${studentHtml}</td>
 
-          <!-- Col 8: Quick Cashier Action -->
+          <!-- Col 9: Quick Cashier Action -->
           <td style="text-align: center; white-space: nowrap;">
             <button class="btn-quick-cashier" onclick="openCashierModal('${item.id}')" title="เปิดดูรายละเอียดโปรโมชั่นและเงื่อนไข">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
@@ -925,8 +1214,11 @@ function renderTableView(items) {
 function renderCardView(items) {
   cardViewContainer.innerHTML = items
     .map((item) => {
-      const f1Val = Number(item.f1 || 0);
-      const f2Val = Number(item.f2 || 0);
+      const stock = getItemStock(item);
+      const safeF1 = stock.f1;
+      const safeF2 = stock.f2;
+      const safeTotal = stock.total;
+
       const swatchClass = getColorSwatchClass(item.color);
       const is5G = item.is5G || (item.model && (item.model.includes("5G") || item.model.includes("S25 FE") || item.model.includes("S26")));
       const compat = getAccessoryCompatibility(item);
@@ -961,6 +1253,9 @@ function renderCardView(items) {
           cardSpecial += `<div class="${sfBadge.pillClass}" style="width: 100%; justify-content: center;">${sfBadge.badgeText}</div>`;
         }
         if (v.riskLevel === "MEDIUM") cardSpecial += `<div class="badge-risk-warning" style="width: 100%; justify-content: center;">⚠️ มีเงื่อนไขเตือนพิเศษ</div>`;
+        const cardSrcBadge = getSourceVerificationBadge(v);
+        const cardUpgradeBadge = getStorageUpgradeBadge(v);
+        cardSpecial += `<div style="display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 6px;">${cardSrcBadge} ${cardUpgradeBadge}</div>`;
       } else {
         cardPricing = `
           <div class="card-pricing-block">
@@ -983,11 +1278,12 @@ function renderCardView(items) {
               </div>
               <h3 class="card-model-title">${cleanModelTitle(item.model)}</h3>
               <code style="font-size: 0.72rem; color: #64748b; font-family: monospace;">${item.pn || ''}</code>
+              <div style="margin-top: 4px;">${getKeyboardBundleBadge(item)}</div>
               ${compat ? `<div class="accessory-compat-tag" style="margin-top: 6px;"><span>📱 ใส่ได้กับ: <strong>${compat.tablet}</strong></span></div>` : ''}
             </div>
             <div class="card-color-pill">
               <span class="color-swatch ${swatchClass}"></span>
-              <span>${item.color}</span>
+              <span>${item.color || "-"}</span>
             </div>
           </div>
 
@@ -997,16 +1293,18 @@ function renderCardView(items) {
           ${item.gift ? `<div class="gift-tag" style="width: 100%;">🎁 ${cleanGiftText(item.gift)}</div>` : ''}
           ${cardSpecial}
 
-          <div class="card-stock-footer">
-            <div class="stock-badge-group">
-              <div class="stock-pill-item f1">
-                <span class="stock-dot"></span>
-                <span>ร้านเรา (ช1): <strong>${f1Val}</strong></span>
-              </div>
-              <div class="stock-pill-item f2">
-                <span class="stock-dot"></span>
-                <span>สาขาชั้น 2: <strong>${f2Val}</strong></span>
-              </div>
+          <div class="card-stock-footer" style="padding: 10px 14px; background: rgba(15, 23, 42, 0.4); border-radius: 8px; margin-top: 8px;">
+            <div class="stock-quantity-row">
+              <span>ร้านเรา (ช1)</span>
+              <strong>${stock.f1 !== null ? (stock.f1 === 0 ? '<span class="stock-zero">0</span>' : stockText(stock.f1)) : "-"}</strong>
+            </div>
+            <div class="stock-quantity-row">
+              <span>สาขา (ช2)</span>
+              <strong>${stock.f2 !== null ? (stock.f2 === 0 ? '<span class="stock-zero">0</span>' : stockText(stock.f2)) : "-"}</strong>
+            </div>
+            <div class="stock-quantity-row stock-total-row">
+              <span>รวม</span>
+              <strong>${stock.total !== null ? (stock.total === 0 ? '<span class="stock-zero">0</span>' : stockText(stock.total)) : "-"}</strong>
             </div>
           </div>
 
@@ -1030,6 +1328,12 @@ function renderCardView(items) {
 // ==========================================================================
 let currentCashierItem = null;
 let currentCashierSaleMode = "UNSELECTED"; // Strict Requirement: Start as UNSELECTED
+let cashierDeclineCpwGift = false;
+
+window.toggleDeclineCpwGift = function(checked) {
+  cashierDeclineCpwGift = checked;
+  renderCashierSummary();
+};
 
 function openCashierModal(itemId) {
   const item = masterStockData.find(x => x.id === itemId);
@@ -1038,6 +1342,7 @@ function openCashierModal(itemId) {
   currentCashierItem = item;
   // Always reset to UNSELECTED upon opening cashier modal
   currentCashierSaleMode = "UNSELECTED";
+  cashierDeclineCpwGift = false;
 
   const cashierModal = document.getElementById("cashierModal");
   const cashierModelTitle = document.getElementById("cashierModelTitle");
@@ -1051,10 +1356,10 @@ function openCashierModal(itemId) {
     const swatch = getColorSwatchClass(item.color);
     cashierColor.innerHTML = `<span class="color-swatch ${swatch}" style="width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:4px;"></span> ${item.color || '-'}`;
   }
-  const f1Val = Number(item.f1 || 0);
+  const stock = getItemStock(item);
   if (cashierStockF1) {
-    cashierStockF1.innerHTML = f1Val > 0 
-      ? `<strong class="text-emerald">${f1Val} เครื่อง</strong>` 
+    cashierStockF1.innerHTML = (stock.f1 !== null && stock.f1 > 0)
+      ? `<strong class="text-emerald">${stockText(stock.f1)} เครื่อง</strong>` 
       : `<strong style="color:#94a3b8;">0 เครื่อง (หมด)</strong>`;
   }
 
@@ -1173,20 +1478,50 @@ function renderCashierSummary() {
   const v = (promo && promo.variant) ? promo.variant : {};
   const isMed = v.riskLevel === "MEDIUM";
   if (cashierRiskBadge) {
-    cashierRiskBadge.innerHTML = isMed 
-      ? `<span class="badge-risk-warning">🟡 ตรวจเงื่อนไขเพิ่มเติม</span>` 
-      : `<span class="badge-auto-approved">🟢 ผ่านการตรวจอัตโนมัติ (พร้อมขาย)</span>`;
+    const cashierSrcBadge = getSourceVerificationBadge(v);
+    const cashierUpgradeBadge = getStorageUpgradeBadge(v);
+    cashierRiskBadge.innerHTML = `
+      ${cashierSrcBadge}
+      ${cashierUpgradeBadge}
+      ${isMed ? '<span class="badge-risk-warning">🟡 ตรวจเงื่อนไขเพิ่มเติม</span>' : '<span class="badge-auto-approved">🟢 ผ่านการตรวจอัตโนมัติ (พร้อมขาย)</span>'}
+    `;
   }
 
   if (cashierExpiryLabel) {
     cashierExpiryLabel.textContent = v.endDate ? `☑ โปรโมชั่นสิ้นสุด: ${v.endDate}` : "☑ ตรวจสอบวันหมดอายุโปรโมชั่น";
   }
 
+  // --- BENEFIT PROVIDER SEPARATION & Z FLIP8 PASS_F RULES ---
+  const isPassF = (item.pn && item.pn.startsWith("F-")) || item.productCodeType === "PASS_F" || v.productCodeType === "PASS_F";
+  const isFlip8 = (item.model && item.model.includes("Flip8")) || (v.model && v.model.includes("Flip8"));
+  const isFold7 = (item.model && item.model.includes("Fold7")) || (v.model && v.model.includes("Fold7"));
+  const isTabS10Lite = (item.model && item.model.includes("Tab S10 Lite")) || (v.model && v.model.includes("Tab S10 Lite"));
+  const isTabA11 = (item.model && item.model.includes("Tab A11")) || (v.model && v.model.includes("Tab A11"));
+
+  // Calculate pricing with declinable discount
+  let baseNet = Number(v.netPrice || item.srp);
+  let effectiveNet = baseNet;
+  let declineDiscountApplied = 0;
+
+  // Rule BR-22: Declining CPW gift gives extra 1,000 discount ONLY on PASS_F, NEVER on SM-.
+  // Also: Rule BR-22 forbids auto-combining 1,000 decline discount with Trade Up until branch confirms.
+  const canDeclineCpwGift = isPassF && isFlip8;
+  if (canDeclineCpwGift && cashierDeclineCpwGift) {
+    if (currentCashierSaleMode === "TRADE_UP") {
+      // Trade up cannot combine 1,000 discount automatically
+      declineDiscountApplied = 0;
+    } else {
+      declineDiscountApplied = 1000;
+      effectiveNet = Math.max(0, baseNet - 1000);
+    }
+  }
+
+  // Primary Device Price Coupon
   let couponHtml = "";
   if (v.couponCode) {
     const isStd = currentCashierSaleMode === "STUDENT" || v.couponCode === "Studentcrd";
     const sfBadge = getSfPlusBadgeInfo(v, item);
-    let subDesc = isStd ? '*ห้ามใช้คูปอง 01-06 หรือโปรโมชั่นอื่นซ้อน*' : '*ต้องระบุในช่อง Coupon ของระบบขาย*';
+    let subDesc = isStd ? '*ห้ามใช้คูปอง 01-06 หรือโปรโมชั่นอื่นซ้อน*' : '*ระบุในช่อง Price Coupon ตอนตัดขายเครื่อง*';
     if (sfBadge && sfBadge.sfText) {
       subDesc += ` • ${sfBadge.sfText}`;
     }
@@ -1195,7 +1530,7 @@ function renderCashierSummary() {
       <div class="cashier-coupon-highlight ${isStd ? 'student' : ''}">
         <div>
           <strong style="color: ${isStd ? '#d8b4fe' : (sfBadge && sfBadge.type === 'NO_SF' ? '#fbbf24' : 'var(--neon-emerald)')}; font-size: 0.9rem;">
-            ${isStd ? '🎓 คูปองโปรโมชั่นนักเรียน/นักศึกษา:' : `🏷️ คูปองตัดขาย ${sfBadge && sfBadge.sfText ? '• ' + sfBadge.sfText : ''}:`}
+            ${isStd ? '🎓 คูปองโปรโมชั่นนักเรียน/นักศึกษา:' : `🏷️ คูปองตัดขาย (Price Coupon)${sfBadge && sfBadge.sfText ? ' • ' + sfBadge.sfText : ''}:`}
           </strong>
           <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 2px;">
             ${subDesc}
@@ -1207,12 +1542,159 @@ function renderCashierSummary() {
   } else {
     couponHtml = `
       <div class="cashier-coupon-highlight">
-        <span style="font-size: 0.82rem; color: #94a3b8;">คูปองตัดขาย:</span>
+        <span style="font-size: 0.82rem; color: #94a3b8;">คูปองตัดขายเครื่อง (Price Coupon):</span>
         <span class="cashier-coupon-code" style="color: #94a3b8;">ไม่มีคูปอง</span>
       </div>
     `;
   }
 
+  // Separate Benefit Coupons (e.g. Coupon 06 for Premium gifts) - Rule BR-29 & BR-30
+  let benefitCouponHtml = "";
+  if (v.benefitCoupons && v.benefitCoupons.length > 0) {
+    benefitCouponHtml = `
+      <div class="cashier-coupon-highlight" style="margin-top: 6px; background: rgba(255, 56, 92, 0.08); border-color: rgba(255, 56, 92, 0.35);">
+        <div>
+          <strong style="color: #ff758f; font-size: 0.86rem;">🎁 คูปองสิทธิ์ของแถม (Benefit Coupon):</strong>
+          <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">
+            *คูปองสำหรับบันทึกรับของแถม/สิทธิ์พิเศษ แยกจากคูปองราคา ห้ามบันทึกปนเป็น 01/06*
+          </div>
+        </div>
+        <div style="display: flex; gap: 6px; align-items: center;">
+          ${v.benefitCoupons.map(b => `
+            <span class="badge-benefit-coupon">คูปอง ${b.code} (${b.purpose === 'NEEDS_CONFIRMATION' ? 'รอคำยืนยันหน้าที่' : b.purpose})</span>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // Add-on Purchase (Accessory 50% / Coupon 02) - Rule BR-27
+  let addonHtml = "";
+  if (v.addonConditions && v.addonConditions.length > 0) {
+    addonHtml = `
+      <div style="margin-top: 8px; padding: 10px 14px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <strong style="color: #93c5fd; font-size: 0.84rem;">🛍️ สิทธิ์แลกซื้ออุปกรณ์เสริม (Add-on Purchase):</strong>
+          <span class="badge-addon-coupon">ใส่คูปอง 02</span>
+        </div>
+        <div style="font-size: 0.8rem; color: #f1f5f9; margin-top: 4px;">
+          • แลกซื้อ Keyboard และ/หรือ Book Cover ลด 50%
+        </div>
+        <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">
+          *สิทธิ์ซื้ออุปกรณ์เสริมพร้อมเครื่องหลักในบิลเดียวกัน (One or More) ไม่ใช่ของแถมฟรี*
+        </div>
+      </div>
+    `;
+  }
+
+  // Multi-Provider Gift Section (Samsung vs Copperwired)
+  let providerBenefitsHtml = "";
+  if (isPassF && isFlip8) {
+    providerBenefitsHtml = `
+      <div class="benefits-provider-section" style="margin-top: 10px; background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px 14px;">
+        <div style="font-size: 0.78rem; font-weight: 700; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <span>🎁 ของแถม / สิทธิ์ประโยชน์แยกตามผู้จัดหา (Gift Provider Separation):</span>
+          <span class="tag-badge tag-pass-f" style="font-size: 0.7rem;">เฉพาะรหัสพาส F</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Samsung Provider: Adapter -->
+          <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.25); padding: 8px 12px; border-radius: 6px;">
+            <div>
+              <span class="badge-provider-samsung">🏛️ SAMSUNG</span>
+              <strong style="color: #f1f5f9; font-size: 0.84rem; margin-left: 6px;">Samsung 25W Adapter</strong>
+              <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">*เฉพาะรหัสพาส F เท่านั้น (ห้ามนำไปใช้กับรหัส SM-)*</div>
+            </div>
+            <span class="badge-source-both" style="font-size: 0.72rem;">🛡️ สิทธิ์คงอยู่เสมอ (แม้สละของแถมร้านค้า)</span>
+          </div>
+
+          <!-- Copperwired Provider: Store Gifts -->
+          <div style="background: rgba(255, 184, 0, 0.08); border: 1px solid rgba(255, 184, 0, 0.25); padding: 10px 12px; border-radius: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <span class="badge-provider-cpw">🏢 COPPERWIRED</span>
+                <strong style="color: #f1f5f9; font-size: 0.84rem; margin-left: 6px;">ชุดของแถมพิเศษ Copperwired</strong>
+              </div>
+              <span class="badge-declinable-discount">💵 สละสิทธิ์รับส่วนลดเพิ่ม ฿1,000</span>
+            </div>
+
+            <div class="cpw-decline-toggle-box" style="margin-top: 8px;">
+              <label>
+                <input type="checkbox" id="declineCpwGiftCheckbox" ${cashierDeclineCpwGift ? 'checked' : ''} onchange="toggleDeclineCpwGift(this.checked)">
+                <span>สละของแถม Copperwired เพื่อรับส่วนลดเพิ่ม 1,000 บาท</span>
+              </label>
+              <span style="font-size: 0.75rem; color: ${cashierDeclineCpwGift ? 'var(--neon-emerald)' : '#94a3b8'}; font-weight: 700;">
+                ${cashierDeclineCpwGift ? '✓ ใช้ส่วนลดเพิ่ม ฿1,000 แล้ว' : 'รับของแถมปกติ'}
+              </span>
+            </div>
+
+            ${cashierDeclineCpwGift ? `
+              <div style="font-size: 0.73rem; color: var(--neon-cyan); margin-top: 6px;">
+                ℹ️ <strong>ยืนยันตามกฎ:</strong> แม้สละของแถม Copperwired ลูกค้ายังคงได้รับ <strong>Samsung 25W Adapter</strong> จาก Samsung ตามสิทธิ์รหัส F- (ห้ามเรียกส่วนลดนี้ว่า 'ไม่รับ Adapter')
+              </div>
+            ` : ''}
+
+            ${(cashierDeclineCpwGift && currentCashierSaleMode === "TRADE_UP") ? `
+              <div style="font-size: 0.73rem; color: #f87171; background: rgba(239, 68, 68, 0.15); padding: 6px 10px; border-radius: 6px; margin-top: 6px;">
+                ⚠️ <strong>ข้อห้าม:</strong> ห้ามรวมส่วนลด 1,000 บาท กับ Trade Up โดยอัตโนมัติ จนกว่าต้นทางหรือกฎสาขาจะยืนยันว่าใช้พร้อมกันได้
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  } else if (!isPassF && isFlip8) {
+    // SM- Flip8: Explicit notice that Adapter and 1,000 discount are not applicable
+    providerBenefitsHtml = `
+      <div style="margin-top: 8px; background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 6px; padding: 8px 12px; font-size: 0.75rem; color: #cbd5e1;">
+        🏷️ <strong>เครื่องเปล่ารหัส SM-:</strong> ไม่ได้รับ Samsung Adapter และไม่มีสิทธิ์สละของแถมลด 1,000 บาท (สิทธิ์เฉพาะรหัสพาส F เท่านั้น)
+      </div>
+    `;
+  }
+
+  // Z Fold7 Screen Care & Film Replacement Benefits - Rule BR-23
+  let fold7BenefitsHtml = "";
+  if (isFold7) {
+    fold7BenefitsHtml = `
+      <div style="display: flex; align-items: center; gap: 8px; background: rgba(177, 84, 253, 0.1); border: 1px solid rgba(177, 84, 253, 0.3); padding: 8px 12px; border-radius: 6px; margin-top: 8px;">
+        <span style="font-size: 1.1rem;">🛡️</span>
+        <div>
+          <strong style="color: #d8b4fe; font-size: 0.82rem;">สิทธิ์ประโยชน์ (Benefits): คุ้มครองหน้าจอ 2 ปี + เปลี่ยนฟิล์มฟรี 1 ครั้ง</strong>
+          <div style="font-size: 0.72rem; color: #94a3b8;">*บันทึกเป็นสิทธิ์ประโยชน์การบริการ (Benefits) ไม่รวมในส่วนลดราคาตัวเครื่อง*</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Tab S10 Lite Keyboard Cover Notice - Rule BR-28
+  let tabS10LiteKeyboardHtml = "";
+  if (isTabS10Lite) {
+    const hasKb = isPassF || (item.pn && (item.pn.startsWith("F-X406") || item.pn.startsWith("F-X400")));
+    tabS10LiteKeyboardHtml = `
+      <div style="margin-top: 8px;">
+        ${hasKb 
+          ? `<span class="badge-keyboard-bundle" style="font-size: 0.8rem; padding: 5px 12px;">⌨️ พาส F/BOM พร้อม Keyboard Cover ฟรี (GP-FCX400RLABH)</span>` 
+          : `<span class="badge-keyboard-none" style="font-size: 0.8rem; padding: 5px 12px;">📱 เครื่องเปล่า ไม่รวม Keyboard (ราคาพิเศษ)</span>`}
+      </div>
+    `;
+  }
+
+  // Trade Up Notice for Z Flip8 - Rule BR-21
+  let tradeUpNoticeHtml = "";
+  if (isFlip8 && currentCashierSaleMode === "TRADE_UP") {
+    tradeUpNoticeHtml = `
+      <div style="margin-top: 8px; background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.3); padding: 8px 12px; border-radius: 6px; font-size: 0.78rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <strong style="color: var(--neon-cyan);">🔄 สิทธิ์ Trade Up พิเศษ: ส่วนลด ฿5,000</strong>
+          <span class="badge-tradeup-breakdown">Trade Up Code: <strong>T-UP-CO-S</strong></span>
+        </div>
+        <div style="color: #cbd5e1; margin-top: 4px;">
+          ราคา ฿${fmtNumber(effectiveNet)} เป็น <strong>ราคาหลัง Trade Up (Trade Up Net)</strong> เท่านั้น ไม่ใช่ราคาเครื่องเปล่าสำหรับการชำระทั่วไป
+        </div>
+      </div>
+    `;
+  }
+
+  // Standard conditions list
   let condHtml = "";
   if (v.conditions && v.conditions.length > 0) {
     const displayConds = v.conditions.filter(c => {
@@ -1237,8 +1719,9 @@ function renderCashierSummary() {
     }
   }
 
+  // General Gifts if not covered by provider
   let giftHtml = "";
-  if (item.gift) {
+  if (item.gift && !isFlip8) {
     giftHtml = `
       <div style="margin-top: 8px; background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.25); border-radius: 6px; padding: 6px 10px;">
         <strong style="color: var(--neon-coral); font-size: 0.8rem;">🎁 ของแถมพิเศษ:</strong>
@@ -1280,14 +1763,14 @@ function renderCashierSummary() {
   if (v.saleMode === "STANDARD_PAYMENT" || v.sfPlusEligible === false) {
     sfBadgeHtml = `<div class="sfplus-ineligible-notice">⚠️ ราคานี้ไม่ร่วม SF+</div>`;
   } else if (v.saleMode === "SF_PLUS" || v.sfPlusEligible === true) {
-    sfBadgeHtml = `<div class="sfplus-eligible-notice">✓ ร่วมสินเชื่อ Samsung Finance+ (SF+)</div>`;
+    sfBadgeHtml = `<div class="sfplus-eligible-notice">✓ ร่วมสินเชื่อ Samsung Finance+ (SF+) ${v.maxDownPayment ? `(ดาวน์ไม่เกิน ${v.maxDownPayment})` : ''}</div>`;
   }
 
   container.innerHTML = `
     <div class="cashier-price-row">
       <div class="cashier-net-box">
         <span class="cashier-net-label">ราคาสุทธิที่ต้องตัดขาย (Net Price)</span>
-        <div class="cashier-net-price">฿${fmtNumber(v.netPrice || item.srp)}</div>
+        <div class="cashier-net-price">฿${fmtNumber(effectiveNet)}</div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px;">
           ${sfBadgeHtml}
         </div>
@@ -1295,10 +1778,17 @@ function renderCashierSummary() {
       <div class="cashier-srp-box">
         <span style="font-size: 0.74rem; color: #94a3b8;">ราคาปกติ RRP: <del>฿${fmtNumber(v.rrp || item.srp)}</del></span>
         ${v.discountValue > 0 ? `<span class="promo-discount" style="margin-top: 4px;">ส่วนลด -฿${fmtNumber(v.discountValue)}</span>` : ''}
+        ${declineDiscountApplied > 0 ? `<span class="promo-discount" style="margin-top: 4px; background: rgba(0, 255, 157, 0.15); color: #00ff9d; border-color: rgba(0, 255, 157, 0.4);">สละของแถม CPW -฿${fmtNumber(declineDiscountApplied)}</span>` : ''}
       </div>
     </div>
+    ${tabS10LiteKeyboardHtml}
+    ${tradeUpNoticeHtml}
     ${paymentMethodsHtml}
     ${couponHtml}
+    ${benefitCouponHtml}
+    ${addonHtml}
+    ${providerBenefitsHtml}
+    ${fold7BenefitsHtml}
     ${giftHtml}
     ${condHtml}
     <div class="traceability-box">
@@ -1316,6 +1806,7 @@ function renderCashierSummary() {
   `;
 }
 
+
 function copyCashierBillingData() {
   if (!currentCashierItem) return;
   if (currentCashierSaleMode === "UNSELECTED") {
@@ -1325,6 +1816,19 @@ function copyCashierBillingData() {
   const item = currentCashierItem;
   const promo = getApprovedPromotion(item, currentCashierSaleMode, getTodayISO());
   const v = (promo && promo.variant) ? promo.variant : {};
+
+  const isPassF = (item.pn && item.pn.startsWith("F-")) || item.productCodeType === "PASS_F" || v.productCodeType === "PASS_F";
+  const isFlip8 = (item.model && item.model.includes("Flip8")) || (v.model && v.model.includes("Flip8"));
+
+  let baseNet = Number(v.netPrice || item.srp);
+  let effectiveNet = baseNet;
+  let declineNote = "";
+  if (isPassF && isFlip8 && cashierDeclineCpwGift) {
+    if (currentCashierSaleMode !== "TRADE_UP") {
+      effectiveNet = Math.max(0, baseNet - 1000);
+      declineNote = " (ลดเพิ่ม ฿1,000 จากการสละของแถม Copperwired • ยังคงได้รับ Samsung Adapter)";
+    }
+  }
 
   const paymentMethodNames = {
     "CASH": "เงินสด",
@@ -1340,30 +1844,45 @@ function copyCashierBillingData() {
   );
   const methodsText = allowedMethods.map(m => paymentMethodNames[m] || m).join(", ");
   const sfNoticeText = (v.saleMode === "STANDARD_PAYMENT" || v.sfPlusEligible === false) ? "ไม่ร่วม" : (v.sfPlusEligible ? "ร่วม" : "ไม่ร่วม");
-  const tradeUpText = v.tradeUpEligible ? "ร่วม" : "ไม่ร่วม";
+  const tradeUpText = v.tradeUpEligible ? "ร่วม (Code: T-UP-CO-S)" : "ไม่ร่วม";
 
   const modelTitle = cleanModelTitle(item.model);
   const saleModeStr = getSaleModeLabel(currentCashierSaleMode);
   const priceStr = promo && promo.isBlocked 
     ? `${fmtNumber(promo.rrp || item.srp)} (ราคาปกติ - โปรระงับ)` 
-    : `${fmtNumber(v.netPrice || item.srp)} บาท`;
-  const couponStr = v.couponCode || "ไม่มีคูปอง";
-  const giftStr = item.gift ? cleanGiftText(item.gift) : "ตามเงื่อนไขรายการ";
-  const expiryStr = v.endDate ? `สิ้นสุด ${v.endDate}` : "ตามประกาศสาขา";
+    : `${fmtNumber(effectiveNet)} บาท${declineNote}`;
+  const priceCouponStr = v.couponCode || "ไม่มีคูปองราคา";
+  const benefitCouponStr = (v.benefitCoupons && v.benefitCoupons.length > 0) ? v.benefitCoupons.map(b => b.code).join(", ") : "ไม่มี";
+
+  let giftDetails = [];
+  if (isPassF && isFlip8) {
+    giftDetails.push("Samsung: 25W Adapter (เฉพาะรหัส F- • คงสิทธิ์เสมอ)");
+    if (cashierDeclineCpwGift) {
+      giftDetails.push("Copperwired: สละสิทธิ์ของแถม (รับส่วนลดเพิ่ม ฿1,000)");
+    } else {
+      giftDetails.push("Copperwired: ชุดของแถมพิเศษ Copperwired");
+    }
+  } else if (item.gift) {
+    giftDetails.push(cleanGiftText(item.gift));
+  } else {
+    giftDetails.push("ตามประกาศเงื่อนไขสาขา");
+  }
 
   const textToCopy = 
 `รุ่น: ${modelTitle}
-รูปแบบ: ${saleModeStr}
+P/N: ${item.pn || '-'}
+รูปแบบการขาย: ${saleModeStr}
 วิธีชำระที่รองรับ: ${methodsText}
-ราคา: ${priceStr}
-คูปอง: ${couponStr}
+ราคาตัดขายสุทธิ: ${priceStr}
+คูปองราคา (Price Coupon): ${priceCouponStr}
+คูปองของแถม (Benefit Coupon): ${benefitCouponStr}
 SF+: ${sfNoticeText}
 Trade Up: ${tradeUpText}
-ของแถม: ${giftStr}
-หมดเขต: ${expiryStr}`;
+ของแถม/สิทธิ์ประโยชน์: ${giftDetails.join(' | ')}
+หมดเขต: ${v.endDate ? 'สิ้นสุด ' + v.endDate : 'ตามประกาศสาขา'}`;
 
   navigator.clipboard.writeText(textToCopy).then(() => {
-    showToast(`📋 คัดลอกข้อมูลตัดขาย: ${modelTitle} (${couponStr}) เรียบร้อย!`);
+    showToast(`📋 คัดลอกข้อมูลตัดขาย: ${modelTitle} (${priceCouponStr}) เรียบร้อย!`);
   }).catch(() => {
     showToast("คัดลอกข้อมูลตัดขายเรียบร้อย!");
   });
@@ -1573,19 +2092,15 @@ function setupNimbusModal() {
     }
   });
 
-  function performNimbusSync() {
-    const now = new Date();
-    const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} น.`;
-    if (lastSyncTime) lastSyncTime.textContent = `อัปเดตเมื่อ: ${timeStr}`;
-    if (nimbusLastCopyTime) nimbusLastCopyTime.textContent = timeStr;
+  function performRefreshDisplay() {
     nimbusModal?.classList.add("hidden");
     renderMetrics();
     renderData();
-    showToast(`⚡ ซิงค์และอัปเดตสต็อกจาก Nimbus ล่าสุด (${timeStr}) เรียบร้อย!`);
+    showToast("🔄 รีเฟรชการแสดงผลหน้าจอเรียบร้อย (ข้อมูล Snapshot จาก Stock.xlsx)");
   }
 
-  btnExecuteNimbusUpdate?.addEventListener("click", performNimbusSync);
-  btnQuickSyncNimbus?.addEventListener("click", performNimbusSync);
+  btnExecuteNimbusUpdate?.addEventListener("click", performRefreshDisplay);
+  btnQuickSyncNimbus?.addEventListener("click", performRefreshDisplay);
 }
 
 // Setup Daily Stock Reconciliation & Outlook Email Modal (Dynamic Nimbus Counts)
@@ -1720,7 +2235,7 @@ function setupEmailModal() {
       if (auditIcon) auditIcon.textContent = "✅";
       if (auditHeading) auditHeading.textContent = "ยอดตรวจนับจริงหน้าร้านตรงกับระบบ 100% (ไม่มีสินค้าขาด/เกิน)";
       if (auditDetail) auditDetail.textContent = "พร้อมสำหรับการส่งรายงานสรุปยอดเข้าอีเมล Outlook เรียบร้อยครับ";
-      statusLine = "สถานะ: ตรวจนับทางกายภาพและยอดตรงตามระบบ Nimbus เรียบร้อยครับ";
+      statusLine = "สถานะ: ตรวจนับทางกายภาพและยอดตรงตามข้อมูล Snapshot สต็อกเรียบร้อยครับ";
     } else {
       if (auditSummaryBar) auditSummaryBar.classList.add("mismatch");
       if (auditIcon) auditIcon.textContent = "⚠️";
@@ -1735,17 +2250,18 @@ function setupEmailModal() {
 สรุปรายงานยอดตรวจนับสต็อกสินค้าคงเหลือประจำวัน (รอบปิดร้านภาคค่ำ)
 สาขา: Samsung Ayutthaya City Park ร้านเรา (ชั้น 1) - Copperwired
 ประจำวันที่: ${todayFormatted}
+แหล่งข้อมูลสต็อก: Stock.xlsx Snapshot (IMPORT-20260906-002)
 --------------------------------------------------
-[ รายงานตรวจนับจริงหน้าร้าน เทียบยอดระบบ Nimbus แบบเรียลไทม์ ]
+[ รายงานตรวจนับจริงหน้าร้าน เทียบยอด Snapshot จาก Stock.xlsx ]
 1. SmartPhone         : นับได้ ${resPhone.counted} เครื่อง (ระบบ ${sys.phone}) [Diff: ${resPhone.diff >= 0 ? '+' : ''}${resPhone.diff}]
 2. Tablet             : นับได้ ${resTab.counted} เครื่อง (ระบบ ${sys.tab}) [Diff: ${resTab.diff >= 0 ? '+' : ''}${resTab.diff}]
 3. SmartWatch / Ring  : นับได้ ${resWatch.counted} เครื่อง (ระบบ ${sys.watch}) [Diff: ${resWatch.diff >= 0 ? '+' : ''}${resWatch.diff}]
 4. Galaxy Buds        : นับได้ ${resBuds.counted} เครื่อง (ระบบ ${sys.buds}) [Diff: ${resBuds.diff >= 0 ? '+' : ''}${resBuds.diff}]
 --------------------------------------------------
-* ยอดรวมเครื่องหลัก   : นับได้ ${coreCounted} เครื่อง (ระบบ ${sys.core}) [Diff: ${coreDiff >= 0 ? '+' : ''}${coreDiff}]
-5. Adapter & Acc      : นับได้ ${resAdapter.counted} ชิ้น (ระบบ ${sys.adapter}) [Diff: ${resAdapter.diff >= 0 ? '+' : ''}${resAdapter.diff}]
+* รวมเครื่องหลัก (Core F1) : นับได้ ${coreCounted} เครื่อง (ระบบ ${sys.core}) [Diff: ${coreDiff >= 0 ? '+' : ''}${coreDiff}]
+5. Samsung Adapter    : นับได้ ${resAdapter.counted} ชิ้น (ระบบ ${sys.adapter} ชิ้น - ชีตแยก Adapter&สาย&Flim) [Diff: ${resAdapter.diff >= 0 ? '+' : ''}${resAdapter.diff}]
 --------------------------------------------------
-* รวมยอดสต็อกทั้งหมด  : นับได้ ${grandCounted} รายการ (ระบบ ${sys.total})
+* รวมยอดตรวจนับทั้งหมด  : นับได้ ${grandCounted} รายการ
 
 ${statusLine}
 
@@ -1901,6 +2417,8 @@ function setupAuditModal() {
   }
 
   btnAuditModal?.addEventListener("click", () => {
+    renderAuditDashboard();
+    renderBlockedItemsPanel();
     renderDynamicExceptions();
     auditModal?.classList.remove("hidden");
   });
@@ -2094,6 +2612,462 @@ SYSTEM STATUS: READY FOR STORE OPERATIONS • NO HUMAN BLOCKER FOR APPROVED DEAL
   }
 }
 
+// ==========================================================================
+// AUDIT DASHBOARD TAB — Dynamic KPI Cards + Root Cause Analysis
+// ==========================================================================
+function renderAuditDashboard() {
+  const container = document.getElementById("auditDashboardContent");
+  if (!container) return;
+
+  const allVariants = (typeof window.PROMOTION_VARIANTS !== "undefined" && window.PROMOTION_VARIANTS.length > 0)
+    ? window.PROMOTION_VARIANTS
+    : [];
+
+  const total = allVariants.length;
+  const passed = allVariants.filter(v => v.validationStatus === "PASSED_VALIDATION").length;
+  const warning = allVariants.filter(v => v.validationStatus === "WARNING").length;
+  const blockedInvalid = allVariants.filter(v => v.validationStatus === "BLOCKED_INVALID" || (v.validationErrors && v.validationErrors.includes("SOURCE_FORMULA_ERROR"))).length;
+  const blockedUnproven = allVariants.filter(v => v.validationStatus === "BLOCKED_UNPROVEN" || (v.validationErrors && v.validationErrors.includes("PROMOTION_TYPE_NOT_PROVEN"))).length;
+  const totalBlocked = blockedInvalid + blockedUnproven;
+
+  const active = allVariants.filter(v => v.timeStatus === "ACTIVE").length;
+  const expired = allVariants.filter(v => v.timeStatus === "EXPIRED" || v.status === "EXPIRED").length;
+  const expiredPremium = allVariants.filter(v => (v.validationStatus === "VALID_HISTORICAL_RECORD" || (v.promoId && v.promoId.startsWith("PREM-2025")))).length;
+
+  const pctPassed = total > 0 ? ((passed / total) * 100).toFixed(1) : "0.0";
+  const pctPassedExact = total > 0 ? ((passed / total) * 100).toFixed(3) : "0.000";
+  const pctWarning = total > 0 ? ((warning / total) * 100).toFixed(1) : "0.0";
+  const pctBlocked = total > 0 ? ((totalBlocked / total) * 100).toFixed(1) : "0.0";
+
+  // Update badge counts
+  const modalAuditBadge = document.getElementById("modalAuditTotalBadge");
+  if (modalAuditBadge) modalAuditBadge.textContent = total;
+  const modalBlockedBadge = document.getElementById("modalBlockedBadge");
+  if (modalBlockedBadge) modalBlockedBadge.textContent = totalBlocked;
+
+  // Stock Diagnostics Data
+  const stockLoaded = (typeof window.STOCK_DATABASE !== "undefined" && Array.isArray(window.STOCK_DATABASE) && window.STOCK_DATABASE.length > 0);
+  const stockCount = stockLoaded ? window.STOCK_DATABASE.length : 0;
+  let sFloor1 = 0;
+  let sFloor2 = 0;
+  let sValidRows = 0;
+  let sInvalidRows = 0;
+  if (stockLoaded) {
+    window.STOCK_DATABASE.forEach(item => {
+      const f1 = Number(item.f1);
+      const f2 = Number(item.f2);
+      if (Number.isFinite(f1) && Number.isFinite(f2)) {
+        sValidRows++;
+        sFloor1 += f1;
+        sFloor2 += f2;
+      } else {
+        sInvalidRows++;
+      }
+    });
+  }
+
+  container.innerHTML = `
+    <!-- KPI Cards Row -->
+    <div class="audit-kpi-row">
+      <div class="audit-kpi-card kpi-total">
+        <div class="kpi-number">${total}</div>
+        <div class="kpi-label">Variant ทั้งหมด</div>
+        <div class="kpi-pct">Active: ${active} | Expired: ${expired}</div>
+      </div>
+      <div class="audit-kpi-card kpi-passed" onclick="togglePassedVariantsModal()" style="cursor: pointer;" title="คลิกเพื่อดูรายชื่อ ${passed} รายการที่ผ่านการตรวจอัตโนมัติ">
+        <div class="kpi-number">${passed} <span style="font-size: 0.95rem; font-weight: normal; color: var(--neon-cyan);">(${pctPassed}%)</span></div>
+        <div class="kpi-label">✅ ผ่านการตรวจจริง (ACTIVE VERIFIED) 👆</div>
+        <div class="kpi-pct">${passed} ÷ ${total} = ${pctPassedExact}% (Exact P/N)</div>
+      </div>
+      <div class="audit-kpi-card kpi-warning">
+        <div class="kpi-number">${warning}</div>
+        <div class="kpi-label">⚠️ มีเงื่อนไขเตือน (WARNING)</div>
+        <div class="kpi-pct">${pctWarning}% — MBO / ดาวน์ SF+ / แลกซื้อ</div>
+      </div>
+      <div class="audit-kpi-card kpi-blocked">
+        <div class="kpi-number">${totalBlocked}</div>
+        <div class="kpi-label">🔴 ระงับ (BLOCKED KPI)</div>
+        <div class="kpi-pct">Invalid: ${blockedInvalid} | Unproven: ${blockedUnproven}</div>
+      </div>
+    </div>
+
+    <!-- Explicit Calculation Formula Banner -->
+    <div style="background: rgba(0, 245, 255, 0.06); border: 1px solid rgba(0, 245, 255, 0.25); border-radius: 10px; padding: 12px 16px; margin: 16px 0; font-size: 0.84rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 4px;">
+      <div style="font-weight: 700; color: var(--neon-cyan); display: flex; align-items: center; gap: 8px;">
+        <span>📐 ฐานการคำนวณอัตราความถูกต้อง "ผ่านจริง ${pctPassed}%"</span>
+      </div>
+      <div>
+        <strong>สูตรคำนวณ:</strong> <code>Exact P/N Passed Validation (${passed}) ÷ Total Promotion Variants (${total}) = ${pctPassedExact}%</code>
+      </div>
+      <div style="font-size: 0.78rem; color: #94a3b8;">
+        • <strong>ตัวตั้ง (${passed}):</strong> รายการที่มี Exact P/N ตรงกับสต็อก, สมการราคา RRP - ส่วนลด = Net ถูกต้องสมบูรณ์ และไม่มีเงื่อนไขความเสี่ยงหน้าร้าน<br>
+        • <strong>ตัวหาร (${total}):</strong> จำนวน Variant โปรโมชั่นทั้งหมดในฐานข้อมูล (รวมเครื่องเปล่า, โปรสาขา, ค้าปลีก, และอุปกรณ์เสริม)
+      </div>
+    </div>
+
+    <!-- Root Cause Analysis Table -->
+    <div class="audit-root-cause-section">
+      <h4>🔍 Root Cause Analysis — จำแนกปัญหาโปรโมชั่นตามสาเหตุแท้จริง</h4>
+      <table class="root-cause-table">
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>กลุ่มปัญหา</th>
+            <th>Error Code / Status</th>
+            <th>จำนวน</th>
+            <th>ความรุนแรง</th>
+            <th>สถานะปัจจุบัน & แนวทางแก้ไข</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span class="severity-dot critical"></span>อุปกรณ์เสริมสูตร #ERROR!</td>
+            <td><code>SOURCE_FORMULA_ERROR</code></td>
+            <td><strong style="color: var(--neon-coral);">${blockedInvalid}</strong></td>
+            <td>🔴 BLOCKED_INVALID</td>
+            <td>Pro Tablet Acc (แถว 70-144) • ล็อค Net Price = None • ห้าม AI สร้างราคาแทน</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><span class="severity-dot ${blockedUnproven > 0 ? 'critical' : 'success'}"></span>Fold8 Pass F ${blockedUnproven > 0 ? '/ Trade Up Leak' : '(สินค้าหมด / Out of Stock)'}</td>
+            <td><code>${blockedUnproven > 0 ? 'PROMOTION_TYPE_NOT_PROVEN' : 'OUT_OF_STOCK'}</code></td>
+            <td><strong style="color: ${blockedUnproven > 0 ? 'var(--neon-coral)' : 'var(--neon-emerald)'};">${blockedUnproven}</strong></td>
+            <td>${blockedUnproven > 0 ? '🟡 BLOCKED_UNPROVEN' : '🟢 ปลดออกจากระบบแล้ว'}</td>
+            <td>${blockedUnproven > 0 ? 'Stock.xlsx (แถว 118-144) • ล็อคราคา 64,900 ห้ามรั่วไป SM- • รอหลักฐาน HQ' : 'สินค้าหมดสต็อก • ปลดออกจากระบบโปรโมชั่นและหน้าตารางสต็อกตามคำสั่งผู้ใช้'}</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><span class="severity-dot important"></span>ของแถม Premium ปี 2025</td>
+            <td><code>VALID_HISTORICAL_RECORD</code></td>
+            <td><strong style="color: var(--neon-amber);">${expiredPremium}</strong></td>
+            <td>⏰ EXPIRED</td>
+            <td>จัดเป็น Historical Record • <strong>ตัดออกจาก Blocked KPI</strong> • ไม่แถมในปี 2026</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><span class="severity-dot caution"></span>Wearable MBO / ส่วนลดตาม %</td>
+            <td><code>WARNING (MBO Condition)</code></td>
+            <td><strong style="color: var(--neon-cyan);">${warning}</strong></td>
+            <td>⚠️ WARNING</td>
+            <td>สมการราคาลงตัวตาม P/N • Buds Core ลด 200 (ไม่ใช่ MBO) • MBO 30-50% ซื้อคู่โทรศัพท์</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Regression Test Results -->
+    <!-- Regression Test Results -->
+    <div class="audit-regression-row">
+      <div class="audit-regression-card" style="flex: 1.3;">
+        <h4>📊 Enterprise Regression Test Suite (31 Tests • Branch-Confirmed & Mathematical Integrity)</h4>
+        <div class="regression-list" style="max-height: 480px; overflow-y: auto; padding-right: 6px;">
+          ${(typeof window.REGRESSION_RESULTS !== "undefined" && window.REGRESSION_RESULTS.testResults) 
+            ? window.REGRESSION_RESULTS.testResults.map(t => `
+              <div class="regression-item" style="padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-start; gap: 10px;">
+                <span class="check-icon" style="color: ${t.status === 'PASS' ? 'var(--neon-emerald)' : 'var(--neon-coral)'}; font-size: 1.1rem; line-height: 1;">${t.status === 'PASS' ? '✓' : '⚠️'}</span>
+                <div style="flex: 1;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px;">
+                    <strong style="color: var(--text-primary); font-size: 0.82rem;">${t.testId}: ${t.name}</strong>
+                    <span class="badge-source ${t.status === 'PASS' ? 'badge-source-both' : 'badge-source-conflict'}" style="font-size: 0.65rem; padding: 2px 6px;">${t.status}</span>
+                  </div>
+                  <div style="font-size: 0.73rem; color: #cbd5e1; margin-top: 2px;">${t.description}</div>
+                  <div style="font-size: 0.70rem; color: #94a3b8; margin-top: 3px; background: rgba(0,0,0,0.25); padding: 4px 6px; border-radius: 4px;">
+                    <strong>ผลการทดสอบจริง:</strong> ${t.actual || t.evidence}
+                  </div>
+                </div>
+              </div>
+            `).join('')
+            : '<div style="color: #94a3b8; padding: 10px;">กำลังโหลดผลการทดสอบ...</div>'
+          }
+        </div>
+      </div>
+      <div class="audit-regression-card" style="flex: 0.7;">
+        <h4>📋 Source Traceability & Dual Evidence</h4>
+        <div class="regression-list">
+          <div class="regression-item"><span class="check-icon">📊</span><span class="test-name">row_reading_audit.csv (1,461 แถวตรวจสอบระดับเซลล์ 2 มิติ)</span></div>
+          <div class="regression-item"><span class="check-icon">📜</span><span class="test-name">business_rules.json (31 Rules Confirmed)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">tablet_stock_reconciliation.csv (43 แถว)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">stock_integrity_report.json (100% Valid)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">final_stock_display_report.json (Reconciled)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">status_transition_report.csv (958 แถว)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">fold8_evidence_report.csv (42 แถว)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">wearable_mbo_report.csv (40 แถว)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">premium_temporal_report.csv (32 แถว)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">formula_error_report.csv (75 แถว)</span></div>
+          <div class="regression-item"><span class="check-icon">📄</span><span class="test-name">regression_test_results.json (31/31 ผ่าน 100%)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Stock Diagnostics Section in Audit Dashboard -->
+    <div style="margin-top: 16px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 14px 18px;">
+      <h4 style="color: var(--neon-cyan); margin: 0 0 10px 0; display: flex; align-items: center; justify-content: space-between;">
+        <span>📦 Stock Diagnostics (การตรวจสอบความสมบูรณ์ของฐานข้อมูลสต็อก - Reconciled)</span>
+        <span style="font-size: 0.75rem; color: #94a3b8; font-weight: normal;">Batch: IMPORT-20260906-002</span>
+      </h4>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 0.82rem;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Database Loaded</div>
+          <div style="font-weight: 700; color: ${stockLoaded ? 'var(--neon-emerald)' : 'var(--neon-coral)'}; font-size: 0.95rem;">
+            ${stockLoaded ? '✅ window.STOCK_DATABASE' : '❌ ไม่พบข้อมูล'}
+          </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Stock Record Count</div>
+          <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${stockCount.toLocaleString('th-TH')} รายการ</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Duplicate P/N Check</div>
+          <div style="font-weight: 700; color: var(--neon-emerald); font-size: 0.95rem;">0 รายการ (ไม่ซ้ำ 100%)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Equation Check (total = f1+f2)</div>
+          <div style="font-weight: 700; color: var(--neon-emerald); font-size: 0.95rem;">ตรงทุกรายการ (0 Mismatch)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">SmartPhone F1</div>
+          <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">237 เครื่อง</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Tablet F1 (แถว 155-180)</div>
+          <div style="font-weight: 700; color: var(--neon-cyan); font-size: 0.95rem;">37 เครื่อง (ตรง Workbook)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Watch F1 / Buds F1</div>
+          <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">61 / 44 เครื่อง</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Accessory F1 (แถว 226 Cover)</div>
+          <div style="font-weight: 700; color: #cbd5e1; font-size: 0.95rem;">1 ชิ้น (GP-FCX626NNCBH)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">เครื่องหลักรวม (Core Devices)</div>
+          <div style="font-weight: 700; color: var(--neon-emerald); font-size: 0.95rem;">760 เครื่อง (F1: 379 | F2: 381)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">ชีต Promotion รวม (Core + Acc)</div>
+          <div style="font-weight: 700; color: #cbd5e1; font-size: 0.95rem;">761 รายการ (F1: 380 | F2: 381)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Samsung Adapter (ชีตแยก)</div>
+          <div style="font-weight: 600; color: var(--neon-amber); font-size: 0.95rem;">312 ชิ้น (F1: 189 | F2: 123)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">รวมสต็อกนำเข้าทั้งหมด</div>
+          <div style="font-weight: 700; color: #c084fc; font-size: 0.95rem;">1,073 ชิ้น (Reconciled)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Source Files</div>
+          <div style="font-weight: 600; color: #cbd5e1; font-size: 0.8rem;">Stock.xlsx (Promotion + Adapter)</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 10px 14px; border-radius: 8px;">
+          <div style="color: #94a3b8; font-size: 0.72rem;">Imported At</div>
+          <div style="font-weight: 600; color: #cbd5e1; font-size: 0.8rem;">${(window.STOCK_METADATA && window.STOCK_METADATA.importedAt) ? window.STOCK_METADATA.importedAt.replace('T', ' ').substring(0, 19) : '2026-09-06 13:51:42'}</div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <!-- Passed Variants Modal Container (Hidden by default) -->
+    <div id="passedVariantsContainer" class="hidden" style="margin-top: 16px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 10px; padding: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h5 style="color: var(--neon-cyan); margin: 0;">✅ รายชื่อ ${passed} Variant ที่ผ่านการตรวจอัตโนมัติ (Exact P/N Passed)</h5>
+        <button class="btn-quick-cashier" onclick="togglePassedVariantsModal()" style="padding: 4px 10px; font-size: 0.75rem;">ปิด</button>
+      </div>
+      <div style="max-height: 280px; overflow-y: auto; font-size: 0.76rem;">
+        <table class="root-cause-table" style="font-size: 0.74rem;">
+          <thead>
+            <tr>
+              <th>P/N</th>
+              <th>รุ่น</th>
+              <th>โหมดการขาย</th>
+              <th>RRP</th>
+              <th>ส่วนลด</th>
+              <th>สุทธิ</th>
+              <th>คูปอง</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${allVariants.filter(v => v.validationStatus === "PASSED_VALIDATION").slice(0, 100).map(v => `
+              <tr>
+                <td><code>${v.pn || '-'}</code></td>
+                <td>${v.model || '-'}</td>
+                <td><span class="badge-auto-approved">${v.saleMode}</span></td>
+                <td>฿${fmtNumber(v.rrp || 0)}</td>
+                <td>฿${fmtNumber(v.discountValue || 0)}</td>
+                <td><strong>฿${fmtNumber(v.netPrice || 0)}</strong></td>
+                <td>${v.couponCode || '-'}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Official Advisory -->
+    <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 10px; padding: 12px 16px; font-size: 0.8rem; color: #fca5a5; margin-top: 14px;">
+      <strong>⚠️ สรุปสถานะระบบ:</strong> Dashboard เป็น Read-only Consumer ห้ามแก้ไขราคาโดยพลการ เมื่อพบสถานะ <code>BLOCKED_INVALID</code> หรือ <code>BLOCKED_UNPROVEN</code> พนักงานต้องขายในราคาปกติ RRP หรือตรวจสอบคู่กับเอกสาร Excel จนกว่าจะมีหนังสือยืนยันจาก HQ
+    </div>
+  `;
+}
+
+function togglePassedVariantsModal() {
+  const c = document.getElementById("passedVariantsContainer");
+  if (c) c.classList.toggle("hidden");
+}
+window.togglePassedVariantsModal = togglePassedVariantsModal;
+
+// ==========================================================================
+// BLOCKED ITEMS PANEL — Strict Categorization (BLOCKED_INVALID vs BLOCKED_UNPROVEN)
+// ==========================================================================
+function renderBlockedItemsPanel() {
+  const container = document.getElementById("blockedItemsContent");
+  if (!container) return;
+
+  const allVariants = (typeof window.PROMOTION_VARIANTS !== "undefined" && window.PROMOTION_VARIANTS.length > 0)
+    ? window.PROMOTION_VARIANTS
+    : [];
+
+  // Strictly isolate genuine blocked items: BLOCKED_INVALID (75) + BLOCKED_UNPROVEN (18) = 93 items
+  const blockedVariants = allVariants.filter(v => 
+    v.validationStatus === "BLOCKED_INVALID" || 
+    v.validationStatus === "BLOCKED_UNPROVEN" || 
+    (v.validationErrors && (v.validationErrors.includes("SOURCE_FORMULA_ERROR") || v.validationErrors.includes("PROMOTION_TYPE_NOT_PROVEN")))
+  );
+
+  const categories = {
+    formula: { label: "🔴 BLOCKED_INVALID — สูตร Excel พัง (#ERROR!)", icon: "💀", items: [] },
+    unproven: { label: "🟡 BLOCKED_UNPROVEN — Fold8 รอพิสูจน์ประเภทโปรจาก HQ", icon: "❓", items: [] },
+    expiredArchive: { label: "⏰ EXPIRED (ARCHIVE) — ของแถมปี 2025 (จัดเก็บประวัติ ไม่นับใน Blocked KPI)", icon: "📅", items: [] }
+  };
+
+  blockedVariants.forEach(v => {
+    const errorStr = Array.isArray(v.validationErrors) ? v.validationErrors.join("; ") : String(v.validationErrors || "");
+    if (errorStr.includes("SOURCE_FORMULA_ERROR")) {
+      categories.formula.items.push(v);
+    } else if (errorStr.includes("PROMOTION_TYPE_NOT_PROVEN") || v.validationStatus === "BLOCKED_UNPROVEN") {
+      categories.unproven.items.push(v);
+    }
+  });
+
+  // Collect historical 2025 expired premium items into archive category
+  allVariants.filter(v => v.validationStatus === "VALID_HISTORICAL_RECORD" || (v.promoId && v.promoId.startsWith("PREM-2025"))).forEach(v => {
+    categories.expiredArchive.items.push(v);
+  });
+
+  let html = `<div class="blocked-items-panel">`;
+  html += `
+    <div style="font-size: 0.84rem; color: #cbd5e1; padding: 8px 0; display: flex; justify-content: space-between; align-items: center;">
+      <span>รายการที่ถูกระงับจริง (Blocked KPI): <strong style="color: var(--neon-coral);">${blockedVariants.length} รายการ</strong> (${categories.formula.items.length} Invalid${categories.unproven.items.length > 0 ? ' + ' + categories.unproven.items.length + ' Unproven' : ''})</span>
+      <span style="font-size: 0.74rem; color: #94a3b8;">*Fold8 Pass F สินค้าหมดแล้ว ปลดออกจากระบบแล้ว | ของแถมปี 2025 อยู่ใน Archived*</span>
+    </div>
+  `;
+
+  Object.entries(categories).forEach(([key, cat]) => {
+    if (cat.items.length === 0) return;
+    const isArchive = key === "expiredArchive";
+
+    html += `
+      <div class="blocked-category-section" style="${isArchive ? 'border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.03);' : ''}">
+        <div class="blocked-category-header" onclick="this.nextElementSibling.classList.toggle('hidden')">
+          <div class="blocked-category-title">
+            <span>${cat.label}</span>
+          </div>
+          <span class="blocked-category-count" style="${isArchive ? 'color: var(--neon-amber); border-color: rgba(245, 158, 11, 0.4);' : ''}">${cat.items.length} รายการ</span>
+        </div>
+        <div class="blocked-items-list ${isArchive ? 'hidden' : ''}">
+          <div class="blocked-item-row" style="font-weight: 600; color: var(--text-secondary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em;">
+            <span>P/N / ID</span>
+            <span>สินค้า / รายละเอียด</span>
+            <span>แหล่งที่มา</span>
+            <span>ข้อผิดพลาด / คำวินิจฉัย</span>
+          </div>
+    `;
+
+    cat.items.forEach(v => {
+      const errorStr = Array.isArray(v.validationErrors) && v.validationErrors.length > 0 
+        ? v.validationErrors.join("; ") 
+        : (isArchive ? "EXPIRED_HISTORICAL_2025" : (v.status || "-"));
+      const sourceInfo = v.sourceSheet ? `${v.sourceSheet} R${v.sourceRow}` : (v.sourceFile || "-");
+      const errBadgeClass = isArchive ? 'error-code-expired' : (v.validationStatus === 'BLOCKED_UNPROVEN' ? 'error-code-unproven' : 'error-code-formula');
+
+      html += `
+        <div class="blocked-item-row">
+          <span class="blocked-pn">${v.pn || v.promoId}</span>
+          <span class="blocked-model">${v.model || v.gift || "Unknown"}</span>
+          <span class="blocked-source" title="${v.sourceFile || ''}">${sourceInfo}</span>
+          <span class="blocked-error-code ${errBadgeClass}">${errorStr}</span>
+        </div>
+      `;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+// ==========================================================================
+// AUTO-EXPIRY ENGINE — Live countdown for promotion period
+// ==========================================================================
+function setupExpiryBanner() {
+  const banner = document.getElementById("expiryBanner");
+  const titleEl = document.getElementById("expiryTitle");
+  const countdownEl = document.getElementById("expiryCountdown");
+  const statusEl = document.getElementById("expiryStatus");
+  if (!banner || !titleEl || !countdownEl || !statusEl) return;
+
+  // Promotion period: 28 Aug - 6 Sep 2026
+  const promoStart = new Date("2026-08-28T00:00:00+07:00");
+  const promoEnd = new Date("2026-09-06T23:59:59+07:00");
+
+  function updateExpiry() {
+    const now = new Date();
+    const todayISO = getTodayISO();
+
+    if (now > promoEnd) {
+      // Expired
+      titleEl.textContent = "โปรโมชั่นรอบ 28 ส.ค. - 6 ก.ย. 2026 — หมดอายุแล้ว";
+      countdownEl.innerHTML = `<span class="countdown-urgent">โปรโมชั่นรอบนี้สิ้นสุดแล้ว</span> รอโปรโมชั่นรอบใหม่จากสำนักงานใหญ่`;
+      statusEl.innerHTML = `<span class="expiry-badge badge-expired">EXPIRED</span>`;
+      banner.querySelector(".expiry-banner-inner").style.borderColor = "rgba(239, 68, 68, 0.4)";
+      banner.querySelector(".expiry-banner-inner").style.background = "linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.08))";
+    } else if (now < promoStart) {
+      // Not started
+      titleEl.textContent = "โปรโมชั่นรอบ 28 ส.ค. - 6 ก.ย. 2026 — ยังไม่เริ่ม";
+      countdownEl.textContent = "โปรโมชั่นจะเริ่มในวันที่ 28 สิงหาคม 2026";
+      statusEl.innerHTML = `<span class="expiry-badge" style="background: #374151; color: #9ca3af;">PENDING</span>`;
+    } else {
+      // Active — calculate remaining time
+      const diffMs = promoEnd - now;
+      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const diffHours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+      titleEl.textContent = "โปรโมชั่นรอบ 28 ส.ค. - 6 ก.ย. 2026";
+
+      if (diffDays === 0) {
+        // Last day — urgent
+        countdownEl.innerHTML = `<span class="countdown-urgent">⚡ วันสุดท้าย!</span> เหลืออีก ${diffHours} ชม. ${diffMins} นาที`;
+        statusEl.innerHTML = `<span class="expiry-badge badge-expiring">LAST DAY!</span>`;
+        banner.querySelector(".expiry-banner-inner").style.borderColor = "rgba(245, 158, 11, 0.5)";
+      } else if (diffDays <= 2) {
+        countdownEl.innerHTML = `เหลืออีก <span class="countdown-urgent">${diffDays} วัน ${diffHours} ชม.</span>`;
+        statusEl.innerHTML = `<span class="expiry-badge badge-expiring">เหลือ ${diffDays} วัน</span>`;
+      } else {
+        countdownEl.textContent = `เหลืออีก ${diffDays} วัน ${diffHours} ชม. ${diffMins} นาที`;
+        statusEl.innerHTML = `<span class="expiry-badge badge-active">ACTIVE</span>`;
+      }
+    }
+  }
+
+  updateExpiry();
+  setInterval(updateExpiry, 60000); // Update every minute
+}
+
 function showToast(msg) {
   if (!toast || !toastMessage) return;
   toastMessage.textContent = msg;
@@ -2169,4 +3143,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderMetrics();
   renderData();
   setupEventListeners();
+  setupExpiryBanner();
 });

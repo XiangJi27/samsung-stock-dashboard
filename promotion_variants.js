@@ -1,4 +1,4 @@
-[
+window.PROMOTION_VARIANTS = [
   {
     "promoId": "RET-อัพเดท-R4-SF_PLUS",
     "importBatch": "IMPORT-20260906-002",
@@ -45363,4 +45363,4 @@
     "baseCapacity": null,
     "upgradedCapacity": null
   }
-]
+];

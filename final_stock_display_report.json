@@ -1,0 +1,22 @@
+{
+  "recordCount": 218,
+  "validRows": 218,
+  "invalidRows": 0,
+  "duplicatePnCount": 0,
+  "totalMismatchCount": 0,
+  "floor1Total": 569,
+  "floor2Total": 504,
+  "phoneF1": 237,
+  "tabletF1": 37,
+  "watchF1": 61,
+  "budsF1": 44,
+  "adapterF1": 189,
+  "accessoryF1": 1,
+  "coreDevicesTotal": 760,
+  "importedInventoryTotal": 1073,
+  "sourceFile": "Stock.xlsx",
+  "importedAt": "2026-09-06T19:20:18+07:00",
+  "importBatchId": "IMPORT-20260906-002",
+  "clockMismatch": false,
+  "dataVersionMismatch": false
+}
