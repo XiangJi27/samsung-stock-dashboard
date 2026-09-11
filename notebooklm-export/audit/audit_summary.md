@@ -6,10 +6,12 @@
 
 ## 1. Compliance Metrics
 - **Total Variants Processed**: 554
-- **Validated Active Variants**: 129
-- **Quarantined Blocked Variants**: 425
+- **Current Active Usable Variants**: 129
+- **Current Quarantined Blocked Variants**: 117
+- **Historical Expired Variants**: 286
+- **Historical Blocked Variants**: 22
 - **Quarantine Compliance Rate**: 100%
-- **Formula Error Blocked Count**: 75
+- **Current Formula Error Blocked Count**: 75
 - **Cross-Type Leak Count**: 0
 
 ## 2. Input Synchronization

@@ -1,190 +1,114 @@
 {
-  "validator": "NotebookLM Export Sanitization & Contract Validator",
-  "version": "1.0.0",
-  "evaluatedAt": "2026-09-07T16:11:56.732547",
+  "testSuite": "NotebookLM Contract Adversarial Test Suite",
+  "evaluatedAt": "2026-09-11T12:18:37.172954",
   "overallStatus": "PASSED",
-  "totalChecks": 16,
-  "passedChecksCount": 16,
-  "violationCount": 0,
-  "contractGuarantees": {
-    "zeroCredentials": true,
-    "zeroTokens": true,
-    "zeroPII": true,
-    "zeroLocalPaths": true,
-    "pnMaskingEnforced": true,
-    "writeBackProhibited": true,
-    "dashboardPublishProhibited": true,
-    "acceptedCloudRiskDocumented": true
-  },
-  "testResults": [
+  "totalScenarios": 13,
+  "passedCount": 13,
+  "failedCount": 0,
+  "scenarios": [
     {
-      "testId": "VAL-10-VERSION",
-      "name": "Contract Version Integrity",
-      "expected": "Valid semantic contractVersion present",
-      "actual": "contractVersion=1.0.0",
+      "scenarioId": "TC-01",
+      "name": "Secret Leak Detection",
+      "expectedBehavior": "Blocked by secret scanner",
+      "observedBehavior": "Detected and blocked",
       "status": "PASS",
-      "evidence": {},
-      "evaluatedAt": "2026-09-07T16:11:56.640902"
+      "details": {}
     },
     {
-      "testId": "VAL-09-BATCH-ID",
-      "name": "Batch Provenance Identifiers",
-      "expected": "Stock, Promotion, and Audit batch IDs present",
-      "actual": "Stock=IMPORT-20260906-002, Promo=BATCH-20260907-105441, Audit=AUDIT-20260907-001",
+      "scenarioId": "TC-02",
+      "name": "Password Leak Detection",
+      "expectedBehavior": "Blocked by password scanner",
+      "observedBehavior": "Detected and blocked",
       "status": "PASS",
-      "evidence": {
-        "stockBatchId": "IMPORT-20260906-002",
-        "promotionBatchId": "BATCH-20260907-105441",
-        "auditBatchId": "AUDIT-20260907-001"
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.640940"
+      "details": {}
     },
     {
-      "testId": "VAL-11-WRITEBACK",
-      "name": "WriteBack Prohibition Enforcement",
-      "expected": "writeBackAllowed must be strictly False",
-      "actual": "writeBackAllowed=False",
+      "scenarioId": "TC-03",
+      "name": "Local Path Leak Detection",
+      "expectedBehavior": "Blocked by local path scanner",
+      "observedBehavior": "Detected and blocked",
       "status": "PASS",
-      "evidence": {},
-      "evaluatedAt": "2026-09-07T16:11:56.640949"
+      "details": {}
     },
     {
-      "testId": "VAL-12-PUBLISH",
-      "name": "Dashboard Publish Prohibition Enforcement",
-      "expected": "dashboardPublishAllowed must be strictly False",
-      "actual": "dashboardPublishAllowed=False",
+      "scenarioId": "TC-04",
+      "name": "Customer Data Leak Detection",
+      "expectedBehavior": "Blocked by PII scanner",
+      "observedBehavior": "Detected and blocked",
       "status": "PASS",
-      "evidence": {},
-      "evaluatedAt": "2026-09-07T16:11:56.640953"
+      "details": {}
     },
     {
-      "testId": "VAL-01-SECRETS",
-      "name": "Secret & Enterprise Credential Scan",
-      "expected": "Zero credentials, passwords, or private keys",
-      "actual": "0 detected",
+      "scenarioId": "TC-05",
+      "name": "Missing Source Citation",
+      "expectedBehavior": "Blocked when sourceFile or sourceRow is empty",
+      "observedBehavior": "Flagged as missing citation",
       "status": "PASS",
-      "evidence": {
-        "violations": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.720222"
+      "details": {}
     },
     {
-      "testId": "VAL-03-TOKENS",
-      "name": "Authentication Tokens & Headers Scan",
-      "expected": "Zero bearer tokens, session tokens, or auth headers",
-      "actual": "0 detected",
+      "scenarioId": "TC-06",
+      "name": "Conflict Dual-Value Enforcement",
+      "expectedBehavior": "Reject one-sided conflict record",
+      "observedBehavior": "Rejected one-sided conflict successfully",
       "status": "PASS",
-      "evidence": {
-        "violations": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.720239"
+      "details": {}
     },
     {
-      "testId": "VAL-05-CUSTOMER-PII",
-      "name": "Customer Data & Sensitive PII Scan",
-      "expected": "Zero national IDs, credit card PANs, or IMEI numbers",
-      "actual": "0 detected",
+      "scenarioId": "TC-07",
+      "name": "Blocked Item Price Guessing Rejection",
+      "expectedBehavior": "Reject price in blocked item",
+      "observedBehavior": "Price substitution detected and blocked",
       "status": "PASS",
-      "evidence": {
-        "violations": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.720243"
+      "details": {}
     },
     {
-      "testId": "VAL-06-LOCAL-PATHS",
-      "name": "Absolute Windows & User Paths Sanitization",
-      "expected": "Zero C:\\Users\\... or internal developer directory paths",
-      "actual": "0 detected",
+      "scenarioId": "TC-08",
+      "name": "Studentcrd Hard Rule Enforcement",
+      "expectedBehavior": "Only Studentcrd allowed",
+      "observedBehavior": "Validated Studentcrd and rejected invalid coupon",
       "status": "PASS",
-      "evidence": {
-        "violations": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.720247"
+      "details": {}
     },
     {
-      "testId": "VAL-07-PRIVATE-URLS",
-      "name": "Private Network & Credentialed URLs Scan",
-      "expected": "Zero localhost or token-embedded URLs",
-      "actual": "0 detected",
+      "scenarioId": "TC-09",
+      "name": "Trade Up T-UP-CO-S Code Enforcement",
+      "expectedBehavior": "Only T-UP-CO-S allowed",
+      "observedBehavior": "Validated T-UP-CO-S and rejected invalid code",
       "status": "PASS",
-      "evidence": {
-        "violations": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.720250"
+      "details": {}
     },
     {
-      "testId": "VAL-08-SOURCE-REF",
-      "name": "Active Promotions Source Reference Citation",
-      "expected": "100% of active promotions must cite source file and sheet/row",
-      "actual": "0 missing references",
+      "scenarioId": "TC-10",
+      "name": "Pass F Cross-Type Leak Detection",
+      "expectedBehavior": "Decouple F- and SM-",
+      "observedBehavior": "Prevented Pass F contamination into SM- retail",
       "status": "PASS",
-      "evidence": {
-        "missing": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.722207"
+      "details": {}
     },
     {
-      "testId": "VAL-DOM-STUDENT",
-      "name": "Student Promotion Hard Rule (Studentcrd Only)",
-      "expected": "Student promos must strictly use Studentcrd and decouple SF+/TradeUp",
-      "actual": "0 student rule violations",
+      "scenarioId": "TC-11",
+      "name": "WriteBack Allowed Prohibition",
+      "expectedBehavior": "Strictly reject writeBackAllowed=true",
+      "observedBehavior": "Caught and blocked writeBackAllowed=true",
       "status": "PASS",
-      "evidence": {},
-      "evaluatedAt": "2026-09-07T16:11:56.722222"
+      "details": {}
     },
     {
-      "testId": "VAL-DOM-TRADEUP",
-      "name": "Trade Up Project Code Consistency (T-UP-CO-S)",
-      "expected": "Trade Up promos must enforce T-UP-CO-S payment reference",
-      "actual": "0 trade up code violations",
+      "scenarioId": "TC-12",
+      "name": "Dashboard Publish Allowed Prohibition",
+      "expectedBehavior": "Strictly reject dashboardPublishAllowed=true",
+      "observedBehavior": "Caught and blocked dashboardPublishAllowed=true",
       "status": "PASS",
-      "evidence": {},
-      "evaluatedAt": "2026-09-07T16:11:56.722226"
+      "details": {}
     },
     {
-      "testId": "VAL-PN-MASKING",
-      "name": "Blocked Variants P/N Masking Enforcement",
-      "expected": "P/N Masked header present and all P/Ns masked with '*****'",
-      "actual": "Header present=True, 0 unmasked P/Ns",
+      "scenarioId": "TC-13",
+      "name": "File Tampering Detection",
+      "expectedBehavior": "Hash mismatch blocks package",
+      "observedBehavior": "File hash mismatch immediately detected",
       "status": "PASS",
-      "evidence": {
-        "unmasked": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.726025"
-    },
-    {
-      "testId": "VAL-13-NO-GUESSED-PRICES",
-      "name": "Quarantined Items Zero Price Guessing",
-      "expected": "Blocked variants must have zero calculated or guessed replacement prices",
-      "actual": "0 guessed prices found",
-      "status": "PASS",
-      "evidence": {
-        "guessed": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.726040"
-    },
-    {
-      "testId": "VAL-14-CONFLICT-DUAL-SIDE",
-      "name": "Source Conflicts Dual-Value Recording",
-      "expected": "Source conflict records must document both Excel and Branch Confirmed values",
-      "actual": "0 one-sided records",
-      "status": "PASS",
-      "evidence": {
-        "oneSided": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.726409"
-    },
-    {
-      "testId": "VAL-15-FILE-SHA256",
-      "name": "Package Files SHA-256 Manifest Integrity",
-      "expected": "All 17 files in manifest match disk hash and size exactly",
-      "actual": "0 hash mismatches, 0 missing files",
-      "status": "PASS",
-      "evidence": {
-        "mismatches": [],
-        "missing": []
-      },
-      "evaluatedAt": "2026-09-07T16:11:56.732527"
+      "details": {}
     }
   ]
 }

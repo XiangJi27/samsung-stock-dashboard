@@ -1,0 +1,60 @@
+{
+  "reportId": "RECONCILIATION-20260911-001",
+  "generatedAt": "2026-09-11T12:16:30.000000",
+  "commitSha": "4b39a03",
+  "currentCampaign": {
+    "sourceSheets": [
+      "อัพเดท 28 Aug - 6 Sep ล่าสุด",
+      "โปร และ เงื่อนไขการตัดขาย",
+      "business_rules.json"
+    ],
+    "promotionBatchId": "BATCH-20260907-105441",
+    "totalVariants": 246,
+    "uniquePnCount": 38,
+    "uniqueModelCount": 70,
+    "statusBreakdown": {
+      "PASSED_VALIDATION": 39,
+      "WARNING": 90,
+      "BLOCKED_INVALID": 117,
+      "BLOCKED_UNPROVEN": 0,
+      "SOURCE_CONFLICT": 0,
+      "FUTURE": 0,
+      "EXPIRED": 0
+    },
+    "equationVerification": {
+      "equation": "totalCurrentVariants = passed + warning + blockedInvalid + blockedUnproven + sourceConflict + future + expired",
+      "sumStatus": 246,
+      "totalCurrent": 246,
+      "balanced": true
+    },
+    "rates": {
+      "usableActiveCount": 129,
+      "usableActiveRatePercent": 52.44,
+      "blockedInvalidCount": 117,
+      "blockedRatePercent": 47.56
+    }
+  },
+  "historicalArchive": {
+    "totalVariants": 308,
+    "historicalExpiredUsable": 286,
+    "historicalBlocked": 22,
+    "historicalBlockedRatePercent": 7.14
+  },
+  "allDatasetsCombined": {
+    "grandTotalVariants": 554,
+    "reconciliationOf425": {
+      "currentBlocked": 117,
+      "historicalBlocked": 22,
+      "historicalExpiredUsable": 286,
+      "sumInactive": 425,
+      "matchesOriginal425": true
+    }
+  },
+  "gateDecision": {
+    "status": "HOLD_HIGH_QUARANTINE_RATE",
+    "action": "PROHIBITED",
+    "thresholdPercent": 20.0,
+    "actualBlockedPercent": 47.56,
+    "explanation": "Current campaign blocked rate (47.56%) exceeds 20.0% threshold. Rule 31 mandates HOLD_HIGH_QUARANTINE_RATE."
+  }
+}

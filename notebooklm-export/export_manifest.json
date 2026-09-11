@@ -1,7 +1,7 @@
 {
   "contractVersion": "1.0.0",
-  "exportId": "NBLM-EXPORT-20260907-001",
-  "generatedAt": "2026-09-07T16:09:59.158568",
+  "exportId": "NBLM-EXPORT-20260911-001",
+  "generatedAt": "2026-09-11T12:18:36.807837",
   "mode": "READ_ONLY",
   "sourceEnvironment": "VALIDATED_PIPELINE",
   "inputBatches": {
@@ -19,19 +19,19 @@
     {
       "file": "README_FIRST.md",
       "sizeBytes": 1735,
-      "sha256": "92823d103633ef32e9ff3e5a3e084e43cdfd355d5260cf3ccb1f4b49158800ef",
+      "sha256": "81b9e0e5df5c541335565627257c661232ad48c13179053676574586fd6dd00c",
       "category": "root"
     },
     {
       "file": "audit/audit_summary.md",
-      "sizeBytes": 680,
-      "sha256": "e80538e7b898aba7340850d667af0fd8b481a6d1d5bd4602c30343977813df21",
+      "sizeBytes": 780,
+      "sha256": "0fa949418ba810b929a12cf89ee3094e2066c45bd0a82d2df1e82f368f14af9e",
       "category": "audit"
     },
     {
       "file": "audit/blocked_variants.csv",
-      "sizeBytes": 147056,
-      "sha256": "931cbcf3ae02e3b0037ed906fac0217008f854c1784a68b05fe2b3811828eb65",
+      "sizeBytes": 44366,
+      "sha256": "9b95f608865fbbee0dbb9042aa480604dd82112e3e4a507e56e0763798d1306e",
       "category": "audit"
     },
     {
@@ -53,6 +53,12 @@
       "category": "current"
     },
     {
+      "file": "current/blocked_variants.csv",
+      "sizeBytes": 44366,
+      "sha256": "9b95f608865fbbee0dbb9042aa480604dd82112e3e4a507e56e0763798d1306e",
+      "category": "current"
+    },
+    {
       "file": "current/branch_confirmed_rules.md",
       "sizeBytes": 11294,
       "sha256": "135cc4312aebf9e7300bf751d453a50e2ddce8b0d57ab7f8189355c11b98a35f",
@@ -67,7 +73,7 @@
     {
       "file": "current/promotion_summary.md",
       "sizeBytes": 357,
-      "sha256": "03f5adf0fbbd78fd61a874d43f6cfea94681024e5691361c5f2eed697cf0f2ed",
+      "sha256": "30cec2882a4e0ad3950f95c68a54e87c4d1232006351f9c1619c613b29c8d27f",
       "category": "current"
     },
     {
@@ -78,8 +84,14 @@
     },
     {
       "file": "historical/expired_promotions.csv",
-      "sizeBytes": 240,
-      "sha256": "9963c69a45815dd3d8313ee1842565833afbfef68c2f2e281c37286b7ea938a6",
+      "sizeBytes": 58877,
+      "sha256": "e4fdd3ca9f61b00590f68d52b0be24dbeb94771e8bec771980f16ed649a6eb94",
+      "category": "historical"
+    },
+    {
+      "file": "historical/historical_blocked_variants.csv",
+      "sizeBytes": 5709,
+      "sha256": "69705213f9e1786084db20b1b2de0f3ed0c5c6c4a17b28b097349c977f599df3",
       "category": "historical"
     },
     {

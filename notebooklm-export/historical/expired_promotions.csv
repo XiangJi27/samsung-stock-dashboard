@@ -1,3 +1,450 @@
-﻿VariantId,Model,SaleMode,ExpiredDate,ArchiveReason
-HIST-GIFT-2025-01,Galaxy S25 Series Free Case,STANDARD_PAYMENT,2025-12-31,Expired Premium Gift
-HIST-LAUNCH-FOLD8,Galaxy Fold8 Launch Pre-order,PASS_F,2026-08-15,Depleted Launch Quota
+﻿variantId,model,ram,storage,saleMode,rrp,netPrice,startDate,endDate,sourceFileDisplayName,sourceSheet,archiveReason
+RET-อัพเดท-R4-FLASHSALE,Galaxy S26 Ultra,N/A,1TB,STANDARD_PAYMENT,66900.0,57900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,Expired campaign (อัพเดท 28 Aug - 6 Sep ล่าสุด)
+RET-อัพเดท-R5-FLASHSALE,Galaxy S26 Ultra,N/A,512GB,STANDARD_PAYMENT,54900.0,45900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,Expired campaign (อัพเดท 28 Aug - 6 Sep ล่าสุด)
+RET-อัพเดท-R6-FLASHSALE,Galaxy S26 Ultra,N/A,256GB,STANDARD_PAYMENT,46900.0,37900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,Expired campaign (อัพเดท 28 Aug - 6 Sep ล่าสุด)
+RET-อัพเดท-R39-FLASHSALE,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STANDARD_PAYMENT,10599.0,8999.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,Expired campaign (อัพเดท 28 Aug - 6 Sep ล่าสุด)
+RET-19 -27-R4-SF_PLUS,Galaxy S26 Ultra,N/A,1TB,SF_PLUS,66900.0,61900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R4-TRADEUP,Galaxy S26 Ultra,N/A,1TB,TRADE_UP,66900.0,56900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R4-FLASHSALE,Galaxy S26 Ultra,N/A,1TB,STANDARD_PAYMENT,66900.0,57900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R5-SF_PLUS,Galaxy S26 Ultra,N/A,512GB,SF_PLUS,54900.0,49900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R5-TRADEUP,Galaxy S26 Ultra,N/A,512GB,TRADE_UP,54900.0,44900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R5-STUDENT,Galaxy S26 Ultra,N/A,512GB,STUDENT,54900.0,46665.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R5-FLASHSALE,Galaxy S26 Ultra,N/A,512GB,STANDARD_PAYMENT,54900.0,45900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R6-SF_PLUS,Galaxy S26 Ultra,N/A,256GB,SF_PLUS,46900.0,41900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R6-TRADEUP,Galaxy S26 Ultra,N/A,256GB,TRADE_UP,46900.0,39900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R6-STUDENT,Galaxy S26 Ultra,N/A,256GB,STUDENT,46900.0,39865.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R6-FLASHSALE,Galaxy S26 Ultra,N/A,256GB,STANDARD_PAYMENT,46900.0,37900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R7-SF_PLUS,Galaxy S26+,N/A,512GB,SF_PLUS,48900.0,36900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R8-SF_PLUS,Galaxy S26+,N/A,256GB,SF_PLUS,40900.0,30900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R9-SF_PLUS,Galaxy S26,N/A,512GB,SF_PLUS,41900.0,29900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R10-SF_PLUS,Galaxy S26,N/A,256GB,SF_PLUS,33900.0,27900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R11-SF_PLUS,Galaxy S25 Ultra,N/A,256GB,SF_PLUS,42900.0,30900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R12-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,SF_PLUS,26900.0,23900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R12-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,STUDENT,26900.0,22865.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R13-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,SF_PLUS,22900.0,19900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R13-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,STUDENT,22900.0,19465.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R14-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,256GB,STANDARD_PAYMENT,26900.0,20900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R15-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,128GB,STANDARD_PAYMENT,22900.0,17900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R16-TRADEUP,Galaxy Z Fold8 Ultra,N/A,1TB,TRADE_UP,93900.0,86900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R17-TRADEUP,Galaxy Z Fold8 Ultra,N/A,512GB,TRADE_UP,77900.0,72900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R18-TRADEUP,Galaxy Z Fold8 Ultra,N/A,256GB,TRADE_UP,69900.0,64900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R19-TRADEUP,Galaxy Z Fold8,N/A,1TB,TRADE_UP,85900.0,78900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R20-TRADEUP,Galaxy Z Fold8,N/A,512GB,TRADE_UP,69900.0,64900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R21-TRADEUP,Galaxy Z Fold8,N/A,256GB,TRADE_UP,61900.0,56900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R24-SF_PLUS,Galaxy Z Fold 7,N/A,1TB,SF_PLUS,87900.0,69900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R25-SF_PLUS,Galaxy Z Fold 7,N/A,512GB,SF_PLUS,75900.0,57900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R26-SF_PLUS,Galaxy Z Fold 7,N/A,256GB,SF_PLUS,67900.0,49900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R27-SF_PLUS,Galaxy Z Flip7,N/A,512GB,SF_PLUS,48900.0,37900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R28-SF_PLUS,Galaxy Z Flip7,N/A,256GB,SF_PLUS,40900.0,29900.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R29-SF_PLUS,Galaxy A57 5G,N/A,12/512GB,SF_PLUS,20999.0,20999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R29-STUDENT,Galaxy A57 5G,N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R30-SF_PLUS,Galaxy A57 5G,N/A,12/256GB,SF_PLUS,17999.0,17999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R30-STUDENT,Galaxy A57 5G,N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R31-SF_PLUS,Galaxy A57 5G,N/A,8/256GB,SF_PLUS,16999.0,16999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R31-STUDENT,Galaxy A57 5G,N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/512GB,STANDARD_PAYMENT,20999.0,18999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R32-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/256GB,STANDARD_PAYMENT,17999.0,15999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R33-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,8/256GB,STANDARD_PAYMENT,16999.0,14999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R34-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R35-SF_PLUS,"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,SF_PLUS,13999.0,13999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R35-STUDENT,"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STUDENT,13999.0,13439.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R36-SF_PLUS,"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/128GB,SF_PLUS,10999.0,9999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R37-SF_PLUS,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,SF_PLUS,10599.0,8999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R37-STUDENT,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STUDENT,10599.0,9539.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R37-FLASHSALE,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STANDARD_PAYMENT,10599.0,8999.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R38-SF_PLUS,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/128GB,SF_PLUS,8999.0,7499.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R39-SF_PLUS,"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/128GB,SF_PLUS,7999.0,6999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R40-STUDENT,"Galaxy A07 5G
+(SF+ campaign)",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R41-STANDARD_PAYMENT,"Galaxy A07 5G
+(ไม่ร่วม SF+)",N/A,6/128GB,STANDARD_PAYMENT,6999.0,6499.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R41-STUDENT,"Galaxy A07 5G
+(ไม่ร่วม SF+)",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R42-SF_PLUS,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,6/128GB,SF_PLUS,5999.0,4999.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R43-SF_PLUS,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,4/128GB,SF_PLUS,5299.0,4299.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET-19 -27-R44-SF_PLUS,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,4/64GB,SF_PLUS,4599.0,3799.0,2026-08-19,2026-08-27,Promotion Retail Aug 2026.xlsx,19 -27  Aug,Expired campaign (19 -27  Aug)
+RET- 17-18-R4-SF_PLUS,Galaxy S26 Ultra,N/A,1TB,SF_PLUS,66900.0,61900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R4-TRADEUP,Galaxy S26 Ultra,N/A,1TB,TRADE_UP,66900.0,56900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R4-FLASHSALE,Galaxy S26 Ultra,N/A,1TB,STANDARD_PAYMENT,66900.0,58900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R5-SF_PLUS,Galaxy S26 Ultra,N/A,512GB,SF_PLUS,54900.0,49900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R5-TRADEUP,Galaxy S26 Ultra,N/A,512GB,TRADE_UP,54900.0,44900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R5-STUDENT,Galaxy S26 Ultra,N/A,512GB,STUDENT,54900.0,46665.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R5-FLASHSALE,Galaxy S26 Ultra,N/A,512GB,STANDARD_PAYMENT,54900.0,46900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R6-SF_PLUS,Galaxy S26 Ultra,N/A,256GB,SF_PLUS,46900.0,41900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R6-TRADEUP,Galaxy S26 Ultra,N/A,256GB,TRADE_UP,46900.0,39900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R6-STUDENT,Galaxy S26 Ultra,N/A,256GB,STUDENT,46900.0,39865.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R6-FLASHSALE,Galaxy S26 Ultra,N/A,256GB,STANDARD_PAYMENT,46900.0,39900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R7-SF_PLUS,Galaxy S26+,N/A,512GB,SF_PLUS,48900.0,36900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R8-SF_PLUS,Galaxy S26+,N/A,256GB,SF_PLUS,40900.0,30900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R9-SF_PLUS,Galaxy S26,N/A,512GB,SF_PLUS,41900.0,29900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R10-SF_PLUS,Galaxy S26,N/A,256GB,SF_PLUS,33900.0,27900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R11-SF_PLUS,Galaxy S25 Ultra,N/A,256GB,SF_PLUS,42900.0,30900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R12-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,SF_PLUS,26900.0,23900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R12-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,STUDENT,26900.0,22865.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R13-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,SF_PLUS,22900.0,19900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R13-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,STUDENT,22900.0,19465.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R14-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,256GB,STANDARD_PAYMENT,26900.0,20900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R15-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,128GB,STANDARD_PAYMENT,22900.0,17900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R16-TRADEUP,Galaxy Z Fold8 Ultra,N/A,1TB,TRADE_UP,93900.0,86900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R17-TRADEUP,Galaxy Z Fold8 Ultra,N/A,512GB,TRADE_UP,77900.0,72900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R18-TRADEUP,Galaxy Z Fold8 Ultra,N/A,256GB,TRADE_UP,69900.0,64900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R19-TRADEUP,Galaxy Z Fold8,N/A,1TB,TRADE_UP,85900.0,78900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R20-TRADEUP,Galaxy Z Fold8,N/A,512GB,TRADE_UP,69900.0,64900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R21-TRADEUP,Galaxy Z Fold8,N/A,256GB,TRADE_UP,61900.0,56900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R24-SF_PLUS,Galaxy Z Fold 7,N/A,1TB,SF_PLUS,87900.0,69900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R25-SF_PLUS,Galaxy Z Fold 7,N/A,512GB,SF_PLUS,75900.0,57900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R26-SF_PLUS,Galaxy Z Fold 7,N/A,256GB,SF_PLUS,67900.0,49900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R27-SF_PLUS,Galaxy Z Flip7,N/A,512GB,SF_PLUS,48900.0,37900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R28-SF_PLUS,Galaxy Z Flip7,N/A,256GB,SF_PLUS,40900.0,29900.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R29-SF_PLUS,Galaxy A57 5G,N/A,12/512GB,SF_PLUS,20999.0,20999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R29-STUDENT,Galaxy A57 5G,N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R30-SF_PLUS,Galaxy A57 5G,N/A,12/256GB,SF_PLUS,17999.0,17999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R30-STUDENT,Galaxy A57 5G,N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R31-SF_PLUS,Galaxy A57 5G,N/A,8/256GB,SF_PLUS,16999.0,16999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R31-STUDENT,Galaxy A57 5G,N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/512GB,STANDARD_PAYMENT,20999.0,18999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R32-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/256GB,STANDARD_PAYMENT,17999.0,15999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R33-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,8/256GB,STANDARD_PAYMENT,16999.0,14999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R34-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R35-SF_PLUS,"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,SF_PLUS,13999.0,13999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R35-STUDENT,"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STUDENT,13999.0,13439.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R36-SF_PLUS,"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/128GB,SF_PLUS,10999.0,9999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R37-SF_PLUS,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,SF_PLUS,10599.0,9999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R37-STUDENT,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STUDENT,10599.0,9539.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R37-FLASHSALE,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/256GB,STANDARD_PAYMENT,10599.0,8999.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R38-SF_PLUS,"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/128GB,SF_PLUS,8999.0,7499.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R39-SF_PLUS,"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,8/128GB,SF_PLUS,7999.0,6999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R40-STUDENT,"Galaxy A07 5G
+(SF+ campaign)",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R41-STANDARD_PAYMENT,"Galaxy A07 5G
+(ไม่ร่วม SF+)",N/A,6/128GB,STANDARD_PAYMENT,6999.0,6499.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R41-STUDENT,"Galaxy A07 5G
+(ไม่ร่วม SF+)",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R42-SF_PLUS,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,6/128GB,SF_PLUS,5999.0,4999.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R43-SF_PLUS,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,4/128GB,SF_PLUS,5299.0,4299.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 17-18-R44-SF_PLUS,"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",N/A,4/64GB,SF_PLUS,4599.0,3799.0,2026-08-17,2026-08-18,Promotion Retail Aug 2026.xlsx, 17-18  Aug,Expired campaign ( 17-18  Aug)
+RET- 14 Au-R4-SF_PLUS,Galaxy S26 Ultra,N/A,1TB,SF_PLUS,66900.0,61900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R4-TRADEUP,Galaxy S26 Ultra,N/A,1TB,TRADE_UP,66900.0,56900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R4-FLASHSALE,Galaxy S26 Ultra,N/A,1TB,STANDARD_PAYMENT,66900.0,58900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R5-SF_PLUS,Galaxy S26 Ultra,N/A,512GB,SF_PLUS,54900.0,49900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R5-TRADEUP,Galaxy S26 Ultra,N/A,512GB,TRADE_UP,54900.0,44900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R5-STUDENT,Galaxy S26 Ultra,N/A,512GB,STUDENT,54900.0,46665.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R5-FLASHSALE,Galaxy S26 Ultra,N/A,512GB,STANDARD_PAYMENT,54900.0,46900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R6-SF_PLUS,Galaxy S26 Ultra,N/A,256GB,SF_PLUS,46900.0,41900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R6-TRADEUP,Galaxy S26 Ultra,N/A,256GB,TRADE_UP,46900.0,39900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R6-STUDENT,Galaxy S26 Ultra,N/A,256GB,STUDENT,46900.0,39865.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R6-FLASHSALE,Galaxy S26 Ultra,N/A,256GB,STANDARD_PAYMENT,46900.0,39900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R7-SF_PLUS,Galaxy S26+,N/A,512GB,SF_PLUS,48900.0,36900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R8-SF_PLUS,Galaxy S26+,N/A,256GB,SF_PLUS,40900.0,30900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R9-SF_PLUS,Galaxy S26,N/A,512GB,SF_PLUS,41900.0,29900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R10-SF_PLUS,Galaxy S26,N/A,256GB,SF_PLUS,33900.0,27900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R11-SF_PLUS,Galaxy S25 Ultra,N/A,256GB,SF_PLUS,42900.0,30900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R12-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,SF_PLUS,26900.0,23900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R12-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,STUDENT,26900.0,22865.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R13-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,SF_PLUS,22900.0,19900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R13-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,STUDENT,22900.0,19465.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R14-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,256GB,STANDARD_PAYMENT,26900.0,20900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R15-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,128GB,STANDARD_PAYMENT,22900.0,17900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R16-TRADEUP,Galaxy Z Fold8 Ultra,N/A,1TB,TRADE_UP,93900.0,86900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R17-TRADEUP,Galaxy Z Fold8 Ultra,N/A,512GB,TRADE_UP,77900.0,72900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R18-TRADEUP,Galaxy Z Fold8 Ultra,N/A,256GB,TRADE_UP,69900.0,64900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R19-TRADEUP,Galaxy Z Fold8,N/A,1TB,TRADE_UP,85900.0,78900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R20-TRADEUP,Galaxy Z Fold8,N/A,512GB,TRADE_UP,69900.0,64900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R21-TRADEUP,Galaxy Z Fold8,N/A,256GB,TRADE_UP,61900.0,56900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R24-SF_PLUS,Galaxy Z Fold 7,N/A,1TB,SF_PLUS,87900.0,69900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R25-SF_PLUS,Galaxy Z Fold 7,N/A,512GB,SF_PLUS,75900.0,57900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R26-SF_PLUS,Galaxy Z Fold 7,N/A,256GB,SF_PLUS,67900.0,49900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R27-SF_PLUS,Galaxy Z Flip7,N/A,512GB,SF_PLUS,48900.0,37900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R28-SF_PLUS,Galaxy Z Flip7,N/A,256GB,SF_PLUS,40900.0,29900.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R29-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,SF_PLUS,20999.0,20999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R29-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R30-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,SF_PLUS,17999.0,17999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R30-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R31-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,16999.0,16999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R31-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STANDARD_PAYMENT,20999.0,18999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R32-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STANDARD_PAYMENT,17999.0,15999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R33-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STANDARD_PAYMENT,16999.0,14999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R34-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R35-SF_PLUS,"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,13999.0,13999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R35-STUDENT,"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,13999.0,13439.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R36-SF_PLUS,"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,10999.0,9999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R37-SF_PLUS,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,10599.0,8999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R37-STUDENT,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,10599.0,9539.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R37-FLASHSALE,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STANDARD_PAYMENT,10599.0,8999.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R38-SF_PLUS,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,8999.0,7299.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R39-SF_PLUS,"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,7999.0,6999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R40-SF_PLUS,"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,6/128GB,SF_PLUS,6999.0,6999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R40-STUDENT,"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R41-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,6/128GB,SF_PLUS,5999.0,5999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R42-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,4/128GB,SF_PLUS,5299.0,3999.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 14 Au-R43-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,4/64GB,SF_PLUS,4599.0,3799.0,2026-08-14,2026-08-16,Promotion Retail Aug 2026.xlsx, 14 Aug -16 Aug,Expired campaign ( 14 Aug -16 Aug)
+RET- 7 Aug-R4-SF_PLUS,Galaxy S26 Ultra,N/A,1TB,SF_PLUS,66900.0,61900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R4-TRADEUP,Galaxy S26 Ultra,N/A,1TB,TRADE_UP,66900.0,56900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R4-FLASHSALE,Galaxy S26 Ultra,N/A,1TB,STANDARD_PAYMENT,66900.0,58900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R5-SF_PLUS,Galaxy S26 Ultra,N/A,512GB,SF_PLUS,54900.0,49900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R5-TRADEUP,Galaxy S26 Ultra,N/A,512GB,TRADE_UP,54900.0,44900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R5-STUDENT,Galaxy S26 Ultra,N/A,512GB,STUDENT,54900.0,46665.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R5-FLASHSALE,Galaxy S26 Ultra,N/A,512GB,STANDARD_PAYMENT,54900.0,46900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R6-SF_PLUS,Galaxy S26 Ultra,N/A,256GB,SF_PLUS,46900.0,41900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R6-TRADEUP,Galaxy S26 Ultra,N/A,256GB,TRADE_UP,46900.0,39900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R6-STUDENT,Galaxy S26 Ultra,N/A,256GB,STUDENT,46900.0,39865.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R6-FLASHSALE,Galaxy S26 Ultra,N/A,256GB,STANDARD_PAYMENT,46900.0,39900.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R7-SF_PLUS,Galaxy S26+,N/A,512GB,SF_PLUS,48900.0,36900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R8-SF_PLUS,Galaxy S26+,N/A,256GB,SF_PLUS,40900.0,30900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R9-SF_PLUS,Galaxy S26,N/A,512GB,SF_PLUS,41900.0,29900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R10-SF_PLUS,Galaxy S26,N/A,256GB,SF_PLUS,33900.0,27900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R11-SF_PLUS,Galaxy S25 Ultra,N/A,256GB,SF_PLUS,42900.0,30900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R12-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,SF_PLUS,26900.0,23900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R12-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,STUDENT,26900.0,22865.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R13-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,SF_PLUS,22900.0,19900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R13-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,STUDENT,22900.0,19465.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R14-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,256GB,STANDARD_PAYMENT,26900.0,20900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R15-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,128GB,STANDARD_PAYMENT,22900.0,17900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R24-SF_PLUS,Galaxy Z Fold 7,N/A,1TB,SF_PLUS,87900.0,69900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R25-SF_PLUS,Galaxy Z Fold 7,N/A,512GB,SF_PLUS,75900.0,57900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R26-SF_PLUS,Galaxy Z Fold 7,N/A,256GB,SF_PLUS,67900.0,49900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R27-SF_PLUS,Galaxy Z Flip7,N/A,512GB,SF_PLUS,48900.0,37900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R28-SF_PLUS,Galaxy Z Flip7,N/A,256GB,SF_PLUS,40900.0,29900.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R29-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,SF_PLUS,20999.0,20999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R29-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R30-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,SF_PLUS,17999.0,17999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R30-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R31-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,16999.0,16999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R31-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STANDARD_PAYMENT,20999.0,18999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R32-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STANDARD_PAYMENT,17999.0,15999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R33-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STANDARD_PAYMENT,16999.0,14999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R34-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R35-SF_PLUS,"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,13999.0,13999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R35-STUDENT,"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,13999.0,13439.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R36-SF_PLUS,"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,10999.0,9999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R37-SF_PLUS,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,10599.0,9999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R37-STUDENT,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,10599.0,9539.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R37-FLASHSALE,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STANDARD_PAYMENT,10599.0,8999.0,2026-08-27,2026-08-30,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R38-SF_PLUS,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,8999.0,7299.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R39-SF_PLUS,"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,7999.0,6999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R40-SF_PLUS,"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,6/128GB,SF_PLUS,6999.0,6999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R40-STUDENT,"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R41-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,6/128GB,SF_PLUS,5999.0,5999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R42-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,4/128GB,SF_PLUS,5299.0,3999.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 7 Aug-R43-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,4/64GB,SF_PLUS,4599.0,3799.0,2026-08-07,2026-08-12,Promotion Retail Aug 2026.xlsx, 7 Aug - 12 Aug,Expired campaign ( 7 Aug - 12 Aug)
+RET- 3 -6 -R4-SF_PLUS,Galaxy S26 Ultra,N/A,1TB,SF_PLUS,66900.0,61900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R4-TRADEUP,Galaxy S26 Ultra,N/A,1TB,TRADE_UP,66900.0,56900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R5-SF_PLUS,Galaxy S26 Ultra,N/A,512GB,SF_PLUS,54900.0,49900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R5-TRADEUP,Galaxy S26 Ultra,N/A,512GB,TRADE_UP,54900.0,44900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R5-STUDENT,Galaxy S26 Ultra,N/A,512GB,STUDENT,54900.0,46665.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R6-SF_PLUS,Galaxy S26 Ultra,N/A,256GB,SF_PLUS,46900.0,41900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R6-TRADEUP,Galaxy S26 Ultra,N/A,256GB,TRADE_UP,46900.0,39900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R6-STUDENT,Galaxy S26 Ultra,N/A,256GB,STUDENT,46900.0,39865.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R7-SF_PLUS,Galaxy S26+,N/A,512GB,SF_PLUS,48900.0,36900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R8-SF_PLUS,Galaxy S26+,N/A,256GB,SF_PLUS,40900.0,30900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R9-SF_PLUS,Galaxy S26,N/A,512GB,SF_PLUS,41900.0,29900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R10-SF_PLUS,Galaxy S26,N/A,256GB,SF_PLUS,33900.0,27900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R11-SF_PLUS,Galaxy S25 Ultra,N/A,256GB,SF_PLUS,42900.0,30900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R12-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,SF_PLUS,26900.0,23900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R12-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,256GB,STUDENT,26900.0,22865.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R13-SF_PLUS,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,SF_PLUS,22900.0,19900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R13-STUDENT,"Galaxy S25 FE
+(ร่วม SF+)",N/A,128GB,STUDENT,22900.0,19465.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R14-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,256GB,STANDARD_PAYMENT,26900.0,20900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R15-STANDARD_PAYMENT,"Galaxy S25 FE
+(ไม่ร่วม SF+)",N/A,128GB,STANDARD_PAYMENT,22900.0,17900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R24-SF_PLUS,Galaxy Z Fold 7,N/A,1TB,SF_PLUS,87900.0,69900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R25-SF_PLUS,Galaxy Z Fold 7,N/A,512GB,SF_PLUS,75900.0,57900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R26-SF_PLUS,Galaxy Z Fold 7,N/A,256GB,SF_PLUS,67900.0,49900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R27-SF_PLUS,Galaxy Z Flip7,N/A,512GB,SF_PLUS,48900.0,37900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R28-SF_PLUS,Galaxy Z Flip7,N/A,256GB,SF_PLUS,40900.0,29900.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R29-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,SF_PLUS,20999.0,20999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R29-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R30-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,SF_PLUS,17999.0,17999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R30-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R31-SF_PLUS,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,16999.0,16999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R31-STUDENT,"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R32-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STANDARD_PAYMENT,20999.0,18999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R32-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/512GB,STUDENT,20999.0,18479.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R33-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STANDARD_PAYMENT,17999.0,15999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R33-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,12/256GB,STUDENT,17999.0,15479.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R34-STANDARD_PAYMENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STANDARD_PAYMENT,16999.0,14999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R34-STUDENT,"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,16999.0,14449.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R35-SF_PLUS,"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,13999.0,13999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R35-STUDENT,"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,13999.0,13439.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R36-SF_PLUS,"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,10999.0,9999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R37-SF_PLUS,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,SF_PLUS,10599.0,9999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R37-STUDENT,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/256GB,STUDENT,10599.0,9539.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R38-SF_PLUS,"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,8999.0,7299.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R39-SF_PLUS,"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",N/A,8/128GB,SF_PLUS,7999.0,6999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R40-SF_PLUS,"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,6/128GB,SF_PLUS,6999.0,6999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R40-STUDENT,"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",N/A,6/128GB,STUDENT,6999.0,6299.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R41-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,6/128GB,SF_PLUS,5999.0,5999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R42-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,4/128GB,SF_PLUS,5299.0,3999.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+RET- 3 -6 -R43-SF_PLUS,"Galaxy A07 LTE
+6-19 July",N/A,4/64GB,SF_PLUS,4599.0,3799.0,2026-08-03,2026-08-06,Promotion Retail Aug 2026.xlsx, 3 -6 Aug ,Expired campaign ( 3 -6 Aug )
+PREM-2025-R6,,N/A,,STANDARD_PAYMENT,1000.0,1000.0,2025-07-01,2025-09-30,Promotion Retail Aug 2026.xlsx,Promotion Premium Q2.2026,Expired campaign (Promotion Premium Q2.2026)
+PREM-2025-R8,,N/A,,STANDARD_PAYMENT,1000.0,1000.0,2025-07-01,2025-09-30,Promotion Retail Aug 2026.xlsx,Promotion Premium Q2.2026,Expired campaign (Promotion Premium Q2.2026)
+PREM-2025-R13,,N/A,,STANDARD_PAYMENT,1000.0,1000.0,2025-07-01,2025-09-30,Promotion Retail Aug 2026.xlsx,Promotion Premium Q2.2026,Expired campaign (Promotion Premium Q2.2026)
+PREM-2025-R20,,N/A,,STANDARD_PAYMENT,1000.0,1000.0,2025-07-01,2025-09-30,Promotion Retail Aug 2026.xlsx,Promotion Premium Q2.2026,Expired campaign (Promotion Premium Q2.2026)
+PREM-2025-R21,,N/A,,STANDARD_PAYMENT,1000.0,1000.0,2025-07-01,2025-09-30,Promotion Retail Aug 2026.xlsx,Promotion Premium Q2.2026,Expired campaign (Promotion Premium Q2.2026)
+PREM-2025-R29,,N/A,,STANDARD_PAYMENT,1000.0,1000.0,2025-07-01,2025-09-30,Promotion Retail Aug 2026.xlsx,Promotion Premium Q2.2026,Expired campaign (Promotion Premium Q2.2026)

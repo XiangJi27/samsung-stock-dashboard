@@ -1,0 +1,35 @@
+{
+  "analysisId": "BLOCKED-SCOPE-AUDIT-001",
+  "description": "Granular analysis distinguishing Current Batch Quarantined Variants from Historical Expired Archive",
+  "comparisonScope": {
+    "activePromotionsCsv": {
+      "scope": "Current Active Campaign ('28 Aug - 6 Sep')",
+      "recordCount": 129,
+      "uniqueVariants": 129,
+      "uniquePn": 38,
+      "promotionBatchId": "BATCH-20260907-105441",
+      "temporalFilter": "ACTIVE (28 Aug - 6 Sep 2026)"
+    },
+    "quarantinedVariantsCsv": {
+      "originalScope": "Flawed bundling of Current Blocked (117) + Historical Expired (308)",
+      "originalCount": 425,
+      "correctedCurrentBlockedCount": 117,
+      "correctedHistoricalCount": 308,
+      "clarification": "425 was NOT 425 current quarantined items; 308 items were historical expired August campaigns/gifts, and 117 items were current campaign invalid records."
+    }
+  },
+  "granularityDistinction": {
+    "blockedUniqueVariants": 117,
+    "blockedUniquePn": 1,
+    "validationErrorEvents": 128,
+    "historicalBlockedVariants": 22,
+    "historicalExpiredUsable": 286,
+    "totalHistoricalVariants": 308
+  },
+  "rates": {
+    "currentUsableRate": 52.44,
+    "currentBlockedRate": 47.56,
+    "historicalBlockedRate": 7.14
+  },
+  "statusClassificationRule": "Every variant belongs to exactly one Primary Status partition. Expired is strictly segregated from Blocked Invalid. Warnings are classified as usable with supervisor awareness."
+}

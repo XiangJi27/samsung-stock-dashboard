@@ -1,0 +1,305 @@
+[
+  {
+    "ruleId": "RULE-01-FORMULA-ERROR",
+    "name": "Formula Error & Numeric Sanity",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_formula_sanity",
+    "inputFiles": [
+      "promotion_variants.json"
+    ],
+    "recordsChecked": 129,
+    "expected": "Zero formula errors in active promotions",
+    "actual": "0 formula errors found",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "errors": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-02-PRICE-EQUATION",
+    "name": "Price Equation Consistency (Net = RRP - Discount)",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_price_equation",
+    "inputFiles": [
+      "promotion_variants.json"
+    ],
+    "recordsChecked": 48,
+    "expected": "Zero arithmetic price mismatches in standard payment",
+    "actual": "0 price equation mismatches",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "mismatches": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-03-STUDENT-RULE",
+    "name": "Student Promotion Strict Validation (Studentcrd Only)",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_student_promotions",
+    "inputFiles": [
+      "promotion_variants.json"
+    ],
+    "recordsChecked": 14,
+    "expected": "Zero illegal student coupon combinations",
+    "actual": "0 invalid student promotions",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "violations": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-04-PASS-F-ISOLATION",
+    "name": "Pass F (Memory Upgrade) Isolation",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_pass_f_isolation",
+    "inputFiles": [
+      "promotion_variants.json"
+    ],
+    "recordsChecked": 129,
+    "expected": "Zero cross-type classification leaks between SM- and F-",
+    "actual": "0 leaks detected",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "leaks": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-05-TRADE-UP-ISOLATION",
+    "name": "Trade Up Isolation from Standard Payment",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_trade_up_isolation",
+    "inputFiles": [
+      "promotion_variants.json"
+    ],
+    "recordsChecked": 129,
+    "expected": "Zero Trade Up promotions categorized as Standard Payment",
+    "actual": "0 leaks detected",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "leaks": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-06-STOCK-SUM",
+    "name": "Stock Arithmetic Integrity (Total = f1 + f2)",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_stock_arithmetic",
+    "inputFiles": [
+      "stock_full_data.json"
+    ],
+    "recordsChecked": 218,
+    "expected": "All 218 inventory records satisfy Total = f1 + f2",
+    "actual": "0 arithmetic errors in stock database",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "errors": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-07-A07-GOLDEN",
+    "name": "Galaxy A07 8 Golden Cases Ground Truth",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_a07_golden_cases",
+    "inputFiles": [
+      "stock_full_data.json"
+    ],
+    "recordsChecked": 8,
+    "expected": "100% match with Stock.xlsx verified ground truth",
+    "actual": "0 Golden Case mismatches",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "verifiedCases": [
+        "SM-A075FLVDTHL",
+        "SM-A075FZKDTHL",
+        "SM-A075FLVGTHL",
+        "SM-A075FZKGTHL",
+        "SM-A075FLVHTHL",
+        "SM-A075FZKHTHL",
+        "SM-A076BLVCTHL",
+        "SM-A076BZKCTHL"
+      ],
+      "mismatches": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "RULE-08-SECRET-LEAK",
+    "name": "Secret & Enterprise Credential Leak Scan",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_secret_leaks",
+    "inputFiles": [
+      "89 repository files scanned"
+    ],
+    "recordsChecked": 89,
+    "expected": "Zero secrets, passwords, or tokens in repository",
+    "actual": "0 credential leaks detected",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "leaks": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "GATE-EXACT-PN",
+    "name": "Exact P/N & Product Code Type Quality Gate",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_exact_pn_scope",
+    "inputFiles": [
+      "stock_full_data.json",
+      "promotion_variants.json"
+    ],
+    "recordsChecked": 129,
+    "expected": "Zero PN_NOT_FOUND, EXACT_PN_MISMATCH, or PRODUCT_CODE_TYPE_MISMATCH across all variants",
+    "actual": "0 violations (Verified 18 exact PNs, 111 model scopes)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "gate": "EXACT_PN_QUALITY_GATE",
+      "gateId": "EXACT_PN_GATE",
+      "executed": true,
+      "executionMode": "LIVE_DATA_VALIDATION",
+      "status": "PASSED",
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03",
+      "inputFiles": {
+        "stockMaster": {
+          "path": "stock_full_data.json",
+          "sha256": "36b702f1b314d79d5808c0ba88f569128b931a0646e3e0c72bd24db701cac44f"
+        },
+        "promotions": {
+          "path": "promotion_variants.json",
+          "sha256": "021c67fdf291f896dc34db1b1912fb077b80b59eed0dbe9b4e4c6ec2fa9fb1a4"
+        }
+      },
+      "counts": {
+        "variantsChecked": 129,
+        "exactPnRequired": 18,
+        "exactPnMatched": 18,
+        "modelScopeMatched": 111,
+        "pnNotFound": 0,
+        "productTypeMismatch": 0,
+        "capacityMismatch": 0,
+        "connectivityMismatch": 0,
+        "ambiguousMatches": 0,
+        "violationCount": 0
+      },
+      "totalActiveVariantsEvaluated": 129,
+      "exactPnMatches": 18,
+      "modelCapacityScopeMatches": 111,
+      "violationCount": 0,
+      "affectedVariantIds": [],
+      "violations": [],
+      "rulesEnforced": [
+        "PN_NOT_FOUND",
+        "EXACT_PN_MISMATCH",
+        "PRODUCT_CODE_TYPE_MISMATCH",
+        "CAPACITY_MISMATCH",
+        "CONNECTIVITY_MISMATCH",
+        "AMBIGUOUS_MODEL_MATCH"
+      ],
+      "generatedAt": "2026-09-11T12:18:34.986270"
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "GATE-BATCH-CONSISTENCY",
+    "name": "Import Batch Consistency & Provenance Gate",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_batch_consistency",
+    "inputFiles": [
+      "stock_data.js",
+      "promotion_variants.js",
+      "audit_summary.json",
+      "business_rules.json"
+    ],
+    "recordsChecked": 4,
+    "expected": "All runtime data files, business rules, and audit summaries reference synchronized batch IDs",
+    "actual": "0 batch discrepancies",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "gate": "BATCH_CONSISTENCY_GATE",
+      "gateId": "BATCH_CONSISTENCY_GATE",
+      "executed": true,
+      "executionMode": "LIVE_DATA_VALIDATION",
+      "status": "PASSED",
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03",
+      "verifiedInputs": {
+        "stockBatchId": "IMPORT-20260906-002",
+        "promotionBatchId": "BATCH-20260907-105441",
+        "parserVersion": "2.1.0-LTR-MERGE",
+        "ruleEngineVersion": "2.5.0-STRICT",
+        "businessRulesVersion": "1.0.0",
+        "applicationCommit": "802a786"
+      },
+      "inputFiles": {
+        "stock_data.js": "b87776743709471bc53177696695208b8039321f6bf4a2a4df70fbd4f1583673",
+        "promotion_variants.js": "e1cb478babe5cb189352d90c9d08b717b0505063d7dd3f9d126f54326a2e2b6e",
+        "audit_summary.json": "2bff11704ce9c0697592ffe2cc8bcc73f31c6de0630f96c1bed4f573a1e9cbf5",
+        "business_rules.json": "539a8b20045528cd81fca1e7c38e51ce537daf534b88b43f910fd2551dfcaf58",
+        "runtime_manifest.json": "0d9b238613ebc1dc4946a111bbbde5fbec683e19ab859fea2cbbc47fa6260946"
+      },
+      "counts": {
+        "staleAuditCount": 0,
+        "batchMismatchCount": 0,
+        "ruleVersionMismatchCount": 0,
+        "violationCount": 0
+      },
+      "violationCount": 0,
+      "violations": [],
+      "generatedAt": "2026-09-11T12:18:34.986270"
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  },
+  {
+    "ruleId": "GATE-RUNTIME-HASH",
+    "name": "Runtime Manifest SHA256 Hash Verification",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "validate_runtime_manifest_hashes",
+    "inputFiles": [
+      "runtime_manifest.json"
+    ],
+    "recordsChecked": 19,
+    "expected": "All 19 files match runtime_manifest.json exactly",
+    "actual": "0 hash mismatches (19 verified files)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "gate": "RUNTIME_HASH_VERIFICATION_GATE",
+      "status": "PASSED",
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03",
+      "totalManifestFiles": 19,
+      "verifiedFileCount": 19,
+      "violationCount": 0,
+      "violations": []
+    },
+    "generatedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
+  }
+]

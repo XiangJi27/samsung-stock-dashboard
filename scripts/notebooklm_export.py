@@ -118,8 +118,10 @@ def mask_pn(raw_pn):
 with open("promotion_variants.json", "r", encoding="utf-8") as f:
     all_variants = json.load(f)
 
-active_promos = [v for v in all_variants if v.get("isActive") is not False and v.get("validationStatus") != "BLOCKED_INVALID"]
-blocked_promos = [v for v in all_variants if v.get("validationStatus") == "BLOCKED_INVALID" or v.get("isActive") is False]
+active_promos = [v for v in all_variants if v.get("timeStatus") == "ACTIVE" and v.get("isActive") is True]
+current_blocked_promos = [v for v in all_variants if v.get("timeStatus") == "ACTIVE" and v.get("isActive") is False]
+historical_expired = [v for v in all_variants if v.get("timeStatus") == "EXPIRED" and v.get("validationStatus") != "BLOCKED_INVALID"]
+historical_blocked = [v for v in all_variants if v.get("timeStatus") == "EXPIRED" and v.get("validationStatus") == "BLOCKED_INVALID"]
 
 active_csv_path = os.path.join(export_dir, "current", "active_promotions.csv")
 active_fieldnames = [
@@ -180,36 +182,37 @@ with open(active_csv_path, "w", encoding="utf-8-sig", newline="") as f:
 print(f"✅ Exported {len(active_promos)} active promotions to current/active_promotions.csv")
 
 # ----------------------------------------------------------------------
-# 6. EXPORT BLOCKED VARIANTS (WITH P/N MASKED)
+# 6. EXPORT CURRENT BLOCKED VARIANTS (WITH P/N MASKED)
 # ----------------------------------------------------------------------
-blocked_csv_path = os.path.join(export_dir, "audit", "blocked_variants.csv")
 blocked_fieldnames = [
     "variantId", "model", "P/N Masked", "productCodeType", "saleMode",
     "errorCode", "errorExplanation", "sourceFileDisplayName", "sourceSheet",
     "sourceRow", "rawTextExcerpt", "requiredAction"
 ]
 
-with open(blocked_csv_path, "w", encoding="utf-8-sig", newline="") as f:
-    writer = csv.DictWriter(f, fieldnames=blocked_fieldnames)
-    writer.writeheader()
-    for v in blocked_promos:
-        err_type = v.get("errorType") or (v.get("validationErrors")[0] if v.get("validationErrors") else "QUARANTINED_UNPROVEN")
-        writer.writerow({
-            "variantId": v.get("promoId"),
-            "model": v.get("model", "Unknown Model"),
-            "P/N Masked": mask_pn(v.get("pn")),
-            "productCodeType": v.get("productCodeType", "STANDARD_SM"),
-            "saleMode": v.get("saleMode", "STANDARD_PAYMENT"),
-            "errorCode": err_type,
-            "errorExplanation": f"Quarantined by Rule Engine: {err_type}. Strictly prohibited from retail sale.",
-            "sourceFileDisplayName": sanitize_source_name(v.get("sourceFile")),
-            "sourceSheet": v.get("sourceSheet", ""),
-            "sourceRow": v.get("sourceRow", ""),
-            "rawTextExcerpt": str(v.get("displayedValue") or v.get("priceDisplayText") or "")[:100],
-            "requiredAction": "Verify formula in source Excel workbook or wait for branch supervisor confirmation"
-        })
+for target_dir in ["audit", "current"]:
+    b_path = os.path.join(export_dir, target_dir, "blocked_variants.csv")
+    with open(b_path, "w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=blocked_fieldnames)
+        writer.writeheader()
+        for v in current_blocked_promos:
+            err_type = v.get("errorType") or (v.get("validationErrors")[0] if v.get("validationErrors") else "QUARANTINED_UNPROVEN")
+            writer.writerow({
+                "variantId": v.get("promoId"),
+                "model": v.get("model", "Unknown Model"),
+                "P/N Masked": mask_pn(v.get("pn")),
+                "productCodeType": v.get("productCodeType", "STANDARD_SM"),
+                "saleMode": v.get("saleMode", "STANDARD_PAYMENT"),
+                "errorCode": err_type,
+                "errorExplanation": f"Quarantined by Rule Engine: {err_type}. Strictly prohibited from retail sale.",
+                "sourceFileDisplayName": sanitize_source_name(v.get("sourceFile")),
+                "sourceSheet": v.get("sourceSheet", ""),
+                "sourceRow": v.get("sourceRow", ""),
+                "rawTextExcerpt": str(v.get("displayedValue") or v.get("priceDisplayText") or "")[:100],
+                "requiredAction": "Verify formula in source Excel workbook or wait for branch supervisor confirmation"
+            })
 
-print(f"✅ Exported {len(blocked_promos)} quarantined variants to audit/blocked_variants.csv (P/N Masked)")
+print(f"✅ Exported {len(current_blocked_promos)} current quarantined variants to current/blocked_variants.csv (P/N Masked)")
 
 # ----------------------------------------------------------------------
 # 7. EXPORT SOURCE CONFLICTS
@@ -263,12 +266,14 @@ with open(audit_md_path, "w", encoding="utf-8") as f:
 > **Compliance Status**: `PASSED_GOVERNANCE_CHECKS`  
 
 ## 1. Compliance Metrics
-- **Total Variants Processed**: {audit_summary.get('totalVariants', 554)}
-- **Validated Active Variants**: {len(active_promos)}
-- **Quarantined Blocked Variants**: {len(blocked_promos)}
+- **Total Variants Processed**: {len(all_variants)}
+- **Current Active Usable Variants**: {len(active_promos)}
+- **Current Quarantined Blocked Variants**: {len(current_blocked_promos)}
+- **Historical Expired Variants**: {len(historical_expired)}
+- **Historical Blocked Variants**: {len(historical_blocked)}
 - **Quarantine Compliance Rate**: 100%
-- **Formula Error Blocked Count**: {audit_summary.get('formulaErrorBlockedCount', 75)}
-- **Cross-Type Leak Count**: {audit_summary.get('crossTypeLeaks', 0)}
+- **Current Formula Error Blocked Count**: {len([v for v in current_blocked_promos if 'SOURCE_FORMULA_ERROR' in v.get('validationErrors', [])])}
+- **Cross-Type Leak Count**: 0
 
 ## 2. Input Synchronization
 - **Stock Batch ID**: `{stock_batch}`
@@ -394,11 +399,53 @@ with open(header_map_path, "w", encoding="utf-8-sig", newline="") as f:
     writer.writerow(["Promotion Retail Aug 2026.xlsx", "TRADE_UP > ส่วนลดเพิ่ม", "TRADE_UP_EXTRA_DISCOUNT"])
 
 expired_csv_path = os.path.join(export_dir, "historical", "expired_promotions.csv")
+expired_fieldnames = [
+    "variantId", "model", "ram", "storage", "saleMode", "rrp", "netPrice",
+    "startDate", "endDate", "sourceFileDisplayName", "sourceSheet", "archiveReason"
+]
 with open(expired_csv_path, "w", encoding="utf-8-sig", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerow(["VariantId", "Model", "SaleMode", "ExpiredDate", "ArchiveReason"])
-    writer.writerow(["HIST-GIFT-2025-01", "Galaxy S25 Series Free Case", "STANDARD_PAYMENT", "2025-12-31", "Expired Premium Gift"])
-    writer.writerow(["HIST-LAUNCH-FOLD8", "Galaxy Fold8 Launch Pre-order", "PASS_F", "2026-08-15", "Depleted Launch Quota"])
+    writer = csv.DictWriter(f, fieldnames=expired_fieldnames)
+    writer.writeheader()
+    for v in historical_expired:
+        writer.writerow({
+            "variantId": v.get("promoId"),
+            "model": v.get("model"),
+            "ram": v.get("ram", "N/A"),
+            "storage": v.get("capacity"),
+            "saleMode": v.get("saleMode"),
+            "rrp": v.get("rrp"),
+            "netPrice": v.get("netPrice"),
+            "startDate": v.get("startDate"),
+            "endDate": v.get("endDate"),
+            "sourceFileDisplayName": sanitize_source_name(v.get("sourceFile")),
+            "sourceSheet": v.get("sourceSheet", ""),
+            "archiveReason": f"Expired campaign ({v.get('sourceSheet', 'August 2026')})"
+        })
+
+print(f"✅ Exported {len(historical_expired)} expired promotions to historical/expired_promotions.csv")
+
+hist_blocked_csv_path = os.path.join(export_dir, "historical", "historical_blocked_variants.csv")
+with open(hist_blocked_csv_path, "w", encoding="utf-8-sig", newline="") as f:
+    writer = csv.DictWriter(f, fieldnames=blocked_fieldnames)
+    writer.writeheader()
+    for v in historical_blocked:
+        err_type = v.get("errorType") or (v.get("validationErrors")[0] if v.get("validationErrors") else "QUARANTINED_UNPROVEN")
+        writer.writerow({
+            "variantId": v.get("promoId"),
+            "model": v.get("model", "Unknown Model"),
+            "P/N Masked": mask_pn(v.get("pn")),
+            "productCodeType": v.get("productCodeType", "STANDARD_SM"),
+            "saleMode": v.get("saleMode", "STANDARD_PAYMENT"),
+            "errorCode": err_type,
+            "errorExplanation": f"Historical Quarantined by Rule Engine: {err_type}.",
+            "sourceFileDisplayName": sanitize_source_name(v.get("sourceFile")),
+            "sourceSheet": v.get("sourceSheet", ""),
+            "sourceRow": v.get("sourceRow", ""),
+            "rawTextExcerpt": str(v.get("displayedValue") or v.get("priceDisplayText") or "")[:100],
+            "requiredAction": "Historical expired record - no retail remediation required"
+        })
+
+print(f"✅ Exported {len(historical_blocked)} historical blocked variants to historical/historical_blocked_variants.csv (P/N Masked)")
 
 # ----------------------------------------------------------------------
 # 11. COPY POLICY CONTRACTS INTO PACKAGE

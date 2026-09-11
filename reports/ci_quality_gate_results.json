@@ -5,8 +5,8 @@
     "passedCount": 11,
     "warningCount": 0,
     "violationCount": 0,
-    "executedAt": "2026-09-07T16:12:01.263054",
-    "commitSha": "0c5ef9c"
+    "executedAt": "2026-09-11T12:18:34.986270",
+    "commitSha": "4b39a03"
   },
   "gates": [
     {
@@ -19,8 +19,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-02-PRICE-EQUATION",
@@ -32,8 +32,8 @@
       "evidence": {
         "mismatches": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-03-STUDENT-RULE",
@@ -45,8 +45,8 @@
       "evidence": {
         "violations": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-04-PASS-F-ISOLATION",
@@ -58,8 +58,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-05-TRADE-UP-ISOLATION",
@@ -71,8 +71,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-06-STOCK-SUM",
@@ -84,8 +84,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-07-A07-GOLDEN",
@@ -107,8 +107,8 @@
         ],
         "mismatches": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "RULE-08-SECRET-LEAK",
@@ -120,8 +120,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "GATE-EXACT-PN",
@@ -132,13 +132,39 @@
       "affectedRecords": 0,
       "evidence": {
         "gate": "EXACT_PN_QUALITY_GATE",
+        "gateId": "EXACT_PN_GATE",
+        "executed": true,
+        "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-07T16:12:01.263054",
-        "commitSha": "0c5ef9c",
+        "executedAt": "2026-09-11T12:18:34.986270",
+        "commitSha": "4b39a03",
+        "inputFiles": {
+          "stockMaster": {
+            "path": "stock_full_data.json",
+            "sha256": "36b702f1b314d79d5808c0ba88f569128b931a0646e3e0c72bd24db701cac44f"
+          },
+          "promotions": {
+            "path": "promotion_variants.json",
+            "sha256": "021c67fdf291f896dc34db1b1912fb077b80b59eed0dbe9b4e4c6ec2fa9fb1a4"
+          }
+        },
+        "counts": {
+          "variantsChecked": 129,
+          "exactPnRequired": 18,
+          "exactPnMatched": 18,
+          "modelScopeMatched": 111,
+          "pnNotFound": 0,
+          "productTypeMismatch": 0,
+          "capacityMismatch": 0,
+          "connectivityMismatch": 0,
+          "ambiguousMatches": 0,
+          "violationCount": 0
+        },
         "totalActiveVariantsEvaluated": 129,
         "exactPnMatches": 18,
         "modelCapacityScopeMatches": 111,
         "violationCount": 0,
+        "affectedVariantIds": [],
         "violations": [],
         "rulesEnforced": [
           "PN_NOT_FOUND",
@@ -147,10 +173,11 @@
           "CAPACITY_MISMATCH",
           "CONNECTIVITY_MISMATCH",
           "AMBIGUOUS_MODEL_MATCH"
-        ]
+        ],
+        "generatedAt": "2026-09-11T12:18:34.986270"
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "GATE-BATCH-CONSISTENCY",
@@ -161,9 +188,12 @@
       "affectedRecords": 0,
       "evidence": {
         "gate": "BATCH_CONSISTENCY_GATE",
+        "gateId": "BATCH_CONSISTENCY_GATE",
+        "executed": true,
+        "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-07T16:12:01.263054",
-        "commitSha": "0c5ef9c",
+        "executedAt": "2026-09-11T12:18:34.986270",
+        "commitSha": "4b39a03",
         "verifiedInputs": {
           "stockBatchId": "IMPORT-20260906-002",
           "promotionBatchId": "BATCH-20260907-105441",
@@ -172,11 +202,25 @@
           "businessRulesVersion": "1.0.0",
           "applicationCommit": "802a786"
         },
+        "inputFiles": {
+          "stock_data.js": "b87776743709471bc53177696695208b8039321f6bf4a2a4df70fbd4f1583673",
+          "promotion_variants.js": "e1cb478babe5cb189352d90c9d08b717b0505063d7dd3f9d126f54326a2e2b6e",
+          "audit_summary.json": "2bff11704ce9c0697592ffe2cc8bcc73f31c6de0630f96c1bed4f573a1e9cbf5",
+          "business_rules.json": "539a8b20045528cd81fca1e7c38e51ce537daf534b88b43f910fd2551dfcaf58",
+          "runtime_manifest.json": "0d9b238613ebc1dc4946a111bbbde5fbec683e19ab859fea2cbbc47fa6260946"
+        },
+        "counts": {
+          "staleAuditCount": 0,
+          "batchMismatchCount": 0,
+          "ruleVersionMismatchCount": 0,
+          "violationCount": 0
+        },
         "violationCount": 0,
-        "violations": []
+        "violations": [],
+        "generatedAt": "2026-09-11T12:18:34.986270"
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     },
     {
       "ruleId": "GATE-RUNTIME-HASH",
@@ -188,15 +232,15 @@
       "evidence": {
         "gate": "RUNTIME_HASH_VERIFICATION_GATE",
         "status": "PASSED",
-        "executedAt": "2026-09-07T16:12:01.263054",
-        "commitSha": "0c5ef9c",
+        "executedAt": "2026-09-11T12:18:34.986270",
+        "commitSha": "4b39a03",
         "totalManifestFiles": 19,
         "verifiedFileCount": 19,
         "violationCount": 0,
         "violations": []
       },
-      "executedAt": "2026-09-07T16:12:01.263054",
-      "commitSha": "0c5ef9c"
+      "executedAt": "2026-09-11T12:18:34.986270",
+      "commitSha": "4b39a03"
     }
   ]
 }

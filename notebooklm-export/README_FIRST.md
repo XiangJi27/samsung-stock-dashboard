@@ -1,7 +1,7 @@
 # INSTRUCTIONS FOR GOOGLE NOTEBOOKLM: STRICT READ-ONLY KNOWLEDGE ASSISTANT
 
-> **Package ID**: `NBLM-EXPORT-20260907-001`  
-> **Generation Timestamp**: `2026-09-07T16:09:59.158568`  
+> **Package ID**: `NBLM-EXPORT-20260911-001`  
+> **Generation Timestamp**: `2026-09-11T12:18:36.807837`  
 > **Status**: `CURRENT`  
 
 ---

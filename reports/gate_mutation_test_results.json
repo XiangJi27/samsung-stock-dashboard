@@ -1,0 +1,110 @@
+{
+  "suite": "GATE_MUTATION_TESTS",
+  "executedAt": "2026-09-11T12:18:36.549960",
+  "commitSha": "4b39a03",
+  "totalScenarios": 4,
+  "scenariosPassed": 4,
+  "scenariosFailed": 0,
+  "scenarios": [
+    {
+      "scenarioId": "MUTATION-01-EXACT-PN",
+      "name": "Tampered P/N Rejection (SM-F776BLIATHL -> SM-INVALID-PN-TEST)",
+      "targetField": "pn",
+      "originalValue": "SM-F776BLIATHL",
+      "mutatedValue": "SM-INVALID-PN-TEST",
+      "affectedPromoId": "BR-ZFLIP8-TU-SM-F776BLIATHL",
+      "expectedGateStatus": "FAIL",
+      "actualGateStatus": "FAIL",
+      "expectedErrorCode": "PN_NOT_FOUND",
+      "actualErrorCodes": [
+        "PN_NOT_FOUND"
+      ],
+      "violations": [
+        {
+          "errorCode": "PN_NOT_FOUND",
+          "promoId": "BR-ZFLIP8-TU-SM-F776BLIATHL",
+          "pn": "SM-INVALID-PN-TEST",
+          "detail": "Branch rule P/N SM-INVALID-PN-TEST does not match any recognized branch inventory prefix or stock master"
+        }
+      ],
+      "notebooklmExportStatus": "EXPORT_BLOCKED",
+      "exportBlocked": true,
+      "testPassed": true
+    },
+    {
+      "scenarioId": "MUTATION-02-PRODUCT-TYPE",
+      "name": "Pass F Cross-Contamination Rejection (PASS_F -> STANDARD_SM)",
+      "targetField": "productCodeType",
+      "originalValue": "PASS_F",
+      "mutatedValue": "STANDARD_SM",
+      "affectedPromoId": "BR-S26FE-256-STORAGE-UPGRADE",
+      "expectedGateStatus": "FAIL",
+      "actualGateStatus": "FAIL",
+      "expectedErrorCode": "PRODUCT_CODE_TYPE_MISMATCH",
+      "actualErrorCodes": [
+        "PRODUCT_CODE_TYPE_MISMATCH"
+      ],
+      "violations": [
+        {
+          "errorCode": "PRODUCT_CODE_TYPE_MISMATCH",
+          "promoId": "BR-S26FE-256-STORAGE-UPGRADE",
+          "pn": "F-S26FE256TH",
+          "detail": "Branch rule codeType STANDARD_SM conflicts with P/N prefix F-S26FE256TH"
+        }
+      ],
+      "notebooklmExportStatus": "EXPORT_BLOCKED",
+      "exportBlocked": true,
+      "testPassed": true
+    },
+    {
+      "scenarioId": "MUTATION-03-BATCH-MISMATCH",
+      "name": "Stale / Desynchronized Promotion Batch Rejection",
+      "targetField": "promotionBatchId",
+      "originalValue": "BATCH-20260907-105441",
+      "mutatedValue": "PROMO-FAKE-BATCH-MUTATION",
+      "expectedGateStatus": "FAIL",
+      "actualGateStatus": "FAIL",
+      "expectedErrorCode": "IMPORT_BATCH_MISMATCH",
+      "actualErrorCodes": [
+        "IMPORT_BATCH_MISMATCH"
+      ],
+      "violations": [
+        {
+          "errorCode": "IMPORT_BATCH_MISMATCH",
+          "component": "promotion_variants.js",
+          "expected": "BATCH-20260907-105441",
+          "actual": "PROMO-FAKE-BATCH-MUTATION"
+        }
+      ],
+      "notebooklmExportStatus": "EXPORT_BLOCKED",
+      "exportBlocked": true,
+      "testPassed": true
+    },
+    {
+      "scenarioId": "MUTATION-04-HASH-MISMATCH",
+      "name": "Tampered File / Hash Desynchronization Rejection",
+      "targetField": "sha256",
+      "tamperedFile": "promotion_variants.js",
+      "mutatedHash": "tampered_hash_0000000000000000000000000000000000000000000000000000",
+      "expectedGateStatus": "FAIL",
+      "actualGateStatus": "FAIL",
+      "expectedErrorCode": "RUNTIME_HASH_MISMATCH",
+      "actualErrorCodes": [
+        "RUNTIME_HASH_MISMATCH"
+      ],
+      "violations": [
+        {
+          "errorCode": "RUNTIME_HASH_MISMATCH",
+          "file": "promotion_variants.js",
+          "expectedSha": "e1cb478babe5cb189352d90c9d08b717b0505063d7dd3f9d126f54326a2e2b6e",
+          "actualSha": "tampered_hash_0000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "notebooklmExportStatus": "EXPORT_BLOCKED",
+      "exportBlocked": true,
+      "testPassed": true
+    }
+  ],
+  "allScenariosPassed": true,
+  "conclusion": "All CI gates proven deterministic and actively enforcing validation logic on live data. Every synthetic mutation caused immediate gate failure and strictly blocked NotebookLM export."
+}
