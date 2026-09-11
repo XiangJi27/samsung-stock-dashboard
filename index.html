@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/css/navigation.css?v=20260907-b2">
   <link rel="stylesheet" href="assets/css/home.css?v=20260907-b2">
   <link rel="stylesheet" href="assets/css/responsive.css?v=20260907-b2">
+  <link rel="stylesheet" href="assets/css/importer.css?v=20260911-c1">
   <link rel="stylesheet" href="style.css?v=20260907-b2">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
@@ -45,13 +46,32 @@
             <a href="#/stock" class="nav-item-link" id="navLinkStock">
               <span class="nav-icon">📦</span>
               <span class="nav-label">สต็อกสาขา</span>
-              <span class="nav-badge-pill badge-live-count">218 รายการ</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/stock-import" class="nav-item-link" id="navLinkStockImport">
+              <span class="nav-icon">📥</span>
+              <span class="nav-label">นำเข้าสต็อกจาก Excel</span>
+              <span class="nav-badge-pill badge-live-count">2 Sheets</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/stock-import-history" class="nav-item-link" id="navLinkStockHistory">
+              <span class="nav-icon">🕒</span>
+              <span class="nav-label">ประวัติการนำเข้าสต็อก</span>
             </a>
           </li>
           <li>
             <a href="#/promotions" class="nav-item-link" id="navLinkPromotions">
               <span class="nav-icon">🏷️</span>
               <span class="nav-label">โปรโมชั่น</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/promotion-import" class="nav-item-link" id="navLinkPromotionImport">
+              <span class="nav-icon">⚡</span>
+              <span class="nav-label">นำเข้าราคาและโปรโมชั่น</span>
+              <span class="nav-badge-pill badge-live-count" style="background: rgba(0, 243, 255, 0.15); color: #00f3ff;">5 ด่าน</span>
             </a>
           </li>
           <li>
@@ -213,7 +233,7 @@
           <h1 class="main-title">
             <span class="text-samsung">SAMSUNG</span> STOCK & PROMOTIONS
           </h1>
-          <p class="sub-title">ระบบจัดการและเช็กสต็อกสาขาแบบเรียลไทม์ • ข้อมูลซิงค์จาก Stock.xlsx (Promotion Sheet)</p>
+          <p class="sub-title">ระบบจัดการและเช็กสต็อกสาขา • ข้อมูลล่าสุดจาก Excel Snapshot (Stock.xlsx)</p>
         </div>
       </div>
 
@@ -1460,15 +1480,15 @@
       </div>
     </div>
 
-    <!-- Nimbus Stock Paste Modal (วางสต็อก Nimbus) -->
+    <!-- Nimbus Stock Paste Modal (นำเข้า Snapshot จาก Nimbus) -->
     <div id="nimbusModal" class="modal-backdrop hidden">
       <div class="modal-card">
         <div class="modal-header">
           <div class="modal-title-group">
-            <span class="modal-icon">🔄</span>
+            <span class="modal-icon">📋</span>
             <div>
-              <h2 class="modal-title">อัปเดตสต็อกจากระบบ Nimbus POS</h2>
-              <p class="modal-subtitle">Nimbus ➔ Copy ➔ วาง ➔ กดอัปเดตสต็อกหน้าร้าน</p>
+              <h2 class="modal-title">นำเข้า Snapshot จากระบบ Nimbus POS</h2>
+              <p class="modal-subtitle">Nimbus ➔ Copy ➔ วาง ➔ กดนำเข้า Snapshot หน้าร้าน</p>
             </div>
           </div>
           <button id="btnCloseNimbusModal" class="btn-close-modal">&times;</button>
@@ -1476,23 +1496,23 @@
 
         <div class="modal-body">
           <div class="nimbus-guide-banner">
-            <span>📋 วิธีใช้งาน: เข้า Nimbus ➔ Copy ตารางสต็อก ➔ วางลงในช่องด้านล่าง ➔ กดอัปเดตสต็อก</span>
+            <span>📋 วิธีใช้งาน: เข้า Nimbus ➔ Copy ตารางสต็อก ➔ วางลงในช่องด้านล่าง ➔ กดนำเข้า Snapshot</span>
           </div>
           <div class="nimbus-paste-box">
             <textarea id="nimbusPasteInput" placeholder="วางข้อมูลสต็อกที่ Copy จาก Nimbus ที่นี่ (หรือกดปุ่ม 'ดึงยอดล่าสุด' ด้านล่าง)..." rows="6"></textarea>
           </div>
           <div class="nimbus-meta-footer">
-            <span>เวลา Copy สต็อกจาก Nimbus ล่าสุด: <strong id="nimbusLastCopyTime" class="text-cyan">16:35 น.</strong></span>
-            <span>สถานะ: <strong class="text-emerald">พร้อมซิงค์</strong></span>
+            <span>เวลาคัดลอกสต็อกจาก Nimbus ล่าสุด: <strong id="nimbusLastCopyTime" class="text-cyan">16:35 น.</strong></span>
+            <span>สถานะ: <strong class="text-emerald">พร้อมนำเข้า Snapshot</strong></span>
           </div>
         </div>
 
         <div class="modal-footer">
           <button id="btnExecuteNimbusUpdate" class="btn-primary-action">
-            <span>⚡ บันทึกและอัปเดตสต็อก</span>
+            <span>⚡ นำเข้า Stock Snapshot</span>
           </button>
           <button id="btnQuickSyncNimbus" class="btn-secondary-action">
-            <span>🔄 ซิงค์ด่วนอัตโนมัติ</span>
+            <span>📋 นำเข้าข้อมูลล่าสุด</span>
           </button>
         </div>
       </div>
@@ -1522,6 +1542,316 @@
         <!-- VIEW 4: PROMOTIONS -->
         <section id="view-promotions" class="app-view">
           <div id="promotionsViewContent" class="home-view-container"></div>
+        </section>
+
+        <!-- VIEW: PROMOTION IMPORT CENTER -->
+        <section id="view-promotion-import" class="app-view">
+          <div class="importer-container">
+            <!-- Local Storage Banner -->
+            <div class="local-store-banner">
+              <div class="local-store-banner-left">
+                <span class="local-store-icon">🛡️</span>
+                <div>
+                  <strong class="local-store-tag">PROMOTION QUALITY GATE</strong>
+                  <span class="local-store-desc">รองรับ .xlsx, รูปภาพ (OCR Draft) และ .txt (Rule Draft) • ห้ามเขียนทับข้อมูลโดยไม่ผ่านการตรวจสอบและกดยืนยัน</span>
+                </div>
+              </div>
+              <span class="local-store-badge">Storage: LOCAL_BROWSER_ONLY</span>
+            </div>
+
+            <!-- Importer Header Card -->
+            <div class="importer-header-card">
+              <div class="importer-title-group">
+                <h2><span>⚡ นำเข้าราคาและโปรโมชั่น (Promotion Import Center)</span></h2>
+                <p>ระบบนำเข้าโปรโมชั่น 5 ขั้นตอน (Upload ➔ Extract ➔ Preview ➔ Validate ➔ Confirm &amp; Publish) พร้อมด่านคัดกรองอัตโนมัติ</p>
+              </div>
+              <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/promotions')">
+                <span>🏷️ กลับไปดูโปรโมชั่น &rarr;</span>
+              </button>
+            </div>
+
+            <!-- 5-Step Staging Stepper -->
+            <div class="staging-stepper" id="promoStepper">
+              <div class="step-item active">
+                <span class="step-circle">1</span>
+                <span class="step-label">1. อัปโหลด</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">2</span>
+                <span class="step-label">2. สกัดข้อมูล (Extract)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">3</span>
+                <span class="step-label">3. ดูตัวอย่าง (Preview Diff)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">4</span>
+                <span class="step-label">4. ตรวจสอบกฎ (Validate)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">5</span>
+                <span class="step-label">5. เผยแพร่ (Publish)</span>
+              </div>
+            </div>
+
+            <!-- Upload Dropzone Card -->
+            <div class="upload-dropzone-card" id="promoUploadDropzone">
+              <div class="dropzone-icon">📥</div>
+              <h3 class="dropzone-title">เลือกไฟล์โปรโมชั่น (.xlsx, .png, .jpg, .webp, .txt)</h3>
+              <p class="dropzone-sub">
+                Excel จะผ่าน Header-Guided Parser อัตโนมัติ • รูปภาพจะเข้าสถานะ DRAFT_FROM_OCR (ต้องผ่านการตรวจโดยมนุษย์) • ข้อความ TXT จะเข้าสถานะ BRANCH_RULE_DRAFT (ไม่เขียนทับ Master โดยตรง)
+              </p>
+              <div class="dropzone-types-pill">
+                <span class="type-pill active">📊 Excel .xlsx</span>
+                <span class="type-pill active">🖼️ Images .png / .jpg / .webp</span>
+                <span class="type-pill active">📝 Text .txt</span>
+                <span class="type-pill">🔒 ตรวจสอบ Magic Bytes &amp; Macro</span>
+              </div>
+              <input type="file" id="promoCenterFileInput" accept=".xlsx,.png,.jpg,.jpeg,.webp,.txt" style="display: none;">
+              <div id="promoUploadStatus" style="margin-top: 14px; font-size: 0.86rem; font-weight: 600;"></div>
+            </div>
+
+            <!-- Preview & Diff Section (Initially Hidden) -->
+            <div id="promoPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+              <div class="diff-kpi-grid">
+                <div class="diff-kpi-box cyan">
+                  <span class="diff-kpi-label">รายการโปรโมชั่นที่อ่านได้</span>
+                  <strong class="diff-kpi-val" id="promoKpiTotal">0</strong>
+                  <span class="diff-kpi-sub">Total Variants Read</span>
+                </div>
+                <div class="diff-kpi-box emerald">
+                  <span class="diff-kpi-label">🟢 ผ่านการตรวจสอบ (Passed)</span>
+                  <strong class="diff-kpi-val text-emerald" id="promoKpiPassed">0</strong>
+                  <span class="diff-kpi-sub">พร้อม Publish สู่ระบบ</span>
+                </div>
+                <div class="diff-kpi-box amber">
+                  <span class="diff-kpi-label">🟡 ต้องตรวจทาน (Review Required)</span>
+                  <strong class="diff-kpi-val text-amber" id="promoKpiReview">0</strong>
+                  <span class="diff-kpi-sub">Image OCR / TXT Draft</span>
+                </div>
+                <div class="diff-kpi-box coral">
+                  <span class="diff-kpi-label">🔴 ถูกกักกัน (Blocked)</span>
+                  <strong class="diff-kpi-val text-coral" id="promoKpiBlocked">0</strong>
+                  <span class="diff-kpi-sub">สมการผิด / ไม่พบ P/N</span>
+                </div>
+              </div>
+
+              <!-- Diff Table Container -->
+              <div class="diff-table-container">
+                <div class="diff-table-header">
+                  <h4 class="diff-table-title">รายการโปรโมชั่นและผลการตรวจสอบ (Promotion Diff &amp; Quality Gate)</h4>
+                  <div class="table-filter-tabs">
+                    <button class="tab-filter-btn active promo-tab-filter" data-filter="ALL">ทั้งหมด</button>
+                    <button class="tab-filter-btn promo-tab-filter" data-filter="PASSED">เฉพาะที่ผ่าน</button>
+                    <button class="tab-filter-btn promo-tab-filter" data-filter="REVIEW">ต้องตรวจทาน</button>
+                    <button class="tab-filter-btn promo-tab-filter" data-filter="BLOCKED">ถูกกักกัน</button>
+                  </div>
+                </div>
+                <div style="overflow-x: auto; max-height: 480px;">
+                  <table class="diff-table">
+                    <thead>
+                      <tr>
+                        <th>P/N &amp; ชื่อรุ่น</th>
+                        <th>ประเภทโค้ด</th>
+                        <th>ราคาปกติ (RRP)</th>
+                        <th>ส่วนลด</th>
+                        <th>ราคาสุทธิ (Net Price)</th>
+                        <th>คูปอง</th>
+                        <th>Sale Mode</th>
+                        <th>ผลการตรวจสอบ</th>
+                        <th>หมายเหตุ / Flags</th>
+                      </tr>
+                    </thead>
+                    <tbody id="promoDiffTableBody">
+                      <!-- Rendered by promotion-importer.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Confirmation Actions -->
+              <div class="importer-footer-actions">
+                <button class="btn-cancel-import" id="btnCancelPromoImport">
+                  <span>ยกเลิก</span>
+                </button>
+                <button class="btn-confirm-import" id="btnConfirmPromoPublish">
+                  <span>⚡ ยืนยันการเผยแพร่ (Confirm &amp; Publish)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW: STOCK IMPORT -->
+        <section id="view-stock-import" class="app-view">
+          <div class="importer-container">
+            <!-- Local Storage Banner -->
+            <div class="local-store-banner">
+              <div class="local-store-banner-left">
+                <span class="local-store-icon">⚠️</span>
+                <div>
+                  <strong class="local-store-tag">LOCAL_BROWSER_ONLY</strong>
+                  <span class="local-store-desc">ข้อมูล Stock Snapshot จัดเก็บใน IndexedDB ของเครื่องนี้เท่านั้น ยังไม่ได้เชื่อมต่อ API Nimbus หรือฐานข้อมูลกลาง</span>
+                </div>
+              </div>
+              <span class="local-store-badge">Update Method: MANUAL_EXCEL_SNAPSHOT</span>
+            </div>
+
+            <!-- Importer Header Card -->
+            <div class="importer-header-card">
+              <div class="importer-title-group">
+                <h2><span>📥 นำเข้าสต็อกจาก Excel (Stock Snapshot Import)</span></h2>
+                <p>รองรับไฟล์ Stock.xlsx (Sheet1 = ร้านเรา ชั้น 1 [f1], Sheet2 = สาขา ชั้น 2 [f2]) • เชื่อมโยง Exact P/N อัตโนมัติ</p>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock-import-history')">
+                  <span>🕒 ดูประวัติการนำเข้า</span>
+                </button>
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock')">
+                  <span>📦 กลับไปดูสต็อก &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3-Step Staging Stepper -->
+            <div class="staging-stepper" id="stockStepper">
+              <div class="step-item active">
+                <span class="step-circle">1</span>
+                <span class="step-label">1. อัปโหลดไฟล์ (.xlsx)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">2</span>
+                <span class="step-label">2. ตรวจสอบข้อมูล &amp; Diff</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">3</span>
+                <span class="step-label">3. ยืนยัน Snapshot</span>
+              </div>
+            </div>
+
+            <!-- Upload Dropzone Card -->
+            <div class="upload-dropzone-card" id="stockUploadDropzone">
+              <div class="dropzone-icon">📊</div>
+              <h3 class="dropzone-title">ลากไฟล์ Stock.xlsx มาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์</h3>
+              <p class="dropzone-sub">ระบบจะตรวจ Header, จับคู่ Exact P/N, ดึงเฉพาะยอด On Hand และทำ Full Outer Join ระหว่าง Sheet1 และ Sheet2 โดยไม่แตะต้องราคาโปรโมชั่น</p>
+              <div class="dropzone-types-pill">
+                <span class="type-pill active">รองรับเฉพาะ .xlsx</span>
+                <span class="type-pill">ต้องมี Sheet1 &amp; Sheet2</span>
+                <span class="type-pill">ใช้คอลัมน์ On Hand</span>
+                <span class="type-pill">แยก Price 99 เป็นราคาอ้างอิง</span>
+              </div>
+              <input type="file" id="stockFileInput" accept=".xlsx" style="display: none;">
+              <div id="stockUploadStatus" style="margin-top: 14px; font-size: 0.86rem; font-weight: 600;"></div>
+            </div>
+
+            <!-- Preview & Diff Section (Initially Hidden) -->
+            <div id="stockPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- KPI Summary Grid -->
+              <div class="diff-kpi-grid">
+                <div class="diff-kpi-box cyan">
+                  <span class="diff-kpi-label">จำนวนสินค้าทั้งหมด</span>
+                  <strong class="diff-kpi-val" id="stkKpiUnique">0</strong>
+                  <span class="diff-kpi-sub">Unique Exact P/N</span>
+                </div>
+                <div class="diff-kpi-box cyan">
+                  <span class="diff-kpi-label">ยอดร้านเรา (ช1 / f1)</span>
+                  <strong class="diff-kpi-val text-cyan" id="stkKpiF1">0</strong>
+                  <span class="diff-kpi-sub">Sheet1 On Hand</span>
+                </div>
+                <div class="diff-kpi-box amber">
+                  <span class="diff-kpi-label">ยอดสาขา (ช2 / f2)</span>
+                  <strong class="diff-kpi-val text-amber" id="stkKpiF2">0</strong>
+                  <span class="diff-kpi-sub">Sheet2 On Hand</span>
+                </div>
+                <div class="diff-kpi-box emerald">
+                  <span class="diff-kpi-label">ยอดรวมสองชั้น</span>
+                  <strong class="diff-kpi-val text-emerald" id="stkKpiTotal">0</strong>
+                  <span class="diff-kpi-sub">f1 + f2</span>
+                </div>
+                <div class="diff-kpi-box coral">
+                  <span class="diff-kpi-label">สต็อกที่มีการเปลี่ยนแปลง</span>
+                  <strong class="diff-kpi-val text-coral" id="stkKpiChanged">0</strong>
+                  <span class="diff-kpi-sub">เทียบกับ Snapshot ปัจจุบัน</span>
+                </div>
+                <div class="diff-kpi-box">
+                  <span class="diff-kpi-label">สินค้าใหม่</span>
+                  <strong class="diff-kpi-val" id="stkKpiNew" style="color: #a78bfa;">0</strong>
+                  <span class="diff-kpi-sub">ไม่พบใน Snapshot เดิม</span>
+                </div>
+              </div>
+
+              <!-- Diff Table Container -->
+              <div class="diff-table-container">
+                <div class="diff-table-header">
+                  <h4 class="diff-table-title">ตารางเปรียบเทียบยอดสต็อก (Stock Diff Preview)</h4>
+                  <div class="table-filter-tabs">
+                    <button class="tab-filter-btn active stock-tab-filter" data-filter="ALL">ทั้งหมด</button>
+                    <button class="tab-filter-btn stock-tab-filter" data-filter="CHANGED">เฉพาะที่เปลี่ยน</button>
+                    <button class="tab-filter-btn stock-tab-filter" data-filter="NEW">สินค้าใหม่</button>
+                    <button class="tab-filter-btn stock-tab-filter" data-filter="CORE">เครื่องหลัก Core</button>
+                  </div>
+                </div>
+                <div style="overflow-x: auto; max-height: 480px;">
+                  <table class="diff-table">
+                    <thead>
+                      <tr>
+                        <th>P/N &amp; ชื่อรุ่น (Description)</th>
+                        <th>หมวดหมู่</th>
+                        <th>ร้านเรา (ช1)</th>
+                        <th>สาขา (ช2)</th>
+                        <th>รวม (f1+f2)</th>
+                        <th>Price 99 (อ้างอิง)</th>
+                        <th>สถานะการเปลี่ยน</th>
+                      </tr>
+                    </thead>
+                    <tbody id="stockDiffTableBody">
+                      <!-- Rendered by stock-importer.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Confirmation Actions -->
+              <div class="importer-footer-actions">
+                <button class="btn-cancel-import" id="btnCancelStockImport">
+                  <span>ยกเลิก</span>
+                </button>
+                <button class="btn-confirm-import" id="btnConfirmStockImport">
+                  <span>✓ ยืนยันการนำเข้า (Confirm Import)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW: STOCK IMPORT HISTORY -->
+        <section id="view-stock-import-history" class="app-view">
+          <div class="importer-container">
+            <div class="importer-header-card">
+              <div class="importer-title-group">
+                <h2><span>🕒 ประวัติการนำเข้า Stock Snapshot (Batch History &amp; Rollback)</span></h2>
+                <p>บันทึกประวัติการนำเข้าทุกรอบ พร้อมฟังก์ชันย้อนกลับไปยัง Snapshot ก่อนหน้า (One-Click Rollback)</p>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn-confirm-import" onclick="window.AppRouter.navigate('/stock-import')">
+                  <span>➕ นำเข้าสต็อกรอบใหม่</span>
+                </button>
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock')">
+                  <span>📦 กลับไปดูสต็อก &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="stockHistoryContent">
+              <!-- Rendered by stock-importer.js -->
+            </div>
+          </div>
         </section>
 
         <!-- VIEW 5: REPORTS -->
@@ -1609,6 +1939,8 @@
   <script src="assets/js/modules.js?v=20260907-b2"></script>
   <script src="assets/js/navigation.js?v=20260907-b2"></script>
   <script src="assets/js/router.js?v=20260907-b2"></script>
+  <script src="assets/js/stock-importer.js?v=20260911-c1"></script>
+  <script src="assets/js/promotion-importer.js?v=20260911-c1"></script>
 
   <!-- Login Form Submission Binding -->
   <script>

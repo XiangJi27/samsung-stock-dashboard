@@ -108,6 +108,18 @@ function renderSettingsView() {
         </div>
       </div>
 
+      <div class="action-center-card" style="margin-bottom: 24px;">
+        <h4 class="card-heading">📦 สถานะการเชื่อมต่อสต็อกและระบบภายนอก (Stock & Nimbus Status)</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; font-size: 0.85rem;">
+          <div class="meta-row"><span class="meta-label">Stock Auto Sync:</span> <strong class="meta-value text-coral">NOT_IMPLEMENTED</strong></div>
+          <div class="meta-row"><span class="meta-label">Stock Source:</span> <strong class="meta-value text-cyan">STATIC_EXCEL_SNAPSHOT</strong></div>
+          <div class="meta-row"><span class="meta-label">Nimbus API Connection:</span> <strong class="meta-value text-coral">NOT_CONFIGURED</strong></div>
+          <div class="meta-row"><span class="meta-label">Reconciliation Method:</span> <strong class="meta-value">MANUAL_COMPARISON_TOOL</strong></div>
+          <div class="meta-row"><span class="meta-label">Storage Adapter:</span> <span class="badge-dev-mode">LOCAL_BROWSER_ONLY (IndexedDB)</span></div>
+          <div class="meta-row"><span class="meta-label">Central Persistence:</span> <strong class="meta-value text-coral">NO</strong></div>
+        </div>
+      </div>
+
       <div class="action-center-card">
         <h4 class="card-heading">🚩 คุณสมบัติและฟีเจอร์ระบบ (Feature Flags)</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.82rem;">

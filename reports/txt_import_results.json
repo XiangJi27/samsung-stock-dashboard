@@ -1,0 +1,39 @@
+[
+  {
+    "result": {
+      "draftType": "BRANCH_RULE_DRAFT",
+      "ruleCount": 3,
+      "rules": [
+        {
+          "rawText": "Z Flip8 256GB Trade Up ลด 5,000 เหลือ 37,900",
+          "interpretedModel": "Z Flip8 256GB Trade Up",
+          "interpretedSaleMode": "TRADE_UP",
+          "interpretedDiscount": 5000.0,
+          "interpretedNetPrice": 37900.0,
+          "interpretationConfidence": 0.88,
+          "status": "BRANCH_RULE_DRAFT",
+          "requiresHumanConfirmation": true
+        },
+        {
+          "rawText": "พาส F ได้ Adapter Samsung",
+          "interpretedModel": "ALL_PASS_F",
+          "interpretedGift": "Adapter Samsung",
+          "interpretedSaleMode": "PASS_F_GIFT",
+          "interpretationConfidence": 0.92,
+          "status": "BRANCH_RULE_DRAFT",
+          "requiresHumanConfirmation": true
+        },
+        {
+          "rawText": "ข้อความโปรโมชั่นทั่วไปสาขาอยุธยาซิตี้พาร์ค",
+          "interpretedModel": "UNSTRUCTURED",
+          "interpretationConfidence": 0.4,
+          "status": "BRANCH_RULE_DRAFT",
+          "requiresHumanConfirmation": true
+        }
+      ],
+      "canAutoPublish": false,
+      "reviewRequirement": "Must be reviewed and compiled by Store Manager before Rule Engine execution"
+    },
+    "status": "PASSED"
+  }
+]

@@ -1,0 +1,60 @@
+[
+  {
+    "case": "High Confidence Flyer",
+    "result": {
+      "draftType": "DRAFT_FROM_OCR",
+      "rawOcrText": "Galaxy S25 Ultra ลดทันที 4,000 บาท คูปอง CPN-S25",
+      "detectedFields": {
+        "model": "Galaxy S25 Ultra",
+        "detectedPn": null,
+        "detectedPrice": 42900,
+        "detectedCoupon": "CPN-S25"
+      },
+      "fieldConfidences": {
+        "model": 0.95,
+        "price": 0.92,
+        "coupon": 0.91
+      },
+      "overallConfidence": 0.9267,
+      "status": "REVIEW_REQUIRED",
+      "canAutoPublish": false,
+      "requiresHumanReview": true,
+      "reviewChecklist": [
+        "Verify Exact P/N against Product Master",
+        "Confirm Final Price equation (RRP - Discount)",
+        "Validate Coupon Code spelling",
+        "Assign authorized Sale Mode"
+      ]
+    },
+    "status": "PASSED"
+  },
+  {
+    "case": "Low Confidence Blurred Photo",
+    "result": {
+      "draftType": "DRAFT_FROM_OCR",
+      "rawOcrText": "Ga1axy A0? ปร0โมชั่น 4,500 บ.",
+      "detectedFields": {
+        "model": "Galaxy A07",
+        "detectedPn": null,
+        "detectedPrice": 4500,
+        "detectedCoupon": ""
+      },
+      "fieldConfidences": {
+        "model": 0.62,
+        "price": 0.7,
+        "coupon": 0.4
+      },
+      "overallConfidence": 0.5733,
+      "status": "OCR_LOW_CONFIDENCE",
+      "canAutoPublish": false,
+      "requiresHumanReview": true,
+      "reviewChecklist": [
+        "Verify Exact P/N against Product Master",
+        "Confirm Final Price equation (RRP - Discount)",
+        "Validate Coupon Code spelling",
+        "Assign authorized Sale Mode"
+      ]
+    },
+    "status": "PASSED"
+  }
+]

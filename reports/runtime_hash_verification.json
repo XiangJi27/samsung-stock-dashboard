@@ -1,10 +1,10 @@
 {
   "gate": "RUNTIME_HASH_VERIFICATION_GATE",
   "status": "PASSED",
-  "executedAt": "2026-09-11T12:18:34.986270",
-  "commitSha": "4b39a03",
-  "totalManifestFiles": 19,
-  "verifiedFileCount": 19,
+  "executedAt": "2026-09-11T13:06:45.027793",
+  "commitSha": "f6678c8",
+  "totalManifestFiles": 22,
+  "verifiedFileCount": 22,
   "violationCount": 0,
   "violations": []
 }

@@ -1,0 +1,26 @@
+{
+  "testId": "ROLLBACK-TEST-001",
+  "description": "Simulated snapshot rollback to previous state",
+  "initialSnapshot": {
+    "batchId": "STOCK-SNAPSHOT-BASELINE-20260907",
+    "skuCount": 218,
+    "f1Total": 379,
+    "f2Total": 381,
+    "grandTotal": 760
+  },
+  "importedNewSnapshot": {
+    "batchId": "STOCK-BATCH-20260911-130551",
+    "skuCount": 399,
+    "f1Total": 1763,
+    "f2Total": 1649,
+    "grandTotal": 3412
+  },
+  "rollbackExecution": {
+    "initiatedAt": "2026-09-11T13:05:51.266186",
+    "action": "RESTORE_PREVIOUS_SNAPSHOT",
+    "restoredBatchId": "STOCK-SNAPSHOT-BASELINE-20260907",
+    "newBatchMarkedAs": "ROLLED_BACK",
+    "auditEventRecorded": true,
+    "status": "SUCCESS"
+  }
+}

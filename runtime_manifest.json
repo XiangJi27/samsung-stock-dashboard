@@ -5,15 +5,15 @@
   "environment": "Production / Vercel Static Hosting",
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
-    "totalFiles": 19,
-    "totalSizeBytes": 6765011,
-    "totalSizeMB": 6.45
+    "totalFiles": 22,
+    "totalSizeBytes": 6854215,
+    "totalSizeMB": 6.54
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 102361,
-      "sha256": "abc96ec5a83900819b255ca979a3ebad9866f88d4f1d778df8610c52cade6f79",
+      "sizeBytes": 122403,
+      "sha256": "2f441f25d171c869663c6aca55b9e0551dadcc48d4c496c264d647590fc3aee1",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -102,8 +102,8 @@
     },
     {
       "file": "assets/js/router.js",
-      "sizeBytes": 5447,
-      "sha256": "c0101655a11943168921ee931c4302e8f7cf6e56d1db6faec6fc945d7caf7517",
+      "sizeBytes": 6153,
+      "sha256": "9501500580fc4c9a899cc8ff6932dcf282ea0afcafa3379e3b351bd467dc65ea",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -120,8 +120,26 @@
     },
     {
       "file": "assets/js/modules.js",
-      "sizeBytes": 8669,
-      "sha256": "7c768dbefd34a331e5086a6cb022ce291013dc60378d6d07551e680404d9bd16",
+      "sizeBytes": 9972,
+      "sha256": "6e6c35a61b73043dc5222d0ea37be4b97f785d72d863e0e8962d7b13ce0e415f",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/css/importer.css",
+      "sizeBytes": 10490,
+      "sha256": "a1b9a2f5d128ded598c021e094fb3a1c6513f1ceecb8b2a8c2f75ff874e15a72",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/stock-importer.js",
+      "sizeBytes": 31763,
+      "sha256": "53d818351d7b3611971186b3336889133b89464d06181d8da0b52a2235a74ea8",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/promotion-importer.js",
+      "sizeBytes": 24900,
+      "sha256": "896c44c036d13e2ded8c487263986bc7c9a9a9f07652c55ac2e143aa598160a0",
       "status": "REQUIRED_RUNTIME"
     }
   ]

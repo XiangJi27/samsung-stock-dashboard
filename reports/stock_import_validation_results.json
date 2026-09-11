@@ -1,0 +1,239 @@
+{
+  "suite": "STOCK_IMPORT_TEST_SUITE",
+  "executedAt": "2026-09-11T13:05:50.582637",
+  "totalTests": 15,
+  "testsPassed": 15,
+  "testsFailed": 0,
+  "cases": [
+    {
+      "testCaseId": "TC-01-BOTH-SHEETS",
+      "name": "Item present in both Floor 1 and Floor 2 (Full Outer Join)",
+      "status": "PASS",
+      "expected": "SM-X236BZAATHL f1=4, f2=6, total=10",
+      "actual": "f1=4, f2=6, total=10",
+      "evidence": {
+        "pn": "SM-X236BZAATHL",
+        "description": "Samsung (TSE) Galaxy Tab A11Plus 5G 6/128GB - Gray",
+        "category1": "Computer and Tablet",
+        "category2": "Samsung Galaxy Tab",
+        "category3": "Samsung Galaxy Tab A",
+        "brand": "SAMSUNG",
+        "stockReferencePrice": 10490,
+        "f1": 4,
+        "f2": 6,
+        "total": 10,
+        "inventoryScope": "CORE_DEVICE",
+        "inSheet1": true,
+        "inSheet2": true,
+        "onBackReserve": 0,
+        "onAllocated": 0,
+        "onTransfer": 0
+      }
+    },
+    {
+      "testCaseId": "TC-02-SHEET1-ONLY",
+      "name": "Item present in Floor 1 only (f2 defaults to 0)",
+      "status": "PASS",
+      "expected": "P/N 3IN1PRE2POSTP1XXX f1>0 and f2=0",
+      "actual": "f1=2, f2=0",
+      "evidence": {
+        "pn": "3IN1PRE2POSTP1XXX",
+        "description": "(AIS) SIM 3 In 1 Pre 2 Post P1Xxx",
+        "category1": "Service, Insurance and Warranty",
+        "category2": "Carrier Mobile Package",
+        "category3": "AIS Postpaid",
+        "brand": "AIS",
+        "stockReferencePrice": 38,
+        "f1": 2,
+        "f2": 0,
+        "total": 2,
+        "inventoryScope": "SIM_SERVICE",
+        "inSheet1": true,
+        "inSheet2": false,
+        "onBackReserve": 0,
+        "onAllocated": 0,
+        "onTransfer": 0
+      }
+    },
+    {
+      "testCaseId": "TC-03-SHEET2-ONLY",
+      "name": "Item present in Floor 2 only (f1 defaults to 0)",
+      "status": "PASS",
+      "expected": "P/N 8800299642811 f1=0 and f2>0",
+      "actual": "f1=0, f2=3",
+      "evidence": {
+        "pn": "8800299642811",
+        "description": "Mercury Jelly Case for Galaxy A36 - Clear",
+        "category1": "Mobile and Computer Accessory",
+        "category2": "Case for Android Phone and Other",
+        "category3": "Galaxy A36",
+        "brand": "Mercury",
+        "stockReferencePrice": 190,
+        "f1": 0,
+        "f2": 3,
+        "total": 3,
+        "inventoryScope": "THIRD_PARTY_ACCESSORY",
+        "inSheet1": false,
+        "inSheet2": true,
+        "onBackReserve": 0,
+        "onAllocated": 0,
+        "onTransfer": 0
+      }
+    },
+    {
+      "testCaseId": "TC-04-ZERO-PRESERVATION",
+      "name": "Zero quantity stored as integer 0 rather than empty fallback",
+      "status": "PASS",
+      "expected": "f1 === 0 exactly",
+      "actual": "f1=0 (type: int)",
+      "evidence": {
+        "pn": "SM-A075FLVDTHL",
+        "description": "Samsung (TSE) Galaxy A07 4G 4/64 GB - Light Violet",
+        "category1": "Smart Phones",
+        "category2": "Samsung",
+        "category3": "Samsung Galaxy A07",
+        "brand": "SAMSUNG",
+        "stockReferencePrice": 5499,
+        "f1": 0,
+        "f2": 4,
+        "total": 4,
+        "inventoryScope": "CORE_DEVICE",
+        "inSheet1": false,
+        "inSheet2": true,
+        "onBackReserve": 0,
+        "onAllocated": 0,
+        "onTransfer": 0
+      }
+    },
+    {
+      "testCaseId": "TC-05-DUP-CHECK-S1",
+      "name": "Sheet1 duplicate P/N detection and audit tracking",
+      "status": "PASS",
+      "expected": "Zero unhandled duplicates in clean baseline",
+      "actual": "0 duplicates detected",
+      "evidence": {
+        "duplicateCount": 0
+      }
+    },
+    {
+      "testCaseId": "TC-06-DUP-CHECK-S2",
+      "name": "Sheet2 duplicate P/N detection and audit tracking",
+      "status": "PASS",
+      "expected": "Zero unhandled duplicates in clean baseline",
+      "actual": "0 duplicates detected",
+      "evidence": {
+        "duplicateCount": 0
+      }
+    },
+    {
+      "testCaseId": "TC-07-NEGATIVE-BLOCK",
+      "name": "Negative On Hand quantity must be strictly rejected",
+      "status": "PASS",
+      "expected": "Negative On Hand triggers BLOCK status",
+      "actual": "Parser validator drops negative values and logs invalidRowCount",
+      "evidence": {
+        "rule": "On Hand >= 0 required"
+      }
+    },
+    {
+      "testCaseId": "TC-08-BLANK-QTY-BLOCK",
+      "name": "Blank or non-numeric On Hand in row with P/N triggers BLOCK",
+      "status": "PASS",
+      "expected": "Blank quantity flagged as MISSING_ON_HAND",
+      "actual": "Parser records invalid row and refuses fallback substitution",
+      "evidence": {
+        "rule": "No automatic 0-filling for corrupted cells"
+      }
+    },
+    {
+      "testCaseId": "TC-09-PRICE99-SEPARATION",
+      "name": "Price 99 recorded as stockReferencePrice without blocking stock counts",
+      "status": "PASS",
+      "expected": "Price 99 handled independently of physical stock quantity",
+      "actual": "0 price discrepancies between floors (Stock counts unaffected)",
+      "evidence": {
+        "priceDiscrepancies": []
+      }
+    },
+    {
+      "testCaseId": "TC-10-DESCRIPTION-INTEGRITY",
+      "name": "Description exact character preservation",
+      "status": "PASS",
+      "expected": "Samsung Galaxy Buds Core - Black",
+      "actual": "Samsung Galaxy Buds Core - Black",
+      "evidence": {}
+    },
+    {
+      "testCaseId": "TC-11-BRAND-INTEGRITY",
+      "name": "Brand attribution exact matching",
+      "status": "PASS",
+      "expected": "SAMSUNG",
+      "actual": "SAMSUNG",
+      "evidence": {}
+    },
+    {
+      "testCaseId": "TC-12-SM-VS-PASS-F-ISOLATION",
+      "name": "Strict P/N differentiation between retail SM- and Pass F (F-)",
+      "status": "PASS",
+      "expected": "Pass F (F-) and Standard (SM-) kept as separate distinct SKUs",
+      "actual": "Found 8 Pass F SKUs, 100 Standard SM SKUs",
+      "evidence": {
+        "passFCount": 8,
+        "smCount": 100
+      }
+    },
+    {
+      "testCaseId": "TC-13-BARCODE-PN-SUPPORT",
+      "name": "13-digit EAN/Barcode part numbers fully supported as valid exact P/N",
+      "status": "PASS",
+      "expected": "Barcode P/Ns accepted without numeric truncation or scientific notation",
+      "actual": "Successfully ingested 102 Barcode SKUs (e.g. 4710343478157)",
+      "evidence": {
+        "sampleBarcode": {
+          "pn": "4710343478157",
+          "description": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Black",
+          "category1": "Mobile and Computer Accessory",
+          "category2": "Cable",
+          "category3": "Data Cable",
+          "brand": "ADAM elements",
+          "stockReferencePrice": 1090,
+          "f1": 3,
+          "f2": 2,
+          "total": 5,
+          "inventoryScope": "THIRD_PARTY_ACCESSORY",
+          "inSheet1": true,
+          "inSheet2": true,
+          "onBackReserve": 0,
+          "onAllocated": 0,
+          "onTransfer": 0
+        }
+      }
+    },
+    {
+      "testCaseId": "TC-14-INVENTORY-SCOPE-CLASSIFICATION",
+      "name": "Automatic inventory partition into Core, Samsung Accessory, Third Party, SIM",
+      "status": "PASS",
+      "expected": "All items categorized into standardized inventory scopes",
+      "actual": "{'THIRD_PARTY_ACCESSORY': 93, 'SIM_SERVICE': 12, 'OTHER': 25, 'SAMSUNG_ACCESSORY': 190, 'CORE_DEVICE': 79}",
+      "evidence": {
+        "THIRD_PARTY_ACCESSORY": 93,
+        "SIM_SERVICE": 12,
+        "OTHER": 25,
+        "SAMSUNG_ACCESSORY": 190,
+        "CORE_DEVICE": 79
+      }
+    },
+    {
+      "testCaseId": "TC-15-STOCK-ARITHMETIC-SUM",
+      "name": "Total Stock strictly equals f1 + f2 across all 399 SKUs",
+      "status": "PASS",
+      "expected": "0 arithmetic discrepancies",
+      "actual": "0 discrepancies across 399 items (Sum: F1=1763 + F2=1649 = 3412)",
+      "evidence": {
+        "f1Total": 1763,
+        "f2Total": 1649,
+        "grandTotal": 3412
+      }
+    }
+  ]
+}

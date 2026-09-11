@@ -1,0 +1,49 @@
+{
+  "system": "SAMSUNG_BRANCH_OPERATIONS",
+  "evaluatedAt": "2026-09-11T12:59:00+07:00",
+  "stockProvenance": {
+    "stockSource": "STATIC_EXCEL_SNAPSHOT",
+    "stockSourceLabel": "Excel Snapshot copied from source system",
+    "autoSync": "NOT_IMPLEMENTED",
+    "nimbusApiConnection": "NOT_CONFIGURED",
+    "nimbusApiEndpoint": null,
+    "pageRefreshBehavior": "LOADS_PERSISTED_SNAPSHOT",
+    "nimbusReconciliation": "MANUAL_COMPARISON_TOOL_NOT_AUTOMATIC_SYNC",
+    "updateMethod": "MANUAL_EXCEL_SNAPSHOT",
+    "storageMode": "LOCAL_BROWSER_ONLY (Phase 1)"
+  },
+  "currentProductionSnapshot": {
+    "batchId": "IMPORT-20260906-002",
+    "sourceFile": "Stock.xlsx (Initial Baseline)",
+    "skuCount": 218,
+    "f1TotalStock": 379,
+    "f2TotalStock": 381,
+    "grandTotalStock": 760,
+    "deployedAt": "2026-09-07T06:00:00+07:00"
+  },
+  "verifiedDesktopInventorySnapshot": {
+    "sourceFile": "C:\\Users\\JarNJay\\Desktop\\Stock.xlsx",
+    "fileSha256": "8a09b307ff036cfae4f8d956891ebc5a932d0d3c015b6d17961b606277685603",
+    "skuCount": 399,
+    "matchedBothFloors": 274,
+    "floor1Only": 62,
+    "floor2Only": 63,
+    "f1TotalStock": 1763,
+    "f2TotalStock": 1649,
+    "grandTotalStock": 3412,
+    "price99Discrepancies": 0
+  },
+  "prohibitedWording": [
+    "Sync Nimbus สำเร็จ",
+    "Real-time Nimbus",
+    "Auto Sync",
+    "Live Inventory Connection"
+  ],
+  "authorizedWording": [
+    "นำเข้าสต็อกจาก Excel",
+    "ตรวจสอบข้อมูลก่อนนำเข้า",
+    "นำเข้า Stock Snapshot สำเร็จ",
+    "ข้อมูลล่าสุดจาก Excel",
+    "นำเข้า Snapshot จาก Nimbus"
+  ]
+}

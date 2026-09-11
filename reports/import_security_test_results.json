@@ -1,0 +1,65 @@
+[
+  {
+    "test": "Valid Excel",
+    "filename": "Promo_2026.xlsx",
+    "expectedOk": true,
+    "expectedCode": "PASSED_SECURITY",
+    "actualOk": true,
+    "actualCode": "PASSED_SECURITY",
+    "status": "PASSED"
+  },
+  {
+    "test": "Disallowed Extension",
+    "filename": "malicious.exe",
+    "expectedOk": false,
+    "expectedCode": "EXTENSION_DISALLOWED",
+    "actualOk": false,
+    "actualCode": "EXTENSION_DISALLOWED",
+    "status": "PASSED"
+  },
+  {
+    "test": "Magic Byte Mismatch",
+    "filename": "fake.xlsx",
+    "expectedOk": false,
+    "expectedCode": "MAGIC_BYTE_MISMATCH",
+    "actualOk": false,
+    "actualCode": "MAGIC_BYTE_MISMATCH",
+    "status": "PASSED"
+  },
+  {
+    "test": "Macro Embedded XLSX",
+    "filename": "has_macro.xlsx",
+    "expectedOk": false,
+    "expectedCode": "SECURITY_RISK_MACRO",
+    "actualOk": false,
+    "actualCode": "SECURITY_RISK_MACRO",
+    "status": "PASSED"
+  },
+  {
+    "test": "Duplicate Hash Upload",
+    "filename": "Promo_2026.xlsx",
+    "expectedOk": false,
+    "expectedCode": "DUPLICATE_UPLOAD_HASH",
+    "actualOk": false,
+    "actualCode": "DUPLICATE_UPLOAD_HASH",
+    "status": "PASSED"
+  },
+  {
+    "test": "Valid PNG",
+    "filename": "banner.png",
+    "expectedOk": true,
+    "expectedCode": "PASSED_SECURITY",
+    "actualOk": true,
+    "actualCode": "PASSED_SECURITY",
+    "status": "PASSED"
+  },
+  {
+    "test": "Valid WEBP",
+    "filename": "hero.webp",
+    "expectedOk": true,
+    "expectedCode": "PASSED_SECURITY",
+    "actualOk": true,
+    "actualCode": "PASSED_SECURITY",
+    "status": "PASSED"
+  }
+]

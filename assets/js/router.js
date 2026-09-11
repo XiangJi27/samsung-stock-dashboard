@@ -10,6 +10,9 @@ class AppRouter {
       "/home": { title: "ภาพรวมสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-home" },
       "/stock": { title: "สต็อกสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-stock" },
       "/promotions": { title: "โปรโมชั่นสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-promotions" },
+      "/promotion-import": { title: "นำเข้าราคาและโปรโมชั่น • Samsung Branch Operations", isProtected: true, viewId: "view-promotion-import" },
+      "/stock-import": { title: "นำเข้าสต็อกจาก Excel • Samsung Branch Operations", isProtected: true, viewId: "view-stock-import" },
+      "/stock-import-history": { title: "ประวัติการนำเข้าสต็อก • Samsung Branch Operations", isProtected: true, viewId: "view-stock-import-history" },
       "/reports": { title: "รายงานสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-reports" },
       "/knowledge": { title: "คลังความรู้สาขา • Samsung Branch Operations", isProtected: true, viewId: "view-knowledge" },
       "/settings": { title: "ตั้งค่าระบบ • Samsung Branch Operations", isProtected: true, viewId: "view-settings" }
@@ -149,6 +152,8 @@ class AppRouter {
       window.renderPromotionsView();
     } else if (path === "/settings" && typeof window.renderSettingsView === "function") {
       window.renderSettingsView();
+    } else if (path === "/stock-import-history" && typeof window.renderStockImportHistoryView === "function") {
+      window.renderStockImportHistoryView();
     }
   }
 }
