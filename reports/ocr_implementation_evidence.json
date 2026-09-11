@@ -1,0 +1,18 @@
+{
+  "status": "OCR_NOT_IMPLEMENTED",
+  "label": "FILE_ACCEPTED_OCR_PENDING",
+  "canAutoPublish": false,
+  "isRealOcrEngineBundled": false,
+  "architecturalDisclosure": "Browser UI accepts image uploads (.png, .jpg, .webp) and routes them into the staging pipeline. However, automated character extraction via embedded Tesseract WASM or Google Cloud Vision API is NOT yet connected. Images remain in FILE_ACCEPTED_OCR_PENDING and require Store Leader manual data entry.",
+  "prohibitedClaim": "ห้ามเคลมว่า 'รองรับรูปภาพด้วย OCR สมบูรณ์' จนกว่าจะมีการ Compile Tesseract.js WASM หรือเชื่อมโยง Vision API จริง",
+  "preFlightSafetyChecksActive": {
+    "magicBytesValidation": true,
+    "maxFileSize15MB": true,
+    "sha256DuplicateDetection": true
+  },
+  "draftContractEnforced": {
+    "assignedDraftType": "DRAFT_FROM_OCR",
+    "autoPublishAllowed": false,
+    "humanReviewMandatory": true
+  }
+}

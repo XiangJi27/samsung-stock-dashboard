@@ -1,0 +1,39 @@
+{
+  "status": "IMPLEMENTED_DRAFT_ONLY",
+  "draftType": "BRANCH_RULE_DRAFT",
+  "canAutoPublish": false,
+  "canDirectlyModifyPromotionMaster": false,
+  "requiresHumanReview": true,
+  "testedRawText": "Z Flip8 256GB Trade Up ลด 5,000 เหลือ 37,900\nพาส F ได้ Adapter Samsung 25W ฟรี\nGalaxy S25 Ultra จองรับหูฟัง Buds3 Pro",
+  "parsedRules": [
+    {
+      "ruleId": "RULE-TXT-01",
+      "rawLine": "Z Flip8 256GB Trade Up ลด 5,000 เหลือ 37,900",
+      "extractedModel": "Z Flip8 256GB",
+      "saleMode": "TRADE_UP",
+      "discount": 5000,
+      "netPrice": 37900,
+      "status": "BRANCH_RULE_DRAFT",
+      "governanceRoute": "Human Store Leader Confirmation -> Rule Engine Syntax Check -> Master"
+    },
+    {
+      "ruleId": "RULE-TXT-02",
+      "rawLine": "พาส F ได้ Adapter Samsung 25W ฟรี",
+      "extractedModel": "ALL_PASS_F",
+      "saleMode": "PASS_F_GIFT",
+      "gift": "Adapter Samsung 25W",
+      "status": "BRANCH_RULE_DRAFT",
+      "governanceRoute": "Human Store Leader Confirmation -> Rule Engine Syntax Check -> Master"
+    },
+    {
+      "ruleId": "RULE-TXT-03",
+      "rawLine": "Galaxy S25 Ultra จองรับหูฟัง Buds3 Pro",
+      "extractedModel": "Galaxy S25 Ultra",
+      "saleMode": "PRE_ORDER_GIFT",
+      "gift": "Buds3 Pro",
+      "status": "BRANCH_RULE_DRAFT",
+      "governanceRoute": "Human Store Leader Confirmation -> Rule Engine Syntax Check -> Master"
+    }
+  ],
+  "hardRuleEnforced": "Zero paths exist from TXT upload directly into active promotions without explicit human review and Rule Engine compilation."
+}

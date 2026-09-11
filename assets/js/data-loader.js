@@ -72,6 +72,22 @@
           await this._loadScript("stock_data.js");
           await this._loadScript("promotion_variants.js");
 
+          // Check if user has an imported active stock snapshot in IndexedDB (LOCAL_BROWSER_ONLY)
+          if (window.StockStorageAdapter && typeof window.StockStorageAdapter.getActiveSnapshot === "function") {
+            try {
+              const localSnapshot = await window.StockStorageAdapter.getActiveSnapshot();
+              if (localSnapshot && localSnapshot.data && localSnapshot.data.length > 0) {
+                window.STOCK_DATABASE = localSnapshot.data;
+                if (localSnapshot.meta) {
+                  window.STOCK_METADATA = localSnapshot.meta;
+                }
+                console.info("[DataLoaderGate] Restored active stock snapshot from IndexedDB (LOCAL_BROWSER_ONLY):", localSnapshot.batchId);
+              }
+            } catch (e) {
+              console.warn("[DataLoaderGate] Could not restore IndexedDB snapshot, using static baseline:", e);
+            }
+          }
+
           // Sync masterStockData in app.js if app.js is already running
           if (typeof window.syncMasterStockData === "function") {
             window.syncMasterStockData();

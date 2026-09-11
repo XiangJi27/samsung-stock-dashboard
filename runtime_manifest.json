@@ -6,7 +6,7 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 22,
-    "totalSizeBytes": 6854215,
+    "totalSizeBytes": 6860024,
     "totalSizeMB": 6.54
   },
   "files": [
@@ -18,8 +18,8 @@
     },
     {
       "file": "app.js",
-      "sizeBytes": 165469,
-      "sha256": "328b14978098e7cb9ad4ec7c214e3157c6605a297ac672f57a41a37916b50e9c",
+      "sizeBytes": 166513,
+      "sha256": "0f87e879cfe94993891d70c89aa52b4acad2ea095e5a6aa26c353e671ad7d364",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 3754,
-      "sha256": "09cdfba2e51e704875aa433016c950f4834446b7f3ef74b187efb3e94e0c2b5e",
+      "sizeBytes": 4669,
+      "sha256": "0b2e96b2182c3be634ff9e0f1e07aacdfdc09ad9089b27523641824e37993cb4",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -132,8 +132,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 31763,
-      "sha256": "53d818351d7b3611971186b3336889133b89464d06181d8da0b52a2235a74ea8",
+      "sizeBytes": 35613,
+      "sha256": "ec0be377646caa3944d2c2fcdb9551d5e79bacbd7a61e5444e54d4dc1bae3389",
       "status": "REQUIRED_RUNTIME"
     },
     {

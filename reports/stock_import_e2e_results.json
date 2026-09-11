@@ -1,0 +1,181 @@
+{
+  "sourceFile": "C:\\Users\\JarNJay\\Desktop\\Stock.xlsx",
+  "fileExists": true,
+  "targetSkus": {
+    "SM-A075FLVDTHL": {
+      "f1": 0,
+      "f2": 4,
+      "total": 4,
+      "expected": {
+        "exp_f1": 0,
+        "exp_f2": 4,
+        "exp_total": 4
+      },
+      "status": "PASSED"
+    },
+    "SM-X236BZAATHL": {
+      "f1": 4,
+      "f2": 6,
+      "total": 10,
+      "expected": {
+        "exp_f1": 4,
+        "exp_f2": 6,
+        "exp_total": 10
+      },
+      "status": "PASSED"
+    },
+    "SM-A075FLVHTHL": {
+      "f1": 3,
+      "f2": 3,
+      "total": 6,
+      "expected": {
+        "exp_f1": 3,
+        "exp_f2": 3,
+        "exp_total": 6
+      },
+      "status": "PASSED"
+    },
+    "SM-A076BLVCTHL": {
+      "f1": 6,
+      "f2": 4,
+      "total": 10,
+      "expected": {
+        "exp_f1": 6,
+        "exp_f2": 4,
+        "exp_total": 10
+      },
+      "status": "PASSED"
+    },
+    "SM-A076BZKCTHL": {
+      "f1": 5,
+      "f2": 5,
+      "total": 10,
+      "expected": {
+        "exp_f1": 5,
+        "exp_f2": 5,
+        "exp_total": 10
+      },
+      "status": "PASSED"
+    }
+  },
+  "scopeReconciliation": {
+    "scopes": {
+      "CORE_DEVICE": {
+        "f1": 385,
+        "f2": 357,
+        "total": 742,
+        "skus": 108,
+        "label": "เครื่องหลัก (Core Devices)"
+      },
+      "SAMSUNG_ACCESSORY": {
+        "f1": 403,
+        "f2": 357,
+        "total": 760,
+        "skus": 151,
+        "label": "อุปกรณ์เสริมซัมซุง (Samsung Accessories)"
+      },
+      "THIRD_PARTY_ACCESSORY": {
+        "f1": 605,
+        "f2": 515,
+        "total": 1120,
+        "skus": 91,
+        "label": "อุปกรณ์เสริม Third-Party"
+      },
+      "PREMIUM_GIFT": {
+        "f1": 303,
+        "f2": 356,
+        "total": 659,
+        "skus": 30,
+        "label": "ของแถม / พรีเมียม (Premium Gifts)"
+      },
+      "SIM_SERVICE": {
+        "f1": 58,
+        "f2": 54,
+        "total": 112,
+        "skus": 12,
+        "label": "ซิมและบริการ (SIM & Services)"
+      },
+      "OTHER": {
+        "f1": 9,
+        "f2": 10,
+        "total": 19,
+        "skus": 7,
+        "label": "สินค้าอื่น ๆ (Other)"
+      }
+    },
+    "grandTotalUnits": 3412,
+    "grandTotalSkus": 399,
+    "coreDevicesUnitTotal": 742,
+    "coreDevicesSkuTotal": 108,
+    "hardRuleEnforced": "Grand Total (3,412) strictly partitioned and never conflated with Core Devices Total (742)"
+  },
+  "failureTests": [
+    {
+      "scenario": "Duplicate P/N in Sheet1",
+      "errorCode": "DUPLICATE_PN_IN_SHEET",
+      "expectedAction": "REVIEW_REQUIRED",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Blank P/N in Row with Data",
+      "errorCode": "BLANK_PN",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Blank On Hand with P/N",
+      "errorCode": "BLANK_ON_HAND",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Negative On Hand (<0)",
+      "errorCode": "NEGATIVE_ON_HAND",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Text String in On Hand",
+      "errorCode": "NON_NUMERIC_ON_HAND",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Missing Sheet1 in Workbook",
+      "errorCode": "MISSING_SHEET1",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Missing Sheet2 in Workbook",
+      "errorCode": "MISSING_SHEET2",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Header Row not found at Row 4",
+      "errorCode": "HEADER_MISPLACED",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Duplicate Upload File Hash",
+      "errorCode": "DUPLICATE_FILE_HASH",
+      "expectedAction": "BLOCK",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Idempotent Double-Confirm Submit",
+      "errorCode": "DOUBLE_CONFIRM_BLOCKED",
+      "expectedAction": "IDEMPOTENT_IGNORED",
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Rollback to Previous Snapshot",
+      "errorCode": "ROLLBACK_PREVIOUS_BATCH",
+      "expectedAction": "RESTORE_SUCCESS",
+      "status": "PASSED"
+    }
+  ],
+  "overallStatus": "PASSED"
+}

@@ -1,0 +1,51 @@
+{
+  "scopes": {
+    "CORE_DEVICE": {
+      "f1": 385,
+      "f2": 357,
+      "total": 742,
+      "skus": 108,
+      "label": "เครื่องหลัก (Core Devices)"
+    },
+    "SAMSUNG_ACCESSORY": {
+      "f1": 403,
+      "f2": 357,
+      "total": 760,
+      "skus": 151,
+      "label": "อุปกรณ์เสริมซัมซุง (Samsung Accessories)"
+    },
+    "THIRD_PARTY_ACCESSORY": {
+      "f1": 605,
+      "f2": 515,
+      "total": 1120,
+      "skus": 91,
+      "label": "อุปกรณ์เสริม Third-Party"
+    },
+    "PREMIUM_GIFT": {
+      "f1": 303,
+      "f2": 356,
+      "total": 659,
+      "skus": 30,
+      "label": "ของแถม / พรีเมียม (Premium Gifts)"
+    },
+    "SIM_SERVICE": {
+      "f1": 58,
+      "f2": 54,
+      "total": 112,
+      "skus": 12,
+      "label": "ซิมและบริการ (SIM & Services)"
+    },
+    "OTHER": {
+      "f1": 9,
+      "f2": 10,
+      "total": 19,
+      "skus": 7,
+      "label": "สินค้าอื่น ๆ (Other)"
+    }
+  },
+  "grandTotalUnits": 3412,
+  "grandTotalSkus": 399,
+  "coreDevicesUnitTotal": 742,
+  "coreDevicesSkuTotal": 108,
+  "hardRuleEnforced": "Grand Total (3,412) strictly partitioned and never conflated with Core Devices Total (742)"
+}

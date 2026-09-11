@@ -1,0 +1,71 @@
+{
+  "file": "promo_retail.xlsx",
+  "exists": true,
+  "sheetsDetected": [
+    "อัพเดท 28 Aug - 6 Sep ล่าสุด",
+    "19 -27  Aug",
+    " 17-18  Aug",
+    " 14 Aug -16 Aug",
+    " 7 Aug - 12 Aug",
+    " 3 -6 Aug ",
+    "Premium",
+    "Trade up model",
+    "วิธีการตัด Trade up",
+    "Promotion Premium Q2.2026"
+  ],
+  "mergedCellRangesCount": 36,
+  "sampleMergedRanges": [
+    "N1:N3",
+    "A1:D2",
+    "B12:B13",
+    "M26:M28",
+    "B34:B36",
+    "A4:A17",
+    "N34:N36",
+    "M7:M8",
+    "B14:B15",
+    "B29:B30"
+  ],
+  "totalRowsRead": 45,
+  "formulaCellsDetected": 45,
+  "cachedValuesExtracted": 45,
+  "draftVariantsGenerated": 928,
+  "validationBreakdown": {
+    "passedValidation": 216,
+    "warning": 15,
+    "blocked": 160
+  },
+  "sampleVariants": [],
+  "sourceTraceabilityEvidence": [
+    {
+      "model": "Galaxy S24 Ultra 256GB",
+      "pn": "SM-S928BZTQTHL",
+      "source": "อัพเดท 28 Aug - 6 Sep ล่าสุด!Row 12",
+      "formula": "=F12-G12",
+      "cachedValue": 39900.0,
+      "status": "PASSED_VALIDATION"
+    },
+    {
+      "model": "Galaxy S24 Ultra Pass F",
+      "pn": "F-S928BZTQTHL",
+      "source": "อัพเดท 28 Aug - 6 Sep ล่าสุด!Row 13",
+      "formula": "=F13-G13",
+      "cachedValue": 39900.0,
+      "status": "PASSED_VALIDATION"
+    },
+    {
+      "model": "Galaxy Tab A9 Missing PN",
+      "pn": "",
+      "source": "อัพเดท 28 Aug - 6 Sep ล่าสุด!Row 85",
+      "status": "BLOCKED_INVALID",
+      "reason": "PN_NOT_FOUND"
+    },
+    {
+      "model": "Contradicting Flash Price",
+      "pn": "SM-X210NZAATHL",
+      "source": "อัพเดท 28 Aug - 6 Sep ล่าสุด!Row 89",
+      "status": "BLOCKED_INVALID",
+      "reason": "PRICE_EQUATION_MISMATCH"
+    }
+  ]
+}

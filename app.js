@@ -706,9 +706,21 @@ function renderMetrics() {
   const expectedBatch = "IMPORT-20260906-002";
   const actualBatch = meta.importBatchId || meta.batchId || "";
 
-  // 10. ทุก Artifact ต้องใช้ Batch เดียว: IMPORT-20260906-002
+  // 10. ทุก Artifact ต้องใช้ Batch เดียว: IMPORT-20260906-002 (หรือ Local Snapshot Batch)
   if (actualBatch && actualBatch !== expectedBatch) {
-    if (bannerContainer) {
+    if (actualBatch.startsWith("STOCK-BATCH-")) {
+      if (bannerContainer) {
+        bannerContainer.innerHTML += `
+          <div class="urgent-alert-banner" style="background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 12px; padding: 12px 18px; margin: 12px 0; color: #cbd5e1; display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 1.4rem;">📦</span>
+            <div>
+              <strong style="color: #38bdf8; font-size: 0.95rem;">LOCAL_BROWSER_ONLY: ใช้งาน Stock Snapshot ที่นำเข้าในเบราว์เซอร์นี้</strong>
+              <div style="font-size: 0.8rem; color: #94a3b8;">Batch ID: ${actualBatch} • นำเข้าเมื่อ: ${new Date(meta.importedAt).toLocaleString('th-TH')} • ข้อมูลบันทึกในเครื่องนี้เท่านั้น</div>
+            </div>
+          </div>
+        `;
+      }
+    } else if (bannerContainer) {
       bannerContainer.innerHTML += `
         <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fecaca; display: flex; align-items: center; gap: 12px;">
           <span style="font-size: 1.5rem;">⚠️</span>

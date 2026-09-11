@@ -54,6 +54,21 @@
       });
     }
 
+    static async getActiveSnapshot() {
+      try {
+        const db = await this.getDb();
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(STORE_CURRENT, 'readonly');
+          const store = tx.objectStore(STORE_CURRENT);
+          const req = store.get('active');
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(req.error);
+        });
+      } catch (err) {
+        return null;
+      }
+    }
+
     static async getAllBatches() {
       const db = await this.getDb();
       return new Promise((resolve, reject) => {
@@ -276,36 +291,62 @@
         const brandUpper = (ref.brand || '').toUpperCase();
         const cat1Upper = (ref.category1 || '').toUpperCase();
         const cat2Upper = (ref.category2 || '').toUpperCase();
+        const descUpper = (ref.description || '').toUpperCase();
 
-        if (brandUpper.includes('SAMSUNG')) {
-          if (cat1Upper.includes('PHONE') || cat1Upper.includes('TABLET') || cat1Upper.includes('WATCH') || cat1Upper.includes('DEVICE')) {
-            scope = 'CORE_DEVICE';
+        if (cat1Upper.includes('PREMIUM') || cat1Upper.includes('GIFT') || cat2Upper.includes('PREMIUM') || descUpper.includes('PREMIUM')) {
+          scope = 'PREMIUM_GIFT';
+        } else if (cat1Upper.includes('SIM') || cat2Upper.includes('SIM') || descUpper.includes('SIM')) {
+          scope = 'SIM_SERVICE';
+        } else if (brandUpper.includes('SAMSUNG')) {
+          if (cat1Upper.includes('PHONE') || cat1Upper.includes('TABLET') || cat1Upper.includes('WATCH') || cat1Upper.includes('DEVICE') || pn.startsWith('SM-') || pn.startsWith('F-')) {
+            if (pn.startsWith('EP-') || pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('ET-') || pn.startsWith('EJ-') || pn.startsWith('EE-')) {
+              scope = 'SAMSUNG_ACCESSORY';
+            } else {
+              scope = 'CORE_DEVICE';
+            }
           } else {
             scope = 'SAMSUNG_ACCESSORY';
           }
-        } else if (cat1Upper.includes('ACC') || cat2Upper.includes('ACC')) {
+        } else if (cat1Upper.includes('ACC') || cat2Upper.includes('ACC') || cat1Upper.includes('CASE') || cat1Upper.includes('FILM') || cat1Upper.includes('CHARGER') || cat1Upper.includes('AUDIO')) {
           scope = 'THIRD_PARTY_ACCESSORY';
-        } else if (cat1Upper.includes('PREMIUM') || cat2Upper.includes('GIFT')) {
-          scope = 'PREMIUM_GIFT';
-        } else if (cat1Upper.includes('SIM')) {
-          scope = 'SIM_SERVICE';
+        } else {
+          scope = 'OTHER';
+        }
+
+        const isCore = (scope === 'CORE_DEVICE');
+        let categoryLabel = 'Accessory';
+        if (isCore) {
+          if (cat1Upper.includes('TABLET') || descUpper.includes('TAB')) categoryLabel = 'Tablet';
+          else if (cat1Upper.includes('WATCH') || descUpper.includes('WATCH')) categoryLabel = 'Watch';
+          else categoryLabel = 'SmartPhone';
+        } else if (scope === 'SIM_SERVICE') {
+          categoryLabel = 'SIM';
+        } else if (scope === 'PREMIUM_GIFT') {
+          categoryLabel = 'Premium';
         }
 
         merged.push({
           pn: pn,
           model: ref.description || pn,
           description: ref.description,
+          category: categoryLabel,
           category1: ref.category1,
           category2: ref.category2,
           category3: ref.category3,
           brand: ref.brand,
           koanSku: ref.koanSku,
           applePart: ref.applePart,
+          srp: ref.stockReferencePrice,
           stockReferencePrice: ref.stockReferencePrice,
           f1: f1,
           f2: f2,
           total: f1 + f2,
-          inventoryScope: scope,
+          stock_f1: f1,
+          stock_f2: f2,
+          stock_total: f1 + f2,
+          inventoryGroup: scope,
+          includedInCoreDeviceKpi: isCore,
+          sourceSheet: 'Stock.xlsx',
           onBackReserve: (r1 ? r1.onBackReserve : 0) + (r2 ? r2.onBackReserve : 0),
           onAllocated: (r1 ? r1.onAllocated : 0) + (r2 ? r2.onAllocated : 0),
           onTransfer: (r1 ? r1.onTransfer : 0) + (r2 ? r2.onTransfer : 0),
@@ -616,12 +657,37 @@
         // Save to IndexedDB
         await StockStorageAdapter.saveBatch(batchRecord);
 
-        // Update in-memory STOCK_DATA
+        // Update in-memory databases
+        window.STOCK_DATABASE = b.mergedResult.items;
         window.STOCK_DATA = b.mergedResult.items;
+
+        const coreItems = b.mergedResult.items.filter(it => it.includedInCoreDeviceKpi);
+        const coreF1 = coreItems.reduce((acc, it) => acc + it.f1, 0);
+        const coreF2 = coreItems.reduce((acc, it) => acc + it.f2, 0);
+
+        window.STOCK_METADATA = {
+          sourceType: "Manual Excel Snapshot",
+          sourceFile: b.sourceFilename,
+          importedAt: b.importedAt,
+          recordCount: b.stats.totalProducts,
+          coreDevices: {
+            floor1: coreF1,
+            floor2: coreF2,
+            total: coreF1 + coreF2
+          },
+          importedInventoryTotal: b.stats.grandTotal,
+          importBatchId: b.batchId,
+          storageMode: 'LOCAL_BROWSER_ONLY'
+        };
 
         // If DataService exists, update it as well
         if (window.DataService && typeof window.DataService.setStockData === 'function') {
           window.DataService.setStockData(b.mergedResult.items);
+        }
+
+        // Trigger app.js synchronization to re-render table, cards, and metrics
+        if (typeof window.syncMasterStockData === "function") {
+          window.syncMasterStockData();
         }
 
         // Update Last Sync / Snapshot label in top header
@@ -631,7 +697,13 @@
           lastSyncLabel.textContent = `Excel Snapshot (${nowStr})`;
         }
 
-        alert(`✓ นำเข้า Stock Snapshot สำเร็จ!\nBatch ID: ${b.batchId}\nระบบได้อัปเดตสต็อกรวมเป็น ${b.stats.grandTotal.toLocaleString()} รายการเรียบร้อยแล้ว`);
+        // Truthful local disclosure dialog
+        alert(`✓ นำเข้า Stock Snapshot ในเบราว์เซอร์นี้แล้ว\n\n` +
+              `• Batch ID: ${b.batchId}\n` +
+              `• สถานะการบันทึก: LOCAL_BROWSER_ONLY (IndexedDB)\n` +
+              `• เครื่องหลักรวม (Core Devices): ${(coreF1 + coreF2).toLocaleString()} เครื่อง (ช1: ${coreF1} | ช2: ${coreF2})\n` +
+              `• ยอดคงเหลือรวมทุกหมวด: ${b.stats.grandTotal.toLocaleString()} รายการ (${b.stats.totalProducts} SKUs)\n\n` +
+              `ระบบได้อัปเดตหน้า Dashboard ในเบราว์เซอร์นี้เรียบร้อยแล้ว (ยังไม่มีการกระจายไปยังอุปกรณ์อื่นอัตโนมัติ)`);
 
         // Navigate to Stock View
         if (window.AppRouter) {
@@ -754,11 +826,18 @@
 
       try {
         const restored = await StockStorageAdapter.rollbackToBatch(batchId);
+        window.STOCK_DATABASE = restored.data;
         window.STOCK_DATA = restored.data;
+        if (restored.meta) {
+          window.STOCK_METADATA = restored.meta;
+        }
         if (window.DataService && typeof window.DataService.setStockData === 'function') {
           window.DataService.setStockData(restored.data);
         }
-        alert(`✓ ย้อนกลับไปยัง Batch: ${batchId} เรียบร้อยแล้ว`);
+        if (typeof window.syncMasterStockData === "function") {
+          window.syncMasterStockData();
+        }
+        alert(`✓ ย้อนกลับไปยัง Stock Snapshot: ${batchId} ในเบราว์เซอร์นี้เรียบร้อยแล้ว`);
         StockImportController.renderHistoryView();
       } catch (err) {
         alert(`เกิดข้อผิดพลาดในการ Rollback: ${err.message}`);
