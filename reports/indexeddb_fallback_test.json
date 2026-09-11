@@ -1,0 +1,55 @@
+{
+  "testSuite": "Stock Provider Hierarchy & Fallback Gate",
+  "providerHierarchy": [
+    "1. Confirmed IndexedDB Snapshot (if valid and active)",
+    "2. StaticDataProvider (stock_data.js fallback baseline)",
+    "3. DATA_UNAVAILABLE (if static provider missing)"
+  ],
+  "scenarios": [
+    {
+      "scenario": "Valid IndexedDB Snapshot (Schema 2.0.0, exact sums, no duplicates)",
+      "validationOutcome": "VALID",
+      "activeProvider": "Confirmed IndexedDB Snapshot",
+      "stockStatus": "CONFIRMED_LOCAL_SNAPSHOT",
+      "dataLoadedRecords": 399,
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Corrupted Schema Version (schemaVersion = 1.0.0 or missing)",
+      "validationOutcome": "INVALID (LOCAL_SNAPSHOT_INVALID)",
+      "reason": "Invalid or missing schemaVersion",
+      "activeProvider": "StaticDataProvider (stock_data.js)",
+      "stockStatus": "LOCAL_SNAPSHOT_INVALID",
+      "partialDataAllowed": false,
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Arithmetic Corruption in Item (total != f1 + f2)",
+      "validationOutcome": "INVALID (LOCAL_SNAPSHOT_INVALID)",
+      "reason": "Arithmetic mismatch (total !== f1 + f2) at P/N SM-A075FLVDTHL",
+      "activeProvider": "StaticDataProvider (stock_data.js)",
+      "stockStatus": "LOCAL_SNAPSHOT_INVALID",
+      "partialDataAllowed": false,
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Duplicate P/N in Snapshot Array",
+      "validationOutcome": "INVALID (LOCAL_SNAPSHOT_INVALID)",
+      "reason": "Duplicate P/N detected in snapshot",
+      "activeProvider": "StaticDataProvider (stock_data.js)",
+      "stockStatus": "LOCAL_SNAPSHOT_INVALID",
+      "partialDataAllowed": false,
+      "status": "PASSED"
+    },
+    {
+      "scenario": "Missing File Hash or Batch ID",
+      "validationOutcome": "INVALID (LOCAL_SNAPSHOT_INVALID)",
+      "reason": "Missing or invalid batchId / sourceFileHash",
+      "activeProvider": "StaticDataProvider (stock_data.js)",
+      "stockStatus": "LOCAL_SNAPSHOT_INVALID",
+      "partialDataAllowed": false,
+      "status": "PASSED"
+    }
+  ],
+  "hardRuleEnforced": "Never use partial corrupt data. On LOCAL_SNAPSHOT_INVALID, cleanly fall back to static dataset and alert user."
+}

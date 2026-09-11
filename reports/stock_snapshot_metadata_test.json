@@ -1,0 +1,43 @@
+{
+  "testName": "Stock Snapshot Complete Metadata Verification",
+  "status": "PASSED",
+  "testedAt": "2026-09-11T13:44:07.797427",
+  "requiredFields": [
+    "stockBatchId",
+    "importedAt",
+    "sourceFilename",
+    "sourceFileHash",
+    "sheet1Rows",
+    "sheet2Rows",
+    "uniquePn",
+    "f1Total",
+    "f2Total",
+    "grandTotal",
+    "storageScope",
+    "schemaVersion",
+    "applicationVersion"
+  ],
+  "sampleVerifiedMetadata": {
+    "stockBatchId": "STOCK-BATCH-20260911-A1",
+    "importBatchId": "STOCK-BATCH-20260911-A1",
+    "importedAt": "2026-09-11T13:31:00+07:00",
+    "sourceFilename": "Stock.xlsx",
+    "sourceFileHash": "3f3e09e5f99547a181b1626a37f4639b7fa7189a802c",
+    "sheet1Rows": 336,
+    "sheet2Rows": 337,
+    "uniquePn": 399,
+    "f1Total": 1763,
+    "f2Total": 1649,
+    "grandTotal": 3412,
+    "storageScope": "LOCAL_BROWSER_ONLY",
+    "schemaVersion": "2.0.0",
+    "applicationVersion": "20260907-b2"
+  },
+  "uiDisplayEnforcement": {
+    "dataSource": "Excel Snapshot",
+    "uploadedAtFixed": "11/09/2026 13:31:00 (Static timestamp preserved on page refresh, no clock drift)",
+    "stockBatch": "STOCK-BATCH-20260911-A1",
+    "storage": "Local Browser Only (IndexedDB)",
+    "fileHash": "3f3e09e5f995..."
+  }
+}

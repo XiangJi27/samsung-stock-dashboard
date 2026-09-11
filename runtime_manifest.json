@@ -6,20 +6,20 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 22,
-    "totalSizeBytes": 6860024,
-    "totalSizeMB": 6.54
+    "totalSizeBytes": 6875161,
+    "totalSizeMB": 6.56
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 122403,
-      "sha256": "2f441f25d171c869663c6aca55b9e0551dadcc48d4c496c264d647590fc3aee1",
+      "sizeBytes": 122452,
+      "sha256": "26f190831b0213c326f13f8a74dd039a8ad6f15af225849b830f0e7ea1d31083",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "app.js",
-      "sizeBytes": 166513,
-      "sha256": "0f87e879cfe94993891d70c89aa52b4acad2ea095e5a6aa26c353e671ad7d364",
+      "sizeBytes": 170962,
+      "sha256": "e710f0b0a95226321aa9481b93f442fb6ce9379df09d4fbe36f4d67a9b0b61a0",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 4669,
-      "sha256": "0b2e96b2182c3be634ff9e0f1e07aacdfdc09ad9089b27523641824e37993cb4",
+      "sizeBytes": 5857,
+      "sha256": "4ddaef55a364e0671afaf833599a9a35eea0126ea3968fd439440a9fd9af02d4",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -114,8 +114,8 @@
     },
     {
       "file": "assets/js/home.js",
-      "sizeBytes": 15790,
-      "sha256": "d0bee4b0ddb8cab56ec6a21284fa2c72d3d09e7056abad6063640069c5f2e084",
+      "sizeBytes": 17231,
+      "sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -132,14 +132,14 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 35613,
-      "sha256": "ec0be377646caa3944d2c2fcdb9551d5e79bacbd7a61e5444e54d4dc1bae3389",
+      "sizeBytes": 40779,
+      "sha256": "736901bae6f1d506f9dfc2f76e946a52c41a74ff24ac5271d5b95fa107afa787",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 24900,
-      "sha256": "896c44c036d13e2ded8c487263986bc7c9a9a9f07652c55ac2e143aa598160a0",
+      "sizeBytes": 27744,
+      "sha256": "4ad88686fc1caad2cb46c11d84a5667b10c571360af0887f1de02ce5ec164246",
       "status": "REQUIRED_RUNTIME"
     }
   ]

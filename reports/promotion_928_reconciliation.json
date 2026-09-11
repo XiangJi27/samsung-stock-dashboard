@@ -1,0 +1,82 @@
+{
+  "totalDraftVariants": 928,
+  "formula": "totalDraftVariants = passed + warning + blocked_invalid + blocked_unproven + source_conflict + expired + future + duplicate + ignored_not_promotion + unsupported",
+  "isMutuallyExclusive": true,
+  "primaryStatusBreakdown": {
+    "PASSED_VALIDATION": {
+      "count": 216,
+      "scope": "CURRENT_BATCH_ACTIVE",
+      "action": "AUTO_PUBLISH_APPROVED",
+      "description": "ผ่านการตรวจ P/N ตรงกับสต็อก, สมการราคาถูกต้อง (RRP - Discount = Net) พร้อมเผยแพร่สู่หน้างาน"
+    },
+    "WARNING_CONFIRMABLE": {
+      "count": 15,
+      "scope": "CURRENT_BATCH_ACTIVE",
+      "action": "CONFIRMATION_REQUIRED",
+      "description": "มีเงื่อนไขเพิ่มเติม (Trade Up, ดาวน์ SF+, สิทธิ์แลกซื้อ) ต้องให้ผู้จัดการสาขาตรวจทานและกดยืนยันรายตัว"
+    },
+    "BLOCKED_INVALID": {
+      "count": 160,
+      "scope": "CURRENT_BATCH_QUARANTINE",
+      "action": "QUARANTINE_ISOLATED",
+      "description": "ข้อมูลไม่ถูกต้อง เช่น สูตรใน Excel เป็น #ERROR!, ขาดรหัส P/N, หรือสมการราคาขัดแย้ง"
+    },
+    "EXPIRED": {
+      "count": 306,
+      "scope": "HISTORICAL_INACTIVE",
+      "action": "EXCLUDED_FROM_ACTIVE_KPI",
+      "description": "แคมเปญช่วงต้นเดือนสิงหาคมและของแถมปี 2025 ที่สิ้นสุดระยะเวลาโปรโมชั่นแล้ว แยกเก็บเป็นประวัติย้อนหลัง"
+    },
+    "DUPLICATE": {
+      "count": 84,
+      "scope": "REVISION_SUPERSEDED",
+      "action": "EXCLUDED_FROM_ACTIVE_KPI",
+      "description": "รายการที่ซ้ำซ้อนกันข้ามชีตการอัปเดต โดยถูกแทนที่ด้วยชีตฉบับแก้ไขล่าสุด (Superseded Rows)"
+    },
+    "IGNORED_NOT_PROMOTION": {
+      "count": 52,
+      "scope": "INFORMATIONAL_HEADER",
+      "action": "EXCLUDED_FROM_ACTIVE_KPI",
+      "description": "แถวข้อความคำอธิบาย ขั้นตอนการตัด Trade up กฎเกณฑ์หน้าร้าน และหัวตารางที่ไม่ใช่รายการสินค้าขาย"
+    },
+    "UNSUPPORTED": {
+      "count": 39,
+      "scope": "FORMAT_UNSUPPORTED",
+      "action": "EXCLUDED_FROM_ACTIVE_KPI",
+      "description": "แถวที่มีโครงสร้างไม่เข้าเกณฑ์การตัดขายหน้าร้าน หรือเป็นบันทึกข้อความภายในสาขา"
+    },
+    "FUTURE": {
+      "count": 24,
+      "scope": "FUTURE_CAMPAIGN",
+      "action": "STAGED_FUTURE_DATE",
+      "description": "โปรโมชั่นกำหนดเปิดตัวล่วงหน้า (ปลายเดือนกันยายน / ไตรมาส 4) ยังไม่ถึงวันเริ่มแคมเปญ"
+    },
+    "BLOCKED_UNPROVEN": {
+      "count": 20,
+      "scope": "CURRENT_BATCH_QUARANTINE",
+      "action": "QUARANTINE_ISOLATED",
+      "description": "โปรโมชั่นที่มีเงื่อนไขหรือโค้ดโอเปอเรเตอร์ที่ยังพิสูจน์แหล่งที่มาไม่ได้"
+    },
+    "SOURCE_CONFLICT": {
+      "count": 12,
+      "scope": "CURRENT_BATCH_QUARANTINE",
+      "action": "QUARANTINE_ISOLATED",
+      "description": "ตรวจพบข้อมูลราคาหรือส่วนลดขัดแย้งกันเองระหว่างชีตค้าปลีกกับชีตแท็บเล็ต"
+    }
+  },
+  "reconciliationSum": 928,
+  "unaccountedVariants": 0,
+  "historicalExpiredExplained": {
+    "totalExplained": 537,
+    "breakdown": {
+      "expiredCampaigns": 306,
+      "duplicateRevisionRows": 84,
+      "ignoredInformationalRows": 52,
+      "unsupportedFormats": 39,
+      "futureLaunchCampaigns": 24,
+      "blockedUnproven": 20,
+      "sourceConflicts": 12
+    },
+    "hardGovernanceRule": "537 รายการนี้ถูกแยกออกจาก Current Batch อย่างเด็ดขาด และห้ามรวมเข้ากับ Active Promotion KPI หน้าร้าน"
+  }
+}

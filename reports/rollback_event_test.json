@@ -1,0 +1,22 @@
+{
+  "testSuite": "Rollback Audit Event Ledger",
+  "status": "PASSED",
+  "executedAt": "2026-09-11T13:44:07.801517",
+  "ledgerPolicy": "Rollback creates a new audit event in history ledger without deleting any prior batches",
+  "simulatedRollbackEvent": {
+    "eventId": "EVT-ROLLBACK-20260911-001",
+    "eventType": "STOCK_SNAPSHOT_ROLLBACK",
+    "fromBatchId": "STOCK-BATCH-20260911-B2",
+    "toBatchId": "STOCK-BATCH-20260911-A1",
+    "executedAt": "2026-09-11T13:40:00+07:00",
+    "storageScope": "LOCAL_BROWSER_ONLY",
+    "auditStatus": "COMMITTED"
+  },
+  "batchHistoryPreservation": {
+    "batch1Status": "ARCHIVED (Intact, not deleted)",
+    "batch2Status": "ARCHIVED (Intact, not deleted)",
+    "activeBatch": "STOCK-BATCH-20260911-A1",
+    "historyCountAfterRollback": 2
+  },
+  "hardRuleEnforced": "Previous batches preserved with complete provenance trail."
+}

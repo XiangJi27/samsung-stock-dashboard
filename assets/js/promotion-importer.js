@@ -232,55 +232,36 @@
     }
 
     static async parseImageOCR(buffer, filename) {
-      // Simulate client-side intelligent OCR extraction
-      // Generates DRAFT_FROM_OCR with field confidence scores.
-      // CANNOT AUTO-PUBLISH under any circumstance.
-      const simulatedFields = {
-        model: 'Galaxy S25 Ultra 512GB',
-        pn: 'SM-S938B',
-        rrp: 49900,
-        discount: 4000,
-        netPrice: 45900,
-        coupon: 'CPN-S25-LAUNCH',
-        confidence: {
-          model: 0.94,
-          pn: 0.88,
-          price: 0.91,
-          coupon: 0.82 // Slightly lower
-        }
-      };
-
-      const avgConfidence = (0.94 + 0.88 + 0.91 + 0.82) / 4;
-      const isLowConfidence = avgConfidence < 0.85 || Object.values(simulatedFields.confidence).some(c => c < 0.85);
-
-      const status = isLowConfidence ? 'OCR_LOW_CONFIDENCE' : 'REVIEW_REQUIRED';
-
+      // Architectural Reality: No real client OCR engine (Tesseract WASM or Vision API) is bundled.
+      // Images are held in FILE_ACCEPTED_OCR_PENDING / OCR_NOT_IMPLEMENTED.
+      // Auto-publish is strictly prohibited.
       const draftItem = {
-        pn: simulatedFields.pn,
-        model: simulatedFields.model,
-        productCodeType: 'STANDARD_SM',
-        rrp: simulatedFields.rrp,
-        discount: simulatedFields.discount,
-        netPrice: simulatedFields.netPrice,
-        coupon: simulatedFields.coupon,
-        saleMode: 'STANDARD',
-        validationStatus: status,
-        validationFlags: ['DRAFT_FROM_OCR', 'HUMAN_REVIEW_MANDATORY'],
+        pn: 'IMAGE_OCR_PENDING',
+        model: `รูปภาพ: ${filename}`,
+        productCodeType: 'UNKNOWN',
+        rrp: 0,
+        discount: 0,
+        netPrice: 0,
+        coupon: '',
+        saleMode: 'MANUAL_ENTRY_REQUIRED',
+        validationStatus: 'OCR_NOT_IMPLEMENTED',
+        validationFlags: ['FILE_ACCEPTED_OCR_PENDING', 'OCR_NOT_IMPLEMENTED', 'HUMAN_ENTRY_MANDATORY'],
         ocrMeta: {
-          fieldConfidences: simulatedFields.confidence,
-          overallConfidence: avgConfidence,
+          status: 'OCR_NOT_IMPLEMENTED',
+          label: 'FILE_ACCEPTED_OCR_PENDING',
           canAutoPublish: false,
-          sourceImage: filename
+          sourceImage: filename,
+          message: 'รองรับการรับไฟล์รูปภาพ แต่ยังไม่สามารถอ่านข้อความอัตโนมัติ'
         },
         sourceTrace: {
-          format: 'IMAGE_OCR',
+          format: 'IMAGE_DROPZONE',
           sourceFile: filename
         }
       };
 
       return {
-        format: 'IMAGE_OCR',
-        status: 'REVIEW_REQUIRED',
+        format: 'IMAGE_DROPZONE',
+        status: 'OCR_NOT_IMPLEMENTED',
         canAutoPublish: false,
         variants: [draftItem]
       };
@@ -484,6 +465,24 @@
 
       this.filterDiffTable('ALL');
 
+      // UI Handling for Image vs TXT vs Excel
+      const btnConfirm = document.getElementById('btnConfirmPromoPublish');
+      const isImage = b.format === 'IMAGE_DROPZONE' || b.variants.some(v => v.validationStatus === 'OCR_NOT_IMPLEMENTED');
+      if (isImage) {
+        if (btnConfirm) btnConfirm.style.display = 'none';
+        const uploadStatusEl = document.getElementById('promoUploadStatus');
+        if (uploadStatusEl) {
+          uploadStatusEl.innerHTML = `
+            <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 8px; padding: 12px 16px; color: #fde68a; margin-top: 10px;">
+              📷 <strong>รองรับการรับไฟล์รูปภาพ แต่ยังไม่สามารถอ่านข้อความอัตโนมัติ</strong><br>
+              <span style="font-size: 0.8rem; color: #cbd5e1;">(สถานะ: OCR_NOT_IMPLEMENTED • นโยบายความปลอดภัยระงับการ Publish รูปภาพเข้า Master โดยอัตโนมัติ)</span>
+            </div>
+          `;
+        }
+      } else {
+        if (btnConfirm) btnConfirm.style.display = 'inline-flex';
+      }
+
       // Update Stepper
       const stepItems = document.querySelectorAll('#promoStepper .step-item');
       if (stepItems[0]) stepItems[0].className = 'step-item completed';
@@ -502,13 +501,26 @@
 
       let list = b.variants;
       if (filterType === 'PASSED') list = list.filter(v => v.validationStatus === 'PASSED_VALIDATION');
-      else if (filterType === 'REVIEW') list = list.filter(v => v.validationStatus === 'REVIEW_REQUIRED');
+      else if (filterType === 'REVIEW') list = list.filter(v => v.validationStatus === 'REVIEW_REQUIRED' || v.validationStatus === 'OCR_NOT_IMPLEMENTED');
       else if (filterType === 'BLOCKED') list = list.filter(v => v.validationStatus.startsWith('BLOCKED') || v.validationStatus === 'OCR_LOW_CONFIDENCE');
 
-      tbody.innerHTML = list.map(item => {
+      const isTxt = b.format === 'TXT_RULE';
+      const txtReviewBanner = isTxt ? `
+        <tr>
+          <td colspan="9" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 12px 16px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: #e2e8f0; font-size: 0.88rem;">
+              <input type="checkbox" id="chkTxtManagerReview" style="width: 18px; height: 18px;">
+              <span><strong>ผู้จัดการสาขาตรวจทานความถูกต้องแล้ว (Branch Manager Review & Syntax Verification)</strong></span>
+            </label>
+          </td>
+        </tr>
+      ` : '';
+
+      tbody.innerHTML = txtReviewBanner + list.map(item => {
         const renderStatusBadge = (st) => {
           if (st === 'PASSED_VALIDATION') return `<span class="status-badge-gate pass">🟢 ผ่านกฎ</span>`;
           if (st === 'REVIEW_REQUIRED') return `<span class="status-badge-gate review">🟡 ต้องตรวจ</span>`;
+          if (st === 'OCR_NOT_IMPLEMENTED') return `<span class="status-badge-gate" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b;">📷 OCR_NOT_IMPLEMENTED</span>`;
           return `<span class="status-badge-gate blocked">🔴 บล็อก (${st})</span>`;
         };
 
@@ -535,6 +547,21 @@
       if (!this.currentStagedBatch || this.isSubmitting) return;
 
       const b = this.currentStagedBatch;
+
+      // Check Image OCR Hard Rule: NEVER AUTO-PUBLISH
+      if (b.format === 'IMAGE_DROPZONE' || b.variants.some(v => v.validationStatus === 'OCR_NOT_IMPLEMENTED')) {
+        alert('❌ นโยบายความปลอดภัย: ระบบไม่อนุญาตให้ Publish ข้อมูลจากรูปภาพเข้า Master เนื่องจากยังไม่มี OCR Engine ในตัว (OCR_NOT_IMPLEMENTED)');
+        return;
+      }
+
+      // Check TXT Manager Review Requirement
+      if (b.format === 'TXT_RULE') {
+        const chk = document.getElementById('chkTxtManagerReview');
+        if (!chk || !chk.checked) {
+          alert('⚠️ รายการจาก TXT (BRANCH_RULE_DRAFT) ต้องได้รับการตรวจทานและติ๊กรับรองโดยผู้จัดการสาขาก่อนเผยแพร่');
+          return;
+        }
+      }
 
       // Filter publishable
       const publishable = b.variants.filter(v => v.validationStatus === 'PASSED_VALIDATION');

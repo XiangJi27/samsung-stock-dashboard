@@ -94,9 +94,92 @@
       });
     }
 
+    static validateSnapshot(snapshot) {
+      if (!snapshot || typeof snapshot !== 'object') {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'Snapshot ไม่ใช่ Object ที่ถูกต้อง' };
+      }
+      if (!snapshot.batchId || typeof snapshot.batchId !== 'string') {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ไม่พบ Batch ID หรือรูปแบบไม่ถูกต้อง' };
+      }
+      const meta = snapshot.meta;
+      if (!meta || typeof meta !== 'object') {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ไม่พบ Metadata ประจำ Snapshot' };
+      }
+      if (!meta.schemaVersion || !String(meta.schemaVersion).startsWith('2.')) {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: `Schema version (${meta.schemaVersion || 'none'}) ไม่รองรับ ต้องเป็น 2.x` };
+      }
+      if (!meta.importedAt) {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ไม่พบวันที่นำเข้า (importedAt)' };
+      }
+      if (!meta.sourceFileHash) {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ไม่พบ Source File Hash' };
+      }
+      if (!Array.isArray(snapshot.data) || snapshot.data.length === 0) {
+        return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ข้อมูลสต็อกว่างเปล่าหรือไม่ใช่อาร์เรย์' };
+      }
+
+      // Validate records integrity
+      const pnSet = new Set();
+      for (let i = 0; i < snapshot.data.length; i++) {
+        const item = snapshot.data[i];
+        if (!item || !item.pn) {
+          return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: `แถวที่ ${i + 1} ไม่มีรหัส P/N` };
+        }
+        if (pnSet.has(item.pn)) {
+          return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: `พบรหัส P/N ซ้ำซ้อนใน Snapshot: ${item.pn}` };
+        }
+        pnSet.add(item.pn);
+
+        const f1 = Number(item.f1);
+        const f2 = Number(item.f2);
+        const total = Number(item.total);
+        if (isNaN(f1) || isNaN(f2) || isNaN(total) || f1 < 0 || f2 < 0) {
+          return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: `ยอด On Hand ไม่ใช่ตัวเลขที่ถูกต้องที่ SKU ${item.pn}` };
+        }
+        if (total !== (f1 + f2)) {
+          return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: `ผลรวม Total != f1 + f2 ที่ SKU ${item.pn} (${total} != ${f1}+${f2})` };
+        }
+      }
+
+      return { valid: true, batchId: snapshot.batchId, itemCount: snapshot.data.length };
+    }
+
+    static async saveAuditEvent(event) {
+      try {
+        const existing = JSON.parse(localStorage.getItem('SAMSUNG_STOCK_AUDIT_EVENTS') || '[]');
+        existing.unshift(event);
+        localStorage.setItem('SAMSUNG_STOCK_AUDIT_EVENTS', JSON.stringify(existing.slice(0, 50)));
+        console.info('[StockStorageAdapter] Audit event logged:', event.eventType, event);
+      } catch (e) {
+        console.warn('[StockStorageAdapter] Could not persist audit event to localStorage:', e);
+      }
+    }
+
+    static getAuditEvents() {
+      try {
+        return JSON.parse(localStorage.getItem('SAMSUNG_STOCK_AUDIT_EVENTS') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
     static async rollbackToBatch(batchId) {
+      const currentActive = await this.getActiveSnapshot();
+      const fromBatchId = currentActive ? currentActive.batchId : 'STOCK-INITIAL';
       const targetBatch = await this.getBatchById(batchId);
       if (!targetBatch) throw new Error(`ไม่พบ Batch ID: ${batchId}`);
+
+      // Create explicit Rollback Event ledger entry without deleting any prior batches
+      const rollbackEvent = {
+        eventId: `EVT-ROLLBACK-${Date.now()}`,
+        eventType: 'STOCK_SNAPSHOT_ROLLBACK',
+        fromBatchId: fromBatchId,
+        toBatchId: targetBatch.batchId,
+        executedAt: new Date().toISOString(),
+        storageScope: 'LOCAL_BROWSER_ONLY'
+      };
+
+      await this.saveAuditEvent(rollbackEvent);
 
       const db = await this.getDb();
       return new Promise((resolve, reject) => {
@@ -108,7 +191,8 @@
           data: targetBatch.data,
           meta: {
             ...targetBatch.meta,
-            rolledBackAt: new Date().toISOString(),
+            rolledBackAt: rollbackEvent.executedAt,
+            lastRollbackEvent: rollbackEvent,
             status: 'ROLLED_BACK'
           }
         });
@@ -644,10 +728,21 @@
           batchId: b.batchId,
           data: b.mergedResult.items,
           meta: {
+            stockBatchId: b.batchId,
+            importBatchId: b.batchId,
             batchId: b.batchId,
-            sourceFilename: b.sourceFilename,
-            fileHash: b.fileHash,
             importedAt: b.importedAt,
+            sourceFilename: b.sourceFilename,
+            sourceFileHash: b.fileHash,
+            sheet1Rows: b.sheet1.totalRows,
+            sheet2Rows: b.sheet2.totalRows,
+            uniquePn: b.stats.totalProducts,
+            f1Total: b.stats.f1Total,
+            f2Total: b.stats.f2Total,
+            grandTotal: b.stats.grandTotal,
+            storageScope: 'LOCAL_BROWSER_ONLY',
+            schemaVersion: '2.0.0',
+            applicationVersion: '20260907-b2',
             stats: b.stats,
             storageMode: 'LOCAL_BROWSER_ONLY',
             status: 'IMPORTED'
@@ -666,18 +761,30 @@
         const coreF2 = coreItems.reduce((acc, it) => acc + it.f2, 0);
 
         window.STOCK_METADATA = {
+          stockBatchId: b.batchId,
+          importBatchId: b.batchId,
           sourceType: "Manual Excel Snapshot",
           sourceFile: b.sourceFilename,
+          sourceFilename: b.sourceFilename,
+          sourceFileHash: b.fileHash,
           importedAt: b.importedAt,
           recordCount: b.stats.totalProducts,
+          sheet1Rows: b.sheet1.totalRows,
+          sheet2Rows: b.sheet2.totalRows,
+          uniquePn: b.stats.totalProducts,
+          f1Total: b.stats.f1Total,
+          f2Total: b.stats.f2Total,
+          grandTotal: b.stats.grandTotal,
           coreDevices: {
             floor1: coreF1,
             floor2: coreF2,
             total: coreF1 + coreF2
           },
           importedInventoryTotal: b.stats.grandTotal,
-          importBatchId: b.batchId,
-          storageMode: 'LOCAL_BROWSER_ONLY'
+          storageScope: 'LOCAL_BROWSER_ONLY',
+          storageMode: 'LOCAL_BROWSER_ONLY',
+          schemaVersion: '2.0.0',
+          applicationVersion: '20260907-b2'
         };
 
         // If DataService exists, update it as well
@@ -690,11 +797,11 @@
           window.syncMasterStockData();
         }
 
-        // Update Last Sync / Snapshot label in top header
+        // Update Last Sync / Snapshot label in top header (Never use new Date() on refresh)
+        const importTimeFormatted = b.importedAt ? b.importedAt.replace('T', ' ').substring(0, 19) : '2026-09-11 13:31:00';
         const lastSyncLabel = document.getElementById('lastSyncTime');
         if (lastSyncLabel) {
-          const nowStr = new Date().toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-          lastSyncLabel.textContent = `Excel Snapshot (${nowStr})`;
+          lastSyncLabel.textContent = `Excel Snapshot (${importTimeFormatted})`;
         }
 
         // Truthful local disclosure dialog

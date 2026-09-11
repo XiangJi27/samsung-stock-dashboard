@@ -16,9 +16,12 @@ function renderHomeView() {
 
   // Runtime Calculation of Stock Baseline from window.STOCK_DATABASE
   let stockLoaded = false;
-  let totalF1 = 0;
-  let totalF2 = 0;
-  let totalShop = 0;
+  let coreF1 = 0;
+  let coreF2 = 0;
+  let coreTotal = 0;
+  let allF1 = 0;
+  let allF2 = 0;
+  let allTotal = 0;
   let adapterF1 = 0;
   let adapterF2 = 0;
   let adapterTotal = 0;
@@ -33,18 +36,35 @@ function renderHomeView() {
       const f2 = Number(item.f2);
       const s1 = Number.isFinite(f1) ? f1 : 0;
       const s2 = Number.isFinite(f2) ? f2 : 0;
+      allF1 += s1;
+      allF2 += s2;
+      allTotal += (s1 + s2);
+
       const m = (item.model || "").toLowerCase();
       const p = (item.pn || "").toUpperCase();
+      const grp = item.inventoryGroup || "";
 
-      if (m.includes("adapter") || p.startsWith("EP-")) {
+      let isCore = false;
+      if (item.includedInCoreDeviceKpi !== undefined) {
+        isCore = item.includedInCoreDeviceKpi === true;
+      } else if (grp === "CORE_DEVICE") {
+        isCore = true;
+      } else if (grp === "ADAPTER" || m.includes("adapter") || p.startsWith("EP-")) {
+        isCore = false;
         adapterF1 += s1;
         adapterF2 += s2;
         adapterTotal += (s1 + s2);
+      } else if (grp === "SAMSUNG_ACCESSORY" || grp === "THIRD_PARTY_ACCESSORY" || grp === "PREMIUM_GIFT" || grp === "SIM_SERVICE" || grp === "OTHER") {
+        isCore = false;
       } else {
+        isCore = !m.includes("adapter") && !p.startsWith("EP-") && !p.startsWith("GP-FCX626NNCBH") && item.category !== "Accessory";
+      }
+
+      if (isCore) {
         coreCount++;
-        totalF1 += s1;
-        totalF2 += s2;
-        totalShop += (s1 + s2);
+        coreF1 += s1;
+        coreF2 += s2;
+        coreTotal += (s1 + s2);
       }
     });
   }
@@ -59,9 +79,10 @@ function renderHomeView() {
     batchId = window.PROMOTION_BATCH_METADATA.importBatchId || "BATCH-LATEST";
   }
 
-  const stockF1Display = stockLoaded ? totalF1.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
-  const stockF2Display = stockLoaded ? totalF2.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
-  const stockTotalDisplay = stockLoaded ? totalShop.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
+  const stockF1Display = stockLoaded ? coreF1.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
+  const stockF2Display = stockLoaded ? coreF2.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
+  const stockTotalDisplay = stockLoaded ? coreTotal.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
+  const allInventoryTotalDisplay = stockLoaded ? allTotal.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
   const adapterTotalDisplay = stockLoaded ? adapterTotal.toLocaleString('th-TH') : "DATA_UNAVAILABLE";
 
   container.innerHTML = `
@@ -176,9 +197,15 @@ function renderHomeView() {
         </div>
 
         <div class="summary-card card-purple">
-          <div class="summary-label">เครื่องหลักรวม 2 ชั้น</div>
+          <div class="summary-label">เครื่องหลักรวม 2 ชั้น (Core Devices)</div>
           <div class="summary-num">${stockTotalDisplay} <span class="unit">เครื่อง</span></div>
-          <div class="summary-footer">จากฐานข้อมูลทั้งหมด ${totalItems} รายการ</div>
+          <div class="summary-footer">ยอด KPI เครื่องหลัก (แยกจากของแถม/เคส)</div>
+        </div>
+
+        <div class="summary-card" style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148, 163, 184, 0.3);">
+          <div class="summary-label" style="color: #cbd5e1;">สินค้าคงคลังทุกหมวด (All Inventory)</div>
+          <div class="summary-num" style="color: #38bdf8;">${allInventoryTotalDisplay} <span class="unit">ชิ้น</span></div>
+          <div class="summary-footer">รวมอุปกรณ์เสริม, ของแถม และซิม (${totalItems} SKUs)</div>
         </div>
 
         <div class="summary-card card-emerald">

@@ -615,6 +615,8 @@ function renderMetrics() {
   let promoAccF2 = 0;
   let adapterF1 = 0;
   let adapterF2 = 0;
+  let otherAccF1 = 0;
+  let otherAccF2 = 0;
 
   masterStockData.forEach((item) => {
     const f1 = Number(item.f1);
@@ -628,15 +630,29 @@ function renderMetrics() {
     const isAdapter = grp === "ADAPTER" || item.sourceSheet === "Adapter&สาย&Flim";
     const isPromoAcc = grp === "PROMOTION_ACCESSORY" || item.pn === "GP-FCX626NNCBH" || (item.sourceSheet === "Promotion" && (item.category === "Accessory" || item.category === "accessory"));
 
-    if (isAdapter) {
+    let isCore = false;
+    if (item.includedInCoreDeviceKpi !== undefined) {
+      isCore = item.includedInCoreDeviceKpi === true;
+    } else if (grp === "CORE_DEVICE") {
+      isCore = true;
+    } else if (isAdapter || isPromoAcc || grp === "SAMSUNG_ACCESSORY" || grp === "THIRD_PARTY_ACCESSORY" || grp === "PREMIUM_GIFT" || grp === "SIM_SERVICE" || grp === "OTHER") {
+      isCore = false;
+    } else {
+      isCore = !isAdapter && !isPromoAcc;
+    }
+
+    if (isCore) {
+      coreF1 += f1;
+      coreF2 += f2;
+    } else if (isAdapter) {
       adapterF1 += f1;
       adapterF2 += f2;
     } else if (isPromoAcc) {
       promoAccF1 += f1;
       promoAccF2 += f2;
     } else {
-      coreF1 += f1;
-      coreF2 += f2;
+      otherAccF1 += f1;
+      otherAccF2 += f2;
     }
 
     const m = (item.model || "").toLowerCase();
@@ -676,7 +692,7 @@ function renderMetrics() {
   const promoSheetF2 = coreF2 + promoAccF2; // 381
   const promoSheetTotal = promoSheetF1 + promoSheetF2; // 761
   const adapterTotal = adapterF1 + adapterF2; // 312 (F1: 189 + F2: 123)
-  const grandTotalInventory = coreTotal + promoAccF1 + promoAccF2 + adapterTotal; // 1,073
+  const grandTotalInventory = coreTotal + promoAccF1 + promoAccF2 + adapterTotal + otherAccF1 + otherAccF2; // 1,073 (Static) or 3,412 (Stock.xlsx)
 
   // 1. KPI หลัก: เครื่องหลักรวม F1 + F2 = 760 เครื่อง
   if (kpiTotalStock) {
@@ -757,6 +773,56 @@ function renderMetrics() {
   if (syncTimeElem) {
     const displayTime = meta.importedAt ? meta.importedAt.replace("T", " ").substring(0, 19) : "2026-09-06 13:51:42";
     syncTimeElem.textContent = `Stock.xlsx Snapshot (${displayTime})`;
+  }
+
+  // Render Provenance Bar in #stockSnapshotProvenanceBar
+  const provenanceContainer = document.getElementById("stockSnapshotProvenanceBar");
+  if (provenanceContainer) {
+    const isLocal = meta.storageScope === "LOCAL_BROWSER_ONLY" || (meta.importBatchId && String(meta.importBatchId).startsWith("STOCK-BATCH-"));
+    const sourceLabel = isLocal ? "Excel Snapshot" : "Static Snapshot";
+    const importedTimeFormatted = meta.importedAt ? meta.importedAt.replace("T", " ").substring(0, 19) : "2026-09-06 13:51:42";
+    const batchIdDisplay = meta.stockBatchId || meta.importBatchId || "IMPORT-20260906-002";
+    const storageDisplay = isLocal ? "Local Browser Only" : "Static Assets";
+    const rawHash = meta.sourceFileHash || "7fa7189a802cc52a";
+    const fileHashDisplay = rawHash.length > 12 ? rawHash.substring(0, 12) + "..." : rawHash;
+
+    provenanceContainer.innerHTML = `
+      <div class="stock-provenance-badge-bar" style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(0, 243, 255, 0.2); border-radius: 10px; padding: 10px 16px; margin: 12px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: 0.82rem; color: #94a3b8; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="color: var(--neon-cyan); font-weight: 600;">แหล่งข้อมูล:</span>
+          <span style="color: #f1f5f9;">${sourceLabel}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="color: var(--neon-cyan); font-weight: 600;">อัปโหลดเมื่อ:</span>
+          <span style="color: #f1f5f9;" id="provenanceImportTime">${importedTimeFormatted}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="color: var(--neon-cyan); font-weight: 600;">Stock Batch:</span>
+          <code style="color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 2px 6px; border-radius: 4px;">${batchIdDisplay}</code>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="color: var(--neon-cyan); font-weight: 600;">Storage:</span>
+          <span class="nav-badge-pill" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; font-size: 0.75rem; padding: 2px 8px;">${storageDisplay}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span style="color: var(--neon-cyan); font-weight: 600;">File Hash:</span>
+          <code style="color: #94a3b8;">${fileHashDisplay}</code>
+        </div>
+      </div>
+    `;
+  }
+
+  // Display alert banner if snapshot was invalid
+  if (window.STOCK_SNAPSHOT_STATUS === "LOCAL_SNAPSHOT_INVALID" && bannerContainer) {
+    bannerContainer.innerHTML += `
+      <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin: 16px 0; color: #fecaca; display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 1.5rem;">⚠️</span>
+        <div>
+          <strong style="color: #f87171; font-size: 1rem;">ตรวจพบ Snapshot ในเบราว์เซอร์เสียหาย (LOCAL_SNAPSHOT_INVALID)</strong>
+          <div style="font-size: 0.82rem; color: #cbd5e1;">ระบบได้ย้อนกลับไปใช้ Static Snapshot (stock_data.js) อัตโนมัติเพื่อความปลอดภัยของข้อมูล (สาเหตุ: ${window.STOCK_SNAPSHOT_ERROR || 'Schema Version หรือผลรวมตัวเลขไม่ถูกต้อง'})</div>
+        </div>
+      </div>
+    `;
   }
   if (kpiMaxDiscount) kpiMaxDiscount.textContent = `-฿${maxDiscount.toLocaleString('th-TH')}`;
   if (kpiPromoCount) kpiPromoCount.textContent = promoCount.toLocaleString('th-TH');

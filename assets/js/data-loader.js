@@ -72,20 +72,40 @@
           await this._loadScript("stock_data.js");
           await this._loadScript("promotion_variants.js");
 
-          // Check if user has an imported active stock snapshot in IndexedDB (LOCAL_BROWSER_ONLY)
+          // Stock Provider Hierarchy: 1. Confirmed IndexedDB Snapshot -> 2. StaticDataProvider -> 3. DATA_UNAVAILABLE
+          let snapshotLoaded = false;
           if (window.StockStorageAdapter && typeof window.StockStorageAdapter.getActiveSnapshot === "function") {
             try {
               const localSnapshot = await window.StockStorageAdapter.getActiveSnapshot();
-              if (localSnapshot && localSnapshot.data && localSnapshot.data.length > 0) {
-                window.STOCK_DATABASE = localSnapshot.data;
-                if (localSnapshot.meta) {
-                  window.STOCK_METADATA = localSnapshot.meta;
+              if (localSnapshot) {
+                const validation = window.StockStorageAdapter.validateSnapshot 
+                  ? window.StockStorageAdapter.validateSnapshot(localSnapshot)
+                  : { valid: Boolean(localSnapshot.data && localSnapshot.data.length > 0) };
+
+                if (validation.valid) {
+                  window.STOCK_DATABASE = localSnapshot.data;
+                  if (localSnapshot.meta) {
+                    window.STOCK_METADATA = localSnapshot.meta;
+                  }
+                  window.STOCK_SNAPSHOT_STATUS = "CONFIRMED_LOCAL_SNAPSHOT";
+                  snapshotLoaded = true;
+                  console.info("[DataLoaderGate] Restored validated active stock snapshot from IndexedDB (LOCAL_BROWSER_ONLY):", localSnapshot.batchId);
+                } else {
+                  console.warn("[DataLoaderGate] Snapshot in IndexedDB failed validation. Falling back to static dataset:", validation.reason);
+                  window.STOCK_SNAPSHOT_STATUS = "LOCAL_SNAPSHOT_INVALID";
+                  window.STOCK_SNAPSHOT_ERROR = validation.reason;
+                  // Strict Safety: NEVER use partial corrupt data; keep static dataset from stock_data.js intact
                 }
-                console.info("[DataLoaderGate] Restored active stock snapshot from IndexedDB (LOCAL_BROWSER_ONLY):", localSnapshot.batchId);
               }
             } catch (e) {
-              console.warn("[DataLoaderGate] Could not restore IndexedDB snapshot, using static baseline:", e);
+              console.warn("[DataLoaderGate] Error evaluating IndexedDB snapshot, using static baseline:", e);
+              window.STOCK_SNAPSHOT_STATUS = "LOCAL_SNAPSHOT_INVALID";
+              window.STOCK_SNAPSHOT_ERROR = e.message;
             }
+          }
+
+          if (!snapshotLoaded && !window.STOCK_SNAPSHOT_STATUS) {
+            window.STOCK_SNAPSHOT_STATUS = window.STOCK_DATABASE ? "STATIC_BASELINE" : "DATA_UNAVAILABLE";
           }
 
           // Sync masterStockData in app.js if app.js is already running
