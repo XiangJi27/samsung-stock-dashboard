@@ -114,6 +114,11 @@
       if (!meta.sourceFileHash) {
         return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ไม่พบ Source File Hash' };
       }
+      if (typeof meta.grandTotal === 'number' && typeof meta.f1Total === 'number' && typeof meta.f2Total === 'number') {
+        if (meta.grandTotal !== (meta.f1Total + meta.f2Total)) {
+          return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: `Metadata grandTotal != f1Total + f2Total (${meta.grandTotal} != ${meta.f1Total}+${meta.f2Total})` };
+        }
+      }
       if (!Array.isArray(snapshot.data) || snapshot.data.length === 0) {
         return { valid: false, errorCode: 'LOCAL_SNAPSHOT_INVALID', reason: 'ข้อมูลสต็อกว่างเปล่าหรือไม่ใช่อาร์เรย์' };
       }
@@ -734,8 +739,8 @@
             importedAt: b.importedAt,
             sourceFilename: b.sourceFilename,
             sourceFileHash: b.fileHash,
-            sheet1Rows: b.sheet1.totalRows,
-            sheet2Rows: b.sheet2.totalRows,
+            sheet1Rows: (b.s1Summary ? b.s1Summary.totalRows : (b.sheet1 ? b.sheet1.totalRows : 0)),
+            sheet2Rows: (b.s2Summary ? b.s2Summary.totalRows : (b.sheet2 ? b.sheet2.totalRows : 0)),
             uniquePn: b.stats.totalProducts,
             f1Total: b.stats.f1Total,
             f2Total: b.stats.f2Total,
@@ -769,8 +774,8 @@
           sourceFileHash: b.fileHash,
           importedAt: b.importedAt,
           recordCount: b.stats.totalProducts,
-          sheet1Rows: b.sheet1.totalRows,
-          sheet2Rows: b.sheet2.totalRows,
+          sheet1Rows: (b.s1Summary ? b.s1Summary.totalRows : (b.sheet1 ? b.sheet1.totalRows : 0)),
+          sheet2Rows: (b.s2Summary ? b.s2Summary.totalRows : (b.sheet2 ? b.sheet2.totalRows : 0)),
           uniquePn: b.stats.totalProducts,
           f1Total: b.stats.f1Total,
           f2Total: b.stats.f2Total,

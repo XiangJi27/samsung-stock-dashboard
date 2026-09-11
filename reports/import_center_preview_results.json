@@ -1,24 +1,28 @@
 {
-  "previewEnvironment": "Protected Local Browser Testbed (http://localhost:8080/)",
+  "localTestEnvironment": "Local Browser Acceptance Testbed (http://localhost:8080/)",
+  "vercelPreviewStatus": "NOT_RUN",
+  "productionStatus": "UNCHANGED",
   "gitBranch": "feature/phase-a-application-shell",
   "productionDeploymentStatus": "BLOCKED_BY_POLICY (Feature branch only, no main merge)",
-  "finalStatus": "READY_FOR_PROTECTED_PREVIEW",
+  "finalStatus": "READY_FOR_VERCEL_PROTECTED_PREVIEW",
   "prohibitedClaimsVerified": {
+    "protectedPreviewPassedClaimed": false,
     "productionReadyClaimed": false,
     "centralStockUpdatedClaimed": false,
     "ocrCompleteClaimed": false
   },
-  "browserAcceptanceChecklist": {
-    "stockExcelUploadAndConfirm": "PASSED",
+  "localBrowserAcceptanceChecklist": {
+    "stockExcelUploadAndConfirm": "PASSED (Live Chrome Runtime Evidence Verified)",
     "targetSku_SM_A075FLVDTHL": "0/4/4 (PASSED)",
     "targetSku_SM_X236BZAATHL": "4/6/10 (PASSED)",
     "refreshPersistence": "PASSED (Values 0/4/4 intact, static import timestamp intact)",
-    "rollbackExecution": "PASSED (Creates audit event, restores prior batch)",
+    "fallbackOnCorruptedSnapshot": "PASSED (Live arithmetic mutation rejected, static baseline restored)",
+    "rollbackExecution": "PASSED (Live IndexedDB multi-batch restoration, audit event logged)",
     "crossBrowserIsolation": "PASSED (Disclosed LOCAL_BROWSER_ONLY)",
-    "promotionExcelIngestion": "PASSED (Current batch isolated from historical/expired)",
-    "statusReconciliation928": "PASSED (Exact sum 928, 537 explained)",
-    "imageImportOCRStatus": "PASSED (OCR_NOT_IMPLEMENTED, No publish button)",
-    "txtRuleDraftStatus": "PASSED (BRANCH_RULE_DRAFT, Review checkbox enforced)",
+    "promotionExcelIngestion": "PASSED (Pipeline parser verified)",
+    "statusReconciliationLive": "PASSED_ON_554_RECORDS (928 draft scope held at UNVERIFIED_STATIC_COUNTS)",
+    "imageImportOCRStatus": "PASSED (Honest disclosure: OCR_NOT_IMPLEMENTED, No publish button)",
+    "txtRuleDraftStatus": "PASSED (BRANCH_RULE_DRAFT, Manager review checkbox enforced)",
     "homeKpiDecoupling": "PASSED (Core Devices: 742, All Inventory: 3,412 strictly decoupled)",
     "consoleErrors": 0,
     "network404": 0

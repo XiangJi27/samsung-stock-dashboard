@@ -1,0 +1,38 @@
+{
+  "testName": "LIVE_INDEXEDDB_FALLBACK_VERIFICATION",
+  "executedAt": "2026-09-11T14:42:00+07:00",
+  "environment": "Google Chrome (Headful Local Browser via CDP)",
+  "testScenario": {
+    "step1_inject_corrupted_snapshot": {
+      "corruptedField": "meta.grandTotal",
+      "corruptedValue": 999999,
+      "expectedSum": 3412,
+      "action": "Deliberately violate arithmetic total equation"
+    },
+    "step2_page_reload": {
+      "action": "Execute CDP Page.reload",
+      "effect": "Forces DataLoaderGate to re-evaluate IndexedDB on boot"
+    },
+    "step3_snapshot_validation_rejection": {
+      "observedStatus": "LOCAL_SNAPSHOT_INVALID",
+      "observedError": "Metadata grandTotal != f1Total + f2Total (999999 != 1763+1649)",
+      "isRejected": true
+    },
+    "step4_static_provider_fallback": {
+      "fallbackProvider": "StaticDataProvider (stock_data.js)",
+      "activeStockItemCount": 218,
+      "matchesBaseline218": true
+    },
+    "step5_ui_indicator": {
+      "urgentAlertBannerPresent": true,
+      "bannerContent": "⚠️\nตรวจพบ Snapshot ในเบราว์เซอร์เสียหาย (LOCAL_SNAPSHOT_INVALID)\nระบบได้ย้อนกลับไปใช้ Static Snapshot (stock_data.js) อัตโนมัติเพื่อความปลอดภัยของข้อมูล (สาเหตุ: Metadata grandTotal != f1Total + f2Total (999999 != 1763+1649))"
+    },
+    "step6_safety_cleanup": {
+      "originalSnapshotRestored": true,
+      "postRecoveryStatus": "CONFIRMED_LOCAL_SNAPSHOT",
+      "postRecoveryItemCount": 399
+    }
+  },
+  "status": "PASSED",
+  "finalConclusion": "Browser cleanly rejected the corrupt snapshot, isolated corrupted data, fell back to StaticDataProvider (218 items), and rendered LOCAL_SNAPSHOT_INVALID banner."
+}

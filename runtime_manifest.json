@@ -13,7 +13,7 @@
     {
       "file": "index.html",
       "sizeBytes": 122452,
-      "sha256": "26f190831b0213c326f13f8a74dd039a8ad6f15af225849b830f0e7ea1d31083",
+      "sha256": "03eff97ae5c90da8ae1368274463c52d121104a73fca4783e1188810b265c87b",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -102,8 +102,8 @@
     },
     {
       "file": "assets/js/router.js",
-      "sizeBytes": 6153,
-      "sha256": "9501500580fc4c9a899cc8ff6932dcf282ea0afcafa3379e3b351bd467dc65ea",
+      "sizeBytes": 6247,
+      "sha256": "4f4cde945e519adb532b96931aeb36c617b6910c39c772b2fd3e3a95c22f8e05",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -132,8 +132,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 40779,
-      "sha256": "736901bae6f1d506f9dfc2f76e946a52c41a74ff24ac5271d5b95fa107afa787",
+      "sizeBytes": 41391,
+      "sha256": "2610cbd65f36e7743c4a352633b4e3600520b6a0bf87b03049ce77df2bd489f7",
       "status": "REQUIRED_RUNTIME"
     },
     {

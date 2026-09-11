@@ -24,7 +24,11 @@ class AppRouter {
 
   init() {
     window.addEventListener("hashchange", () => this.handleRouting());
-    window.addEventListener("DOMContentLoaded", () => this.handleRouting());
+    if (document.readyState === "loading") {
+      window.addEventListener("DOMContentLoaded", () => this.handleRouting());
+    } else {
+      this.handleRouting();
+    }
   }
 
   /**

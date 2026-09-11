@@ -1,0 +1,55 @@
+{
+  "testName": "LIVE_INDEXEDDB_ROLLBACK_TRANSACTION_VERIFICATION",
+  "executedAt": "2026-09-11T14:45:00+07:00",
+  "environment": "Google Chrome (Headful Local Browser via CDP)",
+  "testScenario": {
+    "step1_batchA_active": {
+      "batchId": "STOCK-BATCH-20260911-ZV3H4V",
+      "grandTotal": 3412
+    },
+    "step2_batchB_ingested": {
+      "batchId": "STOCK-BATCH-20260911-TESTB",
+      "grandTotal": 50,
+      "becameActive": true
+    },
+    "step3_rollback_to_batchA": {
+      "action": "StockStorageAdapter.rollbackToBatch('STOCK-BATCH-20260911-ZV3H4V')",
+      "restoredActiveBatchId": "STOCK-BATCH-20260911-ZV3H4V",
+      "restoredGrandTotal": 3412,
+      "isBatchARestored": true
+    },
+    "step4_batchB_retention": {
+      "batchBRetainedInHistory": true,
+      "allBatchIdsInHistory": [
+        "STOCK-BATCH-20260911-TESTB",
+        "STOCK-BATCH-20260911-ZV3H4V",
+        "STOCK-BATCH-20260911-XK4JRG"
+      ]
+    },
+    "step5_audit_ledger_event": {
+      "eventFound": true,
+      "loggedEvent": {
+        "eventId": "EVT-ROLLBACK-1789112494895",
+        "eventType": "STOCK_SNAPSHOT_ROLLBACK",
+        "fromBatchId": "STOCK-BATCH-20260911-TESTB",
+        "toBatchId": "STOCK-BATCH-20260911-ZV3H4V",
+        "executedAt": "2026-09-11T07:41:34.895Z",
+        "storageScope": "LOCAL_BROWSER_ONLY"
+      },
+      "verifiedLedgerEntry": {
+        "eventType": "STOCK_SNAPSHOT_ROLLBACK",
+        "fromBatch": "STOCK-BATCH-20260911-TESTB",
+        "toBatch": "STOCK-BATCH-20260911-ZV3H4V"
+      }
+    },
+    "step6_pristine_cleanup": {
+      "batchBDeleted": true,
+      "finalRemainingBatches": [
+        "STOCK-BATCH-20260911-ZV3H4V",
+        "STOCK-BATCH-20260911-XK4JRG"
+      ]
+    }
+  },
+  "status": "PASSED",
+  "finalConclusion": "Live rollback transaction successfully executed in IndexedDB. Active snapshot restored to Batch A, superseded Batch B retained in history ledger, and rollback event persisted in audit ledger."
+}
