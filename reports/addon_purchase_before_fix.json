@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "reportProvenanceRule": "RULE-0: REPORT PROVENANCE CHECK",
+    "gitCommitSha": "b7f36a384056848879555252731d8244acb7b0a1",
+    "evaluationDate": "2026-09-06",
+    "generatedAt": "2026-09-11T15:08:46.258571",
+    "batchId": "IMPORT-20260906-002",
+    "parserVersion": "2.1.0-LTR-MERGE",
+    "ruleEngineVersion": "2.5.0-STRICT",
+    "sourceFiles": {
+      "promoTablet": {
+        "filename": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sha256": "6e91888b88c87383ba75da97e08036c700aaa6e6fe44e0fc12365ef5895a2c4f",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย"
+      },
+      "retailShop": {
+        "filename": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
+        "sha256": "45d85a9fe78e9c6e4f38c3db464a4f666b906b26225907c7ff2b176443d6509c"
+      },
+      "stock": {
+        "filename": "Stock.xlsx",
+        "sha256": "846c77d67f56916cfe9003eba5d21efa92163df75532720152b0050110abbb85"
+      }
+    }
+  },
+  "saleMode": "ADD_ON_PURCHASE",
+  "inputHash": "6e91888b88c87383ba75da97e08036c700aaa6e6fe44e0fc12365ef5895a2c4f",
+  "batchId": "IMPORT-20260906-002",
+  "totalDatasetVariants": 554,
+  "totalDatasetBlocked": 139,
+  "totalDatasetSourceFormulaError": 75,
+  "totalUniqueVariants": 13,
+  "passed": 0,
+  "warning": 0,
+  "blocked": 13,
+  "priceEquationMismatch": 13,
+  "sourceFormulaError": 0,
+  "missingDiscountMapping": 13,
+  "promoIds": [
+    "TAB-R4-ADDON-KEYBOARD",
+    "TAB-R5-ADDON-KEYBOARD",
+    "TAB-R6-ADDON-KEYBOARD",
+    "TAB-R9-ADDON-KEYBOARD",
+    "TAB-R10-ADDON-KEYBOARD",
+    "TAB-R11-ADDON-KEYBOARD",
+    "TAB-R12-ADDON-KEYBOARD",
+    "TAB-R20-ADDON-KEYBOARD",
+    "TAB-R21-ADDON-KEYBOARD",
+    "TAB-R22-ADDON-KEYBOARD",
+    "TAB-R23-ADDON-KEYBOARD",
+    "TAB-R24-ADDON-KEYBOARD",
+    "TAB-R25-ADDON-KEYBOARD"
+  ],
+  "currentQuarantineRate": 25.09,
+  "status": "BASELINE_BEFORE_FIX"
+}

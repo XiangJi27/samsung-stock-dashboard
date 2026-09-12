@@ -453,7 +453,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 50900.0 - 10000.0 != 45900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": "อัพเดท 28 Aug - 6 Sep ล่าสุด",
       "sourceRow": 24
@@ -468,7 +468,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 42900.0 - 10000.0 != 37900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": "อัพเดท 28 Aug - 6 Sep ล่าสุด",
       "sourceRow": 25
@@ -1368,7 +1368,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 50900.0 - 10000.0 != 45900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": "19 -27  Aug",
       "sourceRow": 22
@@ -1383,7 +1383,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 42900.0 - 10000.0 != 37900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": "19 -27  Aug",
       "sourceRow": 23
@@ -2283,7 +2283,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 50900.0 - 10000.0 != 45900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 17-18  Aug",
       "sourceRow": 22
@@ -2298,7 +2298,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 42900.0 - 10000.0 != 37900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 17-18  Aug",
       "sourceRow": 23
@@ -3198,7 +3198,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 50900.0 - 10000.0 != 45900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 14 Aug -16 Aug",
       "sourceRow": 22
@@ -3213,7 +3213,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 42900.0 - 10000.0 != 37900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 14 Aug -16 Aug",
       "sourceRow": 23
@@ -4008,7 +4008,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 93900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 16
@@ -4023,7 +4023,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 77900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 17
@@ -4038,7 +4038,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 69900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 18
@@ -4053,7 +4053,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 85900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 19
@@ -4068,7 +4068,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 69900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 20
@@ -4083,7 +4083,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 61900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 21
@@ -4098,7 +4098,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 50900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 22
@@ -4113,7 +4113,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 42900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 7 Aug - 12 Aug",
       "sourceRow": 23
@@ -4863,7 +4863,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 93900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 16
@@ -4878,7 +4878,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 77900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 17
@@ -4893,7 +4893,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 69900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 18
@@ -4908,7 +4908,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 85900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 19
@@ -4923,7 +4923,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 69900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 20
@@ -4938,7 +4938,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 61900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 21
@@ -4953,7 +4953,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 50900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 22
@@ -4968,7 +4968,7 @@
       "couponCode": "",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 42900.0 - 5000.0 != 0.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
       "sourceSheet": " 3 -6 Aug ",
       "sourceRow": 23
@@ -7638,7 +7638,7 @@
       "couponCode": "01",
       "status": "PASSED_WITH_WARNING",
       "errors": "",
-      "warnings": "TRADE_UP_CODE_UNVERIFIED: ",
+      "warnings": "PRICE_EQUATION_MISMATCH: 54900.0 - 10000.0 != 45900.0; TRADE_UP_CODE_UNVERIFIED: ",
       "sourceFile": "business_rules.json",
       "sourceSheet": "BR-10-S26U",
       "sourceRow": 1

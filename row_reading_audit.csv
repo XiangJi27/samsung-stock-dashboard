@@ -1,0 +1,2142 @@
+﻿Model,P/N,Source Row,Column,Header Path,Raw Value,Interpreted Field,Variant ID,Validation Status
+Galaxy S26 Ultra,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),66900.0,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),9000.0,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),57900.0,field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",field,RET-อัพเดท-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),54900.0,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),44900.0,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),9000.0,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),45900.0,field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",field,RET-อัพเดท-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),46900.0,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),2000.0,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),39900.0,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),9000.0,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),37900.0,field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",field,RET-อัพเดท-R6,PASSED_VALIDATION
+Galaxy S26+,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET-อัพเดท-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET-อัพเดท-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),36900.0,field,RET-อัพเดท-R7,PASSED_VALIDATION
+Galaxy S26+,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET-อัพเดท-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),10000.0,field,RET-อัพเดท-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET-อัพเดท-R8,PASSED_VALIDATION
+Galaxy S26,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),41900.0,field,RET-อัพเดท-R9,PASSED_VALIDATION
+Galaxy S26,-,9,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET-อัพเดท-R9,PASSED_VALIDATION
+Galaxy S26,-,9,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R9,PASSED_VALIDATION
+Galaxy S26,-,9,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET-อัพเดท-R9,PASSED_VALIDATION
+Galaxy S26,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,RET-อัพเดท-R10,PASSED_VALIDATION
+Galaxy S26,-,10,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET-อัพเดท-R10,PASSED_VALIDATION
+Galaxy S26,-,10,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R10,PASSED_VALIDATION
+Galaxy S26,-,10,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),27900.0,field,RET-อัพเดท-R10,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET-อัพเดท-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET-อัพเดท-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET-อัพเดท-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"รหัส SM- ระบบลด (12,000)
+รหัส F- ระบบลด (6,000)",field,RET-อัพเดท-R11,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),28900.0,field,RET-อัพเดท-R12,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,12,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),4000.0,field,RET-อัพเดท-R12,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,12,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R12,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,12,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),24900.0,field,RET-อัพเดท-R12,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,12,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),ฟรีเพิ่มความจุ 2 เท่า จาก 128GB เป็น 256GB มูลค่า ,field,RET-อัพเดท-R12,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),24900.0,field,RET-อัพเดท-R13,PASSED_VALIDATION
+Galaxy S26 FE  NEW,-,13,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),สินเชื่อ SF+ ดาวน์สูงสุด 10%,field,RET-อัพเดท-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET-อัพเดท-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,14,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET-อัพเดท-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,14,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,14,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-อัพเดท-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,14,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,RET-อัพเดท-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,14,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET-อัพเดท-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET-อัพเดท-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,15,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET-อัพเดท-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,15,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,15,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-อัพเดท-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,15,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),19900.0,field,RET-อัพเดท-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,15,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET-อัพเดท-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET-อัพเดท-R16,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,16,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET-อัพเดท-R16,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,16,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET-อัพเดท-R16,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,16,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20900.0,field,RET-อัพเดท-R16,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,16,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET-อัพเดท-R16,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET-อัพเดท-R17,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,17,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-อัพเดท-R17,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,17,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET-อัพเดท-R17,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,17,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17900.0,field,RET-อัพเดท-R17,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,17,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET-อัพเดท-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),93900.0,field,RET-อัพเดท-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET-อัพเดท-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),86900.0,field,RET-อัพเดท-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),77900.0,field,RET-อัพเดท-R19,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,19,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-อัพเดท-R19,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,19,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R19,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,19,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),72900.0,field,RET-อัพเดท-R19,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET-อัพเดท-R20,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,20,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-อัพเดท-R20,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,20,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R20,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,20,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET-อัพเดท-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),85900.0,field,RET-อัพเดท-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET-อัพเดท-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),78900.0,field,RET-อัพเดท-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET-อัพเดท-R22,PASSED_VALIDATION
+Galaxy Z Fold8,-,22,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-อัพเดท-R22,PASSED_VALIDATION
+Galaxy Z Fold8,-,22,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R22,PASSED_VALIDATION
+Galaxy Z Fold8,-,22,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET-อัพเดท-R22,PASSED_VALIDATION
+Galaxy Z Fold8,-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),61900.0,field,RET-อัพเดท-R23,PASSED_VALIDATION
+Galaxy Z Fold8,-,23,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-อัพเดท-R23,PASSED_VALIDATION
+Galaxy Z Fold8,-,23,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-อัพเดท-R23,PASSED_VALIDATION
+Galaxy Z Fold8,-,23,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET-อัพเดท-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),50900.0,field,RET-อัพเดท-R24,PASSED_VALIDATION
+Galaxy Z Flip8,-,24,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-อัพเดท-R24,PASSED_VALIDATION
+Galaxy Z Flip8,-,24,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R24,PASSED_VALIDATION
+Galaxy Z Flip8,-,24,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),45900.0,field,RET-อัพเดท-R24,PASSED_VALIDATION
+Galaxy Z Flip8,-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET-อัพเดท-R25,PASSED_VALIDATION
+Galaxy Z Flip8,-,25,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-อัพเดท-R25,PASSED_VALIDATION
+Galaxy Z Flip8,-,25,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R25,PASSED_VALIDATION
+Galaxy Z Flip8,-,25,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET-อัพเดท-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),87900.0,field,RET-อัพเดท-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET-อัพเดท-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),69900.0,field,RET-อัพเดท-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET-อัพเดท-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),75900.0,field,RET-อัพเดท-R27,PASSED_VALIDATION
+Galaxy Z Fold 7,-,27,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET-อัพเดท-R27,PASSED_VALIDATION
+Galaxy Z Fold 7,-,27,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R27,PASSED_VALIDATION
+Galaxy Z Fold 7,-,27,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),57900.0,field,RET-อัพเดท-R27,PASSED_VALIDATION
+Galaxy Z Fold 7,-,27,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET-อัพเดท-R27,PASSED_VALIDATION
+Galaxy Z Fold 7,-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),67900.0,field,RET-อัพเดท-R28,PASSED_VALIDATION
+Galaxy Z Fold 7,-,28,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET-อัพเดท-R28,PASSED_VALIDATION
+Galaxy Z Fold 7,-,28,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R28,PASSED_VALIDATION
+Galaxy Z Fold 7,-,28,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),49900.0,field,RET-อัพเดท-R28,PASSED_VALIDATION
+Galaxy Z Fold 7,-,28,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET-อัพเดท-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET-อัพเดท-R29,PASSED_VALIDATION
+Galaxy Z Flip7,-,29,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET-อัพเดท-R29,PASSED_VALIDATION
+Galaxy Z Flip7,-,29,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R29,PASSED_VALIDATION
+Galaxy Z Flip7,-,29,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET-อัพเดท-R29,PASSED_VALIDATION
+Galaxy Z Flip7,-,29,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET-อัพเดท-R29,PASSED_VALIDATION
+Galaxy Z Flip7,-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET-อัพเดท-R30,PASSED_VALIDATION
+Galaxy Z Flip7,-,30,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET-อัพเดท-R30,PASSED_VALIDATION
+Galaxy Z Flip7,-,30,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R30,PASSED_VALIDATION
+Galaxy Z Flip7,-,30,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET-อัพเดท-R30,PASSED_VALIDATION
+Galaxy Z Flip7,-,30,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET-อัพเดท-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET-อัพเดท-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET-อัพเดท-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20999.0,field,RET-อัพเดท-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 8% : (1,680 B)",field,RET-อัพเดท-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET-อัพเดท-R32,PASSED_VALIDATION
+Galaxy A57 5G,-,32,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET-อัพเดท-R32,PASSED_VALIDATION
+Galaxy A57 5G,-,32,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET-อัพเดท-R32,PASSED_VALIDATION
+Galaxy A57 5G,-,32,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 7% : (1,260 B)",field,RET-อัพเดท-R32,PASSED_VALIDATION
+Galaxy A57 5G,-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET-อัพเดท-R33,PASSED_VALIDATION
+Galaxy A57 5G,-,33,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-อัพเดท-R33,PASSED_VALIDATION
+Galaxy A57 5G,-,33,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),16999.0,field,RET-อัพเดท-R33,PASSED_VALIDATION
+Galaxy A57 5G,-,33,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% :(850 B),field,RET-อัพเดท-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET-อัพเดท-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET-อัพเดท-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET-อัพเดท-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET-อัพเดท-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 3,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET-อัพเดท-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET-อัพเดท-R35,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,35,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET-อัพเดท-R35,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,35,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R35,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,35,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET-อัพเดท-R35,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,35,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),15999.0,field,RET-อัพเดท-R35,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,35,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET-อัพเดท-R35,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET-อัพเดท-R36,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,36,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET-อัพเดท-R36,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,36,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R36,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,36,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-อัพเดท-R36,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,36,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),14999.0,field,RET-อัพเดท-R36,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,36,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET-อัพเดท-R36,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13999.0,field,RET-อัพเดท-R37,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.04,field,RET-อัพเดท-R37,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),13999.0,field,RET-อัพเดท-R37,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 6% (840 บาท),field,RET-อัพเดท-R37,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10999.0,field,RET-อัพเดท-R38,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-อัพเดท-R38,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R38,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET-อัพเดท-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10599.0,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1600.0,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),8999.0,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),1600.0,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),8999.0,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET-อัพเดท-R39,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8999.0,field,RET-อัพเดท-R40,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,40,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1500.0,field,RET-อัพเดท-R40,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,40,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R40,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,40,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),7499.0,field,RET-อัพเดท-R40,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7999.0,field,RET-อัพเดท-R41,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,41,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-อัพเดท-R41,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,41,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R41,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,41,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET-อัพเดท-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET-อัพเดท-R42,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,42,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET-อัพเดท-R42,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,42,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 13% - 910 บาท,field,RET-อัพเดท-R42,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET-อัพเดท-R43,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,43,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),500.0,field,RET-อัพเดท-R43,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,43,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R43,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,43,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET-อัพเดท-R43,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,43,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6499.0,field,RET-อัพเดท-R43,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,43,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET-อัพเดท-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5999.0,field,RET-อัพเดท-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-อัพเดท-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),4999.0,field,RET-อัพเดท-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,45,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5299.0,field,RET-อัพเดท-R45,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,45,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-อัพเดท-R45,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,45,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R45,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,45,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),4299.0,field,RET-อัพเดท-R45,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,46,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4599.0,field,RET-อัพเดท-R46,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,46,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),800.0,field,RET-อัพเดท-R46,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,46,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-อัพเดท-R46,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,46,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3799.0,field,RET-อัพเดท-R46,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),66900.0,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),9000.0,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),57900.0,field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",field,RET-19 -27-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),54900.0,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),44900.0,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),9000.0,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),45900.0,field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",field,RET-19 -27-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),46900.0,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),2000.0,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),39900.0,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),9000.0,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),37900.0,field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลดทั้งหมด 9,000 บาท ไม่ร่วมเทรดอัพ",field,RET-19 -27-R6,PASSED_VALIDATION
+Galaxy S26+,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET-19 -27-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET-19 -27-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),36900.0,field,RET-19 -27-R7,PASSED_VALIDATION
+Galaxy S26+,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET-19 -27-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),10000.0,field,RET-19 -27-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET-19 -27-R8,PASSED_VALIDATION
+Galaxy S26,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),41900.0,field,RET-19 -27-R9,PASSED_VALIDATION
+Galaxy S26,-,9,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET-19 -27-R9,PASSED_VALIDATION
+Galaxy S26,-,9,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R9,PASSED_VALIDATION
+Galaxy S26,-,9,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET-19 -27-R9,PASSED_VALIDATION
+Galaxy S26,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,RET-19 -27-R10,PASSED_VALIDATION
+Galaxy S26,-,10,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET-19 -27-R10,PASSED_VALIDATION
+Galaxy S26,-,10,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R10,PASSED_VALIDATION
+Galaxy S26,-,10,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),27900.0,field,RET-19 -27-R10,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET-19 -27-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET-19 -27-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET-19 -27-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"รหัส SM- ระบบลด (12,000)
+รหัส F- ระบบลด (6,000)",field,RET-19 -27-R11,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET-19 -27-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET-19 -27-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-19 -27-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,RET-19 -27-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET-19 -27-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET-19 -27-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET-19 -27-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-19 -27-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),19900.0,field,RET-19 -27-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET-19 -27-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET-19 -27-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET-19 -27-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET-19 -27-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20900.0,field,RET-19 -27-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET-19 -27-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET-19 -27-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-19 -27-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET-19 -27-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17900.0,field,RET-19 -27-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET-19 -27-R15,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),93900.0,field,RET-19 -27-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET-19 -27-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),86900.0,field,RET-19 -27-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),77900.0,field,RET-19 -27-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-19 -27-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),72900.0,field,RET-19 -27-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET-19 -27-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-19 -27-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET-19 -27-R18,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),85900.0,field,RET-19 -27-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET-19 -27-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),78900.0,field,RET-19 -27-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET-19 -27-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-19 -27-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET-19 -27-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),61900.0,field,RET-19 -27-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET-19 -27-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET-19 -27-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET-19 -27-R21,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),50900.0,field,RET-19 -27-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-19 -27-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),45900.0,field,RET-19 -27-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET-19 -27-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET-19 -27-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET-19 -27-R23,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),87900.0,field,RET-19 -27-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET-19 -27-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),69900.0,field,RET-19 -27-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET-19 -27-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),75900.0,field,RET-19 -27-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET-19 -27-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),57900.0,field,RET-19 -27-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET-19 -27-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),67900.0,field,RET-19 -27-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET-19 -27-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),49900.0,field,RET-19 -27-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET-19 -27-R26,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET-19 -27-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET-19 -27-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET-19 -27-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET-19 -27-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET-19 -27-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET-19 -27-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET-19 -27-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET-19 -27-R28,PASSED_VALIDATION
+Galaxy A57 5G,-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET-19 -27-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,29,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET-19 -27-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,29,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20999.0,field,RET-19 -27-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,29,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 8% : (1,680 B)",field,RET-19 -27-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET-19 -27-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,30,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET-19 -27-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,30,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET-19 -27-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,30,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 7% : (1,260 B)",field,RET-19 -27-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET-19 -27-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-19 -27-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),16999.0,field,RET-19 -27-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% :(850 B),field,RET-19 -27-R31,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET-19 -27-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET-19 -27-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET-19 -27-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),18999.0,field,RET-19 -27-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET-19 -27-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET-19 -27-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET-19 -27-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET-19 -27-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),15999.0,field,RET-19 -27-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET-19 -27-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET-19 -27-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET-19 -27-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET-19 -27-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),14999.0,field,RET-19 -27-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET-19 -27-R34,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13999.0,field,RET-19 -27-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.04,field,RET-19 -27-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),13999.0,field,RET-19 -27-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 6% (840 บาท),field,RET-19 -27-R35,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10999.0,field,RET-19 -27-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-19 -27-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET-19 -27-R36,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10599.0,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1600.0,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),8999.0,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),1600.0,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),8999.0,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET-19 -27-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8999.0,field,RET-19 -27-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1500.0,field,RET-19 -27-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),7499.0,field,RET-19 -27-R38,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7999.0,field,RET-19 -27-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-19 -27-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET-19 -27-R39,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET-19 -27-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,40,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET-19 -27-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,40,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 13% - 910 บาท,field,RET-19 -27-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET-19 -27-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),500.0,field,RET-19 -27-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET-19 -27-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6499.0,field,RET-19 -27-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET-19 -27-R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5999.0,field,RET-19 -27-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-19 -27-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),4999.0,field,RET-19 -27-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5299.0,field,RET-19 -27-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET-19 -27-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),4299.0,field,RET-19 -27-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4599.0,field,RET-19 -27-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),800.0,field,RET-19 -27-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET-19 -27-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3799.0,field,RET-19 -27-R44,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),66900.0,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),8000.0,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),58900.0,field,RET- 17-18-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),54900.0,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),44900.0,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),8000.0,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),46900.0,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET- 17-18-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),46900.0,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),2000.0,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),39900.0,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),7000.0,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),39900.0,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET- 17-18-R6,PASSED_VALIDATION
+Galaxy S26+,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 17-18-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 17-18-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),36900.0,field,RET- 17-18-R7,PASSED_VALIDATION
+Galaxy S26+,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 17-18-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),10000.0,field,RET- 17-18-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 17-18-R8,PASSED_VALIDATION
+Galaxy S26,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),41900.0,field,RET- 17-18-R9,PASSED_VALIDATION
+Galaxy S26,-,9,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 17-18-R9,PASSED_VALIDATION
+Galaxy S26,-,9,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R9,PASSED_VALIDATION
+Galaxy S26,-,9,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 17-18-R9,PASSED_VALIDATION
+Galaxy S26,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,RET- 17-18-R10,PASSED_VALIDATION
+Galaxy S26,-,10,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 17-18-R10,PASSED_VALIDATION
+Galaxy S26,-,10,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R10,PASSED_VALIDATION
+Galaxy S26,-,10,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),27900.0,field,RET- 17-18-R10,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 17-18-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 17-18-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 17-18-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"รหัส SM- ระบบลด (12,000)
+รหัส F- ระบบลด (6,000)",field,RET- 17-18-R11,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 17-18-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 17-18-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 17-18-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,RET- 17-18-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET- 17-18-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 17-18-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 17-18-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 17-18-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),19900.0,field,RET- 17-18-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET- 17-18-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 17-18-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 17-18-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 17-18-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20900.0,field,RET- 17-18-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET- 17-18-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 17-18-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 17-18-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 17-18-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17900.0,field,RET- 17-18-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET- 17-18-R15,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),93900.0,field,RET- 17-18-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET- 17-18-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),86900.0,field,RET- 17-18-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),77900.0,field,RET- 17-18-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 17-18-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),72900.0,field,RET- 17-18-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 17-18-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 17-18-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET- 17-18-R18,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),85900.0,field,RET- 17-18-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET- 17-18-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),78900.0,field,RET- 17-18-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 17-18-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 17-18-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET- 17-18-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),61900.0,field,RET- 17-18-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 17-18-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 17-18-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET- 17-18-R21,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),50900.0,field,RET- 17-18-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 17-18-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),45900.0,field,RET- 17-18-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 17-18-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 17-18-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET- 17-18-R23,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),87900.0,field,RET- 17-18-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 17-18-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),69900.0,field,RET- 17-18-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 17-18-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),75900.0,field,RET- 17-18-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 17-18-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),57900.0,field,RET- 17-18-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 17-18-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),67900.0,field,RET- 17-18-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 17-18-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),49900.0,field,RET- 17-18-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 17-18-R26,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 17-18-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 17-18-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET- 17-18-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET- 17-18-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 17-18-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 17-18-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 17-18-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET- 17-18-R28,PASSED_VALIDATION
+Galaxy A57 5G,-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 17-18-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,29,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 17-18-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,29,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20999.0,field,RET- 17-18-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,29,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 8% : (1,680 B)",field,RET- 17-18-R29,PASSED_VALIDATION
+Galaxy A57 5G,-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 17-18-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,30,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 17-18-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,30,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET- 17-18-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,30,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 7% : (1,260 B)",field,RET- 17-18-R30,PASSED_VALIDATION
+Galaxy A57 5G,-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 17-18-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 17-18-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),16999.0,field,RET- 17-18-R31,PASSED_VALIDATION
+Galaxy A57 5G,-,31,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% :(850 B),field,RET- 17-18-R31,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 17-18-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 17-18-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 17-18-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),18999.0,field,RET- 17-18-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,32,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 17-18-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 17-18-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 17-18-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 17-18-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),15999.0,field,RET- 17-18-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,33,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 17-18-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 17-18-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 17-18-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 17-18-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),14999.0,field,RET- 17-18-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,34,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 17-18-R34,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13999.0,field,RET- 17-18-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.04,field,RET- 17-18-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),13999.0,field,RET- 17-18-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,35,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 6% (840 บาท),field,RET- 17-18-R35,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10999.0,field,RET- 17-18-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 17-18-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,36,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 17-18-R36,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10599.0,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),600.0,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),1600.0,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),8999.0,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,37,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET- 17-18-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8999.0,field,RET- 17-18-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1500.0,field,RET- 17-18-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,38,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),7499.0,field,RET- 17-18-R38,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7999.0,field,RET- 17-18-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 17-18-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,39,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 17-18-R39,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET- 17-18-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,40,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 17-18-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+(SF+ campaign)",-,40,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 13% - 910 บาท,field,RET- 17-18-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET- 17-18-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),500.0,field,RET- 17-18-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 17-18-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6499.0,field,RET- 17-18-R41,PASSED_VALIDATION
+"Galaxy A07 5G
+(ไม่ร่วม SF+)",-,41,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET- 17-18-R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5999.0,field,RET- 17-18-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 17-18-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,42,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),4999.0,field,RET- 17-18-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5299.0,field,RET- 17-18-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 17-18-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,43,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),4299.0,field,RET- 17-18-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4599.0,field,RET- 17-18-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),800.0,field,RET- 17-18-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 17-18-R44,PASSED_VALIDATION
+"Galaxy A07 LTE
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",-,44,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3799.0,field,RET- 17-18-R44,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),66900.0,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),8000.0,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),58900.0,field,RET- 14 Au-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),54900.0,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),44900.0,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),8000.0,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),46900.0,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET- 14 Au-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),46900.0,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),2000.0,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),39900.0,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),7000.0,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),39900.0,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),โปรนักเรียนไม่ร่วมกับส่วนลดหรือโปรใดๆ,field,RET- 14 Au-R6,PASSED_VALIDATION
+Galaxy S26+,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 14 Au-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 14 Au-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),36900.0,field,RET- 14 Au-R7,PASSED_VALIDATION
+Galaxy S26+,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 14 Au-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),10000.0,field,RET- 14 Au-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 14 Au-R8,PASSED_VALIDATION
+Galaxy S26,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),41900.0,field,RET- 14 Au-R9,PASSED_VALIDATION
+Galaxy S26,-,9,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 14 Au-R9,PASSED_VALIDATION
+Galaxy S26,-,9,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R9,PASSED_VALIDATION
+Galaxy S26,-,9,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 14 Au-R9,PASSED_VALIDATION
+Galaxy S26,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,RET- 14 Au-R10,PASSED_VALIDATION
+Galaxy S26,-,10,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 14 Au-R10,PASSED_VALIDATION
+Galaxy S26,-,10,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R10,PASSED_VALIDATION
+Galaxy S26,-,10,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),27900.0,field,RET- 14 Au-R10,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 14 Au-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 14 Au-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 14 Au-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"รหัส SM- ระบบลด (12,000)
+รหัส F- ระบบลด (6,000)",field,RET- 14 Au-R11,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 14 Au-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 14 Au-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 14 Au-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,RET- 14 Au-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET- 14 Au-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 14 Au-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 14 Au-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 14 Au-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),19900.0,field,RET- 14 Au-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET- 14 Au-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 14 Au-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 14 Au-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 14 Au-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20900.0,field,RET- 14 Au-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET- 14 Au-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 14 Au-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 14 Au-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 14 Au-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17900.0,field,RET- 14 Au-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET- 14 Au-R15,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),93900.0,field,RET- 14 Au-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET- 14 Au-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),86900.0,field,RET- 14 Au-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),77900.0,field,RET- 14 Au-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 14 Au-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),72900.0,field,RET- 14 Au-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 14 Au-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 14 Au-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R18,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET- 14 Au-R18,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),85900.0,field,RET- 14 Au-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),7000.0,field,RET- 14 Au-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),78900.0,field,RET- 14 Au-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 14 Au-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 14 Au-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),64900.0,field,RET- 14 Au-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),61900.0,field,RET- 14 Au-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 14 Au-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 14 Au-R21,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET- 14 Au-R21,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),50900.0,field,RET- 14 Au-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 14 Au-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),45900.0,field,RET- 14 Au-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 14 Au-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 14 Au-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R23,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET- 14 Au-R23,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),87900.0,field,RET- 14 Au-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 14 Au-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),69900.0,field,RET- 14 Au-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 14 Au-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),75900.0,field,RET- 14 Au-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 14 Au-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),57900.0,field,RET- 14 Au-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 14 Au-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),67900.0,field,RET- 14 Au-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 14 Au-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),49900.0,field,RET- 14 Au-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 14 Au-R26,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 14 Au-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 14 Au-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET- 14 Au-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET- 14 Au-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 14 Au-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 14 Au-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 14 Au-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET- 14 Au-R28,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 14 Au-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 14 Au-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20999.0,field,RET- 14 Au-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 8% : (1,680 B)",field,RET- 14 Au-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 14 Au-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 14 Au-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET- 14 Au-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 7% : (1,260 B)",field,RET- 14 Au-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 14 Au-R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 14 Au-R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),16999.0,field,RET- 14 Au-R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% :(850 B),field,RET- 14 Au-R31,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 14 Au-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 14 Au-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 14 Au-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),18999.0,field,RET- 14 Au-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 14 Au-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 14 Au-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 14 Au-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 14 Au-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),15999.0,field,RET- 14 Au-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 14 Au-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 14 Au-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 14 Au-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 14 Au-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),14999.0,field,RET- 14 Au-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 14 Au-R34,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13999.0,field,RET- 14 Au-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.04,field,RET- 14 Au-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),13999.0,field,RET- 14 Au-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% (700 B),field,RET- 14 Au-R35,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10999.0,field,RET- 14 Au-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 14 Au-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 14 Au-R36,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10599.0,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1600.0,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),8999.0,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),1600.0,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),8999.0,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),เริ่ม 7-16 สิงหาคม 2569,field,RET- 14 Au-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8999.0,field,RET- 14 Au-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1700.0,field,RET- 14 Au-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),7299.0,field,RET- 14 Au-R38,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7999.0,field,RET- 14 Au-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 14 Au-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 14 Au-R39,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET- 14 Au-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 14 Au-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 14 Au-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 13% - 910,field,RET- 14 Au-R40,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5999.0,field,RET- 14 Au-R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,41,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),5999.0,field,RET- 14 Au-R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5299.0,field,RET- 14 Au-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1300.0,field,RET- 14 Au-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3999.0,field,RET- 14 Au-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4599.0,field,RET- 14 Au-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),800.0,field,RET- 14 Au-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 14 Au-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3799.0,field,RET- 14 Au-R43,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),66900.0,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),8000.0,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),58900.0,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),ระยะเวลาโปรโมชั่น:  7- 12 สิงหาคม 2569,field,RET- 7 Aug-R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),54900.0,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),44900.0,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),8000.0,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),46900.0,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),ระยะเวลาโปรโมชั่น:  7- 12 สิงหาคม 2569,field,RET- 7 Aug-R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),46900.0,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),2000.0,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),39900.0,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),7000.0,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),39900.0,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),ระยะเวลาโปรโมชั่น:  7- 12 สิงหาคม 2569,field,RET- 7 Aug-R6,PASSED_VALIDATION
+Galaxy S26+,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 7 Aug-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 7 Aug-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R7,PASSED_VALIDATION
+Galaxy S26+,-,7,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),36900.0,field,RET- 7 Aug-R7,PASSED_VALIDATION
+Galaxy S26+,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 7 Aug-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),10000.0,field,RET- 7 Aug-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R8,PASSED_VALIDATION
+Galaxy S26+,-,8,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 7 Aug-R8,PASSED_VALIDATION
+Galaxy S26,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),41900.0,field,RET- 7 Aug-R9,PASSED_VALIDATION
+Galaxy S26,-,9,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 7 Aug-R9,PASSED_VALIDATION
+Galaxy S26,-,9,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R9,PASSED_VALIDATION
+Galaxy S26,-,9,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 7 Aug-R9,PASSED_VALIDATION
+Galaxy S26,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,RET- 7 Aug-R10,PASSED_VALIDATION
+Galaxy S26,-,10,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 7 Aug-R10,PASSED_VALIDATION
+Galaxy S26,-,10,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R10,PASSED_VALIDATION
+Galaxy S26,-,10,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),27900.0,field,RET- 7 Aug-R10,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 7 Aug-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 7 Aug-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 7 Aug-R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"รหัส SM- ระบบลด (12,000)
+รหัส F- ระบบลด (6,000)",field,RET- 7 Aug-R11,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 7 Aug-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 7 Aug-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 7 Aug-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,RET- 7 Aug-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET- 7 Aug-R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 7 Aug-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 7 Aug-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 7 Aug-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),19900.0,field,RET- 7 Aug-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 10%,field,RET- 7 Aug-R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 7 Aug-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 7 Aug-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 7 Aug-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20900.0,field,RET- 7 Aug-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET- 7 Aug-R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 7 Aug-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 7 Aug-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 7 Aug-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17900.0,field,RET- 7 Aug-R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),(ไม่สามารถใช้ร่วมกับ SF+ ได้),field,RET- 7 Aug-R15,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),93900.0,field,RET- 7 Aug-R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),77900.0,field,RET- 7 Aug-R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 7 Aug-R18,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),85900.0,field,RET- 7 Aug-R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 7 Aug-R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),61900.0,field,RET- 7 Aug-R21,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),50900.0,field,RET- 7 Aug-R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 7 Aug-R23,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),87900.0,field,RET- 7 Aug-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 7 Aug-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),69900.0,field,RET- 7 Aug-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 7 Aug-R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),75900.0,field,RET- 7 Aug-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 7 Aug-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),57900.0,field,RET- 7 Aug-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 7 Aug-R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),67900.0,field,RET- 7 Aug-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 7 Aug-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),49900.0,field,RET- 7 Aug-R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,field,RET- 7 Aug-R26,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 7 Aug-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 7 Aug-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET- 7 Aug-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET- 7 Aug-R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 7 Aug-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 7 Aug-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 7 Aug-R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง
+และ
+SF+",field,RET- 7 Aug-R28,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 7 Aug-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 7 Aug-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20999.0,field,RET- 7 Aug-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 8% : (1,680 B)",field,RET- 7 Aug-R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 7 Aug-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 7 Aug-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET- 7 Aug-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"SF+ ดาวน์ไม่เกิน 7% : (1,260 B)",field,RET- 7 Aug-R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 7 Aug-R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 7 Aug-R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),16999.0,field,RET- 7 Aug-R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% :(850 B),field,RET- 7 Aug-R31,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 7 Aug-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 7 Aug-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 7 Aug-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),18999.0,field,RET- 7 Aug-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 7 Aug-R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 7 Aug-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 7 Aug-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 7 Aug-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),15999.0,field,RET- 7 Aug-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 7 Aug-R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 7 Aug-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 7 Aug-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 7 Aug-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),14999.0,field,RET- 7 Aug-R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),"ส่วนลด 2,000 บาท ไม่สามารถใช้ร่วมกับ SF+ ได้",field,RET- 7 Aug-R34,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13999.0,field,RET- 7 Aug-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.04,field,RET- 7 Aug-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),13999.0,field,RET- 7 Aug-R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 5% (700 B),field,RET- 7 Aug-R35,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10999.0,field,RET- 7 Aug-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 7 Aug-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 7 Aug-R36,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10599.0,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),600.0,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,K,FLASH_SALE > ส่วนลดพิเศษ (Flash Sale Discount),1600.0,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,L,FLASH_SALE > ราคาหลังหักส่วนลด (Flash Sale Net),8999.0,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),เริ่ม 7-16 สิงหาคม 2569,field,RET- 7 Aug-R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8999.0,field,RET- 7 Aug-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1700.0,field,RET- 7 Aug-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),7299.0,field,RET- 7 Aug-R38,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7999.0,field,RET- 7 Aug-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 7 Aug-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 7 Aug-R39,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET- 7 Aug-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 7 Aug-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 7 Aug-R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,M,REMARKS > โปรเพิ่มเติม / เงื่อนไข (Remarks/Gifts),SF+ ดาวน์ไม่เกิน 13% - 910,field,RET- 7 Aug-R40,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5999.0,field,RET- 7 Aug-R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,41,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),5999.0,field,RET- 7 Aug-R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5299.0,field,RET- 7 Aug-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1300.0,field,RET- 7 Aug-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3999.0,field,RET- 7 Aug-R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4599.0,field,RET- 7 Aug-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),800.0,field,RET- 7 Aug-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 7 Aug-R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3799.0,field,RET- 7 Aug-R43,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),66900.0,field,RET- 3 -6 -R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 3 -6 -R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 3 -6 -R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 3 -6 -R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,4,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),56900.0,field,RET- 3 -6 -R4,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),54900.0,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),5000.0,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,5,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),44900.0,field,RET- 3 -6 -R5,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),46900.0,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,H,TRADE_UP > ส่วนลดเทรดอัพ (Trade Up Discount),2000.0,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,I,TRADE_UP > รหัสการชำระ (Payment Code: T-UP-CO-S),T-UP-CO-S,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26 Ultra,-,6,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),39900.0,field,RET- 3 -6 -R6,PASSED_VALIDATION
+Galaxy S26+,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 3 -6 -R7,PASSED_VALIDATION
+Galaxy S26+,-,7,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 3 -6 -R7,PASSED_VALIDATION
+Galaxy S26+,-,7,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R7,PASSED_VALIDATION
+Galaxy S26+,-,7,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),36900.0,field,RET- 3 -6 -R7,PASSED_VALIDATION
+Galaxy S26+,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 3 -6 -R8,PASSED_VALIDATION
+Galaxy S26+,-,8,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),10000.0,field,RET- 3 -6 -R8,PASSED_VALIDATION
+Galaxy S26+,-,8,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R8,PASSED_VALIDATION
+Galaxy S26+,-,8,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 3 -6 -R8,PASSED_VALIDATION
+Galaxy S26,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),41900.0,field,RET- 3 -6 -R9,PASSED_VALIDATION
+Galaxy S26,-,9,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 3 -6 -R9,PASSED_VALIDATION
+Galaxy S26,-,9,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R9,PASSED_VALIDATION
+Galaxy S26,-,9,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 3 -6 -R9,PASSED_VALIDATION
+Galaxy S26,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,RET- 3 -6 -R10,PASSED_VALIDATION
+Galaxy S26,-,10,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 3 -6 -R10,PASSED_VALIDATION
+Galaxy S26,-,10,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R10,PASSED_VALIDATION
+Galaxy S26,-,10,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),27900.0,field,RET- 3 -6 -R10,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 3 -6 -R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),12000.0,field,RET- 3 -6 -R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R11,PASSED_VALIDATION
+Galaxy S25 Ultra,-,11,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,RET- 3 -6 -R11,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 3 -6 -R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 3 -6 -R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 3 -6 -R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,12,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,RET- 3 -6 -R12,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 3 -6 -R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),3000.0,field,RET- 3 -6 -R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 3 -6 -R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ร่วม SF+)",-,13,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),19900.0,field,RET- 3 -6 -R13,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),26900.0,field,RET- 3 -6 -R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),6000.0,field,RET- 3 -6 -R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 3 -6 -R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,14,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20900.0,field,RET- 3 -6 -R14,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,RET- 3 -6 -R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),5000.0,field,RET- 3 -6 -R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,F,STANDARD_PAYMENT > คูปอง (Price Coupon),02,field,RET- 3 -6 -R15,PASSED_VALIDATION
+"Galaxy S25 FE
+(ไม่ร่วม SF+)",-,15,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17900.0,field,RET- 3 -6 -R15,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),93900.0,field,RET- 3 -6 -R16,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),77900.0,field,RET- 3 -6 -R17,PASSED_VALIDATION
+Galaxy Z Fold8 Ultra,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 3 -6 -R18,PASSED_VALIDATION
+Galaxy Z Fold8,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),85900.0,field,RET- 3 -6 -R19,PASSED_VALIDATION
+Galaxy Z Fold8,-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),69900.0,field,RET- 3 -6 -R20,PASSED_VALIDATION
+Galaxy Z Fold8,-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),61900.0,field,RET- 3 -6 -R21,PASSED_VALIDATION
+Galaxy Z Flip8,-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),50900.0,field,RET- 3 -6 -R22,PASSED_VALIDATION
+Galaxy Z Flip8,-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),42900.0,field,RET- 3 -6 -R23,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),87900.0,field,RET- 3 -6 -R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 3 -6 -R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,24,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),69900.0,field,RET- 3 -6 -R24,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),75900.0,field,RET- 3 -6 -R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 3 -6 -R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,25,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),57900.0,field,RET- 3 -6 -R25,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),67900.0,field,RET- 3 -6 -R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),18000.0,field,RET- 3 -6 -R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R26,PASSED_VALIDATION
+Galaxy Z Fold 7,-,26,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),49900.0,field,RET- 3 -6 -R26,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,RET- 3 -6 -R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 3 -6 -R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,27,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),37900.0,field,RET- 3 -6 -R27,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),40900.0,field,RET- 3 -6 -R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),11000.0,field,RET- 3 -6 -R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R28,PASSED_VALIDATION
+Galaxy Z Flip7,-,28,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),29900.0,field,RET- 3 -6 -R28,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 3 -6 -R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 3 -6 -R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,29,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),20999.0,field,RET- 3 -6 -R29,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 3 -6 -R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 3 -6 -R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,30,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),17999.0,field,RET- 3 -6 -R30,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 3 -6 -R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 3 -6 -R31,PASSED_VALIDATION
+"Galaxy A57 5G
+ ตั้งแต่ 3-16 สิงหาคม",-,31,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),16999.0,field,RET- 3 -6 -R31,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),20999.0,field,RET- 3 -6 -R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 3 -6 -R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.12,field,RET- 3 -6 -R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,32,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),18999.0,field,RET- 3 -6 -R32,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17999.0,field,RET- 3 -6 -R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 3 -6 -R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.14,field,RET- 3 -6 -R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,33,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),15999.0,field,RET- 3 -6 -R33,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16999.0,field,RET- 3 -6 -R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),2000.0,field,RET- 3 -6 -R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.15,field,RET- 3 -6 -R34,PASSED_VALIDATION
+"Galaxy A57 5G 
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)
+ตั้งแต่ 3-16 สิงหาคม",-,34,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),14999.0,field,RET- 3 -6 -R34,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13999.0,field,RET- 3 -6 -R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.04,field,RET- 3 -6 -R35,PASSED_VALIDATION
+"Galaxy A37 5G
+ตั้งแต่ 3-16 สิงหาคม",-,35,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),13999.0,field,RET- 3 -6 -R35,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10999.0,field,RET- 3 -6 -R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 3 -6 -R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R36,PASSED_VALIDATION
+"Galaxy A27 5G
+ตั้งแต่ 3-16 สิงหาคม",-,36,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 3 -6 -R36,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10599.0,field,RET- 3 -6 -R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),600.0,field,RET- 3 -6 -R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 3 -6 -R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,37,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),9999.0,field,RET- 3 -6 -R37,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8999.0,field,RET- 3 -6 -R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1700.0,field,RET- 3 -6 -R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R38,PASSED_VALIDATION
+"Galaxy A17 5G
+ตั้งแต่ 3-16 สิงหาคม",-,38,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),7299.0,field,RET- 3 -6 -R38,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7999.0,field,RET- 3 -6 -R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1000.0,field,RET- 3 -6 -R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R39,PASSED_VALIDATION
+"Galaxy A17 LTE
+ตั้งแต่ 3-16 สิงหาคม",-,39,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 3 -6 -R39,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),6999.0,field,RET- 3 -6 -R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,G,STUDENT > อัตราส่วนลด (Student Discount Rate),0.1,field,RET- 3 -6 -R40,PASSED_VALIDATION
+"Galaxy A07 5G
+ตั้งแต่ 3-16 สิงหาคม",-,40,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),6999.0,field,RET- 3 -6 -R40,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5999.0,field,RET- 3 -6 -R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,41,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),5999.0,field,RET- 3 -6 -R41,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5299.0,field,RET- 3 -6 -R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),1300.0,field,RET- 3 -6 -R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,42,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3999.0,field,RET- 3 -6 -R42,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4599.0,field,RET- 3 -6 -R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,E,STANDARD_PAYMENT > ส่วนลด (Standard Discount),800.0,field,RET- 3 -6 -R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,F,STANDARD_PAYMENT > คูปอง (Price Coupon),01,field,RET- 3 -6 -R43,PASSED_VALIDATION
+"Galaxy A07 LTE
+6-19 July",-,43,J,FINAL_NET > ราคาหลังลดและเทรดอัพ (Net Price),3799.0,field,RET- 3 -6 -R43,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,D,STANDARD_PAYMENT > ราคาปกติ (RRP),48900.0,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,E,STANDARD_PAYMENT > ส่วนลด ss,3000.0,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,F,STANDARD_PAYMENT > ส่วนลด CPW,2000.0,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),43900.0,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,I,Incentive,01,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 ห,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11  Ultra 5G,-,4,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R4-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,D,STANDARD_PAYMENT > ราคาปกติ (RRP),33900.0,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,E,STANDARD_PAYMENT > ส่วนลด ss,2000.0,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,F,STANDARD_PAYMENT > ส่วนลด CPW,1500.0,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),30400.0,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,I,Incentive,01,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 ห,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11 (5G),-,5,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R5-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,D,STANDARD_PAYMENT > ราคาปกติ (RRP),28900.0,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,E,STANDARD_PAYMENT > ส่วนลด ss,2000.0,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,F,STANDARD_PAYMENT > ส่วนลด CPW,1500.0,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),25400.0,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,I,Incentive,01,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 ห,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S11  (WiFi),-,6,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R6-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,D,STANDARD_PAYMENT > ราคาปกติ (RRP),43900.0,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,E,STANDARD_PAYMENT > ส่วนลด ss,10000.0,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,F,STANDARD_PAYMENT > ส่วนลด CPW,3000.0,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),30900.0,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,I,Incentive,01,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ Small Talk TC-04 TypeC Tabl,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10 plus 5G,-,7,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R7-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,D,STANDARD_PAYMENT > ราคาปกติ (RRP),52900.0,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,F,STANDARD_PAYMENT > ส่วนลด CPW,10000.0,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),42900.0,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,I,Incentive,01,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ Small Talk TC-04 TypeC Tabl,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10ultra,-,8,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R8-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,D,STANDARD_PAYMENT > ราคาปกติ (RRP),30900.0,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,E,STANDARD_PAYMENT > ส่วนลด ss,4000.0,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,F,STANDARD_PAYMENT > ส่วนลด CPW,1000.0,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),25900.0,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,I,Incentive,01,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet Laptop Sleeve 13 inch  กับ  Double Wall Sta,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ 5G,-,9,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R9-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,D,STANDARD_PAYMENT > ราคาปกติ (RRP),27900.0,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,E,STANDARD_PAYMENT > ส่วนลด ss,4000.0,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,F,STANDARD_PAYMENT > ส่วนลด CPW,1000.0,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),22900.0,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,I,Incentive,01,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet Laptop Sleeve 13 inch  กับ  Double Wall Sta,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE+ WiFi,-,10,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R10-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,D,STANDARD_PAYMENT > ราคาปกติ (RRP),22900.0,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,E,STANDARD_PAYMENT > ส่วนลด ss,2000.0,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,F,STANDARD_PAYMENT > ส่วนลด CPW,1500.0,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),19400.0,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,I,Incentive,01,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Double Wall Stainless Steel 600ml กับ  Phone Stand,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE 5G,-,11,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R11-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,D,STANDARD_PAYMENT > ราคาปกติ (RRP),19900.0,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,E,STANDARD_PAYMENT > ส่วนลด ss,2000.0,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,F,STANDARD_PAYMENT > ส่วนลด CPW,1500.0,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),16400.0,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,I,Incentive,01,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),แลกซื้อ Keyboard / Book Cover ลด 50%,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Double Wall Stainless Steel 600ml กับ  Phone Stand,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 FE WiFi,-,12,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R12-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16990.0,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,F,STANDARD_PAYMENT > ส่วนลด CPW,500.0,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),16490.0,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,I,Incentive,01,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ฟรี  Keyboard Cover (1,990)
+GP-FCX400RLABH",field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Phone Stand First class NO V168 Phoenix กับ Small ,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),-,13,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R13-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,D,STANDARD_PAYMENT > ราคาปกติ (RRP),12990.0,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,F,STANDARD_PAYMENT > ส่วนลด CPW,500.0,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),12490.0,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,I,Incentive,01,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ฟรี  Keyboard Cover (1,990)
+GP-FCX400RLABH",field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Phone Stand First class NO V168 Phoenix กับ Small ,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),-,14,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R14-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,D,STANDARD_PAYMENT > ราคาปกติ (RRP),16990.0,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,F,STANDARD_PAYMENT > ส่วนลด CPW,2500.0,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),14490.0,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,I,Incentive,01,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Phone Stand First class NO V168 Phoenix กับ Small ,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,-,15,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R15-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,D,STANDARD_PAYMENT > ราคาปกติ (RRP),12990.0,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,F,STANDARD_PAYMENT > ส่วนลด CPW,2500.0,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),10490.0,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,I,Incentive,01,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Phone Stand First class NO V168 Phoenix กับ Small ,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,-,16,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R16-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,D,STANDARD_PAYMENT > ราคาปกติ (RRP),23900.0,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,F,STANDARD_PAYMENT > ส่วนลด CPW,2500.0,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),21400.0,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,I,Incentive,01,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ Small Talk TC-04 TypeC Tabl,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus Wifi,-,17,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R17-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,D,STANDARD_PAYMENT > ราคาปกติ (RRP),27900.0,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,F,STANDARD_PAYMENT > ส่วนลด CPW,12000.0,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),15900.0,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,I,Incentive,01,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ Small Talk TC-04 TypeC Tabl,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 FE plus 5G,-,18,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R18-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,D,STANDARD_PAYMENT > ราคาปกติ (RRP),35900.0,field,TAB-R19-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R19-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,F,STANDARD_PAYMENT > ส่วนลด CPW,12000.0,field,TAB-R19-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),23900.0,field,TAB-R19-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,I,Incentive,01,field,TAB-R19-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ Small Talk TC-04 TypeC Tabl,field,TAB-R19-VAR,PASSED_VALIDATION
+Galaxy Tab S9 5G,-,19,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R19-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10490.0,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,E,STANDARD_PAYMENT > ส่วนลด ss,1000.0,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,F,STANDARD_PAYMENT > ส่วนลด CPW,500.0,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),8990.0,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,I,Incentive,01,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ไม่ผ่อนกับ  SF+
+แลกซื้อ Keyboard / Book Cover ลด 5",field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tab,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,20,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R20-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8490.0,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,E,STANDARD_PAYMENT > ส่วนลด ss,1000.0,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,F,STANDARD_PAYMENT > ส่วนลด CPW,500.0,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),6990.0,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,I,Incentive,01,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ไม่ผ่อนกับ  SF+
+แลกซื้อ Keyboard / Book Cover ลด 5",field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tab,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,21,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R21-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,D,STANDARD_PAYMENT > ราคาปกติ (RRP),10490.0,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,E,STANDARD_PAYMENT > ส่วนลด ss,500.0,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),9990.0,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,I,Incentive,04,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ผ่อนกับ SF+ ดาวน์ไม่เกิน 10%
+แลกซื้อ Keyboard / Bo",field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tab,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  5G  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,22,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R22-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,D,STANDARD_PAYMENT > ราคาปกติ (RRP),8490.0,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,E,STANDARD_PAYMENT > ส่วนลด ss,500.0,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),7990.0,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,I,Incentive,04,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ผ่อนกับ SF+ ดาวน์ไม่เกิน 10%
+แลกซื้อ Keyboard / Bo",field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tab,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11+  WiFi  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,23,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R23-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7490.0,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,E,STANDARD_PAYMENT > ส่วนลด ss,1000.0,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,F,STANDARD_PAYMENT > ส่วนลด CPW,500.0,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),5990.0,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,I,Incentive,01,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ไม่ผ่อนกับ  SF+
+แลกซื้อ Keyboard / Book Cover ลด 5",field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tab,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",-,24,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R24-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7490.0,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,E,STANDARD_PAYMENT > ส่วนลด ss,500.0,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),6990.0,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,I,Incentive,04,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"ผ่อนกับ SF+ ดาวน์ไม่เกิน 10%
+แลกซื้อ Keyboard / Bo",field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,K,REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions),02,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,L,ADD_ON > คูปองตัดขาย (Add-on Coupon),Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tab,field,TAB-R25-VAR,PASSED_VALIDATION
+"Galaxy Tab A11 LTE  (NEW)
+(ใช้ร่วมกับ SF+ ได้)",-,25,M,PREMIUM > ของแถม (Gifts Description),06,field,TAB-R25-VAR,PASSED_VALIDATION
+Watch Ultra 2,-,26,D,STANDARD_PAYMENT > ราคาปกติ (RRP),25900.0,field,TAB-R26-VAR,PASSED_VALIDATION
+Watch Ultra 2,-,26,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R26-VAR,PASSED_VALIDATION
+Watch Ultra 2,-,26,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R26-VAR,PASSED_VALIDATION
+Watch Ultra 2,-,26,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),18130.0,field,TAB-R26-VAR,PASSED_VALIDATION
+Watch Ultra 2,-,26,I,Incentive,03,field,TAB-R26-VAR,PASSED_VALIDATION
+Watch Ultra 2,-,26,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R26-VAR,PASSED_VALIDATION
+Watch Ultra (64GB),-,27,D,STANDARD_PAYMENT > ราคาปกติ (RRP),24900.0,field,TAB-R27-VAR,PASSED_VALIDATION
+Watch Ultra (64GB),-,27,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R27-VAR,PASSED_VALIDATION
+Watch Ultra (64GB),-,27,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R27-VAR,PASSED_VALIDATION
+Watch Ultra (64GB),-,27,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),16185.0,field,TAB-R27-VAR,PASSED_VALIDATION
+Watch Ultra (64GB),-,27,I,Incentive,03,field,TAB-R27-VAR,PASSED_VALIDATION
+Watch Ultra (64GB),-,27,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R27-VAR,PASSED_VALIDATION
+Watch Ultra (32GB),-,28,D,STANDARD_PAYMENT > ราคาปกติ (RRP),23900.0,field,TAB-R28-VAR,PASSED_VALIDATION
+Watch Ultra (32GB),-,28,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R28-VAR,PASSED_VALIDATION
+Watch Ultra (32GB),-,28,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R28-VAR,PASSED_VALIDATION
+Watch Ultra (32GB),-,28,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),11950.0,field,TAB-R28-VAR,PASSED_VALIDATION
+Watch Ultra (32GB),-,28,I,Incentive,03,field,TAB-R28-VAR,PASSED_VALIDATION
+Watch Ultra (32GB),-,28,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R28-VAR,PASSED_VALIDATION
+Watch8 Classic - LTE,-,29,D,STANDARD_PAYMENT > ราคาปกติ (RRP),19900.0,field,TAB-R29-VAR,PASSED_VALIDATION
+Watch8 Classic - LTE,-,29,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R29-VAR,PASSED_VALIDATION
+Watch8 Classic - LTE,-,29,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R29-VAR,PASSED_VALIDATION
+Watch8 Classic - LTE,-,29,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),13930.0,field,TAB-R29-VAR,PASSED_VALIDATION
+Watch8 Classic - LTE,-,29,I,Incentive,03,field,TAB-R29-VAR,PASSED_VALIDATION
+Watch8 Classic - LTE,-,29,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R29-VAR,PASSED_VALIDATION
+Watch8 Classic - BT,-,30,D,STANDARD_PAYMENT > ราคาปกติ (RRP),17900.0,field,TAB-R30-VAR,PASSED_VALIDATION
+Watch8 Classic - BT,-,30,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R30-VAR,PASSED_VALIDATION
+Watch8 Classic - BT,-,30,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R30-VAR,PASSED_VALIDATION
+Watch8 Classic - BT,-,30,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),12530.0,field,TAB-R30-VAR,PASSED_VALIDATION
+Watch8 Classic - BT,-,30,I,Incentive,03,field,TAB-R30-VAR,PASSED_VALIDATION
+Watch8 Classic - BT,-,30,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R30-VAR,PASSED_VALIDATION
+Watch9 44mm,-,31,D,STANDARD_PAYMENT > ราคาปกติ (RRP),14900.0,field,TAB-R31-VAR,PASSED_VALIDATION
+Watch9 44mm,-,31,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R31-VAR,PASSED_VALIDATION
+Watch9 44mm,-,31,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R31-VAR,PASSED_VALIDATION
+Watch9 44mm,-,31,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),10430.0,field,TAB-R31-VAR,PASSED_VALIDATION
+Watch9 44mm,-,31,I,Incentive,03,field,TAB-R31-VAR,PASSED_VALIDATION
+Watch9 44mm,-,31,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R31-VAR,PASSED_VALIDATION
+Watch9 40mm,-,32,D,STANDARD_PAYMENT > ราคาปกติ (RRP),12900.0,field,TAB-R32-VAR,PASSED_VALIDATION
+Watch9 40mm,-,32,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R32-VAR,PASSED_VALIDATION
+Watch9 40mm,-,32,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R32-VAR,PASSED_VALIDATION
+Watch9 40mm,-,32,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),9030.0,field,TAB-R32-VAR,PASSED_VALIDATION
+Watch9 40mm,-,32,I,Incentive,03,field,TAB-R32-VAR,PASSED_VALIDATION
+Watch9 40mm,-,32,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R32-VAR,PASSED_VALIDATION
+Watch8 44mm,-,33,D,STANDARD_PAYMENT > ราคาปกติ (RRP),13900.0,field,TAB-R33-VAR,PASSED_VALIDATION
+Watch8 44mm,-,33,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R33-VAR,PASSED_VALIDATION
+Watch8 44mm,-,33,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R33-VAR,PASSED_VALIDATION
+Watch8 44mm,-,33,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),9900.0,field,TAB-R33-VAR,PASSED_VALIDATION
+Watch8 44mm,-,33,I,Incentive,03,field,TAB-R33-VAR,PASSED_VALIDATION
+Watch8 44mm,-,33,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R33-VAR,PASSED_VALIDATION
+Watch8 40mm,-,34,D,STANDARD_PAYMENT > ราคาปกติ (RRP),11900.0,field,TAB-R34-VAR,PASSED_VALIDATION
+Watch8 40mm,-,34,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R34-VAR,PASSED_VALIDATION
+Watch8 40mm,-,34,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R34-VAR,PASSED_VALIDATION
+Watch8 40mm,-,34,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),7900.0,field,TAB-R34-VAR,PASSED_VALIDATION
+Watch8 40mm,-,34,I,Incentive,03,field,TAB-R34-VAR,PASSED_VALIDATION
+Watch8 40mm,-,34,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R34-VAR,PASSED_VALIDATION
+Buds4 Pro Black,-,35,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7990.0,field,TAB-R35-VAR,PASSED_VALIDATION
+Buds4 Pro Black,-,35,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R35-VAR,PASSED_VALIDATION
+Buds4 Pro Black,-,35,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R35-VAR,PASSED_VALIDATION
+Buds4 Pro Black,-,35,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),5593.0,field,TAB-R35-VAR,PASSED_VALIDATION
+Buds4 Pro Black,-,35,I,Incentive,03,field,TAB-R35-VAR,PASSED_VALIDATION
+Buds4 Pro Black,-,35,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R35-VAR,PASSED_VALIDATION
+Buds4 Pro White,-,36,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7990.0,field,TAB-R36-VAR,PASSED_VALIDATION
+Buds4 Pro White,-,36,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R36-VAR,PASSED_VALIDATION
+Buds4 Pro White,-,36,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R36-VAR,PASSED_VALIDATION
+Buds4 Pro White,-,36,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),5593.0,field,TAB-R36-VAR,PASSED_VALIDATION
+Buds4 Pro White,-,36,I,Incentive,03,field,TAB-R36-VAR,PASSED_VALIDATION
+Buds4 Pro White,-,36,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R36-VAR,PASSED_VALIDATION
+Buds4 Pro Pink,-,37,D,STANDARD_PAYMENT > ราคาปกติ (RRP),7990.0,field,TAB-R37-VAR,PASSED_VALIDATION
+Buds4 Pro Pink,-,37,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R37-VAR,PASSED_VALIDATION
+Buds4 Pro Pink,-,37,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R37-VAR,PASSED_VALIDATION
+Buds4 Pro Pink,-,37,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),5593.0,field,TAB-R37-VAR,PASSED_VALIDATION
+Buds4 Pro Pink,-,37,I,Incentive,03,field,TAB-R37-VAR,PASSED_VALIDATION
+Buds4 Pro Pink,-,37,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R37-VAR,PASSED_VALIDATION
+Buds4  Black,-,38,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5990.0,field,TAB-R38-VAR,PASSED_VALIDATION
+Buds4  Black,-,38,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R38-VAR,PASSED_VALIDATION
+Buds4  Black,-,38,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R38-VAR,PASSED_VALIDATION
+Buds4  Black,-,38,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),4193.0,field,TAB-R38-VAR,PASSED_VALIDATION
+Buds4  Black,-,38,I,Incentive,03,field,TAB-R38-VAR,PASSED_VALIDATION
+Buds4  Black,-,38,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R38-VAR,PASSED_VALIDATION
+Buds4  White,-,39,D,STANDARD_PAYMENT > ราคาปกติ (RRP),5990.0,field,TAB-R39-VAR,PASSED_VALIDATION
+Buds4  White,-,39,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R39-VAR,PASSED_VALIDATION
+Buds4  White,-,39,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R39-VAR,PASSED_VALIDATION
+Buds4  White,-,39,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),4193.0,field,TAB-R39-VAR,PASSED_VALIDATION
+Buds4  White,-,39,I,Incentive,03,field,TAB-R39-VAR,PASSED_VALIDATION
+Buds4  White,-,39,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R39-VAR,PASSED_VALIDATION
+Buds3 FE,-,40,D,STANDARD_PAYMENT > ราคาปกติ (RRP),4290.0,field,TAB-R40-VAR,PASSED_VALIDATION
+Buds3 FE,-,40,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R40-VAR,PASSED_VALIDATION
+Buds3 FE,-,40,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R40-VAR,PASSED_VALIDATION
+Buds3 FE,-,40,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),3003.0,field,TAB-R40-VAR,PASSED_VALIDATION
+Buds3 FE,-,40,I,Incentive,03,field,TAB-R40-VAR,PASSED_VALIDATION
+Buds3 FE,-,40,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R40-VAR,PASSED_VALIDATION
+Buds Core,-,41,D,STANDARD_PAYMENT > ราคาปกติ (RRP),1490.0,field,TAB-R41-VAR,PASSED_VALIDATION
+Buds Core,-,41,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R41-VAR,PASSED_VALIDATION
+Buds Core,-,41,F,STANDARD_PAYMENT > ส่วนลด CPW,200.0,field,TAB-R41-VAR,PASSED_VALIDATION
+Buds Core,-,41,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),1290.0,field,TAB-R41-VAR,PASSED_VALIDATION
+Buds Core,-,41,I,Incentive,03,field,TAB-R41-VAR,PASSED_VALIDATION
+Buds Core,-,41,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R41-VAR,PASSED_VALIDATION
+Ring,-,42,D,STANDARD_PAYMENT > ราคาปกติ (RRP),14900.0,field,TAB-R42-VAR,PASSED_VALIDATION
+Ring,-,42,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R42-VAR,PASSED_VALIDATION
+Ring,-,42,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R42-VAR,PASSED_VALIDATION
+Ring,-,42,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),8195.0,field,TAB-R42-VAR,PASSED_VALIDATION
+Ring,-,42,I,Incentive,03,field,TAB-R42-VAR,PASSED_VALIDATION
+Ring,-,42,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R42-VAR,PASSED_VALIDATION
+Fit3,-,43,D,STANDARD_PAYMENT > ราคาปกติ (RRP),1990.0,field,TAB-R43-VAR,PASSED_VALIDATION
+Fit3,-,43,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R43-VAR,PASSED_VALIDATION
+Fit3,-,43,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R43-VAR,PASSED_VALIDATION
+Fit3,-,43,G,STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price),1990.0,field,TAB-R43-VAR,PASSED_VALIDATION
+Fit3,-,43,I,Incentive,03,field,TAB-R43-VAR,PASSED_VALIDATION
+Fit3,-,43,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Watch MBO:
+Applicable models are Flagship SMP (Z8 ",field,TAB-R43-VAR,PASSED_VALIDATION
+SmartTag2,-,44,D,STANDARD_PAYMENT > ราคาปกติ (RRP),1090.0,field,TAB-R44-VAR,PASSED_VALIDATION
+SmartTag2,-,44,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R44-VAR,PASSED_VALIDATION
+SmartTag2,-,44,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R44-VAR,PASSED_VALIDATION
+SmartTag2,-,44,I,Incentive,ไม่ต้องคูปอง,field,TAB-R44-VAR,PASSED_VALIDATION
+SmartTag2,-,44,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R44-VAR,PASSED_VALIDATION
+Flip7 / Fold7,-,45,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R45-VAR,PASSED_VALIDATION
+Flip7 / Fold7,-,45,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R45-VAR,PASSED_VALIDATION
+Flip7 / Fold7,-,45,I,Incentive,ไม่ต้องคูปอง,field,TAB-R45-VAR,PASSED_VALIDATION
+Flip7 / Fold7,-,45,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R45-VAR,PASSED_VALIDATION
+S25 / S25+,-,46,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R46-VAR,PASSED_VALIDATION
+S25 / S25+,-,46,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R46-VAR,PASSED_VALIDATION
+S25 / S25+,-,46,I,Incentive,ไม่ต้องคูปอง,field,TAB-R46-VAR,PASSED_VALIDATION
+S25 / S25+,-,46,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R46-VAR,PASSED_VALIDATION
+A56 / A36,-,47,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R47-VAR,PASSED_VALIDATION
+A56 / A36,-,47,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R47-VAR,PASSED_VALIDATION
+A56 / A36,-,47,I,Incentive,ไม่ต้องคูปอง,field,TAB-R47-VAR,PASSED_VALIDATION
+A56 / A36,-,47,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R47-VAR,PASSED_VALIDATION
+S25 FE,-,48,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R48-VAR,PASSED_VALIDATION
+S25 FE,-,48,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R48-VAR,PASSED_VALIDATION
+S25 FE,-,48,I,Incentive,ไม่ต้องคูปอง,field,TAB-R48-VAR,PASSED_VALIDATION
+S25 FE,-,48,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R48-VAR,PASSED_VALIDATION
+S25 Ultra,-,49,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R49-VAR,PASSED_VALIDATION
+S25 Ultra,-,49,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R49-VAR,PASSED_VALIDATION
+S25 Ultra,-,49,I,Incentive,ไม่ต้องคูปอง,field,TAB-R49-VAR,PASSED_VALIDATION
+S25 Ultra,-,49,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R49-VAR,PASSED_VALIDATION
+S26 Series,-,50,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R50-VAR,PASSED_VALIDATION
+S26 Series,-,50,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R50-VAR,PASSED_VALIDATION
+S26 Series,-,50,I,Incentive,ไม่ต้องคูปอง,field,TAB-R50-VAR,PASSED_VALIDATION
+S26 Series,-,50,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R50-VAR,PASSED_VALIDATION
+A57 / A37,-,51,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R51-VAR,PASSED_VALIDATION
+A57 / A37,-,51,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R51-VAR,PASSED_VALIDATION
+A57 / A37,-,51,I,Incentive,ไม่ต้องคูปอง,field,TAB-R51-VAR,PASSED_VALIDATION
+A57 / A37,-,51,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R51-VAR,PASSED_VALIDATION
+"Watch Band and Buds Case
+(Watch Ultra Band & Watch7 Band & Oder model / Buds3 Case",-,52,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R52-VAR,PASSED_VALIDATION
+"Watch Band and Buds Case
+(Watch Ultra Band & Watch7 Band & Oder model / Buds3 Case",-,52,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R52-VAR,PASSED_VALIDATION
+"Watch Band and Buds Case
+(Watch Ultra Band & Watch7 Band & Oder model / Buds3 Case",-,52,I,Incentive,ไม่ต้องคูปอง,field,TAB-R52-VAR,PASSED_VALIDATION
+"Watch Band and Buds Case
+(Watch Ultra Band & Watch7 Band & Oder model / Buds3 Case",-,52,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R52-VAR,PASSED_VALIDATION
+Watch8 Band,-,53,E,STANDARD_PAYMENT > ส่วนลด ss,0.0,field,TAB-R53-VAR,PASSED_VALIDATION
+Watch8 Band,-,53,F,STANDARD_PAYMENT > ส่วนลด CPW,0.0,field,TAB-R53-VAR,PASSED_VALIDATION
+Watch8 Band,-,53,I,Incentive,ไม่ต้องคูปอง,field,TAB-R53-VAR,PASSED_VALIDATION
+Watch8 Band,-,53,J,STANDARD_PAYMENT > คูปองตัดขาย (Device Price Coupon),"Validate MCS S/O within promotion period
+*Please s",field,TAB-R53-VAR,PASSED_VALIDATION

@@ -1,0 +1,1280 @@
+{
+  "metadata": {
+    "reportProvenanceRule": "RULE-0: REPORT PROVENANCE CHECK",
+    "gitCommitSha": "b7f36a384056848879555252731d8244acb7b0a1",
+    "evaluationDate": "2026-09-06",
+    "generatedAt": "2026-09-11T15:08:46.258571",
+    "batchId": "IMPORT-20260906-002",
+    "parserVersion": "2.1.0-LTR-MERGE",
+    "ruleEngineVersion": "2.5.0-STRICT",
+    "sourceFiles": {
+      "promoTablet": {
+        "filename": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sha256": "6e91888b88c87383ba75da97e08036c700aaa6e6fe44e0fc12365ef5895a2c4f",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย"
+      },
+      "retailShop": {
+        "filename": "Aug_ 2026 Promotion Retail_Shop Samsung .xlsx",
+        "sha256": "45d85a9fe78e9c6e4f38c3db464a4f666b906b26225907c7ff2b176443d6509c"
+      },
+      "stock": {
+        "filename": "Stock.xlsx",
+        "sha256": "846c77d67f56916cfe9003eba5d21efa92163df75532720152b0050110abbb85"
+      }
+    }
+  },
+  "investigationObjective": "ADD_ON_PURCHASE Parser Root Cause Correction (Read-Only Trace)",
+  "summary": {
+    "totalAddonVariantsExamined": 13,
+    "parserDefectConfirmedCount": 13,
+    "sourceExcelFormulaErrorInAddon": 0,
+    "isolatedSourceFormulaErrorsInDataset": 75,
+    "isolatedFormulaErrorRows": "Rows 70 to 144 of Pro Tablet Acc samsung 3Aug2026.xlsx (Sheet: รายการสินค้าที่ลด 50-70%)",
+    "conclusion": "The 13 TAB-R*-ADDON-KEYBOARD variants were blocked solely due to PARSER_ADDON_DISCOUNT_MAPPING_MISSING, NOT upstream Excel formula errors. The 75 true SOURCE_FORMULA_ERROR variants reside in a completely separate sheet/row block and must remain quarantined."
+  },
+  "rootCauseTaxonomy": {
+    "SOURCE_FORMULA_ERROR": {
+      "count": 75,
+      "description": "True upstream Excel formula evaluation failure (#ERROR!) in rows 70-144 of Tablet Accessory sheet",
+      "action": "KEEP QUARANTINED (BLOCKED_INVALID) - Do not touch"
+    },
+    "PARSER_ADDON_DISCOUNT_MAPPING_MISSING": {
+      "count": 13,
+      "description": "Parser failed to map Columns E+F to addOnDiscount for ADD_ON_PURCHASE saleMode",
+      "action": "Fix parser mapping in audit_engine.py / promotion_import.py"
+    },
+    "PRICE_EQUATION_MISMATCH_NON_ADDON": {
+      "count": 25,
+      "description": "Trade-up and watch/buds MBO promotions requiring distinct business rule handling",
+      "action": "Keep current validation status pending respective feature specs",
+      "breakdown": {
+        "TRADE_UP": 9,
+        "STANDARD_PAYMENT_MBO_WATCH_BUDS": 16
+      }
+    }
+  },
+  "evidenceRecords": [
+    {
+      "promoId": "TAB-R4-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 4
+      },
+      "product": {
+        "model": "Galaxy Tab S11  Ultra 5G",
+        "capacity": "12/256GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D4",
+          "mergedRange": null,
+          "cachedValue": 48900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E4",
+          "mergedRange": null,
+          "cachedValue": 3000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F4",
+          "mergedRange": null,
+          "cachedValue": 2000.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 5000.0,
+        "netPrice": {
+          "cell": "G4",
+          "mergedRange": null,
+          "cachedValue": 43900,
+          "formula": "=D4-E4-F4"
+        },
+        "deviceCoupon": {
+          "cell": "I4",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J4",
+          "mergedRange": "J4:J6",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K4",
+          "mergedRange": "K4:K6",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 48900.0,
+        "netPrice": 43900.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "48900.0 - (0 + 0 + 0 + 0) == 43900.0",
+        "calculatedNet": 48900.0,
+        "actualNet": 43900.0,
+        "discrepancy": 5000.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 4 contains explicit discount cells E4 (3000.0) and F4 (2000.0) summing to 5000.0 THB, perfectly satisfying 48900.0 - 5000.0 = 43900. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R5-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 5
+      },
+      "product": {
+        "model": "Galaxy Tab S11 (5G)",
+        "capacity": "12/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D5",
+          "mergedRange": null,
+          "cachedValue": 33900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E5",
+          "mergedRange": null,
+          "cachedValue": 2000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F5",
+          "mergedRange": null,
+          "cachedValue": 1500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 3500.0,
+        "netPrice": {
+          "cell": "G5",
+          "mergedRange": null,
+          "cachedValue": 30400,
+          "formula": "=D5-E5-F5"
+        },
+        "deviceCoupon": {
+          "cell": "I5",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J5",
+          "mergedRange": "J4:J6",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K5",
+          "mergedRange": "K4:K6",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 33900.0,
+        "netPrice": 30400.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "33900.0 - (0 + 0 + 0 + 0) == 30400.0",
+        "calculatedNet": 33900.0,
+        "actualNet": 30400.0,
+        "discrepancy": 3500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 5 contains explicit discount cells E5 (2000.0) and F5 (1500.0) summing to 3500.0 THB, perfectly satisfying 33900.0 - 3500.0 = 30400. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R6-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 6
+      },
+      "product": {
+        "model": "Galaxy Tab S11  (WiFi)",
+        "capacity": "12/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D6",
+          "mergedRange": null,
+          "cachedValue": 28900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E6",
+          "mergedRange": null,
+          "cachedValue": 2000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F6",
+          "mergedRange": null,
+          "cachedValue": 1500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 3500.0,
+        "netPrice": {
+          "cell": "G6",
+          "mergedRange": null,
+          "cachedValue": 25400,
+          "formula": "=D6-E6-F6"
+        },
+        "deviceCoupon": {
+          "cell": "I6",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J6",
+          "mergedRange": "J4:J6",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K6",
+          "mergedRange": "K4:K6",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 28900.0,
+        "netPrice": 25400.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "28900.0 - (0 + 0 + 0 + 0) == 25400.0",
+        "calculatedNet": 28900.0,
+        "actualNet": 25400.0,
+        "discrepancy": 3500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 6 contains explicit discount cells E6 (2000.0) and F6 (1500.0) summing to 3500.0 THB, perfectly satisfying 28900.0 - 3500.0 = 25400. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R9-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 9
+      },
+      "product": {
+        "model": "Galaxy Tab S10 FE+ 5G",
+        "capacity": "12/256GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D9",
+          "mergedRange": null,
+          "cachedValue": 30900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E9",
+          "mergedRange": null,
+          "cachedValue": 4000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F9",
+          "mergedRange": null,
+          "cachedValue": 1000.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 5000.0,
+        "netPrice": {
+          "cell": "G9",
+          "mergedRange": null,
+          "cachedValue": 25900,
+          "formula": "=D9-E9-F9"
+        },
+        "deviceCoupon": {
+          "cell": "I9",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J9",
+          "mergedRange": "J9:J12",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K9",
+          "mergedRange": "K9:K12",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 30900.0,
+        "netPrice": 25900.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "30900.0 - (0 + 0 + 0 + 0) == 25900.0",
+        "calculatedNet": 30900.0,
+        "actualNet": 25900.0,
+        "discrepancy": 5000.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 9 contains explicit discount cells E9 (4000.0) and F9 (1000.0) summing to 5000.0 THB, perfectly satisfying 30900.0 - 5000.0 = 25900. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R10-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 10
+      },
+      "product": {
+        "model": "Galaxy Tab S10 FE+ WiFi",
+        "capacity": "12/256GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D10",
+          "mergedRange": null,
+          "cachedValue": 27900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E10",
+          "mergedRange": null,
+          "cachedValue": 4000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F10",
+          "mergedRange": null,
+          "cachedValue": 1000.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 5000.0,
+        "netPrice": {
+          "cell": "G10",
+          "mergedRange": null,
+          "cachedValue": 22900,
+          "formula": "=D10-E10-F10"
+        },
+        "deviceCoupon": {
+          "cell": "I10",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J10",
+          "mergedRange": "J9:J12",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K10",
+          "mergedRange": "K9:K12",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 27900.0,
+        "netPrice": 22900.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "27900.0 - (0 + 0 + 0 + 0) == 22900.0",
+        "calculatedNet": 27900.0,
+        "actualNet": 22900.0,
+        "discrepancy": 5000.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 10 contains explicit discount cells E10 (4000.0) and F10 (1000.0) summing to 5000.0 THB, perfectly satisfying 27900.0 - 5000.0 = 22900. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R11-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 11
+      },
+      "product": {
+        "model": "Galaxy Tab S10 FE 5G",
+        "capacity": "8/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D11",
+          "mergedRange": null,
+          "cachedValue": 22900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E11",
+          "mergedRange": null,
+          "cachedValue": 2000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F11",
+          "mergedRange": null,
+          "cachedValue": 1500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 3500.0,
+        "netPrice": {
+          "cell": "G11",
+          "mergedRange": null,
+          "cachedValue": 19400,
+          "formula": "=D11-E11-F11"
+        },
+        "deviceCoupon": {
+          "cell": "I11",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J11",
+          "mergedRange": "J9:J12",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K11",
+          "mergedRange": "K9:K12",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 22900.0,
+        "netPrice": 19400.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "22900.0 - (0 + 0 + 0 + 0) == 19400.0",
+        "calculatedNet": 22900.0,
+        "actualNet": 19400.0,
+        "discrepancy": 3500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 11 contains explicit discount cells E11 (2000.0) and F11 (1500.0) summing to 3500.0 THB, perfectly satisfying 22900.0 - 3500.0 = 19400. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R12-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 12
+      },
+      "product": {
+        "model": "Galaxy Tab S10 FE WiFi",
+        "capacity": "8/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D12",
+          "mergedRange": null,
+          "cachedValue": 19900.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E12",
+          "mergedRange": null,
+          "cachedValue": 2000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F12",
+          "mergedRange": null,
+          "cachedValue": 1500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 3500.0,
+        "netPrice": {
+          "cell": "G12",
+          "mergedRange": null,
+          "cachedValue": 16400,
+          "formula": "=D12-E12-F12"
+        },
+        "deviceCoupon": {
+          "cell": "I12",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J12",
+          "mergedRange": "J9:J12",
+          "cachedValue": "แลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K12",
+          "mergedRange": "K9:K12",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 19900.0,
+        "netPrice": 16400.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "19900.0 - (0 + 0 + 0 + 0) == 16400.0",
+        "calculatedNet": 19900.0,
+        "actualNet": 16400.0,
+        "discrepancy": 3500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 12 contains explicit discount cells E12 (2000.0) and F12 (1500.0) summing to 3500.0 THB, perfectly satisfying 19900.0 - 3500.0 = 16400. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R20-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 20
+      },
+      "product": {
+        "model": "Galaxy Tab A11+  5G  (NEW)\n(ไม่สามารถใช้ร่วมกับ SF+ ได้)",
+        "capacity": "6/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D20",
+          "mergedRange": null,
+          "cachedValue": 10490.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E20",
+          "mergedRange": null,
+          "cachedValue": 1000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F20",
+          "mergedRange": null,
+          "cachedValue": 500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 1500.0,
+        "netPrice": {
+          "cell": "G20",
+          "mergedRange": null,
+          "cachedValue": 8990,
+          "formula": "=D20-E20-F20"
+        },
+        "deviceCoupon": {
+          "cell": "I20",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J20",
+          "mergedRange": null,
+          "cachedValue": "ไม่ผ่อนกับ  SF+\nแลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K20",
+          "mergedRange": "K20:K25",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 10490.0,
+        "netPrice": 8990.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "10490.0 - (0 + 0 + 0 + 0) == 8990.0",
+        "calculatedNet": 10490.0,
+        "actualNet": 8990.0,
+        "discrepancy": 1500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 20 contains explicit discount cells E20 (1000.0) and F20 (500.0) summing to 1500.0 THB, perfectly satisfying 10490.0 - 1500.0 = 8990. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R21-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 21
+      },
+      "product": {
+        "model": "Galaxy Tab A11+  WiFi  (NEW)\n(ไม่สามารถใช้ร่วมกับ SF+ ได้)",
+        "capacity": "6/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D21",
+          "mergedRange": null,
+          "cachedValue": 8490.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E21",
+          "mergedRange": null,
+          "cachedValue": 1000,
+          "formula": "=E20"
+        },
+        "cpwDiscount": {
+          "cell": "F21",
+          "mergedRange": null,
+          "cachedValue": 500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 1500.0,
+        "netPrice": {
+          "cell": "G21",
+          "mergedRange": null,
+          "cachedValue": 6990,
+          "formula": "=D21-E21-F21"
+        },
+        "deviceCoupon": {
+          "cell": "I21",
+          "mergedRange": "I4:I21",
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J21",
+          "mergedRange": null,
+          "cachedValue": "ไม่ผ่อนกับ  SF+\nแลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K21",
+          "mergedRange": "K20:K25",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 8490.0,
+        "netPrice": 6990.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "8490.0 - (0 + 0 + 0 + 0) == 6990.0",
+        "calculatedNet": 8490.0,
+        "actualNet": 6990.0,
+        "discrepancy": 1500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 21 contains explicit discount cells E21 (1000.0) and F21 (500.0) summing to 1500.0 THB, perfectly satisfying 8490.0 - 1500.0 = 6990. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R22-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 22
+      },
+      "product": {
+        "model": "Galaxy Tab A11+  5G  (NEW)\n(ใช้ร่วมกับ SF+ ได้)",
+        "capacity": "6/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D22",
+          "mergedRange": null,
+          "cachedValue": 10490.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E22",
+          "mergedRange": null,
+          "cachedValue": 500.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F22",
+          "mergedRange": null,
+          "cachedValue": null,
+          "formula": null
+        },
+        "totalSourceDiscount": 500.0,
+        "netPrice": {
+          "cell": "G22",
+          "mergedRange": null,
+          "cachedValue": 9990,
+          "formula": "=D22-E22-F22"
+        },
+        "deviceCoupon": {
+          "cell": "I22",
+          "mergedRange": "I22:I23",
+          "cachedValue": "ใส่ 04",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J22",
+          "mergedRange": null,
+          "cachedValue": "ผ่อนกับ SF+ ดาวน์ไม่เกิน 10%\nแลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K22",
+          "mergedRange": "K20:K25",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 10490.0,
+        "netPrice": 9990.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "10490.0 - (0 + 0 + 0 + 0) == 9990.0",
+        "calculatedNet": 10490.0,
+        "actualNet": 9990.0,
+        "discrepancy": 500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 22 contains explicit discount cells E22 (500.0) and F22 (0.0) summing to 500.0 THB, perfectly satisfying 10490.0 - 500.0 = 9990. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R23-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 23
+      },
+      "product": {
+        "model": "Galaxy Tab A11+  WiFi  (NEW)\n(ใช้ร่วมกับ SF+ ได้)",
+        "capacity": "6/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D23",
+          "mergedRange": null,
+          "cachedValue": 8490.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E23",
+          "mergedRange": null,
+          "cachedValue": 500,
+          "formula": "=E22"
+        },
+        "cpwDiscount": {
+          "cell": "F23",
+          "mergedRange": null,
+          "cachedValue": null,
+          "formula": null
+        },
+        "totalSourceDiscount": 500.0,
+        "netPrice": {
+          "cell": "G23",
+          "mergedRange": null,
+          "cachedValue": 7990,
+          "formula": "=D23-E23-F23"
+        },
+        "deviceCoupon": {
+          "cell": "I23",
+          "mergedRange": "I22:I23",
+          "cachedValue": "ใส่ 04",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J23",
+          "mergedRange": null,
+          "cachedValue": "ผ่อนกับ SF+ ดาวน์ไม่เกิน 10%\nแลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K23",
+          "mergedRange": "K20:K25",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 8490.0,
+        "netPrice": 7990.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "8490.0 - (0 + 0 + 0 + 0) == 7990.0",
+        "calculatedNet": 8490.0,
+        "actualNet": 7990.0,
+        "discrepancy": 500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 23 contains explicit discount cells E23 (500.0) and F23 (0.0) summing to 500.0 THB, perfectly satisfying 8490.0 - 500.0 = 7990. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R24-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 24
+      },
+      "product": {
+        "model": "Galaxy Tab A11 LTE  (NEW)\n(ไม่สามารถใช้ร่วมกับ SF+ ได้)",
+        "capacity": "8/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D24",
+          "mergedRange": null,
+          "cachedValue": 7490.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E24",
+          "mergedRange": null,
+          "cachedValue": 1000.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F24",
+          "mergedRange": null,
+          "cachedValue": 500.0,
+          "formula": null
+        },
+        "totalSourceDiscount": 1500.0,
+        "netPrice": {
+          "cell": "G24",
+          "mergedRange": null,
+          "cachedValue": 5990,
+          "formula": "=D24-E24-F24"
+        },
+        "deviceCoupon": {
+          "cell": "I24",
+          "mergedRange": null,
+          "cachedValue": "ใส่ 01",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J24",
+          "mergedRange": null,
+          "cachedValue": "ไม่ผ่อนกับ  SF+\nแลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K24",
+          "mergedRange": "K20:K25",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 7490.0,
+        "netPrice": 5990.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "7490.0 - (0 + 0 + 0 + 0) == 5990.0",
+        "calculatedNet": 7490.0,
+        "actualNet": 5990.0,
+        "discrepancy": 1500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 24 contains explicit discount cells E24 (1000.0) and F24 (500.0) summing to 1500.0 THB, perfectly satisfying 7490.0 - 1500.0 = 5990. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    },
+    {
+      "promoId": "TAB-R25-ADDON-KEYBOARD",
+      "sourceLocation": {
+        "file": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+        "sheet": "โปร และ เงื่อนไขการตัดขาย",
+        "row": 25
+      },
+      "product": {
+        "model": "Galaxy Tab A11 LTE  (NEW)\n(ใช้ร่วมกับ SF+ ได้)",
+        "capacity": "8/128GB",
+        "productCodeType": "STANDARD_SM"
+      },
+      "saleMode": "ADD_ON_PURCHASE",
+      "sourceCells": {
+        "rrp": {
+          "cell": "D25",
+          "mergedRange": null,
+          "cachedValue": 7490.0,
+          "formula": null
+        },
+        "ssDiscount": {
+          "cell": "E25",
+          "mergedRange": null,
+          "cachedValue": 500.0,
+          "formula": null
+        },
+        "cpwDiscount": {
+          "cell": "F25",
+          "mergedRange": null,
+          "cachedValue": null,
+          "formula": null
+        },
+        "totalSourceDiscount": 500.0,
+        "netPrice": {
+          "cell": "G25",
+          "mergedRange": null,
+          "cachedValue": 6990,
+          "formula": "=D25-E25-F25"
+        },
+        "deviceCoupon": {
+          "cell": "I25",
+          "mergedRange": null,
+          "cachedValue": "ใส่ 04 ",
+          "formula": null
+        },
+        "remarksAddOn": {
+          "cell": "J25",
+          "mergedRange": null,
+          "cachedValue": "ผ่อนกับ SF+ ดาวน์ไม่เกิน 10%\nแลกซื้อ Keyboard / Book Cover ลด 50%",
+          "formula": null
+        },
+        "addonCoupon": {
+          "cell": "K25",
+          "mergedRange": "K20:K25",
+          "cachedValue": "ใส่ 02",
+          "formula": null
+        }
+      },
+      "headerPaths": {
+        "rrp": "STANDARD_PAYMENT > ราคาปกติ (RRP)",
+        "ssDiscount": "STANDARD_PAYMENT > ส่วนลด ss",
+        "cpwDiscount": "STANDARD_PAYMENT > ส่วนลด CPW",
+        "netPrice": "STANDARD_PAYMENT > ราคาหลังลดและเทรดอัพ (Net Price)",
+        "remarksAddOn": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+        "addonCoupon": "ADD_ON > คูปองตัดขาย (Add-on Coupon)"
+      },
+      "rawParsedRecord": {
+        "rrp": 7490.0,
+        "netPrice": 6990.0,
+        "discountValue": 0,
+        "standardDiscount": 0,
+        "addOnDiscount": null,
+        "coupon": null,
+        "sourceColumnMapping": {
+          "remarks": "J",
+          "coupon": "K"
+        }
+      },
+      "ruleEngineExecution": {
+        "evaluatedEquation": "rrp - (std_disc + sf_disc + tu_disc + std_net_disc) == net_price",
+        "valuesSubstituted": "7490.0 - (0 + 0 + 0 + 0) == 6990.0",
+        "calculatedNet": 7490.0,
+        "actualNet": 6990.0,
+        "discrepancy": 500.0,
+        "errorTriggered": "PRICE_EQUATION_MISMATCH",
+        "statusAssigned": "BLOCKED_INVALID"
+      },
+      "defectAnalysis": {
+        "parserDefectIdentified": true,
+        "rootCause": "PARSER_ADDON_DISCOUNT_MAPPING_MISSING",
+        "explanation": "Source row 25 contains explicit discount cells E25 (500.0) and F25 (0.0) summing to 500.0 THB, perfectly satisfying 7490.0 - 500.0 = 6990. The parser set std_disc=0 and sf_disc=0 without populating addOnDiscount or mapping columns E+F, causing the rule engine to calculate RRP - 0 != NetPrice.",
+        "prescribedAction": "Map source discount (E+F) to addOnDiscount and discountValue; leave standardDiscount as 0; evaluate expectedNet = rrp - addOnDiscount for ADD_ON_PURCHASE."
+      }
+    }
+  ]
+}

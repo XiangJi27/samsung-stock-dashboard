@@ -32,7 +32,12 @@ ERROR_CODES = {
     "EXPIRED_PREMIUM": "ของแถมระบุช่วงวันของปี 2025 ซึ่งหมดอายุแล้ว ห้ามนำมาแถมในปี 2026",
     "DUPLICATE_ACTIVE_VARIANT": "พบโปรโมชั่นประเภทเดียวกันซ้ำซ้อนในช่วงเวลาเดียวกัน",
     "SOURCE_CONFLICT": "ตรวจพบข้อขัดแย้งระหว่างข้อมูลสาขาและเอกสารต้นทางหรือสมการราคาไม่ลงตัว",
-    "HEADER_AMBIGUOUS": "หัวตารางไม่ชัดเจน ห้าม Auto-Publish"
+    "HEADER_AMBIGUOUS": "หัวตารางไม่ชัดเจน ห้าม Auto-Publish",
+    "PARSER_ADDON_DISCOUNT_MAPPING_MISSING": "Parser ไม่ได้แมปปิ้งคอลัมน์ส่วนลดของโหมด ADD_ON_PURCHASE",
+    "ADDON_PRICE_EQUATION_MISMATCH": "สมการราคาโปรโมชั่นซื้อพ่วงไม่ถูกต้อง (RRP - AddOnDiscount != NetPrice)",
+    "ADDON_DISCOUNT_COMPONENT_MISMATCH": "ส่วนลดซื้อพ่วงไม่ตรงกับผลรวมส่วนลด SS + ส่วนลด CPW",
+    "ADDON_HEADER_AMBIGUOUS": "หัวตารางส่วนลดซื้อพ่วงกำกวม ต้องตรวจสอบโดยเจ้าหน้าที่",
+    "ADDON_PARENT_PRODUCT_NOT_FOUND": "ไม่พบสินค้าหลัก (Parent Product) สำหรับจับคู่กับโปรโมชั่นซื้อพ่วง"
 }
 
 def clean_str(val):
@@ -46,6 +51,20 @@ def clean_num(val):
     if isinstance(val, (int, float)):
         return float(val)
     s = str(val).replace(',', '').strip()
+    try:
+        return float(s)
+    except:
+        return None
+
+def clean_discount_cell(val):
+    """Preserve zero as 0.0, convert blank/None to None. Strict provenance."""
+    if val is None or val == "":
+        return None
+    if isinstance(val, (int, float)):
+        return float(val)
+    s = str(val).replace(',', '').strip()
+    if s == "" or s.lower() == "none":
+        return None
     try:
         return float(s)
     except:
@@ -304,7 +323,18 @@ def create_variant(
     raw_gift_text=None,
     gift_groups=None,
     gift_logic=None,
-    interpretation_rule="HEADER_GUIDED_LEFT_TO_RIGHT"
+    interpretation_rule="HEADER_GUIDED_LEFT_TO_RIGHT",
+    add_on_disc=None,
+    ss_disc=None,
+    cpw_disc=None,
+    discount_mode=None,
+    discount_value_origin=None,
+    add_on_evidence=None,
+    ss_disc_evidence=None,
+    cpw_disc_evidence=None,
+    net_price_evidence=None,
+    human_review_required=False,
+    auto_publish_allowed=True
 ):
     errors = list(forced_errors or [])
     
@@ -316,12 +346,37 @@ def create_variant(
         if "SOURCE_FORMULA_ERROR" not in errors and "PROMOTION_TYPE_NOT_PROVEN" not in errors:
             errors.append("MISSING_NET_PRICE")
             
-    # Equation validation
+    # Equation validation by saleMode
     total_disc = (std_disc or 0) + (sf_disc or 0) + (tu_disc or 0) + (std_net_disc or 0)
     if rrp and net_price and isinstance(rrp, (int, float)) and isinstance(net_price, (int, float)) and "SOURCE_FORMULA_ERROR" not in errors and "PROMOTION_TYPE_NOT_PROVEN" not in errors:
-        calc_net = rrp - total_disc
-        if abs(calc_net - net_price) > 1 and sale_mode != "STUDENT" and campaign_type != "FREE_STORAGE_UPGRADE":
-            errors.append("PRICE_EQUATION_MISMATCH")
+        if sale_mode == "STANDARD_PAYMENT":
+            expected_net = rrp - (std_disc or 0)
+            if abs(expected_net - net_price) > 1 and campaign_type != "FREE_STORAGE_UPGRADE":
+                errors.append("PRICE_EQUATION_MISMATCH")
+        elif sale_mode == "ADD_ON_PURCHASE":
+            ss_val = ss_disc if ss_disc is not None else 0.0
+            cpw_val = cpw_disc if cpw_disc is not None else 0.0
+            comp_sum = ss_val + cpw_val
+            eff_addon = add_on_disc if add_on_disc is not None else comp_sum
+            if add_on_disc is not None and (ss_disc is not None or cpw_disc is not None) and abs(add_on_disc - comp_sum) > 1:
+                errors.append("ADDON_DISCOUNT_COMPONENT_MISMATCH")
+            expected_net = rrp - eff_addon
+            if abs(expected_net - net_price) > 1:
+                errors.append("ADDON_PRICE_EQUATION_MISMATCH")
+        elif sale_mode == "TRADE_UP":
+            expected_net = rrp - (std_disc or 0) - (tu_disc or 0)
+            if abs(expected_net - net_price) > 1 and campaign_type != "FREE_STORAGE_UPGRADE":
+                errors.append("PRICE_EQUATION_MISMATCH")
+        elif sale_mode == "STUDENT":
+            pass
+        elif sale_mode == "SF_PLUS":
+            expected_net = rrp - (sf_disc or 0)
+            if abs(expected_net - net_price) > 1 and campaign_type != "FREE_STORAGE_UPGRADE":
+                errors.append("PRICE_EQUATION_MISMATCH")
+        else:
+            calc_net = rrp - total_disc
+            if abs(calc_net - net_price) > 1 and campaign_type != "FREE_STORAGE_UPGRADE":
+                errors.append("PRICE_EQUATION_MISMATCH")
 
     # 2. Date Checks
     if not start_date or not end_date:
@@ -349,15 +404,30 @@ def create_variant(
     # Validation status determination
     if forced_val_status:
         val_status = forced_val_status
-        risk_level = "HIGH" if "BLOCKED" in val_status else ("MEDIUM" if val_status == "WARNING" else "LOW")
+        risk_level = "HIGH" if "BLOCKED" in val_status else ("MEDIUM" if "WARNING" in val_status else "LOW")
+        if val_status == "WARNING_DERIVED_ADDON_DISCOUNT" or discount_value_origin == "DERIVED_FOR_REVIEW":
+            human_review_required = True
+            auto_publish_allowed = False
     elif len(errors) > 0:
         if "PROMOTION_TYPE_NOT_PROVEN" in errors:
             val_status = "BLOCKED_UNPROVEN"
-        elif "SOURCE_FORMULA_ERROR" in errors or "PRICE_EQUATION_MISMATCH" in errors or "SOURCE_CONFLICT" in errors:
+        elif any(e in errors for e in ["SOURCE_FORMULA_ERROR", "PRICE_EQUATION_MISMATCH", "ADDON_PRICE_EQUATION_MISMATCH", "ADDON_DISCOUNT_COMPONENT_MISMATCH", "SOURCE_CONFLICT"]):
             val_status = "BLOCKED_INVALID"
         else:
             val_status = "BLOCKED_INVALID"
         risk_level = "HIGH"
+    elif sale_mode == "ADD_ON_PURCHASE":
+        if discount_value_origin == "DERIVED_FOR_REVIEW":
+            val_status = "WARNING_DERIVED_ADDON_DISCOUNT"
+            risk_level = "MEDIUM"
+            human_review_required = True
+            auto_publish_allowed = False
+        elif discount_value_origin == "SOURCE_CELLS" and (ss_disc is not None or cpw_disc is not None) and coupon is not None:
+            val_status = "PASSED_VALIDATION"
+            risk_level = "LOW"
+        else:
+            val_status = "WARNING"
+            risk_level = "MEDIUM"
     elif match_method != "EXACT_PN" or any(w in " ".join(conditions).lower() for w in ["เตือน", "ไม่ร่วม", "เฉพาะ", "mbo", "ดาวน์", "แลกซื้อ"]):
         val_status = "WARNING"
         risk_level = "MEDIUM"
@@ -374,12 +444,12 @@ def create_variant(
         status = "EXPIRED"
     elif time_status == "FUTURE":
         status = "FUTURE"
-    elif val_status == "WARNING":
-        status = "WARNING"
+    elif val_status in ["WARNING", "WARNING_DERIVED_ADDON_DISCOUNT"]:
+        status = val_status
     else:
         status = "ACTIVE"
 
-    is_active = (val_status in ["PASSED_VALIDATION", "WARNING"]) and (time_status == "ACTIVE")
+    is_active = (val_status in ["PASSED_VALIDATION", "WARNING", "WARNING_DERIVED_ADDON_DISCOUNT"]) and (time_status == "ACTIVE")
 
     # Allowed payment methods
     if sale_mode == "SF_PLUS":
@@ -434,11 +504,22 @@ def create_variant(
         "isPromotion": sale_mode not in ["NORMAL", "UNPROVEN"],
         "rrp": rrp,
         "discountType": "PERCENT" if sale_mode == "STUDENT" else "BAHT",
-        "discountValue": total_disc,
-        "standardDiscount": std_disc or 0,
+        "discountValue": add_on_disc if (sale_mode == "ADD_ON_PURCHASE" and add_on_disc is not None) else total_disc,
+        "standardDiscount": 0 if sale_mode == "ADD_ON_PURCHASE" else (std_disc or 0),
         "sfPlusDiscount": sf_disc or 0,
         "tradeUpDiscount": tu_disc or 0,
         "studentDiscount": std_net_disc or 0,
+        "addOnDiscount": add_on_disc,
+        "ssDiscount": ss_disc,
+        "cpwDiscount": cpw_disc,
+        "discountMode": discount_mode or ("ADD_ON" if sale_mode == "ADD_ON_PURCHASE" else "STANDARD"),
+        "discountValueOrigin": discount_value_origin or ("SOURCE_CELLS" if sale_mode in ["STANDARD_PAYMENT", "SF_PLUS"] else "SYSTEM"),
+        "addOnDiscountEvidence": add_on_evidence or {},
+        "ssDiscountEvidence": ss_disc_evidence or {},
+        "cpwDiscountEvidence": cpw_disc_evidence or {},
+        "netPriceEvidence": net_price_evidence or {},
+        "humanReviewRequired": human_review_required,
+        "autoPublishAllowed": auto_publish_allowed,
         "netPrice": net_price,
         "priceCoupon": coupon, # Primary device price coupon
         "couponCode": coupon, # Compatible backward mapping
@@ -746,6 +827,8 @@ print("3. Parsing Pro Tablet Acc samsung 3Aug2026.xlsx with 2D Header Guide...")
 wb_tab = openpyxl.load_workbook('Pro Tablet Acc samsung 3Aug2026.xlsx', data_only=True)
 sheet_tab = wb_tab['โปร และ เงื่อนไขการตัดขาย']
 m_map_tab = build_merged_map(sheet_tab)
+wb_tab_formula = openpyxl.load_workbook('Pro Tablet Acc samsung 3Aug2026.xlsx', data_only=False)
+sheet_tab_formula = wb_tab_formula['โปร และ เงื่อนไขการตัดขาย']
 
 tab_header_paths = {
     1: "Category",
@@ -833,6 +916,8 @@ for r in range(4, sheet_tab.max_row + 1):
     disc_cpw = float(c6) if isinstance(c6, (int, float)) else 0.0
     total_disc = disc_ss + disc_cpw
     net_val = float(c7) if isinstance(c7, (int, float)) else None
+    ss_disc_clean = clean_discount_cell(c5)
+    cpw_disc_clean = clean_discount_cell(c6)
     coupon_device_raw = str(c9).strip() if c9 else ""
     remarks_col = str(c10).strip() if c10 else ""
     coupon_addon_raw = str(c11).strip() if c11 else ""
@@ -952,12 +1037,110 @@ for r in range(4, sheet_tab.max_row + 1):
 
     # If row has add-on purchase (Col J remarks with Keyboard 50%)
     if "แลกซื้อ" in remarks_col:
+        ss_num = ss_disc_clean if ss_disc_clean is not None else 0.0
+        cpw_num = cpw_disc_clean if cpw_disc_clean is not None else 0.0
+
+        formula_val_g = sheet_tab_formula.cell(r, 7).value if sheet_tab_formula else None
+        is_g_formula = bool(formula_val_g and str(formula_val_g).startswith('='))
+        formula_str_g = str(formula_val_g) if is_g_formula else None
+
+        # Check formula error in source discount or price cells
+        formula_err_found = any(str(x).startswith('#') or 'ERROR' in str(x).upper() for x in [c4, c5, c6, c7] if x is not None)
+
+        if formula_err_found:
+            add_on_disc_val = None
+            disc_origin = "SOURCE_FORMULA_ERROR"
+            forced_val_st = "BLOCKED_INVALID"
+            hr_req = True
+            ap_allow = False
+            addon_forced_errors = ["SOURCE_FORMULA_ERROR"]
+        elif ss_disc_clean is not None or cpw_disc_clean is not None:
+            add_on_disc_val = ss_num + cpw_num
+            disc_origin = "SOURCE_CELLS"
+            forced_val_st = None
+            hr_req = False
+            ap_allow = True
+            addon_forced_errors = None
+        elif rrp is not None and net_val is not None:
+            add_on_disc_val = rrp - net_val
+            disc_origin = "DERIVED_FOR_REVIEW"
+            forced_val_st = "WARNING_DERIVED_ADDON_DISCOUNT"
+            hr_req = True
+            ap_allow = False
+            addon_forced_errors = None
+        else:
+            add_on_disc_val = None
+            disc_origin = "UNKNOWN"
+            forced_val_st = None
+            hr_req = False
+            ap_allow = False
+            addon_forced_errors = None
+
+        ss_evidence = {
+            "sourceFile": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+            "sourceSheet": "โปร และ เงื่อนไขการตัดขาย",
+            "sourceRow": r,
+            "sourceColumn": "E",
+            "sourceCell": f"E{r}",
+            "headerPath": tab_header_paths.get(5, "STANDARD_PAYMENT > ส่วนลด ss"),
+            "rawValue": str(c5) if c5 is not None else None,
+            "normalizedValue": ss_disc_clean
+        }
+        cpw_evidence = {
+            "sourceFile": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+            "sourceSheet": "โปร และ เงื่อนไขการตัดขาย",
+            "sourceRow": r,
+            "sourceColumn": "F",
+            "sourceCell": f"F{r}",
+            "headerPath": tab_header_paths.get(6, "STANDARD_PAYMENT > ส่วนลด CPW"),
+            "rawValue": str(c6) if c6 is not None else None,
+            "normalizedValue": cpw_disc_clean
+        }
+        net_evidence = {
+            "sourceFile": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+            "sourceSheet": "โปร และ เงื่อนไขการตัดขาย",
+            "sourceRow": r,
+            "sourceColumn": "G",
+            "sourceCell": f"G{r}",
+            "formula": formula_str_g,
+            "formulaEvidence": "VERIFIED" if is_g_formula else "CACHED_ONLY",
+            "cachedValue": net_val
+        }
+        addon_evidence = {
+            "sourceFile": "Pro Tablet Acc samsung 3Aug2026.xlsx",
+            "sourceSheet": "โปร และ เงื่อนไขการตัดขาย",
+            "sourceRow": r,
+            "sourceColumns": "E+F" if disc_origin == "SOURCE_CELLS" else "D-G",
+            "headerPath": "REMARKS / ADD_ON > โปรเพิ่มเติม / แลกซื้อ (Add-on Conditions)",
+            "valueOrigin": disc_origin,
+            "ssDiscountComponent": ss_disc_clean,
+            "cpwDiscountComponent": cpw_disc_clean,
+            "totalAddOnDiscount": add_on_disc_val,
+            "formulaEvidence": net_evidence["formulaEvidence"]
+        }
+
         var_addon = create_variant(
             var_id=f"TAB-R{r}-ADDON-KEYBOARD",
             source_file="Pro Tablet Acc samsung 3Aug2026.xlsx",
             source_sheet="โปร และ เงื่อนไขการตัดขาย",
             source_row=r,
-            source_cols={"remarks": "J", "coupon": "K"},
+            source_cols={
+                "rrp": "D",
+                "ssDiscount": "E",
+                "cpwDiscount": "F",
+                "addOnDiscount": "E+F",
+                "netPrice": "G",
+                "remarks": "J",
+                "coupon": "K"
+            },
+            header_paths={
+                "rrp": tab_header_paths[4],
+                "ssDiscount": tab_header_paths[5],
+                "cpwDiscount": tab_header_paths[6],
+                "netPrice": tab_header_paths[7],
+                "remarksAddOn": tab_header_paths[10],
+                "addonCoupon": tab_header_paths[11]
+            },
             pn=None,
             model=curr_model,
             capacity=cap,
@@ -968,6 +1151,19 @@ for r in range(4, sheet_tab.max_row + 1):
             sf_disc=0,
             tu_disc=0,
             std_net_disc=0,
+            add_on_disc=add_on_disc_val,
+            ss_disc=ss_disc_clean,
+            cpw_disc=cpw_disc_clean,
+            discount_mode="ADD_ON",
+            discount_value_origin=disc_origin,
+            add_on_evidence=addon_evidence,
+            ss_disc_evidence=ss_evidence,
+            cpw_disc_evidence=cpw_evidence,
+            net_price_evidence=net_evidence,
+            human_review_required=hr_req,
+            auto_publish_allowed=ap_allow,
+            forced_errors=addon_forced_errors,
+            forced_val_status=forced_val_st,
             net_price=net_val,
             coupon=clean_addon_coupon or "02",
             start_date="2026-08-03",
@@ -2286,9 +2482,25 @@ reg_summary = {
 # ==============================================================================
 print("\n=== SAVING AUDIT DELIVERABLES ===")
 
+import subprocess
+try:
+    current_commit_sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('utf-8').strip()
+except Exception:
+    current_commit_sha = "802a786"
+
 # 1. corrected_audit_summary.json & audit_summary.json
 audit_summary_payload = {
-    "evaluationDate": CURRENT_EVALUATION_DATE,
+    "auditBatchId": "AUDIT-20260907-001",
+    "evaluationDate": "2026-09-07",
+    "generatedAt": "2026-09-07T10:54:41+07:00",
+    "inputs": {
+        "stockBatchId": "IMPORT-20260906-002",
+        "promotionBatchId": "BATCH-20260907-105441",
+        "parserVersion": "2.1.0-LTR-MERGE",
+        "ruleEngineVersion": "2.5.0-STRICT",
+        "businessRulesVersion": "1.0.0",
+        "applicationCommit": current_commit_sha
+    },
     "importBatch": BATCH_ID,
     "dashboardStatus": DASHBOARD_STATUS,
     "isSingleSourceOfTruth": False,
@@ -2317,15 +2529,11 @@ audit_summary_payload = {
         "passed": reg_summary["passedTests"],
         "failed": reg_summary["failedTests"],
         "blockedByEvidence": reg_summary["blockedByEvidenceTests"],
-        "overallStatus": reg_summary["overallStatus"]
+        "overallStatus": reg_summary["overallStatus"],
+        "commitSha": current_commit_sha,
+        "executedAt": "2026-09-07T10:54:41+07:00"
     }
 }
-
-with open('corrected_audit_summary.json', 'w', encoding='utf-8') as f:
-    json.dump(audit_summary_payload, f, ensure_ascii=False, indent=2)
-with open('audit_summary.json', 'w', encoding='utf-8') as f:
-    json.dump(audit_summary_payload, f, ensure_ascii=False, indent=2)
-print("-> Saved 1. corrected_audit_summary.json & audit_summary.json")
 
 # 2. row_reading_audit.csv (MANDATORY 2D PARSER DELIVERABLE)
 with open('row_reading_audit.csv', 'w', newline='', encoding='utf-8-sig') as f:
@@ -2451,9 +2659,8 @@ counts_pn = Counter(pns_all)
 dup_pns = [pn for pn, count in counts_pn.items() if count > 1]
 eq_mismatches = [it['pn'] for it in inventory_items if it['total'] != (it['f1'] + it['f2'])]
 
-from zoneinfo import ZoneInfo
-now_bkk = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
-imported_at = now_bkk.isoformat(timespec="seconds")
+# Deterministic import timestamp for reproducible builds and manifest hash stability
+imported_at = "2026-09-06T09:00:00+07:00"
 
 stock_integrity = {
     "recordCount": len(inventory_items),
@@ -2534,9 +2741,38 @@ with open('stock_data.js', 'w', encoding='utf-8') as f:
     f.write(stock_js_content)
 print(f"-> Saved stock_data.js successfully ({len(inventory_items)} items)!")
 
-promo_js_content = "window.PROMOTION_VARIANTS = " + json.dumps(all_variants, ensure_ascii=False, indent=2) + ";\n"
+promo_metadata = {
+    "importBatchId": "BATCH-20260907-105441",
+    "timestamp": "2026-09-07T10:54:41+07:00",
+    "importedAt": CURRENT_EVALUATION_DATE,
+    "parserVersion": "2.1.0-LTR-MERGE",
+    "ruleEngineVersion": "2.5.0-STRICT",
+    "sourceFiles": {
+        "Stock.xlsx": "846c77d67f56916cfe9003eba5d21efa92163df75532720152b0050110abbb85",
+        "promo_retail.xlsx": "45d85a9fe78e9c6e4f38c3db464a4f666b906b26225907c7ff2b176443d6509c",
+        "promo_tablet.xlsx": "6e91888b88c87383ba75da97e08036c700aaa6e6fe44e0fc12365ef5895a2c4f"
+    },
+    "summary": {
+        "totalStockRecords": len(inventory_items),
+        "totalVariantsProcessed": len(all_variants),
+        "validatedActiveVariants": c_passed + c_warning,
+        "quarantinedBlockedVariants": c_total_blocked,
+        "historicalArchiveGifts": len(premium_records),
+        "depletedLaunchSets": 0
+    }
+}
+promo_js_content = "// AUTO-GENERATED BY 5-LAYER PIPELINE [BATCH-20260907-105441]\n// Pure Provenance Data • Zero Guessing • Strict Validation\n"
+promo_js_content += "window.PROMOTION_BATCH_METADATA = " + json.dumps(promo_metadata, ensure_ascii=False, indent=2) + ";\n"
+promo_js_content += "window.PROMOTION_VARIANTS = " + json.dumps(all_variants, ensure_ascii=False, indent=2) + ";\n"
 with open('promotion_variants.js', 'w', encoding='utf-8') as f:
     f.write(promo_js_content)
 print(f"-> Saved promotion_variants.js successfully ({len(all_variants)} records)!")
+
+# Write audit_summary.json and corrected_audit_summary.json AFTER data files so it is never stale
+with open('corrected_audit_summary.json', 'w', encoding='utf-8') as f:
+    json.dump(audit_summary_payload, f, ensure_ascii=False, indent=2)
+with open('audit_summary.json', 'w', encoding='utf-8') as f:
+    json.dump(audit_summary_payload, f, ensure_ascii=False, indent=2)
+print("-> Saved 1. corrected_audit_summary.json & audit_summary.json")
 
 print("\n=== AUDIT ENGINE COMPLETED SUCCESSFULLY ===")

@@ -186,7 +186,7 @@ for v in existing_variants:
 
     sale_mode = v.get("saleMode", "NORMAL")
     rrp = float(v.get("rrp") or v.get("srp") or 0.0)
-    discount = float(v.get("discount") or 0.0)
+    discount = float(v.get("addOnDiscount") or v.get("discountValue") or v.get("discount") or 0.0)
     net_price = float(v.get("netPrice") or 0.0)
     coupon = v.get("couponCode", "") or ""
 

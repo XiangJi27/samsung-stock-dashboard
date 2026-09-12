@@ -1,0 +1,32 @@
+{
+  "reportMetadata": {
+    "reportPath": "reports/quarantine_rate_after_addon_fix.json",
+    "isArchived": false,
+    "batchId": "BATCH-20260907-105441",
+    "generatedAt": "2026-09-11T15:40:00+07:00",
+    "evaluationDate": "2026-09-06"
+  },
+  "metrics": {
+    "addOnTotal": 13,
+    "addOnPassed": 13,
+    "addOnWarning": 0,
+    "addOnBlocked": 0,
+    "uniqueVariantsReleased": 13,
+    "errorEventsRemoved": 13,
+    "totalBlockedBefore": 139,
+    "totalBlockedAfter": 126,
+    "historicalBlocked": 22,
+    "remainingCurrentBlocked": 104,
+    "formulaErrorsQuarantined": 75,
+    "tradeUpMboQuarantined": 25,
+    "missingRrpNetQuarantined": 26,
+    "overallQuarantineRateBefore": "25.09%",
+    "overallQuarantineRateAfter": "22.74%",
+    "currentCampaignBlockedRateBefore": "47.56%",
+    "currentCampaignBlockedRateAfter": "42.28%",
+    "quarantineThreshold": "20.0%",
+    "notebookLmExportStatus": "HOLD",
+    "notebookLmExportReason": "Current campaign blocked rate (42.28%) and overall blocked rate (22.74%) strictly exceed the 20.0% threshold due to 75 verified SOURCE_FORMULA_ERROR items in sheet รายการสินค้าที่ลด 50-70%. No manual override permitted.",
+    "acceptanceStatus": "HOLD_HIGH_QUARANTINE_RATE"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-09-12T10:10:42.498118",
+  "suiteName": "ADD_ON_PURCHASE Regression & Mutation Suite",
+  "totalTests": 10,
+  "passedTests": 10,
+  "failedTests": 0,
+  "overallStatus": "ALL_PASSED",
+  "results": [
+    {
+      "testId": "ADDON-01-ALL-13-RELEASED",
+      "name": "All 13 TAB-R*-ADDON-KEYBOARD variants present and PASSED_VALIDATION",
+      "status": "PASS",
+      "passed": true,
+      "details": "Found 13 variants; passed count: 13"
+    },
+    {
+      "testId": "ADDON-02-ROW-4-EVIDENCE",
+      "name": "Row 4 Galaxy Tab S11 Ultra: 48,900 - (3000+2000) = 43,900, stdDisc=0, origin=SOURCE_CELLS",
+      "status": "PASS",
+      "passed": true,
+      "details": "RRP=48900.0, SS=3000.0, CPW=2000.0, Addon=5000.0, Net=43900.0"
+    },
+    {
+      "testId": "ADDON-03-ROW-22-PRESERVE-BLANK-CPW",
+      "name": "Row 22 Galaxy Tab A11+ SF+: ss=500, cpw=None (preserved blank), addOn=500, Net=9990",
+      "status": "PASS",
+      "passed": true,
+      "details": "SS=500.0, CPW=None, Addon=500.0"
+    },
+    {
+      "testId": "ADDON-04-DERIVED-DISCOUNT-WARNING-ONLY",
+      "name": "Missing explicit discount cells with RRP-Net must trigger WARNING_DERIVED_ADDON_DISCOUNT and block auto-publish",
+      "status": "PASS",
+      "passed": true,
+      "details": "Status: WARNING_DERIVED_ADDON_DISCOUNT, autoPublishAllowed: False"
+    },
+    {
+      "testId": "ADDON-05-FORMULA-ERROR-STRICT-BLOCKED",
+      "name": "Cell containing formula error must remain BLOCKED_INVALID and never be unlocked by derived discount",
+      "status": "PASS",
+      "passed": true,
+      "details": "Status: BLOCKED_INVALID, Errors: ['SOURCE_FORMULA_ERROR']"
+    },
+    {
+      "testId": "ADDON-06-EQUATION-MISMATCH-BLOCKED",
+      "name": "Add-on Net price arithmetic discrepancy must be BLOCKED_INVALID with ADDON_PRICE_EQUATION_MISMATCH",
+      "status": "PASS",
+      "passed": true,
+      "details": "Status: BLOCKED_INVALID, Errors: ['ADDON_PRICE_EQUATION_MISMATCH']"
+    },
+    {
+      "testId": "ADDON-07-COMPONENT-MISMATCH-BLOCKED",
+      "name": "addOnDiscount != ssDiscount + cpwDiscount must trigger ADDON_DISCOUNT_COMPONENT_MISMATCH and BLOCK",
+      "status": "PASS",
+      "passed": true,
+      "details": "Status: BLOCKED_INVALID, Errors: ['ADDON_DISCOUNT_COMPONENT_MISMATCH']"
+    },
+    {
+      "testId": "MUT-ADDON-01-DISCOUNT-ZERO",
+      "name": "Mutation Test: addOnDiscount mutated to 0 must be BLOCKED_INVALID",
+      "status": "PASS",
+      "passed": true,
+      "details": "Errors: ['ADDON_DISCOUNT_COMPONENT_MISMATCH', 'ADDON_PRICE_EQUATION_MISMATCH']"
+    },
+    {
+      "testId": "MUT-ADDON-02-NET-PRICE-CORRUPTED",
+      "name": "Mutation Test: netPrice mutated to RRP must be BLOCKED_INVALID",
+      "status": "PASS",
+      "passed": true,
+      "details": "Errors: ['ADDON_PRICE_EQUATION_MISMATCH']"
+    },
+    {
+      "testId": "ADDON-08-CROSS-MODE-INTEGRITY",
+      "name": "Cross-mode non-regression: Standard, Student (81), SF+, Trade Up, Pass F intact; 75 Formula Errors blocked",
+      "status": "PASS",
+      "passed": true,
+      "details": "Formula Error Count: 75 (All blocked: True), Pass F Leaks: 0"
+    }
+  ]
+}
