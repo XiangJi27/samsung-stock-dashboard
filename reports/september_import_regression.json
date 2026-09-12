@@ -1,0 +1,93 @@
+{
+  "reportName": "SEPTEMBER_IMPORT_REGRESSION",
+  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
+  "regressionComparison": {
+    "metrics": {
+      "totalRowsRead": {
+        "before": 82,
+        "after": 47,
+        "difference": -35,
+        "verdict": "IMPROVED (Excluded 35 Trade-in reference rows)"
+      },
+      "totalVariantsGenerated": {
+        "before": 82,
+        "after": 56,
+        "difference": -26,
+        "verdict": "CORRECT (47 promo rows -> 56 variants via 9 Trade-Up splits)"
+      },
+      "netPriceZeroRows": {
+        "before": 82,
+        "after": 0,
+        "difference": -82,
+        "verdict": "ELIMINATED (100% fixed from header mapping)"
+      },
+      "netPriceExtracted": {
+        "before": 0,
+        "after": 56,
+        "difference": 56,
+        "verdict": "PASSED (All valid prices extracted accurately)"
+      },
+      "passedValidation": {
+        "before": 0,
+        "after": 0,
+        "difference": 0,
+        "verdict": "HOLD_BY_POLICY (Zero unproven auto-publishing)"
+      },
+      "reviewRequired": {
+        "before": 0,
+        "after": 32,
+        "difference": 32,
+        "verdict": "SAFE_CONTAINMENT (Waiting human P/N resolution)"
+      },
+      "blockedInvalid": {
+        "before": 82,
+        "after": 0,
+        "difference": -82,
+        "verdict": "ELIMINATED (No false INVALID_PRICE blocks)"
+      },
+      "blockedUnproven": {
+        "before": 0,
+        "after": 24,
+        "difference": 24,
+        "verdict": "CORRECT_QUARANTINE (Missing trade-up payment codes or stock master missing)"
+      },
+      "autoPublishAllowed": {
+        "before": 0,
+        "after": 0,
+        "difference": 0,
+        "verdict": "ENFORCED (Strict zero auto-publish without exact P/N)"
+      }
+    }
+  },
+  "safetyCriteriaVerification": {
+    "incorrectlyImportedTradeUpModelRows": {
+      "target": 0,
+      "actual": 0,
+      "passed": true
+    },
+    "netPriceIncorrectlyConvertedToZero": {
+      "target": 0,
+      "actual": 0,
+      "passed": true
+    },
+    "exactPnUnresolvedRowsAutoPublished": {
+      "target": 0,
+      "actual": 0,
+      "passed": true
+    },
+    "formulaErrorsAutoPublished": {
+      "target": 0,
+      "actual": 0,
+      "passed": true
+    }
+  },
+  "finalDecisionState": {
+    "SEPTEMBER_IMPORT_MAPPING_FIXED": "PASSED",
+    "HOLD_PRODUCT_MATCHING": "HELD_PENDING_CONFIRMATION",
+    "HOLD_HEADER_AMBIGUITY": "PASSED_DETERMINISTIC",
+    "HOLD_REGRESSION_FAILURE": "PASSED_REGRESSION_GREEN",
+    "MAIN_MERGE": "HOLD",
+    "PRODUCTION_DEPLOY": "HOLD"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "reportName": "SEPTEMBER_SHEET_CLASSIFICATION",
+  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
+  "classificationRule": "A sheet is eligible as PROMOTION_PRICE_TABLE if and only if it contains: (1) Model or P/N column, (2) RRP column, and (3) Discount or Net Price column. Sheets without RRP/Discount are categorized as TRADE_IN_REFERENCE or INFORMATIONAL_SHEET.",
+  "sheets": [
+    {
+      "sheetName": "7-20 Sep",
+      "classification": "PROMOTION_PRICE_TABLE",
+      "headerRow": 3,
+      "dataRowCount": 47,
+      "promotionVariantsCreated": 56,
+      "isEligibleForPricing": true,
+      "reason": "Contains Model ('รุ่น'), RRP ('ราคาปกติ'), and Discount ('ส่วนลด') columns. Rows with Trade Up are safely split into Standard and Trade Up variants."
+    },
+    {
+      "sheetName": "Trade up model",
+      "classification": "TRADE_IN_REFERENCE",
+      "headerRow": 4,
+      "dataRowCount": 35,
+      "promotionVariantsCreated": 0,
+      "referenceRecordsCreated": 35,
+      "isEligibleForPricing": false,
+      "reason": "Lacks RRP and Discount columns; serves solely as an eligible trade-in device reference lookup table."
+    },
+    {
+      "sheetName": "ร้านค้าที่ร่วมรายการ SF+ Flip8",
+      "classification": "INFORMATIONAL_SHEET",
+      "promotionVariantsCreated": 0,
+      "isEligibleForPricing": false,
+      "reason": "Branch eligibility list for SF+ Flip8 promotion."
+    },
+    {
+      "sheetName": "Premium",
+      "classification": "INFORMATIONAL_SHEET",
+      "promotionVariantsCreated": 0,
+      "isEligibleForPricing": false,
+      "reason": "Premium gift guidelines without device pricing structures."
+    },
+    {
+      "sheetName": "วิธีการตัด Trade up",
+      "classification": "INFORMATIONAL_SHEET",
+      "promotionVariantsCreated": 0,
+      "isEligibleForPricing": false,
+      "reason": "Operational cashier procedural instructions for POS trade-up processing."
+    },
+    {
+      "sheetName": "Promotion Premium Q2.2026",
+      "classification": "INFORMATIONAL_SHEET",
+      "promotionVariantsCreated": 0,
+      "isEligibleForPricing": false,
+      "reason": "Historical Q2.2026 promotional gift lookup."
+    }
+  ],
+  "summary": {
+    "totalSheetsInWorkbook": 6,
+    "pricingSheets": 1,
+    "referenceSheets": 1,
+    "informationalSheets": 4,
+    "totalPromotionRowsToProcess": 47,
+    "totalPromotionVariantsGenerated": 56,
+    "totalReferenceRowsExcludedFromPricing": 35
+  }
+}

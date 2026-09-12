@@ -1,0 +1,82 @@
+{
+  "reportName": "SEPTEMBER_HEADER_MAPPING_BEFORE",
+  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
+  "evaluation": {
+    "rootCause1": "Generic discount header match (h.includes('ลด')) preceded specific net price match (h.includes('หลังลด')), causing Column J ('ราคาหลังลดและเทรดอัพ') to be treated as a redundant discount column and completely dropped.",
+    "rootCause2": "Sheet 'Trade up model' lacked RRP and Net pricing columns but was erroneously parsed as a promotion table because row 4 contained the header 'Model'.",
+    "rootCause3": "Missing exact P/N column in sheet '7-20 Sep' resulted in codeType 'UNKNOWN' for all extracted rows."
+  },
+  "metricsBefore": {
+    "totalVariantsRead": 82,
+    "sheet7_20SepVariants": 47,
+    "sheetTradeUpModelVariants": 35,
+    "netPriceZeroCount": 82,
+    "blockedInvalidCount": 82,
+    "passedCount": 0,
+    "reviewRequiredCount": 0,
+    "primaryErrorCode": "INVALID_PRICE"
+  },
+  "headerMappingDetails": [
+    {
+      "colLetter": "A",
+      "headerText": "Category",
+      "mappedFieldBefore": null,
+      "status": "IGNORED"
+    },
+    {
+      "colLetter": "B",
+      "headerText": "รุ่น",
+      "mappedFieldBefore": "model",
+      "status": "CORRECT"
+    },
+    {
+      "colLetter": "C",
+      "headerText": "ความจุ",
+      "mappedFieldBefore": null,
+      "status": "IGNORED"
+    },
+    {
+      "colLetter": "D",
+      "headerText": "ราคาปกติ",
+      "mappedFieldBefore": "rrp",
+      "status": "CORRECT"
+    },
+    {
+      "colLetter": "E",
+      "headerText": "ส่วนลด",
+      "mappedFieldBefore": "discount",
+      "status": "CORRECT"
+    },
+    {
+      "colLetter": "F",
+      "headerText": "คูปอง\n",
+      "mappedFieldBefore": "coupon",
+      "status": "CORRECT"
+    },
+    {
+      "colLetter": "G",
+      "headerText": "โปรนักเรียนนักศึกษา  SES/SPS เท่านั้น",
+      "mappedFieldBefore": null,
+      "status": "IGNORED"
+    },
+    {
+      "colLetter": "H",
+      "headerText": "เทรดอัพ",
+      "mappedFieldBefore": null,
+      "status": "UNMAPPED"
+    },
+    {
+      "colLetter": "I",
+      "headerText": "กดชำระ Trade up",
+      "mappedFieldBefore": null,
+      "status": "UNMAPPED"
+    },
+    {
+      "colLetter": "J",
+      "headerText": "ราคาหลังลด\nและเทรดอัพ",
+      "mappedFieldBefore": null,
+      "status": "DROPPED_DUE_TO_DISCOUNT_PRECEDENCE"
+    }
+  ]
+}

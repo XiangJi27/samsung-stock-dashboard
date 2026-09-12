@@ -318,33 +318,85 @@
           }
         }
 
-        if (headerIdx === -1) return; // Not a promotion table sheet
-        const headers = rows[headerIdx].map(h => String(h).trim().toUpperCase());
+        if (headerIdx === -1) return; // Not a recognized table sheet
+        const headers = rows[headerIdx];
+
+        // Specific Header Classification Function
+        const classifyHeader = (rawH) => {
+          const h = String(rawH || '').trim().replace(/\r?\n/g, ' ').toUpperCase();
+          if (!h) return null;
+
+          // 1. Specific Net Prices (Specific before generic)
+          if (h.includes('หลังลดและเทรดอัพ') || h.includes('หลังลด และเทรดอัพ') || h.includes('หลังลด และ เทรดอัพ')) return 'tradeUpNetPrice';
+          if (h.includes('NET แลกซื้อ') || h.includes('ราคา NET แลกซื้อ') || h.includes('ราคาหลังหักส่วนลด แลกซื้อ')) return 'addOnNetPrice';
+          if (h.includes('สุทธิ STUDENT') || h.includes('ราคา STUDENT') || h.includes('หลังลด STUDENT')) return 'studentNetPrice';
+          if (h.includes('หลังลด SF+') || h.includes('สุทธิ SF+')) return 'sfPlusNetPrice';
+          if (h.includes('ราคาหลังหักส่วนลด PROMOTION') || h.includes('ราคาหลังหักส่วนลด') || h.includes('ราคาหลังลด') || h.includes('ราคาสุทธิ') || h.includes('NET PRICE') || h === 'NET') return 'standardNetPrice';
+
+          // 2. Specific Trade Up Payment Code and Discount
+          if (h.includes('กดชำระ TRADE UP') || h.includes('กดชำระ TRADE') || h.includes('ปุ่มชำระ') || h.includes('ปุ่ม TRADE UP')) return 'tradeUpPaymentCode';
+          if (h.includes('ส่วนลด TRADE UP') || h.includes('เทรดอัพ') || h.includes('TRADE UP') || h.includes('TRADE-UP')) return 'tradeUpDiscount';
+
+          // 3. Specific Component / Addon Discounts
+          if (h.includes('SS DISCOUNT') || h.includes('ลด SS') || h.includes('SS ส่วนลด')) return 'ssDiscount';
+          if (h.includes('CPW DISCOUNT') || h.includes('ลด CPW') || h.includes('CPW ส่วนลด')) return 'cpwDiscount';
+          if (h.includes('ADD ON') || h.includes('แลกซื้อ')) return 'addOnDiscount';
+          if (h.includes('ส่วนลด STUDENT') || h.includes('ลด STUDENT') || h.includes('% ส่วนลด')) return 'studentDiscount';
+
+          // 4. Generic Standard Discount
+          if (h.includes('ส่วนลด') || h.includes('DISCOUNT') || h === 'ลด') return 'standardDiscount';
+
+          // 5. Product Specs & Scope
+          if (h.includes('P/N') || h === 'PN' || h.includes('PART NUMBER') || h.includes('SKU') || h.includes('รหัส')) return 'pn';
+          if (h.includes('MODEL') || h.includes('รุ่น') || h.includes('สินค้า')) return 'model';
+          if (h.includes('ความจุ') || h.includes('CAPACITY') || h.includes('STORAGE') || h.includes('RAM/ROM')) return 'capacity';
+          if (h.includes('RRP') || h.includes('ราคาปกติ') || h.includes('ราคาป้าย')) return 'rrp';
+          if (h.includes('COUPON') || h.includes('คูปอง')) return 'coupon';
+          if (h.includes('MODE') || h.includes('แคมเปญ') || h.includes('ประเภท')) return 'saleMode';
+          if (h.includes('CATEGORY') || h.includes('หมวดหมู่')) return 'category';
+
+          return null;
+        };
 
         // Detect Columns
         const colMap = {};
         headers.forEach((h, idx) => {
-          if (h.includes('P/N') || h === 'PN' || h.includes('SKU') || h.includes('รหัส')) colMap['pn'] = idx;
-          else if (h.includes('MODEL') || h.includes('รุ่น') || h.includes('สินค้า')) colMap['model'] = idx;
-          else if (h.includes('RRP') || h.includes('ราคาปกติ') || h.includes('ราคาป้าย')) colMap['rrp'] = idx;
-          else if (h.includes('SS DISCOUNT') || h.includes('ลด SS') || h.includes('SS ส่วนลด')) colMap['ssDiscount'] = idx;
-          else if (h.includes('CPW DISCOUNT') || h.includes('ลด CPW') || h.includes('CPW ส่วนลด')) colMap['cpwDiscount'] = idx;
-          else if (h.includes('ADD ON') || h.includes('แลกซื้อ')) colMap['addOnDiscount'] = idx;
-          else if (h.includes('DISCOUNT') || h.includes('ส่วนลด') || h.includes('ลด')) {
-            if (colMap['discount'] === undefined) colMap['discount'] = idx;
+          const field = classifyHeader(h);
+          if (field && colMap[field] === undefined) {
+            colMap[field] = idx;
           }
-          else if (h.includes('NET') || h.includes('สุทธิ') || h.includes('ราคาขาย') || h.includes('หลังลด')) colMap['netPrice'] = idx;
-          else if (h.includes('COUPON') || h.includes('คูปอง')) colMap['coupon'] = idx;
-          else if (h.includes('MODE') || h.includes('แคมเปญ') || h.includes('ประเภท')) colMap['saleMode'] = idx;
         });
 
+        // Sheet Eligibility Gate
+        // A promotion pricing sheet MUST have: (1) Model or P/N, (2) RRP, and (3) Discount or Net Price
+        const hasProductCol = (colMap['model'] !== undefined || colMap['pn'] !== undefined);
+        const hasRrpCol = colMap['rrp'] !== undefined;
+        const hasPricingCol = (colMap['standardDiscount'] !== undefined || colMap['tradeUpDiscount'] !== undefined ||
+                              colMap['addOnDiscount'] !== undefined || colMap['standardNetPrice'] !== undefined ||
+                              colMap['tradeUpNetPrice'] !== undefined || colMap['addOnNetPrice'] !== undefined);
+
+        if (!hasProductCol || !hasRrpCol || !hasPricingCol) {
+          // Exclude reference sheets (e.g. 'Trade up model') from pricing variants
+          return;
+        }
+
         const isAddonSheet = sheetName.includes('50-70%') || sheetName.includes('แลกซื้อ') || colMap['addOnDiscount'] !== undefined || (colMap['ssDiscount'] !== undefined && colMap['cpwDiscount'] !== undefined);
+
+        // Helper to parse numbers safely without defaulting to 0
+        const parseNumOrNull = (v) => {
+          if (v === null || v === undefined || v === '' || v === '-' || String(v).trim().toLowerCase() === 'none') return null;
+          const s = String(v).replace(/,/g, '').trim();
+          const n = parseFloat(s);
+          return isNaN(n) ? null : n;
+        };
+
+        const getColLetter = (cIdx) => String.fromCharCode(65 + (cIdx % 26));
+
+        let currentModel = '';
 
         for (let r = headerIdx + 1; r < rows.length; r++) {
           const row = rows[r];
           if (!row || row.length === 0) continue;
-
-          const getColLetter = (cIdx) => String.fromCharCode(65 + (cIdx % 26));
 
           // Check formula errors
           let hasFormulaError = false;
@@ -363,128 +415,312 @@
           }
 
           const pnRaw = colMap['pn'] !== undefined ? String(row[colMap['pn']] || '').trim() : '';
-          const modelRaw = colMap['model'] !== undefined ? String(row[colMap['model']] || '').trim() : '';
+          let modelRaw = colMap['model'] !== undefined ? String(row[colMap['model']] || '').trim() : '';
+          const capacityRaw = colMap['capacity'] !== undefined ? String(row[colMap['capacity']] || '').trim() : '';
+
+          if (modelRaw) {
+            currentModel = modelRaw;
+          } else if (currentModel && (capacityRaw || (colMap['rrp'] !== undefined && row[colMap['rrp']] !== undefined && row[colMap['rrp']] !== null && row[colMap['rrp']] !== ''))) {
+            modelRaw = currentModel;
+          }
 
           if (!pnRaw && !modelRaw && !hasFormulaError) continue;
 
-          const pn = pnRaw.toUpperCase();
-          const model = modelRaw || pn || `แถวที่ ${r + 1}`;
+          const rrp = colMap['rrp'] !== undefined ? parseNumOrNull(row[colMap['rrp']]) : null;
+          const stdDiscount = colMap['standardDiscount'] !== undefined ? parseNumOrNull(row[colMap['standardDiscount']]) : null;
+          const ssDisc = colMap['ssDiscount'] !== undefined ? parseNumOrNull(row[colMap['ssDiscount']]) : null;
+          const cpwDisc = colMap['cpwDiscount'] !== undefined ? parseNumOrNull(row[colMap['cpwDiscount']]) : null;
+          const addOnDisc = colMap['addOnDiscount'] !== undefined ? parseNumOrNull(row[colMap['addOnDiscount']]) : ((ssDisc || 0) + (cpwDisc || 0) || null);
+          const tradeUpDiscount = colMap['tradeUpDiscount'] !== undefined ? parseNumOrNull(row[colMap['tradeUpDiscount']]) : null;
 
-          const cleanNum = (v) => {
-            if (v === null || v === undefined || v === '') return 0;
-            const s = String(v).replace(/,/g, '').trim();
-            const n = parseFloat(s);
-            return isNaN(n) ? 0 : n;
-          };
+          const tradeUpNetPrice = colMap['tradeUpNetPrice'] !== undefined ? parseNumOrNull(row[colMap['tradeUpNetPrice']]) : null;
+          const standardNetPrice = colMap['standardNetPrice'] !== undefined ? parseNumOrNull(row[colMap['standardNetPrice']]) : null;
+          const addOnNetPrice = colMap['addOnNetPrice'] !== undefined ? parseNumOrNull(row[colMap['addOnNetPrice']]) : null;
 
-          const rrp = colMap['rrp'] !== undefined ? cleanNum(row[colMap['rrp']]) : 0;
-          let discount = colMap['discount'] !== undefined ? cleanNum(row[colMap['discount']]) : 0;
-          const ssDisc = colMap['ssDiscount'] !== undefined ? cleanNum(row[colMap['ssDiscount']]) : 0;
-          const cpwDisc = colMap['cpwDiscount'] !== undefined ? cleanNum(row[colMap['cpwDiscount']]) : 0;
-          const addOnDisc = colMap['addOnDiscount'] !== undefined ? cleanNum(row[colMap['addOnDiscount']]) : (ssDisc + cpwDisc);
+          let tradeUpPaymentCode = colMap['tradeUpPaymentCode'] !== undefined ? String(row[colMap['tradeUpPaymentCode']] || '').trim() : null;
+          if (tradeUpPaymentCode === '-' || tradeUpPaymentCode === '' || tradeUpPaymentCode === 'None') tradeUpPaymentCode = null;
 
-          let netPrice = colMap['netPrice'] !== undefined ? cleanNum(row[colMap['netPrice']]) : 0;
-          const coupon = colMap['coupon'] !== undefined ? String(row[colMap['coupon']] || '').trim() : '';
-          let saleMode = colMap['saleMode'] !== undefined ? String(row[colMap['saleMode']] || '').trim().toUpperCase() : '';
+          const couponRaw = colMap['coupon'] !== undefined ? String(row[colMap['coupon']] || '').trim() : '';
+          let normalizedCoupon = couponRaw;
+          if (couponRaw.includes('01')) normalizedCoupon = '01';
+          else if (couponRaw.includes('02')) normalizedCoupon = '02';
+          else if (couponRaw.includes('04')) normalizedCoupon = '04';
+          else if (couponRaw.toUpperCase().includes('STUDENT')) normalizedCoupon = 'Studentcrd';
 
-          if (!saleMode) {
-            if (isAddonSheet) saleMode = 'ADD_ON_PURCHASE';
-            else if (coupon.toUpperCase().includes('STUDENT')) saleMode = 'STUDENT';
-            else if (coupon.includes('04')) saleMode = 'SF_PLUS';
-            else saleMode = 'STANDARD';
-          }
-
-          if (saleMode === 'ADD_ON_PURCHASE' && addOnDisc > 0) {
-            discount = addOnDisc;
-          }
-
+          // Exact P/N & Product Code Type
+          let pn = null;
           let codeType = 'UNKNOWN';
-          if (pn.startsWith('F-')) codeType = 'PASS_F';
-          else if (pn.startsWith('SM-')) codeType = 'STANDARD_SM';
-          else if (pn.startsWith('EP-') || pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('EE-')) codeType = 'STANDARD_ACCESSORY';
+          let productMatchStatus = 'UNPROVEN';
+          let candidateList = [];
 
-          let validationStatus = 'PASSED_VALIDATION';
-          const flags = [];
-          let reasonText = '';
+          if (pnRaw) {
+            pn = pnRaw.toUpperCase();
+            productMatchStatus = 'EXACT_SINGLE_MATCH';
+            if (pn.startsWith('F-')) codeType = 'PASS_F';
+            else if (pn.startsWith('SM-')) codeType = 'STANDARD_SM';
+            else if (pn.startsWith('EP-') || pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('EE-')) codeType = 'STANDARD_ACCESSORY';
+          } else {
+            // No Exact P/N in row: Query stock master cache
+            const stockData = window.STOCK_DATABASE || window.STOCK_DATA || [];
+            const cleanM = modelRaw.toLowerCase().replace('galaxy', '').replace('(ร่วม sf+)', '').replace('(ไม่ร่วม sf+)', '').trim();
+            const cleanCap = capacityRaw.toLowerCase().replace('gb', '').replace('tb', '').trim();
 
-          if (hasFormulaError) {
-            validationStatus = 'BLOCKED_INVALID';
-            flags.push('SOURCE_FORMULA_ERROR');
-            reasonText = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail}) ที่เซลล์ ${sheetName}!${errorCellRef}`;
-            warnings.push({
-              sheet: sheetName,
-              row: r + 1,
-              cellRef: `${sheetName}!${errorCellRef}`,
-              message: `แถวที่ ${r + 1} (${model}): สูตรผิดพลาด ${formulaErrorDetail} ที่เซลล์ ${errorCellRef}`
+            stockData.forEach(s => {
+              const sm = (s.model || '').toLowerCase();
+              if (cleanM && sm.includes(cleanM)) {
+                if (!cleanCap || sm.includes(cleanCap) || sm.includes(capacityRaw.toLowerCase())) {
+                  candidateList.push(s.pn);
+                }
+              }
             });
+
+            if (candidateList.length === 1) {
+              productMatchStatus = 'EXACT_SINGLE_MATCH';
+            } else if (candidateList.length > 1) {
+              productMatchStatus = 'MULTIPLE_PN_CANDIDATES';
+            } else {
+              productMatchStatus = 'PN_NOT_FOUND';
+            }
           }
 
-          if (!pn && validationStatus !== 'BLOCKED_INVALID') {
-            flags.push('PN_MISSING_MODEL_ONLY');
-            reasonText = 'ไม่พบรหัสสินค้า P/N (มีเฉพาะชื่อรุ่น)';
-          }
+          // Case A: Row contains Trade Up discount -> Split into STANDARD_PAYMENT and TRADE_UP
+          if (tradeUpDiscount !== null && tradeUpDiscount > 0) {
+            // 1. STANDARD_PAYMENT Variant
+            const stdExpectedNet = rrp !== null ? (rrp - (stdDiscount || 0)) : null;
+            const stdNet = standardNetPrice !== null ? standardNetPrice : stdExpectedNet;
+            const stdOrigin = standardNetPrice !== null ? 'SOURCE_CELL' : 'DERIVED_FROM_SOURCE_COMPONENTS';
 
-          if (saleMode === 'ADD_ON_PURCHASE') {
-            const expectedNet = rrp - addOnDisc;
-            if (netPrice > 0 && Math.abs(netPrice - expectedNet) > 1 && validationStatus !== 'BLOCKED_INVALID') {
-              validationStatus = 'BLOCKED_INVALID';
-              flags.push('ADD_ON_EQUATION_MISMATCH');
-              reasonText = `สมการแลกซื้อไม่ตรง: RRP (฿${rrp.toLocaleString()}) - ลดแลกซื้อ (฿${addOnDisc.toLocaleString()}) != สุทธิ (฿${netPrice.toLocaleString()})`;
-              warnings.push({
+            let stdStatus = 'PASSED_VALIDATION';
+            const stdFlags = [];
+            let stdReason = '';
+
+            if (hasFormulaError) {
+              stdStatus = 'BLOCKED_INVALID';
+              stdFlags.push('SOURCE_FORMULA_ERROR');
+              stdReason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail})`;
+            } else if (stdNet === null) {
+              stdStatus = 'BLOCKED_INVALID';
+              stdFlags.push('NET_PRICE_NOT_EXTRACTED');
+              stdReason = 'ไม่สามารถสกัดราคาสุทธิได้ (Net Price is null)';
+            } else if (!pn) {
+              if (productMatchStatus === 'PN_NOT_FOUND') {
+                stdStatus = 'BLOCKED_UNPROVEN';
+                stdFlags.push('PN_NOT_FOUND');
+                stdReason = `ไม่พบรหัส P/N ที่ตรงกับ ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
+              } else {
+                stdStatus = 'REVIEW_REQUIRED';
+                stdFlags.push('WARNING_DERIVED_STANDARD_NET', 'EXACT_PN_UNRESOLVED');
+                stdReason = `คำนวณราคาสุทธิมาตรฐาน (฿${rrp} - ฿${stdDiscount || 0} = ฿${stdNet}) • ต้องจับคู่ Exact P/N ก่อนเผยแพร่`;
+              }
+            }
+
+            extractedVariants.push({
+              draftRowId: `ROW-${r + 1}-STD`,
+              pn: pn,
+              model: modelRaw || `แถวที่ ${r + 1}`,
+              capacity: capacityRaw,
+              productCodeType: codeType,
+              productMatchStatus,
+              candidatePns: candidateList,
+              rrp,
+              discount: stdDiscount || 0,
+              standardDiscount: stdDiscount || 0,
+              tradeUpDiscount: null,
+              standardNetPrice: stdNet,
+              tradeUpNetPrice: null,
+              netPrice: stdNet,
+              netPriceOrigin: stdOrigin,
+              coupon: normalizedCoupon,
+              saleMode: 'STANDARD_PAYMENT',
+              promotionSourceType: 'EXCEL_CONFIRMED',
+              validationStatus: stdStatus,
+              validationFlags: stdFlags,
+              autoPublishAllowed: false, // Strict safety: no auto-publish without exact P/N
+              humanReviewRequired: !pn,
+              reasonText: stdReason || 'ผ่านการตรวจสอบความถูกต้องสมบูรณ์',
+              sourceEvidence: {
+                rrp: colMap['rrp'] !== undefined ? `${getColLetter(colMap['rrp'])}${r + 1}` : null,
+                standardDiscount: colMap['standardDiscount'] !== undefined ? `${getColLetter(colMap['standardDiscount'])}${r + 1}` : null,
+                coupon: colMap['coupon'] !== undefined ? `${getColLetter(colMap['coupon'])}${r + 1}` : null
+              },
+              sourceTrace: {
                 sheet: sheetName,
                 row: r + 1,
-                cellRef: `${sheetName}!${colMap['netPrice'] !== undefined ? getColLetter(colMap['netPrice']) + (r+1) : 'R' + (r+1)}`,
-                message: `แถวที่ ${r + 1} (${model}): สมการแลกซื้อไม่ลงตัว (Expected ${expectedNet} vs Net ${netPrice})`
-              });
-            } else if (netPrice === 0 && expectedNet > 0) {
-              netPrice = expectedNet;
-            }
-          } else {
-            if (rrp > 0 && netPrice > 0) {
-              const expectedNet = rrp - discount;
-              if (Math.abs(netPrice - expectedNet) > 1 && validationStatus !== 'BLOCKED_INVALID') {
-                validationStatus = 'BLOCKED_INVALID';
-                flags.push('PRICE_EQUATION_ERROR');
-                reasonText = `สมการราคาไม่ลงตัว: RRP (฿${rrp.toLocaleString()}) - ส่วนลด (฿${discount.toLocaleString()}) != สุทธิ (฿${netPrice.toLocaleString()})`;
-                warnings.push({
-                  sheet: sheetName,
-                  row: r + 1,
-                  cellRef: `${sheetName}!${colMap['netPrice'] !== undefined ? getColLetter(colMap['netPrice']) + (r+1) : 'R' + (r+1)}`,
-                  message: `แถวที่ ${r + 1} (${model}): สมการราคาไม่ตรง (RRP ${rrp} - ลด ${discount} != ${netPrice})`
-                });
+                cellRef: errorCellRef || `${getColLetter(colMap['rrp'] || 0)}${r + 1}`,
+                format: 'EXCEL_LTR'
               }
-            } else if (rrp <= 0 || netPrice <= 0) {
-              if (validationStatus !== 'BLOCKED_INVALID') {
-                validationStatus = 'BLOCKED_INVALID';
-                flags.push('INVALID_PRICE');
-                reasonText = `ราคาต้องมากกว่า 0 บาท (RRP: ฿${rrp}, Net: ฿${netPrice})`;
-              }
-            }
-          }
+            });
 
-          extractedVariants.push({
-            pn: pn || `ROW-${r+1}`,
-            model: model,
-            productCodeType: codeType,
-            rrp,
-            discount,
-            ssDiscount: ssDisc,
-            cpwDiscount: cpwDisc,
-            addOnDiscount: addOnDisc,
-            netPrice,
-            coupon,
-            saleMode,
-            promotionSourceType: 'EXCEL_CONFIRMED',
-            validationStatus,
-            validationFlags: flags,
-            reasonText: reasonText || (validationStatus === 'PASSED_VALIDATION' ? 'ผ่านการตรวจสอบความถูกต้องสมบูรณ์' : flags.join(', ')),
-            sourceTrace: {
-              sheet: sheetName,
-              row: r + 1,
-              cellRef: errorCellRef || `${getColLetter(colMap['rrp'] || 0)}${r+1}`,
-              format: 'EXCEL_LTR'
+            // 2. TRADE_UP Variant
+            const tupExpectedNet = rrp !== null ? (rrp - (stdDiscount || 0) - tradeUpDiscount) : null;
+            const tupNet = tradeUpNetPrice !== null ? tradeUpNetPrice : tupExpectedNet;
+            const tupOrigin = tradeUpNetPrice !== null ? 'SOURCE_CELL' : 'DERIVED_FROM_SOURCE_COMPONENTS';
+
+            let tupStatus = 'PASSED_VALIDATION';
+            const tupFlags = [];
+            let tupReason = '';
+
+            if (hasFormulaError) {
+              tupStatus = 'BLOCKED_INVALID';
+              tupFlags.push('SOURCE_FORMULA_ERROR');
+              tupReason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail})`;
+            } else if (!tradeUpPaymentCode) {
+              tupStatus = 'BLOCKED_UNPROVEN';
+              tupFlags.push('TRADE_UP_PAYMENT_CODE_MISSING');
+              tupReason = 'มีส่วนลด Trade Up แต่ไม่มีรหัสตัดชำระ (Payment Code ว่างในไฟล์)';
+            } else if (tupNet === null) {
+              tupStatus = 'BLOCKED_INVALID';
+              tupFlags.push('NET_PRICE_NOT_EXTRACTED');
+              tupReason = 'ไม่สามารถสกัดราคาสุทธิ Trade Up ได้';
+            } else if (!pn) {
+              if (productMatchStatus === 'PN_NOT_FOUND') {
+                tupStatus = 'BLOCKED_UNPROVEN';
+                tupFlags.push('PN_NOT_FOUND');
+                tupReason = `ไม่พบรหัส P/N ที่ตรงกับ ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
+              } else {
+                tupStatus = 'REVIEW_REQUIRED';
+                tupFlags.push('EXACT_PN_UNRESOLVED', 'TRADE_UP_PROVISIONAL');
+                tupReason = `โปรโมชั่น Trade Up (สุทธิ ฿${tupNet} | รหัสชำระ ${tradeUpPaymentCode}) • ต้องจับคู่ Exact P/N ก่อนเผยแพร่`;
+              }
             }
-          });
+
+            extractedVariants.push({
+              draftRowId: `ROW-${r + 1}-TUP`,
+              pn: pn,
+              model: modelRaw || `แถวที่ ${r + 1}`,
+              capacity: capacityRaw,
+              productCodeType: codeType,
+              productMatchStatus,
+              candidatePns: candidateList,
+              rrp,
+              discount: (stdDiscount || 0) + tradeUpDiscount,
+              standardDiscount: stdDiscount || 0,
+              tradeUpDiscount,
+              standardNetPrice: stdExpectedNet,
+              tradeUpNetPrice: tupNet,
+              tradeUpPaymentCode,
+              netPrice: tupNet,
+              netPriceOrigin: tupOrigin,
+              coupon: normalizedCoupon,
+              saleMode: 'TRADE_UP',
+              promotionSourceType: 'EXCEL_CONFIRMED',
+              validationStatus: tupStatus,
+              validationFlags: tupFlags,
+              autoPublishAllowed: false,
+              humanReviewRequired: !pn,
+              reasonText: tupReason || 'ผ่านการตรวจสอบความถูกต้องสมบูรณ์',
+              sourceEvidence: {
+                rrp: colMap['rrp'] !== undefined ? `${getColLetter(colMap['rrp'])}${r + 1}` : null,
+                standardDiscount: colMap['standardDiscount'] !== undefined ? `${getColLetter(colMap['standardDiscount'])}${r + 1}` : null,
+                coupon: colMap['coupon'] !== undefined ? `${getColLetter(colMap['coupon'])}${r + 1}` : null,
+                tradeUpDiscount: colMap['tradeUpDiscount'] !== undefined ? `${getColLetter(colMap['tradeUpDiscount'])}${r + 1}` : null,
+                tradeUpPaymentCode: colMap['tradeUpPaymentCode'] !== undefined ? `${getColLetter(colMap['tradeUpPaymentCode'])}${r + 1}` : null,
+                tradeUpNetPrice: colMap['tradeUpNetPrice'] !== undefined ? `${getColLetter(colMap['tradeUpNetPrice'])}${r + 1}` : null
+              },
+              sourceTrace: {
+                sheet: sheetName,
+                row: r + 1,
+                cellRef: errorCellRef || `${getColLetter(colMap['rrp'] || 0)}${r + 1}`,
+                format: 'EXCEL_LTR'
+              }
+            });
+
+          } else {
+            // Case B: No Trade Up discount -> Single Variant
+            let saleMode = 'STANDARD_PAYMENT';
+            if (isAddonSheet) saleMode = 'ADD_ON_PURCHASE';
+            else if (couponRaw.includes('04')) saleMode = 'SF_PLUS';
+            else if (couponRaw.toUpperCase().includes('STUDENT')) saleMode = 'STUDENT';
+
+            const activeDiscount = isAddonSheet ? (addOnDisc || 0) : (stdDiscount || 0);
+            const expectedNet = rrp !== null ? (rrp - activeDiscount) : null;
+
+            let resolvedNet = null;
+            let netOrigin = 'DERIVED_FROM_SOURCE_COMPONENTS';
+
+            if (isAddonSheet && addOnNetPrice !== null) {
+              resolvedNet = addOnNetPrice;
+              netOrigin = 'SOURCE_CELL';
+            } else if (standardNetPrice !== null) {
+              resolvedNet = standardNetPrice;
+              netOrigin = 'SOURCE_CELL';
+            } else if (tradeUpNetPrice !== null) {
+              resolvedNet = tradeUpNetPrice; // In sheets without trade-up discount, this cell is the net price
+              netOrigin = 'SOURCE_CELL';
+            } else if (expectedNet !== null) {
+              resolvedNet = expectedNet;
+              netOrigin = 'DERIVED_FROM_SOURCE_COMPONENTS';
+            }
+
+            let status = 'PASSED_VALIDATION';
+            const flags = [];
+            let reason = '';
+
+            if (hasFormulaError) {
+              status = 'BLOCKED_INVALID';
+              flags.push('SOURCE_FORMULA_ERROR');
+              reason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail}) ที่เซลล์ ${sheetName}!${errorCellRef}`;
+            } else if (resolvedNet === null) {
+              status = 'BLOCKED_INVALID';
+              flags.push('NET_PRICE_NOT_EXTRACTED');
+              reason = 'ไม่สามารถสกัดราคาสุทธิได้ (Net Price is null)';
+            } else if (rrp !== null && resolvedNet !== null && expectedNet !== null && Math.abs(resolvedNet - expectedNet) > 1) {
+              status = 'BLOCKED_INVALID';
+              flags.push('PRICE_EQUATION_ERROR');
+              reason = `สมการราคาไม่ลงตัว: RRP (฿${rrp}) - ส่วนลด (฿${activeDiscount}) != สุทธิ (฿${resolvedNet})`;
+            } else if (!pn) {
+              if (productMatchStatus === 'PN_NOT_FOUND') {
+                status = 'BLOCKED_UNPROVEN';
+                flags.push('PN_NOT_FOUND');
+                reason = `ไม่พบรหัส P/N ที่ตรงกับ ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
+              } else {
+                status = 'REVIEW_REQUIRED';
+                flags.push('EXACT_PN_UNRESOLVED');
+                reason = `สมการราคาถูกต้อง (สุทธิ ฿${resolvedNet}) • ต้องจับคู่ Exact P/N ก่อนเผยแพร่`;
+              }
+            }
+
+            extractedVariants.push({
+              draftRowId: `ROW-${r + 1}`,
+              pn: pn,
+              model: modelRaw || `แถวที่ ${r + 1}`,
+              capacity: capacityRaw,
+              productCodeType: codeType,
+              productMatchStatus,
+              candidatePns: candidateList,
+              rrp,
+              discount: activeDiscount,
+              standardDiscount: stdDiscount || 0,
+              ssDiscount: ssDisc,
+              cpwDiscount: cpwDisc,
+              addOnDiscount: addOnDisc,
+              tradeUpDiscount: null,
+              standardNetPrice: resolvedNet,
+              tradeUpNetPrice: null,
+              netPrice: resolvedNet,
+              netPriceOrigin: netOrigin,
+              coupon: normalizedCoupon,
+              saleMode,
+              promotionSourceType: 'EXCEL_CONFIRMED',
+              validationStatus: status,
+              validationFlags: flags,
+              autoPublishAllowed: false,
+              humanReviewRequired: !pn,
+              reasonText: reason || 'ผ่านการตรวจสอบความถูกต้องสมบูรณ์',
+              sourceEvidence: {
+                rrp: colMap['rrp'] !== undefined ? `${getColLetter(colMap['rrp'])}${r + 1}` : null,
+                standardDiscount: colMap['standardDiscount'] !== undefined ? `${getColLetter(colMap['standardDiscount'])}${r + 1}` : null,
+                coupon: colMap['coupon'] !== undefined ? `${getColLetter(colMap['coupon'])}${r + 1}` : null,
+                netPrice: colMap['standardNetPrice'] !== undefined ? `${getColLetter(colMap['standardNetPrice'])}${r + 1}` : (colMap['tradeUpNetPrice'] !== undefined ? `${getColLetter(colMap['tradeUpNetPrice'])}${r + 1}` : null)
+              },
+              sourceTrace: {
+                sheet: sheetName,
+                row: r + 1,
+                cellRef: errorCellRef || `${getColLetter(colMap['rrp'] || 0)}${r + 1}`,
+                format: 'EXCEL_LTR'
+              }
+            });
+          }
         }
       });
 

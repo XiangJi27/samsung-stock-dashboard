@@ -1,0 +1,1016 @@
+{
+  "reportName": "SEPTEMBER_PRODUCT_MATCH_RESULTS",
+  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
+  "matchingRulesHierarchy": [
+    "1. Model Name Token Alignment (case-insensitive, normalized Galaxy prefix, removed SF+ suffixes)",
+    "2. Storage Capacity Token Alignment (normalized GB / TB)",
+    "3. Connectivity & Spec Alignment",
+    "4. Exact P/N Resolution against Stock Master (window.STOCK_DATABASE)",
+    "5. Safety Policy: If Exact P/N absent in source Excel, set pn: null, status: REVIEW_REQUIRED / BLOCKED_UNPROVEN, autoPublishAllowed: false"
+  ],
+  "summaryMetrics": {
+    "totalVariantsEvaluated": 56,
+    "exactPnProvidedInSource": 0,
+    "singleCandidateMatched": 0,
+    "multipleCandidatesMatched": 32,
+    "pnNotFoundInStockMaster": 24,
+    "autoPublishAllowedCount": 0,
+    "humanReviewRequiredCount": 56
+  },
+  "details": [
+    {
+      "draftRowId": "ROW-4-STD",
+      "model": "Galaxy S26 Ultra",
+      "capacity": "1TB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 61900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 12,
+      "candidates": [
+        "SM-S948BZKBTHL",
+        "SM-S948BLBBTHL",
+        "SM-S948BZVBTHL",
+        "SM-S948BZWBTHL",
+        "SM-S948BZKCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "WARNING_DERIVED_STANDARD_NET",
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-4-TUP",
+      "model": "Galaxy S26 Ultra",
+      "capacity": "1TB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 56900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 12,
+      "candidates": [
+        "SM-S948BZKBTHL",
+        "SM-S948BLBBTHL",
+        "SM-S948BZVBTHL",
+        "SM-S948BZWBTHL",
+        "SM-S948BZKCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED",
+        "TRADE_UP_PROVISIONAL"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-5-STD",
+      "model": "Galaxy S26 Ultra",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 49900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S948BZKCTHL",
+        "SM-S948BLBCTHL",
+        "SM-S948BZVCTHL",
+        "SM-S948BZWCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "WARNING_DERIVED_STANDARD_NET",
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-5-TUP",
+      "model": "Galaxy S26 Ultra",
+      "capacity": "512GB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 44900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S948BZKCTHL",
+        "SM-S948BLBCTHL",
+        "SM-S948BZVCTHL",
+        "SM-S948BZWCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED",
+        "TRADE_UP_PROVISIONAL"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-6-STD",
+      "model": "Galaxy S26 Ultra",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 41900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S948BZKBTHL",
+        "SM-S948BLBBTHL",
+        "SM-S948BZVBTHL",
+        "SM-S948BZWBTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "WARNING_DERIVED_STANDARD_NET",
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-6-TUP",
+      "model": "Galaxy S26 Ultra",
+      "capacity": "256GB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 39900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S948BZKBTHL",
+        "SM-S948BLBBTHL",
+        "SM-S948BZVBTHL",
+        "SM-S948BZWBTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED",
+        "TRADE_UP_PROVISIONAL"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-7",
+      "model": "Galaxy S26+",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 36900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S947BZKCTHL",
+        "SM-S947BLBCTHL",
+        "SM-S947BZVCTHL",
+        "SM-S947BZWCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-8",
+      "model": "Galaxy S26+",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 30900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S947BZKBTHL",
+        "SM-S947BLBBTHL",
+        "SM-S947BZVBTHL",
+        "SM-S947BZWBTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-9",
+      "model": "Galaxy S26",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 29900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 12,
+      "candidates": [
+        "SM-S942BZKQTHL",
+        "SM-S942BLBQTHL",
+        "SM-S942BZVQTHL",
+        "SM-S942BZWQTHL",
+        "SM-S947BZKCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-10",
+      "model": "Galaxy S26",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 27900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 15,
+      "candidates": [
+        "F-NS741BLGCLSV",
+        "F-NS741BZKCLSV",
+        "F-NS741BZVCLSV",
+        "SM-S942BZKCTHL",
+        "SM-S942BLBCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-11",
+      "model": "Galaxy S25 Ultra",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 30900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 6,
+      "candidates": [
+        "F-N1938BZKBTHL",
+        "SM-S938BZKBTHL",
+        "SM-S938BZBBTHL",
+        "SM-S938BZTBTHL",
+        "SM-S938BZSBTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-12",
+      "model": "Galaxy S26 FE",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 24900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-13",
+      "model": "Galaxy S26 FE",
+      "capacity": "128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 24900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-14",
+      "model": "Galaxy S25 FE\n(ร่วม SF+)",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 23900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S731BDBCTHL",
+        "SM-S731BLBCTHL",
+        "SM-S731BZKCTHL",
+        "SM-S731BZWCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-15",
+      "model": "Galaxy S25 FE\n(ร่วม SF+)",
+      "capacity": "128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 19900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S731BDBBTHL",
+        "SM-S731BLBBTHL",
+        "SM-S731BZKBTHL",
+        "SM-S731BZWBTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-16",
+      "model": "Galaxy S25 FE\n(ไม่ร่วม SF+)",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 20900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S731BDBCTHL",
+        "SM-S731BLBCTHL",
+        "SM-S731BZKCTHL",
+        "SM-S731BZWCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-17",
+      "model": "Galaxy S25 FE\n(ไม่ร่วม SF+)",
+      "capacity": "128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 17900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-S731BDBBTHL",
+        "SM-S731BLBBTHL",
+        "SM-S731BZKBTHL",
+        "SM-S731BZWBTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-18-STD",
+      "model": "Galaxy Z Fold8 Ultra",
+      "capacity": "1TB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 93900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-18-TUP",
+      "model": "Galaxy Z Fold8 Ultra",
+      "capacity": "1TB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 86900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "TRADE_UP_PAYMENT_CODE_MISSING"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-19-STD",
+      "model": "Galaxy Z Fold8 Ultra",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 77900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-19-TUP",
+      "model": "Galaxy Z Fold8 Ultra",
+      "capacity": "512GB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 72900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "TRADE_UP_PAYMENT_CODE_MISSING"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-20-STD",
+      "model": "Galaxy Z Fold8 Ultra",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 69900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-20-TUP",
+      "model": "Galaxy Z Fold8 Ultra",
+      "capacity": "256GB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 64900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "TRADE_UP_PAYMENT_CODE_MISSING"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-21-STD",
+      "model": "Galaxy Z Fold8",
+      "capacity": "1TB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 85900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-21-TUP",
+      "model": "Galaxy Z Fold8",
+      "capacity": "1TB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 78900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "TRADE_UP_PAYMENT_CODE_MISSING"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-22-STD",
+      "model": "Galaxy Z Fold8",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 69900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-22-TUP",
+      "model": "Galaxy Z Fold8",
+      "capacity": "512GB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 64900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "TRADE_UP_PAYMENT_CODE_MISSING"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-23-STD",
+      "model": "Galaxy Z Fold8",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 61900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-23-TUP",
+      "model": "Galaxy Z Fold8",
+      "capacity": "256GB",
+      "saleMode": "TRADE_UP",
+      "netPrice": 56900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "TRADE_UP_PAYMENT_CODE_MISSING"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-24",
+      "model": "สำหรับร้านค้าที่ร่วมรายการเท่านั้น\nGalaxy Z Flip8\n(ร่วม SF+ ดาวน์ไม่เกิน10%)",
+      "capacity": "8/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 48900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-25",
+      "model": "สำหรับร้านค้าที่ร่วมรายการเท่านั้น\nGalaxy Z Flip8\n(ร่วม SF+ ดาวน์ไม่เกิน10%)",
+      "capacity": "8/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 40900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-26",
+      "model": "สำหรับทุกหน้าร้าน\nGalaxy Z Flip8",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 45900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-27",
+      "model": "สำหรับทุกหน้าร้าน\nGalaxy Z Flip8",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 37900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-28",
+      "model": "Galaxy Z Fold 7",
+      "capacity": "1TB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 69900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-29",
+      "model": "Galaxy Z Fold 7",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 57900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-30",
+      "model": "Galaxy Z Fold 7",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 49900.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-31",
+      "model": "Galaxy Z Flip7",
+      "capacity": "512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 37900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-F766BZRETHL",
+        "SM-F766BZKETHL",
+        "SM-F766BDBETHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-32",
+      "model": "Galaxy Z Flip7",
+      "capacity": "256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 29900.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-F766BZRATHL",
+        "SM-F766BZKATHL",
+        "SM-F766BDBATHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-33",
+      "model": "Galaxy A57 5G\n(ร่วม SF+)",
+      "capacity": "12/512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 27999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A576BDBUTHL",
+        "SM-A576BZVUTHL",
+        "SM-A576BZAUTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-34",
+      "model": "Galaxy A57 5G\n(ร่วม SF+)",
+      "capacity": "12/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 22999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A576BDBTTHL",
+        "SM-A576BZVTTHL",
+        "SM-A576BZATTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-35",
+      "model": "Galaxy A57 5G\n(ร่วม SF+)",
+      "capacity": "8/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 19999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A576BDBSTHL",
+        "SM-A576BZVSTHL",
+        "SM-A576BZASTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-36",
+      "model": "Galaxy A57 5G \n(ไม่ร่วม SF+)",
+      "capacity": "12/512GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 25999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A576BDBUTHL",
+        "SM-A576BZVUTHL",
+        "SM-A576BZAUTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-37",
+      "model": "Galaxy A57 5G \n(ไม่ร่วม SF+)",
+      "capacity": "12/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 20999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A576BDBTTHL",
+        "SM-A576BZVTTHL",
+        "SM-A576BZATTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-38",
+      "model": "Galaxy A57 5G \n(ไม่ร่วม SF+)",
+      "capacity": "8/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 17999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A576BDBSTHL",
+        "SM-A576BZVSTHL",
+        "SM-A576BZASTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-39",
+      "model": "Galaxy A37 5G \n(ร่วม SF+)",
+      "capacity": "8/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 17999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A376BDGTTHL",
+        "SM-A376BLVTTHL",
+        "SM-A376BZATTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-40",
+      "model": "Galaxy A37 5G \n(ไม่ร่วม SF+)",
+      "capacity": "8/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 15999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 3,
+      "candidates": [
+        "SM-A376BDGTTHL",
+        "SM-A376BLVTTHL",
+        "SM-A376BZATTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-41",
+      "model": "Galaxy A27 5G \n(ร่วม SF+)",
+      "capacity": "8/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 12999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 2,
+      "candidates": [
+        "SM-A276BLIGTHL",
+        "SM-A276BZKGTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-42",
+      "model": "Galaxy A27 5G \n(ไม่ร่วม SF+)",
+      "capacity": "8/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 11999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 2,
+      "candidates": [
+        "SM-A276BLIGTHL",
+        "SM-A276BZKGTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-43",
+      "model": "Galaxy A17 5G",
+      "capacity": "8/256GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 10999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-A176BZBKTHL",
+        "SM-A176BZKKTHL",
+        "F-A175G256BLTH",
+        "F-A175G256BKTH"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-44",
+      "model": "Galaxy A17 5G",
+      "capacity": "8/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 8999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "SM-A176BZBJTHL",
+        "SM-A176BZKJTHL",
+        "F-A175G128BLTH",
+        "F-A175G128BKTH"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-45",
+      "model": "Galaxy A17 LTE",
+      "capacity": "8/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 8499.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        "F-A174G128BDTH",
+        "F-A174G128KDTH",
+        "SM-A175FLBDTHL",
+        "SM-A175FZKDTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-46",
+      "model": "Galaxy A07 5G\n(ไม่ร่วม SF+)",
+      "capacity": "6/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 7999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 2,
+      "candidates": [
+        "SM-A076BLVCTHL",
+        "SM-A076BZKCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-47",
+      "model": "Galaxy A07 5G\n(ร่วม SF+ Campaign)",
+      "capacity": "6/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 8999.0,
+      "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
+      "candidateCount": 2,
+      "candidates": [
+        "SM-A076BLVCTHL",
+        "SM-A076BZKCTHL"
+      ],
+      "validationStatus": "REVIEW_REQUIRED",
+      "validationFlags": [
+        "EXACT_PN_UNRESOLVED"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-48",
+      "model": "Galaxy A07 LTE\n\n7 - 13 กันยายน 2569",
+      "capacity": "6/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 4999.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-49",
+      "model": "Galaxy A07 LTE\n\n7 - 13 กันยายน 2569",
+      "capacity": "4/128GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 4299.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    },
+    {
+      "draftRowId": "ROW-50",
+      "model": "Galaxy A07 LTE\n\n7 - 13 กันยายน 2569",
+      "capacity": "4/64GB",
+      "saleMode": "STANDARD_PAYMENT",
+      "netPrice": 3799.0,
+      "productMatchStatus": "PN_NOT_FOUND",
+      "candidateCount": 0,
+      "candidates": [],
+      "validationStatus": "BLOCKED_UNPROVEN",
+      "validationFlags": [
+        "PN_NOT_FOUND"
+      ],
+      "autoPublishAllowed": false
+    }
+  ]
+}
