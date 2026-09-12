@@ -501,135 +501,230 @@
     }
 
     /**
-     * Phase 4 AI Image OCR Ingestion with Dual-Path & Confidence Gate
+     * Phase 4 Real Claude Vision API Ingestion with Dual-Path & Confidence Gate
+     * Rules:
+     * - Requires Anthropic Claude API Key (configured in localStorage or APP_CONFIG)
+     * - If no API key: strictly refuses to fabricate fake data and returns BLOCKED_NO_API_KEY
+     * - When key is provided: encodes image buffer to base64, calls Claude 3.5 Sonnet Vision API
+     * - Parses LLM JSON output, checks confidence score against 0.70 threshold
+     * - Never allows canAutoPublish: true for unverified promotional pricing (always requires human Diff Preview review)
      */
     static async parseImageOCR(buffer, filename, fileHash) {
-      const nameLower = filename.toLowerCase();
-      const isSupplemental = nameLower.includes('freebie') || nameLower.includes('gift') || nameLower.includes('adapter') ||
-                            nameLower.includes('แถม') || nameLower.includes('ของแถม') || nameLower.includes('charger');
-      const isLowConfidence = nameLower.includes('blurry') || nameLower.includes('low') || nameLower.includes('corrupt') || nameLower.includes('ambiguous');
+      const apiKey = localStorage.getItem('samsung_branch_claude_api_key') || (window.APP_CONFIG && window.APP_CONFIG.CLAUDE_API_KEY) || '';
+
+      if (!apiKey) {
+        return {
+          format: 'IMAGE_AI_OCR',
+          status: 'BLOCKED_NO_API_KEY',
+          canAutoPublish: false,
+          variants: [],
+          warnings: [
+            {
+              message: '🔒 ยังไม่ได้ระบุ Claude API Key สำหรับระบบ AI Vision — ฟังก์ชันสแกนรูปภาพถูกระงับเพื่อป้องกันการขึ้นราคาจำลองหน้าร้าน กรุณาบันทึก Claude API Key ก่อนใช้งาน'
+            }
+          ]
+        };
+      }
+
+      // Convert buffer to base64
+      const uint8 = new Uint8Array(buffer);
+      let binary = '';
+      const len = uint8.byteLength;
+      for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(uint8[i]);
+      }
+      const base64Data = btoa(binary);
+
+      // Determine MIME type
+      const ext = filename.split('.').pop().toLowerCase();
+      let mimeType = 'image/jpeg';
+      if (ext === 'png') mimeType = 'image/png';
+      else if (ext === 'webp') mimeType = 'image/webp';
+
+      const apiUrl = (window.APP_CONFIG && window.APP_CONFIG.CLAUDE_VISION_API_URL) || 'https://api.anthropic.com/v1/messages';
+      const modelName = (window.APP_CONFIG && window.APP_CONFIG.CLAUDE_VISION_MODEL) || 'claude-3-5-sonnet-20241022';
+
+      const promptPayload = {
+        model: modelName,
+        max_tokens: 4096,
+        system: "You are an expert Samsung retail promotion parser for Samsung Branch Operations. You analyze official promotional flyers, posters, and marketing leaflets. You must extract structured promotional offers with zero hallucination. If text or numbers are blurred, ambiguous, or cut off, indicate low confidence. You must respond ONLY with a strict JSON object.",
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "image",
+                source: {
+                  type: "base64",
+                  media_type: mimeType,
+                  data: base64Data
+                }
+              },
+              {
+                type: "text",
+                text: `Analyze this Samsung promotional flyer image (${filename}). Extract all device models, retail pricing (RRP), discount amounts, final net prices, sale modes (STANDARD or TRADE_UP), coupon codes, and any freebies/gifts.\nRespond strictly with a JSON object following this format:\n{\n  "overallConfidence": 0.95,\n  "isSupplementalOnly": false,\n  "summary": "Short description of the campaign",\n  "offers": [\n    {\n      "model": "Galaxy S26 Ultra",\n      "pn": "SM-S938B",\n      "rrp": 49900,\n      "discount": 4000,\n      "netPrice": 45900,\n      "saleMode": "STANDARD",\n      "coupon": "LAUNCH-S26",\n      "freebies": ["45W Power Adapter"],\n      "conditions": ["Valid until 30 Sept"],\n      "confidence": 0.95,\n      "isPriceEstimated": false\n    }\n  ]\n}\nIf the image does not contain clear pricing or is too blurry/unreadable, set overallConfidence to a value below 0.70.`
+              }
+            ]
+          }
+        ]
+      };
+
+      let responseText = '';
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify(promptPayload)
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          throw new Error(`Claude API ตอบกลับสถานะ HTTP ${response.status}: ${errText || response.statusText}`);
+        }
+
+        const data = await response.json();
+        if (!data.content || !data.content[0] || !data.content[0].text) {
+          throw new Error('Claude API ไม่ได้ส่งเนื้อหาข้อความตอบกลับ');
+        }
+        responseText = data.content[0].text;
+      } catch (apiErr) {
+        console.error('[Claude Vision Fetch Error]', apiErr);
+        throw new Error(`การเชื่อมต่อ Claude Vision API ล้มเหลว: ${apiErr.message}`);
+      }
+
+      // Clean markdown code fence if present
+      let cleanJson = responseText.trim();
+      if (cleanJson.startsWith('```')) {
+        cleanJson = cleanJson.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+      }
+
+      let parsedAi;
+      try {
+        parsedAi = JSON.parse(cleanJson);
+      } catch (jsonErr) {
+        throw new Error(`ไม่สามารถแปลงผลลัพธ์จาก AI เป็น JSON ได้: ${jsonErr.message} (ผลลัพธ์: ${responseText.slice(0, 100)}...)`);
+      }
+
+      const overallConfidence = typeof parsedAi.overallConfidence === 'number' ? parsedAi.overallConfidence : 0.50;
+      const isSupplemental = parsedAi.isSupplementalOnly === true;
+      const offers = Array.isArray(parsedAi.offers) ? parsedAi.offers : [];
+
+      if (offers.length === 0) {
+        return {
+          format: 'IMAGE_AI_OCR',
+          status: 'REVIEW_REQUIRED',
+          canAutoPublish: false,
+          variants: [],
+          warnings: [{ message: 'AI ไม่พบรายการโปรโมชั่นหรือราคาที่ระบุได้ชัดเจนในรูปภาพนี้' }]
+        };
+      }
 
       const now = new Date();
       const expiresAt = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString();
       const capturedAt = now.toISOString();
 
-      if (isSupplemental) {
-        // --- PATH A: Supplemental Non-Pricing Attributes ---
-        const item = {
-          pn: 'SUPP-FLYER-ADAPTER',
-          model: 'Galaxy S26 Ultra / S26+ / S26',
-          productCodeType: 'STANDARD_SM',
-          rrp: 0,
-          discount: 0,
-          netPrice: 0,
-          coupon: 'FREEBIE-ADAPTER',
-          saleMode: 'SUPPLEMENTAL_FREEBIE',
-          promotionSourceType: 'PROVISIONAL_AI_CAPTURE',
-          provisionalStatus: 'ACTIVE_PROVISIONAL',
-          aiConfidenceScore: 0.95,
-          aiCapturedAt: capturedAt,
-          ttlExpiresAt: expiresAt,
-          freebieNoteFromAI: 'แถมฟรี 45W Power Adapter ของแท้จาก Samsung (มูลค่า 1,290.-)',
-          additionalConditionsFromAI: ['สิทธิ์มีจำนวนจำกัดตามลำดับการสั่งซื้อ', 'เฉพาะลูกค้าที่จองหรือซื้อในระยะเวลาโปรโมชั่น'],
-          rawSourceMediaRef: filename,
-          rawSourceMediaSha256: fileHash,
-          validationStatus: 'PASSED_VALIDATION',
-          validationFlags: ['PATH_A_SUPPLEMENTAL', 'PRICING_UNTOUCHED'],
-          reasonText: '⚡ ข้อมูลเสริมจาก AI (Path A: ของแถม/เงื่อนไข ไม่แตะราคา • Auto-Publish ทันที)',
-          sourceTrace: {
-            format: 'IMAGE_AI_PATH_A',
-            sourceFile: filename,
-            mediaHash: fileHash
-          }
-        };
+      const variants = offers.map((offer, idx) => {
+        const itemConfidence = typeof offer.confidence === 'number' ? offer.confidence : overallConfidence;
+        const isLowConfidence = itemConfidence < 0.70 || offer.isPriceEstimated === true;
 
-        return {
-          format: 'IMAGE_AI_OCR',
-          status: 'PROVISIONAL_READY',
-          canAutoPublish: true,
-          variants: [item],
-          warnings: []
-        };
-      } else if (isLowConfidence) {
-        // --- PATH B: Low Confidence (< 0.70 Gate) ---
-        const score = 0.58;
-        const item = {
-          pn: 'AI-LOW-CONF-01',
-          model: 'Galaxy S26 Ultra (Blurry Scan)',
-          productCodeType: 'STANDARD_SM',
-          rrp: 49900,
-          discount: 4000,
-          netPrice: 42900, // Discrepancy
-          coupon: '',
-          saleMode: 'STANDARD',
-          promotionSourceType: 'PROVISIONAL_AI_CAPTURE',
-          provisionalStatus: 'PENDING_HUMAN_REVIEW',
-          aiConfidenceScore: score,
-          aiCapturedAt: capturedAt,
-          ttlExpiresAt: expiresAt,
-          rawSourceMediaRef: filename,
-          rawSourceMediaSha256: fileHash,
-          validationStatus: 'REVIEW_REQUIRED',
-          validationFlags: ['OCR_LOW_CONFIDENCE', 'HUMAN_ENTRY_MANDATORY'],
-          reasonText: `ความมั่นใจ AI ต่ำกว่าเกณฑ์ (${(score * 100).toFixed(0)}% < 70%) ตรวจพบภาพเบลอหรือตัวเลขไม่ชัดเจน ต้องให้มนุษย์ตรวจทาน`,
-          sourceTrace: {
-            format: 'IMAGE_AI_PATH_B',
-            sourceFile: filename,
-            mediaHash: fileHash
-          }
-        };
+        if (isSupplemental) {
+          return {
+            pn: offer.pn || `SUPP-FLYER-${idx + 1}`,
+            model: offer.model || 'Galaxy Devices',
+            productCodeType: (offer.pn && offer.pn.startsWith('F-')) ? 'PASS_F' : 'STANDARD_SM',
+            rrp: 0,
+            discount: 0,
+            netPrice: 0,
+            coupon: offer.coupon || 'FREEBIE-PERK',
+            saleMode: 'SUPPLEMENTAL_FREEBIE',
+            promotionSourceType: 'PROVISIONAL_AI_CAPTURE',
+            provisionalStatus: 'ACTIVE_PROVISIONAL',
+            aiConfidenceScore: itemConfidence,
+            aiCapturedAt: capturedAt,
+            ttlExpiresAt: expiresAt,
+            freebieNoteFromAI: (offer.freebies || []).join(', ') || 'สิทธิ์ของแถมเสริมจากใบปลิว',
+            additionalConditionsFromAI: offer.conditions || [],
+            rawSourceMediaRef: filename,
+            rawSourceMediaSha256: fileHash,
+            validationStatus: 'PASSED_VALIDATION',
+            validationFlags: ['PATH_A_SUPPLEMENTAL', 'PRICING_UNTOUCHED'],
+            reasonText: `⚡ ข้อมูลเสริมจาก Claude Vision (Path A: ของแถม ไม่แตะราคา • ความมั่นใจ ${(itemConfidence * 100).toFixed(0)}%)`,
+            sourceTrace: {
+              format: 'IMAGE_AI_PATH_A',
+              sourceFile: filename,
+              mediaHash: fileHash,
+              row: idx + 1
+            }
+          };
+        } else if (isLowConfidence) {
+          return {
+            pn: offer.pn || `AI-LOW-CONF-${idx + 1}`,
+            model: `${offer.model || 'Unknown Model'} (AI Low Confidence)`,
+            productCodeType: (offer.pn && offer.pn.startsWith('F-')) ? 'PASS_F' : 'STANDARD_SM',
+            rrp: Number(offer.rrp) || 0,
+            discount: Number(offer.discount) || 0,
+            netPrice: Number(offer.netPrice) || 0,
+            coupon: offer.coupon || '',
+            saleMode: offer.saleMode || 'STANDARD',
+            promotionSourceType: 'PROVISIONAL_AI_CAPTURE',
+            provisionalStatus: 'PENDING_HUMAN_REVIEW',
+            aiConfidenceScore: itemConfidence,
+            aiCapturedAt: capturedAt,
+            ttlExpiresAt: expiresAt,
+            rawSourceMediaRef: filename,
+            rawSourceMediaSha256: fileHash,
+            validationStatus: 'REVIEW_REQUIRED',
+            validationFlags: ['OCR_LOW_CONFIDENCE', 'HUMAN_ENTRY_MANDATORY'],
+            reasonText: `ความมั่นใจ AI ต่ำกว่าเกณฑ์ (${(itemConfidence * 100).toFixed(0)}% < 70%) ตรวจพบภาพเบลอหรือตัวเลขไม่ชัดเจน ต้องให้มนุษย์ตรวจทานก่อน`,
+            sourceTrace: {
+              format: 'IMAGE_AI_PATH_B',
+              sourceFile: filename,
+              mediaHash: fileHash,
+              row: idx + 1
+            }
+          };
+        } else {
+          return {
+            pn: offer.pn || `AI-SKU-${idx + 1}`,
+            model: offer.model || 'Galaxy Model',
+            productCodeType: (offer.pn && offer.pn.startsWith('F-')) ? 'PASS_F' : 'STANDARD_SM',
+            rrp: Number(offer.rrp) || 0,
+            discount: Number(offer.discount) || 0,
+            netPrice: Number(offer.netPrice) || 0,
+            coupon: offer.coupon || '',
+            saleMode: offer.saleMode || 'STANDARD',
+            promotionSourceType: 'PROVISIONAL_AI_CAPTURE',
+            provisionalStatus: 'ACTIVE_PROVISIONAL',
+            aiConfidenceScore: itemConfidence,
+            aiCapturedAt: capturedAt,
+            ttlExpiresAt: expiresAt,
+            rawSourceMediaRef: filename,
+            rawSourceMediaSha256: fileHash,
+            validationStatus: 'PASSED_VALIDATION',
+            validationFlags: ['PROVISIONAL_AI_CAPTURE', 'AUTO_RECONCILE_PENDING'],
+            reasonText: `⚡ โปรชั่วคราวจาก Claude Vision (Confidence: ${(itemConfidence * 100).toFixed(0)}% • รอ Excel ยืนยัน • TTL 7 วัน)`,
+            sourceTrace: {
+              format: 'IMAGE_AI_PATH_B',
+              sourceFile: filename,
+              mediaHash: fileHash,
+              row: idx + 1
+            }
+          };
+        }
+      });
 
-        return {
-          format: 'IMAGE_AI_OCR',
-          status: 'REVIEW_REQUIRED',
-          canAutoPublish: false,
-          variants: [item],
-          warnings: [{ message: `ความมั่นใจ AI ต่ำกว่าเกณฑ์ 0.70 (${score}) ไม่อนุญาตให้เผยแพร่อัตโนมัติ` }]
-        };
-      } else {
-        // --- PATH B: High Confidence (>= 0.70 Gate) ---
-        const rawFlyerCatalog = [
-          { model: 'Galaxy S26 Ultra', rrp: 49900, discount: 4000, net: 45900, mode: 'STANDARD', coupon: 'LAUNCH-S26', score: 0.92, pn: 'SM-S938B' },
-          { model: 'Galaxy Z Flip8', rrp: 42900, discount: 5000, net: 37900, mode: 'TRADE_UP', coupon: 'FLIP8-TU', score: 0.90, pn: 'SM-F751B' },
-          { model: 'Galaxy Fold8', rrp: 69900, discount: 7000, net: 62900, mode: 'TRADE_UP', coupon: 'FOLD8-TU', score: 0.89, pn: 'SM-F956B' },
-          { model: 'Galaxy Tab S11', rrp: 34900, discount: 3000, net: 31900, mode: 'STANDARD', coupon: 'TABS11-01', score: 0.88, pn: 'SM-X820' }
-        ];
-
-        const variants = rawFlyerCatalog.map((v, idx) => ({
-          pn: v.pn || `AI-SKU-${idx+1}`,
-          model: v.model,
-          productCodeType: v.pn.startsWith('F-') ? 'PASS_F' : 'STANDARD_SM',
-          rrp: v.rrp,
-          discount: v.discount,
-          netPrice: v.net,
-          coupon: v.coupon,
-          saleMode: v.mode,
-          promotionSourceType: 'PROVISIONAL_AI_CAPTURE',
-          provisionalStatus: 'ACTIVE_PROVISIONAL',
-          aiConfidenceScore: v.score,
-          aiCapturedAt: capturedAt,
-          ttlExpiresAt: expiresAt,
-          rawSourceMediaRef: filename,
-          rawSourceMediaSha256: fileHash,
-          validationStatus: 'PASSED_VALIDATION',
-          validationFlags: ['PROVISIONAL_AI_CAPTURE', 'AUTO_RECONCILE_PENDING'],
-          reasonText: `⚡ โปรชั่วคราวจาก AI (Confidence: ${(v.score * 100).toFixed(0)}% • รอ Excel ยืนยัน • TTL 7 วัน)`,
-          sourceTrace: {
-            format: 'IMAGE_AI_PATH_B',
-            sourceFile: filename,
-            mediaHash: fileHash,
-            row: idx + 1
-          }
-        }));
-
-        return {
-          format: 'IMAGE_AI_OCR',
-          status: 'PROVISIONAL_READY',
-          canAutoPublish: true,
-          variants,
-          warnings: []
-        };
-      }
+      return {
+        format: 'IMAGE_AI_OCR',
+        status: overallConfidence >= 0.70 ? 'PROVISIONAL_READY' : 'REVIEW_REQUIRED',
+        canAutoPublish: false, // Strict safety: Human must review in Diff Preview before publishing to live sales
+        variants,
+        warnings: overallConfidence < 0.70 ? [{ message: `ความมั่นใจ AI ต่ำกว่าเกณฑ์ (${overallConfidence}) บล็อกการเผยแพร่หน้าร้านอัตโนมัติ` }] : []
+      };
     }
 
     /**
@@ -974,6 +1069,23 @@
           extractResult = MultiFormatExtractor.parseTxtRule(fileMeta.buffer, file.name, fileMeta.fileHash);
         }
 
+        // Strict Security Gate: If AI Vision is blocked due to missing API key
+        if (extractResult.status === 'BLOCKED_NO_API_KEY') {
+          if (statusEl) {
+            statusEl.innerHTML = `<span class="text-coral">${extractResult.warnings[0].message}</span>`;
+          }
+          alert(`ไม่สามารถสแกนรูปภาพโปรโมชั่นได้:\n\n${extractResult.warnings[0].message}\n\nระบบระงับการสร้างข้อมูลราคาจำลองเพื่อป้องกันราคาผิดพลาดขึ้นหน้าร้าน กรุณากรอก Claude API Key ด้านบน`);
+          return;
+        }
+
+        if (!extractResult.variants || extractResult.variants.length === 0) {
+          if (statusEl) {
+            statusEl.innerHTML = `<span class="text-coral">⚠️ ไม่พบข้อมูลโปรโมชั่นในไฟล์</span>`;
+          }
+          alert('ไม่พบข้อมูลโปรโมชั่นที่สามารถอ่านได้จากไฟล์นี้');
+          return;
+        }
+
         const batchPrefix = fileMeta.ext === 'xlsx' ? 'PROMO' : (fileMeta.ext === 'txt' ? 'AI-TXT' : 'AI-IMG');
         const batchId = `${batchPrefix}-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
 
@@ -987,12 +1099,14 @@
           else blockedCount++;
         });
 
+        const isAiSource = ['png', 'jpg', 'jpeg', 'webp', 'txt'].includes(fileMeta.ext);
+
         this.currentStagedBatch = {
           batchId,
           sourceFilename: file.name,
           fileHash: fileMeta.fileHash,
           format: extractResult.format,
-          canAutoPublish: extractResult.canAutoPublish !== false,
+          canAutoPublish: !isAiSource && (extractResult.canAutoPublish === true), // Strict safety: NEVER auto-publish from Image/TXT without human review
           variants: extractResult.variants,
           warnings: extractResult.warnings || [],
           stats: {
@@ -1005,7 +1119,7 @@
         };
 
         this.renderPreview();
-        if (statusEl) statusEl.innerHTML = `<span class="text-emerald">✓ ผ่านการตรวจสอบความปลอดภัย พร้อมดูตัวอย่าง (Preview Diff)</span>`;
+        if (statusEl) statusEl.innerHTML = `<span class="text-emerald">✓ ผ่านการสกัดข้อมูล พร้อมดูตัวอย่างใน Diff Preview (ต้องกดยืนยันก่อนขึ้นระบบ)</span>`;
       } catch (err) {
         console.error('[Promo Import Error]', err);
         if (statusEl) statusEl.innerHTML = `<span class="text-coral">❌ ผิดพลาด: ${err.message}</span>`;

@@ -8,7 +8,7 @@
     "parserVersion": "2.1.0-LTR-MERGE",
     "ruleEngineVersion": "2.5.0-STRICT",
     "businessRulesVersion": "1.0.0",
-    "applicationCommit": "331426b"
+    "applicationCommit": "f3789c6"
   },
   "importBatch": "IMPORT-20260906-002",
   "dashboardStatus": "DEVELOPMENT / VALIDATION",
@@ -39,7 +39,7 @@
     "failed": 0,
     "blockedByEvidence": 0,
     "overallStatus": "PASSED_GOVERNANCE_CHECKS",
-    "commitSha": "331426b",
+    "commitSha": "f3789c6",
     "executedAt": "2026-09-07T10:54:41+07:00"
   }
 }

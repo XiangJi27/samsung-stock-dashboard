@@ -13,7 +13,9 @@ const CONFIG = Object.freeze({
   authMode: "DEVELOPMENT",
   defaultRoute: "/home",
   loginRoute: "/login",
-  GOOGLE_SHEET_STOCK_CSV_URL: "" // ผู้ใช้กรอกเองผ่านหน้า Settings ไม่ hardcode ตรงโค้ด
+  GOOGLE_SHEET_STOCK_CSV_URL: "", // ผู้ใช้กรอกเองผ่านหน้า Settings ไม่ hardcode ตรงโค้ด
+  CLAUDE_VISION_API_URL: "https://api.anthropic.com/v1/messages",
+  CLAUDE_VISION_MODEL: "claude-3-5-sonnet-20241022"
 });
 
 const FEATURES = Object.freeze({
