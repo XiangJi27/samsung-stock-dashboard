@@ -501,31 +501,16 @@
     }
 
     /**
-     * Phase 4 Real Claude Vision API Ingestion with Dual-Path & Confidence Gate
-     * Rules:
-     * - Requires Anthropic Claude API Key (configured in localStorage or APP_CONFIG)
-     * - If no API key: strictly refuses to fabricate fake data and returns BLOCKED_NO_API_KEY
-     * - When key is provided: encodes image buffer to base64, calls Claude 3.5 Sonnet Vision API
-     * - Parses LLM JSON output, checks confidence score against 0.70 threshold
-     * - Never allows canAutoPublish: true for unverified promotional pricing (always requires human Diff Preview review)
+     * Phase 4 Secure Serverless Claude Vision API Ingestion with Dual-Path & Confidence Gate
+     * Security Architecture:
+     * - Dispatches request to Vercel Serverless Function: /api/vision-proxy
+     * - Client NEVER touches, stores, or transmits CLAUDE_API_KEY (zero localStorage/DevTools leakage)
+     * - If API key is not configured on server: returns BLOCKED_NO_API_KEY with 0 variants (never fakes data)
+     * - When key is configured on server: server proxies to Claude 3.5 Sonnet Vision API
+     * - Evaluates confidence score against 0.70 threshold (Path A supplemental vs Path B provisional)
+     * - NEVER allows canAutoPublish: true for unverified promotional pricing (mandatory human Diff Preview review)
      */
     static async parseImageOCR(buffer, filename, fileHash) {
-      const apiKey = localStorage.getItem('samsung_branch_claude_api_key') || (window.APP_CONFIG && window.APP_CONFIG.CLAUDE_API_KEY) || '';
-
-      if (!apiKey) {
-        return {
-          format: 'IMAGE_AI_OCR',
-          status: 'BLOCKED_NO_API_KEY',
-          canAutoPublish: false,
-          variants: [],
-          warnings: [
-            {
-              message: '🔒 ยังไม่ได้ระบุ Claude API Key สำหรับระบบ AI Vision — ฟังก์ชันสแกนรูปภาพถูกระงับเพื่อป้องกันการขึ้นราคาจำลองหน้าร้าน กรุณาบันทึก Claude API Key ก่อนใช้งาน'
-            }
-          ]
-        };
-      }
-
       // Convert buffer to base64
       const uint8 = new Uint8Array(buffer);
       let binary = '';
@@ -541,60 +526,53 @@
       if (ext === 'png') mimeType = 'image/png';
       else if (ext === 'webp') mimeType = 'image/webp';
 
-      const apiUrl = (window.APP_CONFIG && window.APP_CONFIG.CLAUDE_VISION_API_URL) || 'https://api.anthropic.com/v1/messages';
-      const modelName = (window.APP_CONFIG && window.APP_CONFIG.CLAUDE_VISION_MODEL) || 'claude-3-5-sonnet-20241022';
-
-      const promptPayload = {
-        model: modelName,
-        max_tokens: 4096,
-        system: "You are an expert Samsung retail promotion parser for Samsung Branch Operations. You analyze official promotional flyers, posters, and marketing leaflets. You must extract structured promotional offers with zero hallucination. If text or numbers are blurred, ambiguous, or cut off, indicate low confidence. You must respond ONLY with a strict JSON object.",
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "image",
-                source: {
-                  type: "base64",
-                  media_type: mimeType,
-                  data: base64Data
-                }
-              },
-              {
-                type: "text",
-                text: `Analyze this Samsung promotional flyer image (${filename}). Extract all device models, retail pricing (RRP), discount amounts, final net prices, sale modes (STANDARD or TRADE_UP), coupon codes, and any freebies/gifts.\nRespond strictly with a JSON object following this format:\n{\n  "overallConfidence": 0.95,\n  "isSupplementalOnly": false,\n  "summary": "Short description of the campaign",\n  "offers": [\n    {\n      "model": "Galaxy S26 Ultra",\n      "pn": "SM-S938B",\n      "rrp": 49900,\n      "discount": 4000,\n      "netPrice": 45900,\n      "saleMode": "STANDARD",\n      "coupon": "LAUNCH-S26",\n      "freebies": ["45W Power Adapter"],\n      "conditions": ["Valid until 30 Sept"],\n      "confidence": 0.95,\n      "isPriceEstimated": false\n    }\n  ]\n}\nIf the image does not contain clear pricing or is too blurry/unreadable, set overallConfidence to a value below 0.70.`
-              }
-            ]
-          }
-        ]
-      };
+      const proxyUrl = (window.APP_CONFIG && window.APP_CONFIG.VISION_PROXY_URL) || '/api/vision-proxy';
 
       let responseText = '';
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(proxyUrl, {
           method: 'POST',
           headers: {
-            'content-type': 'application/json',
-            'x-api-key': apiKey,
-            'anthropic-version': '2023-06-01',
-            'anthropic-dangerous-direct-browser-access': 'true'
+            'content-type': 'application/json'
           },
-          body: JSON.stringify(promptPayload)
+          body: JSON.stringify({
+            imageBase64: base64Data,
+            mimeType,
+            filename
+          })
         });
 
+        // Check if server reports missing API key
+        if (response.status === 503 || response.status === 401) {
+          const errData = await response.json().catch(() => ({}));
+          if (errData.status === 'BLOCKED_NO_API_KEY' || errData.error === 'BLOCKED_NO_API_KEY') {
+            return {
+              format: 'IMAGE_AI_OCR',
+              status: 'BLOCKED_NO_API_KEY',
+              canAutoPublish: false,
+              variants: [],
+              warnings: [
+                {
+                  message: errData.message || '🔒 CLAUDE_API_KEY ยังไม่ได้ตั้งค่าใน Vercel Environment Variables — ระบบความปลอดภัยระงับการสแกนเพื่อป้องกันราคาผิดพลาดหน้าร้าน'
+                }
+              ]
+            };
+          }
+        }
+
         if (!response.ok) {
-          const errText = await response.text();
-          throw new Error(`Claude API ตอบกลับสถานะ HTTP ${response.status}: ${errText || response.statusText}`);
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.message || `Vision Proxy ตอบกลับสถานะ HTTP ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
         if (!data.content || !data.content[0] || !data.content[0].text) {
-          throw new Error('Claude API ไม่ได้ส่งเนื้อหาข้อความตอบกลับ');
+          throw new Error('Vision Proxy / Claude API ไม่ได้ส่งเนื้อหาข้อความตอบกลับ');
         }
         responseText = data.content[0].text;
       } catch (apiErr) {
-        console.error('[Claude Vision Fetch Error]', apiErr);
-        throw new Error(`การเชื่อมต่อ Claude Vision API ล้มเหลว: ${apiErr.message}`);
+        console.error('[Vision Proxy Fetch Error]', apiErr);
+        throw new Error(`การเชื่อมต่อ AI Vision Proxy ล้มเหลว: ${apiErr.message}`);
       }
 
       // Clean markdown code fence if present
@@ -1074,7 +1052,7 @@
           if (statusEl) {
             statusEl.innerHTML = `<span class="text-coral">${extractResult.warnings[0].message}</span>`;
           }
-          alert(`ไม่สามารถสแกนรูปภาพโปรโมชั่นได้:\n\n${extractResult.warnings[0].message}\n\nระบบระงับการสร้างข้อมูลราคาจำลองเพื่อป้องกันราคาผิดพลาดขึ้นหน้าร้าน กรุณากรอก Claude API Key ด้านบน`);
+          alert(`ไม่สามารถสแกนรูปภาพโปรโมชั่นได้:\n\n${extractResult.warnings[0].message}\n\nระบบระงับการสร้างข้อมูลราคาจำลองเพื่อป้องกันราคาผิดพลาดขึ้นหน้าร้าน กรุณาตั้งค่า CLAUDE_API_KEY ใน Vercel Dashboard`);
           return;
         }
 

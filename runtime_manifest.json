@@ -6,14 +6,14 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7787858,
+    "totalSizeBytes": 7785766,
     "totalSizeMB": 7.43
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 133082,
-      "sha256": "cda53a4909bf01e1009aec1106f37857e2ae0f54dbfc9c15d097e32b80de2a60",
+      "sizeBytes": 132688,
+      "sha256": "c313dd4ffe8adaf5f3a429f84b1380796e42d17cf4e4e339729023fe8061c841",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -78,8 +78,8 @@
     },
     {
       "file": "assets/js/config.js",
-      "sizeBytes": 1452,
-      "sha256": "93cc9c9d2cb378b52313d4cfc82d5de67f7832302024d2313c89b04c9f1ab70b",
+      "sizeBytes": 1427,
+      "sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -138,8 +138,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 69094,
-      "sha256": "3fc570962f081a22268d75f477a9e26b7cdebab1ec2a400a81348a1020a73d1f",
+      "sizeBytes": 67421,
+      "sha256": "f56042edc5332a39f129a2b166cdf1dcf6aca41868e9dc8b248104b1d12dd6a7",
       "status": "REQUIRED_RUNTIME"
     },
     {
