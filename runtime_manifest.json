@@ -5,15 +5,15 @@
   "environment": "Production / Vercel Static Hosting",
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
-    "totalFiles": 22,
-    "totalSizeBytes": 7741087,
-    "totalSizeMB": 7.38
+    "totalFiles": 23,
+    "totalSizeBytes": 7778709,
+    "totalSizeMB": 7.42
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 124751,
-      "sha256": "c2d4080d7b9707c4f16fdc8c65076e20f87fdf1628090f44d42f55c467cd8ece",
+      "sizeBytes": 130844,
+      "sha256": "970fe015901e6e2aa3aa98c47c78c038f2bd7bd07eb830b8179094a4ad28b207",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -78,8 +78,8 @@
     },
     {
       "file": "assets/js/config.js",
-      "sizeBytes": 1182,
-      "sha256": "039be64f08faa6a9e4acd4dc1e92844f32a421dbbd0f8643e29c54fd6a7e68b2",
+      "sizeBytes": 1333,
+      "sha256": "a74471499b5c59b0f551700b78a773eddba8d7526de39a2e8867ad416e3843f2",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -102,8 +102,8 @@
     },
     {
       "file": "assets/js/router.js",
-      "sizeBytes": 6247,
-      "sha256": "4f4cde945e519adb532b96931aeb36c617b6910c39c772b2fd3e3a95c22f8e05",
+      "sizeBytes": 6448,
+      "sha256": "cb8b7233cfbc5eb86d30f73a21cd074743a5a6022490dab65d1388e95934c698",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -132,14 +132,20 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 53781,
-      "sha256": "d93f2dff21eb9eeb3f181d5e323bc3c7d4fd40facfe9a8a61c7477927a7bead3",
+      "sizeBytes": 64058,
+      "sha256": "b031ae8ebdaba3c12af8fb74e63c1ca3e98f50f6af172f3ec5d9a3096557e00d",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "assets/js/promotion-importer.js",
       "sizeBytes": 62302,
       "sha256": "bd22a87549c2f2a6686bd2e1e383c62cc2ad59dbaa8e98f9423dff7a31dfacec",
+      "status": "REQUIRED_RUNTIME"
+    },
+    {
+      "file": "assets/js/sheet-sync.js",
+      "sizeBytes": 20900,
+      "sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
       "status": "REQUIRED_RUNTIME"
     }
   ]

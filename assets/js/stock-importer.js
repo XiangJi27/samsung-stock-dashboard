@@ -517,10 +517,12 @@
     constructor() {
       this.currentStagedBatch = null;
       this.isSubmitting = false;
+      this.activeMode = localStorage.getItem('samsung_stock_import_active_mode') || 'MODE_A';
     }
 
     init() {
       this.bindEvents();
+      this.initModeSelector();
     }
 
     bindEvents() {
@@ -587,6 +589,226 @@
             this.handleSyncFile(e.target.files[0]);
           }
         });
+      }
+
+      // Mode A / Mode B Switcher Buttons
+      const btnModeA = document.getElementById('btnStockModeA');
+      const btnModeB = document.getElementById('btnStockModeB');
+      if (btnModeA) btnModeA.addEventListener('click', () => this.switchMode('MODE_A'));
+      if (btnModeB) btnModeB.addEventListener('click', () => this.switchMode('MODE_B'));
+
+      // Google Sheet Mode B Controls
+      const btnSaveUrl = document.getElementById('btnSaveGSheetUrl');
+      if (btnSaveUrl) btnSaveUrl.addEventListener('click', () => this.saveGSheetUrl());
+
+      const btnRefreshGSheet = document.getElementById('btnRefreshStockGSheet');
+      if (btnRefreshGSheet) btnRefreshGSheet.addEventListener('click', () => this.fetchFromGoogleSheet(false));
+
+      const chkAutoPub = document.getElementById('chkStockGSheetAutoPublish');
+      if (chkAutoPub) {
+        chkAutoPub.checked = localStorage.getItem('samsung_stock_sheet_auto_publish_opt_in') === 'true';
+        chkAutoPub.addEventListener('change', (e) => {
+          localStorage.setItem('samsung_stock_sheet_auto_publish_opt_in', e.target.checked ? 'true' : 'false');
+        });
+      }
+    }
+
+    initModeSelector() {
+      const savedMode = localStorage.getItem('samsung_stock_import_active_mode') || 'MODE_A';
+      this.switchMode(savedMode, false);
+      this.updateGSheetSyncBadge();
+
+      // Pre-fill Google Sheet URL input
+      const urlInput = document.getElementById('stockGSheetUrlInput');
+      if (urlInput && window.GoogleSheetStockSync) {
+        urlInput.value = window.GoogleSheetStockSync.getStoredSheetUrl();
+      }
+    }
+
+    switchMode(mode, savePref = true) {
+      this.activeMode = mode;
+      if (savePref) {
+        localStorage.setItem('samsung_stock_import_active_mode', mode);
+      }
+
+      const btnA = document.getElementById('btnStockModeA');
+      const btnB = document.getElementById('btnStockModeB');
+      const panelA = document.getElementById('stockModeAPanel');
+      const panelB = document.getElementById('stockModeBPanel');
+
+      if (mode === 'MODE_B') {
+        if (btnA) {
+          btnA.classList.remove('active');
+          btnA.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+          btnA.style.background = 'transparent';
+          btnA.style.color = '#94a3b8';
+        }
+        if (btnB) {
+          btnB.classList.add('active');
+          btnB.style.borderColor = 'var(--shell-neon-cyan, #00ffff)';
+          btnB.style.background = 'rgba(0, 255, 255, 0.08)';
+          btnB.style.color = '#fff';
+        }
+        if (panelA) panelA.classList.add('hidden');
+        if (panelB) panelB.classList.remove('hidden');
+        this.updateGSheetSyncBadge();
+      } else {
+        if (btnA) {
+          btnA.classList.add('active');
+          btnA.style.borderColor = 'var(--shell-neon-cyan, #00ffff)';
+          btnA.style.background = 'rgba(0, 255, 255, 0.08)';
+          btnA.style.color = '#fff';
+        }
+        if (btnB) {
+          btnB.classList.remove('active');
+          btnB.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+          btnB.style.background = 'transparent';
+          btnB.style.color = '#94a3b8';
+        }
+        if (panelA) panelA.classList.remove('hidden');
+        if (panelB) panelB.classList.add('hidden');
+      }
+    }
+
+    saveGSheetUrl() {
+      const urlInput = document.getElementById('stockGSheetUrlInput');
+      const statusEl = document.getElementById('stockGSheetStatus');
+      if (!urlInput || !window.GoogleSheetStockSync) return;
+
+      const url = urlInput.value.trim();
+      if (!url) {
+        alert('กรุณากรอก URL ลิงก์ Google Sheet Published CSV');
+        return;
+      }
+
+      window.GoogleSheetStockSync.setStoredSheetUrl(url);
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="text-emerald">💾 บันทึก URL Google Sheet เรียบร้อยแล้ว พร้อมกดรีเฟรชข้อมูล</span>`;
+      }
+      alert('✓ บันทึก URL Google Sheet สำหรับสาขาเรียบร้อยแล้ว');
+    }
+
+    updateGSheetSyncBadge() {
+      const badge = document.getElementById('stockGSheetLastSyncBadge');
+      if (!badge || !window.GoogleSheetStockSync) return;
+      const lastSync = window.GoogleSheetStockSync.getLastSyncTime();
+      if (lastSync) {
+        const d = new Date(lastSync);
+        badge.textContent = `ซิงค์ล่าสุด: ${d.toLocaleString('th-TH')}`;
+        badge.style.color = '#38bdf8';
+      } else {
+        badge.textContent = 'ซิงค์ล่าสุด: ยังไม่ได้ซิงค์';
+        badge.style.color = '#94a3b8';
+      }
+    }
+
+    async fetchFromGoogleSheet(isAuto = false) {
+      if (!window.GoogleSheetStockSync) {
+        console.warn('[StockImportController] GoogleSheetStockSync module not loaded');
+        return;
+      }
+
+      const urlInput = document.getElementById('stockGSheetUrlInput');
+      const storedUrl = window.GoogleSheetStockSync.getStoredSheetUrl();
+      const currentUrl = (urlInput && urlInput.value.trim()) ? urlInput.value.trim() : storedUrl;
+
+      const statusEl = document.getElementById('stockGSheetStatus');
+      const fallbackBanner = document.getElementById('stockGSheetFallbackBanner');
+      const refreshBtn = document.getElementById('btnRefreshStockGSheet');
+
+      if (!currentUrl) {
+        if (!isAuto) {
+          alert('ยังไม่ได้ระบุลิงก์ Google Sheet CSV กรุณากรอกในช่องลิงก์ด้านบน');
+        }
+        if (statusEl) {
+          statusEl.innerHTML = `<span style="color: #fbbf24;">⚠️ ยังไม่ได้ตั้งค่า URL ลิงก์ Google Sheet สำหรับสต็อก</span>`;
+        }
+        return;
+      }
+
+      // Sync the input value with stored URL
+      window.GoogleSheetStockSync.setStoredSheetUrl(currentUrl);
+
+      if (refreshBtn) refreshBtn.disabled = true;
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="text-cyan">⏳ กำลังเชื่อมต่อและดึงข้อมูลจาก Google Sheet (CSV)...</span>`;
+      }
+      if (fallbackBanner) fallbackBanner.classList.add('hidden');
+
+      try {
+        const syncResult = await window.GoogleSheetStockSync.fetchGoogleSheetCsv(currentUrl);
+
+        // Stage the batch through diff preview
+        const currentStockList = window.STOCK_DATA || [];
+        const stagedBatch = window.GoogleSheetStockSync.createStagedBatchFromSync(syncResult, currentStockList);
+
+        this.currentStagedBatch = stagedBatch;
+
+        // Check opt-in auto publish
+        const isOptInAutoPublish = localStorage.getItem('samsung_stock_sheet_auto_publish_opt_in') === 'true';
+
+        if (isOptInAutoPublish) {
+          await this.confirmImport();
+          if (statusEl) {
+            statusEl.innerHTML = `<span class="text-emerald">⚡ Auto-Publish สำเร็จ: บันทึก ${syncResult.totalRows.toLocaleString()} รายการ เข้าสู่สต็อกหน้าร้านทันที</span>`;
+          }
+        } else {
+          this.renderPreview();
+          if (statusEl) {
+            statusEl.innerHTML = `<span class="text-emerald">✓ ดึงข้อมูลสำเร็จ ${syncResult.totalRows.toLocaleString()} รายการ (F1: ${syncResult.f1Total}, F2: ${syncResult.f2Total}) • กรุณาตรวจสอบใน Diff Preview ด้านล่าง</span>`;
+          }
+        }
+
+        window.GoogleSheetStockSync.setLastSyncTime(syncResult.fetchedAt);
+        this.updateGSheetSyncBadge();
+
+      } catch (err) {
+        console.error('[Google Sheet Sync Error]', err);
+
+        // Human-friendly Thai error and graceful fallback
+        if (statusEl) {
+          statusEl.innerHTML = `<span class="text-coral">❌ ดึงข้อมูลจาก Google Sheet ไม่สำเร็จ (เหตุผล: ${err.message})</span>`;
+        }
+
+        if (fallbackBanner) {
+          fallbackBanner.classList.remove('hidden');
+          fallbackBanner.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+              <span>⚠️ ดึงข้อมูลจาก Google Sheet ไม่สำเร็จ — กำลังใช้ข้อมูลล่าสุดที่มีอยู่แทน</span>
+            </div>
+            <div style="line-height: 1.5;">
+              เหตุผล: <strong>${err.message}</strong><br>
+              ระบบได้ทำการ Fallback สต็อกกลับไปใช้ Snapshot ล่าสุดใน IndexedDB เรียบร้อยแล้ว เพื่อให้หน้าจอไม่ว่างเปล่าและหน้าร้านสามารถเช็คสต็อกได้ตามปกติ
+            </div>
+          `;
+        }
+
+        // Fallback: Verify active stock in memory/IndexedDB is preserved
+        if (!window.STOCK_DATA || window.STOCK_DATA.length === 0) {
+          StockStorageAdapter.getActiveSnapshot().then(snap => {
+            if (snap && snap.data) {
+              window.STOCK_DATABASE = snap.data;
+              window.STOCK_DATA = snap.data;
+              if (window.DataService && typeof window.DataService.setStockData === 'function') {
+                window.DataService.setStockData(snap.data);
+              }
+            }
+          });
+        }
+      } finally {
+        if (refreshBtn) refreshBtn.disabled = false;
+      }
+    }
+
+    handleRouteEnter() {
+      this.initModeSelector();
+      // Auto-fetch ONLY when in Mode B and URL is already configured
+      if (this.activeMode === 'MODE_B' && window.GoogleSheetStockSync) {
+        const url = window.GoogleSheetStockSync.getStoredSheetUrl();
+        if (url) {
+          console.info('[StockImportController] Auto-fetching Google Sheet stock on page enter...');
+          this.fetchFromGoogleSheet(true);
+        }
       }
     }
 

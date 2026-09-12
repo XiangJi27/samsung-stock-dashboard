@@ -1,0 +1,135 @@
+{
+  "suite": "GOOGLE_SHEET_STOCK_SYNC_TESTS",
+  "status": "SHEET_SYNC_READY",
+  "passedTests": 10,
+  "failedTests": 0,
+  "results": [
+    {
+      "test": "TEST_1_VALID_STRUCTURE",
+      "status": "PASS",
+      "details": {
+        "valid": true,
+        "columnMap": {
+          "pn": "P/N",
+          "f1": "F1",
+          "f2": "F2",
+          "total": "Total"
+        },
+        "missingColumns": [],
+        "presentColumns": [
+          "P/N",
+          "Description",
+          "F1",
+          "F2",
+          "Total"
+        ],
+        "extraColumns": [
+          "Description"
+        ]
+      }
+    },
+    {
+      "test": "TEST_2_DETECT_MISSING_F2",
+      "status": "PASS",
+      "details": {
+        "valid": false,
+        "errorCode": "SHEET_STRUCTURE_MISMATCH",
+        "reason": "โครงสร้างคอลัมน์ไม่ตรงตามที่ระบบกำหนด ขาดคอลัมน์: F2 (ชั้น 2)",
+        "missingColumns": [
+          "F2 (ชั้น 2)"
+        ],
+        "presentColumns": [
+          "P/N",
+          "Description",
+          "F1",
+          "Total"
+        ],
+        "extraColumns": [
+          "Description"
+        ]
+      }
+    },
+    {
+      "test": "TEST_3_DETECT_MISSING_PN",
+      "status": "PASS",
+      "details": {
+        "valid": false,
+        "errorCode": "SHEET_STRUCTURE_MISMATCH",
+        "reason": "โครงสร้างคอลัมน์ไม่ตรงตามที่ระบบกำหนด ขาดคอลัมน์: P/N (หรือ PN)",
+        "missingColumns": [
+          "P/N (หรือ PN)"
+        ],
+        "presentColumns": [
+          "Description",
+          "F1",
+          "F2",
+          "Total"
+        ],
+        "extraColumns": [
+          "Description"
+        ]
+      }
+    },
+    {
+      "test": "TEST_4_EXTRA_COLUMNS_PRESERVED",
+      "status": "PASS",
+      "details": {
+        "valid": true,
+        "columnMap": {
+          "pn": "P/N",
+          "f1": "F1",
+          "f2": "F2",
+          "total": "Total"
+        },
+        "missingColumns": [],
+        "presentColumns": [
+          "P/N",
+          "Description",
+          "F1",
+          "F2",
+          "Total",
+          "Notes",
+          "StockStatus",
+          "Updater"
+        ],
+        "extraColumns": [
+          "Description",
+          "Notes",
+          "StockStatus",
+          "Updater"
+        ]
+      }
+    },
+    {
+      "test": "TEST_5_EMPTY_SHEET_PROTECTION",
+      "status": "PASS",
+      "error": "SHEET_EMPTY_ERROR: ไม่พบแถวข้อมูลสินค้าใน Google Sheet (มีเฉพาะหัวตาราง)"
+    },
+    {
+      "test": "TEST_6_ARITHMETIC_INTEGRITY",
+      "status": "PASS",
+      "correctedItem": {
+        "pn": "SM-S928B",
+        "f1": 5,
+        "f2": 2,
+        "total": 7
+      }
+    },
+    {
+      "test": "TEST_7_JS_ENGINE_CONTRACT",
+      "status": "PASS"
+    },
+    {
+      "test": "TEST_8_IMPORTER_INTEGRATION",
+      "status": "PASS"
+    },
+    {
+      "test": "TEST_9_DUAL_MODE_COEXISTENCE",
+      "status": "PASS"
+    },
+    {
+      "test": "TEST_10_CONFIG_PERSISTENCE",
+      "status": "PASS"
+    }
+  ]
+}

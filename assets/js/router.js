@@ -158,6 +158,8 @@ class AppRouter {
       window.renderSettingsView();
     } else if (path === "/stock-import-history" && typeof window.renderStockImportHistoryView === "function") {
       window.renderStockImportHistoryView();
+    } else if (path === "/stock-import" && window.StockImportController && typeof window.StockImportController.handleRouteEnter === "function") {
+      window.StockImportController.handleRouteEnter();
     }
   }
 }

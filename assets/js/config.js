@@ -12,7 +12,8 @@ const CONFIG = Object.freeze({
   sessionKey: "samsung_branch_session_v1",
   authMode: "DEVELOPMENT",
   defaultRoute: "/home",
-  loginRoute: "/login"
+  loginRoute: "/login",
+  GOOGLE_SHEET_STOCK_CSV_URL: "" // ผู้ใช้กรอกเองผ่านหน้า Settings ไม่ hardcode ตรงโค้ด
 });
 
 const FEATURES = Object.freeze({
