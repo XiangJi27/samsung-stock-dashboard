@@ -4,12 +4,12 @@
   "executed": true,
   "executionMode": "LIVE_DATA_VALIDATION",
   "status": "PASSED",
-  "executedAt": "2026-09-12T21:16:46.637135",
-  "commitSha": "eaa8029",
+  "executedAt": "2026-09-12T22:15:37.928945",
+  "commitSha": "73764d5",
   "inputFiles": {
     "stockMaster": {
       "path": "stock_full_data.json",
-      "sha256": "4e70d33df887682d8670b09ff4c761a2ca3a5e4a88e42a0b1d270f07637ec522"
+      "sha256": "2df01e42e2807d45f9b5564aae7438c70455a118e6f8eab4c745061516180747"
     },
     "promotions": {
       "path": "promotion_variants.json",
@@ -42,5 +42,5 @@
     "CONNECTIVITY_MISMATCH",
     "AMBIGUOUS_MODEL_MATCH"
   ],
-  "generatedAt": "2026-09-12T21:16:46.637135"
+  "generatedAt": "2026-09-12T22:15:37.928945"
 }

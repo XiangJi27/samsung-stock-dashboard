@@ -6,8 +6,8 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7828834,
-    "totalSizeMB": 7.47
+    "totalSizeBytes": 7803369,
+    "totalSizeMB": 7.44
   },
   "files": [
     {
@@ -30,8 +30,8 @@
     },
     {
       "file": "stock_data.js",
-      "sizeBytes": 5451022,
-      "sha256": "cabac260c2d381e63e40d5d47f93261d7e2b5259dcb5c90d9ae7b1c65f6d88b3",
+      "sizeBytes": 5423699,
+      "sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -132,14 +132,14 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 64058,
-      "sha256": "b031ae8ebdaba3c12af8fb74e63c1ca3e98f50f6af172f3ec5d9a3096557e00d",
+      "sizeBytes": 65374,
+      "sha256": "e61d4c452e73c773fb184ea10c4be2dc0eb13184cfaa7ee700eac1ca12bb0e20",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 104381,
-      "sha256": "572fac3def64dbbb09eca186eccd0676c074950e3f301e46f1f3312bd09cffbd",
+      "sizeBytes": 104923,
+      "sha256": "6c1e07e7ba982318f90344e7b6b54d86d97bf8e3e4caace017615ff941ab8d41",
       "status": "REQUIRED_RUNTIME"
     },
     {

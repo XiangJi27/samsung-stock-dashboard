@@ -463,7 +463,9 @@
             // No Exact P/N in row: Query stock master cache
             const stockData = window.STOCK_DATABASE || window.STOCK_DATA || [];
             const cleanM = modelRaw.toLowerCase().replace('galaxy', '').replace(/\(.*?\)/g, '').trim();
+            const cleanMNoSpace = cleanM.replace(/\s+/g, '');
             const cleanCap = capacityRaw.toLowerCase().replace('gb', '').replace('tb', '').trim();
+            const cleanCapNoSpace = cleanCap.replace(/\s+/g, '');
 
             // Detect if row explicitly specifies a specific color (Default: promotions apply to ALL colors)
             const fullRowText = (modelRaw + ' ' + (colMap['category'] !== undefined ? String(row[colMap['category']] || '') : '')).toLowerCase();
@@ -498,17 +500,25 @@
             const seenPns = new Set();
             stockData.forEach(s => {
               const sm = (s.model || '').toLowerCase();
+              const smNoSpace = sm.replace(/\s+/g, '');
               const scolor = (s.color || '').toLowerCase();
-              if (cleanM && sm.includes(cleanM)) {
-                if (!cleanCap || sm.includes(cleanCap) || sm.includes(capacityRaw.toLowerCase())) {
-                  // If explicit color specified in file, filter strictly to that color
-                  if (explicitColorFilter && !scolor.includes(explicitColorFilter)) {
-                    return;
-                  }
-                  if (!seenPns.has(s.pn)) {
-                    seenPns.add(s.pn);
-                    candidateList.push(s.pn);
-                  }
+
+              const modelMatches = (cleanM && sm.includes(cleanM)) || (cleanMNoSpace && smNoSpace.includes(cleanMNoSpace));
+              let capMatches = false;
+              if (capacityRaw.toLowerCase().includes('tb')) {
+                capMatches = smNoSpace.includes('1tb') || smNoSpace.includes('tb');
+              } else {
+                capMatches = !cleanCap || sm.includes(cleanCap) || smNoSpace.includes(cleanCapNoSpace) || sm.includes(capacityRaw.toLowerCase());
+              }
+
+              if (modelMatches && capMatches) {
+                // If explicit color specified in file, filter strictly to that color
+                if (explicitColorFilter && !scolor.includes(explicitColorFilter)) {
+                  return;
+                }
+                if (!seenPns.has(s.pn)) {
+                  seenPns.add(s.pn);
+                  candidateList.push(s.pn);
                 }
               }
             });

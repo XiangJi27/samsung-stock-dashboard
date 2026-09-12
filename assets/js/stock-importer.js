@@ -1071,12 +1071,42 @@
           }
         };
 
+        // Auto-Register New Products into System Master Database
+        const currentStockDb = Array.isArray(window.STOCK_DATABASE) ? window.STOCK_DATABASE : (Array.isArray(window.STOCK_DATA) ? window.STOCK_DATA : []);
+        const incomingPns = new Set(b.mergedResult.items.map(it => it.pn));
+        let newItemsRegistered = 0;
+
+        // Detect new items not yet in master catalog
+        const existingPns = new Set(currentStockDb.map(it => it.pn));
+        b.mergedResult.items.forEach(newItem => {
+          if (!existingPns.has(newItem.pn)) {
+            newItemsRegistered++;
+            console.info(`[AutoCatalog] Auto-registered new product into system database: ${newItem.pn} (${newItem.model || newItem.description})`);
+          }
+        });
+
+        // Combined database: incoming active items + preserve catalog products not in current count (qty = 0)
+        const combinedMaster = [...b.mergedResult.items];
+        currentStockDb.forEach(oldItem => {
+          if (!incomingPns.has(oldItem.pn)) {
+            combinedMaster.push({
+              ...oldItem,
+              f1: 0,
+              f2: 0,
+              total: 0
+            });
+          }
+        });
+
+        batchRecord.data = combinedMaster;
+        batchRecord.meta.autoRegisteredNewItemsCount = newItemsRegistered;
+
         // Save to IndexedDB
         await StockStorageAdapter.saveBatch(batchRecord);
 
-        // Update in-memory databases
-        window.STOCK_DATABASE = b.mergedResult.items;
-        window.STOCK_DATA = b.mergedResult.items;
+        // Update in-memory databases with complete catalog
+        window.STOCK_DATABASE = combinedMaster;
+        window.STOCK_DATA = combinedMaster;
 
         const coreItems = b.mergedResult.items.filter(it => it.includedInCoreDeviceKpi);
         const coreF1 = coreItems.reduce((acc, it) => acc + it.f1, 0);
