@@ -1566,9 +1566,18 @@
                 <h2><span>⚡ นำเข้าราคาและโปรโมชั่น (Promotion Import Center)</span></h2>
                 <p>ระบบนำเข้าโปรโมชั่น 5 ขั้นตอน (Upload ➔ Extract ➔ Preview ➔ Validate ➔ Confirm &amp; Publish) พร้อมด่านคัดกรองอัตโนมัติ</p>
               </div>
-              <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/promotions')">
-                <span>🏷️ กลับไปดูโปรโมชั่น &rarr;</span>
-              </button>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-cancel-import" id="btnExportPromoSync" title="ส่งออกไฟล์ JSON โปรโมชั่นสำหรับนำไปซิงค์ยังอุปกรณ์อื่น">
+                  <span>📤 ส่งออกไฟล์ซิงค์ (Export JSON)</span>
+                </button>
+                <button class="btn-cancel-import" id="btnImportPromoSync" title="นำเข้าไฟล์ JSON โปรโมชั่นที่ส่งออกจากเครื่องอื่น">
+                  <span>📥 นำเข้าไฟล์ซิงค์ (Import JSON)</span>
+                </button>
+                <input type="file" id="promoSyncFileInput" accept=".json" style="display: none;">
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/promotions')">
+                  <span>🏷️ กลับไปดูโปรโมชั่น &rarr;</span>
+                </button>
+              </div>
             </div>
 
             <!-- 5-Step Staging Stepper -->
@@ -1618,6 +1627,9 @@
 
             <!-- Preview & Diff Section (Initially Hidden) -->
             <div id="promoPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Validation Warning Box (Human-friendly) -->
+              <div id="promoValidationWarningBanner" class="hidden" style="padding: 14px 18px; border-radius: 10px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.4); color: #fde68a;"></div>
+
               <div class="diff-kpi-grid">
                 <div class="diff-kpi-box cyan">
                   <span class="diff-kpi-label">รายการโปรโมชั่นที่อ่านได้</span>
@@ -1637,7 +1649,7 @@
                 <div class="diff-kpi-box coral">
                   <span class="diff-kpi-label">🔴 ถูกกักกัน (Blocked)</span>
                   <strong class="diff-kpi-val text-coral" id="promoKpiBlocked">0</strong>
-                  <span class="diff-kpi-sub">สมการผิด / ไม่พบ P/N</span>
+                  <span class="diff-kpi-sub">สูตรผิด / สมการไม่ลงตัว</span>
                 </div>
               </div>
 
@@ -1664,7 +1676,7 @@
                         <th>คูปอง</th>
                         <th>Sale Mode</th>
                         <th>ผลการตรวจสอบ</th>
-                        <th>หมายเหตุ / Flags</th>
+                        <th>ตำแหน่งอ้างอิง &amp; รายละเอียด</th>
                       </tr>
                     </thead>
                     <tbody id="promoDiffTableBody">
@@ -1708,7 +1720,14 @@
                 <h2><span>📥 นำเข้าสต็อกจาก Excel (Stock Snapshot Import)</span></h2>
                 <p>รองรับไฟล์ Stock.xlsx (Sheet1 = ร้านเรา ชั้น 1 [f1], Sheet2 = สาขา ชั้น 2 [f2]) • เชื่อมโยง Exact P/N อัตโนมัติ</p>
               </div>
-              <div style="display: flex; gap: 10px;">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-cancel-import" id="btnExportStockSync" title="ส่งออกไฟล์ JSON สำหรับนำไปซิงค์ยังอุปกรณ์อื่น">
+                  <span>📤 ส่งออกไฟล์ซิงค์ (Export JSON)</span>
+                </button>
+                <button class="btn-cancel-import" id="btnImportStockSync" title="นำเข้าไฟล์ JSON ที่ส่งออกจากเครื่องอื่น">
+                  <span>📥 นำเข้าไฟล์ซิงค์ (Import JSON)</span>
+                </button>
+                <input type="file" id="stockSyncFileInput" accept=".json" style="display: none;">
                 <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock-import-history')">
                   <span>🕒 ดูประวัติการนำเข้า</span>
                 </button>
@@ -1753,6 +1772,9 @@
 
             <!-- Preview & Diff Section (Initially Hidden) -->
             <div id="stockPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Validation Warning Box (Human-friendly) -->
+              <div id="stockValidationWarningBanner" class="hidden" style="padding: 14px 18px; border-radius: 10px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.4); color: #fde68a;"></div>
+
               <!-- KPI Summary Grid -->
               <div class="diff-kpi-grid">
                 <div class="diff-kpi-box cyan">

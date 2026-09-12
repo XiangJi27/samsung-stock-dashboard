@@ -1,6 +1,6 @@
 {
   "suite": "GATE_MUTATION_TESTS",
-  "executedAt": "2026-09-11T13:06:39.160695",
+  "executedAt": "2026-09-11T18:35:26.762060",
   "commitSha": "4b39a03",
   "totalScenarios": 4,
   "scenariosPassed": 4,
@@ -96,7 +96,7 @@
         {
           "errorCode": "RUNTIME_HASH_MISMATCH",
           "file": "promotion_variants.js",
-          "expectedSha": "e1cb478babe5cb189352d90c9d08b717b0505063d7dd3f9d126f54326a2e2b6e",
+          "expectedSha": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
           "actualSha": "tampered_hash_0000000000000000000000000000000000000000000000000000"
         }
       ],

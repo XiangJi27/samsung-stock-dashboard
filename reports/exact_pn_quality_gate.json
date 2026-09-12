@@ -4,23 +4,23 @@
   "executed": true,
   "executionMode": "LIVE_DATA_VALIDATION",
   "status": "PASSED",
-  "executedAt": "2026-09-11T14:43:48.731678",
-  "commitSha": "d88919c",
+  "executedAt": "2026-09-12T10:10:52.332733",
+  "commitSha": "b7f36a3",
   "inputFiles": {
     "stockMaster": {
       "path": "stock_full_data.json",
-      "sha256": "36b702f1b314d79d5808c0ba88f569128b931a0646e3e0c72bd24db701cac44f"
+      "sha256": "4e70d33df887682d8670b09ff4c761a2ca3a5e4a88e42a0b1d270f07637ec522"
     },
     "promotions": {
       "path": "promotion_variants.json",
-      "sha256": "021c67fdf291f896dc34db1b1912fb077b80b59eed0dbe9b4e4c6ec2fa9fb1a4"
+      "sha256": "535337af899f2e27454e6af55fee9bea8dfe80a0da1983013e943c83f4d07e7a"
     }
   },
   "counts": {
-    "variantsChecked": 129,
+    "variantsChecked": 142,
     "exactPnRequired": 18,
     "exactPnMatched": 18,
-    "modelScopeMatched": 111,
+    "modelScopeMatched": 124,
     "pnNotFound": 0,
     "productTypeMismatch": 0,
     "capacityMismatch": 0,
@@ -28,9 +28,9 @@
     "ambiguousMatches": 0,
     "violationCount": 0
   },
-  "totalActiveVariantsEvaluated": 129,
+  "totalActiveVariantsEvaluated": 142,
   "exactPnMatches": 18,
-  "modelCapacityScopeMatches": 111,
+  "modelCapacityScopeMatches": 124,
   "violationCount": 0,
   "affectedVariantIds": [],
   "violations": [],
@@ -42,5 +42,5 @@
     "CONNECTIVITY_MISMATCH",
     "AMBIGUOUS_MODEL_MATCH"
   ],
-  "generatedAt": "2026-09-11T14:43:48.731678"
+  "generatedAt": "2026-09-12T10:10:52.332733"
 }

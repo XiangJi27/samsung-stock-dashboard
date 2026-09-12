@@ -113,6 +113,23 @@
             window.syncMasterStockData();
           }
 
+          // Promotion Provider Hierarchy: 1. Confirmed IndexedDB Promo Snapshot -> 2. Static baseline
+          if (window.PromoStorageAdapter && typeof window.PromoStorageAdapter.getActiveSnapshot === "function") {
+            try {
+              const promoSnapshot = await window.PromoStorageAdapter.getActiveSnapshot();
+              if (promoSnapshot && Array.isArray(promoSnapshot.publishedItems) && promoSnapshot.publishedItems.length > 0) {
+                window.PROMOTION_VARIANTS = promoSnapshot.publishedItems;
+                if (promoSnapshot.meta) {
+                  window.PROMOTION_BATCH_METADATA = promoSnapshot.meta;
+                }
+                window.PROMOTION_SNAPSHOT_STATUS = "CONFIRMED_LOCAL_PROMO_SNAPSHOT";
+                console.info("[DataLoaderGate] Restored validated active promotion snapshot from IndexedDB (LOCAL_BROWSER_ONLY):", promoSnapshot.batchId);
+              }
+            } catch (e) {
+              console.warn("[DataLoaderGate] Error evaluating Promo IndexedDB snapshot, using static baseline:", e);
+            }
+          }
+
           this.isLoaded = true;
           this.isLoading = false;
           console.info("[DataLoaderGate] Branch datasets successfully initialized in memory. Total stock items:", window.STOCK_DATABASE ? window.STOCK_DATABASE.length : 0);

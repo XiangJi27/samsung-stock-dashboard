@@ -6,14 +6,14 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 22,
-    "totalSizeBytes": 6875161,
-    "totalSizeMB": 6.56
+    "totalSizeBytes": 7728021,
+    "totalSizeMB": 7.37
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 122452,
-      "sha256": "03eff97ae5c90da8ae1368274463c52d121104a73fca4783e1188810b265c87b",
+      "sizeBytes": 124751,
+      "sha256": "c2d4080d7b9707c4f16fdc8c65076e20f87fdf1628090f44d42f55c467cd8ece",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -30,14 +30,14 @@
     },
     {
       "file": "stock_data.js",
-      "sizeBytes": 4841550,
-      "sha256": "b87776743709471bc53177696695208b8039321f6bf4a2a4df70fbd4f1583673",
+      "sizeBytes": 5451022,
+      "sha256": "cabac260c2d381e63e40d5d47f93261d7e2b5259dcb5c90d9ae7b1c65f6d88b3",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "promotion_variants.js",
-      "sizeBytes": 1475600,
-      "sha256": "e1cb478babe5cb189352d90c9d08b717b0505063d7dd3f9d126f54326a2e2b6e",
+      "sizeBytes": 1673474,
+      "sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -90,8 +90,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 5857,
-      "sha256": "4ddaef55a364e0671afaf833599a9a35eea0126ea3968fd439440a9fd9af02d4",
+      "sizeBytes": 6939,
+      "sha256": "489c0c46258663c3219d15881d65c8395c97c05811cd03e18cb0580c6d253e27",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -120,8 +120,8 @@
     },
     {
       "file": "assets/js/modules.js",
-      "sizeBytes": 9972,
-      "sha256": "6e6c35a61b73043dc5222d0ea37be4b97f785d72d863e0e8962d7b13ce0e415f",
+      "sizeBytes": 15102,
+      "sha256": "1f8cb09d009fac4d87b51f13db29e5510724ea3c4218dea9172981633ee32abe",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -132,14 +132,14 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 41391,
-      "sha256": "2610cbd65f36e7743c4a352633b4e3600520b6a0bf87b03049ce77df2bd489f7",
+      "sizeBytes": 53781,
+      "sha256": "d93f2dff21eb9eeb3f181d5e323bc3c7d4fd40facfe9a8a61c7477927a7bead3",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 27744,
-      "sha256": "4ad88686fc1caad2cb46c11d84a5667b10c571360af0887f1de02ce5ec164246",
+      "sizeBytes": 51651,
+      "sha256": "8a7ca4c6b769b58475a95faec38c336a366f0352b595b150a7b94d349f21941e",
       "status": "REQUIRED_RUNTIME"
     }
   ]
