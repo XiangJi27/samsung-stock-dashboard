@@ -4,22 +4,22 @@
   "executed": true,
   "executionMode": "LIVE_DATA_VALIDATION",
   "status": "PASSED",
-  "executedAt": "2026-09-12T16:01:11.032614",
-  "commitSha": "b95c80c",
+  "executedAt": "2026-09-12T17:20:09.806853",
+  "commitSha": "49b298a",
   "verifiedInputs": {
     "stockBatchId": "IMPORT-20260906-002",
     "promotionBatchId": "BATCH-20260907-105441",
     "parserVersion": "2.1.0-LTR-MERGE",
     "ruleEngineVersion": "2.5.0-STRICT",
     "businessRulesVersion": "1.0.0",
-    "applicationCommit": "b95c80c"
+    "applicationCommit": "49b298a"
   },
   "inputFiles": {
     "stock_data.js": "cabac260c2d381e63e40d5d47f93261d7e2b5259dcb5c90d9ae7b1c65f6d88b3",
     "promotion_variants.js": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
-    "audit_summary.json": "cb2493d4c7c1db79cde3f12da64f224c571f57d73247e299e98a539bcc6ffa1d",
+    "audit_summary.json": "57bb0aa48b8c23940699aeb88e1a598e3ce3670cdb5224cd71ca436a48adc2b8",
     "business_rules.json": "539a8b20045528cd81fca1e7c38e51ce537daf534b88b43f910fd2551dfcaf58",
-    "runtime_manifest.json": "45a878c031b8d3cdb8e6920e6bb76a7e06d687c7e5e448c39b8a69dbf769fff9"
+    "runtime_manifest.json": "b920d6f13f2300687e22356081aac5a9b874610f4e1b6feee6bad8b6ced6f4b7"
   },
   "counts": {
     "staleAuditCount": 0,
@@ -29,5 +29,5 @@
   },
   "violationCount": 0,
   "violations": [],
-  "generatedAt": "2026-09-12T16:01:11.032614"
+  "generatedAt": "2026-09-12T17:20:09.806853"
 }

@@ -462,14 +462,18 @@
           } else {
             // No Exact P/N in row: Query stock master cache
             const stockData = window.STOCK_DATABASE || window.STOCK_DATA || [];
-            const cleanM = modelRaw.toLowerCase().replace('galaxy', '').replace('(ร่วม sf+)', '').replace('(ไม่ร่วม sf+)', '').trim();
+            const cleanM = modelRaw.toLowerCase().replace('galaxy', '').replace(/\(.*?\)/g, '').trim();
             const cleanCap = capacityRaw.toLowerCase().replace('gb', '').replace('tb', '').trim();
 
+            const seenPns = new Set();
             stockData.forEach(s => {
               const sm = (s.model || '').toLowerCase();
               if (cleanM && sm.includes(cleanM)) {
                 if (!cleanCap || sm.includes(cleanCap) || sm.includes(capacityRaw.toLowerCase())) {
-                  candidateList.push(s.pn);
+                  if (!seenPns.has(s.pn)) {
+                    seenPns.add(s.pn);
+                    candidateList.push(s.pn);
+                  }
                 }
               }
             });
@@ -531,6 +535,8 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
+              selectedPns: [],
+              confirmedPns: [],
               rrp,
               discount: stdDiscount || 0,
               standardDiscount: stdDiscount || 0,
@@ -606,6 +612,8 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
+              selectedPns: [],
+              confirmedPns: [],
               rrp,
               discount: (stdDiscount || 0) + tradeUpDiscount,
               standardDiscount: stdDiscount || 0,
@@ -707,6 +715,8 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
+              selectedPns: [],
+              confirmedPns: [],
               rrp,
               discount: activeDiscount,
               standardDiscount: stdDiscount || 0,
@@ -1128,6 +1138,53 @@
         btnCancel.addEventListener('click', () => this.resetStaging());
       }
 
+      // Batch P/N Actions
+      const btnSelectAll = document.getElementById('btnSelectAllCandidates');
+      if (btnSelectAll) {
+        btnSelectAll.addEventListener('click', () => this.selectAllReviewCandidates());
+      }
+
+      const btnBatchConfirm = document.getElementById('btnBatchConfirmPns');
+      if (btnBatchConfirm) {
+        btnBatchConfirm.addEventListener('click', () => this.confirmAllSelectedCandidates());
+      }
+
+      const btnResetPn = document.getElementById('btnResetPnSelections');
+      if (btnResetPn) {
+        btnResetPn.addEventListener('click', () => this.resetCandidateSelections());
+      }
+
+      // Delegated Table Events (Checkboxes, Single Confirm, Select All Row, Undo, Save Payment Code)
+      const tbody = document.getElementById('promoDiffTableBody');
+      if (tbody) {
+        tbody.addEventListener('change', (e) => {
+          if (e.target && e.target.classList.contains('candidate-cb')) {
+            const rowId = e.target.getAttribute('data-row-id');
+            const pn = e.target.getAttribute('data-pn');
+            this.toggleCandidateCheckbox(rowId, pn, e.target.checked);
+          }
+        });
+
+        tbody.addEventListener('click', (e) => {
+          const target = e.target.closest('button');
+          if (!target) return;
+
+          const rowId = target.getAttribute('data-row-id');
+          if (!rowId) return;
+
+          if (target.classList.contains('btn-select-row-all')) {
+            this.selectAllCandidatesForRow(rowId);
+          } else if (target.classList.contains('btn-row-confirm')) {
+            this.confirmRowPns(rowId);
+          } else if (target.classList.contains('btn-row-undo')) {
+            this.undoRowPnConfirmation(rowId);
+          } else if (target.classList.contains('btn-save-tup')) {
+            const input = document.getElementById(`tup-code-${rowId}`);
+            if (input) this.saveTradeUpPaymentCode(rowId, input.value);
+          }
+        });
+      }
+
       const btnExportSync = document.getElementById('btnExportPromoSync');
       if (btnExportSync) {
         btnExportSync.addEventListener('click', () => this.exportSyncFile());
@@ -1413,6 +1470,16 @@
         }
       }
 
+      const batchBar = document.getElementById('promoBatchPnActionBar');
+      if (batchBar) {
+        const hasCandidates = b.variants.some(v => (v.candidatePn && v.candidatePn.length > 0) || v.validationStatus === 'REVIEW_REQUIRED');
+        if (hasCandidates) {
+          batchBar.classList.remove('hidden');
+        } else {
+          batchBar.classList.add('hidden');
+        }
+      }
+
       this.filterDiffTable('ALL');
 
       const btnConfirm = document.getElementById('btnConfirmPromoPublish');
@@ -1441,13 +1508,19 @@
       const b = this.currentStagedBatch;
       if (!b) return;
 
+      this.currentFilterType = filterType || this.currentFilterType || 'ALL';
+
       const tbody = document.getElementById('promoDiffTableBody');
       if (!tbody) return;
 
       let list = b.variants;
-      if (filterType === 'PASSED') list = list.filter(v => v.validationStatus === 'PASSED_VALIDATION');
-      else if (filterType === 'REVIEW') list = list.filter(v => v.validationStatus === 'REVIEW_REQUIRED' || v.validationStatus === 'OCR_NOT_IMPLEMENTED');
-      else if (filterType === 'BLOCKED') list = list.filter(v => v.validationStatus.startsWith('BLOCKED') || v.validationStatus === 'OCR_LOW_CONFIDENCE');
+      if (this.currentFilterType === 'PASSED') list = list.filter(v => v.validationStatus === 'PASSED_VALIDATION');
+      else if (this.currentFilterType === 'REVIEW') list = list.filter(v => v.validationStatus === 'REVIEW_REQUIRED' || v.validationStatus === 'OCR_NOT_IMPLEMENTED');
+      else if (this.currentFilterType === 'BLOCKED') list = list.filter(v => v.validationStatus.startsWith('BLOCKED') || v.validationStatus === 'OCR_LOW_CONFIDENCE');
+
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
 
       tbody.innerHTML = list.map(item => {
         const renderStatusBadge = () => {
@@ -1462,40 +1535,391 @@
 
         const sheetInfo = item.sourceTrace ? `${item.sourceTrace.sheet || item.sourceTrace.format}!${item.sourceTrace.cellRef || ('แถว ' + (item.sourceTrace.row || item.sourceTrace.line || 1))}` : '-';
 
+        const renderActionCell = () => {
+          // 1. Confirmed P/N state
+          if (item.confirmedPns && item.confirmedPns.length > 0) {
+            return `
+              <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 6px 10px;">
+                <div style="font-size: 0.76rem; color: #6ee7b7; font-weight: 700; display: flex; align-items: center; justify-content: space-between;">
+                  <span>🟢 ยืนยัน Exact P/N แล้ว (${item.confirmedPns.length} รายการ)</span>
+                  <button type="button" class="btn-row-action btn-row-undo" data-row-id="${item.draftRowId}" title="แก้ไขการเลือก P/N">↺ แก้ไข</button>
+                </div>
+                <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 4px; font-family: monospace;">
+                  ${item.confirmedPns.map(p => {
+                    const s = stockMap[p];
+                    return `<span style="display: inline-block; background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px; margin: 1px 2px;">${p} (${s ? s.color : '-'})</span>`;
+                  }).join(' ')}
+                </div>
+              </div>
+            `;
+          }
+
+          // 2. Review Required with Candidates
+          if (item.validationStatus === 'REVIEW_REQUIRED' && item.candidatePn && item.candidatePn.length > 0) {
+            const selectedList = item.selectedPns || [];
+            return `
+              <div style="font-size: 0.76rem; color: #93c5fd; font-weight: 600; margin-bottom: 4px;">
+                🔍 พบ ${item.candidatePn.length} Candidate P/N ในสต็อก:
+              </div>
+              <div class="candidate-selector-box">
+                ${item.candidatePn.map(pn => {
+                  const s = stockMap[pn] || { pn, color: '-', productCodeType: (pn.startsWith('F-') ? 'PASS_F' : 'STANDARD_SM'), f1: 0, f2: 0, total: 0 };
+                  const isChecked = selectedList.includes(pn);
+                  const isPassF = s.productCodeType === 'PASS_F' || pn.startsWith('F-');
+                  return `
+                    <div class="candidate-item-row">
+                      <div class="candidate-item-left">
+                        <input type="checkbox" class="candidate-cb" data-row-id="${item.draftRowId}" data-pn="${pn}" ${isChecked ? 'checked' : ''} />
+                        <span class="candidate-pn-code">${pn}</span>
+                        <span class="type-pill ${isPassF ? 'pass-f' : 'std-sm'}" style="font-size: 0.65rem; padding: 1px 4px;">${isPassF ? 'F-' : 'SM-'}</span>
+                        <span class="candidate-color-badge">🎨 ${s.color || '-'}</span>
+                      </div>
+                      <div class="candidate-stock-tag">
+                        ช1: <strong>${s.f1}</strong> | ช2: <strong>${s.f2}</strong> (รวม <strong>${s.total}</strong>)
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+              <div class="candidate-row-actions">
+                <button type="button" class="btn-row-action btn-select-row-all" data-row-id="${item.draftRowId}">
+                  เลือกทุกสี (${item.candidatePn.length})
+                </button>
+                <button type="button" class="btn-row-action btn-row-confirm" data-row-id="${item.draftRowId}">
+                  ✓ ยืนยัน P/N (${selectedList.length})
+                </button>
+              </div>
+            `;
+          }
+
+          // 3. Trade Up Payment Code Missing (6 items)
+          if (item.validationFlags && item.validationFlags.includes('TRADE_UP_PAYMENT_CODE_MISSING')) {
+            return `
+              <div class="tup-fix-box">
+                <div style="font-size: 0.74rem; color: #fca5a5; font-weight: 700;">
+                  ⚠️ ขาดรหัสตัดชำระ Trade Up (Payment Code)
+                </div>
+                <div style="font-size: 0.70rem; color: #cbd5e1;">
+                  ใส่รหัสตัดชำระจากเอกสารต้นทาง (เช่น TUP-01):
+                </div>
+                <div style="display: flex; gap: 6px; margin-top: 4px;">
+                  <input type="text" id="tup-code-${item.draftRowId}" class="tup-code-input" placeholder="เช่น TUP-01" value="" />
+                  <button type="button" class="btn-save-tup" data-row-id="${item.draftRowId}">บันทึก</button>
+                </div>
+              </div>
+            `;
+          }
+
+          // 4. PN Not Found (18 items)
+          if (item.validationFlags && item.validationFlags.includes('PN_NOT_FOUND')) {
+            return `
+              <div class="pn-not-found-box">
+                <div style="font-weight: 700;">🚫 ไม่พบ P/N ใน Stock Master (18 รายการ)</div>
+                <div style="font-size: 0.70rem; margin-top: 2px;">
+                  ต้องอัปเดต Stock Master หรือจับคู่ Product Master ที่ครบกว่า (ระบบระงับการสร้างหรือเดา P/N เอง)
+                </div>
+              </div>
+            `;
+          }
+
+          // 5. Default Trace Evidence
+          return `
+            <div style="font-size: 0.72rem; color: var(--neon-cyan); font-family: monospace;">${sheetInfo}</div>
+            <div style="font-size: 0.76rem; color: ${item.validationStatus === 'PASSED_VALIDATION' ? '#a7f3d0' : '#fca5a5'};">${item.reasonText || (item.validationFlags || []).join(', ') || '-'}</div>
+          `;
+        };
+
         return `
           <tr>
             <td>
-              <div style="font-weight: 700; color: #fff;">${item.pn || '<span style="color: #94a3b8;">-</span>'}</div>
-              <div style="font-size: 0.78rem; color: #cbd5e1;">${item.model}</div>
+              <div style="font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span>${item.pn || '<span style="color: #94a3b8; font-style: italic;">รอจับคู่ Exact P/N</span>'}</span>
+                ${item.confirmedPns && item.confirmedPns.length > 0 ? `<span class="confirmed-pn-tag" style="font-size: 0.68rem; padding: 1px 5px;">✓ ${item.confirmedPns.length} P/N</span>` : ''}
+              </div>
+              <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 2px;">
+                <strong>${item.model}</strong> ${item.capacity ? `<span style="color: #93c5fd;">(${item.capacity})</span>` : ''}
+              </div>
+              ${item.productMatchStatus ? `<div style="font-size: 0.70rem; color: #93c5fd; margin-top: 2px;">สถานะ: <code>${item.productMatchStatus}</code></div>` : ''}
               ${item.freebieNoteFromAI ? `<div style="font-size: 0.72rem; color: #34d399; margin-top: 2px;">🎁 ${item.freebieNoteFromAI}</div>` : ''}
             </td>
-            <td><span class="type-pill ${item.productCodeType === 'STANDARD_SM' ? 'active' : ''}">${item.productCodeType}</span></td>
+            <td><span class="type-pill ${item.productCodeType === 'STANDARD_SM' ? 'active' : (item.productCodeType === 'PASS_F' ? 'pass-f' : '')}">${item.productCodeType}</span></td>
             <td>${item.rrp > 0 ? `฿${item.rrp.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
             <td class="text-coral">${item.discount > 0 ? `-฿${item.discount.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
             <td style="font-weight: 700; color: var(--neon-cyan);">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
-            <td><span class="type-pill">${item.coupon || '-'}</span></td>
+            <td>
+              <span class="type-pill">${item.coupon || '-'}</span>
+              ${item.tradeUpPaymentCode ? `<div style="font-size: 0.70rem; color: #fbbf24; margin-top: 2px; font-family: monospace;">ชำระ: ${item.tradeUpPaymentCode}</div>` : ''}
+            </td>
             <td><span class="type-pill" style="font-size: 0.72rem;">${item.saleMode}</span></td>
             <td>${renderStatusBadge()}</td>
             <td>
-              <div style="font-size: 0.72rem; color: var(--neon-cyan); font-family: monospace;">${sheetInfo}</div>
-              <div style="font-size: 0.76rem; color: ${item.validationStatus === 'PASSED_VALIDATION' ? '#a7f3d0' : '#fca5a5'};">${item.reasonText || (item.validationFlags || []).join(', ') || '-'}</div>
+              ${renderActionCell()}
             </td>
           </tr>
         `;
       }).join('');
     }
 
+    toggleCandidateCheckbox(draftRowId, pn, isChecked) {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+      const item = b.variants.find(v => v.draftRowId === draftRowId);
+      if (!item) return;
+
+      item.selectedPns = item.selectedPns || [];
+      if (isChecked) {
+        if (!item.selectedPns.includes(pn)) item.selectedPns.push(pn);
+      } else {
+        item.selectedPns = item.selectedPns.filter(p => p !== pn);
+      }
+
+      // Update button text in the row
+      const btn = document.querySelector(`.btn-row-confirm[data-row-id="${draftRowId}"]`);
+      if (btn) {
+        btn.textContent = `✓ ยืนยัน P/N (${item.selectedPns.length})`;
+      }
+    }
+
+    selectAllCandidatesForRow(draftRowId) {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+      const item = b.variants.find(v => v.draftRowId === draftRowId);
+      if (!item || !item.candidatePn) return;
+
+      item.selectedPns = [...item.candidatePn];
+      this.filterDiffTable(this.currentFilterType);
+    }
+
+    confirmRowPns(draftRowId) {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+      const item = b.variants.find(v => v.draftRowId === draftRowId);
+      if (!item) return;
+
+      if (!item.selectedPns || item.selectedPns.length === 0) {
+        alert('กรุณาเลือก Candidate P/N อย่างน้อย 1 รายการก่อนกดยืนยัน');
+        return;
+      }
+
+      item.confirmedPns = [...item.selectedPns];
+      item.pn = item.selectedPns.join(', ');
+      item.productCodeType = item.selectedPns[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
+      item.validationStatus = 'PASSED_VALIDATION';
+      item.humanReviewRequired = false;
+      item.autoPublishAllowed = true;
+      item.validationFlags = (item.validationFlags || []).filter(f => f !== 'EXACT_PN_UNRESOLVED');
+      item.reasonText = `✓ ยืนยัน Exact P/N แล้ว (${item.selectedPns.length} P/N)`;
+
+      this.updateBatchStats();
+      this.filterDiffTable(this.currentFilterType);
+    }
+
+    undoRowPnConfirmation(draftRowId) {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+      const item = b.variants.find(v => v.draftRowId === draftRowId);
+      if (!item) return;
+
+      item.confirmedPns = [];
+      item.pn = null;
+      item.productCodeType = 'UNKNOWN';
+      item.validationStatus = 'REVIEW_REQUIRED';
+      item.humanReviewRequired = true;
+      item.autoPublishAllowed = false;
+      if (!item.validationFlags) item.validationFlags = [];
+      if (!item.validationFlags.includes('EXACT_PN_UNRESOLVED')) item.validationFlags.push('EXACT_PN_UNRESOLVED');
+      item.reasonText = `รอจับคู่และยืนยัน Exact P/N จากสต็อกจริง`;
+
+      this.updateBatchStats();
+      this.filterDiffTable(this.currentFilterType);
+    }
+
+    saveTradeUpPaymentCode(draftRowId, code) {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+      const item = b.variants.find(v => v.draftRowId === draftRowId);
+      if (!item) return;
+
+      if (!code || code.trim() === '') {
+        alert('กรุณากรอกรหัสตัดชำระ Trade Up (Payment Code) จากเอกสารต้นทาง');
+        return;
+      }
+
+      const cleanCode = code.trim().toUpperCase();
+      item.tradeUpPaymentCode = cleanCode;
+      item.validationFlags = (item.validationFlags || []).filter(f => f !== 'TRADE_UP_PAYMENT_CODE_MISSING');
+
+      // Re-evaluate candidate match for this item
+      if (item.candidatePn && item.candidatePn.length > 0) {
+        item.validationStatus = 'REVIEW_REQUIRED';
+        item.humanReviewRequired = true;
+        item.autoPublishAllowed = false;
+        if (!item.validationFlags.includes('EXACT_PN_UNRESOLVED')) item.validationFlags.push('EXACT_PN_UNRESOLVED');
+        item.reasonText = `โปรโมชั่น Trade Up (สุทธิ ฿${item.netPrice} | รหัสชำระ ${cleanCode}) • ต้องจับคู่ Exact P/N ก่อนเผยแพร่`;
+      } else {
+        item.validationStatus = 'BLOCKED_UNPROVEN';
+        if (!item.validationFlags.includes('PN_NOT_FOUND')) item.validationFlags.push('PN_NOT_FOUND');
+        item.reasonText = `บันทึกรหัสตัดชำระ ${cleanCode} แล้ว แต่ไม่พบรหัส P/N ในระบบสต็อก`;
+      }
+
+      this.updateBatchStats();
+      this.filterDiffTable(this.currentFilterType);
+      alert(`✓ บันทึกรหัสชำระ ${cleanCode} สำหรับ ${item.model} เรียบร้อยแล้ว!`);
+    }
+
+    selectAllReviewCandidates() {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+
+      let selectedCount = 0;
+      b.variants.forEach(v => {
+        if (v.validationStatus === 'REVIEW_REQUIRED' && v.candidatePn && v.candidatePn.length > 0) {
+          v.selectedPns = [...v.candidatePn];
+          selectedCount += v.candidatePn.length;
+        }
+      });
+
+      this.filterDiffTable(this.currentFilterType);
+      alert(`☑ เลือก Candidate ทั้งหมดแล้ว (${selectedCount} รหัส P/N) ในรายการรอตรวจสอบ\n\nกดปุ่ม "✓ ยืนยัน P/N ที่เลือกทั้งหมด" เพื่ออนุมัติรายการ`);
+    }
+
+    confirmAllSelectedCandidates() {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+
+      let confirmedCount = 0;
+      b.variants.forEach(v => {
+        if (v.validationStatus === 'REVIEW_REQUIRED' && v.selectedPns && v.selectedPns.length > 0) {
+          v.confirmedPns = [...v.selectedPns];
+          v.pn = v.selectedPns.join(', ');
+          v.productCodeType = v.selectedPns[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
+          v.validationStatus = 'PASSED_VALIDATION';
+          v.humanReviewRequired = false;
+          v.autoPublishAllowed = true;
+          v.validationFlags = (v.validationFlags || []).filter(f => f !== 'EXACT_PN_UNRESOLVED');
+          v.reasonText = `✓ ยืนยัน Exact P/N แล้ว (${v.selectedPns.length} P/N)`;
+          confirmedCount++;
+        }
+      });
+
+      if (confirmedCount === 0) {
+        alert('ยังไม่มีรายการที่ถูกเลือก Candidate P/N กรุณาเลือก P/N ในตารางก่อนกดยืนยัน (หรือกด "เลือก Candidate ทั้งหมด")');
+        return;
+      }
+
+      this.updateBatchStats();
+      this.filterDiffTable(this.currentFilterType);
+      alert(`✓ ยืนยัน Exact P/N สำเร็จ ${confirmedCount} รายการ!\n\nรายการที่ผ่านเกณฑ์พร้อมสำหรับการ Publish แล้ว`);
+    }
+
+    resetCandidateSelections() {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+
+      b.variants.forEach(v => {
+        v.selectedPns = [];
+        if (v.confirmedPns && v.confirmedPns.length > 0) {
+          v.confirmedPns = [];
+          v.pn = null;
+          v.productCodeType = 'UNKNOWN';
+          v.validationStatus = 'REVIEW_REQUIRED';
+          v.humanReviewRequired = true;
+          v.autoPublishAllowed = false;
+          if (!v.validationFlags) v.validationFlags = [];
+          if (!v.validationFlags.includes('EXACT_PN_UNRESOLVED')) v.validationFlags.push('EXACT_PN_UNRESOLVED');
+          v.reasonText = `รอจับคู่และยืนยัน Exact P/N จากสต็อกจริง`;
+        }
+      });
+
+      this.updateBatchStats();
+      this.filterDiffTable(this.currentFilterType);
+    }
+
+    updateBatchStats() {
+      const b = this.currentStagedBatch;
+      if (!b) return;
+
+      let passedCount = 0;
+      let reviewCount = 0;
+      let blockedCount = 0;
+
+      b.variants.forEach(v => {
+        if (v.validationStatus === 'PASSED_VALIDATION') passedCount++;
+        else if (v.validationStatus === 'REVIEW_REQUIRED' || v.validationStatus === 'OCR_NOT_IMPLEMENTED') reviewCount++;
+        else blockedCount++;
+      });
+
+      b.stats.passedCount = passedCount;
+      b.stats.reviewCount = reviewCount;
+      b.stats.blockedCount = blockedCount;
+
+      const totalEl = document.getElementById('promoKpiTotal');
+      const passedEl = document.getElementById('promoKpiPassed');
+      const reviewEl = document.getElementById('promoKpiReview');
+      const blockedEl = document.getElementById('promoKpiBlocked');
+
+      if (totalEl) totalEl.textContent = b.stats.totalVariants.toLocaleString();
+      if (passedEl) passedEl.textContent = b.stats.passedCount.toLocaleString();
+      if (reviewEl) reviewEl.textContent = b.stats.reviewCount.toLocaleString();
+      if (blockedEl) blockedEl.textContent = b.stats.blockedCount.toLocaleString();
+
+      const btnConfirm = document.getElementById('btnConfirmPromoPublish');
+      if (btnConfirm) {
+        if (b.stats.passedCount > 0) {
+          btnConfirm.style.display = 'inline-flex';
+          const isAI = b.format.includes('IMAGE') || b.format.includes('TXT');
+          btnConfirm.innerHTML = isAI 
+            ? `<span>⚡ เผยแพร่โปรโมชั่น AI ชั่วคราว (${b.stats.passedCount} รายการ) &rarr;</span>`
+            : `<span>⚡ เผยแพร่เฉพาะรายการที่ผ่านเกณฑ์ (${b.stats.passedCount} รายการ) &rarr;</span>`;
+        } else {
+          btnConfirm.style.display = 'none';
+        }
+      }
+    }
+
     async confirmPublish() {
       if (!this.currentStagedBatch || this.isSubmitting) return;
 
       const b = this.currentStagedBatch;
-      const publishable = b.variants.filter(v => v.validationStatus === 'PASSED_VALIDATION');
+      const rawPassed = b.variants.filter(v => v.validationStatus === 'PASSED_VALIDATION');
       const quarantined = b.variants.filter(v => v.validationStatus !== 'PASSED_VALIDATION');
 
-      if (publishable.length === 0) {
-        alert('❌ ไม่สามารถ Publish ได้ เนื่องจากไม่มีรายการที่ผ่าน Validation (PASSED_VALIDATION)\n\nรายการที่มีข้อผิดพลาดหรือความมั่นใจต่ำกว่า 70% ถูกกักกันทั้งหมดเพื่อความปลอดภัยหน้าร้าน');
+      if (rawPassed.length === 0) {
+        alert('❌ ไม่สามารถ Publish ได้ เนื่องจากไม่มีรายการที่ผ่าน Validation (PASSED_VALIDATION)\n\nรายการที่รอตรวจ P/N หรือมีข้อผิดพลาดถูกกักกันทั้งหมดเพื่อความปลอดภัยหน้าร้าน');
         return;
       }
+
+      // Multi-P/N Promotion Expansion: Expand confirmed multi-P/N variants into individual verified records
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
+
+      const publishable = [];
+      rawPassed.forEach(v => {
+        if (Array.isArray(v.confirmedPns) && v.confirmedPns.length > 0) {
+          v.confirmedPns.forEach((p, idx) => {
+            const stockItem = stockMap[p];
+            publishable.push({
+              ...v,
+              promoId: `${v.draftRowId}-${p}-${idx}`,
+              pn: p,
+              productCodeType: p.startsWith('F-') ? 'PASS_F' : 'STANDARD_SM',
+              color: stockItem ? stockItem.color : (v.color || ''),
+              model: stockItem ? stockItem.model : v.model,
+              status: 'PUBLISHED',
+              validationStatus: 'PASSED_VALIDATION',
+              autoPublishAllowed: true
+            });
+          });
+        } else {
+          publishable.push({
+            ...v,
+            status: 'PUBLISHED',
+            validationStatus: 'PASSED_VALIDATION',
+            autoPublishAllowed: true
+          });
+        }
+      });
 
       const isAI = b.format.includes('IMAGE') || b.format.includes('TXT');
       const confirmMsg = isAI 
@@ -1503,13 +1927,14 @@
           `• Batch ID: ${b.batchId}\n` +
           `• สื่อต้นทาง: ${b.sourceFilename}\n` +
           `• ลายนิ้วมือ Media SHA-256: ${(b.fileHash || '').substring(0, 16)}...\n` +
-          `• รายการที่จะเปิดใช้งานทันที: ${publishable.length.toLocaleString()} รายการ\n` +
+          `• รายการที่จะเปิดใช้งานทันที: ${publishable.length.toLocaleString()} รายการ (ขยายตาม P/N สีจริง)\n` +
           `• รายการที่ถูกกักกัน (ความมั่นใจ < 70%): ${quarantined.length.toLocaleString()} รายการ\n\n` +
           `💡 โปรโมชั่น AI มีอายุ 7 วัน (TTL) และจะกระทบยอดอัตโนมัติเมื่อมีไฟล์ Excel เข้ามา`
         : `ยืนยันการ Publish โปรโมชั่นไปยังระบบหน้าร้าน?\n\n` +
           `• Batch ID: ${b.batchId}\n` +
           `• ไฟล์ต้นทาง: ${b.sourceFilename} (${b.format})\n` +
-          `• รายการที่จะเปิดใช้งานทันที: ${publishable.length.toLocaleString()} รายการ\n` +
+          `• รายการผ่านเกณฑ์: ${rawPassed.length.toLocaleString()} แถวโปรโมชั่น\n` +
+          `• รายการที่จะเปิดใช้งานจริง: ${publishable.length.toLocaleString()} รายการ (ขยายตาม P/N สีจริง)\n` +
           `• รายการที่ถูกกักกัน: ${quarantined.length.toLocaleString()} รายการ\n\n` +
           `ระบบจะบันทึกลงในเบราว์เซอร์นี้ (IndexedDB) และอัปเดตราคาขายหน้าร้านทันที`;
 
@@ -1531,7 +1956,10 @@
           format: b.format,
           publishedItems: publishable,
           quarantinedItems: quarantined,
-          stats: b.stats,
+          stats: {
+            ...b.stats,
+            publishedPnsCount: publishable.length
+          },
           meta: {
             importBatchId: b.batchId,
             batchId: b.batchId,

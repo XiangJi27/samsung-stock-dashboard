@@ -94,7 +94,8 @@ audit_files_to_include = [
     "scripts/generate_september_reports.py",
     "scripts/test_addon_purchase.py",
     "scripts/test_sheet_sync.py",
-    "scripts/test_ai_promotion_ingestion.py"
+    "scripts/test_ai_promotion_ingestion.py",
+    "scripts/test_pn_confirmation_workflow.py"
 ]
 
 print("\nPackaging Clean Audit Evidence Package: samsung_stock_dashboard_audit_evidence.zip...")

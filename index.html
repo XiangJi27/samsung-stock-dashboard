@@ -1685,19 +1685,42 @@
                     <button class="tab-filter-btn promo-tab-filter" data-filter="BLOCKED">ถูกกักกัน</button>
                   </div>
                 </div>
-                <div style="overflow-x: auto; max-height: 480px;">
+
+                <!-- Batch Exact P/N Confirmation Action Bar -->
+                <div id="promoBatchPnActionBar" class="batch-pn-action-bar hidden">
+                  <div class="batch-pn-info">
+                    <span class="batch-pn-icon">🔍</span>
+                    <div>
+                      <strong style="color: #93c5fd;">เวิร์กโฟลว์จับคู่และยืนยัน Exact P/N:</strong>
+                      <span style="color: #cbd5e1; font-size: 0.8rem;">เลือก Candidate P/N จากสต็อกจริง (ระบุสี, ประเภท SM-/F-, สต็อก ช1/ช2) แล้วกดยืนยันเพื่อเปลี่ยนเป็นสถานะผ่านเกณฑ์</span>
+                    </div>
+                  </div>
+                  <div class="batch-pn-buttons">
+                    <button type="button" id="btnSelectAllCandidates" class="tab-filter-btn">
+                      ☑ เลือก Candidate ทั้งหมด (ทุกสีในสต็อก)
+                    </button>
+                    <button type="button" id="btnBatchConfirmPns" class="tab-filter-btn batch-confirm-btn">
+                      ✓ ยืนยัน P/N ที่เลือกทั้งหมด (Batch Confirm)
+                    </button>
+                    <button type="button" id="btnResetPnSelections" class="tab-filter-btn" style="color: #94a3b8;">
+                      ↺ ล้างการเลือก
+                    </button>
+                  </div>
+                </div>
+
+                <div style="overflow-x: auto; max-height: 520px;">
                   <table class="diff-table">
                     <thead>
                       <tr>
-                        <th>P/N &amp; ชื่อรุ่น</th>
+                        <th style="min-width: 240px;">P/N &amp; ชื่อรุ่น / Candidate P/N</th>
                         <th>ประเภทโค้ด</th>
                         <th>ราคาปกติ (RRP)</th>
                         <th>ส่วนลด</th>
                         <th>ราคาสุทธิ (Net Price)</th>
-                        <th>คูปอง</th>
+                        <th>คูปอง / ชำระ</th>
                         <th>Sale Mode</th>
                         <th>ผลการตรวจสอบ</th>
-                        <th>ตำแหน่งอ้างอิง &amp; รายละเอียด</th>
+                        <th style="min-width: 260px;">การจัดการ Exact P/N &amp; หลักฐาน</th>
                       </tr>
                     </thead>
                     <tbody id="promoDiffTableBody">
