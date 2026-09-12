@@ -260,17 +260,39 @@
       const rows = [];
       const pnSeen = new Set();
       const duplicatePns = new Set();
+      const warnings = [];
       let invalidCount = 0;
 
       for (let r = headerRow + 1; r <= range.e.r; r++) {
         const pnCell = sheetObj[XLSX.utils.encode_cell({ r, c: colMap['pn'] })];
         const rawPn = pnCell ? String(pnCell.v).trim() : '';
 
-        if (!rawPn) continue; // Skip blank lines
+        // Check if row has data despite empty P/N
+        const descCell = colMap['description'] !== undefined ? sheetObj[XLSX.utils.encode_cell({ r, c: colMap['description'] })] : null;
+        const ohCell = colMap['onHand'] !== undefined ? sheetObj[XLSX.utils.encode_cell({ r, c: colMap['onHand'] })] : null;
+
+        if (!rawPn) {
+          if ((descCell && descCell.v) || (ohCell && ohCell.v !== undefined && ohCell.v !== '')) {
+            warnings.push({
+              type: 'MISSING_PN',
+              sheet: sheetName,
+              row: r + 1,
+              message: `${sheetName} แถว ${r + 1}: พบข้อมูล (${descCell ? descCell.v : 'ยอดสต็อก'}) แต่ไม่มีรหัส P/N (ระบบข้ามแถวนี้)`
+            });
+          }
+          continue; // Skip blank lines
+        }
 
         const exactPn = rawPn.toUpperCase();
         if (pnSeen.has(exactPn)) {
           duplicatePns.add(exactPn);
+          warnings.push({
+            type: 'DUPLICATE_PN',
+            sheet: sheetName,
+            row: r + 1,
+            pn: exactPn,
+            message: `${sheetName} แถว ${r + 1}: พบรหัส P/N '${exactPn}' ซ้ำกับแถวก่อนหน้าในชีตเดียวกัน`
+          });
         }
         pnSeen.add(exactPn);
 
@@ -281,11 +303,35 @@
         if (onHandCell === undefined || onHandCell.v === null || onHandCell.v === '') {
           isOnHandValid = false;
           invalidCount++;
+          warnings.push({
+            type: 'BLANK_ON_HAND',
+            sheet: sheetName,
+            row: r + 1,
+            pn: exactPn,
+            message: `${sheetName} แถว ${r + 1} (${exactPn}): ยอด On Hand เป็นค่าว่าง ระบบปรับเป็น 0`
+          });
         } else {
           const num = Number(onHandCell.v);
-          if (isNaN(num) || num < 0) {
+          if (isNaN(num)) {
             isOnHandValid = false;
             invalidCount++;
+            warnings.push({
+              type: 'INVALID_ON_HAND',
+              sheet: sheetName,
+              row: r + 1,
+              pn: exactPn,
+              message: `${sheetName} แถว ${r + 1} (${exactPn}): ยอด On Hand ไม่ใช่ตัวเลข ('${onHandCell.v}') ระบบปรับเป็น 0`
+            });
+          } else if (num < 0) {
+            isOnHandValid = false;
+            invalidCount++;
+            warnings.push({
+              type: 'NEGATIVE_ON_HAND',
+              sheet: sheetName,
+              row: r + 1,
+              pn: exactPn,
+              message: `${sheetName} แถว ${r + 1} (${exactPn}): ยอด On Hand ติดลบ (${num}) ระบบปรับเป็น 0`
+            });
           } else {
             onHandVal = Math.floor(num);
           }
@@ -329,6 +375,7 @@
         uniquePns: pnSeen.size,
         duplicatePns: Array.from(duplicatePns),
         invalidCount,
+        warnings,
         rows
       };
     }
@@ -339,6 +386,11 @@
 
       const s2Map = new Map();
       sheet2Parsed.rows.forEach(r => s2Map.set(r.pn, r));
+
+      const allWarnings = [
+        ...(sheet1Parsed.warnings || []),
+        ...(sheet2Parsed.warnings || [])
+      ];
 
       const allPns = new Set([...s1Map.keys(), ...s2Map.keys()]);
       const merged = [];
@@ -454,6 +506,7 @@
         f1Total,
         f2Total,
         grandTotal: f1Total + f2Total,
+        warnings: allWarnings,
         items: merged
       };
     }
@@ -516,6 +569,24 @@
       const btnCancel = document.getElementById('btnCancelStockImport');
       if (btnCancel) {
         btnCancel.addEventListener('click', () => this.resetStaging());
+      }
+
+      // Export Sync File Button
+      const btnExportSync = document.getElementById('btnExportStockSync');
+      if (btnExportSync) {
+        btnExportSync.addEventListener('click', () => this.exportSyncFile());
+      }
+
+      // Import Sync File Button
+      const btnImportSync = document.getElementById('btnImportStockSync');
+      const syncFileInput = document.getElementById('stockSyncFileInput');
+      if (btnImportSync && syncFileInput) {
+        btnImportSync.addEventListener('click', () => syncFileInput.click());
+        syncFileInput.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files.length > 0) {
+            this.handleSyncFile(e.target.files[0]);
+          }
+        });
       }
     }
 
@@ -611,6 +682,7 @@
           s2Summary: s2Parsed,
           mergedResult,
           diffItems,
+          warnings: mergedResult.warnings || [],
           stats: {
             totalProducts: mergedResult.totalUniqueProducts,
             f1Total: mergedResult.f1Total,
@@ -645,6 +717,29 @@
       document.getElementById('stkKpiTotal').textContent = b.stats.grandTotal.toLocaleString();
       document.getElementById('stkKpiChanged').textContent = b.stats.changedCount.toLocaleString();
       document.getElementById('stkKpiNew').textContent = b.stats.newCount.toLocaleString();
+
+      // Render Validation Warnings Banner if any anomalies exist
+      const warningBanner = document.getElementById('stockValidationWarningBanner');
+      if (warningBanner) {
+        const warnings = b.warnings || [];
+        if (warnings.length > 0) {
+          warningBanner.classList.remove('hidden');
+          const sampleWarnings = warnings.slice(0, 5);
+          const moreCount = warnings.length - sampleWarnings.length;
+          warningBanner.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+              <span>⚠️ ข้อควรทราบจากการตรวจสอบข้อมูล (${warnings.length} รายการ):</span>
+            </div>
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; line-height: 1.5;">
+              ${sampleWarnings.map(w => `<li>${w.message || w}</li>`).join('')}
+              ${moreCount > 0 ? `<li>...และอีก ${moreCount} รายการ (ระบบปรับแก้ให้อัตโนมัติ ปลอดภัยต่อการนำเข้า)</li>` : ''}
+            </ul>
+          `;
+        } else {
+          warningBanner.classList.add('hidden');
+          warningBanner.innerHTML = '';
+        }
+      }
 
       // Render Table
       this.filterDiffTable('ALL');
@@ -838,6 +933,12 @@
       const previewSection = document.getElementById('stockPreviewSection');
       if (previewSection) previewSection.classList.add('hidden');
 
+      const warningBanner = document.getElementById('stockValidationWarningBanner');
+      if (warningBanner) {
+        warningBanner.classList.add('hidden');
+        warningBanner.innerHTML = '';
+      }
+
       const statusEl = document.getElementById('stockUploadStatus');
       if (statusEl) statusEl.innerHTML = '';
 
@@ -848,6 +949,152 @@
       if (stepItems[0]) stepItems[0].className = 'step-item active';
       if (stepItems[1]) stepItems[1].className = 'step-item';
       if (stepItems[2]) stepItems[2].className = 'step-item';
+    }
+
+    async exportSyncFile() {
+      try {
+        let activeData = window.STOCK_DATA || window.STOCK_DATABASE || [];
+        let activeMeta = window.STOCK_METADATA || {};
+
+        const snapshot = await StockStorageAdapter.getActiveSnapshot();
+        if (snapshot && snapshot.data && snapshot.data.length > 0) {
+          activeData = snapshot.data;
+          activeMeta = snapshot.meta || activeMeta;
+        }
+
+        if (!activeData || activeData.length === 0) {
+          alert('ไม่พบข้อมูลสต็อกสำหรับส่งออก กรุณานำเข้าไฟล์สต็อกก่อน');
+          return;
+        }
+
+        const batchId = activeMeta.stockBatchId || activeMeta.batchId || `SYNC-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}`;
+        const syncPayload = {
+          syncFormat: "SAMSUNG_BRANCH_STOCK_SYNC_V1",
+          exportedAt: new Date().toISOString(),
+          batchId: batchId,
+          sourceFilename: activeMeta.sourceFilename || activeMeta.sourceFile || "Stock.xlsx",
+          sourceFileHash: activeMeta.sourceFileHash || "",
+          stats: {
+            totalProducts: activeData.length,
+            grandTotal: activeData.reduce((acc, it) => acc + (it.total || 0), 0),
+            f1Total: activeData.reduce((acc, it) => acc + (it.f1 || 0), 0),
+            f2Total: activeData.reduce((acc, it) => acc + (it.f2 || 0), 0)
+          },
+          metadata: activeMeta,
+          data: activeData
+        };
+
+        const jsonStr = JSON.stringify(syncPayload, null, 2);
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `samsung_stock_sync_${batchId}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error('[Export Sync Error]', err);
+        alert(`เกิดข้อผิดพลาดในการส่งออกไฟล์ซิงค์: ${err.message}`);
+      }
+    }
+
+    async handleSyncFile(file) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (ext !== 'json') {
+        alert('กรุณาเลือกไฟล์ JSON สำหรับซิงค์สต็อก (.json) เท่านั้น');
+        return;
+      }
+
+      try {
+        const text = await file.text();
+        const payload = JSON.parse(text);
+
+        if (!payload || payload.syncFormat !== 'SAMSUNG_BRANCH_STOCK_SYNC_V1' || !Array.isArray(payload.data)) {
+          throw new Error('รูปแบบไฟล์ซิงค์ไม่ถูกต้อง (ต้องเป็น SAMSUNG_BRANCH_STOCK_SYNC_V1 ที่ส่งออกจากระบบนี้)');
+        }
+
+        const grandTot = payload.stats ? payload.stats.grandTotal : payload.data.reduce((a, b) => a + (b.total || 0), 0);
+
+        // Check Stale Overwrite Protection (Anti-Silent Data Loss)
+        const activeSnapshot = await StockStorageAdapter.getActiveSnapshot();
+        if (activeSnapshot && activeSnapshot.meta && activeSnapshot.meta.importedAt) {
+          const localTime = new Date(activeSnapshot.meta.importedAt).getTime();
+          const incomingTime = new Date(payload.exportedAt || (payload.metadata && payload.metadata.importedAt) || 0).getTime();
+          if (incomingTime && incomingTime < localTime) {
+            const localTimeStr = new Date(activeSnapshot.meta.importedAt).toLocaleString('th-TH');
+            const incomingTimeStr = new Date(incomingTime).toLocaleString('th-TH');
+            const staleWarning = `⚠️ คำเตือน: ข้อมูลในไฟล์นี้เก่ากว่าข้อมูลปัจจุบันในเครื่อง!\n\n` +
+              `• ข้อมูลปัจจุบันในเครื่อง: ${localTimeStr} (Batch: ${activeSnapshot.batchId})\n` +
+              `• ข้อมูลในไฟล์ที่นำเข้า: ${incomingTimeStr} (Batch: ${payload.batchId})\n\n` +
+              `หากดำเนินการต่อ ข้อมูลที่ใหม่กว่าในเครื่องนี้จะถูกเขียนทับด้วยข้อมูลเก่าจากไฟล์\n\n` +
+              `คุณต้องการเขียนทับจริงหรือไม่?`;
+            if (!confirm(staleWarning)) return;
+          }
+        }
+
+        const confirmMsg = `ยืนยันการนำเข้าไฟล์ซิงค์สต็อกข้ามเครื่อง?\n\n` +
+          `• Batch ID: ${payload.batchId}\n` +
+          `• วันที่ส่งออก: ${new Date(payload.exportedAt).toLocaleString('th-TH')}\n` +
+          `• จำนวนสินค้า: ${payload.data.length.toLocaleString()} รายการ\n` +
+          `• ผลรวมยอดคงเหลือ: ${grandTot.toLocaleString()} ชิ้น\n\n` +
+          `ระบบจะบันทึกลงในเบราว์เซอร์นี้ (IndexedDB) และอัปเดตสต็อกหน้าร้านทันที`;
+
+        if (!confirm(confirmMsg)) return;
+
+        const batchRecord = {
+          batchId: payload.batchId,
+          data: payload.data,
+          meta: {
+            ...(payload.metadata || {}),
+            stockBatchId: payload.batchId,
+            importBatchId: payload.batchId,
+            batchId: payload.batchId,
+            importedAt: payload.exportedAt || new Date().toISOString(),
+            sourceFilename: payload.sourceFilename || file.name,
+            sourceFileHash: payload.sourceFileHash || "",
+            storageScope: 'LOCAL_BROWSER_ONLY',
+            schemaVersion: '2.0.0',
+            applicationVersion: '20260907-b2',
+            stats: payload.stats || { totalProducts: payload.data.length, grandTotal: grandTot },
+            status: 'SYNCED_IMPORT'
+          }
+        };
+
+        await StockStorageAdapter.saveBatch(batchRecord);
+
+        window.STOCK_DATABASE = payload.data;
+        window.STOCK_DATA = payload.data;
+        window.STOCK_METADATA = batchRecord.meta;
+
+        if (window.DataService && typeof window.DataService.setStockData === 'function') {
+          window.DataService.setStockData(payload.data);
+        }
+        if (typeof window.syncMasterStockData === "function") {
+          window.syncMasterStockData();
+        }
+
+        const lastSyncLabel = document.getElementById('lastSyncTime');
+        if (lastSyncLabel) {
+          lastSyncLabel.textContent = `Sync (${payload.batchId})`;
+        }
+
+        alert(`✓ ซิงค์ Stock Snapshot เรียบร้อยแล้ว!\n\n` +
+          `• Batch ID: ${payload.batchId}\n` +
+          `• จำนวนสินค้า: ${payload.data.length.toLocaleString()} รายการ\n` +
+          `• พร้อมใช้งานบน Dashboard ของเครื่องนี้ทันที`);
+
+        if (window.AppRouter) {
+          window.AppRouter.navigate('/stock');
+        }
+      } catch (err) {
+        console.error('[Import Sync Error]', err);
+        alert(`เกิดข้อผิดพลาดในการนำเข้าไฟล์ซิงค์:\n${err.message}`);
+      } finally {
+        const input = document.getElementById('stockSyncFileInput');
+        if (input) input.value = '';
+      }
     }
 
     static async renderHistoryView() {
