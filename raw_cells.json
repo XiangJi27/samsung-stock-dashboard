@@ -35,13 +35,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232239167B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F376A7B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223AEB110>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F393B110>"
       }
     }
   },
@@ -81,13 +81,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223AEAFD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F393AFD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223967BB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F37B7BB0>"
       }
     }
   },
@@ -127,13 +127,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223967490>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F37B7490>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023225FA27B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F5DF27B0>"
       }
     }
   },
@@ -173,13 +173,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223A349E0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F38889E0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223A34AF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F3888AF0>"
       }
     }
   },
@@ -219,13 +219,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232239CA650>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F381A650>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232252B6550>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F5106550>"
       }
     }
   },
@@ -265,13 +265,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223963B60>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F37B3B60>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223963110>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F37B3110>"
       }
     }
   },
@@ -311,13 +311,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023225293230>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F50E3230>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023225293310>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F50E3310>"
       }
     }
   },
@@ -357,13 +357,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227036EA0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6E86EA0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x000002322389FDD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F36EFDD0>"
       }
     }
   },
@@ -403,13 +403,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223B4BB90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F399BB90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232239B7AC0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F3807AC0>"
       }
     }
   },
@@ -449,13 +449,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232239B7B70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F3807B70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 12,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223B087D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F39587D0>"
       }
     }
   },
@@ -495,13 +495,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223B08910>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F3958910>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023223A0A690>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F385E690>"
       }
     }
   },
@@ -541,13 +541,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280914D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7EE14D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023228091550>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7EE1550>"
       }
     }
   },
@@ -587,13 +587,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x000002322805B4D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7EAB4D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x000002322805B540>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7EAB540>"
       }
     }
   },
@@ -633,13 +633,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227055F70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA61B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056030>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6270>"
       }
     }
   },
@@ -679,13 +679,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227055FD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6210>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270560F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6330>"
       }
     }
   },
@@ -725,13 +725,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056150>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6390>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056210>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6450>"
       }
     }
   },
@@ -771,13 +771,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056090>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA62D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270562D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6510>"
       }
     }
   },
@@ -817,13 +817,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270561B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA63F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056390>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA65D0>"
       }
     }
   },
@@ -863,13 +863,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056270>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA64B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056450>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6690>"
       }
     }
   },
@@ -909,13 +909,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056330>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6570>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056510>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6750>"
       }
     }
   },
@@ -955,13 +955,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270563F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6630>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270565D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6810>"
       }
     }
   },
@@ -1001,13 +1001,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270564B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA66F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056690>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA68D0>"
       }
     }
   },
@@ -1047,13 +1047,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056570>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA67B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056750>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6990>"
       }
     }
   },
@@ -1093,13 +1093,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056630>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6870>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227056810>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6A50>"
       }
     }
   },
@@ -1139,13 +1139,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270566F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6930>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270568D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA6B10>"
       }
     }
   },
@@ -1185,13 +1185,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057350>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7590>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057410>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7650>"
       }
     }
   },
@@ -1231,13 +1231,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270572F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7530>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270574D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7710>"
       }
     }
   },
@@ -1277,13 +1277,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270573B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA75F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057590>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA77D0>"
       }
     }
   },
@@ -1323,13 +1323,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057470>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA76B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057650>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7890>"
       }
     }
   },
@@ -1369,13 +1369,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057530>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7770>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057710>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7950>"
       }
     }
   },
@@ -1415,13 +1415,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270575F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7830>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270577D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7A10>"
       }
     }
   },
@@ -1461,13 +1461,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270576B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA78F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057890>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7AD0>"
       }
     }
   },
@@ -1507,13 +1507,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057770>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA79B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7B90>"
       }
     }
   },
@@ -1553,13 +1553,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057830>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7A70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057A10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7C50>"
       }
     }
   },
@@ -1599,13 +1599,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270578F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7B30>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057AD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7D10>"
       }
     }
   },
@@ -1645,13 +1645,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232270579B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7BF0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 11,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7DD0>"
       }
     }
   },
@@ -1691,13 +1691,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 9,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057A70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7CB0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 15,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057C50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7E90>"
       }
     }
   },
@@ -1737,13 +1737,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 9,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057B30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7D70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057D10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7F50>"
       }
     }
   },
@@ -1783,13 +1783,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F6EA7E30>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x0000023227057DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18050>"
       }
     }
   },
@@ -1829,13 +1829,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 9,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A07D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18A10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A08F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18B30>"
       }
     }
   },
@@ -1875,13 +1875,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0770>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F189B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A09B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18BF0>"
       }
     }
   },
@@ -1921,13 +1921,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0830>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18A70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0A70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18CB0>"
       }
     }
   },
@@ -1967,13 +1967,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18B90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0B30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18D70>"
       }
     }
   },
@@ -2013,13 +2013,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0A10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18C50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18E30>"
       }
     }
   },
@@ -2059,13 +2059,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0AD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18D10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0CB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18EF0>"
       }
     }
   },
@@ -2105,13 +2105,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18DD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0D70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18FB0>"
       }
     }
   },
@@ -2151,13 +2151,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0C50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18E90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0E30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19070>"
       }
     }
   },
@@ -2197,13 +2197,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0D10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F18F50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0EF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19130>"
       }
     }
   },
@@ -2243,13 +2243,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 11,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19010>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 9,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0FB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F191F0>"
       }
     }
   },
@@ -2289,13 +2289,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0E90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F190D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1070>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F192B0>"
       }
     }
   },
@@ -2335,13 +2335,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A0F50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19190>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1130>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19370>"
       }
     }
   },
@@ -2381,13 +2381,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1010>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19250>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A11F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19430>"
       }
     }
   },
@@ -2427,13 +2427,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A10D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F19310>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A12B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F194F0>"
       }
     }
   },
@@ -2473,13 +2473,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 13,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1EB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A0F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1F70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A1B0>"
       }
     }
   },
@@ -2519,13 +2519,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1E50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A090>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2030>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A270>"
       }
     }
   },
@@ -2565,13 +2565,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1F10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A150>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A20F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A330>"
       }
     }
   },
@@ -2611,13 +2611,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A1FD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A210>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A21B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A3F0>"
       }
     }
   },
@@ -2657,13 +2657,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2090>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A2D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2270>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A4B0>"
       }
     }
   },
@@ -2703,13 +2703,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2150>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A390>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2330>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A570>"
       }
     }
   },
@@ -2749,13 +2749,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2210>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A450>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A23F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A630>"
       }
     }
   },
@@ -2795,13 +2795,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A22D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A510>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A24B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A6F0>"
       }
     }
   },
@@ -2841,13 +2841,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2390>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A5D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2570>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A7B0>"
       }
     }
   },
@@ -2887,13 +2887,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2450>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A690>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2630>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A870>"
       }
     }
   },
@@ -2933,13 +2933,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2510>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A750>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A26F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A930>"
       }
     }
   },
@@ -2979,13 +2979,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A25D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A810>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A27B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A9F0>"
       }
     }
   },
@@ -3025,13 +3025,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2690>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A8D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2870>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1AAB0>"
       }
     }
   },
@@ -3071,13 +3071,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2750>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1A990>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2930>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1AB70>"
       }
     }
   },
@@ -3117,13 +3117,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A2810>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1AA50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A29F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1AC30>"
       }
     }
   },
@@ -3163,13 +3163,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3470>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B6B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3530>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B770>"
       }
     }
   },
@@ -3209,13 +3209,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3410>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B650>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A35F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B830>"
       }
     }
   },
@@ -3255,13 +3255,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A34D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B710>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A36B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B8F0>"
       }
     }
   },
@@ -3301,13 +3301,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3590>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B7D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3770>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B9B0>"
       }
     }
   },
@@ -3347,13 +3347,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3650>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B890>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3830>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BA70>"
       }
     }
   },
@@ -3393,13 +3393,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3710>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1B950>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A38F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BB30>"
       }
     }
   },
@@ -3439,13 +3439,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A37D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BA10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A39B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BBF0>"
       }
     }
   },
@@ -3485,13 +3485,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3890>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BAD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3A70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BCB0>"
       }
     }
   },
@@ -3531,13 +3531,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BB90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3B30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BD70>"
       }
     }
   },
@@ -3577,13 +3577,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3A10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BC50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BE30>"
       }
     }
   },
@@ -3623,13 +3623,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3AD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BD10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3CB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BEF0>"
       }
     }
   },
@@ -3669,13 +3669,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BDD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3D70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BFB0>"
       }
     }
   },
@@ -3715,13 +3715,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3C50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F1BE90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3E30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9C0B0>"
       }
     }
   },
@@ -3761,13 +3761,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 12,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3D10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9C050>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 12,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3EF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9C170>"
       }
     }
   },
@@ -3807,13 +3807,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9C110>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280A3FB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9C230>"
       }
     }
   },
@@ -3853,13 +3853,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCB30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CD70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCBF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CE30>"
       }
     }
   },
@@ -3899,13 +3899,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCAD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CD10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCCB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CEF0>"
       }
     }
   },
@@ -3945,13 +3945,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCB90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CDD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCD70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CFB0>"
       }
     }
   },
@@ -3991,13 +3991,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCC50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CE90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCE30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D070>"
       }
     }
   },
@@ -4037,13 +4037,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCD10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9CF50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCEF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D130>"
       }
     }
   },
@@ -4083,13 +4083,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCDD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D010>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCFB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D1F0>"
       }
     }
   },
@@ -4129,13 +4129,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCE90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D0D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD070>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D2B0>"
       }
     }
   },
@@ -4175,13 +4175,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CCF50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D190>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD130>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D370>"
       }
     }
   },
@@ -4221,13 +4221,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD010>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D250>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD1F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D430>"
       }
     }
   },
@@ -4267,13 +4267,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD0D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D310>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD2B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D4F0>"
       }
     }
   },
@@ -4313,13 +4313,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD190>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D3D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD370>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D5B0>"
       }
     }
   },
@@ -4359,13 +4359,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD250>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D490>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD430>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D670>"
       }
     }
   },
@@ -4405,13 +4405,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD310>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D550>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD4F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D730>"
       }
     }
   },
@@ -4451,13 +4451,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD3D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D610>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CD5B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9D7F0>"
       }
     }
   },
@@ -4497,13 +4497,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE030>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E270>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE0F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E330>"
       }
     }
   },
@@ -4543,13 +4543,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CDFD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E210>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE1B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E3F0>"
       }
     }
   },
@@ -4589,13 +4589,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE090>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E2D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE270>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E4B0>"
       }
     }
   },
@@ -4635,13 +4635,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE150>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E390>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE330>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E570>"
       }
     }
   },
@@ -4681,13 +4681,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE210>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E450>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE3F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E630>"
       }
     }
   },
@@ -4727,13 +4727,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE2D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E510>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE4B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E6F0>"
       }
     }
   },
@@ -4773,13 +4773,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE390>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E5D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE570>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E7B0>"
       }
     }
   },
@@ -4819,13 +4819,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE450>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E690>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE630>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E870>"
       }
     }
   },
@@ -4865,13 +4865,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE510>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E750>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE6F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E930>"
       }
     }
   },
@@ -4911,13 +4911,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE5D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E810>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE7B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E9F0>"
       }
     }
   },
@@ -4957,13 +4957,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE690>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E8D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE870>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EAB0>"
       }
     }
   },
@@ -5003,13 +5003,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE750>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9E990>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE930>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EB70>"
       }
     }
   },
@@ -5049,13 +5049,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE810>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EA50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE9F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EC30>"
       }
     }
   },
@@ -5095,13 +5095,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE8D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EB10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CEAB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9ECF0>"
       }
     }
   },
@@ -5141,13 +5141,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CE990>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EBD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CEB70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9EDB0>"
       }
     }
   },
@@ -5187,13 +5187,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF6B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9F8F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF770>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9F9B0>"
       }
     }
   },
@@ -5233,13 +5233,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF650>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9F890>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF830>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FA70>"
       }
     }
   },
@@ -5279,13 +5279,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF710>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9F950>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF8F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FB30>"
       }
     }
   },
@@ -5325,13 +5325,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF7D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FA10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF9B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FBF0>"
       }
     }
   },
@@ -5371,13 +5371,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF890>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FAD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFA70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FCB0>"
       }
     }
   },
@@ -5417,13 +5417,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CF950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FB90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFB30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FD70>"
       }
     }
   },
@@ -5463,13 +5463,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFA10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FC50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFBF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FE30>"
       }
     }
   },
@@ -5509,13 +5509,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFAD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FD10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFCB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FEF0>"
       }
     }
   },
@@ -5555,13 +5555,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFB90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FDD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFD70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FFB0>"
       }
     }
   },
@@ -5601,13 +5601,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFC50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F7F9FE90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFE30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80180B0>"
       }
     }
   },
@@ -5647,13 +5647,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFD10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018050>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFEF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018170>"
       }
     }
   },
@@ -5693,13 +5693,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFDD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018110>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFFB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018230>"
       }
     }
   },
@@ -5739,13 +5739,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232280CFE90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80181D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D00B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80182F0>"
       }
     }
   },
@@ -5785,13 +5785,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0050>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018290>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0170>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80183B0>"
       }
     }
   },
@@ -5831,13 +5831,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018E30>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0CB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018EF0>"
       }
     }
   },
@@ -5877,13 +5877,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018DD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0D70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018FB0>"
       }
     }
   },
@@ -5923,13 +5923,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0C50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018E90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0E30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019070>"
       }
     }
   },
@@ -5969,13 +5969,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0D10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8018F50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0EF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019130>"
       }
     }
   },
@@ -6015,13 +6015,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019010>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0FB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80191F0>"
       }
     }
   },
@@ -6061,13 +6061,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0E90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80190D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1070>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80192B0>"
       }
     }
   },
@@ -6107,13 +6107,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D0F50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019190>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1130>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019370>"
       }
     }
   },
@@ -6153,13 +6153,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1010>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019250>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D11F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019430>"
       }
     }
   },
@@ -6199,13 +6199,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D10D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019310>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D12B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80194F0>"
       }
     }
   },
@@ -6245,13 +6245,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1190>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80193D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1370>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80195B0>"
       }
     }
   },
@@ -6291,13 +6291,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1250>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019490>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1430>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019670>"
       }
     }
   },
@@ -6337,13 +6337,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1310>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019550>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D14F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019730>"
       }
     }
   },
@@ -6383,13 +6383,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D13D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8019610>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D15B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80197F0>"
       }
     }
   },
@@ -6429,13 +6429,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1490>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80196D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D1670>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80198B0>"
       }
     }
   },
@@ -6475,13 +6475,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D20F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A330>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D21B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A3F0>"
       }
     }
   },
@@ -6521,13 +6521,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2090>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A2D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2270>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A4B0>"
       }
     }
   },
@@ -6567,13 +6567,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2150>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A390>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2330>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A570>"
       }
     }
   },
@@ -6613,13 +6613,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2210>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A450>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D23F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A630>"
       }
     }
   },
@@ -6659,13 +6659,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D22D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A510>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D24B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A6F0>"
       }
     }
   },
@@ -6705,13 +6705,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2390>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A5D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2570>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A7B0>"
       }
     }
   },
@@ -6751,13 +6751,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2450>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A690>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2630>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A870>"
       }
     }
   },
@@ -6797,13 +6797,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2510>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A750>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D26F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A930>"
       }
     }
   },
@@ -6843,13 +6843,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D25D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A810>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D27B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A9F0>"
       }
     }
   },
@@ -6889,13 +6889,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2690>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A8D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2870>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801AAB0>"
       }
     }
   },
@@ -6935,13 +6935,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2750>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801A990>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2930>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801AB70>"
       }
     }
   },
@@ -6981,13 +6981,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2810>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801AA50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D29F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801AC30>"
       }
     }
   },
@@ -7027,13 +7027,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D28D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801AB10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2AB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801ACF0>"
       }
     }
   },
@@ -7073,13 +7073,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2990>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801ABD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D2B70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801ADB0>"
       }
     }
   },
@@ -7119,13 +7119,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3530>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B770>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D35F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B830>"
       }
     }
   },
@@ -7165,13 +7165,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D34D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B710>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D36B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B8F0>"
       }
     }
   },
@@ -7211,13 +7211,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3590>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B7D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3770>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B9B0>"
       }
     }
   },
@@ -7257,13 +7257,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3650>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B890>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3830>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BA70>"
       }
     }
   },
@@ -7303,13 +7303,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3710>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801B950>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D38F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BB30>"
       }
     }
   },
@@ -7349,13 +7349,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D37D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BA10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D39B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BBF0>"
       }
     }
   },
@@ -7395,13 +7395,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3890>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BAD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3A70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BCB0>"
       }
     }
   },
@@ -7441,13 +7441,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BB90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3B30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BD70>"
       }
     }
   },
@@ -7487,13 +7487,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3A10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BC50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BE30>"
       }
     }
   },
@@ -7533,13 +7533,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3AD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BD10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3CB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BEF0>"
       }
     }
   },
@@ -7579,13 +7579,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BDD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3D70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BFB0>"
       }
     }
   },
@@ -7625,13 +7625,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3C50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F801BE90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3E30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A40B0>"
       }
     }
   },
@@ -7671,13 +7671,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4110>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 11,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281D3FB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4230>"
       }
     }
   },
@@ -7717,13 +7717,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A89B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4BF0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8A70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4CB0>"
       }
     }
   },
@@ -7763,13 +7763,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4B90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8B30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4D70>"
       }
     }
   },
@@ -7809,13 +7809,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8A10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4C50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4E30>"
       }
     }
   },
@@ -7855,13 +7855,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8AD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4D10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8CB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4EF0>"
       }
     }
   },
@@ -7901,13 +7901,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4DD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8D70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4FB0>"
       }
     }
   },
@@ -7947,13 +7947,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8C50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4E90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8E30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5070>"
       }
     }
   },
@@ -7993,13 +7993,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8D10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A4F50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8EF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5130>"
       }
     }
   },
@@ -8039,13 +8039,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5010>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 10,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8FB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A51F0>"
       }
     }
   },
@@ -8085,13 +8085,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8E90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A50D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9070>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A52B0>"
       }
     }
   },
@@ -8131,13 +8131,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A8F50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5190>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9130>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5370>"
       }
     }
   },
@@ -8177,13 +8177,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9010>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5250>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A91F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5430>"
       }
     }
   },
@@ -8223,13 +8223,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A90D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A5310>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A92B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A54F0>"
       }
     }
   },
@@ -8269,13 +8269,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9190>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A53D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9370>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A55B0>"
       }
     }
   },
@@ -8315,13 +8315,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9EB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A60F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9F70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A61B0>"
       }
     }
   },
@@ -8361,13 +8361,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 10,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9E50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6090>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 9,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA030>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6270>"
       }
     }
   },
@@ -8407,13 +8407,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9F10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6150>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA0F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6330>"
       }
     }
   },
@@ -8453,13 +8453,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281A9FD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6210>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA1B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A63F0>"
       }
     }
   },
@@ -8499,13 +8499,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA090>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A62D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA270>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A64B0>"
       }
     }
   },
@@ -8545,13 +8545,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA150>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6390>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA330>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6570>"
       }
     }
   },
@@ -8591,13 +8591,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA210>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6450>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA3F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6630>"
       }
     }
   },
@@ -8637,13 +8637,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA2D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6510>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA4B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A66F0>"
       }
     }
   },
@@ -8683,13 +8683,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA390>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A65D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA570>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A67B0>"
       }
     }
   },
@@ -8729,13 +8729,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA450>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6690>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA630>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6870>"
       }
     }
   },
@@ -8775,13 +8775,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA510>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6750>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA6F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6930>"
       }
     }
   },
@@ -8821,13 +8821,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA5D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6810>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA7B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A69F0>"
       }
     }
   },
@@ -8867,13 +8867,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA690>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A68D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA870>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6AB0>"
       }
     }
   },
@@ -8913,13 +8913,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA750>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6990>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA930>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6B70>"
       }
     }
   },
@@ -8959,13 +8959,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA810>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6A50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AA9F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A6C30>"
       }
     }
   },
@@ -9005,13 +9005,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB530>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7770>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB5F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7830>"
       }
     }
   },
@@ -9051,13 +9051,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB4D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7710>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB6B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A78F0>"
       }
     }
   },
@@ -9097,13 +9097,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB590>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A77D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB770>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A79B0>"
       }
     }
   },
@@ -9143,13 +9143,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB650>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7890>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB830>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7A70>"
       }
     }
   },
@@ -9189,13 +9189,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB710>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7950>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB8F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7B30>"
       }
     }
   },
@@ -9235,13 +9235,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 10,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB7D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7A10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 8,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB9B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7BF0>"
       }
     }
   },
@@ -9281,13 +9281,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB890>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7AD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABA70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7CB0>"
       }
     }
   },
@@ -9327,13 +9327,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281AB950>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7B90>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 3,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABB30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7D70>"
       }
     }
   },
@@ -9373,13 +9373,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABA10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7C50>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABBF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7E30>"
       }
     }
   },
@@ -9419,13 +9419,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABAD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7D10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABD10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7F50>"
       }
     }
   },
@@ -9465,13 +9465,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 4,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABB90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7DD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABDD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124050>"
       }
     }
   },
@@ -9511,13 +9511,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABCB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F80A7EF0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABE90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124110>"
       }
     }
   },
@@ -9557,13 +9557,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABD70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81240B0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 2,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABFB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124230>"
       }
     }
   },
@@ -9603,13 +9603,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232281ABE30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81241D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D40B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81242F0>"
       }
     }
   },
@@ -9649,13 +9649,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4B30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124D70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 5,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4BF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124E30>"
       }
     }
   },
@@ -9695,13 +9695,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 6,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4AD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124D10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": 7,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4D10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124F50>"
       }
     }
   },
@@ -9741,13 +9741,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4B90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124DD0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4DD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125010>"
       }
     }
   },
@@ -9787,13 +9787,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4CB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124EF0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4E90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81250D0>"
       }
     }
   },
@@ -9833,13 +9833,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4D70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8124FB0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4F50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125190>"
       }
     }
   },
@@ -9879,13 +9879,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4E30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125070>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5070>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81252B0>"
       }
     }
   },
@@ -9925,13 +9925,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D4EF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125130>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5130>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125370>"
       }
     }
   },
@@ -9971,13 +9971,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5010>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125250>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D51F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125430>"
       }
     }
   },
@@ -10017,13 +10017,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D50D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125310>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D52B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81254F0>"
       }
     }
   },
@@ -10063,13 +10063,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5190>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81253D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5370>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81255B0>"
       }
     }
   },
@@ -10109,13 +10109,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": 1,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5250>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125490>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5430>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125670>"
       }
     }
   },
@@ -10155,13 +10155,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5310>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125550>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D54F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125730>"
       }
     }
   },
@@ -10201,13 +10201,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D53D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125610>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D55B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81257F0>"
       }
     }
   },
@@ -10247,13 +10247,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5490>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81256D0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D56D0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125910>"
       }
     }
   },
@@ -10293,13 +10293,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5CD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125F10>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5D90>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125FD0>"
       }
     }
   },
@@ -10339,13 +10339,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5C70>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125EB0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5E50>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8126090>"
       }
     }
   },
@@ -10385,13 +10385,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5D30>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8125F70>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5F10>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8126150>"
       }
     }
   },
@@ -10431,13 +10431,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5DF0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8126030>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D6030>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8126270>"
       }
     }
   },
@@ -10477,13 +10477,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5EB0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81260F0>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D60F0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8126330>"
       }
     }
   },
@@ -10523,13 +10523,13 @@
         "column": "E",
         "headerPath": "Stock ชั้น1",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D5FD0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F8126210>"
       },
       "F": {
         "column": "F",
         "headerPath": "Stock ชั้น2",
         "value": null,
-        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000232282D61B0>"
+        "formula": "<openpyxl.worksheet.formula.ArrayFormula object at 0x00000262F81263F0>"
       }
     }
   },

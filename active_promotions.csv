@@ -1,675 +1,675 @@
 ﻿promoId,model,pn,productCodeType,saleMode,rrp,discount,netPrice,couponCode,tradeUpCode,tradeUpDiscount,sfPlusEligible,studentEligible,giftSamsung,giftCopperwired,validationStatus,sourceFile,sourceSheet,sourceRow
-RET-อัพเดท-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
-RET-อัพเดท-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
-RET-อัพเดท-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,,57900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
-RET-อัพเดท-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
-RET-อัพเดท-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
-RET-อัพเดท-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
-RET-อัพเดท-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,,45900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
-RET-อัพเดท-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
-RET-อัพเดท-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
-RET-อัพเดท-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
-RET-อัพเดท-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,,37900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
-RET-อัพเดท-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,7
-RET-อัพเดท-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,8
-RET-อัพเดท-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,9
-RET-อัพเดท-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,10
-RET-อัพเดท-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,11
-RET-อัพเดท-R12-SF_PLUS,Galaxy S26 FE  NEW,,STANDARD_SM,SF_PLUS,28900.0,,24900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,12
+RET-อัพเดท-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,5000.0,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
+RET-อัพเดท-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
+RET-อัพเดท-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,9000.0,57900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,4
+RET-อัพเดท-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,5000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,10000.0,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,8235,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,9000.0,45900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,5
+RET-อัพเดท-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,5000.0,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,7035,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,9000.0,37900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,6
+RET-อัพเดท-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,12000.0,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,7
+RET-อัพเดท-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,10000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,8
+RET-อัพเดท-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,12000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,9
+RET-อัพเดท-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,6000.0,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,10
+RET-อัพเดท-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,12000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,11
+RET-อัพเดท-R12-SF_PLUS,Galaxy S26 FE  NEW,,STANDARD_SM,SF_PLUS,28900.0,4000.0,24900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,12
 RET-อัพเดท-R14-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,14
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,3000.0,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,14
 RET-อัพเดท-R14-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,14
+(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,4035,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,14
 RET-อัพเดท-R15-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,15
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,3000.0,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,15
 RET-อัพเดท-R15-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,15
+(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,3435,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,15
 RET-อัพเดท-R16-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,16
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,16
 RET-อัพเดท-R17-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,17
-RET-อัพเดท-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,18
-RET-อัพเดท-R19-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,19
-RET-อัพเดท-R20-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,20
-RET-อัพเดท-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,21
-RET-อัพเดท-R22-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,22
-RET-อัพเดท-R23-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,23
-RET-อัพเดท-R24-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,24
-RET-อัพเดท-R25-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,25
-RET-อัพเดท-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,26
-RET-อัพเดท-R27-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,27
-RET-อัพเดท-R28-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,28
-RET-อัพเดท-R29-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,29
-RET-อัพเดท-R30-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,30
-RET-อัพเดท-R31-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,20999.0,,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,31
-RET-อัพเดท-R31-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,31
-RET-อัพเดท-R32-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,17999.0,,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,32
-RET-อัพเดท-R32-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,32
-RET-อัพเดท-R33-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,16999.0,,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,33
-RET-อัพเดท-R33-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,33
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,17
+RET-อัพเดท-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,7000.0,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,18
+RET-อัพเดท-R19-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,5000.0,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,19
+RET-อัพเดท-R20-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,20
+RET-อัพเดท-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,7000.0,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,21
+RET-อัพเดท-R22-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,22
+RET-อัพเดท-R23-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,5000.0,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,23
+RET-อัพเดท-R24-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,10000.0,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,24
+RET-อัพเดท-R25-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,10000.0,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,25
+RET-อัพเดท-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,18000.0,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,26
+RET-อัพเดท-R27-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,18000.0,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,27
+RET-อัพเดท-R28-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,18000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,28
+RET-อัพเดท-R29-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,11000.0,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,29
+RET-อัพเดท-R30-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,11000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,30
+RET-อัพเดท-R31-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,20999.0,0,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,31
+RET-อัพเดท-R31-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,31
+RET-อัพเดท-R32-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,17999.0,0,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,32
+RET-อัพเดท-R32-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,32
+RET-อัพเดท-R33-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,16999.0,0,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,33
+RET-อัพเดท-R33-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,33
 RET-อัพเดท-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,20999.0,,17999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,34
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,20999.0,3000.0,17999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,34
 RET-อัพเดท-R34-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,34
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,34
 RET-อัพเดท-R35-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,17999.0,,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,35
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,35
 RET-อัพเดท-R35-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,35
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,35
 RET-อัพเดท-R36-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,16999.0,,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,36
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,36
 RET-อัพเดท-R36-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,36
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,36
 RET-อัพเดท-R37-SF_PLUS,"Galaxy A37 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,13999.0,,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,13999.0,0,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,37
 RET-อัพเดท-R37-STUDENT,"Galaxy A37 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,13999.0,,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,13999.0,560,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,37
 RET-อัพเดท-R38-SF_PLUS,"Galaxy A27 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10999.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,38
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10999.0,1000.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,38
 RET-อัพเดท-R39-SF_PLUS,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10599.0,,8999.0,02,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10599.0,1600.0,8999.0,02,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
 RET-อัพเดท-R39-STUDENT,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,10599.0,,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,10599.0,1060,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
 RET-อัพเดท-R39-FLASHSALE,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STANDARD_PAYMENT,10599.0,,8999.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STANDARD_PAYMENT,10599.0,1600.0,8999.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,39
 RET-อัพเดท-R40-SF_PLUS,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,8999.0,,7499.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,40
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,8999.0,1500.0,7499.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,40
 RET-อัพเดท-R41-SF_PLUS,"Galaxy A17 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,7999.0,,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,41
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,7999.0,1000.0,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,41
 RET-อัพเดท-R42-STUDENT,"Galaxy A07 5G
-(SF+ campaign)",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,42
+(SF+ campaign)",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,42
 RET-อัพเดท-R43-STANDARD_PAYMENT,"Galaxy A07 5G
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,6999.0,,6499.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,43
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,6999.0,500.0,6499.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,43
 RET-อัพเดท-R43-STUDENT,"Galaxy A07 5G
-(ไม่ร่วม SF+)",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,43
+(ไม่ร่วม SF+)",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,43
 RET-อัพเดท-R44-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5999.0,,4999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,44
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5999.0,1000.0,4999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,44
 RET-อัพเดท-R45-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5299.0,,4299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,45
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5299.0,1000.0,4299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,45
 RET-อัพเดท-R46-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,4599.0,,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,46
-RET-19 -27-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,4
-RET-19 -27-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,4
-RET-19 -27-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,,57900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,4
-RET-19 -27-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
-RET-19 -27-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
-RET-19 -27-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
-RET-19 -27-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,,45900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
-RET-19 -27-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
-RET-19 -27-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
-RET-19 -27-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
-RET-19 -27-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,,37900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
-RET-19 -27-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,7
-RET-19 -27-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,8
-RET-19 -27-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,9
-RET-19 -27-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,10
-RET-19 -27-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,11
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,4599.0,800.0,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,อัพเดท 28 Aug - 6 Sep ล่าสุด,46
+RET-19 -27-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,5000.0,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,4
+RET-19 -27-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,4
+RET-19 -27-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,9000.0,57900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,4
+RET-19 -27-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,5000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
+RET-19 -27-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,10000.0,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
+RET-19 -27-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,8235,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
+RET-19 -27-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,9000.0,45900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,5
+RET-19 -27-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,5000.0,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
+RET-19 -27-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
+RET-19 -27-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,7035,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
+RET-19 -27-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,9000.0,37900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,6
+RET-19 -27-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,12000.0,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,7
+RET-19 -27-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,10000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,8
+RET-19 -27-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,12000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,9
+RET-19 -27-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,6000.0,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,10
+RET-19 -27-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,12000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,11
 RET-19 -27-R12-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,12
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,3000.0,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,12
 RET-19 -27-R12-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,12
+(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,4035,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,12
 RET-19 -27-R13-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,13
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,3000.0,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,13
 RET-19 -27-R13-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,13
+(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,3435,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,13
 RET-19 -27-R14-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,14
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,14
 RET-19 -27-R15-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,15
-RET-19 -27-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,16
-RET-19 -27-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,17
-RET-19 -27-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,18
-RET-19 -27-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,19
-RET-19 -27-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,20
-RET-19 -27-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,21
-RET-19 -27-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,22
-RET-19 -27-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,23
-RET-19 -27-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,24
-RET-19 -27-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,25
-RET-19 -27-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,26
-RET-19 -27-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,27
-RET-19 -27-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,28
-RET-19 -27-R29-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,20999.0,,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,29
-RET-19 -27-R29-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,29
-RET-19 -27-R30-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,17999.0,,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,30
-RET-19 -27-R30-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,30
-RET-19 -27-R31-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,16999.0,,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,31
-RET-19 -27-R31-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,31
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,15
+RET-19 -27-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,7000.0,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,16
+RET-19 -27-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,5000.0,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,17
+RET-19 -27-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,18
+RET-19 -27-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,7000.0,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,19
+RET-19 -27-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,20
+RET-19 -27-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,5000.0,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,21
+RET-19 -27-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,10000.0,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,22
+RET-19 -27-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,10000.0,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,23
+RET-19 -27-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,18000.0,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,24
+RET-19 -27-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,18000.0,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,25
+RET-19 -27-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,18000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,26
+RET-19 -27-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,11000.0,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,27
+RET-19 -27-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,11000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,28
+RET-19 -27-R29-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,20999.0,0,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,29
+RET-19 -27-R29-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,29
+RET-19 -27-R30-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,17999.0,0,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,30
+RET-19 -27-R30-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,30
+RET-19 -27-R31-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,16999.0,0,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,31
+RET-19 -27-R31-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,31
 RET-19 -27-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,20999.0,,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,32
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,20999.0,2000.0,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,32
 RET-19 -27-R32-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,32
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,32
 RET-19 -27-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,17999.0,,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,33
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,33
 RET-19 -27-R33-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,33
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,33
 RET-19 -27-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,16999.0,,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,34
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,34
 RET-19 -27-R34-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,34
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,34
 RET-19 -27-R35-SF_PLUS,"Galaxy A37 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,13999.0,,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,35
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,13999.0,0,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,35
 RET-19 -27-R35-STUDENT,"Galaxy A37 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,13999.0,,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,35
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,13999.0,560,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,35
 RET-19 -27-R36-SF_PLUS,"Galaxy A27 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10999.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,36
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10999.0,1000.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,36
 RET-19 -27-R37-SF_PLUS,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10599.0,,8999.0,02,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10599.0,1600.0,8999.0,02,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,37
 RET-19 -27-R37-STUDENT,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,10599.0,,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,10599.0,1060,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,37
 RET-19 -27-R37-FLASHSALE,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STANDARD_PAYMENT,10599.0,,8999.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STANDARD_PAYMENT,10599.0,1600.0,8999.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,37
 RET-19 -27-R38-SF_PLUS,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,8999.0,,7499.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,38
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,8999.0,1500.0,7499.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,38
 RET-19 -27-R39-SF_PLUS,"Galaxy A17 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,7999.0,,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,39
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,7999.0,1000.0,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,39
 RET-19 -27-R40-STUDENT,"Galaxy A07 5G
-(SF+ campaign)",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,40
+(SF+ campaign)",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,40
 RET-19 -27-R41-STANDARD_PAYMENT,"Galaxy A07 5G
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,6999.0,,6499.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,41
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,6999.0,500.0,6499.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,41
 RET-19 -27-R41-STUDENT,"Galaxy A07 5G
-(ไม่ร่วม SF+)",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,41
+(ไม่ร่วม SF+)",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,41
 RET-19 -27-R42-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5999.0,,4999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,42
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5999.0,1000.0,4999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,42
 RET-19 -27-R43-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5299.0,,4299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,43
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5299.0,1000.0,4299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,43
 RET-19 -27-R44-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,4599.0,,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,44
-RET- 17-18-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,4
-RET- 17-18-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,4
-RET- 17-18-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,,58900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,4
-RET- 17-18-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
-RET- 17-18-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
-RET- 17-18-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
-RET- 17-18-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,,46900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
-RET- 17-18-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
-RET- 17-18-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
-RET- 17-18-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
-RET- 17-18-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,,39900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
-RET- 17-18-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,7
-RET- 17-18-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,8
-RET- 17-18-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,9
-RET- 17-18-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,10
-RET- 17-18-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,11
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,4599.0,800.0,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx,19 -27  Aug,44
+RET- 17-18-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,5000.0,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,4
+RET- 17-18-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,4
+RET- 17-18-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,8000.0,58900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,4
+RET- 17-18-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,5000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
+RET- 17-18-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,10000.0,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
+RET- 17-18-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,8235,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
+RET- 17-18-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,8000.0,46900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,5
+RET- 17-18-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,5000.0,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
+RET- 17-18-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
+RET- 17-18-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,7035,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
+RET- 17-18-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,7000.0,39900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,6
+RET- 17-18-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,12000.0,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,7
+RET- 17-18-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,10000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,8
+RET- 17-18-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,12000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,9
+RET- 17-18-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,6000.0,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,10
+RET- 17-18-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,12000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,11
 RET- 17-18-R12-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,12
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,3000.0,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,12
 RET- 17-18-R12-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,12
+(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,4035,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,12
 RET- 17-18-R13-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,13
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,3000.0,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,13
 RET- 17-18-R13-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,13
+(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,3435,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,13
 RET- 17-18-R14-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,14
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,14
 RET- 17-18-R15-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,15
-RET- 17-18-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,16
-RET- 17-18-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,17
-RET- 17-18-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,18
-RET- 17-18-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,19
-RET- 17-18-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,20
-RET- 17-18-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,21
-RET- 17-18-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,22
-RET- 17-18-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,23
-RET- 17-18-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,24
-RET- 17-18-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,25
-RET- 17-18-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,26
-RET- 17-18-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,27
-RET- 17-18-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,28
-RET- 17-18-R29-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,20999.0,,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,29
-RET- 17-18-R29-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,29
-RET- 17-18-R30-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,17999.0,,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,30
-RET- 17-18-R30-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,30
-RET- 17-18-R31-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,16999.0,,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,31
-RET- 17-18-R31-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,31
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,15
+RET- 17-18-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,7000.0,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,16
+RET- 17-18-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,5000.0,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,17
+RET- 17-18-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,18
+RET- 17-18-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,7000.0,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,19
+RET- 17-18-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,20
+RET- 17-18-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,5000.0,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,21
+RET- 17-18-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,10000.0,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,22
+RET- 17-18-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,10000.0,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,23
+RET- 17-18-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,18000.0,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,24
+RET- 17-18-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,18000.0,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,25
+RET- 17-18-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,18000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,26
+RET- 17-18-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,11000.0,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,27
+RET- 17-18-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,11000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,28
+RET- 17-18-R29-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,20999.0,0,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,29
+RET- 17-18-R29-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,29
+RET- 17-18-R30-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,17999.0,0,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,30
+RET- 17-18-R30-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,30
+RET- 17-18-R31-SF_PLUS,Galaxy A57 5G,,STANDARD_SM,SF_PLUS,16999.0,0,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,31
+RET- 17-18-R31-STUDENT,Galaxy A57 5G,,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,31
 RET- 17-18-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,20999.0,,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,32
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,20999.0,2000.0,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,32
 RET- 17-18-R32-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,32
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,32
 RET- 17-18-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,17999.0,,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,33
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,33
 RET- 17-18-R33-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,33
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,33
 RET- 17-18-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,16999.0,,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,34
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,34
 RET- 17-18-R34-STUDENT,"Galaxy A57 5G 
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,34
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,34
 RET- 17-18-R35-SF_PLUS,"Galaxy A37 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,13999.0,,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,35
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,13999.0,0,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,35
 RET- 17-18-R35-STUDENT,"Galaxy A37 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,13999.0,,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,35
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,13999.0,560,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,35
 RET- 17-18-R36-SF_PLUS,"Galaxy A27 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10999.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,36
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10999.0,1000.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,36
 RET- 17-18-R37-SF_PLUS,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10599.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,10599.0,600.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,37
 RET- 17-18-R37-STUDENT,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,10599.0,,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STUDENT,10599.0,1060,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,37
 RET- 17-18-R37-FLASHSALE,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STANDARD_PAYMENT,10599.0,,8999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,37
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,STANDARD_PAYMENT,10599.0,1600.0,8999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,37
 RET- 17-18-R38-SF_PLUS,"Galaxy A17 5G
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,8999.0,,7499.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,38
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,8999.0,1500.0,7499.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,38
 RET- 17-18-R39-SF_PLUS,"Galaxy A17 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,7999.0,,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,39
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,7999.0,1000.0,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,39
 RET- 17-18-R40-STUDENT,"Galaxy A07 5G
-(SF+ campaign)",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,40
+(SF+ campaign)",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,40
 RET- 17-18-R41-STANDARD_PAYMENT,"Galaxy A07 5G
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,6999.0,,6499.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,41
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,6999.0,500.0,6499.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,41
 RET- 17-18-R41-STUDENT,"Galaxy A07 5G
-(ไม่ร่วม SF+)",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,41
+(ไม่ร่วม SF+)",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,41
 RET- 17-18-R42-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5999.0,,4999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,42
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5999.0,1000.0,4999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,42
 RET- 17-18-R43-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5299.0,,4299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,43
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,5299.0,1000.0,4299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,43
 RET- 17-18-R44-SF_PLUS,"Galaxy A07 LTE
-(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,4599.0,,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,44
-RET- 14 Au-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,4
-RET- 14 Au-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,4
-RET- 14 Au-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,,58900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,4
-RET- 14 Au-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
-RET- 14 Au-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
-RET- 14 Au-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
-RET- 14 Au-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,,46900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
-RET- 14 Au-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
-RET- 14 Au-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
-RET- 14 Au-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
-RET- 14 Au-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,,39900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
-RET- 14 Au-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,7
-RET- 14 Au-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,8
-RET- 14 Au-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,9
-RET- 14 Au-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,10
-RET- 14 Au-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,11
+(ตั้งแต่ 17 สิงหาคม - 6 กันยายน 69)",,STANDARD_SM,SF_PLUS,4599.0,800.0,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 17-18  Aug,44
+RET- 14 Au-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,5000.0,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,4
+RET- 14 Au-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,4
+RET- 14 Au-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,8000.0,58900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,4
+RET- 14 Au-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,5000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
+RET- 14 Au-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,10000.0,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
+RET- 14 Au-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,8235,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
+RET- 14 Au-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,8000.0,46900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,5
+RET- 14 Au-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,5000.0,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
+RET- 14 Au-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
+RET- 14 Au-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,7035,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
+RET- 14 Au-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,7000.0,39900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,6
+RET- 14 Au-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,12000.0,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,7
+RET- 14 Au-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,10000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,8
+RET- 14 Au-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,12000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,9
+RET- 14 Au-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,6000.0,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,10
+RET- 14 Au-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,12000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,11
 RET- 14 Au-R12-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,12
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,3000.0,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,12
 RET- 14 Au-R12-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,12
+(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,4035,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,12
 RET- 14 Au-R13-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,13
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,3000.0,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,13
 RET- 14 Au-R13-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,13
+(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,3435,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,13
 RET- 14 Au-R14-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,14
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,14
 RET- 14 Au-R15-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,15
-RET- 14 Au-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,16
-RET- 14 Au-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,17
-RET- 14 Au-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,18
-RET- 14 Au-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,19
-RET- 14 Au-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,20
-RET- 14 Au-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,21
-RET- 14 Au-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,22
-RET- 14 Au-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,23
-RET- 14 Au-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,24
-RET- 14 Au-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,25
-RET- 14 Au-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,26
-RET- 14 Au-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,27
-RET- 14 Au-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,28
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,15
+RET- 14 Au-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,7000.0,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,16
+RET- 14 Au-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,5000.0,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,17
+RET- 14 Au-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,18
+RET- 14 Au-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,7000.0,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,19
+RET- 14 Au-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,20
+RET- 14 Au-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,5000.0,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,21
+RET- 14 Au-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,10000.0,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,22
+RET- 14 Au-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,10000.0,37900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,23
+RET- 14 Au-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,18000.0,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,24
+RET- 14 Au-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,18000.0,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,25
+RET- 14 Au-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,18000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,26
+RET- 14 Au-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,11000.0,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,27
+RET- 14 Au-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,11000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,28
 RET- 14 Au-R29-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,20999.0,,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,29
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,20999.0,0,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,29
 RET- 14 Au-R29-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,29
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,29
 RET- 14 Au-R30-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,17999.0,,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,30
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,17999.0,0,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,30
 RET- 14 Au-R30-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,30
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,30
 RET- 14 Au-R31-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,16999.0,,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,31
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,16999.0,0,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,31
 RET- 14 Au-R31-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,31
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,31
 RET- 14 Au-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,20999.0,,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,32
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,20999.0,2000.0,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,32
 RET- 14 Au-R32-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,32
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,32
 RET- 14 Au-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,17999.0,,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,33
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,33
 RET- 14 Au-R33-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,33
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,33
 RET- 14 Au-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,16999.0,,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,34
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,34
 RET- 14 Au-R34-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,34
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,34
 RET- 14 Au-R35-SF_PLUS,"Galaxy A37 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,13999.0,,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,35
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,13999.0,0,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,35
 RET- 14 Au-R35-STUDENT,"Galaxy A37 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,13999.0,,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,35
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,13999.0,560,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,35
 RET- 14 Au-R36-SF_PLUS,"Galaxy A27 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10999.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,36
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10999.0,1000.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,36
 RET- 14 Au-R37-SF_PLUS,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10599.0,,8999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10599.0,1600.0,8999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,37
 RET- 14 Au-R37-STUDENT,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,10599.0,,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,10599.0,1060,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,37
 RET- 14 Au-R37-FLASHSALE,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,10599.0,,8999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,10599.0,1600.0,8999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,37
 RET- 14 Au-R38-SF_PLUS,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,8999.0,,7299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,38
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,8999.0,1700.0,7299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,38
 RET- 14 Au-R39-SF_PLUS,"Galaxy A17 LTE
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,7999.0,,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,39
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,7999.0,1000.0,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,39
 RET- 14 Au-R40-SF_PLUS,"Galaxy A07 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,6999.0,,6999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,40
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,6999.0,0,6999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,40
 RET- 14 Au-R40-STUDENT,"Galaxy A07 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,40
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,40
 RET- 14 Au-R41-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,5999.0,,5999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,41
+6-19 July",,STANDARD_SM,SF_PLUS,5999.0,0,5999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,41
 RET- 14 Au-R42-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,5299.0,,3999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,42
+6-19 July",,STANDARD_SM,SF_PLUS,5299.0,1300.0,3999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,42
 RET- 14 Au-R43-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,4599.0,,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,43
-RET- 7 Aug-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,4
-RET- 7 Aug-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,4
-RET- 7 Aug-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,,58900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,4
-RET- 7 Aug-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
-RET- 7 Aug-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
-RET- 7 Aug-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
-RET- 7 Aug-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,,46900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
-RET- 7 Aug-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
-RET- 7 Aug-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
-RET- 7 Aug-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
-RET- 7 Aug-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,,39900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
-RET- 7 Aug-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,7
-RET- 7 Aug-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,8
-RET- 7 Aug-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,9
-RET- 7 Aug-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,10
-RET- 7 Aug-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,11
+6-19 July",,STANDARD_SM,SF_PLUS,4599.0,800.0,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 14 Aug -16 Aug,43
+RET- 7 Aug-R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,5000.0,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,4
+RET- 7 Aug-R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,4
+RET- 7 Aug-R4-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,66900.0,8000.0,58900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,4
+RET- 7 Aug-R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,5000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
+RET- 7 Aug-R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,10000.0,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
+RET- 7 Aug-R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,8235,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
+RET- 7 Aug-R5-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,54900.0,8000.0,46900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,5
+RET- 7 Aug-R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,5000.0,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
+RET- 7 Aug-R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
+RET- 7 Aug-R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,7035,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
+RET- 7 Aug-R6-FLASHSALE,Galaxy S26 Ultra,,STANDARD_SM,STANDARD_PAYMENT,46900.0,7000.0,39900.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,6
+RET- 7 Aug-R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,12000.0,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,7
+RET- 7 Aug-R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,10000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,8
+RET- 7 Aug-R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,12000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,9
+RET- 7 Aug-R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,6000.0,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,10
+RET- 7 Aug-R11-SF_PLUS,Galaxy S25 Ultra,,PASS_F,SF_PLUS,42900.0,12000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,11
 RET- 7 Aug-R12-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,12
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,3000.0,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,12
 RET- 7 Aug-R12-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,12
+(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,4035,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,12
 RET- 7 Aug-R13-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,13
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,3000.0,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,13
 RET- 7 Aug-R13-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,13
+(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,3435,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,13
 RET- 7 Aug-R14-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,14
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,14
 RET- 7 Aug-R15-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,15
-RET- 7 Aug-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,16
-RET- 7 Aug-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,17
-RET- 7 Aug-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,18
-RET- 7 Aug-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,19
-RET- 7 Aug-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,20
-RET- 7 Aug-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,21
-RET- 7 Aug-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,22
-RET- 7 Aug-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,23
-RET- 7 Aug-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,24
-RET- 7 Aug-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,25
-RET- 7 Aug-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,26
-RET- 7 Aug-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,27
-RET- 7 Aug-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,28
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,15
+RET- 7 Aug-R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,16
+RET- 7 Aug-R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,17
+RET- 7 Aug-R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,18
+RET- 7 Aug-R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,19
+RET- 7 Aug-R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,20
+RET- 7 Aug-R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,21
+RET- 7 Aug-R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,22
+RET- 7 Aug-R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,23
+RET- 7 Aug-R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,18000.0,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,24
+RET- 7 Aug-R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,18000.0,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,25
+RET- 7 Aug-R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,18000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,26
+RET- 7 Aug-R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,11000.0,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,27
+RET- 7 Aug-R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,11000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,28
 RET- 7 Aug-R29-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,20999.0,,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,29
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,20999.0,0,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,29
 RET- 7 Aug-R29-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,29
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,29
 RET- 7 Aug-R30-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,17999.0,,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,30
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,17999.0,0,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,30
 RET- 7 Aug-R30-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,30
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,30
 RET- 7 Aug-R31-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,16999.0,,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,31
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,16999.0,0,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,31
 RET- 7 Aug-R31-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,31
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,31
 RET- 7 Aug-R32-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,20999.0,,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,32
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,20999.0,2000.0,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,32
 RET- 7 Aug-R32-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,32
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,32
 RET- 7 Aug-R33-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,17999.0,,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,33
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,33
 RET- 7 Aug-R33-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,33
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,33
 RET- 7 Aug-R34-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,16999.0,,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,34
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,34
 RET- 7 Aug-R34-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,34
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,34
 RET- 7 Aug-R35-SF_PLUS,"Galaxy A37 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,13999.0,,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,35
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,13999.0,0,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,35
 RET- 7 Aug-R35-STUDENT,"Galaxy A37 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,13999.0,,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,35
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,13999.0,560,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,35
 RET- 7 Aug-R36-SF_PLUS,"Galaxy A27 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10999.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,36
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10999.0,1000.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,36
 RET- 7 Aug-R37-SF_PLUS,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10599.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10599.0,600.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,37
 RET- 7 Aug-R37-STUDENT,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,10599.0,,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,10599.0,1060,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,37
 RET- 7 Aug-R37-FLASHSALE,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,10599.0,,8999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,10599.0,1600.0,8999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,37
 RET- 7 Aug-R38-SF_PLUS,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,8999.0,,7299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,38
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,8999.0,1700.0,7299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,38
 RET- 7 Aug-R39-SF_PLUS,"Galaxy A17 LTE
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,7999.0,,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,39
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,7999.0,1000.0,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,39
 RET- 7 Aug-R40-SF_PLUS,"Galaxy A07 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,6999.0,,6999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,40
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,6999.0,0,6999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,40
 RET- 7 Aug-R40-STUDENT,"Galaxy A07 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,40
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,40
 RET- 7 Aug-R41-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,5999.0,,5999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,41
+6-19 July",,STANDARD_SM,SF_PLUS,5999.0,0,5999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,41
 RET- 7 Aug-R42-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,5299.0,,3999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,42
+6-19 July",,STANDARD_SM,SF_PLUS,5299.0,1300.0,3999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,42
 RET- 7 Aug-R43-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,4599.0,,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,43
-RET- 3 -6 -R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,4
-RET- 3 -6 -R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,4
-RET- 3 -6 -R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,5
-RET- 3 -6 -R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,5
-RET- 3 -6 -R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,5
-RET- 3 -6 -R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,6
-RET- 3 -6 -R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,6
-RET- 3 -6 -R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,6
-RET- 3 -6 -R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,7
-RET- 3 -6 -R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,8
-RET- 3 -6 -R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,9
-RET- 3 -6 -R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,10
-RET- 3 -6 -R11-SF_PLUS,Galaxy S25 Ultra,,STANDARD_SM,SF_PLUS,42900.0,,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,11
+6-19 July",,STANDARD_SM,SF_PLUS,4599.0,800.0,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 7 Aug - 12 Aug,43
+RET- 3 -6 -R4-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,66900.0,5000.0,61900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,4
+RET- 3 -6 -R4-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,4
+RET- 3 -6 -R5-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,54900.0,5000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,5
+RET- 3 -6 -R5-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,54900.0,10000.0,44900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,5
+RET- 3 -6 -R5-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,54900.0,8235,46665.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,5
+RET- 3 -6 -R6-SF_PLUS,Galaxy S26 Ultra,,STANDARD_SM,SF_PLUS,46900.0,5000.0,41900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,6
+RET- 3 -6 -R6-TRADEUP,Galaxy S26 Ultra,,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,6
+RET- 3 -6 -R6-STUDENT,Galaxy S26 Ultra,,STANDARD_SM,STUDENT,46900.0,7035,39865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,6
+RET- 3 -6 -R7-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,48900.0,12000.0,36900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,7
+RET- 3 -6 -R8-SF_PLUS,Galaxy S26+,,STANDARD_SM,SF_PLUS,40900.0,10000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,8
+RET- 3 -6 -R9-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,41900.0,12000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,9
+RET- 3 -6 -R10-SF_PLUS,Galaxy S26,,STANDARD_SM,SF_PLUS,33900.0,6000.0,27900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,10
+RET- 3 -6 -R11-SF_PLUS,Galaxy S25 Ultra,,STANDARD_SM,SF_PLUS,42900.0,12000.0,30900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,11
 RET- 3 -6 -R12-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,12
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,26900.0,3000.0,23900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,12
 RET- 3 -6 -R12-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,12
+(ร่วม SF+)",,STANDARD_SM,STUDENT,26900.0,4035,22865.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,12
 RET- 3 -6 -R13-SF_PLUS,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,13
+(ร่วม SF+)",,STANDARD_SM,SF_PLUS,22900.0,3000.0,19900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,13
 RET- 3 -6 -R13-STUDENT,"Galaxy S25 FE
-(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,13
+(ร่วม SF+)",,STANDARD_SM,STUDENT,22900.0,3435,19465.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,13
 RET- 3 -6 -R14-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,14
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,26900.0,6000.0,20900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,14
 RET- 3 -6 -R15-STANDARD_PAYMENT,"Galaxy S25 FE
-(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,15
-RET- 3 -6 -R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,16
-RET- 3 -6 -R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,17
-RET- 3 -6 -R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,18
-RET- 3 -6 -R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,19
-RET- 3 -6 -R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,20
-RET- 3 -6 -R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,21
-RET- 3 -6 -R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,22
-RET- 3 -6 -R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,23
-RET- 3 -6 -R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,24
-RET- 3 -6 -R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,25
-RET- 3 -6 -R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,26
-RET- 3 -6 -R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,27
-RET- 3 -6 -R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,28
+(ไม่ร่วม SF+)",,STANDARD_SM,STANDARD_PAYMENT,22900.0,5000.0,17900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,15
+RET- 3 -6 -R16-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,93900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,16
+RET- 3 -6 -R17-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,77900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,17
+RET- 3 -6 -R18-TRADEUP,Galaxy Z Fold8 Ultra,,STANDARD_SM,TRADE_UP,69900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,18
+RET- 3 -6 -R19-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,85900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,19
+RET- 3 -6 -R20-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,69900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,20
+RET- 3 -6 -R21-TRADEUP,Galaxy Z Fold8,,STANDARD_SM,TRADE_UP,61900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,21
+RET- 3 -6 -R22-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,50900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,22
+RET- 3 -6 -R23-TRADEUP,Galaxy Z Flip8,,STANDARD_SM,TRADE_UP,42900.0,5000.0,,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,23
+RET- 3 -6 -R24-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,87900.0,18000.0,69900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,24
+RET- 3 -6 -R25-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,75900.0,18000.0,57900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,25
+RET- 3 -6 -R26-SF_PLUS,Galaxy Z Fold 7,,STANDARD_SM,SF_PLUS,67900.0,18000.0,49900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,26
+RET- 3 -6 -R27-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,48900.0,11000.0,37900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,27
+RET- 3 -6 -R28-SF_PLUS,Galaxy Z Flip7,,STANDARD_SM,SF_PLUS,40900.0,11000.0,29900.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,28
 RET- 3 -6 -R29-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,20999.0,,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,29
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,20999.0,0,20999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,29
 RET- 3 -6 -R29-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,29
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,29
 RET- 3 -6 -R30-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,17999.0,,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,30
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,17999.0,0,17999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,30
 RET- 3 -6 -R30-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,30
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,30
 RET- 3 -6 -R31-SF_PLUS,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,16999.0,,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,31
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,16999.0,0,16999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,31
 RET- 3 -6 -R31-STUDENT,"Galaxy A57 5G
- ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,31
+ ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,31
 RET- 3 -6 -R32-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,20999.0,,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,32
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,20999.0,2000.0,18999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,32
 RET- 3 -6 -R32-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,32
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,20999.0,2520,18479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,32
 RET- 3 -6 -R33-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,17999.0,,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,33
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,17999.0,2000.0,15999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,33
 RET- 3 -6 -R33-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,33
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,17999.0,2520,15479.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,33
 RET- 3 -6 -R34-STANDARD_PAYMENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,16999.0,,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,34
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STANDARD_PAYMENT,16999.0,2000.0,14999.0,01,,0,NO,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,34
 RET- 3 -6 -R34-STUDENT,"Galaxy A57 5G 
 (ไม่สามารถใช้ร่วมกับ SF+ ได้)
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,34
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,16999.0,2550,14449.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,34
 RET- 3 -6 -R35-SF_PLUS,"Galaxy A37 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,13999.0,,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,35
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,13999.0,0,13999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,35
 RET- 3 -6 -R35-STUDENT,"Galaxy A37 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,13999.0,,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,35
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,13999.0,560,13439.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,35
 RET- 3 -6 -R36-SF_PLUS,"Galaxy A27 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10999.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,36
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10999.0,1000.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,36
 RET- 3 -6 -R37-SF_PLUS,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10599.0,,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,10599.0,600.0,9999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,37
 RET- 3 -6 -R37-STUDENT,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,10599.0,,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,37
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,10599.0,1060,9539.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,37
 RET- 3 -6 -R38-SF_PLUS,"Galaxy A17 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,8999.0,,7299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,38
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,8999.0,1700.0,7299.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,38
 RET- 3 -6 -R39-SF_PLUS,"Galaxy A17 LTE
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,7999.0,,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,39
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,7999.0,1000.0,6999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,39
 RET- 3 -6 -R40-SF_PLUS,"Galaxy A07 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,6999.0,,6999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,40
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,SF_PLUS,6999.0,0,6999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,40
 RET- 3 -6 -R40-STUDENT,"Galaxy A07 5G
-ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,6999.0,,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,40
+ตั้งแต่ 3-16 สิงหาคม",,STANDARD_SM,STUDENT,6999.0,700,6299.0,Studentcrd,,0,NO,YES,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,40
 RET- 3 -6 -R41-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,5999.0,,5999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,41
+6-19 July",,STANDARD_SM,SF_PLUS,5999.0,0,5999.0,,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,41
 RET- 3 -6 -R42-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,5299.0,,3999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,42
+6-19 July",,STANDARD_SM,SF_PLUS,5299.0,1300.0,3999.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,42
 RET- 3 -6 -R43-SF_PLUS,"Galaxy A07 LTE
-6-19 July",,STANDARD_SM,SF_PLUS,4599.0,,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,43
-TAB-R4-STANDARD_PAYMENT,Galaxy Tab S11  Ultra 5G,,STANDARD_SM,STANDARD_PAYMENT,48900.0,,43900.0,01,,0,NO,NO,กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,4
-TAB-R4-ADDON-KEYBOARD,Galaxy Tab S11  Ultra 5G,,STANDARD_SM,ADD_ON_PURCHASE,48900.0,,43900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,4
-TAB-R5-STANDARD_PAYMENT,Galaxy Tab S11 (5G),,STANDARD_SM,STANDARD_PAYMENT,33900.0,,30400.0,01,,0,NO,NO,กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,5
-TAB-R5-ADDON-KEYBOARD,Galaxy Tab S11 (5G),,STANDARD_SM,ADD_ON_PURCHASE,33900.0,,30400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,5
-TAB-R6-STANDARD_PAYMENT,Galaxy Tab S11  (WiFi),,STANDARD_SM,STANDARD_PAYMENT,28900.0,,25400.0,01,,0,NO,NO,กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,6
-TAB-R6-ADDON-KEYBOARD,Galaxy Tab S11  (WiFi),,STANDARD_SM,ADD_ON_PURCHASE,28900.0,,25400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,6
-TAB-R7-STANDARD_PAYMENT,Galaxy Tab S10 plus 5G,,STANDARD_SM,STANDARD_PAYMENT,43900.0,,30900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,7
-TAB-R8-STANDARD_PAYMENT,Galaxy Tab S10ultra,,STANDARD_SM,STANDARD_PAYMENT,52900.0,,42900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,8
-TAB-R9-STANDARD_PAYMENT,Galaxy Tab S10 FE+ 5G,,STANDARD_SM,STANDARD_PAYMENT,30900.0,,25900.0,01,,0,NO,NO,Tablet Laptop Sleeve 13 inch  กับ  Double Wall Stainless Steel 600ml,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,9
-TAB-R9-ADDON-KEYBOARD,Galaxy Tab S10 FE+ 5G,,STANDARD_SM,ADD_ON_PURCHASE,30900.0,,25900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,9
-TAB-R10-STANDARD_PAYMENT,Galaxy Tab S10 FE+ WiFi,,STANDARD_SM,STANDARD_PAYMENT,27900.0,,22900.0,01,,0,NO,NO,Tablet Laptop Sleeve 13 inch  กับ  Double Wall Stainless Steel 600ml,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,10
-TAB-R10-ADDON-KEYBOARD,Galaxy Tab S10 FE+ WiFi,,STANDARD_SM,ADD_ON_PURCHASE,27900.0,,22900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,10
-TAB-R11-STANDARD_PAYMENT,Galaxy Tab S10 FE 5G,,STANDARD_SM,STANDARD_PAYMENT,22900.0,,19400.0,01,,0,NO,NO,Double Wall Stainless Steel 600ml กับ  Phone Stand First class NO V168 Phoenix,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,11
-TAB-R11-ADDON-KEYBOARD,Galaxy Tab S10 FE 5G,,STANDARD_SM,ADD_ON_PURCHASE,22900.0,,19400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,11
-TAB-R12-STANDARD_PAYMENT,Galaxy Tab S10 FE WiFi,,STANDARD_SM,STANDARD_PAYMENT,19900.0,,16400.0,01,,0,NO,NO,Double Wall Stainless Steel 600ml กับ  Phone Stand First class NO V168 Phoenix,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,12
-TAB-R12-ADDON-KEYBOARD,Galaxy Tab S10 FE WiFi,,STANDARD_SM,ADD_ON_PURCHASE,19900.0,,16400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,12
-TAB-R13-STANDARD_PAYMENT,Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),,STANDARD_SM,STANDARD_PAYMENT,16990.0,,16490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,13
-TAB-R14-STANDARD_PAYMENT,Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),,STANDARD_SM,STANDARD_PAYMENT,12990.0,,12490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,14
-TAB-R15-STANDARD_PAYMENT,Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,,STANDARD_SM,STANDARD_PAYMENT,16990.0,,14490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,15
-TAB-R16-STANDARD_PAYMENT,Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,,STANDARD_SM,STANDARD_PAYMENT,12990.0,,10490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,16
-TAB-R17-STANDARD_PAYMENT,Galaxy Tab S9 FE plus Wifi,,STANDARD_SM,STANDARD_PAYMENT,23900.0,,21400.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,17
-TAB-R18-STANDARD_PAYMENT,Galaxy Tab S9 FE plus 5G,,STANDARD_SM,STANDARD_PAYMENT,27900.0,,15900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,18
-TAB-R19-STANDARD_PAYMENT,Galaxy Tab S9 5G,,STANDARD_SM,STANDARD_PAYMENT,35900.0,,23900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,19
+6-19 July",,STANDARD_SM,SF_PLUS,4599.0,800.0,3799.0,01,,0,YES,NO,,,PASSED_VALIDATION,Aug_ 2026 Promotion Retail_Shop Samsung .xlsx, 3 -6 Aug ,43
+TAB-R4-STANDARD_PAYMENT,Galaxy Tab S11  Ultra 5G,,STANDARD_SM,STANDARD_PAYMENT,48900.0,5000.0,43900.0,01,,0,NO,NO,กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,4
+TAB-R4-ADDON-KEYBOARD,Galaxy Tab S11  Ultra 5G,,STANDARD_SM,ADD_ON_PURCHASE,48900.0,5000.0,43900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,4
+TAB-R5-STANDARD_PAYMENT,Galaxy Tab S11 (5G),,STANDARD_SM,STANDARD_PAYMENT,33900.0,3500.0,30400.0,01,,0,NO,NO,กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,5
+TAB-R5-ADDON-KEYBOARD,Galaxy Tab S11 (5G),,STANDARD_SM,ADD_ON_PURCHASE,33900.0,3500.0,30400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,5
+TAB-R6-STANDARD_PAYMENT,Galaxy Tab S11  (WiFi),,STANDARD_SM,STANDARD_PAYMENT,28900.0,3500.0,25400.0,01,,0,NO,NO,กระเป๋าเดินทาง  กับ  Stand Wireless Speaker PK05 หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,6
+TAB-R6-ADDON-KEYBOARD,Galaxy Tab S11  (WiFi),,STANDARD_SM,ADD_ON_PURCHASE,28900.0,3500.0,25400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,6
+TAB-R7-STANDARD_PAYMENT,Galaxy Tab S10 plus 5G,,STANDARD_SM,STANDARD_PAYMENT,43900.0,13000.0,30900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,7
+TAB-R8-STANDARD_PAYMENT,Galaxy Tab S10ultra,,STANDARD_SM,STANDARD_PAYMENT,52900.0,10000.0,42900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,8
+TAB-R9-STANDARD_PAYMENT,Galaxy Tab S10 FE+ 5G,,STANDARD_SM,STANDARD_PAYMENT,30900.0,5000.0,25900.0,01,,0,NO,NO,Tablet Laptop Sleeve 13 inch  กับ  Double Wall Stainless Steel 600ml,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,9
+TAB-R9-ADDON-KEYBOARD,Galaxy Tab S10 FE+ 5G,,STANDARD_SM,ADD_ON_PURCHASE,30900.0,5000.0,25900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,9
+TAB-R10-STANDARD_PAYMENT,Galaxy Tab S10 FE+ WiFi,,STANDARD_SM,STANDARD_PAYMENT,27900.0,5000.0,22900.0,01,,0,NO,NO,Tablet Laptop Sleeve 13 inch  กับ  Double Wall Stainless Steel 600ml,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,10
+TAB-R10-ADDON-KEYBOARD,Galaxy Tab S10 FE+ WiFi,,STANDARD_SM,ADD_ON_PURCHASE,27900.0,5000.0,22900.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,10
+TAB-R11-STANDARD_PAYMENT,Galaxy Tab S10 FE 5G,,STANDARD_SM,STANDARD_PAYMENT,22900.0,3500.0,19400.0,01,,0,NO,NO,Double Wall Stainless Steel 600ml กับ  Phone Stand First class NO V168 Phoenix,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,11
+TAB-R11-ADDON-KEYBOARD,Galaxy Tab S10 FE 5G,,STANDARD_SM,ADD_ON_PURCHASE,22900.0,3500.0,19400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,11
+TAB-R12-STANDARD_PAYMENT,Galaxy Tab S10 FE WiFi,,STANDARD_SM,STANDARD_PAYMENT,19900.0,3500.0,16400.0,01,,0,NO,NO,Double Wall Stainless Steel 600ml กับ  Phone Stand First class NO V168 Phoenix,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,12
+TAB-R12-ADDON-KEYBOARD,Galaxy Tab S10 FE WiFi,,STANDARD_SM,ADD_ON_PURCHASE,19900.0,3500.0,16400.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,12
+TAB-R13-STANDARD_PAYMENT,Galaxy Tab S10 Lite 5G (รหัส F-X406BZ ),,STANDARD_SM,STANDARD_PAYMENT,16990.0,500.0,16490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,13
+TAB-R14-STANDARD_PAYMENT,Galaxy Tab S10 Lite WiFi (รหัส F-X400NZ ),,STANDARD_SM,STANDARD_PAYMENT,12990.0,500.0,12490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,14
+TAB-R15-STANDARD_PAYMENT,Galaxy Tab S10 Lite 5G (รหัส SM-X406BZ ) ไม่แถมเคส,,STANDARD_SM,STANDARD_PAYMENT,16990.0,2500.0,14490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,15
+TAB-R16-STANDARD_PAYMENT,Galaxy Tab S10 Lite WiFi (รหัส SM-X400NZ )ไม่แถมเคส,,STANDARD_SM,STANDARD_PAYMENT,12990.0,2500.0,10490.0,01,,0,NO,NO,Phone Stand First class NO V168 Phoenix กับ Small Talk TC-04 TypeC Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,16
+TAB-R17-STANDARD_PAYMENT,Galaxy Tab S9 FE plus Wifi,,STANDARD_SM,STANDARD_PAYMENT,23900.0,2500.0,21400.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,17
+TAB-R18-STANDARD_PAYMENT,Galaxy Tab S9 FE plus 5G,,STANDARD_SM,STANDARD_PAYMENT,27900.0,12000.0,15900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,18
+TAB-R19-STANDARD_PAYMENT,Galaxy Tab S9 5G,,STANDARD_SM,STANDARD_PAYMENT,35900.0,12000.0,23900.0,01,,0,NO,NO,Tablet ring stand  กับ Small Talk TC-04 TypeC Tablet หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,19
 TAB-R20-STANDARD_PAYMENT,"Galaxy Tab A11+  5G  (NEW)
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,10490.0,,8990.0,01,,0,NO,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,20
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,10490.0,1500.0,8990.0,01,,0,NO,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,20
 TAB-R20-ADDON-KEYBOARD,"Galaxy Tab A11+  5G  (NEW)
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,10490.0,,8990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,20
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,10490.0,1500.0,8990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,20
 TAB-R21-STANDARD_PAYMENT,"Galaxy Tab A11+  WiFi  (NEW)
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,8490.0,,6990.0,01,,0,NO,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,21
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,8490.0,1500.0,6990.0,01,,0,NO,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,21
 TAB-R21-ADDON-KEYBOARD,"Galaxy Tab A11+  WiFi  (NEW)
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,8490.0,,6990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,21
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,8490.0,1500.0,6990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,21
 TAB-R22-SF_PLUS,"Galaxy Tab A11+  5G  (NEW)
-(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,SF_PLUS,10490.0,,9990.0,04,,0,YES,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,22
+(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,SF_PLUS,10490.0,500.0,9990.0,04,,0,YES,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,22
 TAB-R22-ADDON-KEYBOARD,"Galaxy Tab A11+  5G  (NEW)
-(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,10490.0,,9990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,22
+(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,10490.0,500.0,9990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,22
 TAB-R23-SF_PLUS,"Galaxy Tab A11+  WiFi  (NEW)
-(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,SF_PLUS,8490.0,,7990.0,04,,0,YES,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,23
+(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,SF_PLUS,8490.0,500.0,7990.0,04,,0,YES,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet   หรือ Tablet Laptop Sleeve 13 inch,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,23
 TAB-R23-ADDON-KEYBOARD,"Galaxy Tab A11+  WiFi  (NEW)
-(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,8490.0,,7990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,23
+(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,8490.0,500.0,7990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,23
 TAB-R24-STANDARD_PAYMENT,"Galaxy Tab A11 LTE  (NEW)
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,7490.0,,5990.0,01,,0,NO,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,24
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,STANDARD_PAYMENT,7490.0,1500.0,5990.0,01,,0,NO,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,24
 TAB-R24-ADDON-KEYBOARD,"Galaxy Tab A11 LTE  (NEW)
-(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,7490.0,,5990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,24
+(ไม่สามารถใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,7490.0,1500.0,5990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,24
 TAB-R25-SF_PLUS,"Galaxy Tab A11 LTE  (NEW)
-(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,SF_PLUS,7490.0,,6990.0,04,,0,YES,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,25
+(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,SF_PLUS,7490.0,500.0,6990.0,04,,0,YES,NO,Tablet ring stand  กับ  Small Talk SMT-P5 3.5m Tablet,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,25
 TAB-R25-ADDON-KEYBOARD,"Galaxy Tab A11 LTE  (NEW)
-(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,7490.0,,6990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,25
-TAB-R26-STANDARD_PAYMENT,Watch Ultra 2,,STANDARD_SM,STANDARD_PAYMENT,25900.0,,18130.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,26
-TAB-R27-STANDARD_PAYMENT,Watch Ultra (64GB),,STANDARD_SM,STANDARD_PAYMENT,24900.0,,16185.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,27
-TAB-R28-STANDARD_PAYMENT,Watch Ultra (32GB),,STANDARD_SM,STANDARD_PAYMENT,23900.0,,11950.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,28
-TAB-R29-STANDARD_PAYMENT,Watch8 Classic - LTE,,STANDARD_SM,STANDARD_PAYMENT,19900.0,,13930.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,29
-TAB-R30-STANDARD_PAYMENT,Watch8 Classic - BT,,STANDARD_SM,STANDARD_PAYMENT,17900.0,,12530.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,30
-TAB-R31-STANDARD_PAYMENT,Watch9 44mm,,STANDARD_SM,STANDARD_PAYMENT,14900.0,,10430.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,31
-TAB-R32-STANDARD_PAYMENT,Watch9 40mm,,STANDARD_SM,STANDARD_PAYMENT,12900.0,,9030.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,32
-TAB-R33-STANDARD_PAYMENT,Watch8 44mm,,STANDARD_SM,STANDARD_PAYMENT,13900.0,,9900.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,33
-TAB-R34-STANDARD_PAYMENT,Watch8 40mm,,STANDARD_SM,STANDARD_PAYMENT,11900.0,,7900.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,34
-TAB-R35-STANDARD_PAYMENT,Buds4 Pro Black,,STANDARD_SM,STANDARD_PAYMENT,7990.0,,5593.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,35
-TAB-R36-STANDARD_PAYMENT,Buds4 Pro White,,STANDARD_SM,STANDARD_PAYMENT,7990.0,,5593.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,36
-TAB-R37-STANDARD_PAYMENT,Buds4 Pro Pink,,STANDARD_SM,STANDARD_PAYMENT,7990.0,,5593.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,37
-TAB-R38-STANDARD_PAYMENT,Buds4  Black,,STANDARD_SM,STANDARD_PAYMENT,5990.0,,4193.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,38
-TAB-R39-STANDARD_PAYMENT,Buds4  White,,STANDARD_SM,STANDARD_PAYMENT,5990.0,,4193.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,39
-TAB-R40-STANDARD_PAYMENT,Buds3 FE,,STANDARD_SM,STANDARD_PAYMENT,4290.0,,3003.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,40
-TAB-R41-STANDARD_PAYMENT,Buds Core,,STANDARD_SM,STANDARD_PAYMENT,1490.0,,1290.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,41
-TAB-R42-STANDARD_PAYMENT,Ring,,STANDARD_SM,STANDARD_PAYMENT,14900.0,,8195.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,42
-TAB-R43-STANDARD_PAYMENT,Fit3,,STANDARD_SM,STANDARD_PAYMENT,1990.0,,1990.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,43
-TAB-R44-STANDARD_PAYMENT,SmartTag2,,STANDARD_SM,STANDARD_PAYMENT,1090.0,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,44
-TAB-R45-STANDARD_PAYMENT,Flip7 / Fold7,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,45
-TAB-R46-STANDARD_PAYMENT,S25 / S25+,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,46
-TAB-R47-STANDARD_PAYMENT,A56 / A36,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,47
-TAB-R48-STANDARD_PAYMENT,S25 FE,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,48
-TAB-R49-STANDARD_PAYMENT,S25 Ultra,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,49
-TAB-R50-STANDARD_PAYMENT,S26 Series,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,50
-TAB-R51-STANDARD_PAYMENT,A57 / A37,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,51
+(ใช้ร่วมกับ SF+ ได้)",,STANDARD_SM,ADD_ON_PURCHASE,7490.0,500.0,6990.0,02,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,25
+TAB-R26-STANDARD_PAYMENT,Watch Ultra 2,,STANDARD_SM,STANDARD_PAYMENT,25900.0,0,18130.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,26
+TAB-R27-STANDARD_PAYMENT,Watch Ultra (64GB),,STANDARD_SM,STANDARD_PAYMENT,24900.0,0,16185.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,27
+TAB-R28-STANDARD_PAYMENT,Watch Ultra (32GB),,STANDARD_SM,STANDARD_PAYMENT,23900.0,0,11950.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,28
+TAB-R29-STANDARD_PAYMENT,Watch8 Classic - LTE,,STANDARD_SM,STANDARD_PAYMENT,19900.0,0,13930.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,29
+TAB-R30-STANDARD_PAYMENT,Watch8 Classic - BT,,STANDARD_SM,STANDARD_PAYMENT,17900.0,0,12530.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,30
+TAB-R31-STANDARD_PAYMENT,Watch9 44mm,,STANDARD_SM,STANDARD_PAYMENT,14900.0,0,10430.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,31
+TAB-R32-STANDARD_PAYMENT,Watch9 40mm,,STANDARD_SM,STANDARD_PAYMENT,12900.0,0,9030.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,32
+TAB-R33-STANDARD_PAYMENT,Watch8 44mm,,STANDARD_SM,STANDARD_PAYMENT,13900.0,0,9900.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,33
+TAB-R34-STANDARD_PAYMENT,Watch8 40mm,,STANDARD_SM,STANDARD_PAYMENT,11900.0,0,7900.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,34
+TAB-R35-STANDARD_PAYMENT,Buds4 Pro Black,,STANDARD_SM,STANDARD_PAYMENT,7990.0,0,5593.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,35
+TAB-R36-STANDARD_PAYMENT,Buds4 Pro White,,STANDARD_SM,STANDARD_PAYMENT,7990.0,0,5593.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,36
+TAB-R37-STANDARD_PAYMENT,Buds4 Pro Pink,,STANDARD_SM,STANDARD_PAYMENT,7990.0,0,5593.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,37
+TAB-R38-STANDARD_PAYMENT,Buds4  Black,,STANDARD_SM,STANDARD_PAYMENT,5990.0,0,4193.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,38
+TAB-R39-STANDARD_PAYMENT,Buds4  White,,STANDARD_SM,STANDARD_PAYMENT,5990.0,0,4193.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,39
+TAB-R40-STANDARD_PAYMENT,Buds3 FE,,STANDARD_SM,STANDARD_PAYMENT,4290.0,0,3003.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,40
+TAB-R41-STANDARD_PAYMENT,Buds Core,,STANDARD_SM,STANDARD_PAYMENT,1490.0,200.0,1290.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,41
+TAB-R42-STANDARD_PAYMENT,Ring,,STANDARD_SM,STANDARD_PAYMENT,14900.0,0,8195.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,42
+TAB-R43-STANDARD_PAYMENT,Fit3,,STANDARD_SM,STANDARD_PAYMENT,1990.0,0,1990.0,03,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,43
+TAB-R44-STANDARD_PAYMENT,SmartTag2,,STANDARD_SM,STANDARD_PAYMENT,1090.0,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,44
+TAB-R45-STANDARD_PAYMENT,Flip7 / Fold7,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,45
+TAB-R46-STANDARD_PAYMENT,S25 / S25+,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,46
+TAB-R47-STANDARD_PAYMENT,A56 / A36,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,47
+TAB-R48-STANDARD_PAYMENT,S25 FE,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,48
+TAB-R49-STANDARD_PAYMENT,S25 Ultra,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,49
+TAB-R50-STANDARD_PAYMENT,S26 Series,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,50
+TAB-R51-STANDARD_PAYMENT,A57 / A37,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,51
 TAB-R52-STANDARD_PAYMENT,"Watch Band and Buds Case
-(Watch Ultra Band & Watch7 Band & Oder model / Buds3 Case",,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,52
-TAB-R53-STANDARD_PAYMENT,Watch8 Band,,STANDARD_SM,STANDARD_PAYMENT,,,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,53
-BR-S26FE-128-SFPLUS,Galaxy S26 FE 128GB,SM-S26FE128TH,STANDARD_SM,SF_PLUS,24900.0,,24900.0,,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-02-S26FE,1
-BR-S26FE-256-STORAGE-UPGRADE,Galaxy S26 FE 256GB (พาส F),F-S26FE256TH,PASS_F,STANDARD_PAYMENT,28900.0,,24900.0,,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-02-S26FE,2
-BR-S26U-256-TRADEUP,Galaxy S26 Ultra 256GB,SM-S948B256TH,STANDARD_SM,TRADE_UP,46900.0,,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-08-S26U,2
-BR-S26U-1TB-TRADEUP,Galaxy S26 Ultra 1TB,SM-S948B1TBTH,STANDARD_SM,TRADE_UP,66900.0,,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-09-S26U,2
-BR-S26U-512-CONFLICT,Galaxy S26 Ultra 512GB,SM-S948B512TH,STANDARD_SM,TRADE_UP,54900.0,,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-10-S26U,1
-BR-ZFLIP8-TU-SM-F741B256TH,Galaxy Z Flip8 256GB,SM-F741B256TH,STANDARD_SM,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-SM-F741B512TH,Galaxy Z Flip8 512GB,SM-F741B512TH,STANDARD_SM,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-F-NS741B256TH,Galaxy Z Flip8 256GB (พาส F),F-NS741B256TH,PASS_F,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS741B256TH,Galaxy Z Flip8 256GB (พาส F),F-NS741B256TH,PASS_F,STANDARD_PAYMENT,42900.0,,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS741B512TH,Galaxy Z Flip8 512GB (พาส F),F-NS741B512TH,PASS_F,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS741B512TH,Galaxy Z Flip8 512GB (พาส F),F-NS741B512TH,PASS_F,STANDARD_PAYMENT,50900.0,,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS776BLIATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BLIATHL,PASS_F,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS776BLIATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BLIATHL,PASS_F,STANDARD_PAYMENT,42900.0,,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS776BZKATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZKATHL,PASS_F,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS776BZKATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZKATHL,PASS_F,STANDARD_PAYMENT,42900.0,,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS776BZWATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZWATHL,PASS_F,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS776BZWATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZWATHL,PASS_F,STANDARD_PAYMENT,42900.0,,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS776BLIETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BLIETHL,PASS_F,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS776BLIETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BLIETHL,PASS_F,STANDARD_PAYMENT,50900.0,,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS776BZKETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZKETHL,PASS_F,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS776BZKETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZKETHL,PASS_F,STANDARD_PAYMENT,50900.0,,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-F-NS776BZWETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZWETHL,PASS_F,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-F-SPECIAL-F-NS776BZWETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZWETHL,PASS_F,STANDARD_PAYMENT,50900.0,,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
-BR-ZFLIP8-TU-SM-F776BLIATHL,Galaxy Z Flip8 256GB,SM-F776BLIATHL,STANDARD_SM,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-SM-F776BZKATHL,Galaxy Z Flip8 256GB,SM-F776BZKATHL,STANDARD_SM,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-SM-F776BZWATHL,Galaxy Z Flip8 256GB,SM-F776BZWATHL,STANDARD_SM,TRADE_UP,42900.0,,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-SM-F776BLIETHL,Galaxy Z Flip8 512GB,SM-F776BLIETHL,STANDARD_SM,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-SM-F776BZKETHL,Galaxy Z Flip8 512GB,SM-F776BZKETHL,STANDARD_SM,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFLIP8-TU-SM-F776BZWETHL,Galaxy Z Flip8 512GB,SM-F776BZWETHL,STANDARD_SM,TRADE_UP,50900.0,,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
-BR-ZFOLD7-SM-F956B256TH,Galaxy Z Fold7 256GB,SM-F956B256TH,STANDARD_SM,STANDARD_PAYMENT,67900.0,,49900.0,01,,0,NO,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-23-ZFOLD7,1
-BR-ZFOLD7-SM-F956B512TH,Galaxy Z Fold7 512GB,SM-F956B512TH,STANDARD_SM,STANDARD_PAYMENT,75900.0,,57900.0,01,,0,NO,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-23-ZFOLD7,1
-BR-ZFOLD7-SM-F956B1TBTH,Galaxy Z Fold7 1TB,SM-F956B1TBTH,STANDARD_SM,STANDARD_PAYMENT,87900.0,,69900.0,01,,0,NO,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-23-ZFOLD7,1
-BR-ZFLIP7-SM-F731B256TH,Galaxy Z Flip7 256GB,SM-F731B256TH,STANDARD_SM,STANDARD_PAYMENT,40900.0,,29900.0,01,,0,YES,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-24-ZFLIP7,1
-BR-ZFLIP7-SM-F731B512TH,Galaxy Z Flip7 512GB,SM-F731B512TH,STANDARD_SM,STANDARD_PAYMENT,48900.0,,37900.0,01,,0,YES,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-24-ZFLIP7,1
-BR-TAB-A11-STD-SM-X236B128TH,Tab A11+ 5G 6/128GB,SM-X236B128TH,STANDARD_SM,STANDARD_PAYMENT,10490.0,,8990.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,1
-BR-TAB-A11-SF-SM-X236B128TH,Tab A11+ 5G 6/128GB,SM-X236B128TH,STANDARD_SM,SF_PLUS,10490.0,,9990.0,04,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,2
-BR-TAB-A11-STD-SM-X230N128TH,Tab A11+ Wi-Fi 6/128GB,SM-X230N128TH,STANDARD_SM,STANDARD_PAYMENT,8490.0,,6990.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,1
-BR-TAB-A11-SF-SM-X230N128TH,Tab A11+ Wi-Fi 6/128GB,SM-X230N128TH,STANDARD_SM,SF_PLUS,8490.0,,7990.0,04,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,2
-BR-TAB-A11-STD-SM-X135N128TH,Tab A11 LTE 8/128GB,SM-X135N128TH,STANDARD_SM,STANDARD_PAYMENT,7490.0,,5990.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,1
-BR-TAB-A11-SF-SM-X135N128TH,Tab A11 LTE 8/128GB,SM-X135N128TH,STANDARD_SM,SF_PLUS,7490.0,,6990.0,04,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,2
-BR-TAB-S10-LITE-F-X406BZ128TH,Galaxy Tab S10 Lite 5G (พาส F พร้อม Keyboard),F-X406BZ128TH,PASS_F,STANDARD_PAYMENT,16990.0,,16490.0,01,,0,NO,NO,Keyboard Cover GP-FCX400RLABH,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
-BR-TAB-S10-LITE-F-X400NZ128TH,Galaxy Tab S10 Lite WiFi (พาส F พร้อม Keyboard),F-X400NZ128TH,PASS_F,STANDARD_PAYMENT,12990.0,,12490.0,01,,0,NO,NO,Keyboard Cover GP-FCX400RLABH,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
-BR-TAB-S10-LITE-SM-X406BZ128TH,Galaxy Tab S10 Lite 5G (เครื่องเปล่า ไม่แถมเคส),SM-X406BZ128TH,STANDARD_SM,STANDARD_PAYMENT,16990.0,,14490.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
-BR-TAB-S10-LITE-SM-X400NZ128TH,Galaxy Tab S10 Lite WiFi (เครื่องเปล่า ไม่แถมเคส),SM-X400NZ128TH,STANDARD_SM,STANDARD_PAYMENT,12990.0,,10490.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
-BR-FOLD8-TU-SM-F971B256TH,Galaxy Fold8 256GB,SM-F971B256TH,STANDARD_SM,TRADE_UP,61900.0,,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
-BR-FOLD8-TU-SM-F971B512TH,Galaxy Fold8 512GB,SM-F971B512TH,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
-BR-FOLD8-TU-SM-F971B1TBTH,Galaxy Fold8 1TB,SM-F971B1TBTH,STANDARD_SM,TRADE_UP,85900.0,,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
-BR-FOLD8-TU-SM-F976B256TH,Galaxy Fold8 Ultra 256GB,SM-F976B256TH,STANDARD_SM,TRADE_UP,69900.0,,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
-BR-FOLD8-TU-SM-F976B512TH,Galaxy Fold8 Ultra 512GB,SM-F976B512TH,STANDARD_SM,TRADE_UP,77900.0,,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
-BR-FOLD8-TU-SM-F976B1TBTH,Galaxy Fold8 Ultra 1TB,SM-F976B1TBTH,STANDARD_SM,TRADE_UP,93900.0,,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
+(Watch Ultra Band & Watch7 Band & Oder model / Buds3 Case",,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,52
+TAB-R53-STANDARD_PAYMENT,Watch8 Band,,STANDARD_SM,STANDARD_PAYMENT,,0,,ไม่ต้องคูปอง,,0,NO,NO,,,PASSED_VALIDATION,Pro Tablet Acc samsung 3Aug2026.xlsx,โปร และ เงื่อนไขการตัดขาย,53
+BR-S26FE-128-SFPLUS,Galaxy S26 FE 128GB,SM-S26FE128TH,STANDARD_SM,SF_PLUS,24900.0,0,24900.0,,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-02-S26FE,1
+BR-S26FE-256-STORAGE-UPGRADE,Galaxy S26 FE 256GB (พาส F),F-S26FE256TH,PASS_F,STANDARD_PAYMENT,28900.0,4000.0,24900.0,,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-02-S26FE,2
+BR-S26U-256-TRADEUP,Galaxy S26 Ultra 256GB,SM-S948B256TH,STANDARD_SM,TRADE_UP,46900.0,7000.0,39900.0,01,,2000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-08-S26U,2
+BR-S26U-1TB-TRADEUP,Galaxy S26 Ultra 1TB,SM-S948B1TBTH,STANDARD_SM,TRADE_UP,66900.0,10000.0,56900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-09-S26U,2
+BR-S26U-512-CONFLICT,Galaxy S26 Ultra 512GB,SM-S948B512TH,STANDARD_SM,TRADE_UP,54900.0,10000.0,45900.0,01,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-10-S26U,1
+BR-ZFLIP8-TU-SM-F741B256TH,Galaxy Z Flip8 256GB,SM-F741B256TH,STANDARD_SM,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-SM-F741B512TH,Galaxy Z Flip8 512GB,SM-F741B512TH,STANDARD_SM,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-F-NS741B256TH,Galaxy Z Flip8 256GB (พาส F),F-NS741B256TH,PASS_F,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS741B256TH,Galaxy Z Flip8 256GB (พาส F),F-NS741B256TH,PASS_F,STANDARD_PAYMENT,42900.0,0,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS741B512TH,Galaxy Z Flip8 512GB (พาส F),F-NS741B512TH,PASS_F,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS741B512TH,Galaxy Z Flip8 512GB (พาส F),F-NS741B512TH,PASS_F,STANDARD_PAYMENT,50900.0,0,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS776BLIATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BLIATHL,PASS_F,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS776BLIATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BLIATHL,PASS_F,STANDARD_PAYMENT,42900.0,0,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS776BZKATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZKATHL,PASS_F,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS776BZKATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZKATHL,PASS_F,STANDARD_PAYMENT,42900.0,0,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS776BZWATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZWATHL,PASS_F,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS776BZWATHL,Galaxy Z Flip8 256GB (พาส F),F-NS776BZWATHL,PASS_F,STANDARD_PAYMENT,42900.0,0,42900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS776BLIETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BLIETHL,PASS_F,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS776BLIETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BLIETHL,PASS_F,STANDARD_PAYMENT,50900.0,0,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS776BZKETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZKETHL,PASS_F,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS776BZKETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZKETHL,PASS_F,STANDARD_PAYMENT,50900.0,0,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-F-NS776BZWETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZWETHL,PASS_F,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-F-SPECIAL-F-NS776BZWETHL,Galaxy Z Flip8 512GB (พาส F),F-NS776BZWETHL,PASS_F,STANDARD_PAYMENT,50900.0,0,50900.0,01,,0,NO,NO,Samsung Adapter + Copperwired Gift,,PASSED_VALIDATION,business_rules.json,BR-22-ZFLIP8-PASS-F,2
+BR-ZFLIP8-TU-SM-F776BLIATHL,Galaxy Z Flip8 256GB,SM-F776BLIATHL,STANDARD_SM,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-SM-F776BZKATHL,Galaxy Z Flip8 256GB,SM-F776BZKATHL,STANDARD_SM,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-SM-F776BZWATHL,Galaxy Z Flip8 256GB,SM-F776BZWATHL,STANDARD_SM,TRADE_UP,42900.0,5000.0,37900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-SM-F776BLIETHL,Galaxy Z Flip8 512GB,SM-F776BLIETHL,STANDARD_SM,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-SM-F776BZKETHL,Galaxy Z Flip8 512GB,SM-F776BZKETHL,STANDARD_SM,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFLIP8-TU-SM-F776BZWETHL,Galaxy Z Flip8 512GB,SM-F776BZWETHL,STANDARD_SM,TRADE_UP,50900.0,5000.0,45900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-21-ZFLIP8-TRADEUP,1
+BR-ZFOLD7-SM-F956B256TH,Galaxy Z Fold7 256GB,SM-F956B256TH,STANDARD_SM,STANDARD_PAYMENT,67900.0,18000.0,49900.0,01,,0,NO,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-23-ZFOLD7,1
+BR-ZFOLD7-SM-F956B512TH,Galaxy Z Fold7 512GB,SM-F956B512TH,STANDARD_SM,STANDARD_PAYMENT,75900.0,18000.0,57900.0,01,,0,NO,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-23-ZFOLD7,1
+BR-ZFOLD7-SM-F956B1TBTH,Galaxy Z Fold7 1TB,SM-F956B1TBTH,STANDARD_SM,STANDARD_PAYMENT,87900.0,18000.0,69900.0,01,,0,NO,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-23-ZFOLD7,1
+BR-ZFLIP7-SM-F731B256TH,Galaxy Z Flip7 256GB,SM-F731B256TH,STANDARD_SM,STANDARD_PAYMENT,40900.0,11000.0,29900.0,01,,0,YES,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-24-ZFLIP7,1
+BR-ZFLIP7-SM-F731B512TH,Galaxy Z Flip7 512GB,SM-F731B512TH,STANDARD_SM,STANDARD_PAYMENT,48900.0,11000.0,37900.0,01,,0,YES,NO,คุ้มครองจอ 2 ปี / เปลี่ยนฟิล์ม ฟรี 1 ครั้ง,,PASSED_VALIDATION,business_rules.json,BR-24-ZFLIP7,1
+BR-TAB-A11-STD-SM-X236B128TH,Tab A11+ 5G 6/128GB,SM-X236B128TH,STANDARD_SM,STANDARD_PAYMENT,10490.0,1500,8990.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,1
+BR-TAB-A11-SF-SM-X236B128TH,Tab A11+ 5G 6/128GB,SM-X236B128TH,STANDARD_SM,SF_PLUS,10490.0,500,9990.0,04,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,2
+BR-TAB-A11-STD-SM-X230N128TH,Tab A11+ Wi-Fi 6/128GB,SM-X230N128TH,STANDARD_SM,STANDARD_PAYMENT,8490.0,1500,6990.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,1
+BR-TAB-A11-SF-SM-X230N128TH,Tab A11+ Wi-Fi 6/128GB,SM-X230N128TH,STANDARD_SM,SF_PLUS,8490.0,500,7990.0,04,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,2
+BR-TAB-A11-STD-SM-X135N128TH,Tab A11 LTE 8/128GB,SM-X135N128TH,STANDARD_SM,STANDARD_PAYMENT,7490.0,1500,5990.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,1
+BR-TAB-A11-SF-SM-X135N128TH,Tab A11 LTE 8/128GB,SM-X135N128TH,STANDARD_SM,SF_PLUS,7490.0,500,6990.0,04,,0,YES,NO,,,PASSED_VALIDATION,business_rules.json,BR-25-TAB-A11,2
+BR-TAB-S10-LITE-F-X406BZ128TH,Galaxy Tab S10 Lite 5G (พาส F พร้อม Keyboard),F-X406BZ128TH,PASS_F,STANDARD_PAYMENT,16990.0,500,16490.0,01,,0,NO,NO,Keyboard Cover GP-FCX400RLABH,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
+BR-TAB-S10-LITE-F-X400NZ128TH,Galaxy Tab S10 Lite WiFi (พาส F พร้อม Keyboard),F-X400NZ128TH,PASS_F,STANDARD_PAYMENT,12990.0,500,12490.0,01,,0,NO,NO,Keyboard Cover GP-FCX400RLABH,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
+BR-TAB-S10-LITE-SM-X406BZ128TH,Galaxy Tab S10 Lite 5G (เครื่องเปล่า ไม่แถมเคส),SM-X406BZ128TH,STANDARD_SM,STANDARD_PAYMENT,16990.0,2500,14490.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
+BR-TAB-S10-LITE-SM-X400NZ128TH,Galaxy Tab S10 Lite WiFi (เครื่องเปล่า ไม่แถมเคส),SM-X400NZ128TH,STANDARD_SM,STANDARD_PAYMENT,12990.0,2500,10490.0,01,,0,NO,NO,,,PASSED_VALIDATION,business_rules.json,BR-27-TAB-S10-LITE,1
+BR-FOLD8-TU-SM-F971B256TH,Galaxy Fold8 256GB,SM-F971B256TH,STANDARD_SM,TRADE_UP,61900.0,5000.0,56900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
+BR-FOLD8-TU-SM-F971B512TH,Galaxy Fold8 512GB,SM-F971B512TH,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
+BR-FOLD8-TU-SM-F971B1TBTH,Galaxy Fold8 1TB,SM-F971B1TBTH,STANDARD_SM,TRADE_UP,85900.0,7000.0,78900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
+BR-FOLD8-TU-SM-F976B256TH,Galaxy Fold8 Ultra 256GB,SM-F976B256TH,STANDARD_SM,TRADE_UP,69900.0,5000.0,64900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
+BR-FOLD8-TU-SM-F976B512TH,Galaxy Fold8 Ultra 512GB,SM-F976B512TH,STANDARD_SM,TRADE_UP,77900.0,5000.0,72900.0,,,5000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1
+BR-FOLD8-TU-SM-F976B1TBTH,Galaxy Fold8 Ultra 1TB,SM-F976B1TBTH,STANDARD_SM,TRADE_UP,93900.0,7000.0,86900.0,,,7000.0,YES,NO,,,PASSED_WITH_WARNING,business_rules.json,BR-14-FOLD8-TU,1

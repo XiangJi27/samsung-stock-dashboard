@@ -1,6 +1,6 @@
 {
   "reportName": "SEPTEMBER_SHEET_CLASSIFICATION",
-  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "generatedAt": "2026-09-12T08:59:43.281846+00:00",
   "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
   "classificationRule": "A sheet is eligible as PROMOTION_PRICE_TABLE if and only if it contains: (1) Model or P/N column, (2) RRP column, and (3) Discount or Net Price column. Sheets without RRP/Discount are categorized as TRADE_IN_REFERENCE or INFORMATIONAL_SHEET.",
   "sheets": [

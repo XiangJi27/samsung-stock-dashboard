@@ -1,6 +1,6 @@
 {
   "reportName": "SEPTEMBER_IMPORT_REGRESSION",
-  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "generatedAt": "2026-09-12T08:59:43.281846+00:00",
   "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
   "regressionComparison": {
     "metrics": {
@@ -22,17 +22,17 @@
         "difference": -82,
         "verdict": "ELIMINATED (100% fixed from header mapping)"
       },
-      "netPriceExtracted": {
+      "netPriceAvailable": {
         "before": 0,
         "after": 56,
         "difference": 56,
-        "verdict": "PASSED (All valid prices extracted accurately)"
+        "verdict": "PASSED (47 from source cell, 9 derived from components)"
       },
       "passedValidation": {
         "before": 0,
         "after": 0,
         "difference": 0,
-        "verdict": "HOLD_BY_POLICY (Zero unproven auto-publishing)"
+        "verdict": "HOLD_BY_POLICY (Zero unproven auto-publishing without exact P/N)"
       },
       "reviewRequired": {
         "before": 0,
@@ -50,7 +50,7 @@
         "before": 0,
         "after": 24,
         "difference": 24,
-        "verdict": "CORRECT_QUARANTINE (Missing trade-up payment codes or stock master missing)"
+        "verdict": "CORRECT_QUARANTINE (Missing trade-up payment codes or stock master unlisted)"
       },
       "autoPublishAllowed": {
         "before": 0,
@@ -59,6 +59,98 @@
         "verdict": "ENFORCED (Strict zero auto-publish without exact P/N)"
       }
     }
+  },
+  "blockedBreakdown": {
+    "formulaEquation": "24 = TRADE_UP_PAYMENT_CODE_MISSING (6) + PN_NOT_FOUND (18) + MODEL_AMBIGUOUS (0) + NET_MISSING (0) + FORMULA_ERROR (0)",
+    "totalBlockedVariants": 24,
+    "reasons": {
+      "TRADE_UP_PAYMENT_CODE_MISSING": {
+        "count": 6,
+        "description": "Row contains Trade Up discount in Col H, but Col I (Payment Code) is empty or dash ('-'). System strictly prohibits auto-filling default T-UP-CO-S.",
+        "draftRowIds": [
+          "ROW-18-TUP",
+          "ROW-19-TUP",
+          "ROW-20-TUP",
+          "ROW-21-TUP",
+          "ROW-22-TUP",
+          "ROW-23-TUP"
+        ],
+        "items": [
+          "ROW-18-TUP: Galaxy Z Fold8 Ultra (1TB)",
+          "ROW-19-TUP: Galaxy Z Fold8 Ultra (512GB)",
+          "ROW-20-TUP: Galaxy Z Fold8 Ultra (256GB)",
+          "ROW-21-TUP: Galaxy Z Fold8 (1TB)",
+          "ROW-22-TUP: Galaxy Z Fold8 (512GB)",
+          "ROW-23-TUP: Galaxy Z Fold8 (256GB)"
+        ]
+      },
+      "PN_NOT_FOUND": {
+        "count": 18,
+        "description": "Device model/capacity is unlisted in current Stock Master database (e.g. unreleased Galaxy S26 FE, Z Fold8 STD, Z Flip8 SF+, Galaxy A17, A07 LTE).",
+        "draftRowIds": [
+          "ROW-12",
+          "ROW-13",
+          "ROW-18-STD",
+          "ROW-19-STD",
+          "ROW-20-STD",
+          "ROW-21-STD",
+          "ROW-22-STD",
+          "ROW-23-STD",
+          "ROW-24",
+          "ROW-25",
+          "ROW-26",
+          "ROW-27",
+          "ROW-28",
+          "ROW-29",
+          "ROW-30",
+          "ROW-48",
+          "ROW-49",
+          "ROW-50"
+        ],
+        "items": [
+          "ROW-12: Galaxy S26 FE (256GB)",
+          "ROW-13: Galaxy S26 FE (128GB)",
+          "ROW-18-STD: Galaxy Z Fold8 Ultra (1TB)",
+          "ROW-19-STD: Galaxy Z Fold8 Ultra (512GB)",
+          "ROW-20-STD: Galaxy Z Fold8 Ultra (256GB)",
+          "ROW-21-STD: Galaxy Z Fold8 (1TB)",
+          "ROW-22-STD: Galaxy Z Fold8 (512GB)",
+          "ROW-23-STD: Galaxy Z Fold8 (256GB)",
+          "ROW-24: สำหรับร้านค้าที่ร่วมรายการเท่านั้น\nGalaxy Z Flip8\n(ร่วม SF+ ดาวน์ไม่เกิน10%) (8/256GB)",
+          "ROW-25: สำหรับร้านค้าที่ร่วมรายการเท่านั้น\nGalaxy Z Flip8\n(ร่วม SF+ ดาวน์ไม่เกิน10%) (8/128GB)",
+          "ROW-26: สำหรับทุกหน้าร้าน\nGalaxy Z Flip8 (512GB)",
+          "ROW-27: สำหรับทุกหน้าร้าน\nGalaxy Z Flip8 (256GB)",
+          "ROW-28: Galaxy Z Fold 7 (1TB)",
+          "ROW-29: Galaxy Z Fold 7 (512GB)",
+          "ROW-30: Galaxy Z Fold 7 (256GB)",
+          "ROW-48: Galaxy A07 LTE\n\n7 - 13 กันยายน 2569 (6/128GB)",
+          "ROW-49: Galaxy A07 LTE\n\n7 - 13 กันยายน 2569 (4/128GB)",
+          "ROW-50: Galaxy A07 LTE\n\n7 - 13 กันยายน 2569 (4/64GB)"
+        ]
+      },
+      "MODEL_CAPACITY_AMBIGUOUS": {
+        "count": 0,
+        "draftRowIds": []
+      },
+      "NET_PRICE_NOT_EXTRACTED": {
+        "count": 0,
+        "draftRowIds": []
+      },
+      "SOURCE_FORMULA_ERROR": {
+        "count": 0,
+        "draftRowIds": []
+      }
+    },
+    "sumVerification": {
+      "sumOfUniqueVariants": 24,
+      "expectedTotal": 24,
+      "isBalanced": true
+    }
+  },
+  "historicalFilesSnapshotDiff": {
+    "baselineAugustAndTabletVariantsChecked": 554,
+    "unexpectedChangedVariants": 0,
+    "verdict": "PASSED (Zero unintended mutations to historical August and Tablet promotion records)"
   },
   "safetyCriteriaVerification": {
     "incorrectlyImportedTradeUpModelRows": {
@@ -83,10 +175,12 @@
     }
   },
   "finalDecisionState": {
-    "SEPTEMBER_IMPORT_MAPPING_FIXED": "PASSED",
-    "HOLD_PRODUCT_MATCHING": "HELD_PENDING_CONFIRMATION",
-    "HOLD_HEADER_AMBIGUITY": "PASSED_DETERMINISTIC",
-    "HOLD_REGRESSION_FAILURE": "PASSED_REGRESSION_GREEN",
+    "SEPTEMBER_HEADER_MAPPING_FIXED": "PASSED",
+    "SEPTEMBER_SHEET_CLASSIFICATION_FIXED": "PASSED",
+    "SEPTEMBER_NET_ZERO_DEFECT_FIXED": "PASSED",
+    "HOLD_EXACT_PN_CONFIRMATION": "HELD_PENDING_CONFIRMATION",
+    "READY_FOR_LOCAL_ACCEPTANCE_TEST": "READY",
+    "NOT_READY_FOR_PRODUCTION": "NOT_READY",
     "MAIN_MERGE": "HOLD",
     "PRODUCTION_DEPLOY": "HOLD"
   }

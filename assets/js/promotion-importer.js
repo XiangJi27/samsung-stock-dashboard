@@ -455,7 +455,7 @@
 
           if (pnRaw) {
             pn = pnRaw.toUpperCase();
-            productMatchStatus = 'EXACT_SINGLE_MATCH';
+            productMatchStatus = 'SOURCE_EXACT_PN';
             if (pn.startsWith('F-')) codeType = 'PASS_F';
             else if (pn.startsWith('SM-')) codeType = 'STANDARD_SM';
             else if (pn.startsWith('EP-') || pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('EE-')) codeType = 'STANDARD_ACCESSORY';
@@ -475,13 +475,17 @@
             });
 
             if (candidateList.length === 1) {
-              productMatchStatus = 'EXACT_SINGLE_MATCH';
+              productMatchStatus = 'UNIQUE_MODEL_CAPACITY_CANDIDATE';
             } else if (candidateList.length > 1) {
               productMatchStatus = 'MULTIPLE_PN_CANDIDATES';
             } else {
               productMatchStatus = 'PN_NOT_FOUND';
             }
           }
+
+          const matchMethod = pnRaw ? 'SOURCE_EXACT_PN' : 'MODEL_CAPACITY_CANDIDATE';
+          const sourceProvidedPn = Boolean(pnRaw);
+          const humanConfirmationRequired = !pnRaw;
 
           // Case A: Row contains Trade Up discount -> Split into STANDARD_PAYMENT and TRADE_UP
           if (tradeUpDiscount !== null && tradeUpDiscount > 0) {
@@ -521,6 +525,11 @@
               capacity: capacityRaw,
               productCodeType: codeType,
               productMatchStatus,
+              matchMethod,
+              candidatePn: candidateList,
+              candidateCount: candidateList.length,
+              sourceProvidedPn,
+              humanConfirmationRequired,
               candidatePns: candidateList,
               rrp,
               discount: stdDiscount || 0,
@@ -591,6 +600,11 @@
               capacity: capacityRaw,
               productCodeType: codeType,
               productMatchStatus,
+              matchMethod,
+              candidatePn: candidateList,
+              candidateCount: candidateList.length,
+              sourceProvidedPn,
+              humanConfirmationRequired,
               candidatePns: candidateList,
               rrp,
               discount: (stdDiscount || 0) + tradeUpDiscount,
@@ -687,6 +701,11 @@
               capacity: capacityRaw,
               productCodeType: codeType,
               productMatchStatus,
+              matchMethod,
+              candidatePn: candidateList,
+              candidateCount: candidateList.length,
+              sourceProvidedPn,
+              humanConfirmationRequired,
               candidatePns: candidateList,
               rrp,
               discount: activeDiscount,

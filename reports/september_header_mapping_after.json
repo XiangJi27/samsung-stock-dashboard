@@ -1,6 +1,6 @@
 {
   "reportName": "SEPTEMBER_HEADER_MAPPING_AFTER",
-  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "generatedAt": "2026-09-12T08:59:43.281846+00:00",
   "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
   "evaluation": {
     "fixSummary": "Replaced precedence-flawed parser with Specific-Before-Generic classification rules. Column J ('ราคาหลังลดและเทรดอัพ') is mapped to 'tradeUpNetPrice'. Sheet 'Trade up model' is classified as 'TRADE_IN_REFERENCE' creating 0 pricing variants. Standard and Trade Up are split into separate variants.",
@@ -74,19 +74,24 @@
       "ruleCategory": "Specific Net Price"
     }
   ],
+  "netPriceMetrics": {
+    "netPriceAvailable": 56,
+    "sourceCellNetPrice": 47,
+    "derivedNetPrice": 9,
+    "netPriceMissing": 0,
+    "netPriceFormulaError": 0,
+    "zeroNetPriceEliminated": true,
+    "netPriceZeroCount": 0,
+    "sourceCellVariantsNote": "47 variants have Net Price directly read from source cell Col J (9 Trade-Up + 38 standard promotions)",
+    "derivedVariantsNote": "9 variants have Standard Net calculated from source components (RRP - Standard Discount) with WARNING_DERIVED_STANDARD_NET"
+  },
   "extractionMetricsAfter": {
     "totalPromotionRowsInSource": 47,
     "totalVariantsGenerated": 56,
     "standardPaymentVariants": 47,
     "tradeUpVariants": 9,
     "sfPlusVariants": 0,
-    "studentVariants": 0,
-    "netPriceExtractedCount": 56,
-    "netPriceZeroCount": 0,
-    "netPriceNullCount": 0,
-    "sourceCellNetPrices": 47,
-    "derivedComponentNetPrices": 9,
-    "zeroNetPriceEliminated": true
+    "studentVariants": 0
   },
   "sampleExtractedVariants": [
     {
@@ -97,7 +102,8 @@
       "pn": null,
       "productCodeType": "UNKNOWN",
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidatePns": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKBTHL",
         "SM-S948BLBBTHL",
         "SM-S948BZVBTHL",
@@ -111,6 +117,9 @@
         "SM-S948BZVQTHL",
         "SM-S948BZWQTHL"
       ],
+      "candidateCount": 12,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "saleMode": "STANDARD_PAYMENT",
       "rrp": 66900.0,
       "discount": 5000.0,
@@ -143,7 +152,8 @@
       "pn": null,
       "productCodeType": "UNKNOWN",
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidatePns": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKBTHL",
         "SM-S948BLBBTHL",
         "SM-S948BZVBTHL",
@@ -157,6 +167,9 @@
         "SM-S948BZVQTHL",
         "SM-S948BZWQTHL"
       ],
+      "candidateCount": 12,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "saleMode": "TRADE_UP",
       "rrp": 66900.0,
       "discount": 10000.0,
@@ -192,12 +205,16 @@
       "pn": null,
       "productCodeType": "UNKNOWN",
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidatePns": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKCTHL",
         "SM-S948BLBCTHL",
         "SM-S948BZVCTHL",
         "SM-S948BZWCTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "saleMode": "STANDARD_PAYMENT",
       "rrp": 54900.0,
       "discount": 5000.0,

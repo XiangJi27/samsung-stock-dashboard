@@ -1,6 +1,6 @@
 {
   "reportName": "SEPTEMBER_PRODUCT_MATCH_RESULTS",
-  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "generatedAt": "2026-09-12T08:59:43.281846+00:00",
   "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
   "matchingRulesHierarchy": [
     "1. Model Name Token Alignment (case-insensitive, normalized Galaxy prefix, removed SF+ suffixes)",
@@ -9,10 +9,16 @@
     "4. Exact P/N Resolution against Stock Master (window.STOCK_DATABASE)",
     "5. Safety Policy: If Exact P/N absent in source Excel, set pn: null, status: REVIEW_REQUIRED / BLOCKED_UNPROVEN, autoPublishAllowed: false"
   ],
+  "matchStatusTaxonomy": {
+    "SOURCE_EXACT_PN": "Exact character-by-character P/N provided in source file (0 in September file)",
+    "UNIQUE_MODEL_CAPACITY_CANDIDATE": "Exactly 1 candidate P/N in Stock Master for given Model + Capacity",
+    "MULTIPLE_PN_CANDIDATES": "Multiple candidate P/Ns due to colors, code types (SM- vs F-), or bundles",
+    "PN_NOT_FOUND": "Zero candidates in current stock master (unreleased or unstocked models)"
+  },
   "summaryMetrics": {
     "totalVariantsEvaluated": 56,
-    "exactPnProvidedInSource": 0,
-    "singleCandidateMatched": 0,
+    "sourceExactPn": 0,
+    "uniqueModelCapacityCandidate": 0,
     "multipleCandidatesMatched": 32,
     "pnNotFoundInStockMaster": 24,
     "autoPublishAllowedCount": 0,
@@ -26,14 +32,24 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 61900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 12,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKBTHL",
         "SM-S948BLBBTHL",
         "SM-S948BZVBTHL",
         "SM-S948BZWBTHL",
-        "SM-S948BZKCTHL"
+        "SM-S948BZKCTHL",
+        "SM-S948BLBCTHL",
+        "SM-S948BZVCTHL",
+        "SM-S948BZWCTHL",
+        "SM-S948BZKQTHL",
+        "SM-S948BLBQTHL",
+        "SM-S948BZVQTHL",
+        "SM-S948BZWQTHL"
       ],
+      "candidateCount": 12,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "WARNING_DERIVED_STANDARD_NET",
@@ -48,14 +64,24 @@
       "saleMode": "TRADE_UP",
       "netPrice": 56900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 12,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKBTHL",
         "SM-S948BLBBTHL",
         "SM-S948BZVBTHL",
         "SM-S948BZWBTHL",
-        "SM-S948BZKCTHL"
+        "SM-S948BZKCTHL",
+        "SM-S948BLBCTHL",
+        "SM-S948BZVCTHL",
+        "SM-S948BZWCTHL",
+        "SM-S948BZKQTHL",
+        "SM-S948BLBQTHL",
+        "SM-S948BZVQTHL",
+        "SM-S948BZWQTHL"
       ],
+      "candidateCount": 12,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED",
@@ -70,13 +96,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 49900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKCTHL",
         "SM-S948BLBCTHL",
         "SM-S948BZVCTHL",
         "SM-S948BZWCTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "WARNING_DERIVED_STANDARD_NET",
@@ -91,13 +120,16 @@
       "saleMode": "TRADE_UP",
       "netPrice": 44900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKCTHL",
         "SM-S948BLBCTHL",
         "SM-S948BZVCTHL",
         "SM-S948BZWCTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED",
@@ -112,13 +144,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 41900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKBTHL",
         "SM-S948BLBBTHL",
         "SM-S948BZVBTHL",
         "SM-S948BZWBTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "WARNING_DERIVED_STANDARD_NET",
@@ -133,13 +168,16 @@
       "saleMode": "TRADE_UP",
       "netPrice": 39900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S948BZKBTHL",
         "SM-S948BLBBTHL",
         "SM-S948BZVBTHL",
         "SM-S948BZWBTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED",
@@ -154,13 +192,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 36900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S947BZKCTHL",
         "SM-S947BLBCTHL",
         "SM-S947BZVCTHL",
         "SM-S947BZWCTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -174,13 +215,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 30900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S947BZKBTHL",
         "SM-S947BLBBTHL",
         "SM-S947BZVBTHL",
         "SM-S947BZWBTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -194,14 +238,24 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 29900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 12,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S942BZKQTHL",
         "SM-S942BLBQTHL",
         "SM-S942BZVQTHL",
         "SM-S942BZWQTHL",
-        "SM-S947BZKCTHL"
+        "SM-S947BZKCTHL",
+        "SM-S947BLBCTHL",
+        "SM-S947BZVCTHL",
+        "SM-S947BZWCTHL",
+        "SM-S948BZKCTHL",
+        "SM-S948BLBCTHL",
+        "SM-S948BZVCTHL",
+        "SM-S948BZWCTHL"
       ],
+      "candidateCount": 12,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -215,14 +269,27 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 27900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 15,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "F-NS741BLGCLSV",
         "F-NS741BZKCLSV",
         "F-NS741BZVCLSV",
         "SM-S942BZKCTHL",
-        "SM-S942BLBCTHL"
+        "SM-S942BLBCTHL",
+        "SM-S942BZVCTHL",
+        "SM-S942BZWCTHL",
+        "SM-S947BZKBTHL",
+        "SM-S947BLBBTHL",
+        "SM-S947BZVBTHL",
+        "SM-S947BZWBTHL",
+        "SM-S948BZKBTHL",
+        "SM-S948BLBBTHL",
+        "SM-S948BZVBTHL",
+        "SM-S948BZWBTHL"
       ],
+      "candidateCount": 15,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -236,14 +303,18 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 30900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 6,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "F-N1938BZKBTHL",
         "SM-S938BZKBTHL",
         "SM-S938BZBBTHL",
         "SM-S938BZTBTHL",
-        "SM-S938BZSBTHL"
+        "SM-S938BZSBTHL",
+        "F-N1938BZBBTHL"
       ],
+      "candidateCount": 6,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -257,8 +328,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 24900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -272,8 +346,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 24900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -287,13 +364,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 23900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S731BDBCTHL",
         "SM-S731BLBCTHL",
         "SM-S731BZKCTHL",
         "SM-S731BZWCTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -307,13 +387,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 19900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S731BDBBTHL",
         "SM-S731BLBBTHL",
         "SM-S731BZKBTHL",
         "SM-S731BZWBTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -327,13 +410,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 20900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S731BDBCTHL",
         "SM-S731BLBCTHL",
         "SM-S731BZKCTHL",
         "SM-S731BZWCTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -347,13 +433,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 17900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-S731BDBBTHL",
         "SM-S731BLBBTHL",
         "SM-S731BZKBTHL",
         "SM-S731BZWBTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -367,8 +456,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 93900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -382,8 +474,11 @@
       "saleMode": "TRADE_UP",
       "netPrice": 86900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "TRADE_UP_PAYMENT_CODE_MISSING"
@@ -397,8 +492,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 77900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -412,8 +510,11 @@
       "saleMode": "TRADE_UP",
       "netPrice": 72900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "TRADE_UP_PAYMENT_CODE_MISSING"
@@ -427,8 +528,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 69900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -442,8 +546,11 @@
       "saleMode": "TRADE_UP",
       "netPrice": 64900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "TRADE_UP_PAYMENT_CODE_MISSING"
@@ -457,8 +564,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 85900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -472,8 +582,11 @@
       "saleMode": "TRADE_UP",
       "netPrice": 78900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "TRADE_UP_PAYMENT_CODE_MISSING"
@@ -487,8 +600,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 69900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -502,8 +618,11 @@
       "saleMode": "TRADE_UP",
       "netPrice": 64900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "TRADE_UP_PAYMENT_CODE_MISSING"
@@ -517,8 +636,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 61900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -532,8 +654,11 @@
       "saleMode": "TRADE_UP",
       "netPrice": 56900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "TRADE_UP_PAYMENT_CODE_MISSING"
@@ -547,8 +672,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 48900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -562,8 +690,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 40900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -577,8 +708,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 45900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -592,8 +726,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 37900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -607,8 +744,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 69900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -622,8 +762,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 57900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -637,8 +780,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 49900.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -652,12 +798,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 37900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-F766BZRETHL",
         "SM-F766BZKETHL",
         "SM-F766BDBETHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -671,12 +820,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 29900.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-F766BZRATHL",
         "SM-F766BZKATHL",
         "SM-F766BDBATHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -690,12 +842,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 27999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A576BDBUTHL",
         "SM-A576BZVUTHL",
         "SM-A576BZAUTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -709,12 +864,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 22999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A576BDBTTHL",
         "SM-A576BZVTTHL",
         "SM-A576BZATTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -728,12 +886,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 19999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A576BDBSTHL",
         "SM-A576BZVSTHL",
         "SM-A576BZASTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -747,12 +908,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 25999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A576BDBUTHL",
         "SM-A576BZVUTHL",
         "SM-A576BZAUTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -766,12 +930,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 20999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A576BDBTTHL",
         "SM-A576BZVTTHL",
         "SM-A576BZATTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -785,12 +952,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 17999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A576BDBSTHL",
         "SM-A576BZVSTHL",
         "SM-A576BZASTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -804,12 +974,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 17999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A376BDGTTHL",
         "SM-A376BLVTTHL",
         "SM-A376BZATTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -823,12 +996,15 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 15999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 3,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A376BDGTTHL",
         "SM-A376BLVTTHL",
         "SM-A376BZATTHL"
       ],
+      "candidateCount": 3,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -842,11 +1018,14 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 12999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 2,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A276BLIGTHL",
         "SM-A276BZKGTHL"
       ],
+      "candidateCount": 2,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -860,11 +1039,14 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 11999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 2,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A276BLIGTHL",
         "SM-A276BZKGTHL"
       ],
+      "candidateCount": 2,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -878,13 +1060,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 10999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A176BZBKTHL",
         "SM-A176BZKKTHL",
         "F-A175G256BLTH",
         "F-A175G256BKTH"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -898,13 +1083,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 8999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A176BZBJTHL",
         "SM-A176BZKJTHL",
         "F-A175G128BLTH",
         "F-A175G128BKTH"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -918,13 +1106,16 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 8499.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 4,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "F-A174G128BDTH",
         "F-A174G128KDTH",
         "SM-A175FLBDTHL",
         "SM-A175FZKDTHL"
       ],
+      "candidateCount": 4,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -938,11 +1129,14 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 7999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 2,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A076BLVCTHL",
         "SM-A076BZKCTHL"
       ],
+      "candidateCount": 2,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -956,11 +1150,14 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 8999.0,
       "productMatchStatus": "MULTIPLE_PN_CANDIDATES",
-      "candidateCount": 2,
-      "candidates": [
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [
         "SM-A076BLVCTHL",
         "SM-A076BZKCTHL"
       ],
+      "candidateCount": 2,
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "REVIEW_REQUIRED",
       "validationFlags": [
         "EXACT_PN_UNRESOLVED"
@@ -974,8 +1171,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 4999.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -989,8 +1189,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 4299.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"
@@ -1004,8 +1207,11 @@
       "saleMode": "STANDARD_PAYMENT",
       "netPrice": 3799.0,
       "productMatchStatus": "PN_NOT_FOUND",
+      "matchMethod": "MODEL_CAPACITY_CANDIDATE",
+      "candidatePn": [],
       "candidateCount": 0,
-      "candidates": [],
+      "sourceProvidedPn": false,
+      "humanConfirmationRequired": true,
       "validationStatus": "BLOCKED_UNPROVEN",
       "validationFlags": [
         "PN_NOT_FOUND"

@@ -1,6 +1,6 @@
 {
   "reportName": "SEPTEMBER_HEADER_MAPPING_BEFORE",
-  "generatedAt": "2026-09-12T07:25:31.159083+00:00",
+  "generatedAt": "2026-09-12T08:59:43.281846+00:00",
   "sourceFile": "Sep_ 2026 Promotion Retail_Shop Samsung .xlsx",
   "evaluation": {
     "rootCause1": "Generic discount header match (h.includes('ลด')) preceded specific net price match (h.includes('หลังลด')), causing Column J ('ราคาหลังลดและเทรดอัพ') to be treated as a redundant discount column and completely dropped.",
