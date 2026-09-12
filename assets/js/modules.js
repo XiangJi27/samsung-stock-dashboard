@@ -83,6 +83,8 @@ function renderPromotionsView() {
             <input type="text" id="promoListSearchInput" placeholder="🔍 ค้นหารุ่น, P/N หรือคูปอง..." style="padding: 6px 12px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: #fff; font-size: 0.84rem; min-width: 220px;">
             <select id="promoListModeFilter" style="padding: 6px 12px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: #fff; font-size: 0.84rem;">
               <option value="ALL">ทุก Sale Mode</option>
+              <option value="AI_PROVISIONAL">⚡ โปรโมชั่นชั่วคราวจาก AI (รอ Excel ยืนยัน)</option>
+              <option value="SUPPLEMENTAL_FREEBIE">🎁 ของแถมเสริมจาก AI (Path A)</option>
               <option value="STANDARD">STANDARD</option>
               <option value="SF_PLUS">SF_PLUS</option>
               <option value="ADD_ON_PURCHASE">ADD_ON_PURCHASE (แลกซื้อ)</option>
@@ -123,14 +125,20 @@ function renderPromotionsView() {
     const mode = document.getElementById("promoListModeFilter")?.value || "ALL";
 
     let list = variants;
-    if (mode !== "ALL") {
+    if (mode === "AI_PROVISIONAL") {
+      list = list.filter(v => v.promotionSourceType === "PROVISIONAL_AI_CAPTURE" && v.saleMode !== "SUPPLEMENTAL_FREEBIE");
+    } else if (mode === "SUPPLEMENTAL_FREEBIE") {
+      list = list.filter(v => v.saleMode === "SUPPLEMENTAL_FREEBIE");
+    } else if (mode !== "ALL") {
       list = list.filter(v => v.saleMode === mode);
     }
+
     if (query) {
       list = list.filter(v => 
         (v.model && v.model.toLowerCase().includes(query)) ||
         (v.pn && v.pn.toLowerCase().includes(query)) ||
-        (v.coupon && v.coupon.toLowerCase().includes(query))
+        (v.coupon && v.coupon.toLowerCase().includes(query)) ||
+        (v.freebieNoteFromAI && v.freebieNoteFromAI.toLowerCase().includes(query))
       );
     }
 
@@ -139,21 +147,37 @@ function renderPromotionsView() {
       return;
     }
 
-    tbody.innerHTML = list.slice(0, 150).map(item => `
-      <tr>
-        <td>
-          <div style="font-weight: 700; color: #fff;">${item.pn || '<span style="color: #94a3b8;">-</span>'}</div>
-          <div style="font-size: 0.78rem; color: #cbd5e1;">${item.model}</div>
-        </td>
-        <td><span class="type-pill ${item.productCodeType === 'STANDARD_SM' ? 'active' : ''}">${item.productCodeType || 'STANDARD_SM'}</span></td>
-        <td>฿${(item.rrp || 0).toLocaleString()}</td>
-        <td class="text-coral">-฿${(item.discountValue || item.discount || 0).toLocaleString()}</td>
-        <td style="font-weight: 700; color: var(--neon-cyan);">฿${(item.netPrice || 0).toLocaleString()}</td>
-        <td><span class="type-pill">${item.coupon || '-'}</span></td>
-        <td><span class="type-pill" style="font-size: 0.72rem;">${item.saleMode || 'STANDARD'}</span></td>
-        <td><span class="status-badge-gate pass">🟢 ACTIVE</span></td>
-      </tr>
-    `).join('');
+    tbody.innerHTML = list.slice(0, 150).map(item => {
+      let statusBadge = '<span class="status-badge-gate pass">🟢 ACTIVE</span>';
+      if (item.provisionalStatus === 'ACTIVE_PROVISIONAL') {
+        const pct = item.aiConfidenceScore ? (item.aiConfidenceScore * 100).toFixed(0) : '90';
+        statusBadge = `<span class="status-badge-gate" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b;" title="SHA-256: ${item.rawSourceMediaSha256 || '-'}">⚡ AI PROV (${pct}%)</span>`;
+      } else if (item.provisionalStatus === 'AUTO_RECONCILED') {
+        statusBadge = `<span class="status-badge-gate pass" title="Reconciled against: ${item.reconciledAgainstBatchId || 'Excel'}">🟢 RECONCILED</span>`;
+      } else if (item.provisionalStatus === 'SOURCE_CONFLICT') {
+        statusBadge = `<span class="status-badge-gate blocked" title="Delta: ฿${item.reconciliationDelta?.differenceBaht || 0}">🔴 CONFLICT</span>`;
+      } else if (item.provisionalStatus === 'EXPIRED_UNRECONCILED') {
+        statusBadge = `<span class="status-badge-gate" style="color: #94a3b8; background: rgba(148, 163, 184, 0.1); border: 1px solid #64748b;">⚪ EXPIRED</span>`;
+      }
+
+      return `
+        <tr>
+          <td>
+            <div style="font-weight: 700; color: #fff;">${item.pn || '<span style="color: #94a3b8;">-</span>'}</div>
+            <div style="font-size: 0.78rem; color: #cbd5e1;">${item.model}</div>
+            ${item.freebieNoteFromAI ? `<div style="font-size: 0.72rem; color: #34d399; margin-top: 2px;">🎁 ${item.freebieNoteFromAI}</div>` : ''}
+            ${item.provisionalStatus === 'ACTIVE_PROVISIONAL' ? `<div style="font-size: 0.70rem; color: #f59e0b; margin-top: 2px;">⚡ รอ Excel ยืนยัน • Media SHA: ${(item.rawSourceMediaSha256 || '').substring(0, 8)}...</div>` : ''}
+          </td>
+          <td><span class="type-pill ${item.productCodeType === 'STANDARD_SM' ? 'active' : ''}">${item.productCodeType || 'STANDARD_SM'}</span></td>
+          <td>${item.rrp > 0 ? `฿${item.rrp.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
+          <td class="text-coral">${(item.discountValue || item.discount) > 0 ? `-฿${(item.discountValue || item.discount).toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
+          <td style="font-weight: 700; color: var(--neon-cyan);">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
+          <td><span class="type-pill">${item.coupon || '-'}</span></td>
+          <td><span class="type-pill" style="font-size: 0.72rem;">${item.saleMode || 'STANDARD'}</span></td>
+          <td>${statusBadge}</td>
+        </tr>
+      `;
+    }).join('');
   };
 
   document.getElementById("promoListSearchInput")?.addEventListener("input", renderTable);
