@@ -465,11 +465,46 @@
             const cleanM = modelRaw.toLowerCase().replace('galaxy', '').replace(/\(.*?\)/g, '').trim();
             const cleanCap = capacityRaw.toLowerCase().replace('gb', '').replace('tb', '').trim();
 
+            // Detect if row explicitly specifies a specific color (Default: promotions apply to ALL colors)
+            const fullRowText = (modelRaw + ' ' + (colMap['category'] !== undefined ? String(row[colMap['category']] || '') : '')).toLowerCase();
+            const colorMapRules = [
+              { key: 'violet', th: 'ม่วง' },
+              { key: 'lilac', th: 'ไลแลค' },
+              { key: 'dark blue', th: 'น้ำเงิน' },
+              { key: 'blue', th: 'ฟ้า' },
+              { key: 'navy', th: 'กรม' },
+              { key: 'black', th: 'ดำ' },
+              { key: 'gray', th: 'เทา' },
+              { key: 'grey', th: 'เทา' },
+              { key: 'silver', th: 'เงิน' },
+              { key: 'white', th: 'ขาว' },
+              { key: 'green', th: 'เขียว' },
+              { key: 'pink', th: 'ชมพู' },
+              { key: 'cream', th: 'ครีม' },
+              { key: 'graphite', th: 'กราไฟต์' },
+              { key: 'mint', th: 'มิ้นท์' },
+              { key: 'yellow', th: 'เหลือง' },
+              { key: 'gold', th: 'ทอง' }
+            ];
+
+            let explicitColorFilter = null;
+            for (const cr of colorMapRules) {
+              if (fullRowText.includes(`สี${cr.th}`) || fullRowText.includes(`เฉพาะสี${cr.th}`) || fullRowText.includes(cr.key)) {
+                explicitColorFilter = cr.key;
+                break;
+              }
+            }
+
             const seenPns = new Set();
             stockData.forEach(s => {
               const sm = (s.model || '').toLowerCase();
+              const scolor = (s.color || '').toLowerCase();
               if (cleanM && sm.includes(cleanM)) {
                 if (!cleanCap || sm.includes(cleanCap) || sm.includes(capacityRaw.toLowerCase())) {
+                  // If explicit color specified in file, filter strictly to that color
+                  if (explicitColorFilter && !scolor.includes(explicitColorFilter)) {
+                    return;
+                  }
                   if (!seenPns.has(s.pn)) {
                     seenPns.add(s.pn);
                     candidateList.push(s.pn);
@@ -535,7 +570,7 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
-              selectedPns: [],
+              selectedPns: [...candidateList],
               confirmedPns: [],
               rrp,
               discount: stdDiscount || 0,
@@ -612,7 +647,7 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
-              selectedPns: [],
+              selectedPns: [...candidateList],
               confirmedPns: [],
               rrp,
               discount: (stdDiscount || 0) + tradeUpDiscount,
@@ -715,7 +750,7 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
-              selectedPns: [],
+              selectedPns: [...candidateList],
               confirmedPns: [],
               rrp,
               discount: activeDiscount,

@@ -6,8 +6,8 @@
   "gitBranch": "feature/phase-a-application-shell",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7826960,
-    "totalSizeMB": 7.46
+    "totalSizeBytes": 7828834,
+    "totalSizeMB": 7.47
   },
   "files": [
     {
@@ -138,8 +138,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 102507,
-      "sha256": "92391cb8f6ecbdc307ebafcacf5d0cf614e91ef0973fedb52ecccb4506ebe4a0",
+      "sizeBytes": 104381,
+      "sha256": "572fac3def64dbbb09eca186eccd0676c074950e3f301e46f1f3312bd09cffbd",
       "status": "REQUIRED_RUNTIME"
     },
     {
