@@ -130,6 +130,11 @@
             }
           }
 
+          // Re-sync masterStockData and metrics with restored promotion snapshot
+          if (typeof window.syncMasterStockData === "function") {
+            window.syncMasterStockData();
+          }
+
           this.isLoaded = true;
           this.isLoading = false;
           console.info("[DataLoaderGate] Branch datasets successfully initialized in memory. Total stock items:", window.STOCK_DATABASE ? window.STOCK_DATABASE.length : 0);

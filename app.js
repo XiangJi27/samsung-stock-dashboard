@@ -27,6 +27,9 @@ window.syncMasterStockData = function() {
   if (typeof renderMetrics === "function") {
     renderMetrics();
   }
+  if (typeof renderPromoCampaignModal === "function") {
+    renderPromoCampaignModal();
+  }
 };
 
 // App State
@@ -663,9 +666,11 @@ function renderMetrics() {
 
     const promoInfo = getApprovedPromotion(item, selectedSaleMode, getTodayISO());
     if (promoInfo && promoInfo.variant) {
-      promoCount++;
       const disc = promoInfo.variant.discountValue || promoInfo.variant.discount || 0;
-      if (disc > maxDiscount) maxDiscount = disc;
+      if (!promoInfo.isNormal && promoInfo.variant.isPromotion !== false && disc > 0) {
+        promoCount++;
+        if (disc > maxDiscount) maxDiscount = disc;
+      }
     }
 
     if (item.promotionVariants && item.promotionVariants.some(v => v.saleMode === "STUDENT")) studentCount++;
@@ -824,11 +829,24 @@ function renderMetrics() {
       </div>
     `;
   }
-  if (kpiMaxDiscount) kpiMaxDiscount.textContent = `-฿${maxDiscount.toLocaleString('th-TH')}`;
-  if (kpiPromoCount) kpiPromoCount.textContent = promoCount.toLocaleString('th-TH');
+  if (kpiMaxDiscount) {
+    if (maxDiscount > 0) {
+      kpiMaxDiscount.textContent = `-฿${maxDiscount.toLocaleString('th-TH')}`;
+    } else {
+      kpiMaxDiscount.innerHTML = `<span style="color: #94a3b8; font-size: 1.15rem;">-฿0</span> <span style="font-size: 0.72rem; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 2px 6px; border-radius: 4px; vertical-align: middle;">หมดอายุ</span>`;
+    }
+  }
+  if (kpiPromoCount) {
+    if (promoCount > 0) {
+      kpiPromoCount.textContent = promoCount.toLocaleString('th-TH');
+    } else {
+      kpiPromoCount.innerHTML = `0 <span style="font-size: 0.72rem; color: #94a3b8;">(รออัปเดตแคมเปญ)</span>`;
+    }
+  }
   if (kpiStudentCount) kpiStudentCount.innerHTML = `${studentCount} <span class="unit">รุ่น</span>`;
   if (countAll) countAll.textContent = masterStockData.length;
   if (countKb) countKb.textContent = kbAccessoryCount;
+  if (typeof renderPromoCampaignModal === "function") renderPromoCampaignModal();
 
   console.info("[Stock Metrics Reconciled]", {
     records: masterStockData.length,
@@ -2409,6 +2427,207 @@ Copperwired Public Company Limited`;
   });
 }
 
+// Dynamic Promotion Expiration Modal Renderer
+function renderPromoCampaignModal() {
+  const modalBody = document.getElementById("promoModalBody");
+  const hdrBadge = document.getElementById("headerPromoExpiryBadge");
+
+  const todayStr = (typeof getTodayISO === "function") ? getTodayISO() : new Date().toISOString().slice(0, 10);
+  const now = new Date(todayStr + "T00:00:00");
+
+  const campaigns = [
+    {
+      id: "CAMP-RET-202608",
+      title: "NTW Promotion สิงหาคม - กันยายน 2026 (รอบ 28 ส.ค. - 6 ก.ย.)",
+      category: "Smartphone Retail Shop",
+      badgeClass: "tag-retail",
+      desc: "โปรโมชั่นเครื่องเปล่าลดทันที Galaxy A07, A17, A27, A37, S25 FE, S26 Series และ Z Fold/Flip",
+      startDate: "2026-08-28",
+      endDate: "2026-09-06",
+      periodText: "28 ส.ค. - 6 ก.ย. 2026"
+    },
+    {
+      id: "CAMP-TAB-202608",
+      title: "แคมเปญ Galaxy Tab & อุปกรณ์เสริม (รอบ 3 ส.ค. - 6 ก.ย.)",
+      category: "Tablet & Accessories",
+      badgeClass: "tag-tab",
+      desc: "โปรโมชั่นซื้อเครื่องคู่ Keyboard Case หรือ Book Cover และลดราคาอุปกรณ์เสริม 50-70%",
+      startDate: "2026-08-03",
+      endDate: "2026-09-06",
+      periodText: "3 ส.ค. - 6 ก.ย. 2026"
+    },
+    {
+      id: "CAMP-WATCH-202608",
+      title: "แคมเปญ Galaxy Watch & สายนาฬิกา (รอบ 7 ส.ค. - 6 ก.ย.)",
+      category: "Wearable & Watch Band",
+      badgeClass: "tag-watch",
+      desc: "โปรพิเศษสายนาฬิกา Galaxy Watch5, Watch7, Watch8 ลดพิเศษ 50-70%",
+      startDate: "2026-08-07",
+      endDate: "2026-09-06",
+      periodText: "7 ส.ค. - 6 ก.ย. 2026"
+    },
+    {
+      id: "CAMP-GIFT-A27",
+      title: "ของแถมไมโครเวฟ 23L มูลค่า ฿3,990 สำหรับ Galaxy A27 5G",
+      category: "Special Premium Gift",
+      badgeClass: "tag-gift",
+      desc: "แถมฟรีไมโครเวฟ 23 ลิตร เมื่อซื้อ Galaxy A27 5G (งดของแถมกรณี Flash Sale)",
+      startDate: "2026-08-01",
+      endDate: "2026-09-06",
+      periodText: "1 ส.ค. - 6 ก.ย. 2026"
+    },
+    {
+      id: "CAMP-FLASH-202608",
+      title: "SES Flash Sale (27 - 30 สิงหาคม 2026)",
+      category: "Flash Sale",
+      badgeClass: "tag-retail",
+      desc: "โปรโมชั่นลดราคาพิเศษ Flash Sale ปลายเดือนสิงหาคม",
+      startDate: "2026-08-27",
+      endDate: "2026-08-30",
+      periodText: "27 - 30 ส.ค. 2026"
+    }
+  ];
+
+  // Dynamically detect any active promotion batches in memory (e.g. September promotions)
+  const variants = window.PROMOTION_VARIANTS || [];
+  const activeVariants = variants.filter(v => v.startDate && v.endDate && v.startDate <= todayStr && todayStr <= v.endDate && v.validationStatus !== "BLOCKED" && v.status !== "BLOCKED");
+
+  if (activeVariants.length > 0) {
+    const minStart = activeVariants.reduce((min, v) => (v.startDate < min ? v.startDate : min), activeVariants[0].startDate);
+    const maxEnd = activeVariants.reduce((max, v) => (v.endDate > max ? v.endDate : max), activeVariants[0].endDate);
+    campaigns.unshift({
+      id: "CAMP-ACTIVE-RUNTIME",
+      title: `แคมเปญโปรโมชั่นรอบปัจจุบัน (รอบ ${minStart} ถึง ${maxEnd})`,
+      category: "Active Promotion In-Flight",
+      badgeClass: "tag-retail",
+      desc: `โปรโมชั่นยืนยันความถูกต้องผ่านระบบ 95/5 Risk Guard จำนวน ${activeVariants.length} รายการ`,
+      startDate: minStart,
+      endDate: maxEnd,
+      periodText: `${minStart} - ${maxEnd}`
+    });
+  }
+
+  let hasActive = false;
+  let activeSoonestEndDays = 999;
+  let allExpired = true;
+
+  const evaluated = campaigns.map(c => {
+    const end = new Date(c.endDate + "T23:59:59");
+    const start = new Date(c.startDate + "T00:00:00");
+    const isExpired = now > end;
+    const isUpcoming = now < start;
+    const isActive = !isExpired && !isUpcoming;
+
+    let pillText = "";
+    let pillClass = "";
+    let itemClass = "";
+    let statusText = "";
+    let daysDiff = 0;
+
+    if (isExpired) {
+      daysDiff = Math.max(1, Math.floor((now.getTime() - end.getTime()) / (1000 * 60 * 60 * 24)));
+      pillText = `หมดอายุแล้ว (${daysDiff} วันก่อนหน้า)`;
+      pillClass = "countdown-pill expired";
+      itemClass = "promo-item expired";
+      statusText = `<span class="text-muted">สถานะ: หมดอายุแล้ว (Expired) • ไม่อนุญาตให้ใช้ราคาและคูปอง</span>`;
+    } else if (isActive) {
+      allExpired = false;
+      hasActive = true;
+      daysDiff = Math.max(0, Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
+      if (daysDiff < activeSoonestEndDays) activeSoonestEndDays = daysDiff;
+      if (daysDiff <= 2) {
+        pillText = `⏳ เหลืออีก ${daysDiff} วัน`;
+        pillClass = "countdown-pill urgent";
+        itemClass = "promo-item urgent";
+      } else {
+        pillText = `✅ เหลืออีก ${daysDiff} วัน`;
+        pillClass = "countdown-pill active";
+        itemClass = "promo-item";
+      }
+      statusText = `<span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>`;
+    } else {
+      allExpired = false;
+      daysDiff = Math.ceil((start.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+      pillText = `📅 อีก ${daysDiff} วันจะเริ่ม`;
+      pillClass = "countdown-pill";
+      itemClass = "promo-item";
+      statusText = `<span class="text-muted">สถานะ: แคมเปญล่วงหน้า (Upcoming)</span>`;
+    }
+
+    return { ...c, isExpired, isActive, isUpcoming, pillText, pillClass, itemClass, statusText, daysDiff };
+  });
+
+  // Alert banner
+  let alertBannerHtml = "";
+  if (allExpired) {
+    alertBannerHtml = `
+      <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; color: #fecaca; display: flex; align-items: center; gap: 14px;">
+        <div class="fire-icon-large" style="font-size: 2rem;">🛑</div>
+        <div class="urgent-content">
+          <h3 style="color: #f87171; margin: 0 0 4px 0; font-size: 1.05rem; font-weight: 700;">แคมเปญโปรโมชั่นรอบสิงหาคมสิ้นสุดแล้ว (Expired)</h3>
+          <p style="margin: 0; color: #cbd5e1; font-size: 0.85rem; line-height: 1.45;">แคมเปญหลัก (28 ส.ค. - 6 ก.ย. 2026) หมดอายุแล้วเมื่อ 7 วันก่อนหน้า (ณ วันที่ 6 ก.ย. 2026 เวลา 23:59 น.) • <strong>ระบบได้ระงับการใช้ราคาส่วนลดและคูปองของแคมเปญที่หมดอายุโดยอัตโนมัติ</strong> เพื่อป้องกันข้อผิดพลาดในการขายหน้าร้าน</p>
+        </div>
+      </div>
+    `;
+    if (hdrBadge) {
+      hdrBadge.className = "hdr-badge badge-coral";
+      hdrBadge.textContent = "หมดอายุแล้ว";
+    }
+  } else if (hasActive && activeSoonestEndDays <= 2) {
+    alertBannerHtml = `
+      <div class="urgent-alert-banner">
+        <div class="fire-icon-large">⏳</div>
+        <div class="urgent-content">
+          <h3>แคมเปญหลักกำลังจะหมดเขตเร็วๆ นี้!</h3>
+          <p>แคมเปญที่เปิดใช้งานอยู่จะสิ้นสุดในอีก <strong>${activeSoonestEndDays} วัน</strong> • กรุณาตรวจสอบรอบโปรโมชั่นถัดไป</p>
+        </div>
+      </div>
+    `;
+    if (hdrBadge) {
+      hdrBadge.className = "hdr-badge badge-amber";
+      hdrBadge.textContent = `เหลือ ${activeSoonestEndDays} วัน`;
+    }
+  } else if (hasActive) {
+    alertBannerHtml = `
+      <div class="urgent-alert-banner" style="background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; color: #d1fae5; display: flex; align-items: center; gap: 14px;">
+        <div class="fire-icon-large" style="font-size: 1.8rem;">✨</div>
+        <div class="urgent-content">
+          <h3 style="color: #34d399; margin: 0 0 4px 0; font-size: 1.05rem; font-weight: 700;">แคมเปญโปรโมชั่นพร้อมใช้งาน</h3>
+          <p style="margin: 0; color: #cbd5e1; font-size: 0.85rem;">มีโปรโมชั่นที่ผ่านการยืนยันและเปิดใช้งานอยู่ตามรอบปฏิทิน</p>
+        </div>
+      </div>
+    `;
+    if (hdrBadge) {
+      hdrBadge.className = "hdr-badge badge-emerald";
+      hdrBadge.textContent = "ใช้งานได้";
+    }
+  }
+
+  if (modalBody) {
+    const listHtml = evaluated.map(c => `
+      <div class="${c.itemClass}">
+        <div class="promo-item-header">
+          <span class="promo-badge-tag ${c.badgeClass}">${c.category}</span>
+          <span class="${c.pillClass}">${c.pillText}</span>
+        </div>
+        <h4 class="promo-item-title">${c.title}</h4>
+        <p class="promo-item-desc">${c.desc}</p>
+        <div class="promo-meta-footer">
+          <span>📅 ระยะเวลา: <strong>${c.periodText}</strong></span>
+          ${c.statusText}
+        </div>
+      </div>
+    `).join("");
+
+    modalBody.innerHTML = `
+      ${alertBannerHtml}
+      <div class="promo-campaign-list">
+        ${listHtml}
+      </div>
+    `;
+  }
+}
+
 // Setup Promo Expiration Modal
 function setupPromoModal() {
   const btnPromoExpiry = document.getElementById("btnPromoExpiry");
@@ -2417,6 +2636,9 @@ function setupPromoModal() {
   const btnClosePromoBottom = document.getElementById("btnClosePromoBottom");
 
   btnPromoExpiry?.addEventListener("click", () => {
+    if (typeof renderPromoCampaignModal === "function") {
+      renderPromoCampaignModal();
+    }
     promoModal?.classList.remove("hidden");
   });
 
@@ -2433,6 +2655,9 @@ function setupPromoModal() {
       promoModal.classList.add("hidden");
     }
   });
+
+  // Initial evaluation for header badge and modal contents
+  renderPromoCampaignModal();
 }
 
 // Setup 95/5 Risk Automation Modal
@@ -3231,6 +3456,7 @@ function setupEventListeners() {
 // Global Exports for Application Shell Router
 window.renderData = renderData;
 window.renderMetrics = renderMetrics;
+window.renderPromoCampaignModal = renderPromoCampaignModal;
 
 // Initialize on Load
 document.addEventListener("DOMContentLoaded", () => {
@@ -3238,5 +3464,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderData();
   setupEventListeners();
   setupExpiryBanner();
+  renderPromoCampaignModal();
 });
 

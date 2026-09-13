@@ -255,7 +255,7 @@
               <polyline points="12 6 12 12 16 14"/>
             </svg>
             <span>วันหมดอายุโปร</span>
-            <span class="hdr-badge badge-amber">เหลือ 1 วัน</span>
+            <span class="hdr-badge badge-coral" id="headerPromoExpiryBadge">หมดอายุ</span>
           </button>
 
           <button id="btnDailyEmail" class="hdr-btn" title="เปิดระบบตรวจนับสต็อกจริงเทียบระบบ และส่งเมล Outlook">
@@ -775,84 +775,17 @@
           <button id="btnClosePromoModal" class="btn-close-modal">&times;</button>
         </div>
 
-        <div class="modal-body">
-          <!-- Urgent Expiration Alert Banner -->
-          <div class="urgent-alert-banner">
-            <div class="fire-icon-large">⏳</div>
+        <div class="modal-body" id="promoModalBody">
+          <!-- Dynamic Content Rendered by renderPromoCampaignModal() -->
+          <div class="urgent-alert-banner" style="background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; color: #fecaca; display: flex; align-items: center; gap: 14px;">
+            <div class="fire-icon-large" style="font-size: 2rem;">🛑</div>
             <div class="urgent-content">
-              <h3>แคมเปญหลักกำลังจะหมดเขตพรุ่งนี้!</h3>
-              <p>แคมเปญรอบสิงหาคม-กันยายน 2026 ทั้งหมดจะสิ้นสุดในวันที่ <strong>6 กันยายน 2026 เวลา 23:59 น.</strong> (เหลือเวลาอีก 1 วัน)</p>
+              <h3 style="color: #f87171; margin: 0 0 4px 0; font-size: 1.05rem; font-weight: 700;">แคมเปญโปรโมชั่นรอบสิงหาคมสิ้นสุดแล้ว (Expired)</h3>
+              <p style="margin: 0; color: #cbd5e1; font-size: 0.85rem; line-height: 1.45;">แคมเปญหลัก (28 ส.ค. - 6 ก.ย. 2026) หมดอายุแล้วเมื่อ 7 วันก่อนหน้า (ณ วันที่ 6 ก.ย. 2026) • <strong>ระบบได้ระงับการใช้ราคาส่วนลดและคูปองของแคมเปญที่หมดอายุโดยอัตโนมัติ</strong> เพื่อป้องกันข้อผิดพลาดในการขายหน้าร้าน</p>
             </div>
           </div>
-
-          <!-- Active Campaigns List -->
-          <div class="promo-campaign-list">
-            
-            <div class="promo-item urgent">
-              <div class="promo-item-header">
-                <span class="promo-badge-tag tag-retail">Smartphone Retail Shop</span>
-                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
-              </div>
-              <h4 class="promo-item-title">NTW Promotion สิงหาคม - กันยายน 2026 (รอบ 28 ส.ค. - 6 ก.ย.)</h4>
-              <p class="promo-item-desc">โปรโมชั่นเครื่องเปล่าลดทันที Galaxy A07, A17, A27, A37, S25 FE, S26 Series และ Z Fold/Flip</p>
-              <div class="promo-meta-footer">
-                <span>📅 ระยะเวลา: <strong>28 ส.ค. - 6 ก.ย. 2026</strong></span>
-                <span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>
-              </div>
-            </div>
-
-            <div class="promo-item urgent">
-              <div class="promo-item-header">
-                <span class="promo-badge-tag tag-tab">Tablet & Accessories</span>
-                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
-              </div>
-              <h4 class="promo-item-title">แคมเปญ Galaxy Tab & อุปกรณ์เสริม (รอบ 3 ส.ค. - 6 ก.ย.)</h4>
-              <p class="promo-item-desc">โปรโมชั่นซื้อเครื่องคู่ Keyboard Case หรือ Book Cover และลดราคาอุปกรณ์เสริม 50-70%</p>
-              <div class="promo-meta-footer">
-                <span>📅 ระยะเวลา: <strong>3 ส.ค. - 6 ก.ย. 2026</strong></span>
-                <span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>
-              </div>
-            </div>
-
-            <div class="promo-item urgent">
-              <div class="promo-item-header">
-                <span class="promo-badge-tag tag-watch">Wearable & Watch Band</span>
-                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
-              </div>
-              <h4 class="promo-item-title">แคมเปญ Galaxy Watch & สายนาฬิกา (รอบ 7 ส.ค. - 6 ก.ย.)</h4>
-              <p class="promo-item-desc">โปรพิเศษสายนาฬิกา Galaxy Watch5, Watch7, Watch8 ลดพิเศษ 50-70%</p>
-              <div class="promo-meta-footer">
-                <span>📅 ระยะเวลา: <strong>7 ส.ค. - 6 ก.ย. 2026</strong></span>
-                <span class="text-emerald">สถานะ: กำลังใช้งาน (Active)</span>
-              </div>
-            </div>
-
-            <div class="promo-item urgent">
-              <div class="promo-item-header">
-                <span class="promo-badge-tag tag-gift">Special Premium Gift</span>
-                <span class="countdown-pill urgent">⏳ เหลืออีก 1 วัน</span>
-              </div>
-              <h4 class="promo-item-title">ของแถมไมโครเวฟ 23L มูลค่า ฿3,990 สำหรับ Galaxy A27 5G</h4>
-              <p class="promo-item-desc">แถมฟรีไมโครเวฟ 23 ลิตร เมื่อซื้อ Galaxy A27 5G (งดของแถมกรณี Flash Sale)</p>
-              <div class="promo-meta-footer">
-                <span>📅 สิ้นสุด: <strong>6 กันยายน 2026</strong></span>
-                <span class="text-coral">ของแถมมีจำนวนจำกัด</span>
-              </div>
-            </div>
-
-            <div class="promo-item expired">
-              <div class="promo-item-header">
-                <span class="promo-badge-tag">Flash Sale</span>
-                <span class="countdown-pill expired">สิ้นสุดแคมเปญแล้ว</span>
-              </div>
-              <h4 class="promo-item-title">SES Flash Sale (27 - 30 สิงหาคม 2026)</h4>
-              <p class="promo-item-desc">โปรโมชั่นลดราคาพิเศษ Flash Sale ปลายเดือนสิงหาคม</p>
-              <div class="promo-meta-footer">
-                <span>📅 ระยะเวลา: <strong>27 - 30 ส.ค. 2026</strong></span>
-                <span class="text-muted">หมดอายุแล้ว (Expired)</span>
-              </div>
-            </div>
-
+          <div class="promo-campaign-list" id="promoCampaignListContainer">
+            <!-- Dynamic campaign cards injected here -->
           </div>
         </div>
 

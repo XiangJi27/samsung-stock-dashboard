@@ -149,9 +149,17 @@ class AppRouter {
   dispatchRouteAction(path) {
     if (path === "/home" && typeof window.renderHomeView === "function") {
       window.renderHomeView();
-    } else if (path === "/stock" && typeof window.renderData === "function") {
-      // Re-trigger stock rendering
-      window.renderData();
+    } else if (path === "/stock") {
+      // Re-trigger stock rendering and KPI synchronization
+      if (typeof window.renderData === "function") {
+        window.renderData();
+      }
+      if (typeof window.renderMetrics === "function") {
+        window.renderMetrics();
+      }
+      if (typeof window.renderPromoCampaignModal === "function") {
+        window.renderPromoCampaignModal();
+      }
     } else if (path === "/promotions" && typeof window.renderPromotionsView === "function") {
       window.renderPromotionsView();
     } else if (path === "/settings" && typeof window.renderSettingsView === "function") {
