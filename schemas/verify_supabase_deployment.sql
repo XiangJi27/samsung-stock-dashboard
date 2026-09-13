@@ -52,6 +52,19 @@ ORDER BY grantee, table_name, privilege_type;
 -- Expected: prosecdef = true, proconfig contains search_path = public, auth, pg_temp
 -- Specifically verify: private.is_active_user has prosecdef = true
 -- ----------------------------------------------------------------------------
+-- 4.1 Focused Check: Verify private.is_active_user() is deployed
+-- Expected: 1 row: private | is_active_user | true | {search_path=public,auth,pg_temp}
+SELECT
+    n.nspname,
+    p.proname,
+    p.prosecdef,
+    p.proconfig
+FROM pg_proc p
+JOIN pg_namespace n ON n.oid = p.pronamespace
+WHERE n.nspname = 'private'
+  AND p.proname = 'is_active_user';
+
+-- 4.2 Comprehensive Function Catalog Check
 SELECT 
     n.nspname AS schema_name, 
     p.proname AS function_name, 

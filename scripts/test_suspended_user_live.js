@@ -15,7 +15,7 @@
  * 10. Post-test cleanup: Profile status restored to 'ACTIVE'.
  */
 
-const { loadLocalEnv } = require('./lib/load-local-env');
+const { loadLocalEnv, loadServerEnv } = require('./lib/load-local-env');
 const { TestUserSession } = require('./lib/test-user-session');
 const { redactToken, redactUuid, redactEmail } = require('./lib/redact-test-output');
 
@@ -23,6 +23,7 @@ function setupMockSuspendedEngine() {
   let memberStatus = 'ACTIVE';
   let memberToken = 'mock_suspended_test_jwt';
   const memberId = '00000000-0000-0000-0000-000000000001';
+  const adminId = '00000000-0000-0000-0000-000000000099';
 
   const originalFetch = global.fetch;
   global.fetch = async (url, opts = {}) => {
@@ -34,16 +35,22 @@ function setupMockSuspendedEngine() {
 
     // 1. Auth Sign-in
     if (pathname.includes('/auth/v1/token')) {
+      const body = JSON.parse(opts.body || '{}');
+      const email = body.email || 'test_m1@store.local';
+      const isAdmin = email.includes('admin');
+      const targetId = isAdmin ? adminId : memberId;
+      const targetToken = isAdmin ? 'mock_admin_jwt' : memberToken;
+
       return {
         status: 200,
         ok: true,
         text: async () => JSON.stringify({
-          access_token: memberToken,
-          user: { id: memberId, email: 'test_m1@store.local' }
+          access_token: targetToken,
+          user: { id: targetId, email }
         }),
         json: async () => ({
-          access_token: memberToken,
-          user: { id: memberId, email: 'test_m1@store.local' }
+          access_token: targetToken,
+          user: { id: targetId, email }
         })
       };
     }
@@ -94,6 +101,9 @@ function setupMockSuspendedEngine() {
             json: async () => ([{ id: 'iss_001', issue_number: 'ISS-2026-00001', status: 'NEW' }])
           };
         }
+        if (method === 'DELETE') {
+          return { status: 204, ok: true, text: async () => '', json: async () => null };
+        }
       }
     }
 
@@ -137,12 +147,22 @@ async function runSuspendedUserTest() {
   console.log('================================================================\n');
 
   const env = loadLocalEnv();
+  const serverEnv = loadServerEnv();
 
   if (mode === 'live') {
     if (!env || !env.SUPABASE_URL || !env.SUPABASE_PUBLISHABLE_KEY || !env.TEST_MEMBER_EMAIL || !env.TEST_MEMBER_PASSWORD) {
       console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
-      console.error('Missing required environment configuration (.env.feedback-pilot.local).');
-      console.error('Required: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TEST_MEMBER_EMAIL, TEST_MEMBER_PASSWORD, SUPABASE_SERVICE_ROLE_KEY or TEST_ADMIN credentials');
+      console.error('Missing required client environment configuration (.env.feedback-pilot.local).');
+      console.error('Required: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TEST_MEMBER_EMAIL, TEST_MEMBER_PASSWORD');
+      process.exit(2);
+    }
+    const hasAdminLogin = env.TEST_ADMIN_EMAIL && env.TEST_ADMIN_PASSWORD;
+    const hasServerSecret = serverEnv && (serverEnv.SUPABASE_SECRET_KEY || serverEnv.SUPABASE_SERVICE_ROLE_KEY);
+    if (!hasAdminLogin && !hasServerSecret) {
+      console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
+      console.error('Admin authentication missing.');
+      console.error('Provide TEST_ADMIN_EMAIL & TEST_ADMIN_PASSWORD in .env.feedback-pilot.local');
+      console.error('OR SUPABASE_SECRET_KEY in .env.feedback-pilot.server.local');
       process.exit(2);
     }
   } else {
@@ -156,7 +176,9 @@ async function runSuspendedUserTest() {
   const apiKey = isSimulated ? 'mock_publishable_anon_key' : env.SUPABASE_PUBLISHABLE_KEY;
   const memberEmail = isSimulated ? 'test_m1@store.local' : env.TEST_MEMBER_EMAIL;
   const memberPassword = isSimulated ? 'validPassword123' : env.TEST_MEMBER_PASSWORD;
-  const serviceRoleKey = isSimulated ? 'mock_admin_key' : (env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_PUBLISHABLE_KEY);
+  const adminEmail = isSimulated ? 'test_admin@store.local' : env?.TEST_ADMIN_EMAIL;
+  const adminPassword = isSimulated ? 'adminPass123' : env?.TEST_ADMIN_PASSWORD;
+  const serverSecret = isSimulated ? null : (serverEnv?.SUPABASE_SECRET_KEY || serverEnv?.SUPABASE_SERVICE_ROLE_KEY);
 
   let passed = 0;
   let failed = 0;
@@ -172,43 +194,66 @@ async function runSuspendedUserTest() {
   }
 
   const memberSession = new TestUserSession(baseUrl, apiKey);
-  const adminSession = new TestUserSession(baseUrl, serviceRoleKey);
+  let adminSession;
+
+  if (serverSecret) {
+    adminSession = new TestUserSession(baseUrl, serverSecret);
+  } else {
+    adminSession = new TestUserSession(baseUrl, apiKey);
+  }
+
+  let createdIssueId = null;
 
   try {
-    // Step 1: Member Login
+    // -------------------------------------------------------------
+    // Step 1: Login
+    // -------------------------------------------------------------
     const user = await memberSession.signIn(memberEmail, memberPassword);
-    assertTest('Step 1: Member sign in successful', !!user?.id, `(UID: ${redactUuid(user?.id)})`);
+    assertTest('Step 1: Login (Member signs in successfully)', !!user?.id, `(UID: ${redactUuid(user?.id)})`);
 
-    // Step 2: Active Member creates an issue
+    // -------------------------------------------------------------
+    // Step 2: Create issue before suspension
+    // -------------------------------------------------------------
     const createRes = await memberSession.post('/rest/v1/issues', {
       title: '[RLS-TEST] Active Lifecycle Issue',
       description: 'Pre-suspension issue',
       category: 'APP_BUG',
       severity: 'LOW'
     });
-    assertTest('Step 2: Active member creates issue successfully', createRes.ok || createRes.status === 201, `(HTTP ${createRes.status})`);
+    if (createRes.data && Array.isArray(createRes.data) && createRes.data[0]?.id) {
+      createdIssueId = createRes.data[0].id;
+    }
+    assertTest('Step 2: Create issue before suspension', createRes.ok || createRes.status === 201, `(HTTP ${createRes.status})`);
 
-    // Step 3: Member token preserved
+    // -------------------------------------------------------------
+    // Step 3: Retain original access token
+    // -------------------------------------------------------------
     const savedToken = memberSession.accessToken;
-    assertTest('Step 3: Original JWT access token preserved', !!savedToken, `(${redactToken(savedToken)})`);
+    assertTest('Step 3: Retain original access token', !!savedToken, `(${redactToken(savedToken)})`);
 
-    // Step 4: Admin updates profile to SUSPENDED
+    // -------------------------------------------------------------
+    // Step 4: Suspend profile
+    // -------------------------------------------------------------
+    if (!serverSecret && adminEmail && adminPassword) {
+      await adminSession.signIn(adminEmail, adminPassword);
+    }
     const suspendRes = await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, {
       status: 'SUSPENDED'
     });
-    assertTest('Step 4: Admin sets profiles.status to SUSPENDED', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204);
+    assertTest('Step 4: Suspend profile (Admin sets profiles.status to SUSPENDED)', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204);
 
-    // Step 5: Member calls SELECT issues using old token -> must be EMPTY or DENIED
+    // -------------------------------------------------------------
+    // Step 5: SELECT with old token blocked
+    // -------------------------------------------------------------
     const selectRes = await memberSession.get('/rest/v1/issues?select=id,title');
-    const selectBlocked = (selectRes.status === 401 || selectRes.status === 403 || (selectRes.ok && Array.isArray(selectRes.data) && selectRes.data.length === 0));
-    assertTest('Step 5: Suspended user SELECT issues returns 0 rows / denied', selectBlocked, `(HTTP ${selectRes.status})`);
-
-    // Step 6: Member calls SELECT user_roles using old token -> must be EMPTY or DENIED
     const rolesRes = await memberSession.get('/rest/v1/user_roles?select=role');
-    const rolesBlocked = (rolesRes.status === 401 || rolesRes.status === 403 || (rolesRes.ok && Array.isArray(rolesRes.data) && rolesRes.data.length === 0));
-    assertTest('Step 6: Suspended user SELECT user_roles returns 0 rows / denied', rolesBlocked, `(HTTP ${rolesRes.status})`);
+    const selectBlocked = (selectRes.status === 401 || selectRes.status === 403 || (selectRes.ok && Array.isArray(selectRes.data) && selectRes.data.length === 0)) &&
+                          (rolesRes.status === 401 || rolesRes.status === 403 || (rolesRes.ok && Array.isArray(rolesRes.data) && rolesRes.data.length === 0));
+    assertTest('Step 5: SELECT with old token blocked', selectBlocked, `(HTTP ${selectRes.status})`);
 
-    // Step 7: Member attempts INSERT issue -> must be DENIED
+    // -------------------------------------------------------------
+    // Step 6: INSERT issue blocked
+    // -------------------------------------------------------------
     const insertRes = await memberSession.post('/rest/v1/issues', {
       title: '[RLS-TEST] Suspended Illegal Issue',
       description: 'Should be rejected by RLS',
@@ -216,31 +261,55 @@ async function runSuspendedUserTest() {
       severity: 'LOW'
     });
     const insertBlocked = (!insertRes.ok && (insertRes.status === 403 || insertRes.status === 401));
-    assertTest('Step 7: Suspended user INSERT issue blocked by RLS', insertBlocked, `(HTTP ${insertRes.status})`);
+    assertTest('Step 6: INSERT issue blocked', insertBlocked, `(HTTP ${insertRes.status})`);
 
-    // Step 8: Member attempts INSERT comment -> must be DENIED
+    // -------------------------------------------------------------
+    // Step 7: INSERT comment blocked
+    // -------------------------------------------------------------
     const commentRes = await memberSession.post('/rest/v1/issue_comments', {
-      issue_id: '00000000-0000-0000-0000-000000000100',
+      issue_id: createdIssueId || '00000000-0000-0000-0000-000000000100',
       comment_text: 'Illegal comment from suspended account'
     });
     const commentBlocked = (!commentRes.ok && (commentRes.status === 403 || commentRes.status === 401));
-    assertTest('Step 8: Suspended user INSERT comment blocked by RLS', commentBlocked, `(HTTP ${commentRes.status})`);
+    assertTest('Step 7: INSERT comment blocked', commentBlocked, `(HTTP ${commentRes.status})`);
 
-    // Step 9: Member attempts RPC update_own_display_name -> must be DENIED
+    // -------------------------------------------------------------
+    // Step 8: RPC blocked
+    // -------------------------------------------------------------
     const rpcRes = await memberSession.post('/rest/v1/rpc/update_own_display_name', {
       new_display_name: 'Suspended Hacker Name'
     });
     const rpcBlocked = (!rpcRes.ok && (rpcRes.status === 403 || rpcRes.status === 400 || rpcRes.status === 500));
-    assertTest('Step 9: Suspended user RPC update_own_display_name blocked', rpcBlocked, `(HTTP ${rpcRes.status})`);
+    assertTest('Step 8: RPC blocked', rpcBlocked, `(HTTP ${rpcRes.status})`);
 
-    // Step 10: Admin reactivates profile to ACTIVE and verifies access restored
+    // -------------------------------------------------------------
+    // Step 9: Reactivate profile
+    // -------------------------------------------------------------
     const restoreRes = await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, {
       status: 'ACTIVE'
     });
-    const verifyRestored = await memberSession.get('/rest/v1/profiles?select=status');
-    const isRestoredActive = (restoreRes.ok || restoreRes.status === 200 || restoreRes.status === 204) &&
-                             (verifyRestored.ok && Array.isArray(verifyRestored.data) && verifyRestored.data[0]?.status === 'ACTIVE');
-    assertTest('Step 10: Teardown: Profile restored to ACTIVE and access re-verified', isRestoredActive);
+    assertTest('Step 9: Reactivate profile (Admin sets profiles.status to ACTIVE)', restoreRes.ok || restoreRes.status === 200 || restoreRes.status === 204);
+
+    // -------------------------------------------------------------
+    // Step 10: Verify same user can sign in/access again
+    // -------------------------------------------------------------
+    const freshMemberSession = new TestUserSession(baseUrl, apiKey);
+    const freshUser = await freshMemberSession.signIn(memberEmail, memberPassword);
+    const readProfileRes = await freshMemberSession.get(`/rest/v1/profiles?id=eq.${user.id}&select=id,status`);
+    const readIssuesRes = await freshMemberSession.get('/rest/v1/issues?select=id,title&limit=5');
+    const accessRestored = !!freshUser?.id &&
+      readProfileRes.ok && Array.isArray(readProfileRes.data) && readProfileRes.data[0]?.status === 'ACTIVE' &&
+      readIssuesRes.ok;
+    assertTest('Step 10: Verify same user can sign in/access again', accessRestored, `(Status: ${readProfileRes.data?.[0]?.status || 'UNKNOWN'})`);
+
+    // Teardown / Cleanup: Delete test issue created in Step 2 to leave 0 residual records
+    if (createdIssueId) {
+      if (adminSession.accessToken) {
+        await adminSession.delete(`/rest/v1/issues?id=eq.${createdIssueId}`);
+      } else if (freshMemberSession.accessToken) {
+        await freshMemberSession.delete(`/rest/v1/issues?id=eq.${createdIssueId}`);
+      }
+    }
 
   } catch (err) {
     assertTest('Lifecycle execution', false, err.message);
