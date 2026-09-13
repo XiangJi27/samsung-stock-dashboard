@@ -49,6 +49,9 @@ def build_pilot_entrypoint():
   <script src="assets/js/user-status-bar.js"></script>
   <script src="assets/js/issue-report-modal.js"></script>
   <script src="assets/js/issue-list.js"></script>
+  <script src="assets/js/pilot-navigation.js"></script>
+  <script src="assets/js/pilot-dashboard-widgets.js"></script>
+  <script src="assets/js/member-admin-service.js"></script>
   <script src="assets/js/pilot-bootstrap.js"></script>
 """
 

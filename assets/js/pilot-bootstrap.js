@@ -32,10 +32,15 @@
         window.IssueReportModal.render();
       }
 
-      // 4. Add "ติดตามปัญหา" (Issue List) button to User Status Bar
+      // 4. Initialize Role-aware Navigation
+      if (window.PilotNavigation) {
+        window.PilotNavigation.init();
+      }
+
+      // 5. Add "ติดตามปัญหา" (Issue List) button to User Status Bar
       this.injectIssueListButton();
 
-      // 5. Restore active session (30-day persistent session support)
+      // 6. Restore active session (30-day persistent session support)
       if (window.AuthService) {
         try {
           const session = await window.AuthService.restoreSession();
@@ -48,10 +53,60 @@
 
         window.AuthService.onAuthStateChange((event) => {
           this.updateIssueListButtonVisibility();
+          this.handleRouteChange();
         });
       }
 
       this.updateIssueListButtonVisibility();
+
+      // 7. Route change listener for dynamic Pilot views (Dashboard & Member Admin)
+      window.addEventListener('hashchange', () => this.handleRouteChange());
+      this.handleRouteChange();
+    }
+
+    handleRouteChange() {
+      const hash = window.location.hash || '#/home';
+
+      // 1. If on Dashboard, render Pilot Dashboard Widgets
+      if (hash === '#/home' || hash === '#/' || hash === '') {
+        const homeContent = document.getElementById('homeViewContent');
+        if (homeContent && window.PilotDashboardRenderer) {
+          window.PilotDashboardRenderer.renderDashboard(homeContent);
+        }
+      }
+
+      // 2. If on Member Admin, render Member Admin View
+      if (hash === '#/admin/members') {
+        this.renderAdminMembersSection();
+      }
+    }
+
+    renderAdminMembersSection() {
+      // Hide all standard views
+      document.querySelectorAll('.app-view').forEach(v => {
+        v.style.display = 'none';
+        v.classList.remove('active');
+      });
+
+      let adminView = document.getElementById('view-admin-members');
+      if (!adminView) {
+        adminView = document.createElement('section');
+        adminView.id = 'view-admin-members';
+        adminView.className = 'app-view active';
+        const main = document.querySelector('main') || document.querySelector('.app-main-content');
+        if (main) {
+          main.appendChild(adminView);
+        } else {
+          document.body.appendChild(adminView);
+        }
+      }
+
+      adminView.style.display = 'block';
+      adminView.classList.add('active');
+
+      if (window.MemberAdminView) {
+        window.MemberAdminView.render(adminView);
+      }
     }
 
     injectIssueListButton() {

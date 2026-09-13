@@ -1,68 +1,77 @@
-# Implementation Plan: User Feedback Pilot (4-User Store Model)
+# Implementation Plan: User Feedback Pilot (Dashboard-First 4-User Store Model)
 
 **Branch**: `feature/user-feedback-pilot`  
 **Scope**: Ayutthaya City Park Store (`AYUTTHAYA_CITY_PARK`)  
 **Target Users**: 4 Users (1 Manager/Admin + 3 Sales Staff)  
-**Primary Workflow**: Stock Lookup (`/#/stock`) + Issue Reporting & Tracking  
+**Primary Landing**: Dashboard (`/#/home`) -> Quick Actions to Stock (`/#/stock`)  
 
 ---
 
 ## 1. Governance State
 
+- `PILOT_SCOPE = SINGLE_BRANCH_SMALL_TEAM`
 - `PILOT_USERS = 4`
-- `OPERATIONAL_BRANCHES = 1`
-- `PRIMARY_USE_CASE = STOCK_LOOKUP`
-- `ACTIVE_ROLES = MEMBER, STORE_LEADER, SYSTEM_ADMIN`
-- `SUPPORT_ROLE_UI = DEFERRED` (Security canary retained in pgTAP)
-- `AUDITOR_ROLE_UI = DEFERRED` (Security canary retained in pgTAP)
-- `MULTI_BRANCH_UI = DEFERRED` (Security canary retained in pgTAP)
+- `DEFAULT_AFTER_LOGIN = DASHBOARD (/#/home)`
+- `PRIMARY_FEATURE = STOCK_LOOKUP`
+- `MANAGER_FEATURES = STOCK_IMPORT, PROMOTION_IMPORT, MEMBER_ADMIN`
+- `FEEDBACK_FEATURES = REPORT_ISSUE, MY_ISSUES, BRANCH_ISSUES`
+- `MEMBERSHIP_MODEL = ADMIN_CREATED_ONLY (Invite-Only)`
+- `PUBLIC_SIGNUP = DISABLED`
 - `BASELINE_RUNTIME_INTEGRITY = PASS (23/23 MATCHED, Commit a7c3390)`
-- `FEEDBACK_PILOT_RUNTIME = BUILT (Separate pilot.html & samsung_stock_dashboard_feedback_pilot.zip)`
+- `FEEDBACK_PILOT_RUNTIME = BUILT (pilot.html & samsung_stock_dashboard_feedback_pilot.zip)`
 - `EMPLOYEE_PILOT = HOLD (Until API & Browser Acceptance)`
 - `PRODUCTION = HOLD`
 - `MAIN_MERGE = HOLD`
 
 ---
 
-## 2. Milestone A: Automated Database RLS Tests (`supabase/tests/`)
+## 2. Dashboard Architecture & Widget Registry (`/#/home`)
 
-Standardized pgTAP test suites (35 assertions) testing database security rules:
-- `01_issue_number_and_audit.test.sql` (Issue number auto-generation & audit trigger)
-- `02_internal_comments_scope.test.sql` (Public vs Internal comment visibility isolation)
-- `03_issue_status_transitions.test.sql` (State machine allow-list & role guardrails)
-- `04_boundary_branch_b_canary.test.sql` (Cross-branch boundary isolation canary)
-- `05_private_schema_surface.test.sql` (Private helper function attack surface)
-- `06_role_management.test.sql` (Admin-only role management & privilege separation)
-- `07_profile_update_rpc.test.sql` (Profile direct tampering prevention)
-- `08_audit_immutability.test.sql` (Immutable audit trail enforcement)
+Extensible `WIDGET_REGISTRY` architecture supporting real store data and future integration slots without refactoring:
 
-All suites are enclosed in `BEGIN; ... SELECT * FROM finish(); ROLLBACK;` (Zero persistent fixtures).
+### Active Live Widgets (Real Data)
+- 📦 **สต็อกเครื่องหลักรวม**: 760 เครื่อง (คำนวณจาก `stock_data.js`)
+- 🏪 **ยอดสต็อกแยกชั้น**: ร้านเรา ชั้น 1 (379 เครื่อง) / สาขา ชั้น 2 (381 เครื่อง)
+- 🏷️ **โปรโมชั่นพร้อมใช้งาน**: คำนวณจาก `promotion_variants.js`
+- 🐞 **ปัญหาหน้าร้าน**: นับจำนวนปัญหาที่รายงานโดยผู้ใช้ พร้อมลิงก์ติดตามสถานะ
 
----
-
-## 3. Milestone B: Streamlined Real Data API Test Runner (`scripts/`)
-
-Tailored for 4-User Store Pilot:
-- Roles: `ANON`, `ADMIN`, `MEMBER_A`, `MEMBER_B`
-- Configuration Check: Exit Code 2 on missing `.env.feedback-pilot.local`
-- Test Failure: Exit Code 1
-- Success: Exit Code 0 (`MEMBER_API_SMOKE_TEST` or `PILOT_STORE_MATRIX_PASSED`)
-- Zero Residual Data: Automatically cleans up `[RLS-TEST]%` fixtures
+### Future Expansion Slots (`NOT_CONNECTED` / `COMING_SOON`)
+- 💰 **ยอดขายวันนี้** (`NOT_CONNECTED` - ป้องกันตัวเลขจำลอง)
+- 🎯 **เป้าหมายยอดขาย** (`COMING_SOON`)
+- 📈 **ยอดขายสะสมเดือนนี้** (`NOT_CONNECTED`)
+- 🧾 **จำนวนบิลขาย** (`NOT_CONNECTED`)
 
 ---
 
-## 4. Milestone C: Pilot UI & Packaging (`pilot.html`)
+## 3. Role-Aware Navigation & Route Guards
 
-- Dedicated entrypoint: `pilot.html` (preserves `index.html` 100% bit-for-bit untouched).
-- Landing page after login: Auto-redirects to `/#/stock`.
-- Simplified 5-field Issue Reporting Modal:
-  1. พบปัญหาที่หน้าไหน (Screen)
-  2. หัวข้อปัญหา (Title)
-  3. รายละเอียด (Description)
-  4. ระดับผลกระทบ (Human Thai terms: ใช้งานต่อไม่ได้, ข้อมูลอาจผิด, ใช้งานได้แต่ไม่สะดวก, ข้อเสนอแนะ)
-  5. ภาพหน้าจอ (Placeholder: COMING SOON)
-- User Status Bar: Thai role badges (`ผู้จัดการสาขา / Admin` vs `พนักงานขาย`), branch label, and Logout.
-- Issue Tracking Modal:
-  - Sales Staff: "ปัญหาที่ฉันรายงาน" (My Issues) + Public comments
-  - Manager: "ปัญหาทั้งหมดในสาขา" (Branch Issues) + Internal notes + Status changes + On-demand AI Analyze button
-- Dedicated Package: `samsung_stock_dashboard_feedback_pilot.zip` (36 files total).
+### Sales Staff (`MEMBER`)
+- 📊 แดชบอร์ด (`/#/home`)
+- 📦 สต็อกสินค้า (`/#/stock`)
+- 🏷️ โปรโมชั่น (`/#/promotions`)
+- 🐞 รายงานปัญหา (Modal 5 ช่อง)
+- 📋 ปัญหาของฉัน (`IssueListView`)
+- 🚪 ออกจากระบบ
+
+### Store Leader & System Admin (`STORE_LEADER` + `SYSTEM_ADMIN`)
+- ครบทุกเมนูด้านบน +
+- 📥 อัปเดตสต็อก (`/#/stock-import`)
+- ⚡ อัปเดตโปรโมชั่น (`/#/promotion-import`)
+- 👥 จัดการสมาชิก (`/#/admin/members`)
+- 📋 ปัญหาทั้งหมดในสาขา
+- 🧠 วิเคราะห์ปัญหาด้วย AI (On-demand)
+
+### Route Guard Enforcement (`assets/js/session-guard.js`)
+- บล็อกการเข้าถึง URL ผู้จัดการโดยตรง (`/#/admin/members`, `/#/stock-import`, `/#/promotion-import`, `/#/issues/branch`)
+- แสดง Toast Alert "🚫 คุณไม่มีสิทธิ์เข้าถึงหน้านี้" และดีดกลับ `/#/home`
+- ตรวจสอบ `profiles.status === 'SUSPENDED'` หากถูกระงับจะบังคับ Logout ทันที
+
+---
+
+## 4. Secure Member Administration API (`api/admin/members.js`)
+
+- Serverless API endpoint: `POST /api/admin/members`
+- ตรวจสอบ JWT Caller ว่ามีบทบาท `SYSTEM_ADMIN`
+- เรียกใช้ Supabase Admin API บน Server-side ด้วย `SUPABASE_SERVICE_ROLE_KEY`
+- สร้าง Auth User (`normalizedCode@staff.internal`), Profile, และ `MEMBER` Role
+- **Zero Browser Secret Exposure**: ป้องกัน Service Role Key หลุดสู่ Browser โดยเด็ดขาด

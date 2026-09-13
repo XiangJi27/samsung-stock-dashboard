@@ -47,7 +47,7 @@
       }
 
       // Map employee code to internal store alias for Supabase Auth backend
-      const loginEmail = `${cleanCode.toLowerCase()}@store.local`;
+      const loginEmail = `${cleanCode.toLowerCase()}@staff.internal`;
 
       const { data, error } = await client.auth.signInWithPassword({
         email: loginEmail,
@@ -62,11 +62,18 @@
 
       this.currentUser = data.user;
       await this.loadProfileAndRoles();
+
+      // Enforce Suspended Account Policy
+      if (this.currentProfile && this.currentProfile.status === 'SUSPENDED') {
+        await this.signOut();
+        throw new Error('บัญชีนี้ถูกระงับ กรุณาติดต่อผู้จัดการร้าน');
+      }
+
       this.notifyListeners('SIGNED_IN', data.session);
 
-      // Primary salesperson landing page: direct to stock view
+      // Central Dashboard Landing Page
       if (!window.location.hash || window.location.hash === '#' || window.location.hash === '#/login' || window.location.hash === '#/') {
-        window.location.hash = '#/stock';
+        window.location.hash = '#/home';
       }
 
       return { user: this.currentUser, profile: this.currentProfile, roles: this.currentRoles };
@@ -81,7 +88,7 @@
       this.currentProfile = null;
       this.currentRoles = [];
       this.notifyListeners('SIGNED_OUT', null);
-      if (window.location.hash === '#/stock') {
+      if (window.location.hash !== '#/' && window.location.hash !== '#/login') {
         window.location.hash = '#/';
       }
     }
@@ -94,11 +101,19 @@
       if (session && session.user) {
         this.currentUser = session.user;
         await this.loadProfileAndRoles();
+
+        // Check if account has been suspended by manager
+        if (this.currentProfile && this.currentProfile.status === 'SUSPENDED') {
+          console.warn('[AuthService] Active session belongs to a SUSPENDED account. Forcing logout.');
+          await this.signOut();
+          return null;
+        }
+
         this.notifyListeners('TOKEN_REFRESHED', session);
 
-        // Auto-direct to stock if on root or login
+        // Open Dashboard if currently on root/login
         if (!window.location.hash || window.location.hash === '#' || window.location.hash === '#/login' || window.location.hash === '#/') {
-          window.location.hash = '#/stock';
+          window.location.hash = '#/home';
         }
 
         return session;
