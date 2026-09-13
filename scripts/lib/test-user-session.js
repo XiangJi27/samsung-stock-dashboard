@@ -35,8 +35,9 @@ class TestUserSession {
     const headers = {
       'apikey': this.apiKey
     };
-    if (this.accessToken) {
-      headers['Authorization'] = `Bearer ${this.accessToken}`;
+    const token = this.accessToken || (this.apiKey && !this.apiKey.startsWith('sb_publishable_') && !this.apiKey.startsWith('mock_publishable_') ? this.apiKey : null);
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
     }
     return headers;
   }

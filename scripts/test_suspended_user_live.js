@@ -174,6 +174,8 @@ async function runSuspendedUserTest() {
   const apiKey = isSimulated ? 'mock_publishable_anon_key' : env.SUPABASE_PUBLISHABLE_KEY;
   const memberEmail = isSimulated ? 'test_m1@store.local' : env.TEST_MEMBER_EMAIL;
   const memberPassword = isSimulated ? 'validPassword123' : env.TEST_MEMBER_PASSWORD;
+  const adminEmail = isSimulated ? 'test_admin@store.local' : env?.TEST_ADMIN_EMAIL;
+  const adminPassword = isSimulated ? 'adminPass123' : env?.TEST_ADMIN_PASSWORD;
   const serverSecret = isSimulated ? 'mock_admin_secret_key' : (serverEnv?.SUPABASE_SECRET_KEY || serverEnv?.SUPABASE_SERVICE_ROLE_KEY);
 
   console.log(`Target URL: ${redactUrl(baseUrl)}`);
@@ -193,7 +195,14 @@ async function runSuspendedUserTest() {
   }
 
   const memberSession = new TestUserSession(baseUrl, apiKey);
-  const adminSession = new TestUserSession(baseUrl, serverSecret);
+  const isRealSecret = serverSecret && (serverSecret.startsWith('sb_secret_') || serverSecret.startsWith('eyJ'));
+  let adminSession;
+
+  if (isRealSecret) {
+    adminSession = new TestUserSession(baseUrl, serverSecret);
+  } else {
+    adminSession = new TestUserSession(baseUrl, apiKey);
+  }
 
   let createdIssueId = null;
   let user = null;
@@ -211,9 +220,9 @@ async function runSuspendedUserTest() {
     const createRes = await memberSession.post('/rest/v1/issues', {
       title: '[RLS-TEST] Active Lifecycle Issue',
       description: 'Pre-suspension issue',
-      category: 'APP_BUG',
-      severity: 'LOW'
-    });
+      category: 'STOCK_DATA',
+      severity: 'P4_LOW'
+    }, { Prefer: 'return=representation' });
     if (createRes.data && Array.isArray(createRes.data) && createRes.data[0]?.id) {
       createdIssueId = createRes.data[0].id;
     }
@@ -228,10 +237,13 @@ async function runSuspendedUserTest() {
     // -------------------------------------------------------------
     // Step 4: Suspend profile
     // -------------------------------------------------------------
+    if (!isRealSecret && adminEmail && adminPassword) {
+      await adminSession.signIn(adminEmail, adminPassword);
+    }
     const suspendRes = await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, {
       status: 'SUSPENDED'
     });
-    assertTest('Step 4: Suspend profile (Admin sets profiles.status to SUSPENDED via Server Key)', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204);
+    assertTest('Step 4: Suspend profile (Admin sets profiles.status to SUSPENDED)', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204, `(HTTP ${suspendRes.status})`);
 
     // -------------------------------------------------------------
     // Step 5: SELECT with old token blocked
@@ -248,8 +260,8 @@ async function runSuspendedUserTest() {
     const insertRes = await memberSession.post('/rest/v1/issues', {
       title: '[RLS-TEST] Suspended Illegal Issue',
       description: 'Should be rejected by RLS',
-      category: 'APP_BUG',
-      severity: 'LOW'
+      category: 'STOCK_DATA',
+      severity: 'P4_LOW'
     });
     const insertBlocked = (!insertRes.ok && (insertRes.status === 403 || insertRes.status === 401));
     assertTest('Step 6: INSERT issue blocked', insertBlocked, `(HTTP ${insertRes.status})`);
@@ -259,6 +271,7 @@ async function runSuspendedUserTest() {
     // -------------------------------------------------------------
     const commentRes = await memberSession.post('/rest/v1/issue_comments', {
       issue_id: createdIssueId || '00000000-0000-0000-0000-000000000100',
+      author_id: user.id,
       comment_text: 'Illegal comment from suspended account'
     });
     const commentBlocked = (!commentRes.ok && (commentRes.status === 403 || commentRes.status === 401));

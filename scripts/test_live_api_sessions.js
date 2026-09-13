@@ -14,7 +14,7 @@
  * - Exit 2: Configuration missing or incomplete (.env.feedback-pilot.local)
  */
 
-const { loadLocalEnv } = require('./lib/load-local-env');
+const { loadLocalEnv, loadServerEnv } = require('./lib/load-local-env');
 const { TestUserSession } = require('./lib/test-user-session');
 const { redactToken, redactUuid, redactEmail, redactUrl } = require('./lib/redact-test-output');
 
@@ -274,7 +274,7 @@ async function runApiTests() {
       const issueRes = await memberASession.post('/rest/v1/issues', {
         title: '[RLS-TEST] Member A Stock Screen Defect',
         description: 'Testing 4-user pilot issue creation flow',
-        category: 'STOCK',
+        category: 'STOCK_DATA',
         severity: 'P3_MEDIUM'
       }, { Prefer: 'return=representation' });
 
@@ -285,7 +285,8 @@ async function runApiTests() {
         const numValid = generatedNum && generatedNum.startsWith('ISS-2026-');
         record('Member A create issue auto-generates issue_number', 'ISS-2026-***', numValid ? generatedNum : 'INVALID', numValid);
       } else {
-        record('Member A create issue', '201', issueRes.status, false);
+        const errDetail = typeof issueRes.data === 'object' ? JSON.stringify(issueRes.data) : (issueRes.data || '');
+        record('Member A create issue', '201', issueRes.status, false, errDetail);
       }
 
       // 2.4 Member A reads own issue
@@ -297,6 +298,7 @@ async function runApiTests() {
         // 2.5 Member A creates public comment
         const pubComment = await memberASession.post('/rest/v1/issue_comments', {
           issue_id: memberAIssueId,
+          author_id: user.id,
           comment_text: 'Public observation from Member A',
           is_internal: false
         });
@@ -305,6 +307,7 @@ async function runApiTests() {
         // 2.6 Member A attempts to create internal comment -> BLOCKED (400/403)
         const intComment = await memberASession.post('/rest/v1/issue_comments', {
           issue_id: memberAIssueId,
+          author_id: user.id,
           comment_text: 'Unauthorized internal attempt',
           is_internal: true
         });
@@ -356,7 +359,7 @@ async function runApiTests() {
       const issueBRes = await memberBSession.post('/rest/v1/issues', {
         title: '[RLS-TEST] Member B Promo Query',
         description: 'Testing peer isolation',
-        category: 'PROMOTION',
+        category: 'PROMOTION_DATA',
         severity: 'P4_LOW'
       }, { Prefer: 'return=representation' });
 
@@ -393,6 +396,7 @@ async function runApiTests() {
         // 4.2 Admin posts internal comment
         const leaderInternalNote = await adminSession.post('/rest/v1/issue_comments', {
           issue_id: memberAIssueId,
+          author_id: adminUser.id,
           comment_text: 'Internal manager triage note',
           is_internal: true
         });
@@ -417,10 +421,14 @@ async function runApiTests() {
   // --------------------------------------------------------------------------
   console.log('\n--- Cleanup Routine: Purging Test Fixtures ([RLS-TEST]%) ---');
   let residualCount = 0;
-  if (createdTestIssueIds.length > 0 && adminSession) {
+  const serverEnv = loadServerEnv();
+  const serverSecret = isSimulated ? 'mock_server_key' : (serverEnv?.SUPABASE_SECRET_KEY || serverEnv?.SUPABASE_SERVICE_ROLE_KEY);
+  const cleanupSession = serverSecret ? new TestUserSession(baseUrl, serverSecret) : (adminSession || memberASession);
+
+  if (createdTestIssueIds.length > 0) {
     for (const testId of createdTestIssueIds) {
       try {
-        const delRes = await adminSession.delete(`/rest/v1/issues?id=eq.${testId}`);
+        const delRes = await cleanupSession.delete(`/rest/v1/issues?id=eq.${testId}`);
         console.log(`Purged test fixture ${redactUuid(testId)} (HTTP ${delRes.status})`);
       } catch (e) {
         console.log(`Note on fixture cleanup: ${e.message}`);
@@ -428,8 +436,8 @@ async function runApiTests() {
     }
   }
 
-  // Verify residual count
-  const checkResidual = await anonSession.get('/rest/v1/issues?title=like.[RLS-TEST]*&select=id');
+  // Verify residual count using cleanupSession
+  const checkResidual = await cleanupSession.get('/rest/v1/issues?title=ilike.%25RLS-TEST%25&select=id');
   if (checkResidual.ok && Array.isArray(checkResidual.data)) {
     residualCount = checkResidual.data.length;
   }
