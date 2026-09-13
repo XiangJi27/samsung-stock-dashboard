@@ -2193,15 +2193,8 @@
       document.getElementById("drawerModeContent").innerHTML = renderDrawerModeDetails(promo.variants, mode, item ? item.srp : 0);
     }
 
-    // Close Drawer
-    document.getElementById("btnCloseDrawer").addEventListener("click", () => {
-      document.getElementById("promoDrawerBackdrop").classList.remove("open");
-    });
-    document.getElementById("promoDrawerBackdrop").addEventListener("click", (e) => {
-      if (e.target === document.getElementById("promoDrawerBackdrop")) {
-        document.getElementById("promoDrawerBackdrop").classList.remove("open");
-      }
-    });
+    // Drawer Close listeners are registered in setupPrototypeStockControls()
+
 
     // ==========================================================================
     // EVENT LISTENERS & INITIALIZATION
@@ -2299,76 +2292,106 @@
       });
     }
 
-    // Category Card Click
-    document.querySelectorAll(".category-card").forEach(card => {
-      card.addEventListener("click", () => {
-        document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
-        card.classList.add("active");
-        currentCategory = card.getAttribute("data-cat");
-        currentFilter = "all";
-        renderFilterChips();
-        renderStockList();
+    function setupPrototypeStockControls() {
+      // Close Drawer
+      const btnCloseDrawer = document.getElementById("btnCloseDrawer");
+      const promoDrawerBackdrop = document.getElementById("promoDrawerBackdrop");
+      if (btnCloseDrawer && promoDrawerBackdrop) {
+        btnCloseDrawer.onclick = () => promoDrawerBackdrop.classList.remove("open");
+        promoDrawerBackdrop.onclick = (e) => {
+          if (e.target === promoDrawerBackdrop) promoDrawerBackdrop.classList.remove("open");
+        };
+      }
+
+      // Category Card Click
+      document.querySelectorAll(".category-card").forEach(card => {
+        card.onclick = () => {
+          document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
+          card.classList.add("active");
+          currentCategory = card.getAttribute("data-cat");
+          currentFilter = "all";
+          renderFilterChips();
+          renderStockList();
+        };
       });
-    });
 
-    // Search Input
-    const searchInput = document.getElementById("searchInput");
-    const btnClearSearch = document.getElementById("btnClearSearch");
+      // Search Input
+      const searchInput = document.getElementById("searchInput");
+      const btnClearSearch = document.getElementById("btnClearSearch");
+      if (searchInput && btnClearSearch) {
+        searchInput.oninput = (e) => {
+          searchQuery = e.target.value.trim();
+          btnClearSearch.style.display = searchQuery ? "block" : "none";
+          renderStockList();
+        };
 
-    searchInput.addEventListener("input", (e) => {
-      searchQuery = e.target.value.trim();
-      btnClearSearch.style.display = searchQuery ? "block" : "none";
-      renderStockList();
-    });
+        btnClearSearch.onclick = () => {
+          searchInput.value = "";
+          searchQuery = "";
+          btnClearSearch.style.display = "none";
+          renderStockList();
+        };
+      }
 
-    btnClearSearch.addEventListener("click", () => {
-      searchInput.value = "";
-      searchQuery = "";
-      btnClearSearch.style.display = "none";
-      renderStockList();
-    });
+      // View Switcher
+      const btnViewTable = document.getElementById("btnViewTable");
+      const btnViewCards = document.getElementById("btnViewCards");
+      const tableContainer = document.getElementById("tableViewContainer");
+      const cardContainer = document.getElementById("cardViewContainer");
 
-    // View Switcher
-    const btnViewTable = document.getElementById("btnViewTable");
-    const btnViewCards = document.getElementById("btnViewCards");
-    const tableContainer = document.getElementById("tableViewContainer");
-    const cardContainer = document.getElementById("cardViewContainer");
+      if (btnViewTable && btnViewCards && tableContainer && cardContainer) {
+        btnViewTable.onclick = () => {
+          btnViewTable.classList.add("active");
+          btnViewCards.classList.remove("active");
+          tableContainer.style.display = "block";
+          cardContainer.style.display = "none";
+        };
 
-    btnViewTable.addEventListener("click", () => {
-      btnViewTable.classList.add("active");
-      btnViewCards.classList.remove("active");
-      tableContainer.style.display = "block";
-      cardContainer.style.display = "none";
-    });
-
-    btnViewCards.addEventListener("click", () => {
-      btnViewCards.classList.add("active");
-      btnViewTable.classList.remove("active");
-      tableContainer.style.display = "none";
-      cardContainer.style.display = "grid";
-    });
+        btnViewCards.onclick = () => {
+          btnViewCards.classList.add("active");
+          btnViewTable.classList.remove("active");
+          tableContainer.style.display = "none";
+          cardContainer.style.display = "grid";
+        };
+      }
+    }
 
     // Dynamic Initialization & Route Lifecycle
     function initPrototypeStock() {
+      setupPrototypeStockControls();
       refreshPrototypeData();
       updateCategoryCardCounts();
       renderFilterChips();
       renderStockList();
     }
 
+    // Global exports for SPA router & inline onclick triggers
     window.initPrototypeStock = initPrototypeStock;
+    window.renderData = initPrototypeStock;
+    window.renderStockList = renderStockList;
+    window.renderFilterChips = renderFilterChips;
+    window.refreshPrototypeData = refreshPrototypeData;
+    window.openPromoDrawer = openPromoDrawer;
+    window.openProductSpecsDrawer = openProductSpecsDrawer;
+    window.switchDrawerMainTab = switchDrawerMainTab;
+    window.switchDrawerMode = switchDrawerMode;
+    window.syncMasterStockData = function() {
+      initPrototypeStock();
+    };
+    window.renderMetrics = window.renderMetrics || function() {};
+    window.renderPromoCampaignModal = window.renderPromoCampaignModal || function() {};
 
     // Hash navigation listener
     window.addEventListener("hashchange", () => {
       if (window.location.hash.includes("/stock") && !window.location.hash.includes("/stock-import")) {
-        setTimeout(initPrototypeStock, 60);
+        setTimeout(initPrototypeStock, 50);
       }
     });
 
     // Observer for view-stock visibility in Single Page App
     function setupViewObserver() {
       const stockViewEl = document.getElementById("view-stock");
-      if (stockViewEl) {
+      if (stockViewEl && typeof MutationObserver !== "undefined") {
         const observer = new MutationObserver(() => {
           if (stockViewEl.classList.contains("active-view") || (stockViewEl.style.display && stockViewEl.style.display !== "none")) {
             initPrototypeStock();
@@ -2387,4 +2410,5 @@
       setupViewObserver();
       initPrototypeStock();
     }
+
   
