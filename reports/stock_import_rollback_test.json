@@ -9,14 +9,14 @@
     "grandTotal": 760
   },
   "importedNewSnapshot": {
-    "batchId": "STOCK-BATCH-20260911-130551",
+    "batchId": "STOCK-BATCH-20260913-090754",
     "skuCount": 399,
     "f1Total": 1763,
     "f2Total": 1649,
     "grandTotal": 3412
   },
   "rollbackExecution": {
-    "initiatedAt": "2026-09-11T13:05:51.266186",
+    "initiatedAt": "2026-09-13T09:07:54.075295",
     "action": "RESTORE_PREVIOUS_SNAPSHOT",
     "restoredBatchId": "STOCK-SNAPSHOT-BASELINE-20260907",
     "newBatchMarkedAs": "ROLLED_BACK",

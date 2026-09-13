@@ -109,7 +109,7 @@ with zipfile.ZipFile(audit_zip, "w", zipfile.ZIP_DEFLATED) as zf:
 audit_size_mb = os.path.getsize(audit_zip) / (1024 * 1024)
 print(f"✅ Clean Audit Evidence Package created: {audit_zip} ({audit_size_mb:.2f} MB)")
 
-# Remove the old 73MB zip if present
+# Remove obsolete zips if present
 old_zip = os.path.join(ROOT_DIR, "samsung_stock_dashboard_september_fix.zip")
 old_zip_txt = os.path.join(ROOT_DIR, "samsung_stock_dashboard_september_fix.zip.txt")
 for oz in [old_zip, old_zip_txt]:
@@ -119,3 +119,27 @@ for oz in [old_zip, old_zip_txt]:
             print(f"Cleaned up obsolete {oz}")
         except Exception:
             pass
+
+# Package Full Repository With .git for Direct Verification
+full_git_zip = os.path.join(ROOT_DIR, "samsung_stock_dashboard_with_git.zip")
+print("\nPackaging Full Repository with .git: samsung_stock_dashboard_with_git.zip...")
+EXCLUDE_DIRS = {".venv", "node_modules", "__pycache__", ".pytest_cache", "scratch", "tools", "excel_extracted", "promo_retail_extracted", "promo_tablet_extracted"}
+EXCLUDE_EXTS = {".zip", ".pyc"}
+
+with zipfile.ZipFile(full_git_zip, "w", zipfile.ZIP_DEFLATED) as zf:
+    for root, dirs, files in os.walk(ROOT_DIR):
+        # Filter directories in-place
+        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS and not d.endswith(".egg-info")]
+        for f in files:
+            ext = os.path.splitext(f)[1].lower()
+            if ext in EXCLUDE_EXTS:
+                continue
+            if f in ["samsung_stock_dashboard_with_git.zip", "samsung-stock-dashboard.zip.txt"]:
+                continue
+            full_path = os.path.join(root, f)
+            rel_path = os.path.relpath(full_path, ROOT_DIR)
+            zf.write(full_path, rel_path)
+
+git_size_mb = os.path.getsize(full_git_zip) / (1024 * 1024)
+print(f"✅ Full Repository with .git created: {full_git_zip} ({git_size_mb:.2f} MB)")
+

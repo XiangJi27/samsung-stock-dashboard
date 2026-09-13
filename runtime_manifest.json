@@ -132,8 +132,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 65374,
-      "sha256": "e61d4c452e73c773fb184ea10c4be2dc0eb13184cfaa7ee700eac1ca12bb0e20",
+      "sizeBytes": 68817,
+      "sha256": "0b418fdf028e41bd08aee88d5d865157d3cfe680c872194a453a519830b61778",
       "status": "REQUIRED_RUNTIME"
     },
     {

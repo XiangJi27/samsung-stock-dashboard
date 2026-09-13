@@ -859,6 +859,9 @@
           let diffTotal = newItem.total;
           let isNew = false;
           let isChanged = false;
+          let registrationStatus = 'APPROVED_MASTER';
+          let isApprovedMaster = true;
+          let riskFlags = [];
 
           if (curr) {
             const currF1 = Number(curr.f1 || curr.floor1 || 0);
@@ -875,9 +878,40 @@
             } else {
               unchangedCount++;
             }
+            registrationStatus = curr.registrationStatus || 'APPROVED_MASTER';
+            isApprovedMaster = curr.isApprovedMaster !== false;
           } else {
             isNew = true;
             newCount++;
+            registrationStatus = 'PENDING_PRODUCT_REVIEW';
+            isApprovedMaster = false;
+
+            const pnUp = (newItem.pn || '').toUpperCase();
+            const descUp = (newItem.description || newItem.model || '').toUpperCase();
+            const catUp = (newItem.category || '').toUpperCase();
+
+            // Strict Validation & Risk Classification Gate
+            if (pnUp.endsWith('-D') || descUp.includes('DEMO') || descUp.includes('LIVE DEMO')) {
+              riskFlags.push('DEMO_UNIT');
+            }
+            if (pnUp.startsWith('PM') || pnUp.startsWith('PREMIUM') || descUp.includes('GIFT') || descUp.includes('FREE')) {
+              riskFlags.push('PREMIUM_OR_GIFT');
+            }
+            if (descUp.includes('SIM') || catUp.includes('SIM') || descUp.includes('CARE+') || descUp.includes('SC+')) {
+              riskFlags.push('SIM_OR_SERVICE');
+            }
+            if (pnUp.startsWith('F-')) {
+              riskFlags.push('PASS_F_CODE');
+            }
+            if (!newItem.stockReferencePrice || Number(newItem.stockReferencePrice) === 0) {
+              riskFlags.push('ZERO_COST_OR_PRICE');
+            }
+            if (!newItem.brand || String(newItem.brand).trim() === '') {
+              riskFlags.push('MISSING_BRAND');
+            }
+            if (!newItem.description || String(newItem.description).trim() === '') {
+              riskFlags.push('MISSING_DESCRIPTION');
+            }
           }
 
           return {
@@ -889,7 +923,10 @@
             diffTotal,
             prevF1: curr ? Number(curr.f1 || curr.floor1 || 0) : 0,
             prevF2: curr ? Number(curr.f2 || curr.floor2 || 0) : 0,
-            prevTotal: curr ? Number(curr.total || 0) : 0
+            prevTotal: curr ? Number(curr.total || 0) : 0,
+            registrationStatus,
+            isApprovedMaster,
+            riskFlags
           };
         });
 
@@ -1023,7 +1060,10 @@
             </td>
             <td style="color: #cbd5e1;">฿${item.stockReferencePrice.toLocaleString()}</td>
             <td>
-              ${item.isNew ? '<span class="status-badge-gate review">✨ สินค้าใหม่</span>' : (item.isChanged ? '<span class="status-badge-gate pass">🔄 สต็อกเปลี่ยน</span>' : '<span class="status-badge-gate" style="color:#64748b;">คงเดิม</span>')}
+              ${item.isNew 
+                ? `<span class="status-badge-gate review">🔍 Draft รอตรวจสอบ (${item.registrationStatus || 'PENDING_PRODUCT_REVIEW'})</span>
+                   ${item.riskFlags && item.riskFlags.length > 0 ? `<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap;">${item.riskFlags.map(f => `<span style="font-size:0.68rem;padding:1px 5px;border-radius:4px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);">${f}</span>`).join('')}</div>` : ''}`
+                : (item.isChanged ? '<span class="status-badge-gate pass">🔄 สต็อกเปลี่ยน</span>' : '<span class="status-badge-gate" style="color:#64748b;">คงเดิม</span>')}
             </td>
           </tr>
         `;
@@ -1034,7 +1074,7 @@
       if (!this.currentStagedBatch || this.isSubmitting) return;
 
       const b = this.currentStagedBatch;
-      const confirmMsg = `ยืนยันการนำเข้า Stock Snapshot ชุดใหม่?\n\n- Batch ID: ${b.batchId}\n- ไฟล์ต้นทาง: ${b.sourceFilename}\n- จำนวนสินค้า: ${b.stats.totalProducts} รายการ\n- ผลรวม F1: ${b.stats.f1Total} | F2: ${b.stats.f2Total} (รวม ${b.stats.grandTotal})\n- สินค้าที่สต็อกเปลี่ยน: ${b.stats.changedCount} รายการ\n- สินค้าใหม่: ${b.stats.newCount} รายการ\n\nข้อมูลจะถูกบันทึกในเครื่องนี้ (LOCAL_BROWSER_ONLY) และอัปเดตหน้า Dashboard ทันที`;
+      const confirmMsg = `ยืนยันการนำเข้า Stock Snapshot ชุดใหม่?\n\n- Batch ID: ${b.batchId}\n- ไฟล์ต้นทาง: ${b.sourceFilename}\n- จำนวนสินค้า: ${b.stats.totalProducts} รายการ\n- ผลรวม F1: ${b.stats.f1Total} | F2: ${b.stats.f2Total} (รวม ${b.stats.grandTotal})\n- สินค้าที่สต็อกเปลี่ยน: ${b.stats.changedCount} รายการ\n- สินค้าใหม่ที่ตรวจพบ: ${b.stats.newCount} รายการ (บันทึกเป็น Draft: PENDING_PRODUCT_REVIEW พร้อม Batch ID กำกับ)\n\nข้อมูลจะถูกบันทึกในเครื่องนี้ (LOCAL_BROWSER_ONLY) และอัปเดตหน้า Dashboard ทันที`;
 
       if (!confirm(confirmMsg)) return;
 
@@ -1071,17 +1111,31 @@
           }
         };
 
-        // Auto-Register New Products into System Master Database
+        // Auto-Register New Products into System Master Database as PENDING_PRODUCT_REVIEW Drafts
         const currentStockDb = Array.isArray(window.STOCK_DATABASE) ? window.STOCK_DATABASE : (Array.isArray(window.STOCK_DATA) ? window.STOCK_DATA : []);
         const incomingPns = new Set(b.mergedResult.items.map(it => it.pn));
         let newItemsRegistered = 0;
 
         // Detect new items not yet in master catalog
         const existingPns = new Set(currentStockDb.map(it => it.pn));
+        const diffItemMap = new Map((b.diffItems || []).map(d => [d.pn, d]));
+
         b.mergedResult.items.forEach(newItem => {
           if (!existingPns.has(newItem.pn)) {
             newItemsRegistered++;
-            console.info(`[AutoCatalog] Auto-registered new product into system database: ${newItem.pn} (${newItem.model || newItem.description})`);
+            const stagedDiff = diffItemMap.get(newItem.pn) || {};
+            newItem.registrationStatus = stagedDiff.registrationStatus || 'PENDING_PRODUCT_REVIEW';
+            newItem.isApprovedMaster = false;
+            newItem.riskFlags = stagedDiff.riskFlags || [];
+            newItem.discoveredBatchId = b.batchId;
+            newItem.discoveredAt = b.importedAt;
+            newItem.sourceFilename = b.sourceFilename;
+            newItem.sourceFileHash = b.fileHash;
+            console.info(`[AutoCatalog] Auto-registered product draft into system database: ${newItem.pn} (${newItem.model || newItem.description}) [Status: ${newItem.registrationStatus}]`);
+          } else {
+            const existing = currentStockDb.find(it => it.pn === newItem.pn);
+            newItem.registrationStatus = (existing && existing.registrationStatus) || 'APPROVED_MASTER';
+            newItem.isApprovedMaster = existing ? (existing.isApprovedMaster !== false) : true;
           }
         });
 
@@ -1093,7 +1147,9 @@
               ...oldItem,
               f1: 0,
               f2: 0,
-              total: 0
+              total: 0,
+              registrationStatus: oldItem.registrationStatus || 'APPROVED_MASTER',
+              isApprovedMaster: oldItem.isApprovedMaster !== false
             });
           }
         });

@@ -1,8 +1,8 @@
 {
-  "batchId": "STOCK-BATCH-20260911-130551",
+  "batchId": "STOCK-BATCH-20260913-090754",
   "sourceFile": "Stock.xlsx",
   "fileSha256": "0b9e31c110534cc6a1960b9efb14799156f886c8dec7baf7e45fde5558e16534",
-  "parsedAt": "2026-09-11T13:05:51.260568",
+  "parsedAt": "2026-09-13T09:07:54.072144",
   "summary": {
     "sheet1RowsRead": 336,
     "sheet2RowsRead": 337,
