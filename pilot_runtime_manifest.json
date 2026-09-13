@@ -1,0 +1,226 @@
+{
+  "manifestVersion": "1.0.0-pilot",
+  "generatedAt": "2026-09-13T18:16:42.849529+07:00",
+  "project": "Samsung Branch Operations System - Feedback Pilot",
+  "environment": "PILOT_PREVIEW_CANDIDATE",
+  "pilotBranch": "AYUTTHAYA_CITY_PARK",
+  "usersCount": 4,
+  "primaryUseCase": "STOCK_LOOKUP",
+  "summary": {
+    "totalFiles": 35,
+    "totalSizeBytes": 8007830,
+    "totalSizeMB": 7.64
+  },
+  "files": [
+    {
+      "file": "index.html",
+      "sizeBytes": 130505,
+      "sha256": "90fcdaacb7bf77fb59918be8dd155ef5565dc68e7a3ea2694ab5c3139195b70c",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "app.js",
+      "sizeBytes": 182511,
+      "sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "style.css",
+      "sizeBytes": 96846,
+      "sha256": "be6db203a2b05f4f34a1f0b5e21cfb3db3136af6a7bbd664d8fe58be126be5b5",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "stock_data.js",
+      "sizeBytes": 5423699,
+      "sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "promotion_variants.js",
+      "sizeBytes": 1673474,
+      "sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "vercel.json",
+      "sizeBytes": 77,
+      "sha256": "8b202658ee9a2426c40c5ba86da9d24246c7bc6bd89ae24b9e24c46b38d0fa68",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/shell.css",
+      "sizeBytes": 5284,
+      "sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/login.css",
+      "sizeBytes": 4773,
+      "sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/navigation.css",
+      "sizeBytes": 2981,
+      "sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/home.css",
+      "sizeBytes": 9028,
+      "sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/responsive.css",
+      "sizeBytes": 2341,
+      "sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/config.js",
+      "sizeBytes": 1427,
+      "sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/auth.js",
+      "sizeBytes": 3227,
+      "sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/data-loader.js",
+      "sizeBytes": 7142,
+      "sha256": "6b73f7e4c62561a389ce805e7427b27ed7451543d0780122bbd6868fed2d0220",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/data-service.js",
+      "sizeBytes": 17719,
+      "sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/router.js",
+      "sizeBytes": 6706,
+      "sha256": "1b6ce787866c8dd871689f84e48acc4bb516938ebc317b9d9693d818dd4b70b6",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/navigation.js",
+      "sizeBytes": 2913,
+      "sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/home.js",
+      "sizeBytes": 17231,
+      "sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/modules.js",
+      "sizeBytes": 17517,
+      "sha256": "d581b36c2cffe2e6bb91ad6438b295977d7fdd78bcef46ad2b90a7603c404125",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/importer.css",
+      "sizeBytes": 14879,
+      "sha256": "8a1c422a4c5518873fc31a7001c58c7ea16b7ac8e9c0b098035f07e99235fb30",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/stock-importer.js",
+      "sizeBytes": 68817,
+      "sha256": "0b418fdf028e41bd08aee88d5d865157d3cfe680c872194a453a519830b61778",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/promotion-importer.js",
+      "sizeBytes": 104923,
+      "sha256": "6c1e07e7ba982318f90344e7b6b54d86d97bf8e3e4caace017615ff941ab8d41",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/sheet-sync.js",
+      "sizeBytes": 20900,
+      "sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "pilot.html",
+      "sizeBytes": 133413,
+      "sha256": "609bed214663b53fd54bdf605368aa3ed99fc277258d65ec9102a3399130d4ca",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-runtime-config.js",
+      "sizeBytes": 1276,
+      "sha256": "ef0833dd6e856a5d2dd8e05c22e4900b73fc615aba43b8a50e18c0e889769a53",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/supabase-client.js",
+      "sizeBytes": 1917,
+      "sha256": "392a08912350690b90641c78c256a3e6eece39f7bea8ac8d1c022de85bcdce69",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/auth-service.js",
+      "sizeBytes": 4774,
+      "sha256": "f699e610523cba5a0767bae69b332dec09915786ae2a7c0938fdc86e20ccad25",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/permission-service.js",
+      "sizeBytes": 1979,
+      "sha256": "e1c913bc0712d1029014a480c9c0cb19695cd791074de05af54a9714cfb3086d",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/session-guard.js",
+      "sizeBytes": 1321,
+      "sha256": "9b45a87a60e064d5f835929a0557d67b21c97e9b58a547cdef0712b2d3cc7913",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/issue-service.js",
+      "sizeBytes": 4273,
+      "sha256": "63d9616bbf811b09352aba3081e78cf343cfc02a195f3356c3a3ae1b0380f002",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/auth-modal.js",
+      "sizeBytes": 5037,
+      "sha256": "961605f657f928f3bbea6aaf634e60fb78483a73fda0c19fc9e6d1990e74444f",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/user-status-bar.js",
+      "sizeBytes": 3984,
+      "sha256": "a2efe935f2f39b2d8a6f6ac450f3cef5430b0c737ba4732193656571a2e04b75",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/issue-report-modal.js",
+      "sizeBytes": 12592,
+      "sha256": "4d4a7ad5450310c3fe42538a94d0f28638fe512848ab19c14b938141726caff8",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/issue-list.js",
+      "sizeBytes": 19343,
+      "sha256": "338e309d4311fd75c8cbfa5e5a43c21cf3560972b3949b6df10524d141b88893",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-bootstrap.js",
+      "sizeBytes": 3001,
+      "sha256": "fe410739ef0f33f8f094147b6c1a9eb9e08f3386d680b4057aab7e1f87fcf070",
+      "status": "PILOT_RUNTIME"
+    }
+  ]
+}

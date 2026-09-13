@@ -15,8 +15,8 @@
 
     init(config = {}) {
       const runtimeConfig = window.__SUPABASE_CONFIG__ || {};
-      const url = config.url || runtimeConfig.url || localStorage.getItem('samsung_pilot_supabase_url');
-      const publishableKey = config.publishableKey || runtimeConfig.publishableKey || localStorage.getItem('samsung_pilot_publishable_key');
+      const url = config.url || runtimeConfig.url || window.PilotRuntimeConfig?.get('supabaseUrl') || localStorage.getItem('samsung_pilot_supabase_url');
+      const publishableKey = config.publishableKey || runtimeConfig.publishableKey || window.PilotRuntimeConfig?.get('supabasePublishableKey') || localStorage.getItem('samsung_pilot_publishable_key');
 
       if (!url || !publishableKey) {
         console.warn('[SupabaseAdapter] Missing URL or Publishable Key. Client running in unconfigured mode.');

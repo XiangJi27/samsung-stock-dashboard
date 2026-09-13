@@ -63,6 +63,12 @@
       this.currentUser = data.user;
       await this.loadProfileAndRoles();
       this.notifyListeners('SIGNED_IN', data.session);
+
+      // Primary salesperson landing page: direct to stock view
+      if (!window.location.hash || window.location.hash === '#' || window.location.hash === '#/login' || window.location.hash === '#/') {
+        window.location.hash = '#/stock';
+      }
+
       return { user: this.currentUser, profile: this.currentProfile, roles: this.currentRoles };
     }
 
@@ -75,6 +81,9 @@
       this.currentProfile = null;
       this.currentRoles = [];
       this.notifyListeners('SIGNED_OUT', null);
+      if (window.location.hash === '#/stock') {
+        window.location.hash = '#/';
+      }
     }
 
     async restoreSession() {
@@ -86,6 +95,12 @@
         this.currentUser = session.user;
         await this.loadProfileAndRoles();
         this.notifyListeners('TOKEN_REFRESHED', session);
+
+        // Auto-direct to stock if on root or login
+        if (!window.location.hash || window.location.hash === '#' || window.location.hash === '#/login' || window.location.hash === '#/') {
+          window.location.hash = '#/stock';
+        }
+
         return session;
       }
       return null;

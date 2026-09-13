@@ -1,40 +1,43 @@
 {
-  "_comment": "Template for automated multi-role Data API tests. Copy values into .env.feedback-pilot.local. NEVER commit real passwords!",
+  "_comment": "Template for 4-User Store Pilot Data API Tests (Ayutthaya City Park). Copy values into .env.feedback-pilot.local. NEVER commit real credentials or secret keys!",
+  "pilot_scope": {
+    "branch_id": "AYUTTHAYA_CITY_PARK",
+    "users_count": 4,
+    "primary_use_case": "STOCK_LOOKUP"
+  },
   "roles": [
     {
       "role": "ANON",
       "scope": "public",
-      "description": "Unauthenticated client"
+      "description": "Unauthenticated client (must be blocked from private tables, issues, and private RPC)"
     },
     {
-      "role": "MEMBER",
-      "scope": "AYUTTHAYA_CITY_PARK",
-      "env_email_key": "TEST_MEMBER_EMAIL",
-      "env_password_key": "TEST_MEMBER_PASSWORD"
-    },
-    {
-      "role": "STORE_LEADER",
-      "scope": "AYUTTHAYA_CITY_PARK",
-      "env_email_key": "TEST_LEADER_EMAIL",
-      "env_password_key": "TEST_LEADER_PASSWORD"
-    },
-    {
-      "role": "SUPPORT",
-      "scope": "GLOBAL",
-      "env_email_key": "TEST_SUPPORT_EMAIL",
-      "env_password_key": "TEST_SUPPORT_PASSWORD"
-    },
-    {
-      "role": "AUDITOR",
-      "scope": "GLOBAL",
-      "env_email_key": "TEST_AUDITOR_EMAIL",
-      "env_password_key": "TEST_AUDITOR_PASSWORD"
-    },
-    {
-      "role": "SYSTEM_ADMIN",
-      "scope": "GLOBAL",
+      "role": "ADMIN",
+      "description": "Store Leader + System Administrator (Dual Role)",
+      "scope": "AYUTTHAYA_CITY_PARK + GLOBAL",
       "env_email_key": "TEST_ADMIN_EMAIL",
       "env_password_key": "TEST_ADMIN_PASSWORD"
+    },
+    {
+      "role": "MEMBER_A",
+      "description": "Sales Staff A (Ayutthaya City Park)",
+      "scope": "AYUTTHAYA_CITY_PARK",
+      "env_email_key": "TEST_MEMBER_EMAIL",
+      "env_email_alt_key": "TEST_MEMBER_A_EMAIL",
+      "env_password_key": "TEST_MEMBER_PASSWORD",
+      "env_password_alt_key": "TEST_MEMBER_A_PASSWORD"
+    },
+    {
+      "role": "MEMBER_B",
+      "description": "Sales Staff B (Ayutthaya City Park - for peer issue privacy verification)",
+      "scope": "AYUTTHAYA_CITY_PARK",
+      "env_email_key": "TEST_MEMBER_B_EMAIL",
+      "env_password_key": "TEST_MEMBER_B_PASSWORD"
     }
-  ]
+  ],
+  "security_canaries": {
+    "support_role": "Enforced in pgTAP (03_issue_status_transitions.test.sql)",
+    "auditor_role": "Enforced in pgTAP (08_audit_immutability.test.sql)",
+    "cross_branch_isolation": "Enforced in pgTAP (04_boundary_branch_b_canary.test.sql)"
+  }
 }

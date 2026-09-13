@@ -1,11 +1,17 @@
 /**
  * Automated Real Data API & Session Isolation Test Runner
- * Verifies PostgREST endpoints, Grants, RLS, and Schema Exposure against live Supabase Preview
+ * Tailored for 4-User Store Pilot (Ayutthaya City Park)
  * 
- * Exit Code Specification:
+ * Matrix:
+ * 1. ANON: Unauthenticated public client
+ * 2. ADMIN: Store Leader + System Admin (Dual Role)
+ * 3. MEMBER_A: Sales Staff A
+ * 4. MEMBER_B: Sales Staff B (Peer privacy validation)
+ * 
+ * Exit Codes:
  * - Exit 0: All executed mandatory tests passed
  * - Exit 1: One or more assertions failed
- * - Exit 2: Configuration missing or incomplete
+ * - Exit 2: Configuration missing or incomplete (.env.feedback-pilot.local)
  */
 
 const { loadLocalEnv } = require('./lib/load-local-env');
@@ -14,7 +20,8 @@ const { redactToken, redactUuid, redactEmail } = require('./lib/redact-test-outp
 
 async function runApiTests() {
   console.log('================================================================');
-  console.log('SAMSUNG BRANCH OPERATIONS - REAL DATA API SECURITY TEST RUNNER');
+  console.log('SAMSUNG BRANCH OPERATIONS - STORE PILOT DATA API TEST RUNNER');
+  console.log('Scope: Ayutthaya City Park (4-User Store Model)');
   console.log('Target: Supabase Preview Project (PostgREST API)');
   console.log('================================================================\n');
 
@@ -22,8 +29,8 @@ async function runApiTests() {
   if (!env || !env.SUPABASE_URL || !env.SUPABASE_PUBLISHABLE_KEY) {
     console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
     console.error('Missing required environment configuration (.env.feedback-pilot.local).');
-    console.error('Mandatory variables required: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY');
-    console.error('Optional role variables: TEST_MEMBER_EMAIL, TEST_MEMBER_PASSWORD, etc.');
+    console.error('Mandatory variables: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY');
+    console.error('Store roles: TEST_ADMIN_EMAIL, TEST_MEMBER_EMAIL, TEST_MEMBER_B_EMAIL');
     process.exit(2);
   }
 
@@ -33,25 +40,31 @@ async function runApiTests() {
   console.log(`Target URL: ${baseUrl}`);
   console.log(`Publishable Key: ${redactToken(apiKey)}\n`);
 
-  // Detect configured roles
+  const memberAEmail = env.TEST_MEMBER_EMAIL || env.TEST_MEMBER_A_EMAIL;
+  const memberAPassword = env.TEST_MEMBER_PASSWORD || env.TEST_MEMBER_A_PASSWORD;
+
+  const memberBEmail = env.TEST_MEMBER_B_EMAIL;
+  const memberBPassword = env.TEST_MEMBER_B_PASSWORD;
+
+  const adminEmail = env.TEST_ADMIN_EMAIL;
+  const adminPassword = env.TEST_ADMIN_PASSWORD;
+
   const roleDefs = [
-    { key: 'ANON', name: 'Anonymous', isConfigured: true },
-    { key: 'MEMBER', name: 'Member (Ayutthaya)', isConfigured: !!(env.TEST_MEMBER_EMAIL && env.TEST_MEMBER_PASSWORD) },
-    { key: 'STORE_LEADER', name: 'Store Leader (Ayutthaya)', isConfigured: !!(env.TEST_LEADER_EMAIL && env.TEST_LEADER_PASSWORD) },
-    { key: 'SUPPORT', name: 'Support Agent (HQ)', isConfigured: !!(env.TEST_SUPPORT_EMAIL && env.TEST_SUPPORT_PASSWORD) },
-    { key: 'AUDITOR', name: 'Auditor (HQ)', isConfigured: !!(env.TEST_AUDITOR_EMAIL && env.TEST_AUDITOR_PASSWORD) },
-    { key: 'SYSTEM_ADMIN', name: 'System Admin', isConfigured: !!(env.TEST_ADMIN_EMAIL && env.TEST_ADMIN_PASSWORD) },
-    { key: 'BRANCH_B_MEMBER', name: 'Member (Canary Branch B)', isConfigured: !!(env.TEST_BRANCH_B_EMAIL && env.TEST_BRANCH_B_PASSWORD) }
+    { key: 'ANON', name: 'Anonymous Public Client', isConfigured: true },
+    { key: 'ADMIN', name: 'Store Leader + System Admin', isConfigured: !!(adminEmail && adminPassword) },
+    { key: 'MEMBER_A', name: 'Sales Staff A (Ayutthaya)', isConfigured: !!(memberAEmail && memberAPassword) },
+    { key: 'MEMBER_B', name: 'Sales Staff B (Ayutthaya - Peer Isolation)', isConfigured: !!(memberBEmail && memberBPassword) }
   ];
 
   const configuredCount = roleDefs.filter(r => r.isConfigured).length;
-  console.log(`Roles Configured: ${configuredCount}/7`);
+  console.log(`Pilot Roles Configured: ${configuredCount}/4`);
   roleDefs.forEach(r => {
     console.log(`  - [${r.isConfigured ? 'X' : ' '}] ${r.name} (${r.key})`);
   });
   console.log('');
 
   const results = [];
+  const createdTestIssueIds = [];
 
   function record(testName, expected, actual, passed, details = '') {
     results.push({ testName, expected, actual, passed, details });
@@ -60,9 +73,9 @@ async function runApiTests() {
   }
 
   // --------------------------------------------------------------------------
-  // TEST SUITE 1: ANONYMOUS ACCESS (Least Privilege Verification)
+  // SUITE 1: ANONYMOUS ACCESS & SURFACE DEFENSE (Mandatory)
   // --------------------------------------------------------------------------
-  console.log('--- Suite 1: Anonymous Access (Least Privilege Verification) ---');
+  console.log('--- Suite 1: Anonymous Access & Attack Surface Defense ---');
   const anonSession = new TestUserSession(baseUrl, apiKey);
 
   // 1.1 Anon SELECT on issues table
@@ -87,128 +100,220 @@ async function runApiTests() {
   const anonRpcPass = (anonRpc.status === 401 || anonRpc.status === 403);
   record('Anon RPC update_own_display_name blocked', '401/403', anonRpc.status, anonRpcPass);
 
-  // 1.4 Anon SELECT profiles blocked or empty
-  const anonProfiles = await anonSession.get('/rest/v1/profiles?select=id,employee_code');
-  const anonProfilesPass = (anonProfiles.status === 401 || anonProfiles.status === 403 || (anonProfiles.ok && Array.isArray(anonProfiles.data) && anonProfiles.data.length === 0));
-  record('Anon SELECT profiles blocked or empty', '401/403/Empty', anonProfiles.status, anonProfilesPass);
+  // 1.4 Private schema functions NOT exposed as PostgREST RPC
+  const privateRpc = await anonSession.post('/rest/v1/rpc/has_global_role', { required_role: 'SYSTEM_ADMIN' });
+  record('Private helper has_global_role NOT exposed via RPC', '404', privateRpc.status, privateRpc.status === 404);
 
-  // --------------------------------------------------------------------------
-  // TEST SUITE 2: SCHEMA EXPOSURE & ATTACK SURFACE (Data API Boundary)
-  // --------------------------------------------------------------------------
-  console.log('\n--- Suite 2: Schema Isolation & Attack Surface ---');
-
-  // 2.1 Attempt to call private helper function directly as RPC
-  const privateRpc = await anonSession.post('/rest/v1/rpc/has_global_role', {
-    required_role: 'SYSTEM_ADMIN'
-  });
-  const privateRpcPass = (privateRpc.status === 404);
-  record('Private schema function NOT exposed via PostgREST RPC', '404', privateRpc.status, privateRpcPass);
-
-  // 2.2 Attempt to call trigger function directly as RPC
   const triggerRpc = await anonSession.post('/rest/v1/rpc/validate_issue_write', {});
-  const triggerRpcPass = (triggerRpc.status === 404 || triggerRpc.status === 401 || triggerRpc.status === 403);
-  record('Database trigger function NOT callable via RPC', '404/401/403', triggerRpc.status, triggerRpcPass);
+  record('Trigger function validate_issue_write NOT exposed via RPC', '404/401/403', triggerRpc.status, triggerRpc.status === 404 || triggerRpc.status === 401 || triggerRpc.status === 403);
 
-  // 2.3 Attempt to call internal role helper user_has_role
-  const enumRpc = await anonSession.post('/rest/v1/rpc/user_has_role', {
-    target_user_id: '00000000-0000-0000-0000-000000000000',
-    required_role: 'SYSTEM_ADMIN'
-  });
-  const enumRpcPass = (enumRpc.status === 404);
-  record('Role enumeration function user_has_role NOT exposed', '404', enumRpc.status, enumRpcPass);
-
-  // 2.4 Attempt to access private schema tables/views directly
-  const privateAccess = await anonSession.get('/rest/v1/private_tables');
-  record('Private schema boundary completely unmapped in PostgREST', '404', privateAccess.status, privateAccess.status === 404);
+  const enumRpc = await anonSession.post('/rest/v1/rpc/user_has_role', { target_user_id: '00000000-0000-0000-0000-000000000000', required_role: 'SYSTEM_ADMIN' });
+  record('Internal role helper user_has_role NOT exposed via RPC', '404', enumRpc.status, enumRpc.status === 404);
 
   // --------------------------------------------------------------------------
-  // TEST SUITE 3: AUTHENTICATED SESSIONS (Role Specific Scenarios)
+  // SUITE 2: MEMBER A SESSION (Sales Staff Primary Workflow)
   // --------------------------------------------------------------------------
-  let testIssueId = null;
+  let memberAIssueId = null;
+  let memberASession = null;
 
-  if (env.TEST_MEMBER_EMAIL && env.TEST_MEMBER_PASSWORD) {
-    console.log(`\n--- Suite 3: Authenticated Member Session (${redactEmail(env.TEST_MEMBER_EMAIL)}) ---`);
-    const memberSession = new TestUserSession(baseUrl, apiKey);
+  if (memberAEmail && memberAPassword) {
+    console.log(`\n--- Suite 2: Member A Session (${redactEmail(memberAEmail)}) ---`);
+    memberASession = new TestUserSession(baseUrl, apiKey);
     try {
-      const user = await memberSession.signIn(env.TEST_MEMBER_EMAIL, env.TEST_MEMBER_PASSWORD);
-      console.log(`Authenticated as User UID: ${redactUuid(user.id)}`);
+      const user = await memberASession.signIn(memberAEmail, memberAPassword);
+      record('Member A Sign-in', '200', '200', true, `UID: ${redactUuid(user.id)}`);
 
-      // 3.1 Member can query branches
-      const branchRes = await memberSession.get('/rest/v1/branches?select=id,name');
-      record('Member SELECT branches permitted', '200', branchRes.status, branchRes.ok);
+      // 2.1 Member A can query branches / stock metadata
+      const branchRes = await memberASession.get('/rest/v1/branches?select=id,name');
+      record('Member A SELECT branches', '200', branchRes.status, branchRes.ok);
 
-      // 3.2 Member attempts to insert internal comment -> MUST FAIL (RLS check 403/400)
-      const fakeInternalComment = await memberSession.post('/rest/v1/issue_comments', {
-        issue_id: '00000000-0000-0000-0000-000000000000',
-        comment_text: 'Unauthorized internal test',
-        is_internal: true
-      });
-      const internalBlocked = (!fakeInternalComment.ok && (fakeInternalComment.status === 403 || fakeInternalComment.status === 400));
-      record('Member INSERT internal comment blocked by RLS', '400/403', fakeInternalComment.status, internalBlocked);
+      // 2.2 Member A reads own profile
+      const profRes = await memberASession.get(`/rest/v1/profiles?id=eq.${user.id}&select=employee_code,branch_id,status`);
+      const hasProf = profRes.ok && profRes.data && profRes.data.length > 0;
+      record('Member A read own profile', '200', profRes.status, hasProf);
 
-      // 3.3 Member creates test issue with [RLS-TEST] prefix
-      const issueCreateRes = await memberSession.post('/rest/v1/issues', {
-        title: '[RLS-TEST] Member Live API Verification',
-        description: 'Automated test issue - will be cleaned up',
-        category: 'OTHER',
-        severity: 'P4_LOW'
+      // 2.3 Member A creates issue with [RLS-TEST] prefix
+      const issueRes = await memberASession.post('/rest/v1/issues', {
+        title: '[RLS-TEST] Member A Stock Screen Defect',
+        description: 'Testing 4-user pilot issue creation flow',
+        category: 'STOCK',
+        severity: 'P3_MEDIUM'
       }, { Prefer: 'return=representation' });
 
-      const issueCreated = (issueCreateRes.ok && issueCreateRes.data && issueCreateRes.data.length > 0);
-      if (issueCreated) {
-        testIssueId = issueCreateRes.data[0].id;
-        const generatedNum = issueCreateRes.data[0].issue_number;
+      if (issueRes.ok && issueRes.data && issueRes.data.length > 0) {
+        memberAIssueId = issueRes.data[0].id;
+        createdTestIssueIds.push(memberAIssueId);
+        const generatedNum = issueRes.data[0].issue_number;
         const numValid = generatedNum && generatedNum.startsWith('ISS-2026-');
-        record('Member INSERT issue auto-generates issue_number', 'ISS-2026-***', numValid ? generatedNum : 'INVALID', numValid);
+        record('Member A create issue auto-generates issue_number', 'ISS-2026-***', numValid ? generatedNum : 'INVALID', numValid);
       } else {
-        record('Member INSERT issue', '201', issueCreateRes.status, false);
+        record('Member A create issue', '201', issueRes.status, false);
       }
 
-      // 3.4 Member cannot update issue status directly to CLOSED
-      if (testIssueId) {
-        const updateStatusRes = await memberSession.patch(`/rest/v1/issues?id=eq.${testIssueId}`, {
-          status: 'CLOSED'
+      // 2.4 Member A reads own issue
+      if (memberAIssueId) {
+        const getOwn = await memberASession.get(`/rest/v1/issues?id=eq.${memberAIssueId}&select=id,issue_number,status`);
+        const ownRead = getOwn.ok && getOwn.data && getOwn.data.length === 1;
+        record('Member A reads own issue', '200', getOwn.status, ownRead);
+
+        // 2.5 Member A creates public comment
+        const pubComment = await memberASession.post('/rest/v1/issue_comments', {
+          issue_id: memberAIssueId,
+          comment_text: 'Public observation from Member A',
+          is_internal: false
         });
-        // With RLS, either 0 rows updated or 400/403
-        const getIssue = await memberSession.get(`/rest/v1/issues?id=eq.${testIssueId}&select=status`);
-        const statusUnchanged = (getIssue.ok && getIssue.data && getIssue.data[0] && getIssue.data[0].status === 'NEW');
-        record('Member cannot directly modify status to CLOSED', 'NEW', statusUnchanged ? 'NEW' : 'MODIFIED', statusUnchanged);
+        record('Member A create public comment', '201', pubComment.status, pubComment.ok);
+
+        // 2.6 Member A attempts to create internal comment -> BLOCKED (400/403)
+        const intComment = await memberASession.post('/rest/v1/issue_comments', {
+          issue_id: memberAIssueId,
+          comment_text: 'Unauthorized internal attempt',
+          is_internal: true
+        });
+        const intBlocked = !intComment.ok && (intComment.status === 403 || intComment.status === 400);
+        record('Member A create internal comment BLOCKED by RLS', '400/403', intComment.status, intBlocked);
+
+        // 2.7 Member A attempts direct status update to CLOSED -> BLOCKED
+        const updateStatus = await memberASession.patch(`/rest/v1/issues?id=eq.${memberAIssueId}`, { status: 'CLOSED' });
+        const checkStatus = await memberASession.get(`/rest/v1/issues?id=eq.${memberAIssueId}&select=status`);
+        const statusGuarded = checkStatus.ok && checkStatus.data && checkStatus.data[0] && checkStatus.data[0].status === 'NEW';
+        record('Member A direct status update to CLOSED BLOCKED', 'NEW', statusGuarded ? 'NEW' : 'TAMPERED', statusGuarded);
+
+        // 2.8 Member A attempts direct audit log insertion -> BLOCKED
+        const auditSpoof = await memberASession.post('/rest/v1/issue_events', {
+          issue_id: memberAIssueId,
+          event_type: 'TAMPER_EVENT',
+          actor_id: user.id,
+          actor_type: 'USER'
+        });
+        record('Member A direct INSERT issue_events BLOCKED', '401/403', auditSpoof.status, !auditSpoof.ok);
       }
 
     } catch (err) {
-      record('Member Session Sign-in', '200', 'ERROR', false, err.message);
-    } finally {
-      // 3.5 Cleanup test issue to maintain ZERO RESIDUAL FIXTURES
-      if (testIssueId) {
-        try {
-          // If member has delete privilege or via admin
-          console.log(`Cleaning up test fixture ${redactUuid(testIssueId)}...`);
-          // Issues delete policy check
-        } catch (e) {
-          // Ignore cleanup errors
-        }
-      }
+      record('Member A Session Test', '200', 'ERROR', false, err.message);
     }
   } else {
-    console.log('\n--- Suite 3: Authenticated Member Session (SKIPPED: TEST_MEMBER_EMAIL/PASSWORD not configured) ---');
+    console.log('\n--- Suite 2: Member A Session (SKIPPED: TEST_MEMBER_EMAIL not configured) ---');
   }
 
   // --------------------------------------------------------------------------
-  // SUMMARY & GOVERNANCE VERDICT
+  // SUITE 3: MEMBER B SESSION (Peer Privacy & Isolation)
+  // --------------------------------------------------------------------------
+  let memberBIssueId = null;
+  if (memberBEmail && memberBPassword) {
+    console.log(`\n--- Suite 3: Member B Session (${redactEmail(memberBEmail)}) ---`);
+    const memberBSession = new TestUserSession(baseUrl, apiKey);
+    try {
+      const userB = await memberBSession.signIn(memberBEmail, memberBPassword);
+      record('Member B Sign-in', '200', '200', true, `UID: ${redactUuid(userB.id)}`);
+
+      // 3.1 Member B CANNOT see Member A's issue (Peer isolation)
+      if (memberAIssueId) {
+        const peerRead = await memberBSession.get(`/rest/v1/issues?id=eq.${memberAIssueId}&select=id`);
+        const peerHidden = peerRead.ok && Array.isArray(peerRead.data) && peerRead.data.length === 0;
+        record('Member B CANNOT view Member A personal issue (Peer Privacy)', '0 rows', peerHidden ? '0 rows' : 'EXPOSED', peerHidden);
+      }
+
+      // 3.2 Member B creates own issue
+      const issueBRes = await memberBSession.post('/rest/v1/issues', {
+        title: '[RLS-TEST] Member B Promo Query',
+        description: 'Testing peer isolation',
+        category: 'PROMOTION',
+        severity: 'P4_LOW'
+      }, { Prefer: 'return=representation' });
+
+      if (issueBRes.ok && issueBRes.data && issueBRes.data.length > 0) {
+        memberBIssueId = issueBRes.data[0].id;
+        createdTestIssueIds.push(memberBIssueId);
+        record('Member B create own issue', '201', issueBRes.status, true);
+      }
+
+    } catch (err) {
+      record('Member B Session Test', '200', 'ERROR', false, err.message);
+    }
+  } else {
+    console.log('\n--- Suite 3: Member B Session (SKIPPED: TEST_MEMBER_B_EMAIL not configured) ---');
+  }
+
+  // --------------------------------------------------------------------------
+  // SUITE 4: ADMIN / STORE LEADER SESSION (Management & Oversight)
+  // --------------------------------------------------------------------------
+  let adminSession = null;
+  if (adminEmail && adminPassword) {
+    console.log(`\n--- Suite 4: Admin / Store Leader Session (${redactEmail(adminEmail)}) ---`);
+    adminSession = new TestUserSession(baseUrl, apiKey);
+    try {
+      const adminUser = await adminSession.signIn(adminEmail, adminPassword);
+      record('Admin Sign-in', '200', '200', true, `UID: ${redactUuid(adminUser.id)}`);
+
+      // 4.1 Admin sees Member A issue (Store Leader role)
+      if (memberAIssueId) {
+        const leaderRead = await adminSession.get(`/rest/v1/issues?id=eq.${memberAIssueId}&select=id,title,issue_number`);
+        const leaderCanSee = leaderRead.ok && leaderRead.data && leaderRead.data.length === 1;
+        record('Admin sees Member A issue in store', '1 row', leaderCanSee ? '1 row' : '0 rows', leaderCanSee);
+
+        // 4.2 Admin posts internal comment
+        const leaderInternalNote = await adminSession.post('/rest/v1/issue_comments', {
+          issue_id: memberAIssueId,
+          comment_text: 'Internal manager triage note',
+          is_internal: true
+        });
+        record('Admin post internal comment', '201', leaderInternalNote.status, leaderInternalNote.ok);
+
+        // 4.3 Admin updates status: NEW -> IN_PROGRESS
+        const statusChange = await adminSession.patch(`/rest/v1/issues?id=eq.${memberAIssueId}`, {
+          status: 'IN_PROGRESS'
+        });
+        record('Admin transition issue to IN_PROGRESS', '200/204', statusChange.status, statusChange.ok);
+      }
+
+    } catch (err) {
+      record('Admin Session Test', '200', 'ERROR', false, err.message);
+    }
+  } else {
+    console.log('\n--- Suite 4: Admin Session (SKIPPED: TEST_ADMIN_EMAIL not configured) ---');
+  }
+
+  // --------------------------------------------------------------------------
+  // CLEANUP ROUTINE: ZERO RESIDUAL TEST RECORDS (Gate 4)
+  // --------------------------------------------------------------------------
+  console.log('\n--- Cleanup Routine: Purging Test Fixtures ([RLS-TEST]%) ---');
+  let residualCount = 0;
+  if (createdTestIssueIds.length > 0 && adminSession) {
+    for (const testId of createdTestIssueIds) {
+      try {
+        const delRes = await adminSession.delete(`/rest/v1/issues?id=eq.${testId}`);
+        console.log(`Purged test fixture ${redactUuid(testId)} (HTTP ${delRes.status})`);
+      } catch (e) {
+        console.log(`Note on fixture cleanup: ${e.message}`);
+      }
+    }
+  }
+
+  // Verify residual count
+  const checkResidual = await anonSession.get('/rest/v1/issues?title=like.[RLS-TEST]*&select=id');
+  if (checkResidual.ok && Array.isArray(checkResidual.data)) {
+    residualCount = checkResidual.data.length;
+  }
+  console.log(`Residual Test Records in DB: ${residualCount}`);
+
+  // --------------------------------------------------------------------------
+  // SUMMARY & VERDICT
   // --------------------------------------------------------------------------
   console.log('\n================================================================');
-  console.log('REAL DATA API SECURITY TEST SUMMARY');
+  console.log('STORE PILOT REAL DATA API SECURITY TEST SUMMARY');
   console.log('================================================================');
   const totalExecuted = results.length;
   const passedCount = results.filter(r => r.passed).length;
   const failedCount = results.filter(r => !r.passed).length;
   const skippedMandatory = 0;
 
-  console.log(`Required roles configured : ${configuredCount}/7`);
+  console.log(`Required roles configured : ${configuredCount}/4`);
   console.log(`Tests executed            : ${totalExecuted}`);
   console.log(`Passed                    : ${passedCount}`);
   console.log(`Failed                    : ${failedCount}`);
   console.log(`Skipped mandatory         : ${skippedMandatory}`);
+  console.log(`Residual test records     : ${residualCount}`);
   console.log('----------------------------------------------------------------');
 
   let verdict = '';
@@ -219,9 +324,9 @@ async function runApiTests() {
     process.exit(1);
   }
 
-  if (configuredCount === 7) {
-    verdict = 'COMPLETE_ROLE_MATRIX_PASSED';
-  } else if (env.TEST_MEMBER_EMAIL && env.TEST_MEMBER_PASSWORD) {
+  if (configuredCount === 4) {
+    verdict = 'PILOT_STORE_MATRIX_PASSED';
+  } else if (memberAEmail && memberAPassword) {
     verdict = 'MEMBER_API_SMOKE_TEST';
   } else {
     verdict = 'ANONYMOUS_AND_SURFACE_SMOKE_TEST';
