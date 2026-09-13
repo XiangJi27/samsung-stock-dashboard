@@ -86,6 +86,21 @@ class TestUserSession {
     try { json = JSON.parse(body); } catch (e) {}
     return { status: res.status, ok: res.ok, data: json || body };
   }
+
+  async delete(path) {
+    const url = `${this.baseUrl}${path.startsWith('/') ? path : '/' + path}`;
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        ...this.getAuthHeaders(),
+        'Prefer': 'return=representation'
+      }
+    });
+    const body = await res.text();
+    let json = null;
+    try { json = JSON.parse(body); } catch (e) {}
+    return { status: res.status, ok: res.ok, data: json || body };
+  }
 }
 
 module.exports = { TestUserSession };

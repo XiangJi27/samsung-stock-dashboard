@@ -63,7 +63,7 @@ ORDER BY p.proname;
 -- 5. Check Function Routine Grants for PUBLIC, anon, and authenticated
 -- Expected:
 -- Schema 'public': ONLY update_own_display_name and update_own_new_issue have EXECUTE for authenticated.
--- Schema 'private': ONLY has_global_role, has_branch_role, has_role, get_user_branch_id have EXECUTE for authenticated.
+-- Schema 'private': ONLY has_global_role, has_branch_role, has_role, get_user_branch_id, is_active_user have EXECUTE for authenticated.
 -- Neither schema has any grant to PUBLIC or anon.
 -- Triggers and internal functions (validate_issue_write, write_issue_audit_event, user_has_role, generate_issue_number) have NO grants to authenticated.
 -- ----------------------------------------------------------------------------

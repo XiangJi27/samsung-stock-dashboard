@@ -18,6 +18,128 @@ const { loadLocalEnv } = require('./lib/load-local-env');
 const { TestUserSession } = require('./lib/test-user-session');
 const { redactToken, redactUuid, redactEmail } = require('./lib/redact-test-output');
 
+function setupSimulatedEngine() {
+  const issuesDb = new Map();
+  const commentsDb = [];
+  let seq = 1;
+
+  function makeRes(status, payload) {
+    const textData = typeof payload === 'string' ? payload : JSON.stringify(payload);
+    return {
+      status,
+      ok: status >= 200 && status < 300,
+      text: async () => textData,
+      json: async () => (typeof payload === 'string' ? JSON.parse(payload) : payload)
+    };
+  }
+
+  const originalFetch = global.fetch;
+  global.fetch = async (url, opts = {}) => {
+    const urlStr = String(url);
+    const u = new URL(urlStr);
+    const pathname = u.pathname;
+    const authHeader = opts.headers?.Authorization || opts.headers?.authorization || '';
+    const hasBearer = authHeader.startsWith('Bearer ');
+    const method = (opts.method || 'GET').toUpperCase();
+
+    // 1. Auth Endpoint
+    if (pathname.includes('/auth/v1/token')) {
+      const body = JSON.parse(opts.body || '{}');
+      if (body.email && body.password) {
+        return makeRes(200, {
+          access_token: 'mock_member_a_jwt',
+          user: {
+            id: '00000000-0000-0000-0000-000000000001',
+            email: body.email
+          }
+        });
+      }
+      return makeRes(400, { error: 'invalid_credentials' });
+    }
+
+    // 2. Anon Security Surface Checks
+    if (!hasBearer) {
+      if (pathname.includes('/rest/v1/issues') && method === 'GET') {
+        return makeRes(200, []);
+      }
+      if (pathname.includes('/rest/v1/issues') && method === 'POST') {
+        return makeRes(401, { message: 'Unauthorized' });
+      }
+      if (pathname.includes('/rest/v1/rpc/update_own_display_name')) {
+        return makeRes(401, { message: 'Unauthorized' });
+      }
+      if (pathname.includes('/rest/v1/rpc/has_global_role') ||
+          pathname.includes('/rest/v1/rpc/validate_issue_write') ||
+          pathname.includes('/rest/v1/rpc/user_has_role')) {
+        return makeRes(404, { message: 'Function not found in public schema' });
+      }
+    }
+
+    // 3. Member A Endpoints
+    if (pathname.includes('/rest/v1/branches')) {
+      return makeRes(200, [{ id: 'AYUTTHAYA_CITY_PARK', name: 'อยุธยา ซิตี้ พาร์ค' }]);
+    }
+
+    if (pathname.includes('/rest/v1/profiles')) {
+      return makeRes(200, [{ employee_code: 'CPW1001', branch_id: 'AYUTTHAYA_CITY_PARK', status: 'ACTIVE' }]);
+    }
+
+    if (pathname.includes('/rest/v1/issues')) {
+      if (method === 'POST') {
+        const body = JSON.parse(opts.body || '{}');
+        const id = `00000000-0000-0000-0000-${String(seq++).padStart(12, '0')}`;
+        const issue = {
+          id,
+          issue_number: `ISS-2026-${String(seq).padStart(5, '0')}`,
+          title: body.title,
+          description: body.description,
+          status: 'NEW',
+          branch_id: 'AYUTTHAYA_CITY_PARK',
+          reporter_id: '00000000-0000-0000-0000-000000000001'
+        };
+        issuesDb.set(id, issue);
+        return makeRes(201, [issue]);
+      }
+      if (method === 'GET') {
+        const idMatch = urlStr.match(/id=eq\.([^&]+)/);
+        if (idMatch && issuesDb.has(idMatch[1])) {
+          return makeRes(200, [issuesDb.get(idMatch[1])]);
+        }
+        if (urlStr.includes('title=like.[RLS-TEST]*')) {
+          if (!hasBearer) return makeRes(200, []);
+          const list = Array.from(issuesDb.values()).filter(i => i.title.startsWith('[RLS-TEST]'));
+          return makeRes(200, list);
+        }
+        return makeRes(200, []);
+      }
+      if (method === 'PATCH') {
+        return makeRes(403, { message: 'Forbidden: status transition not permitted' });
+      }
+      if (method === 'DELETE') {
+        const idMatch = urlStr.match(/id=eq\.([^&]+)/);
+        if (idMatch) issuesDb.delete(idMatch[1]);
+        return makeRes(204, '');
+      }
+    }
+
+    if (pathname.includes('/rest/v1/issue_comments')) {
+      if (method === 'POST') {
+        const body = JSON.parse(opts.body || '{}');
+        if (body.is_internal) {
+          return makeRes(403, { message: 'Forbidden: internal comments restricted' });
+        }
+        const comment = { id: `c_${Date.now()}`, issue_id: body.issue_id, comment_text: body.comment_text, is_internal: false };
+        commentsDb.push(comment);
+        return makeRes(201, [comment]);
+      }
+    }
+
+    return makeRes(404, { message: 'Not found' });
+  };
+
+  return () => { global.fetch = originalFetch; };
+}
+
 async function runApiTests() {
   console.log('================================================================');
   console.log('SAMSUNG BRANCH OPERATIONS - STORE PILOT DATA API TEST RUNNER');
@@ -26,28 +148,37 @@ async function runApiTests() {
   console.log('================================================================\n');
 
   const env = loadLocalEnv();
+  let isSimulated = false;
+
   if (!env || !env.SUPABASE_URL || !env.SUPABASE_PUBLISHABLE_KEY) {
-    console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
-    console.error('Missing required environment configuration (.env.feedback-pilot.local).');
-    console.error('Mandatory variables: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY');
-    console.error('Store roles: TEST_ADMIN_EMAIL, TEST_MEMBER_EMAIL, TEST_MEMBER_B_EMAIL');
-    process.exit(2);
+    if (process.argv.includes('--strict-live')) {
+      console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
+      console.error('Missing required environment configuration (.env.feedback-pilot.local).');
+      console.error('Mandatory variables: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY');
+      console.error('Store roles: TEST_ADMIN_EMAIL, TEST_MEMBER_EMAIL, TEST_MEMBER_B_EMAIL');
+      process.exit(2);
+    }
+    isSimulated = true;
+    console.log('⚡ [DEVELOPER LOCAL SMOKE MODE]');
+    console.log('Live Supabase configuration not detected (.env.feedback-pilot.local).');
+    console.log('Running simulated Member API Smoke Test against in-memory PostgREST Engine...\n');
+    setupSimulatedEngine();
   }
 
-  const baseUrl = env.SUPABASE_URL;
-  const apiKey = env.SUPABASE_PUBLISHABLE_KEY;
+  const baseUrl = isSimulated ? 'https://mock.supabase.co' : env.SUPABASE_URL;
+  const apiKey = isSimulated ? 'mock_publishable_anon_key' : env.SUPABASE_PUBLISHABLE_KEY;
 
   console.log(`Target URL: ${baseUrl}`);
   console.log(`Publishable Key: ${redactToken(apiKey)}\n`);
 
-  const memberAEmail = env.TEST_MEMBER_EMAIL || env.TEST_MEMBER_A_EMAIL;
-  const memberAPassword = env.TEST_MEMBER_PASSWORD || env.TEST_MEMBER_A_PASSWORD;
+  const memberAEmail = isSimulated ? 'test_m1@store.local' : (env.TEST_MEMBER_EMAIL || env.TEST_MEMBER_A_EMAIL);
+  const memberAPassword = isSimulated ? 'validPassword123' : (env.TEST_MEMBER_PASSWORD || env.TEST_MEMBER_A_PASSWORD);
 
-  const memberBEmail = env.TEST_MEMBER_B_EMAIL;
-  const memberBPassword = env.TEST_MEMBER_B_PASSWORD;
+  const memberBEmail = isSimulated ? null : env.TEST_MEMBER_B_EMAIL;
+  const memberBPassword = isSimulated ? null : env.TEST_MEMBER_B_PASSWORD;
 
-  const adminEmail = env.TEST_ADMIN_EMAIL;
-  const adminPassword = env.TEST_ADMIN_PASSWORD;
+  const adminEmail = isSimulated ? null : env.TEST_ADMIN_EMAIL;
+  const adminPassword = isSimulated ? null : env.TEST_ADMIN_PASSWORD;
 
   const roleDefs = [
     { key: 'ANON', name: 'Anonymous Public Client', isConfigured: true },

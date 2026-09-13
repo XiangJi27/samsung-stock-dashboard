@@ -9,6 +9,9 @@ const path = require('path');
 function loadLocalEnv() {
   const envPath = path.resolve(process.cwd(), '.env.feedback-pilot.local');
   if (!fs.existsSync(envPath)) {
+    if (process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY) {
+      return { ...process.env };
+    }
     return null;
   }
 

@@ -220,6 +220,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
+-- Helper: Check if caller account is ACTIVE
+CREATE OR REPLACE FUNCTION private.is_active_user()
+RETURNS BOOLEAN AS $$
+BEGIN
+    RETURN EXISTS (
+        SELECT 1 FROM public.profiles 
+        WHERE id = auth.uid() AND status = 'ACTIVE'
+    );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
+
 -- ----------------------------------------------------------------------------
 -- SECURE RPC: Update Own Display Name (Restricts Profile Modifications)
 -- ----------------------------------------------------------------------------
@@ -230,6 +241,9 @@ DECLARE
 BEGIN
     IF auth.uid() IS NULL THEN
         RAISE EXCEPTION 'Authentication required.';
+    END IF;
+    IF NOT private.is_active_user() THEN
+        RAISE EXCEPTION 'Forbidden: User account is suspended or inactive.';
     END IF;
     cleaned_name := TRIM(new_display_name);
     IF cleaned_name IS NULL OR LENGTH(cleaned_name) < 2 OR LENGTH(cleaned_name) > 60 THEN
@@ -265,6 +279,9 @@ DECLARE
 BEGIN
     IF auth.uid() IS NULL THEN
         RAISE EXCEPTION 'Authentication required.';
+    END IF;
+    IF NOT private.is_active_user() THEN
+        RAISE EXCEPTION 'Forbidden: User account is suspended or inactive.';
     END IF;
 
     SELECT * INTO curr_issue FROM public.issues WHERE id = target_issue_id;
@@ -321,6 +338,9 @@ BEGIN
     -- 1. BEFORE INSERT
     IF (TG_OP = 'INSERT') THEN
         IF (act_type = 'USER') THEN
+            IF NOT private.is_active_user() THEN
+                RAISE EXCEPTION 'Forbidden: User account is suspended or inactive.';
+            END IF;
             NEW.reporter_id := auth.uid();
             NEW.branch_id := private.get_user_branch_id();
             NEW.status := 'NEW';
@@ -339,6 +359,11 @@ BEGIN
 
     -- 2. BEFORE UPDATE
     IF (TG_OP = 'UPDATE') THEN
+        IF (act_type = 'USER') THEN
+            IF NOT private.is_active_user() THEN
+                RAISE EXCEPTION 'Forbidden: User account is suspended or inactive.';
+            END IF;
+        END IF;
         -- Immutable Fields Enforcement
         IF (OLD.branch_id IS DISTINCT FROM NEW.branch_id) THEN
             RAISE EXCEPTION 'Forbidden: issue branch_id is immutable once created.';
@@ -576,6 +601,7 @@ GRANT EXECUTE ON FUNCTION private.has_global_role(TEXT) TO authenticated;
 GRANT EXECUTE ON FUNCTION private.has_branch_role(TEXT, TEXT) TO authenticated;
 GRANT EXECUTE ON FUNCTION private.has_role(TEXT) TO authenticated;
 GRANT EXECUTE ON FUNCTION private.get_user_branch_id() TO authenticated;
+GRANT EXECUTE ON FUNCTION private.is_active_user() TO authenticated;
 
 -- Note: private.user_has_role and private.generate_issue_number are NOT granted
 -- to authenticated because they are called exclusively inside SECURITY DEFINER triggers.
@@ -607,60 +633,67 @@ CREATE POLICY "Profiles viewable in same branch or by admin" ON public.profiles
     FOR SELECT TO authenticated
     USING (
         id = auth.uid() OR 
-        private.has_global_role('SYSTEM_ADMIN') OR 
-        private.has_role('AUDITOR') OR
-        (branch_id = private.get_user_branch_id())
+        (private.is_active_user() AND (
+            private.has_global_role('SYSTEM_ADMIN') OR 
+            private.has_role('AUDITOR') OR
+            (branch_id = private.get_user_branch_id())
+        ))
     );
 
 CREATE POLICY "Admins insert profiles" ON public.profiles
     FOR INSERT TO authenticated
-    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
+    WITH CHECK (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins update profiles" ON public.profiles
     FOR UPDATE TO authenticated
-    USING (private.has_global_role('SYSTEM_ADMIN'))
-    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
+    USING (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'))
+    WITH CHECK (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins delete profiles" ON public.profiles
     FOR DELETE TO authenticated
-    USING (private.has_global_role('SYSTEM_ADMIN'));
+    USING (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'));
 
 -- 3. User Roles Policies
 CREATE POLICY "Roles viewable by owner or admin" ON public.user_roles
     FOR SELECT TO authenticated
     USING (
-        user_id = auth.uid() OR 
-        private.has_global_role('SYSTEM_ADMIN') OR 
-        private.has_role('AUDITOR')
+        private.is_active_user() AND (
+            user_id = auth.uid() OR 
+            private.has_global_role('SYSTEM_ADMIN') OR 
+            private.has_role('AUDITOR')
+        )
     );
 
 CREATE POLICY "Admins insert user roles" ON public.user_roles
     FOR INSERT TO authenticated
-    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
+    WITH CHECK (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins update user roles" ON public.user_roles
     FOR UPDATE TO authenticated
-    USING (private.has_global_role('SYSTEM_ADMIN'))
-    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
+    USING (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'))
+    WITH CHECK (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins delete user roles" ON public.user_roles
     FOR DELETE TO authenticated
-    USING (private.has_global_role('SYSTEM_ADMIN'));
+    USING (private.is_active_user() AND private.has_global_role('SYSTEM_ADMIN'));
 
 -- 4. Issues Policies
 CREATE POLICY "Issues viewable according to role scope" ON public.issues
     FOR SELECT TO authenticated
     USING (
-        reporter_id = auth.uid() OR 
-        private.has_global_role('SYSTEM_ADMIN') OR 
-        private.has_role('AUDITOR') OR
-        (private.has_role('SUPPORT') AND assigned_to = auth.uid()) OR
-        (private.has_branch_role('STORE_LEADER', branch_id))
+        private.is_active_user() AND (
+            reporter_id = auth.uid() OR 
+            private.has_global_role('SYSTEM_ADMIN') OR 
+            private.has_role('AUDITOR') OR
+            (private.has_role('SUPPORT') AND assigned_to = auth.uid()) OR
+            (private.has_branch_role('STORE_LEADER', branch_id))
+        )
     );
 
 CREATE POLICY "Members insert new issues for own branch" ON public.issues
     FOR INSERT TO authenticated
     WITH CHECK (
+        private.is_active_user() AND
         status = 'NEW' AND 
         reporter_id = auth.uid() AND
         branch_id = private.get_user_branch_id()
@@ -669,9 +702,11 @@ CREATE POLICY "Members insert new issues for own branch" ON public.issues
 CREATE POLICY "Store leaders support and admins update issues" ON public.issues
     FOR UPDATE TO authenticated
     USING (
-        private.has_global_role('SYSTEM_ADMIN') OR 
-        private.has_branch_role('STORE_LEADER', branch_id) OR
-        (private.has_role('SUPPORT') AND assigned_to = auth.uid())
+        private.is_active_user() AND (
+            private.has_global_role('SYSTEM_ADMIN') OR 
+            private.has_branch_role('STORE_LEADER', branch_id) OR
+            (private.has_role('SUPPORT') AND assigned_to = auth.uid())
+        )
     );
 
 -- Notice: Members update their own NEW issues strictly via update_own_new_issue() RPC
@@ -680,12 +715,14 @@ CREATE POLICY "Store leaders support and admins update issues" ON public.issues
 CREATE POLICY "Attachments viewable on readable issues" ON public.issue_attachments
     FOR SELECT TO authenticated
     USING (
+        private.is_active_user() AND
         EXISTS (SELECT 1 FROM public.issues WHERE id = issue_attachments.issue_id)
     );
 
 CREATE POLICY "Attachments insertable by reporter or branch leaders" ON public.issue_attachments
     FOR INSERT TO authenticated
     WITH CHECK (
+        private.is_active_user() AND
         uploaded_by = auth.uid() AND
         EXISTS (
             SELECT 1 FROM public.issues 
@@ -698,6 +735,7 @@ CREATE POLICY "Attachments insertable by reporter or branch leaders" ON public.i
 CREATE POLICY "Comments viewable according to issue scope" ON public.issue_comments
     FOR SELECT TO authenticated
     USING (
+        private.is_active_user() AND
         EXISTS (
             SELECT 1
             FROM public.issues i
@@ -714,6 +752,7 @@ CREATE POLICY "Comments viewable according to issue scope" ON public.issue_comme
 CREATE POLICY "Comments insertable on readable issues" ON public.issue_comments
     FOR INSERT TO authenticated
     WITH CHECK (
+        private.is_active_user() AND
         author_id = auth.uid()
         AND EXISTS (
             SELECT 1
@@ -732,6 +771,7 @@ CREATE POLICY "Comments insertable on readable issues" ON public.issue_comments
 CREATE POLICY "Audit events viewable on readable issues" ON public.issue_events
     FOR SELECT TO authenticated
     USING (
+        private.is_active_user() AND
         EXISTS (SELECT 1 FROM public.issues WHERE id = issue_events.issue_id)
     );
 
@@ -741,6 +781,7 @@ CREATE POLICY "Audit events viewable on readable issues" ON public.issue_events
 CREATE POLICY "AI analysis viewable on readable issues" ON public.issue_ai_analysis
     FOR SELECT TO authenticated
     USING (
+        private.is_active_user() AND
         EXISTS (SELECT 1 FROM public.issues WHERE id = issue_ai_analysis.issue_id)
     );
 

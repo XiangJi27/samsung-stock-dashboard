@@ -91,12 +91,16 @@ def build_pilot_package():
         # Create and write pilot_runtime_manifest.json inside zip
         manifest_data = {
             "manifestVersion": "1.0.0-pilot",
-            "generatedAt": datetime.now().astimezone().isoformat(),
+            "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
+            "applicationCommit": "9ff3196",
+            "baselineCommit": "a7c3390",
+            "databaseSchemaCommit": "bd509ef",
+            "builtAt": datetime.now().astimezone().isoformat(),
             "project": "Samsung Branch Operations System - Feedback Pilot",
-            "environment": "PILOT_PREVIEW_CANDIDATE",
             "pilotBranch": "AYUTTHAYA_CITY_PARK",
             "usersCount": 4,
             "primaryUseCase": "STOCK_LOOKUP",
+            "totalFiles": len(pilot_manifest_items),
             "summary": {
                 "totalFiles": len(pilot_manifest_items),
                 "totalSizeBytes": total_bytes,
