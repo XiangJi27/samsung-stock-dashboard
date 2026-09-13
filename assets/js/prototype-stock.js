@@ -1157,11 +1157,28 @@
 ];
 
     // State Variables: Merge core devices (212 items) with full accessories catalog (78 items) = 290 total items
-    const coreDevices = (window.STOCK_DATABASE && window.STOCK_DATABASE.length > 0)
-      ? window.STOCK_DATABASE.filter(x => x.category !== "Accessory" && x.category !== "Adapter")
-      : FALLBACK_STOCK.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
-    let rawItems = coreDevices.concat(ALL_ACCESSORIES);
-    let promoVariants = window.PROMOTION_VARIANTS || [];
+    let rawItems = [];
+    let promoVariants = [];
+
+    function refreshPrototypeData() {
+      const stockDb = (window.STOCK_DATABASE && window.STOCK_DATABASE.length > 0)
+        ? window.STOCK_DATABASE
+        : FALLBACK_STOCK;
+      const coreDevices = stockDb.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
+      rawItems = coreDevices.concat(ALL_ACCESSORIES);
+
+      rawItems.forEach(item => {
+        if (!item.connectivity) {
+          item.connectivity = resolveConnectivity(item);
+        }
+      });
+
+      if (window.PROMOTION_VARIANTS && window.PROMOTION_VARIANTS.length > 0) {
+        promoVariants = window.PROMOTION_VARIANTS;
+      }
+    }
+
+    refreshPrototypeData();
     let currentCategory = "ALL";
     let currentFilter = "all";
     let searchQuery = "";
@@ -2331,10 +2348,43 @@
       cardContainer.style.display = "grid";
     });
 
-    // Init on Load
-    document.addEventListener("DOMContentLoaded", () => {
+    // Dynamic Initialization & Route Lifecycle
+    function initPrototypeStock() {
+      refreshPrototypeData();
       updateCategoryCardCounts();
       renderFilterChips();
       renderStockList();
+    }
+
+    window.initPrototypeStock = initPrototypeStock;
+
+    // Hash navigation listener
+    window.addEventListener("hashchange", () => {
+      if (window.location.hash.includes("/stock") && !window.location.hash.includes("/stock-import")) {
+        setTimeout(initPrototypeStock, 60);
+      }
     });
+
+    // Observer for view-stock visibility in Single Page App
+    function setupViewObserver() {
+      const stockViewEl = document.getElementById("view-stock");
+      if (stockViewEl) {
+        const observer = new MutationObserver(() => {
+          if (stockViewEl.classList.contains("active-view") || (stockViewEl.style.display && stockViewEl.style.display !== "none")) {
+            initPrototypeStock();
+          }
+        });
+        observer.observe(stockViewEl, { attributes: true, attributeFilter: ["class", "style"] });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        setupViewObserver();
+        initPrototypeStock();
+      });
+    } else {
+      setupViewObserver();
+      initPrototypeStock();
+    }
   
