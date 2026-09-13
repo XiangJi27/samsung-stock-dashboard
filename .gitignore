@@ -1,5 +1,6 @@
 # Temporary and extraction files
 *.zip
+*.zip.txt
 *_extracted/
 excel_extracted/
 *.bak
