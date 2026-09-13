@@ -2,7 +2,7 @@
 -- SAMSUNG BRANCH OPERATIONS SYSTEM - USER FEEDBACK PILOT
 -- PostgreSQL Schema & Row Level Security (RLS) for Supabase
 -- Target Environment: Pilot Feedback Phase (Ayutthaya City Park Branch)
--- Security Status: SECURITY_REVISION_APPLIED (Strict Anti-Spoofing & Column RPC)
+-- Security Status: SECURITY_HARDENED_DRAFT (Ready for Supabase Preview Testing)
 -- ============================================================================
 
 -- 1. Enable UUID Extension
@@ -22,7 +22,8 @@ VALUES ('AYUTTHAYA_CITY_PARK', 'Samsung Experience Store - Ayutthaya City Park',
 ON CONFLICT (id) DO NOTHING;
 
 -- 3. Profiles Table (Extends auth.users)
--- Critical Security: Users CANNOT update table directly. Only update_own_display_name() RPC allowed.
+-- Critical Security: Direct UPDATE revoked from regular authenticated users.
+-- Column modifications are restricted strictly via update_own_display_name() RPC.
 CREATE TABLE IF NOT EXISTS public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     employee_code TEXT UNIQUE,
@@ -46,7 +47,7 @@ CREATE TABLE IF NOT EXISTS public.user_roles (
     UNIQUE(user_id, role, branch_id)
 );
 
--- 5. Issues Table (Centralized Issue Tracking with State Machine Enforcement)
+-- 5. Issues Table (Centralized Issue Tracking with Strict Transition Rules)
 CREATE TABLE IF NOT EXISTS public.issues (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     issue_number TEXT UNIQUE NOT NULL,
@@ -108,14 +109,16 @@ CREATE TABLE IF NOT EXISTS public.issue_comments (
 
 -- 8. Issue Audit Events Table (Immutable Append-Only Audit Trail)
 -- Critical Anti-Spoofing: Client browser has NO INSERT, NO UPDATE, NO DELETE permissions.
--- Populated EXCLUSIVELY by database triggers and Security Definer RPC functions using auth.uid().
+-- Populated EXCLUSIVELY by database triggers and Security Definer functions using auth.uid().
 CREATE TABLE IF NOT EXISTS public.issue_events (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     issue_id UUID NOT NULL REFERENCES public.issues(id) ON DELETE CASCADE,
     event_type TEXT NOT NULL,
     from_status TEXT,
     to_status TEXT,
-    actor_id UUID NOT NULL REFERENCES public.profiles(id),
+    actor_id UUID REFERENCES public.profiles(id),
+    actor_type TEXT NOT NULL DEFAULT 'USER' CHECK (actor_type IN ('USER', 'SYSTEM', 'SERVICE_ROLE')),
+    service_name TEXT,
     metadata JSONB DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
@@ -143,9 +146,10 @@ CREATE TABLE IF NOT EXISTS public.issue_ai_analysis (
 
 -- ============================================================================
 -- HELPER FUNCTIONS & WORKFLOW TRANSITION VALIDATOR (SECURITY DEFINER)
+-- Fixed search_path to prevent object shadowing / search path injection attacks
 -- ============================================================================
 
--- Helper: Check role
+-- Helper: Check role (Strict search_path)
 CREATE OR REPLACE FUNCTION public.has_role(required_role TEXT)
 RETURNS BOOLEAN AS $$
 BEGIN
@@ -154,15 +158,15 @@ BEGIN
         WHERE user_id = auth.uid() AND role = required_role
     );
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
--- Helper: Get user's branch_id
+-- Helper: Get user's branch_id (Strict search_path)
 CREATE OR REPLACE FUNCTION public.get_user_branch_id()
 RETURNS TEXT AS $$
 BEGIN
     RETURN (SELECT branch_id FROM public.profiles WHERE id = auth.uid());
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
 -- ----------------------------------------------------------------------------
 -- SECURE RPC: Update Own Display Name (Restricts Member Column Modification)
@@ -185,37 +189,57 @@ BEGIN
         updated_at = TIMEZONE('utc'::text, NOW())
     WHERE id = auth.uid();
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
+
+REVOKE ALL ON FUNCTION public.update_own_display_name(TEXT) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.update_own_display_name(TEXT) TO authenticated;
 
 -- ----------------------------------------------------------------------------
--- DATABASE TRIGGER: Automated Issue Status Transition Validation & Audit Event Logging
--- Prevents Client Spoofing of actor_id, event_type, or invalid status jumps
+-- DATABASE TRIGGER: Automated Issue Integrity, Transition Validation, & Audit Logging
+-- Enforces:
+-- 1. Strict Transition Allow-List (Blocks arbitrary jumps e.g. NEW -> READY_FOR_RETEST)
+-- 2. Prevents branch/reporter/commit/created_at tampering on existing issues
+-- 3. Handles System/Service Role operations gracefully (actor_type = 'SYSTEM')
 -- ----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION public.handle_issue_audit_and_transitions()
 RETURNS TRIGGER AS $$
 DECLARE
     actor UUID;
+    act_type TEXT;
     user_branch TEXT;
     is_admin BOOLEAN;
     is_store_leader BOOLEAN;
     is_support BOOLEAN;
     is_reporter BOOLEAN;
+    is_valid_transition BOOLEAN;
 BEGIN
     actor := auth.uid();
     IF actor IS NULL THEN
-        -- Allow internal migration or service role with NULL actor
-        actor := COALESCE(NEW.reporter_id, OLD.reporter_id);
+        -- System or Service Role execution
+        act_type := 'SYSTEM';
+        actor := NULL;
+    ELSE
+        act_type := 'USER';
     END IF;
 
     -- 1. INSERT EVENT (New Issue Creation)
     IF (TG_OP = 'INSERT') THEN
-        INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, metadata)
+        -- Enforce Reporter ID and Branch ID directly from session on client inserts
+        IF (act_type = 'USER') THEN
+            NEW.reporter_id := auth.uid();
+            NEW.branch_id := public.get_user_branch_id();
+            NEW.status := 'NEW';
+        END IF;
+
+        INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, actor_type, service_name, metadata)
         VALUES (
             NEW.id,
             'ISSUE_CREATED',
             NULL,
             NEW.status,
             actor,
+            act_type,
+            CASE WHEN act_type = 'SYSTEM' THEN 'INTERNAL_INGESTION' ELSE NULL END,
             jsonb_build_object(
                 'title', NEW.title,
                 'category', NEW.category,
@@ -226,8 +250,22 @@ BEGIN
         RETURN NEW;
     END IF;
 
-    -- 2. UPDATE EVENT (Status Transition & Assignment Validation)
+    -- 2. UPDATE EVENT (Status Transition, Immutability & Assignment Validation)
     IF (TG_OP = 'UPDATE') THEN
+        -- Anti-Tampering: branch_id, reporter_id, created_at, issue_number CANNOT be altered
+        IF (OLD.branch_id IS DISTINCT FROM NEW.branch_id) THEN
+            RAISE EXCEPTION 'Forbidden: issue branch_id is immutable once created.';
+        END IF;
+        IF (OLD.reporter_id IS DISTINCT FROM NEW.reporter_id) THEN
+            RAISE EXCEPTION 'Forbidden: issue reporter_id is immutable.';
+        END IF;
+        IF (OLD.issue_number IS DISTINCT FROM NEW.issue_number) THEN
+            RAISE EXCEPTION 'Forbidden: issue_number is immutable.';
+        END IF;
+        IF (OLD.created_at IS DISTINCT FROM NEW.created_at) THEN
+            RAISE EXCEPTION 'Forbidden: issue created_at is immutable.';
+        END IF;
+
         -- Check Role Contexts
         user_branch := public.get_user_branch_id();
         is_admin := public.has_role('SYSTEM_ADMIN');
@@ -237,22 +275,39 @@ BEGIN
 
         -- Validate Status Change Path if status modified
         IF (OLD.status IS DISTINCT FROM NEW.status) THEN
-            -- Rule: MEMBER can never directly RESOLVE or CLOSE an issue
+            is_valid_transition := FALSE;
+
+            -- Explicit State Transition Allow-List:
+            -- Forward Paths
+            IF (OLD.status = 'NEW' AND NEW.status IN ('TRIAGED', 'NEEDS_MORE_INFO', 'WONT_FIX')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'TRIAGED' AND NEW.status IN ('VERIFIED', 'NEEDS_MORE_INFO', 'DUPLICATE', 'CANNOT_REPRODUCE', 'WONT_FIX')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'VERIFIED' AND NEW.status IN ('IN_PROGRESS', 'NEEDS_MORE_INFO', 'WONT_FIX')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'IN_PROGRESS' AND NEW.status IN ('FIX_READY', 'NEEDS_MORE_INFO', 'CANNOT_REPRODUCE')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'FIX_READY' AND NEW.status IN ('READY_FOR_RETEST', 'IN_PROGRESS')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'READY_FOR_RETEST' AND NEW.status IN ('RESOLVED', 'IN_PROGRESS')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'RESOLVED' AND NEW.status IN ('CLOSED', 'IN_PROGRESS')) THEN is_valid_transition := TRUE; END IF;
+
+            -- Reverse / Re-evaluation Paths
+            IF (OLD.status = 'NEEDS_MORE_INFO' AND NEW.status IN ('NEW', 'TRIAGED', 'WONT_FIX')) THEN is_valid_transition := TRUE; END IF;
+            IF (OLD.status = 'CLOSED' AND NEW.status = 'IN_PROGRESS' AND is_admin) THEN is_valid_transition := TRUE; END IF;
+
+            IF NOT is_valid_transition AND NOT is_admin THEN
+                RAISE EXCEPTION 'Invalid status transition path from % to %', OLD.status, NEW.status;
+            END IF;
+
+            -- Role Authority Checks
             IF (NOT is_admin AND NOT is_store_leader AND NOT is_support AND (NEW.status IN ('RESOLVED', 'CLOSED'))) THEN
                 RAISE EXCEPTION 'Forbidden: Members cannot set status to RESOLVED or CLOSED directly.';
             END IF;
 
-            -- Rule: Only Store Leader or Admin can mark issue as VERIFIED
             IF (NEW.status = 'VERIFIED' AND NOT is_store_leader AND NOT is_admin) THEN
                 RAISE EXCEPTION 'Forbidden: Only Store Leader or Admin can verify issues.';
             END IF;
 
-            -- Rule: Only Support or Admin can advance to IN_PROGRESS or FIX_READY
             IF (NEW.status IN ('IN_PROGRESS', 'FIX_READY') AND NOT is_support AND NOT is_admin) THEN
                 RAISE EXCEPTION 'Forbidden: Only Support or Admin can take issue into progress or mark fix ready.';
             END IF;
 
-            -- Rule: Reporter or Store Leader confirms Retest
             IF (NEW.status = 'RESOLVED' AND NOT is_reporter AND NOT is_store_leader AND NOT is_admin) THEN
                 RAISE EXCEPTION 'Forbidden: Retest resolution must be confirmed by Reporter, Store Leader, or Admin.';
             END IF;
@@ -266,13 +321,14 @@ BEGIN
             END IF;
 
             -- Automatic Audit Trail Insertion
-            INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, metadata)
+            INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, actor_type, metadata)
             VALUES (
                 NEW.id,
                 'STATUS_CHANGED',
                 OLD.status,
                 NEW.status,
                 actor,
+                act_type,
                 jsonb_build_object(
                     'severity', NEW.severity,
                     'assigned_to', NEW.assigned_to
@@ -280,15 +336,25 @@ BEGIN
             );
         END IF;
 
-        -- Check Assignment Change
+        -- Check Assignment Change (Ensure Assignee is in same branch or is Support/Admin)
         IF (OLD.assigned_to IS DISTINCT FROM NEW.assigned_to) THEN
-            INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, metadata)
+            IF (NEW.assigned_to IS NOT NULL AND NOT is_admin) THEN
+                IF NOT EXISTS (
+                    SELECT 1 FROM public.profiles p
+                    WHERE p.id = NEW.assigned_to AND (p.branch_id = OLD.branch_id OR public.has_role('SUPPORT'))
+                ) THEN
+                    RAISE EXCEPTION 'Forbidden: Assignee must belong to the same branch or hold SUPPORT role.';
+                END IF;
+            END IF;
+
+            INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, actor_type, metadata)
             VALUES (
                 NEW.id,
                 'ASSIGNMENT_CHANGED',
                 OLD.status,
                 NEW.status,
                 actor,
+                act_type,
                 jsonb_build_object(
                     'from_assigned_to', OLD.assigned_to,
                     'to_assigned_to', NEW.assigned_to
@@ -302,7 +368,7 @@ BEGIN
 
     RETURN NULL;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
 -- Attach Trigger to Issues Table
 DROP TRIGGER IF EXISTS trg_issue_audit_and_transitions ON public.issues;
@@ -340,8 +406,8 @@ CREATE POLICY "Users can view profiles in their branch or admins view all" ON pu
         (branch_id = public.get_user_branch_id())
     );
 
--- Notice: Direct UPDATE policy for regular members is REMOVED.
--- Members MUST call update_own_display_name() RPC, ensuring branch_id, status, and role cannot be tampered with.
+-- Notice: Direct UPDATE policy for regular members is strictly REMOVED.
+-- Members MUST call update_own_display_name() RPC.
 CREATE POLICY "Admins can manage all profiles" ON public.profiles
     FOR ALL USING (public.has_role('SYSTEM_ADMIN'));
 
@@ -393,7 +459,7 @@ CREATE POLICY "Reporters edit only before triaged, store leaders & admins update
     );
 
 -- ----------------------------------------------------------------------------
--- 5. Issue Attachments Policies (Private Metadata)
+-- 5. Issue Attachments Policies (Private Storage Metadata)
 -- ----------------------------------------------------------------------------
 CREATE POLICY "View attachments if user can view corresponding issue" ON public.issue_attachments
     FOR SELECT USING (
@@ -449,8 +515,9 @@ CREATE POLICY "View AI analysis on viewable issues" ON public.issue_ai_analysis
 -- BOOTSTRAP INITIAL DUAL-ROLE ADMIN INSTRUCTIONS (RUN VIA SQL EDITOR ONLY)
 -- ============================================================================
 -- To bootstrap the initial Store Leader + System Admin account safely:
--- DO NOT grant roles via Client Signup.
--- Once the user signs up via email in Supabase Auth, run this in Supabase SQL Editor:
+-- 1. Turn OFF public signup in Supabase Authentication Settings (INVITE_ONLY).
+-- 2. Invite your administrator email from Supabase Auth Dashboard.
+-- 3. Once signed up, retrieve the UUID from auth.users and run this in Supabase SQL Editor:
 --
 -- INSERT INTO public.user_roles (user_id, role, branch_id)
 -- VALUES 
