@@ -132,9 +132,7 @@ with zipfile.ZipFile(full_git_zip, "w", zipfile.ZIP_DEFLATED) as zf:
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS and not d.endswith(".egg-info")]
         for f in files:
             ext = os.path.splitext(f)[1].lower()
-            if ext in EXCLUDE_EXTS:
-                continue
-            if f in ["samsung_stock_dashboard_with_git.zip", "samsung-stock-dashboard.zip.txt"]:
+            if ext in EXCLUDE_EXTS or f.endswith(".zip.txt") or f.endswith(".zip"):
                 continue
             full_path = os.path.join(root, f)
             rel_path = os.path.relpath(full_path, ROOT_DIR)
@@ -145,6 +143,8 @@ print(f"✅ Full Repository with .git created: {full_git_zip} ({git_size_mb:.2f}
 
 # 4. Generate Base64 Deliverable Text Files
 import base64
+
+# Runtime Zip Base64
 runtime_txt = os.path.join(ROOT_DIR, "samsung_stock_dashboard_runtime.zip.txt")
 with open(runtime_zip, "rb") as f:
     runtime_b64 = base64.b64encode(f.read()).decode("utf-8")
@@ -152,9 +152,26 @@ with open(runtime_txt, "w", encoding="utf-8") as f:
     f.write(runtime_b64)
 print(f"✅ Runtime Base64 txt created: {runtime_txt} ({os.path.getsize(runtime_txt)/(1024*1024):.2f} MB)")
 
-legacy_txt = os.path.join(ROOT_DIR, "samsung-stock-dashboard.zip.txt")
-with open(legacy_txt, "w", encoding="utf-8") as f:
-    f.write(runtime_b64)
-print(f"✅ Copilot Base64 txt created: {legacy_txt} ({os.path.getsize(legacy_txt)/(1024*1024):.2f} MB)")
+# Audit Evidence Zip Base64
+audit_txt = os.path.join(ROOT_DIR, "samsung_stock_dashboard_audit_evidence.zip.txt")
+with open(audit_zip, "rb") as f:
+    audit_b64 = base64.b64encode(f.read()).decode("utf-8")
+with open(audit_txt, "w", encoding="utf-8") as f:
+    f.write(audit_b64)
+print(f"✅ Audit Evidence Base64 txt created: {audit_txt} ({os.path.getsize(audit_txt)/(1024*1024):.2f} MB)")
+
+# Full Git Repo Base64 (both with_git.zip.txt and samsung-stock-dashboard.zip.txt)
+with_git_txt = os.path.join(ROOT_DIR, "samsung_stock_dashboard_with_git.zip.txt")
+legacy_git_txt = os.path.join(ROOT_DIR, "samsung-stock-dashboard.zip.txt")
+with open(full_git_zip, "rb") as f:
+    git_b64 = base64.b64encode(f.read()).decode("utf-8")
+
+with open(with_git_txt, "w", encoding="utf-8") as f:
+    f.write(git_b64)
+print(f"✅ Full Git Base64 txt created: {with_git_txt} ({os.path.getsize(with_git_txt)/(1024*1024):.2f} MB)")
+
+with open(legacy_git_txt, "w", encoding="utf-8") as f:
+    f.write(git_b64)
+print(f"✅ Legacy Full Git Base64 txt created: {legacy_git_txt} ({os.path.getsize(legacy_git_txt)/(1024*1024):.2f} MB)")
 
 
