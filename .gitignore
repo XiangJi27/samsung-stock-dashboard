@@ -17,6 +17,24 @@ secrets/
 credentials/
 *.key
 *.pem
+# Scratch and prototype files
+all_accessories.json
+product_specs_data.js
+prototype_dashboard.html
+reports/product_specs_audit_report.json
+reports/stock_audit_reconciliation_report.json
+scripts/audit_product_specs.*
+scripts/audit_stock_reconciliation.py
+scripts/build_full_specs_db.py
+scripts/enrich_stock_connectivity_tags.py
+scripts/generate_product_specs.py
+scripts/inject_full_accessories_prototype.py
+scripts/inspect_accessories.py
+scripts/test_node_resolution.js
+
+# Root IDE Workspace Artifacts
+/implementation_plan.md
+/walkthrough.md
 scratch/
 __pycache__/
 *.pyc
