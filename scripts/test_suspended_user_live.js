@@ -105,7 +105,15 @@ function setupMockSuspendedEngine() {
       return { status: 201, ok: true, text: async () => '[]', json: async () => [] };
     }
 
-    // 6. RPC update_own_display_name
+    // 6. User Roles Endpoints
+    if (pathname.includes('/rest/v1/user_roles')) {
+      if (memberStatus === 'SUSPENDED') {
+        return { status: 200, ok: true, text: async () => '[]', json: async () => [] };
+      }
+      return { status: 200, ok: true, text: async () => '[{"role":"MEMBER"}]', json: async () => ([{ role: 'MEMBER' }]) };
+    }
+
+    // 7. RPC update_own_display_name
     if (pathname.includes('/rest/v1/rpc/update_own_display_name')) {
       if (memberStatus === 'SUSPENDED') {
         return { status: 403, ok: false, text: async () => '{"message":"Forbidden: User account is suspended or inactive."}' };
@@ -190,10 +198,15 @@ async function runSuspendedUserTest() {
     });
     assertTest('Step 4: Admin sets profiles.status to SUSPENDED', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204);
 
-    // Step 5 & 6: Member calls SELECT issues using old token -> must be EMPTY or DENIED
+    // Step 5: Member calls SELECT issues using old token -> must be EMPTY or DENIED
     const selectRes = await memberSession.get('/rest/v1/issues?select=id,title');
     const selectBlocked = (selectRes.status === 401 || selectRes.status === 403 || (selectRes.ok && Array.isArray(selectRes.data) && selectRes.data.length === 0));
-    assertTest('Step 5 & 6: Suspended user SELECT issues returns 0 rows / denied', selectBlocked, `(HTTP ${selectRes.status})`);
+    assertTest('Step 5: Suspended user SELECT issues returns 0 rows / denied', selectBlocked, `(HTTP ${selectRes.status})`);
+
+    // Step 6: Member calls SELECT user_roles using old token -> must be EMPTY or DENIED
+    const rolesRes = await memberSession.get('/rest/v1/user_roles?select=role');
+    const rolesBlocked = (rolesRes.status === 401 || rolesRes.status === 403 || (rolesRes.ok && Array.isArray(rolesRes.data) && rolesRes.data.length === 0));
+    assertTest('Step 6: Suspended user SELECT user_roles returns 0 rows / denied', rolesBlocked, `(HTTP ${rolesRes.status})`);
 
     // Step 7: Member attempts INSERT issue -> must be DENIED
     const insertRes = await memberSession.post('/rest/v1/issues', {
@@ -220,11 +233,14 @@ async function runSuspendedUserTest() {
     const rpcBlocked = (!rpcRes.ok && (rpcRes.status === 403 || rpcRes.status === 400 || rpcRes.status === 500));
     assertTest('Step 9: Suspended user RPC update_own_display_name blocked', rpcBlocked, `(HTTP ${rpcRes.status})`);
 
-    // Step 10: Restore profile status to ACTIVE
+    // Step 10: Admin reactivates profile to ACTIVE and verifies access restored
     const restoreRes = await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, {
       status: 'ACTIVE'
     });
-    assertTest('Step 10: Teardown: Profile status restored to ACTIVE', restoreRes.ok || restoreRes.status === 200 || restoreRes.status === 204);
+    const verifyRestored = await memberSession.get('/rest/v1/profiles?select=status');
+    const isRestoredActive = (restoreRes.ok || restoreRes.status === 200 || restoreRes.status === 204) &&
+                             (verifyRestored.ok && Array.isArray(verifyRestored.data) && verifyRestored.data[0]?.status === 'ACTIVE');
+    assertTest('Step 10: Teardown: Profile restored to ACTIVE and access re-verified', isRestoredActive);
 
   } catch (err) {
     assertTest('Lifecycle execution', false, err.message);

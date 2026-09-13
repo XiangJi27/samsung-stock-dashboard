@@ -1,21 +1,20 @@
 /**
  * Safe Environment Loader for Local Feedback Pilot Tests
- * Loads environment variables from .env.feedback-pilot.local without exposing to Git
+ * Separates Client/Member environment (.env.feedback-pilot.local)
+ * from Server Admin environment (.env.feedback-pilot.server.local).
+ * 
+ * Security Guard:
+ * - Client environment strictly strips any leaked secret/service keys.
+ * - Server environment is exclusively loaded by server/admin tests.
  */
 
 const fs = require('fs');
 const path = require('path');
 
-function loadLocalEnv() {
-  const envPath = path.resolve(process.cwd(), '.env.feedback-pilot.local');
-  if (!fs.existsSync(envPath)) {
-    if (process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY) {
-      return { ...process.env };
-    }
-    return null;
-  }
+function parseEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return null;
 
-  const content = fs.readFileSync(envPath, 'utf-8');
+  const content = fs.readFileSync(filePath, 'utf-8');
   const env = {};
   const lines = content.split('\n');
 
@@ -36,4 +35,49 @@ function loadLocalEnv() {
   return env;
 }
 
-module.exports = { loadLocalEnv };
+/**
+ * Loads Client Live Test environment (.env.feedback-pilot.local)
+ * Sanitizes and strips any accidental secret keys.
+ */
+function loadLocalEnv() {
+  const envPath = path.resolve(process.cwd(), '.env.feedback-pilot.local');
+  let env = parseEnvFile(envPath);
+
+  if (!env) {
+    if (process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY) {
+      env = { ...process.env };
+    } else {
+      return null;
+    }
+  }
+
+  // Security Guard: Client environment MUST NOT contain Server Secret Keys
+  if (env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn('⚠️ [SECURITY GUARD] Secret/Service key detected in client environment file (.env.feedback-pilot.local). Stripping key from client test context.');
+    delete env.SUPABASE_SECRET_KEY;
+    delete env.SUPABASE_SERVICE_ROLE_KEY;
+  }
+
+  return env;
+}
+
+/**
+ * Loads Server Admin Live Test environment (.env.feedback-pilot.server.local)
+ * Used exclusively for serverless admin backend integration tests.
+ */
+function loadServerEnv() {
+  const envPath = path.resolve(process.cwd(), '.env.feedback-pilot.server.local');
+  let env = parseEnvFile(envPath);
+
+  if (!env) {
+    if (process.env.SUPABASE_URL && (process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY)) {
+      env = { ...process.env };
+    } else {
+      return null;
+    }
+  }
+
+  return env;
+}
+
+module.exports = { loadLocalEnv, loadServerEnv };

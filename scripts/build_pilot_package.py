@@ -100,7 +100,7 @@ def build_pilot_package():
             "applicationSourceCommit": "4dba2fe",
             "packageBuiltFromCommit": head_commit,
             "baselineCommit": "a7c3390",
-            "databaseSchemaCommit": "bd509ef",
+            "databaseSchemaCommit": "4dba2fe",
             "builtAt": datetime.now().astimezone().isoformat(),
             "project": "Samsung Branch Operations System - Feedback Pilot",
             "pilotBranch": "AYUTTHAYA_CITY_PARK",

@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "1121b46",
+  "packageBuiltFromCommit": "e1f9c89",
   "baselineCommit": "a7c3390",
-  "databaseSchemaCommit": "bd509ef",
-  "builtAt": "2026-09-13T18:38:04.826167+07:00",
+  "databaseSchemaCommit": "4dba2fe",
+  "builtAt": "2026-09-13T18:42:15.853617+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,7 +13,7 @@
   "totalFiles": 39,
   "summary": {
     "totalFiles": 39,
-    "totalSizeBytes": 8057384,
+    "totalSizeBytes": 8057751,
     "totalSizeMB": 7.68
   },
   "files": [
@@ -163,8 +163,8 @@
     },
     {
       "file": "api/admin/members.js",
-      "sizeBytes": 9544,
-      "sha256": "cb552cd4950f2374a46997085056dfe7864719bc9e8e0a5b810250aebfba0962",
+      "sizeBytes": 9911,
+      "sha256": "710188d127d3905d4096524a9c4990f8ac443b7d7f2ebe25a43539a70276383b",
       "status": "PILOT_RUNTIME"
     },
     {

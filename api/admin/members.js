@@ -13,7 +13,11 @@
  * 6. Rate Limiting: Max 5 creation requests per 10 minutes per admin.
  */
 
-// In-memory rate limiting store (per container instance)
+// Rate Limiting: BEST_EFFORT_IN_MEMORY (per container instance)
+// In serverless environments (e.g. Vercel), instances scale ephemerally.
+// In-memory rate limiting serves as an immediate defense layer against client bursts/loops.
+// The primary security perimeter is JWT verification, SYSTEM_ADMIN role check,
+// strict payload whitelist, unique constraints, and audit logging.
 const rateLimitStore = new Map();
 
 function checkRateLimit(adminId) {
@@ -46,13 +50,14 @@ module.exports = async function handler(req, res) {
   }
 
   const supabaseUrl = process.env.SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Modern key: SUPABASE_SECRET_KEY, Fallback legacy: SUPABASE_SERVICE_ROLE_KEY
+  const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!supabaseUrl || !serviceRoleKey) {
+  if (!supabaseUrl || !secretKey) {
     return res.status(503).json({
       error: 'CONFIG_MISSING',
       requestId,
-      message: 'Server environment missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY'
+      message: 'Server environment missing SUPABASE_URL or SUPABASE_SECRET_KEY'
     });
   }
 
@@ -73,7 +78,7 @@ module.exports = async function handler(req, res) {
     const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
       headers: {
         'Authorization': `Bearer ${token}`,
-        'apikey': process.env.SUPABASE_PUBLISHABLE_KEY || serviceRoleKey
+        'apikey': process.env.SUPABASE_PUBLISHABLE_KEY || secretKey
       }
     });
 
@@ -100,8 +105,8 @@ module.exports = async function handler(req, res) {
       `${supabaseUrl}/rest/v1/user_roles?user_id=eq.${caller.id}&role=eq.SYSTEM_ADMIN&select=role`,
       {
         headers: {
-          'Authorization': `Bearer ${serviceRoleKey}`,
-          'apikey': serviceRoleKey
+          'Authorization': `Bearer ${secretKey}`,
+          'apikey': secretKey
         }
       }
     );
@@ -180,8 +185,8 @@ module.exports = async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${serviceRoleKey}`,
-        'apikey': serviceRoleKey
+        'Authorization': `Bearer ${secretKey}`,
+        'apikey': secretKey
       },
       body: JSON.stringify({
         email: loginEmail,
@@ -218,8 +223,8 @@ module.exports = async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${serviceRoleKey}`,
-        'apikey': serviceRoleKey,
+        'Authorization': `Bearer ${secretKey}`,
+        'apikey': secretKey,
         'Prefer': 'return=minimal'
       },
       body: JSON.stringify({
@@ -241,8 +246,8 @@ module.exports = async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${serviceRoleKey}`,
-        'apikey': serviceRoleKey,
+        'Authorization': `Bearer ${secretKey}`,
+        'apikey': secretKey,
         'Prefer': 'return=minimal'
       },
       body: JSON.stringify({
@@ -286,8 +291,8 @@ module.exports = async function handler(req, res) {
       await fetch(`${supabaseUrl}/auth/v1/admin/users/${newUserId}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${serviceRoleKey}`,
-          'apikey': serviceRoleKey
+          'Authorization': `Bearer ${secretKey}`,
+          'apikey': secretKey
         }
       });
       console.log(`[Admin Members Rollback] Successfully purged orphan auth user ${newUserId}`);

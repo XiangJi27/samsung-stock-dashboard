@@ -63,7 +63,7 @@ async function runAdminApiTests() {
     const req = { method: 'POST', headers: {}, body: {} };
     const res = createMockRes();
     process.env.SUPABASE_URL = 'https://mock.supabase.co';
-    process.env.SUPABASE_SERVICE_ROLE_KEY = 'mock_service_key';
+    process.env.SUPABASE_SECRET_KEY = 'mock_secret_key';
     await handler(req, res);
     assertTest('Anonymous POST rejected with 401', res.statusCode === 401, `(Got ${res.statusCode})`);
   }
