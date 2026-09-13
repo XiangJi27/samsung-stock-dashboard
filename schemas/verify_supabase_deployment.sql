@@ -60,7 +60,22 @@ WHERE n.nspname = 'public'
 ORDER BY p.proname;
 
 -- ----------------------------------------------------------------------------
--- 5. Template: Bootstrap Your Initial Dual-Role Admin Account
+-- 5. Check Function Routine Grants for PUBLIC, anon, and authenticated
+-- Expected: Only update_own_display_name and update_own_new_issue have EXECUTE for authenticated.
+-- All helper and trigger functions must have NO grants to PUBLIC, anon, or authenticated.
+-- ----------------------------------------------------------------------------
+SELECT 
+    routine_schema, 
+    routine_name, 
+    grantee, 
+    privilege_type 
+FROM information_schema.role_routine_grants 
+WHERE routine_schema = 'public' 
+  AND grantee IN ('PUBLIC', 'anon', 'authenticated')
+ORDER BY routine_name, grantee;
+
+-- ----------------------------------------------------------------------------
+-- 6. Template: Bootstrap Your Initial Dual-Role Admin Account
 -- Replace <TARGET_USER_UUID> with your actual UUID from auth.users
 -- DO NOT commit your real UUID or Employee Code to Git!
 -- ----------------------------------------------------------------------------
@@ -95,7 +110,7 @@ ON CONFLICT DO NOTHING;
 */
 
 -- ----------------------------------------------------------------------------
--- 6. Check Dual-Role Bootstrap Verification
+-- 7. Check Dual-Role Bootstrap Verification
 -- Expected: Exactly 2 rows for your account:
 -- 1) STORE_LEADER / AYUTTHAYA_CITY_PARK
 -- 2) SYSTEM_ADMIN / NULL

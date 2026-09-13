@@ -2,7 +2,7 @@
 -- SAMSUNG BRANCH OPERATIONS SYSTEM - USER FEEDBACK PILOT
 -- PostgreSQL Schema & Row Level Security (RLS) for Supabase
 -- Target Environment: Pilot Feedback Phase (Ayutthaya City Park Branch)
--- Security Status: PRODUCTION_GRADE_HARDENED (All 4 Blockers Resolved)
+-- Security Status: PREVIEW_HARDENED_PENDING_LIVE_RLS_VERIFICATION
 -- ============================================================================
 
 -- 1. Enable UUID Extension
@@ -523,29 +523,53 @@ CREATE TRIGGER trg_issue_audit
     FOR EACH ROW EXECUTE FUNCTION public.write_issue_audit_event();
 
 -- ============================================================================
--- EXPLICIT GRANTS & PRIVILEGE HARDENING (REVOKE ANON)
+-- EXPLICIT GRANTS & PRIVILEGE HARDENING (LEAST PRIVILEGE REVOKE & GRANT)
 -- ============================================================================
 
--- Revoke all public/anon access to ensure Zero Unauthorized Ingestion
+-- 1. Revoke all existing default permissions from anon and authenticated
 REVOKE ALL ON ALL TABLES IN SCHEMA public FROM anon;
 REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM anon;
 REVOKE ALL ON ALL FUNCTIONS IN SCHEMA public FROM anon;
 
--- Grant minimal necessary privileges to authenticated users
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM authenticated;
+REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM authenticated;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA public FROM authenticated;
+
+-- 2. Revoke default privileges for future objects created in schema public
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC, anon, authenticated;
+
+-- 3. Explicitly revoke EXECUTE on all internal helper/trigger functions
+-- Prevents direct client invocation, privilege bypass, and user role enumeration
+REVOKE EXECUTE ON FUNCTION public.generate_issue_number() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.has_global_role(TEXT) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.has_branch_role(TEXT, TEXT) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.user_has_role(UUID, TEXT) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.has_role(TEXT) FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.get_user_branch_id() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.validate_issue_write() FROM PUBLIC, anon, authenticated;
+REVOKE EXECUTE ON FUNCTION public.write_issue_audit_event() FROM PUBLIC, anon, authenticated;
+
+-- 4. Revoke sequence access from Client
+-- Sequence is consumed internally by SECURITY DEFINER generate_issue_number()
+REVOKE ALL ON SEQUENCE public.issue_number_seq FROM anon, authenticated;
+
+-- 5. Grant minimal necessary table access to authenticated users
 GRANT USAGE ON SCHEMA public TO authenticated;
-GRANT USAGE, SELECT ON SEQUENCE public.issue_number_seq TO authenticated;
 
 GRANT SELECT ON public.branches TO authenticated;
-GRANT SELECT ON public.profiles TO authenticated;
-GRANT SELECT ON public.user_roles TO authenticated;
-GRANT SELECT, INSERT ON public.issues TO authenticated;
+GRANT SELECT, INSERT, UPDATE ON public.profiles TO authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.user_roles TO authenticated;
+GRANT SELECT, INSERT, UPDATE ON public.issues TO authenticated;
 GRANT SELECT, INSERT ON public.issue_attachments TO authenticated;
 GRANT SELECT, INSERT ON public.issue_comments TO authenticated;
 GRANT SELECT ON public.issue_events TO authenticated;
 GRANT SELECT ON public.issue_ai_analysis TO authenticated;
 
--- Direct UPDATE on profiles and issues is granted only for authenticated with RLS filter
-GRANT UPDATE ON public.issues TO authenticated;
+-- 6. Grant EXECUTE exclusively to whitelisted client RPC functions
+GRANT EXECUTE ON FUNCTION public.update_own_display_name(TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.update_own_new_issue(UUID, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT) TO authenticated;
 
 -- ============================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES WITH EXPLICIT 'TO authenticated'
@@ -575,8 +599,17 @@ CREATE POLICY "Profiles viewable in same branch or by admin" ON public.profiles
         (branch_id = public.get_user_branch_id())
     );
 
-CREATE POLICY "Admins manage all profiles" ON public.profiles
-    FOR ALL TO authenticated
+CREATE POLICY "Admins insert profiles" ON public.profiles
+    FOR INSERT TO authenticated
+    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+
+CREATE POLICY "Admins update profiles" ON public.profiles
+    FOR UPDATE TO authenticated
+    USING (public.has_global_role('SYSTEM_ADMIN'))
+    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+
+CREATE POLICY "Admins delete profiles" ON public.profiles
+    FOR DELETE TO authenticated
     USING (public.has_global_role('SYSTEM_ADMIN'));
 
 -- 3. User Roles Policies
@@ -588,8 +621,17 @@ CREATE POLICY "Roles viewable by owner or admin" ON public.user_roles
         public.has_role('AUDITOR')
     );
 
-CREATE POLICY "Admins manage user roles" ON public.user_roles
-    FOR ALL TO authenticated
+CREATE POLICY "Admins insert user roles" ON public.user_roles
+    FOR INSERT TO authenticated
+    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+
+CREATE POLICY "Admins update user roles" ON public.user_roles
+    FOR UPDATE TO authenticated
+    USING (public.has_global_role('SYSTEM_ADMIN'))
+    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+
+CREATE POLICY "Admins delete user roles" ON public.user_roles
+    FOR DELETE TO authenticated
     USING (public.has_global_role('SYSTEM_ADMIN'));
 
 -- 4. Issues Policies
@@ -640,18 +682,47 @@ CREATE POLICY "Attachments insertable by reporter or branch leaders" ON public.i
     );
 
 -- 6. Issue Comments Policies
-CREATE POLICY "Comments viewable according to internal flag" ON public.issue_comments
+CREATE POLICY "Comments viewable according to issue scope" ON public.issue_comments
     FOR SELECT TO authenticated
     USING (
-        (is_internal = FALSE AND EXISTS (SELECT 1 FROM public.issues WHERE id = issue_comments.issue_id)) OR
-        (is_internal = TRUE AND (public.has_role('SUPPORT') OR public.has_role('STORE_LEADER') OR public.has_global_role('SYSTEM_ADMIN')))
+        EXISTS (
+            SELECT 1
+            FROM public.issues i
+            WHERE i.id = issue_comments.issue_id
+        )
+        AND (
+            is_internal = FALSE
+            OR public.has_global_role('SYSTEM_ADMIN')
+            OR public.has_role('SUPPORT')
+            OR EXISTS (
+                SELECT 1
+                FROM public.issues i
+                WHERE i.id = issue_comments.issue_id
+                  AND public.has_branch_role('STORE_LEADER', i.branch_id)
+            )
+        )
     );
 
 CREATE POLICY "Comments insertable on readable issues" ON public.issue_comments
     FOR INSERT TO authenticated
     WITH CHECK (
-        author_id = auth.uid() AND
-        EXISTS (SELECT 1 FROM public.issues WHERE id = issue_comments.issue_id)
+        author_id = auth.uid()
+        AND EXISTS (
+            SELECT 1
+            FROM public.issues i
+            WHERE i.id = issue_comments.issue_id
+        )
+        AND (
+            is_internal = FALSE
+            OR public.has_global_role('SYSTEM_ADMIN')
+            OR public.has_role('SUPPORT')
+            OR EXISTS (
+                SELECT 1
+                FROM public.issues i
+                WHERE i.id = issue_comments.issue_id
+                  AND public.has_branch_role('STORE_LEADER', i.branch_id)
+            )
+        )
     );
 
 -- 7. Issue Events Policies (Strictly Append-Only via AFTER Trigger)
