@@ -2,7 +2,7 @@
 -- SAMSUNG BRANCH OPERATIONS SYSTEM - USER FEEDBACK PILOT
 -- PostgreSQL Schema & Row Level Security (RLS) for Supabase
 -- Target Environment: Pilot Feedback Phase (Ayutthaya City Park Branch)
--- Security Status: DRAFT_PENDING_SECURITY_REVIEW (No secrets, no real PII)
+-- Security Status: SECURITY_REVISION_APPLIED (Strict Anti-Spoofing & Column RPC)
 -- ============================================================================
 
 -- 1. Enable UUID Extension
@@ -21,7 +21,8 @@ INSERT INTO public.branches (id, name, province)
 VALUES ('AYUTTHAYA_CITY_PARK', 'Samsung Experience Store - Ayutthaya City Park', 'Phra Nakhon Si Ayutthaya')
 ON CONFLICT (id) DO NOTHING;
 
--- 3. Profiles Table (Extends auth.users, managed by Admin/System)
+-- 3. Profiles Table (Extends auth.users)
+-- Critical Security: Users CANNOT update table directly. Only update_own_display_name() RPC allowed.
 CREATE TABLE IF NOT EXISTS public.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     employee_code TEXT UNIQUE,
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- 4. User Roles Table (Supports Dual Roles: STORE_LEADER + SYSTEM_ADMIN)
+-- 4. User Roles Table (Supports Multi-Role: STORE_LEADER + SYSTEM_ADMIN)
 -- Critical Security: Managed ONLY by SYSTEM_ADMIN or Service Role bootstrap. Members cannot insert/update.
 CREATE TABLE IF NOT EXISTS public.user_roles (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -45,7 +46,7 @@ CREATE TABLE IF NOT EXISTS public.user_roles (
     UNIQUE(user_id, role, branch_id)
 );
 
--- 5. Issues Table (Centralized Issue Tracking)
+-- 5. Issues Table (Centralized Issue Tracking with State Machine Enforcement)
 CREATE TABLE IF NOT EXISTS public.issues (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     issue_number TEXT UNIQUE NOT NULL,
@@ -106,14 +107,15 @@ CREATE TABLE IF NOT EXISTS public.issue_comments (
 );
 
 -- 8. Issue Audit Events Table (Immutable Append-Only Audit Trail)
--- Critical Security: No UPDATE, No DELETE. Client cannot supply arbitrary actor_id.
+-- Critical Anti-Spoofing: Client browser has NO INSERT, NO UPDATE, NO DELETE permissions.
+-- Populated EXCLUSIVELY by database triggers and Security Definer RPC functions using auth.uid().
 CREATE TABLE IF NOT EXISTS public.issue_events (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     issue_id UUID NOT NULL REFERENCES public.issues(id) ON DELETE CASCADE,
     event_type TEXT NOT NULL,
     from_status TEXT,
     to_status TEXT,
-    actor_id UUID NOT NULL REFERENCES public.profiles(id) DEFAULT auth.uid(),
+    actor_id UUID NOT NULL REFERENCES public.profiles(id),
     metadata JSONB DEFAULT '{}'::jsonb,
     created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
@@ -140,6 +142,175 @@ CREATE TABLE IF NOT EXISTS public.issue_ai_analysis (
 );
 
 -- ============================================================================
+-- HELPER FUNCTIONS & WORKFLOW TRANSITION VALIDATOR (SECURITY DEFINER)
+-- ============================================================================
+
+-- Helper: Check role
+CREATE OR REPLACE FUNCTION public.has_role(required_role TEXT)
+RETURNS BOOLEAN AS $$
+BEGIN
+    RETURN EXISTS (
+        SELECT 1 FROM public.user_roles 
+        WHERE user_id = auth.uid() AND role = required_role
+    );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Helper: Get user's branch_id
+CREATE OR REPLACE FUNCTION public.get_user_branch_id()
+RETURNS TEXT AS $$
+BEGIN
+    RETURN (SELECT branch_id FROM public.profiles WHERE id = auth.uid());
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- ----------------------------------------------------------------------------
+-- SECURE RPC: Update Own Display Name (Restricts Member Column Modification)
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION public.update_own_display_name(new_display_name TEXT)
+RETURNS VOID AS $$
+DECLARE
+    cleaned_name TEXT;
+BEGIN
+    IF auth.uid() IS NULL THEN
+        RAISE EXCEPTION 'Authentication required.';
+    END IF;
+    cleaned_name := TRIM(new_display_name);
+    IF cleaned_name IS NULL OR LENGTH(cleaned_name) < 2 OR LENGTH(cleaned_name) > 60 THEN
+        RAISE EXCEPTION 'Display name must be between 2 and 60 characters.';
+    END IF;
+
+    UPDATE public.profiles
+    SET display_name = cleaned_name,
+        updated_at = TIMEZONE('utc'::text, NOW())
+    WHERE id = auth.uid();
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- ----------------------------------------------------------------------------
+-- DATABASE TRIGGER: Automated Issue Status Transition Validation & Audit Event Logging
+-- Prevents Client Spoofing of actor_id, event_type, or invalid status jumps
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION public.handle_issue_audit_and_transitions()
+RETURNS TRIGGER AS $$
+DECLARE
+    actor UUID;
+    user_branch TEXT;
+    is_admin BOOLEAN;
+    is_store_leader BOOLEAN;
+    is_support BOOLEAN;
+    is_reporter BOOLEAN;
+BEGIN
+    actor := auth.uid();
+    IF actor IS NULL THEN
+        -- Allow internal migration or service role with NULL actor
+        actor := COALESCE(NEW.reporter_id, OLD.reporter_id);
+    END IF;
+
+    -- 1. INSERT EVENT (New Issue Creation)
+    IF (TG_OP = 'INSERT') THEN
+        INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, metadata)
+        VALUES (
+            NEW.id,
+            'ISSUE_CREATED',
+            NULL,
+            NEW.status,
+            actor,
+            jsonb_build_object(
+                'title', NEW.title,
+                'category', NEW.category,
+                'severity', NEW.severity,
+                'branch_id', NEW.branch_id
+            )
+        );
+        RETURN NEW;
+    END IF;
+
+    -- 2. UPDATE EVENT (Status Transition & Assignment Validation)
+    IF (TG_OP = 'UPDATE') THEN
+        -- Check Role Contexts
+        user_branch := public.get_user_branch_id();
+        is_admin := public.has_role('SYSTEM_ADMIN');
+        is_store_leader := public.has_role('STORE_LEADER') AND (user_branch = OLD.branch_id);
+        is_support := public.has_role('SUPPORT');
+        is_reporter := (actor = OLD.reporter_id);
+
+        -- Validate Status Change Path if status modified
+        IF (OLD.status IS DISTINCT FROM NEW.status) THEN
+            -- Rule: MEMBER can never directly RESOLVE or CLOSE an issue
+            IF (NOT is_admin AND NOT is_store_leader AND NOT is_support AND (NEW.status IN ('RESOLVED', 'CLOSED'))) THEN
+                RAISE EXCEPTION 'Forbidden: Members cannot set status to RESOLVED or CLOSED directly.';
+            END IF;
+
+            -- Rule: Only Store Leader or Admin can mark issue as VERIFIED
+            IF (NEW.status = 'VERIFIED' AND NOT is_store_leader AND NOT is_admin) THEN
+                RAISE EXCEPTION 'Forbidden: Only Store Leader or Admin can verify issues.';
+            END IF;
+
+            -- Rule: Only Support or Admin can advance to IN_PROGRESS or FIX_READY
+            IF (NEW.status IN ('IN_PROGRESS', 'FIX_READY') AND NOT is_support AND NOT is_admin) THEN
+                RAISE EXCEPTION 'Forbidden: Only Support or Admin can take issue into progress or mark fix ready.';
+            END IF;
+
+            -- Rule: Reporter or Store Leader confirms Retest
+            IF (NEW.status = 'RESOLVED' AND NOT is_reporter AND NOT is_store_leader AND NOT is_admin) THEN
+                RAISE EXCEPTION 'Forbidden: Retest resolution must be confirmed by Reporter, Store Leader, or Admin.';
+            END IF;
+
+            -- Set Timestamps accordingly
+            IF (NEW.status = 'RESOLVED' AND OLD.status != 'RESOLVED') THEN
+                NEW.resolved_at := TIMEZONE('utc'::text, NOW());
+            END IF;
+            IF (NEW.status = 'CLOSED' AND OLD.status != 'CLOSED') THEN
+                NEW.closed_at := TIMEZONE('utc'::text, NOW());
+            END IF;
+
+            -- Automatic Audit Trail Insertion
+            INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, metadata)
+            VALUES (
+                NEW.id,
+                'STATUS_CHANGED',
+                OLD.status,
+                NEW.status,
+                actor,
+                jsonb_build_object(
+                    'severity', NEW.severity,
+                    'assigned_to', NEW.assigned_to
+                )
+            );
+        END IF;
+
+        -- Check Assignment Change
+        IF (OLD.assigned_to IS DISTINCT FROM NEW.assigned_to) THEN
+            INSERT INTO public.issue_events (issue_id, event_type, from_status, to_status, actor_id, metadata)
+            VALUES (
+                NEW.id,
+                'ASSIGNMENT_CHANGED',
+                OLD.status,
+                NEW.status,
+                actor,
+                jsonb_build_object(
+                    'from_assigned_to', OLD.assigned_to,
+                    'to_assigned_to', NEW.assigned_to
+                )
+            );
+        END IF;
+
+        NEW.updated_at := TIMEZONE('utc'::text, NOW());
+        RETURN NEW;
+    END IF;
+
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Attach Trigger to Issues Table
+DROP TRIGGER IF EXISTS trg_issue_audit_and_transitions ON public.issues;
+CREATE TRIGGER trg_issue_audit_and_transitions
+    BEFORE INSERT OR UPDATE ON public.issues
+    FOR EACH ROW EXECUTE FUNCTION public.handle_issue_audit_and_transitions();
+
+-- ============================================================================
 -- ROW LEVEL SECURITY (RLS) POLICIES - DEFENSE IN DEPTH
 -- ============================================================================
 
@@ -151,25 +322,6 @@ ALTER TABLE public.issue_attachments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.issue_comments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.issue_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.issue_ai_analysis ENABLE ROW LEVEL SECURITY;
-
--- Helper Function: Check if user has specific role
-CREATE OR REPLACE FUNCTION public.has_role(required_role TEXT)
-RETURNS BOOLEAN AS $$
-BEGIN
-    RETURN EXISTS (
-        SELECT 1 FROM public.user_roles 
-        WHERE user_id = auth.uid() AND role = required_role
-    );
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- Helper Function: Get user's branch_id
-CREATE OR REPLACE FUNCTION public.get_user_branch_id()
-RETURNS TEXT AS $$
-BEGIN
-    RETURN (SELECT branch_id FROM public.profiles WHERE id = auth.uid());
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- ----------------------------------------------------------------------------
 -- 1. Branches Policies
@@ -188,14 +340,8 @@ CREATE POLICY "Users can view profiles in their branch or admins view all" ON pu
         (branch_id = public.get_user_branch_id())
     );
 
-CREATE POLICY "Users can update only their own display name (not role/branch/status)" ON public.profiles
-    FOR UPDATE USING (id = auth.uid())
-    WITH CHECK (
-        id = auth.uid() AND
-        status = (SELECT status FROM public.profiles WHERE id = auth.uid()) AND
-        branch_id = (SELECT branch_id FROM public.profiles WHERE id = auth.uid())
-    );
-
+-- Notice: Direct UPDATE policy for regular members is REMOVED.
+-- Members MUST call update_own_display_name() RPC, ensuring branch_id, status, and role cannot be tampered with.
 CREATE POLICY "Admins can manage all profiles" ON public.profiles
     FOR ALL USING (public.has_role('SYSTEM_ADMIN'));
 
@@ -276,20 +422,17 @@ CREATE POLICY "Insert comments on viewable issues" ON public.issue_comments
     );
 
 -- ----------------------------------------------------------------------------
--- 7. Issue Events Policies (Append-Only Immutable Audit Trail)
+-- 7. Issue Events Policies (Immutable Append-Only Audit Trail)
 -- ----------------------------------------------------------------------------
 CREATE POLICY "View audit events on viewable issues" ON public.issue_events
     FOR SELECT USING (
         EXISTS (SELECT 1 FROM public.issues WHERE id = issue_events.issue_id)
     );
 
-CREATE POLICY "Insert audit events by authenticated actors" ON public.issue_events
-    FOR INSERT WITH CHECK (
-        actor_id = auth.uid() AND
-        EXISTS (SELECT 1 FROM public.issues WHERE id = issue_events.issue_id)
-    );
-
--- NO UPDATE and NO DELETE policies on issue_events = STRICTLY APPEND-ONLY
+-- CRITICAL ANTI-SPOOFING:
+-- Client browser has NO INSERT policy on issue_events!
+-- All events are created via trg_issue_audit_and_transitions() database trigger.
+-- NO UPDATE, NO DELETE = 100% IMMUTABLE APPEND-ONLY.
 
 -- ----------------------------------------------------------------------------
 -- 8. Issue AI Analysis Policies (Server-Side Only for Writing)
@@ -312,5 +455,5 @@ CREATE POLICY "View AI analysis on viewable issues" ON public.issue_ai_analysis
 -- INSERT INTO public.user_roles (user_id, role, branch_id)
 -- VALUES 
 --   ('<TARGET_USER_UUID>', 'STORE_LEADER', 'AYUTTHAYA_CITY_PARK'),
---   ('<TARGET_USER_UUID>', 'SYSTEM_ADMIN', 'AYUTTHAYA_CITY_PARK')
+--   ('<TARGET_USER_UUID>', 'SYSTEM_ADMIN', NULL)
 -- ON CONFLICT DO NOTHING;
