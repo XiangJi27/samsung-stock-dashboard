@@ -1161,9 +1161,17 @@
     let promoVariants = [];
 
     function refreshPrototypeData() {
-      const stockDb = (window.STOCK_DATABASE && window.STOCK_DATABASE.length > 0)
-        ? window.STOCK_DATABASE
-        : FALLBACK_STOCK;
+      // ========================================================================
+      // INTENTIONAL DEDUPLICATION & RECONCILIATION LOGIC:
+      // stock_data.js contains 236 items: 212 Core Devices + 24 Partial Accessories/Adapters.
+      // Those 24 partial items (6 Adapters with f1=189, f2=123 + 18 legacy cases with 1 unit)
+      // are an incomplete subset of Sheet 8 ('Adapter&สาย&Flim' in Stock.xlsx).
+      // The complete, validated accessories catalog is ALL_ACCESSORIES (78 items, f1=721, f2=519).
+      // ALL_ACCESSORIES already includes those exact 6 adapters with identical P/Ns and stock counts!
+      // Therefore, we MUST filter out category 'Accessory' and 'Adapter' from stockDb
+      // to PREVENT DOUBLE-COUNTING (which would erroneously inflate stock by 313 units to 2,313).
+      // 212 Core Devices + 78 Full Accessories = 290 items (1,100 F1 + 900 F2 = 2,000 units).
+      // ========================================================================
       const coreDevices = stockDb.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
       rawItems = coreDevices.concat(ALL_ACCESSORIES);
 

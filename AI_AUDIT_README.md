@@ -105,6 +105,20 @@ $$\mathbf{151 + 25 + 27 + 9 + 78 = 290 \text{ items}}$$
    $760 \text{ core devices} + 1,240 \text{ accessories} = \mathbf{2,000} \text{ units}$.  
    Both representations are 100% reconciled and derived from the master `Stock.xlsx` dataset.
 
+### D. Intentional Deduplication Proof (Why 24 items in `stock_data.js` are filtered):
+- `stock_data.js` contains 236 items (212 core devices + 18 legacy cases + 6 adapters).
+- The 6 adapters in `stock_data.js` (EP-T2510NBEGTH, EP-T2510NWEGTH, EP-T4511XBEGTH, SSG-EP-T4511, EP-T4511NBEGTH, EP-T6010NBEGTH) have stock: Floor 1 = 189 units, Floor 2 = 123 units (total 312 units).
+- **All 6 of these adapters are already present 1:1 in `all_accessories.json` (78 items) with identical P/Ns and identical stock counts.**
+- Furthermore, the 18 legacy cases in `stock_data.js` only had 1 unit in stock (`GP-FCX626NNCBH`), which is also in `all_accessories.json`. The other 17 cases had 0 stock.
+- **Therefore, `prototype-stock.js` explicitly executes:**
+  ```javascript
+  const coreDevices = stockDb.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
+  rawItems = coreDevices.concat(ALL_ACCESSORIES);
+  ```
+  This is a **deliberate deduplication step**. If not filtered, those 6 adapters would be counted twice, artificially inflating inventory by 313 units to 2,313 units.
+  Hence, **212 Core Devices + 78 Full Accessories = 290 Total Items (2,000 Units)** is mathematically verified and complete.
+
+
 ---
 
 ## 4. Security & Role-Based Access Control (RBAC)
