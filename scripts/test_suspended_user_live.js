@@ -196,12 +196,13 @@ async function runSuspendedUserTest() {
   const adminSession = new TestUserSession(baseUrl, serverSecret);
 
   let createdIssueId = null;
+  let user = null;
 
   try {
     // -------------------------------------------------------------
     // Step 1: Login
     // -------------------------------------------------------------
-    const user = await memberSession.signIn(memberEmail, memberPassword);
+    user = await memberSession.signIn(memberEmail, memberPassword);
     assertTest('Step 1: Login (Member signs in successfully)', !!user?.id, `(UID: ${redactUuid(user?.id)})`);
 
     // -------------------------------------------------------------
@@ -292,17 +293,21 @@ async function runSuspendedUserTest() {
       readIssuesRes.ok;
     assertTest('Step 10: Verify same user can sign in/access again', accessRestored, `(Status: ${readProfileRes.data?.[0]?.status || 'UNKNOWN'})`);
 
-    // Teardown / Cleanup: Delete test issue created in Step 2 to leave 0 residual records
-    if (createdIssueId) {
-      if (adminSession.accessToken) {
-        await adminSession.delete(`/rest/v1/issues?id=eq.${createdIssueId}`);
-      } else if (freshMemberSession.accessToken) {
-        await freshMemberSession.delete(`/rest/v1/issues?id=eq.${createdIssueId}`);
-      }
-    }
-
   } catch (err) {
     assertTest('Lifecycle execution', false, err.message);
+  } finally {
+    // Safety Net: Always attempt to guarantee user profile is restored to ACTIVE
+    if (user && user.id && adminSession && adminSession.accessToken) {
+      try {
+        await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, { status: 'ACTIVE' });
+      } catch (_) {}
+    }
+    // Safety Net: Always attempt to purge any residual test issues
+    if (createdIssueId && adminSession && adminSession.accessToken) {
+      try {
+        await adminSession.delete(`/rest/v1/issues?id=eq.${createdIssueId}`);
+      } catch (_) {}
+    }
   }
 
   console.log('\n================================================================');
