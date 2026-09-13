@@ -1,10 +1,10 @@
 {
   "manifestVersion": "1.0.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
-  "applicationCommit": "4dba2fe",
+  "applicationCommit": "5f2e4ac",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "bd509ef",
-  "builtAt": "2026-09-13T18:33:57.386758+07:00",
+  "builtAt": "2026-09-13T18:34:07.320975+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
