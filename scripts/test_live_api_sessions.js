@@ -16,7 +16,7 @@
 
 const { loadLocalEnv } = require('./lib/load-local-env');
 const { TestUserSession } = require('./lib/test-user-session');
-const { redactToken, redactUuid, redactEmail } = require('./lib/redact-test-output');
+const { redactToken, redactUuid, redactEmail, redactUrl } = require('./lib/redact-test-output');
 
 function setupSimulatedEngine() {
   const issuesDb = new Map();
@@ -175,7 +175,7 @@ async function runApiTests() {
   const baseUrl = isSimulated ? 'https://mock.supabase.co' : env.SUPABASE_URL;
   const apiKey = isSimulated ? 'mock_publishable_anon_key' : env.SUPABASE_PUBLISHABLE_KEY;
 
-  console.log(`Target URL: ${baseUrl}`);
+  console.log(`Target URL: ${redactUrl(baseUrl)}`);
   console.log(`Publishable Key: ${redactToken(apiKey)}\n`);
 
   const memberAEmail = isSimulated ? 'test_m1@store.local' : (env.TEST_MEMBER_EMAIL || env.TEST_MEMBER_A_EMAIL);

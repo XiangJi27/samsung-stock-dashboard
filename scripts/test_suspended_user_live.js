@@ -17,7 +17,7 @@
 
 const { loadLocalEnv, loadServerEnv } = require('./lib/load-local-env');
 const { TestUserSession } = require('./lib/test-user-session');
-const { redactToken, redactUuid, redactEmail } = require('./lib/redact-test-output');
+const { redactToken, redactUuid, redactEmail, redactUrl } = require('./lib/redact-test-output');
 
 function setupMockSuspendedEngine() {
   let memberStatus = 'ACTIVE';
@@ -156,13 +156,11 @@ async function runSuspendedUserTest() {
       console.error('Required: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TEST_MEMBER_EMAIL, TEST_MEMBER_PASSWORD');
       process.exit(2);
     }
-    const hasAdminLogin = env.TEST_ADMIN_EMAIL && env.TEST_ADMIN_PASSWORD;
     const hasServerSecret = serverEnv && (serverEnv.SUPABASE_SECRET_KEY || serverEnv.SUPABASE_SERVICE_ROLE_KEY);
-    if (!hasAdminLogin && !hasServerSecret) {
+    if (!hasServerSecret) {
       console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
-      console.error('Admin authentication missing.');
-      console.error('Provide TEST_ADMIN_EMAIL & TEST_ADMIN_PASSWORD in .env.feedback-pilot.local');
-      console.error('OR SUPABASE_SECRET_KEY in .env.feedback-pilot.server.local');
+      console.error('Missing required server environment configuration (.env.feedback-pilot.server.local).');
+      console.error('Step 4 & Step 9 require SUPABASE_SECRET_KEY for admin profile status updates.');
       process.exit(2);
     }
   } else {
@@ -176,9 +174,10 @@ async function runSuspendedUserTest() {
   const apiKey = isSimulated ? 'mock_publishable_anon_key' : env.SUPABASE_PUBLISHABLE_KEY;
   const memberEmail = isSimulated ? 'test_m1@store.local' : env.TEST_MEMBER_EMAIL;
   const memberPassword = isSimulated ? 'validPassword123' : env.TEST_MEMBER_PASSWORD;
-  const adminEmail = isSimulated ? 'test_admin@store.local' : env?.TEST_ADMIN_EMAIL;
-  const adminPassword = isSimulated ? 'adminPass123' : env?.TEST_ADMIN_PASSWORD;
-  const serverSecret = isSimulated ? null : (serverEnv?.SUPABASE_SECRET_KEY || serverEnv?.SUPABASE_SERVICE_ROLE_KEY);
+  const serverSecret = isSimulated ? 'mock_admin_secret_key' : (serverEnv?.SUPABASE_SECRET_KEY || serverEnv?.SUPABASE_SERVICE_ROLE_KEY);
+
+  console.log(`Target URL: ${redactUrl(baseUrl)}`);
+  console.log(`Publishable Key: ${redactToken(apiKey)}\n`);
 
   let passed = 0;
   let failed = 0;
@@ -194,13 +193,7 @@ async function runSuspendedUserTest() {
   }
 
   const memberSession = new TestUserSession(baseUrl, apiKey);
-  let adminSession;
-
-  if (serverSecret) {
-    adminSession = new TestUserSession(baseUrl, serverSecret);
-  } else {
-    adminSession = new TestUserSession(baseUrl, apiKey);
-  }
+  const adminSession = new TestUserSession(baseUrl, serverSecret);
 
   let createdIssueId = null;
 
@@ -234,13 +227,10 @@ async function runSuspendedUserTest() {
     // -------------------------------------------------------------
     // Step 4: Suspend profile
     // -------------------------------------------------------------
-    if (!serverSecret && adminEmail && adminPassword) {
-      await adminSession.signIn(adminEmail, adminPassword);
-    }
     const suspendRes = await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, {
       status: 'SUSPENDED'
     });
-    assertTest('Step 4: Suspend profile (Admin sets profiles.status to SUSPENDED)', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204);
+    assertTest('Step 4: Suspend profile (Admin sets profiles.status to SUSPENDED via Server Key)', suspendRes.ok || suspendRes.status === 200 || suspendRes.status === 204);
 
     // -------------------------------------------------------------
     // Step 5: SELECT with old token blocked
@@ -288,7 +278,7 @@ async function runSuspendedUserTest() {
     const restoreRes = await adminSession.patch(`/rest/v1/profiles?id=eq.${user.id}`, {
       status: 'ACTIVE'
     });
-    assertTest('Step 9: Reactivate profile (Admin sets profiles.status to ACTIVE)', restoreRes.ok || restoreRes.status === 200 || restoreRes.status === 204);
+    assertTest('Step 9: Reactivate profile (Admin sets profiles.status to ACTIVE via Server Key)', restoreRes.ok || restoreRes.status === 200 || restoreRes.status === 204);
 
     // -------------------------------------------------------------
     // Step 10: Verify same user can sign in/access again

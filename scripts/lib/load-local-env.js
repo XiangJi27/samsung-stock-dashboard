@@ -51,11 +51,24 @@ function loadLocalEnv() {
     }
   }
 
-  // Security Guard: Client environment MUST NOT contain Server Secret Keys
-  if (env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn('⚠️ [SECURITY GUARD] Secret/Service key detected in client environment file (.env.feedback-pilot.local). Stripping key from client test context.');
-    delete env.SUPABASE_SECRET_KEY;
-    delete env.SUPABASE_SERVICE_ROLE_KEY;
+  // Security Guard: Client environment MUST NOT contain Server Secret Keys or Database Passwords
+  const restrictedKeys = [
+    'SUPABASE_SECRET_KEY',
+    'SUPABASE_SERVICE_ROLE_KEY',
+    'SERVICE_ROLE_KEY',
+    'DATABASE_PASSWORD',
+    'DB_PASSWORD',
+    'POSTGRES_PASSWORD'
+  ];
+  let strippedCount = 0;
+  for (const key of restrictedKeys) {
+    if (env[key]) {
+      delete env[key];
+      strippedCount++;
+    }
+  }
+  if (strippedCount > 0) {
+    console.warn('⚠️ [SECURITY GUARD] Restricted server/database credentials detected in client environment file (.env.feedback-pilot.local). Stripped from client test context.');
   }
 
   return env;

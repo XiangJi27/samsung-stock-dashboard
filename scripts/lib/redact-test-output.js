@@ -49,9 +49,26 @@ function redactObject(obj) {
   return cloned;
 }
 
+function redactUrl(urlStr) {
+  if (!urlStr || typeof urlStr !== 'string') return urlStr;
+  try {
+    const u = new URL(urlStr);
+    const hostParts = u.hostname.split('.');
+    if (hostParts.length >= 3 && hostParts.slice(1).join('.') === 'supabase.co') {
+      const proj = hostParts[0];
+      const maskedProj = proj.length > 4 ? `${proj.substring(0, 3)}***${proj.substring(proj.length - 2)}` : '***';
+      return `${u.protocol}//${maskedProj}.supabase.co`;
+    }
+    return `${u.protocol}//***.${hostParts.slice(-2).join('.')}`;
+  } catch (e) {
+    return 'https://***.supabase.co';
+  }
+}
+
 module.exports = {
   redactUuid,
   redactToken,
   redactEmail,
+  redactUrl,
   redactObject
 };

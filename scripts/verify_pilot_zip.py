@@ -67,11 +67,31 @@ with tempfile.TemporaryDirectory() as tmpdir:
     app_source_commit = manifest.get("applicationSourceCommit") or manifest.get("applicationCommit")
     built_from_commit = manifest.get("packageBuiltFromCommit") or manifest.get("applicationCommit")
 
+    # Check for runtime drift since package was built
+    runtime_tracked_paths = [
+        "index.html", "app.js", "style.css", "stock_data.js", "promotion_variants.js",
+        "pilot.html", "assets/", "api/"
+    ]
+    drift_detected = False
+    drifted_files = []
+    if built_from_commit and built_from_commit != "UNKNOWN" and current_head != "UNKNOWN":
+        try:
+            diff_cmd = ["git", "diff", "--name-only", f"{built_from_commit}..{current_head}", "--"] + runtime_tracked_paths
+            diff_output = subprocess.check_output(diff_cmd, text=True, stderr=subprocess.DEVNULL).strip()
+            if diff_output:
+                drifted_files = [line.strip() for line in diff_output.splitlines() if line.strip()]
+                drift_detected = len(drifted_files) > 0
+        except Exception:
+            pass
+
+    runtime_status = "DRIFT_DETECTED (REBUILD REQUIRED)" if drift_detected else "FALSE (RUNTIME FROZEN)"
+
     print(f"Pilot Manifest Extraction Verification: {matched}/{len(files_list)} MATCHED")
     print(f"Environment:                  {manifest.get('environment')}")
     print(f"Application Source Commit:    {app_source_commit}")
     print(f"Package Built From Commit:    {built_from_commit}")
     print(f"Repository HEAD At Verify:    {current_head}")
+    print(f"Runtime Drift After Package:  {runtime_status}")
     print(f"Baseline Commit:              {manifest.get('baselineCommit')}")
     print(f"Database Schema Commit:       {manifest.get('databaseSchemaCommit')}")
     print(f"Built At:                     {manifest.get('builtAt')}")
@@ -83,6 +103,14 @@ with tempfile.TemporaryDirectory() as tmpdir:
         for m in mismatches:
             print(f"  - {m}")
         sys.exit(1)
-    else:
-        print(f"\n✅ 100% Verified: All {matched} files in extracted pilot zip match pilot_runtime_manifest.json!")
-        print("================================================================\n")
+
+    if drift_detected:
+        print("\n❌ RUNTIME SOURCE DRIFT DETECTED:")
+        print(f"Runtime source files changed since packageBuiltFromCommit ({built_from_commit}):")
+        for df in drifted_files:
+            print(f"  - {df}")
+        print("Re-run python scripts/build_pilot_package.py to synchronize package before verification.")
+        sys.exit(1)
+
+    print(f"\n✅ 100% Verified: All {matched} files in extracted pilot zip match pilot_runtime_manifest.json!")
+    print("================================================================\n")
