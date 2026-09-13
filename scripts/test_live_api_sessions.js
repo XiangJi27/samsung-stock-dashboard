@@ -141,30 +141,37 @@ function setupSimulatedEngine() {
 }
 
 async function runApiTests() {
+  const mode = process.argv.find(a => a.startsWith('--mode='))?.split('=')[1] || (process.argv.includes('--mock') ? 'mock' : 'live');
+
   console.log('================================================================');
   console.log('SAMSUNG BRANCH OPERATIONS - STORE PILOT DATA API TEST RUNNER');
   console.log('Scope: Ayutthaya City Park (4-User Store Model)');
-  console.log('Target: Supabase Preview Project (PostgREST API)');
+  console.log(`Execution Mode: ${mode.toUpperCase()} ${mode === 'live' ? '(Real Supabase Data API)' : '(Local In-Memory Mock Engine)'}`);
   console.log('================================================================\n');
 
   const env = loadLocalEnv();
-  let isSimulated = false;
 
-  if (!env || !env.SUPABASE_URL || !env.SUPABASE_PUBLISHABLE_KEY) {
-    if (process.argv.includes('--strict-live')) {
-      console.error('❌ CONFIGURATION ERROR (Exit Code 2):');
+  if (mode === 'live') {
+    if (!env || !env.SUPABASE_URL || !env.SUPABASE_PUBLISHABLE_KEY) {
+      console.error('❌ LIVE DATA API CONFIGURATION ERROR (Exit Code 2):');
       console.error('Missing required environment configuration (.env.feedback-pilot.local).');
-      console.error('Mandatory variables: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY');
-      console.error('Store roles: TEST_ADMIN_EMAIL, TEST_MEMBER_EMAIL, TEST_MEMBER_B_EMAIL');
+      console.error('Mandatory variables: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, TEST_MEMBER_EMAIL, TEST_MEMBER_PASSWORD');
+      console.error('To run local mock assertion checks instead, execute: node scripts/test_live_api_sessions.js --mode=mock\n');
       process.exit(2);
     }
-    isSimulated = true;
-    console.log('⚡ [DEVELOPER LOCAL SMOKE MODE]');
-    console.log('Live Supabase configuration not detected (.env.feedback-pilot.local).');
-    console.log('Running simulated Member API Smoke Test against in-memory PostgREST Engine...\n');
+    if (env.SUPABASE_URL.includes('mock.supabase.co')) {
+      console.error('❌ LIVE DATA API CONFIGURATION ERROR (Exit Code 2):');
+      console.error('SUPABASE_URL points to mock.supabase.co. Live mode requires real Supabase preview project.\n');
+      process.exit(2);
+    }
+  } else {
+    console.log('⚡ [MOCK RUNNER VALIDATION MODE]');
+    console.log('Running simulated Member API test against in-memory PostgREST Engine.');
+    console.log('NOTE: This verifies test runner logic and contract assertions; it is NOT a live Supabase Data API test.\n');
     setupSimulatedEngine();
   }
 
+  const isSimulated = (mode === 'mock');
   const baseUrl = isSimulated ? 'https://mock.supabase.co' : env.SUPABASE_URL;
   const apiKey = isSimulated ? 'mock_publishable_anon_key' : env.SUPABASE_PUBLISHABLE_KEY;
 
@@ -455,12 +462,14 @@ async function runApiTests() {
     process.exit(1);
   }
 
-  if (configuredCount === 4) {
-    verdict = 'PILOT_STORE_MATRIX_PASSED';
+  if (mode === 'mock') {
+    verdict = 'MOCK_RUNNER_VALIDATION_PASSED';
+  } else if (configuredCount === 4) {
+    verdict = 'REAL_DATA_API_STORE_MATRIX_PASSED';
   } else if (memberAEmail && memberAPassword) {
-    verdict = 'MEMBER_API_SMOKE_TEST';
+    verdict = 'REAL_DATA_API_MEMBER_SMOKE_PASSED';
   } else {
-    verdict = 'ANONYMOUS_AND_SURFACE_SMOKE_TEST';
+    verdict = 'REAL_DATA_API_ANON_SURFACE_PASSED';
   }
 
   console.log(`Verdict: ✅ ${verdict}`);

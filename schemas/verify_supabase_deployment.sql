@@ -26,7 +26,9 @@ SELECT
     policyname, 
     permissive, 
     roles, 
-    cmd
+    cmd,
+    qual,
+    with_check
 FROM pg_policies 
 WHERE schemaname = 'public'
 ORDER BY tablename, cmd, policyname;
@@ -48,6 +50,7 @@ ORDER BY grantee, table_name, privilege_type;
 -- ----------------------------------------------------------------------------
 -- 4. Check SECURITY DEFINER and strict search_path on Functions
 -- Expected: prosecdef = true, proconfig contains search_path = public, auth, pg_temp
+-- Specifically verify: private.is_active_user has prosecdef = true
 -- ----------------------------------------------------------------------------
 SELECT 
     n.nspname AS schema_name, 
@@ -56,8 +59,8 @@ SELECT
     p.proconfig AS function_settings
 FROM pg_proc p
 JOIN pg_namespace n ON n.oid = p.pronamespace
-WHERE n.nspname = 'public'
-ORDER BY p.proname;
+WHERE n.nspname IN ('public', 'private')
+ORDER BY n.nspname, p.proname;
 
 -- ----------------------------------------------------------------------------
 -- 5. Check Function Routine Grants for PUBLIC, anon, and authenticated

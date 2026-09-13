@@ -58,14 +58,25 @@ with tempfile.TemporaryDirectory() as tmpdir:
         else:
             mismatches.append(f"Hash mismatch: {frel} (expected {item.get('sha256')}, got {h})")
             
+    import subprocess
+    try:
+        current_head = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], text=True).strip()
+    except Exception:
+        current_head = "UNKNOWN"
+
+    app_source_commit = manifest.get("applicationSourceCommit") or manifest.get("applicationCommit")
+    built_from_commit = manifest.get("packageBuiltFromCommit") or manifest.get("applicationCommit")
+
     print(f"Pilot Manifest Extraction Verification: {matched}/{len(files_list)} MATCHED")
-    print(f"Environment:             {manifest.get('environment')}")
-    print(f"Application Commit:      {manifest.get('applicationCommit')}")
-    print(f"Baseline Commit:         {manifest.get('baselineCommit')}")
-    print(f"Database Schema Commit:  {manifest.get('databaseSchemaCommit')}")
-    print(f"Built At:                {manifest.get('builtAt')}")
-    print(f"Total Files in Manifest: {manifest.get('totalFiles')}")
-    print(f"Zip Package Size:        {os.path.getsize(zip_path)} bytes")
+    print(f"Environment:                  {manifest.get('environment')}")
+    print(f"Application Source Commit:    {app_source_commit}")
+    print(f"Package Built From Commit:    {built_from_commit}")
+    print(f"Repository HEAD At Verify:    {current_head}")
+    print(f"Baseline Commit:              {manifest.get('baselineCommit')}")
+    print(f"Database Schema Commit:       {manifest.get('databaseSchemaCommit')}")
+    print(f"Built At:                     {manifest.get('builtAt')}")
+    print(f"Total Files in Manifest:      {manifest.get('totalFiles')}")
+    print(f"Zip Package Size:             {os.path.getsize(zip_path)} bytes")
 
     if mismatches:
         print("\n❌ Mismatches found:")
