@@ -1,10 +1,13 @@
 -- ============================================================================
 -- TEST 02: Internal Comments Scope & Anti-Spoofing Guard
--- Framework: PostgreSQL Transaction Isolation (pgTAP compatible)
--- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent artifacts)
+-- Framework: pgTAP (Test Anything Protocol for PostgreSQL)
+-- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent fixtures)
 -- ============================================================================
 
 BEGIN;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+
+SELECT plan(4);
 
 -- 1. Setup Test Fixtures (Member 1, Member 2, Store Leader)
 INSERT INTO auth.users (id, instance_id, aud, role, email, created_at, updated_at)
@@ -40,55 +43,44 @@ VALUES ('00000000-0000-0000-0000-000000000211', '00000000-0000-0000-0000-0000000
 INSERT INTO public.issue_comments (id, issue_id, author_id, comment_text, is_internal)
 VALUES ('00000000-0000-0000-0000-000000000212', '00000000-0000-0000-0000-000000000201', '00000000-0000-0000-0000-000000000003', 'Internal Note by Leader', TRUE);
 
--- 2. Assert: Member 1 sees ONLY 1 comment (Public only)
+-- 2. Switch to Member 1 Context -> Assert sees ONLY public comment (count = 1)
 SET LOCAL ROLE authenticated;
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000001", "role": "authenticated"}';
 
-DO $$
-DECLARE
-    cnt INT;
-BEGIN
-    SELECT count(*) INTO cnt FROM public.issue_comments WHERE issue_id = '00000000-0000-0000-0000-000000000201';
-    IF cnt != 1 THEN
-        RAISE EXCEPTION 'TEST_FAILED: Member 1 saw % comments, expected exactly 1!', cnt;
-    END IF;
-END;
-$$;
+SELECT is(
+    (SELECT count(*)::int FROM public.issue_comments WHERE issue_id = '00000000-0000-0000-0000-000000000201'),
+    1,
+    'Member must see exactly 1 comment (public comment only, internal hidden)'
+);
 
--- 3. Assert: Store Leader sees BOTH comments (2 comments)
+-- 3. Switch to Store Leader Context -> Assert sees BOTH comments (count = 2)
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000003", "role": "authenticated"}';
 
-DO $$
-DECLARE
-    cnt INT;
-BEGIN
-    SELECT count(*) INTO cnt FROM public.issue_comments WHERE issue_id = '00000000-0000-0000-0000-000000000201';
-    IF cnt != 2 THEN
-        RAISE EXCEPTION 'TEST_FAILED: Store Leader saw % comments, expected 2!', cnt;
-    END IF;
-END;
-$$;
+SELECT is(
+    (SELECT count(*)::int FROM public.issue_comments WHERE issue_id = '00000000-0000-0000-0000-000000000201'),
+    2,
+    'Store Leader must see both public and internal comments (count = 2)'
+);
 
--- 4. Assert: Member 2 attempts to insert is_internal = TRUE -> Must be BLOCKED
-SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000002", "role": "authenticated"}';
+-- 4. Switch back to Member 1 Context -> Attempt to insert internal comment -> MUST THROW 42501
+SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000001", "role": "authenticated"}';
 
-DO $$
-DECLARE
-    caught_expected_error BOOLEAN := FALSE;
-BEGIN
-    BEGIN
-        INSERT INTO public.issue_comments (issue_id, author_id, comment_text, is_internal)
-        VALUES ('00000000-0000-0000-0000-000000000201', '00000000-0000-0000-0000-000000000002', 'Unauthorized Note', TRUE);
-    EXCEPTION WHEN check_violation OR insufficient_privilege THEN
-        caught_expected_error := TRUE;
-    END;
+SELECT throws_ok(
+    $$INSERT INTO public.issue_comments (id, issue_id, author_id, comment_text, is_internal)
+      VALUES ('00000000-0000-0000-0000-000000000213', '00000000-0000-0000-0000-000000000201', '00000000-0000-0000-0000-000000000001', 'Hacked internal note', TRUE)$$,
+    '42501',
+    NULL,
+    'Member insertion of internal comment (is_internal = TRUE) must be blocked by RLS policy'
+);
 
-    IF NOT caught_expected_error THEN
-        RAISE EXCEPTION 'TEST_FAILED: Member 2 was able to insert an internal comment!';
-    END IF;
+-- 5. Store Leader inserts internal comment -> MUST SUCCEED
+SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000003", "role": "authenticated"}';
 
-    RAISE NOTICE 'TEST 02 PASSED: Internal comments scope and spoofing guard verified.';
-END;
-$$;
+SELECT lives_ok(
+    $$INSERT INTO public.issue_comments (id, issue_id, author_id, comment_text, is_internal)
+      VALUES ('00000000-0000-0000-0000-000000000214', '00000000-0000-0000-0000-000000000201', '00000000-0000-0000-0000-000000000003', 'Authorized leader note', TRUE)$$,
+    'Store Leader must be authorized to insert internal comment'
+);
 
+SELECT * FROM finish();
 ROLLBACK;

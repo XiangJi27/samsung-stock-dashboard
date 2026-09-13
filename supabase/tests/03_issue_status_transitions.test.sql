@@ -1,10 +1,13 @@
 -- ============================================================================
 -- TEST 03: Issue Status Transitions & Role Guardrails
--- Framework: PostgreSQL Transaction Isolation (pgTAP compatible)
--- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent artifacts)
+-- Framework: pgTAP (Test Anything Protocol for PostgreSQL)
+-- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent fixtures)
 -- ============================================================================
 
 BEGIN;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+
+SELECT plan(4);
 
 -- 1. Setup Fixtures
 INSERT INTO auth.users (id, instance_id, aud, role, email, created_at, updated_at)
@@ -32,58 +35,45 @@ ON CONFLICT DO NOTHING;
 INSERT INTO public.issues (id, issue_number, title, description, category, severity, reporter_id, branch_id, status)
 VALUES ('00000000-0000-0000-0000-000000000301', 'ISS-2026-TEST03', 'Transition Test', 'Testing state machine', 'OTHER', 'P3_MEDIUM', '00000000-0000-0000-0000-000000000001', 'AYUTTHAYA_CITY_PARK', 'NEW');
 
--- 2. Assert: Member attempts direct update to CLOSED -> RLS filters to 0 rows updated
+-- 2. Member attempts direct update to CLOSED -> RLS filters out, status remains NEW
 SET LOCAL ROLE authenticated;
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000001", "role": "authenticated"}';
 
 UPDATE public.issues SET status = 'CLOSED' WHERE id = '00000000-0000-0000-0000-000000000301';
 
-DO $$
-DECLARE
-    curr_status TEXT;
-BEGIN
-    -- Verify status remains NEW
-    SELECT status INTO curr_status FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000301';
-    IF curr_status != 'NEW' THEN
-        RAISE EXCEPTION 'TEST_FAILED: Member was able to modify issue status! Current: %', curr_status;
-    END IF;
-END;
-$$;
+SELECT is(
+    (SELECT status FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000301'),
+    'NEW',
+    'Member direct status update to CLOSED must be blocked; status remains NEW'
+);
 
--- 3. Assert: Store Leader executes valid transition path: NEW -> TRIAGED -> VERIFIED
+-- 3. Store Leader executes valid transition: NEW -> TRIAGED -> VERIFIED
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000003", "role": "authenticated"}';
 
 UPDATE public.issues SET status = 'TRIAGED' WHERE id = '00000000-0000-0000-0000-000000000301';
 UPDATE public.issues SET status = 'VERIFIED' WHERE id = '00000000-0000-0000-0000-000000000301';
 
-DO $$
-DECLARE
-    curr_status TEXT;
-BEGIN
-    SELECT status INTO curr_status FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000301';
-    IF curr_status != 'VERIFIED' THEN
-        RAISE EXCEPTION 'TEST_FAILED: Leader failed to transition to VERIFIED! Current: %', curr_status;
-    END IF;
-END;
-$$;
+SELECT is(
+    (SELECT status FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000301'),
+    'VERIFIED',
+    'Store Leader valid transitions (NEW -> TRIAGED -> VERIFIED) must succeed'
+);
 
--- 4. Assert: Leader attempts invalid shortcut transition: VERIFIED -> CLOSED (Invalid path) -> Must RAISE EXCEPTION
-DO $$
-DECLARE
-    caught_error BOOLEAN := FALSE;
-BEGIN
-    BEGIN
-        UPDATE public.issues SET status = 'CLOSED' WHERE id = '00000000-0000-0000-0000-000000000301';
-    EXCEPTION WHEN OTHERS THEN
-        caught_error := TRUE;
-    END;
+-- 4. Store Leader illegal jump VERIFIED -> CLOSED blocked by trigger state machine
+SELECT throws_ok(
+    $$UPDATE public.issues SET status = 'CLOSED' WHERE id = '00000000-0000-0000-0000-000000000301'$$,
+    'P0001',
+    NULL,
+    'Illegal state machine skip (VERIFIED -> CLOSED) must be rejected by trigger'
+);
 
-    IF NOT caught_error THEN
-        RAISE EXCEPTION 'TEST_FAILED: Invalid status transition was allowed without error!';
-    END IF;
+-- 5. Support agent can progress VERIFIED -> IN_PROGRESS
+SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000004", "role": "authenticated"}';
 
-    RAISE NOTICE 'TEST 03 PASSED: Issue status transitions and role guardrails verified.';
-END;
-$$;
+SELECT lives_ok(
+    $$UPDATE public.issues SET status = 'IN_PROGRESS', assigned_to = '00000000-0000-0000-0000-000000000004' WHERE id = '00000000-0000-0000-0000-000000000301'$$,
+    'Support role must be authorized to transition VERIFIED -> IN_PROGRESS'
+);
 
+SELECT * FROM finish();
 ROLLBACK;

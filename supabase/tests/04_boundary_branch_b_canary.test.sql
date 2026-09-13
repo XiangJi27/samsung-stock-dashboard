@@ -1,10 +1,13 @@
 -- ============================================================================
 -- TEST 04: Boundary Canary - Cross-Branch Isolation Verification
--- Framework: PostgreSQL Transaction Isolation (pgTAP compatible)
--- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent artifacts)
+-- Framework: pgTAP (Test Anything Protocol for PostgreSQL)
+-- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent fixtures)
 -- ============================================================================
 
 BEGIN;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+
+SELECT plan(4);
 
 -- 1. Setup Fixtures (Branch A and Branch B)
 INSERT INTO auth.users (id, instance_id, aud, role, email, created_at, updated_at)
@@ -36,43 +39,40 @@ VALUES ('00000000-0000-0000-0000-000000000401', 'ISS-2026-BRA001', 'Branch A Iss
 INSERT INTO public.issues (id, issue_number, title, description, category, severity, reporter_id, branch_id)
 VALUES ('00000000-0000-0000-0000-000000000402', 'ISS-2026-BRB001', 'Branch B Issue', 'Issue in Test Branch B', 'OTHER', 'P3_MEDIUM', '00000000-0000-0000-0000-000000000005', 'TEST_BRANCH_B');
 
--- 2. Assert: Member Branch A can see Issue A, but Issue B is COMPLETELY HIDDEN
+-- 2. Member Branch A context: can see Branch A issue, but Branch B issue is completely hidden
 SET LOCAL ROLE authenticated;
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000001", "role": "authenticated"}';
 
-DO $$
-DECLARE
-    cnt_a INT;
-    cnt_b INT;
-BEGIN
-    SELECT count(*) INTO cnt_a FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000401';
-    SELECT count(*) INTO cnt_b FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000402';
+SELECT is(
+    (SELECT count(*)::int FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000401'),
+    1,
+    'Member Branch A must be able to view their own branch issue'
+);
 
-    IF cnt_a != 1 THEN
-        RAISE EXCEPTION 'TEST_FAILED: Member A cannot see own issue!';
-    END IF;
+SELECT is(
+    (SELECT count(*)::int FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000402'),
+    0,
+    'Branch B issue must be completely hidden from Member Branch A (RLS filter count = 0)'
+);
 
-    IF cnt_b != 0 THEN
-        RAISE EXCEPTION 'SECURITY_BREACH: Member A was able to read Branch B issue!';
-    END IF;
-END;
-$$;
+-- 3. Member Branch A attempts to insert issue pretending to be Branch B -> trigger forces Branch A
+INSERT INTO public.issues (id, issue_number, title, description, category, severity, reporter_id, branch_id)
+VALUES ('00000000-0000-0000-0000-000000000403', 'ISS-2026-SPOOF', 'Spoofed Branch', 'Trying to inject into Branch B', 'OTHER', 'P3_MEDIUM', '00000000-0000-0000-0000-000000000001', 'TEST_BRANCH_B');
 
--- 3. Assert: Leader Branch A can see Issue A, but CANNOT see Issue B
+SELECT is(
+    (SELECT branch_id FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000403'),
+    'AYUTTHAYA_CITY_PARK',
+    'Trigger must overwrite spoofed branch_id with caller verified profile branch'
+);
+
+-- 4. Store Leader Branch A context: cannot see Branch B issue
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000003", "role": "authenticated"}';
 
-DO $$
-DECLARE
-    cnt_b INT;
-BEGIN
-    SELECT count(*) INTO cnt_b FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000402';
+SELECT is(
+    (SELECT count(*)::int FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000402'),
+    0,
+    'Store Leader Branch A must NOT see issues from Branch B'
+);
 
-    IF cnt_b != 0 THEN
-        RAISE EXCEPTION 'SECURITY_BREACH: Leader Branch A was able to read Branch B issue!';
-    END IF;
-
-    RAISE NOTICE 'TEST 04 PASSED: Cross-branch boundary isolation verified.';
-END;
-$$;
-
+SELECT * FROM finish();
 ROLLBACK;

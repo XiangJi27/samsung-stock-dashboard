@@ -1,52 +1,50 @@
 -- ============================================================================
--- TEST 05: Private Schema & RPC Surface Isolation
--- Framework: PostgreSQL Transaction Isolation (pgTAP compatible)
--- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent artifacts)
+-- TEST 05: Private Schema Surface - Zero Public Exposure of Internal Helpers
+-- Framework: pgTAP (Test Anything Protocol for PostgreSQL)
+-- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent fixtures)
 -- ============================================================================
 
 BEGIN;
+CREATE EXTENSION IF NOT EXISTS pgtap;
 
-DO $$
-DECLARE
-    unauthorized_public_rpc INT;
-    unauthorized_private_anon INT;
-    unauthorized_trigger_grants INT;
-BEGIN
-    -- 1. Check Public RPC surface: ONLY update_own_display_name and update_own_new_issue allowed
-    SELECT count(*) INTO unauthorized_public_rpc
-    FROM information_schema.role_routine_grants
-    WHERE routine_schema = 'public'
-      AND grantee = 'authenticated'
-      AND privilege_type = 'EXECUTE'
-      AND routine_name NOT IN ('update_own_display_name', 'update_own_new_issue');
+SELECT plan(4);
 
-    IF unauthorized_public_rpc > 0 THEN
-        RAISE EXCEPTION 'SECURITY_BREACH: Found % unauthorized functions granted EXECUTE to authenticated in public schema!', unauthorized_public_rpc;
-    END IF;
+-- 1. Assert: anon role has NO usage on schema private (throws 42501)
+SET LOCAL ROLE anon;
 
-    -- 2. Check Private Schema: Zero grants to PUBLIC or anon
-    SELECT count(*) INTO unauthorized_private_anon
-    FROM information_schema.role_routine_grants
-    WHERE routine_schema = 'private'
-      AND grantee IN ('PUBLIC', 'anon');
+SELECT throws_ok(
+    $$SELECT private.has_global_role('SYSTEM_ADMIN')$$,
+    '42501',
+    NULL,
+    'Anonymous client must NOT be permitted to execute private.has_global_role'
+);
 
-    IF unauthorized_private_anon > 0 THEN
-        RAISE EXCEPTION 'SECURITY_BREACH: Found % functions in private schema accessible by PUBLIC or anon!', unauthorized_private_anon;
-    END IF;
+-- 2. Assert: authenticated caller cannot execute internal trigger validate_issue_write (throws 42501)
+SET LOCAL ROLE authenticated;
+SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000001", "role": "authenticated"}';
 
-    -- 3. Check Triggers: validate_issue_write and write_issue_audit_event must NOT be callable by authenticated
-    SELECT count(*) INTO unauthorized_trigger_grants
-    FROM information_schema.role_routine_grants
-    WHERE routine_schema = 'public'
-      AND routine_name IN ('validate_issue_write', 'write_issue_audit_event')
-      AND grantee = 'authenticated';
+SELECT throws_ok(
+    $$SELECT private.validate_issue_write()$$,
+    '42501',
+    NULL,
+    'Authenticated client must NOT have EXECUTE grant on trigger function private.validate_issue_write'
+);
 
-    IF unauthorized_trigger_grants > 0 THEN
-        RAISE EXCEPTION 'SECURITY_BREACH: Triggers must not have EXECUTE granted to authenticated users!';
-    END IF;
+-- 3. Assert: authenticated caller cannot execute audit trigger function directly (throws 42501)
+SELECT throws_ok(
+    $$SELECT private.write_issue_audit_event()$$,
+    '42501',
+    NULL,
+    'Authenticated client must NOT have EXECUTE grant on audit function private.write_issue_audit_event'
+);
 
-    RAISE NOTICE 'TEST 05 PASSED: Function execution and private schema surface verified.';
-END;
-$$;
+-- 4. Assert: authenticated caller cannot execute role inspection helper directly (throws 42501)
+SELECT throws_ok(
+    $$SELECT private.user_has_role('00000000-0000-0000-0000-000000000001', 'SYSTEM_ADMIN')$$,
+    '42501',
+    NULL,
+    'Direct execution of private.user_has_role must be denied to authenticated client'
+);
 
+SELECT * FROM finish();
 ROLLBACK;

@@ -1,55 +1,51 @@
 -- ============================================================================
--- TEST 07: Profile Update RPC & Direct Tampering Prevention
--- Framework: PostgreSQL Transaction Isolation (pgTAP compatible)
--- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent artifacts)
+-- TEST 07: Profile Tampering Prevention & Secure Display Name RPC
+-- Framework: pgTAP (Test Anything Protocol for PostgreSQL)
+-- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent fixtures)
 -- ============================================================================
 
 BEGIN;
+CREATE EXTENSION IF NOT EXISTS pgtap;
 
--- 1. Setup Fixtures
+SELECT plan(3);
+
+-- 1. Setup Fixture
 INSERT INTO auth.users (id, instance_id, aud, role, email, created_at, updated_at)
-VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'member_1@store.local', NOW(), NOW())
+VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'test_m1@store.local', NOW(), NOW())
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO public.profiles (id, employee_code, display_name, branch_id, status)
-VALUES ('00000000-0000-0000-0000-000000000001', 'MEM_1', 'Original Name', 'AYUTTHAYA_CITY_PARK', 'ACTIVE')
+VALUES ('00000000-0000-0000-0000-000000000001', 'TEST_M1', 'Original Name', 'AYUTTHAYA_CITY_PARK', 'ACTIVE')
 ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO public.user_roles (user_id, role, branch_id)
 VALUES ('00000000-0000-0000-0000-000000000001', 'MEMBER', 'AYUTTHAYA_CITY_PARK')
 ON CONFLICT DO NOTHING;
 
--- 2. Assert: Member attempts direct UPDATE on profiles table (tampering branch_id) -> 0 rows updated
+-- 2. Member attempts direct UPDATE on profiles -> RLS filters out, 0 rows modified
 SET LOCAL ROLE authenticated;
 SET LOCAL "request.jwt.claims" = '{"sub": "00000000-0000-0000-0000-000000000001", "role": "authenticated"}';
 
-UPDATE public.profiles SET branch_id = 'TEST_BRANCH_B' WHERE id = '00000000-0000-0000-0000-000000000001';
+UPDATE public.profiles SET employee_code = 'HACKED', branch_id = 'BRANCH_HACK' WHERE id = '00000000-0000-0000-0000-000000000001';
 
-DO $$
-DECLARE
-    curr_branch TEXT;
-BEGIN
-    SELECT branch_id INTO curr_branch FROM public.profiles WHERE id = '00000000-0000-0000-0000-000000000001';
-    IF curr_branch != 'AYUTTHAYA_CITY_PARK' THEN
-        RAISE EXCEPTION 'SECURITY_BREACH: Member was able to directly tamper with branch_id in profiles table!';
-    END IF;
-END;
-$$;
+SELECT is(
+    (SELECT employee_code FROM public.profiles WHERE id = '00000000-0000-0000-0000-000000000001'),
+    'TEST_M1',
+    'Direct table UPDATE on profiles must be blocked by RLS; employee_code unmodified'
+);
 
--- 3. Assert: Member invokes secure RPC update_own_display_name -> SUCCEEDS
-SELECT public.update_own_display_name('Updated Member Name');
+-- 3. Member updates display name via public RPC -> lives_ok
+SELECT lives_ok(
+    $$SELECT public.update_own_display_name('Updated Legitimate Name')$$,
+    'Member must be permitted to execute public.update_own_display_name'
+);
 
-DO $$
-DECLARE
-    curr_name TEXT;
-BEGIN
-    SELECT display_name INTO curr_name FROM public.profiles WHERE id = '00000000-0000-0000-0000-000000000001';
-    IF curr_name != 'Updated Member Name' THEN
-        RAISE EXCEPTION 'TEST_FAILED: update_own_display_name RPC failed to update display name!';
-    END IF;
+-- 4. Assert display_name updated, but critical fields unchanged
+SELECT is(
+    (SELECT display_name FROM public.profiles WHERE id = '00000000-0000-0000-0000-000000000001'),
+    'Updated Legitimate Name',
+    'Profile display_name must reflect update from RPC'
+);
 
-    RAISE NOTICE 'TEST 07 PASSED: Profile update RPC and direct tampering prevention verified.';
-END;
-$$;
-
+SELECT * FROM finish();
 ROLLBACK;

@@ -1,10 +1,13 @@
 -- ============================================================================
 -- TEST 01: Issue Number Auto-Generation & Immutable Audit Trigger
--- Framework: PostgreSQL Transaction Isolation (pgTAP compatible)
--- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent artifacts)
+-- Framework: pgTAP (Test Anything Protocol for PostgreSQL)
+-- Safety: Enclosed in BEGIN ... ROLLBACK (Zero persistent fixtures)
 -- ============================================================================
 
 BEGIN;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+
+SELECT plan(8);
 
 -- 1. Setup Test Fixture (Mock Member)
 INSERT INTO auth.users (id, instance_id, aud, role, email, created_at, updated_at)
@@ -41,51 +44,54 @@ VALUES (
     'P3_MEDIUM'
 );
 
--- 4. Assert Issue Number Overwritten by Database Trigger
-DO $$
-DECLARE
-    rec RECORD;
-    evt RECORD;
-BEGIN
-    SELECT * INTO rec FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000101';
-    
-    IF rec.issue_number = 'FAKE-999999' THEN
-        RAISE EXCEPTION 'TEST_FAILED: issue_number was not overwritten by database trigger!';
-    END IF;
+-- 4. pgTAP Assertions for Issue Generation & Enforcement
+SELECT isnt(
+    (SELECT issue_number FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000101'),
+    'FAKE-999999',
+    'Issue number must be overwritten by database BEFORE INSERT trigger'
+);
 
-    IF rec.issue_number NOT LIKE 'ISS-2026-%' THEN
-        RAISE EXCEPTION 'TEST_FAILED: issue_number does not match ISS-2026-%% format! Got: %', rec.issue_number;
-    END IF;
+SELECT ok(
+    (SELECT issue_number FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000101') LIKE 'ISS-2026-%',
+    'Issue number must follow ISS-2026-% format pattern'
+);
 
-    IF rec.status != 'NEW' THEN
-        RAISE EXCEPTION 'TEST_FAILED: status was not forced to NEW! Got: %', rec.status;
-    END IF;
+SELECT is(
+    (SELECT status FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000101'),
+    'NEW',
+    'Initial status must be forced to NEW by database trigger'
+);
 
-    IF rec.reporter_id != '00000000-0000-0000-0000-000000000001'::uuid THEN
-        RAISE EXCEPTION 'TEST_FAILED: reporter_id was not bound to auth.uid()!';
-    END IF;
+SELECT is(
+    (SELECT reporter_id FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000101'),
+    '00000000-0000-0000-0000-000000000001'::uuid,
+    'Reporter ID must be bound to auth.uid()'
+);
 
-    IF rec.branch_id != 'AYUTTHAYA_CITY_PARK' THEN
-        RAISE EXCEPTION 'TEST_FAILED: branch_id was not bound to profile branch!';
-    END IF;
+SELECT is(
+    (SELECT branch_id FROM public.issues WHERE id = '00000000-0000-0000-0000-000000000101'),
+    'AYUTTHAYA_CITY_PARK',
+    'Branch ID must be bound to reporter profile branch'
+);
 
-    -- 5. Assert Immutable Audit Event Created via AFTER Trigger
-    SELECT * INTO evt FROM public.issue_events WHERE issue_id = '00000000-0000-0000-0000-000000000101';
-    
-    IF evt.event_type != 'ISSUE_CREATED' THEN
-        RAISE EXCEPTION 'TEST_FAILED: audit event_type is not ISSUE_CREATED! Got: %', evt.event_type;
-    END IF;
+-- 5. pgTAP Assertions for Immutable AFTER INSERT Audit Event
+SELECT is(
+    (SELECT event_type FROM public.issue_events WHERE issue_id = '00000000-0000-0000-0000-000000000101'),
+    'ISSUE_CREATED',
+    'Audit event must be auto-generated with event_type ISSUE_CREATED'
+);
 
-    IF evt.actor_id != '00000000-0000-0000-0000-000000000001'::uuid THEN
-        RAISE EXCEPTION 'TEST_FAILED: audit actor_id does not match caller!';
-    END IF;
+SELECT is(
+    (SELECT actor_id FROM public.issue_events WHERE issue_id = '00000000-0000-0000-0000-000000000101'),
+    '00000000-0000-0000-0000-000000000001'::uuid,
+    'Audit actor_id must match authenticated caller'
+);
 
-    IF evt.actor_type != 'USER' THEN
-        RAISE EXCEPTION 'TEST_FAILED: audit actor_type is not USER! Got: %', evt.actor_type;
-    END IF;
+SELECT is(
+    (SELECT actor_type FROM public.issue_events WHERE issue_id = '00000000-0000-0000-0000-000000000101'),
+    'USER',
+    'Audit actor_type must be USER'
+);
 
-    RAISE NOTICE 'TEST 01 PASSED: Issue number database generation and audit trigger verified.';
-END;
-$$;
-
+SELECT * FROM finish();
 ROLLBACK;
