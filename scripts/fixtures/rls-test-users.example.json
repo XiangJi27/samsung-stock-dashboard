@@ -1,0 +1,40 @@
+{
+  "_comment": "Template for automated multi-role Data API tests. Copy values into .env.feedback-pilot.local. NEVER commit real passwords!",
+  "roles": [
+    {
+      "role": "ANON",
+      "scope": "public",
+      "description": "Unauthenticated client"
+    },
+    {
+      "role": "MEMBER",
+      "scope": "AYUTTHAYA_CITY_PARK",
+      "env_email_key": "TEST_MEMBER_EMAIL",
+      "env_password_key": "TEST_MEMBER_PASSWORD"
+    },
+    {
+      "role": "STORE_LEADER",
+      "scope": "AYUTTHAYA_CITY_PARK",
+      "env_email_key": "TEST_LEADER_EMAIL",
+      "env_password_key": "TEST_LEADER_PASSWORD"
+    },
+    {
+      "role": "SUPPORT",
+      "scope": "GLOBAL",
+      "env_email_key": "TEST_SUPPORT_EMAIL",
+      "env_password_key": "TEST_SUPPORT_PASSWORD"
+    },
+    {
+      "role": "AUDITOR",
+      "scope": "GLOBAL",
+      "env_email_key": "TEST_AUDITOR_EMAIL",
+      "env_password_key": "TEST_AUDITOR_PASSWORD"
+    },
+    {
+      "role": "SYSTEM_ADMIN",
+      "scope": "GLOBAL",
+      "env_email_key": "TEST_ADMIN_EMAIL",
+      "env_password_key": "TEST_ADMIN_PASSWORD"
+    }
+  ]
+}
