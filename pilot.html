@@ -2012,6 +2012,10 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- User Feedback Pilot Modular Components (Ayutthaya City Park - 4-User Store Model) -->
+  <script>
+    window.__ENV_SUPABASE_URL = "https://anhxzffcmrihymrptsgd.supabase.co";
+    window.__ENV_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_pGifV6m8N3TYw4C6PQ0QhA_rmx8A1EH";
+  </script>
   <script src="assets/js/pilot-runtime-config.js"></script>
   <script src="assets/js/supabase-client.js"></script>
   <script src="assets/js/auth-service.js"></script>
@@ -2056,20 +2060,25 @@
           btnSubmit.disabled = true;
           btnSubmit.innerHTML = '<span>กำลังเข้าสู่ระบบ...</span>';
 
-          const res = await window.AuthService.signIn(empInput.value, pwInput.value);
-          btnSubmit.disabled = false;
-          btnSubmit.innerHTML = '<span>เข้าสู่ระบบ &rarr;</span>';
-
-          if (res.success) {
-            pwInput.value = ""; // Clear password field immediately
-            // Load datasets on demand after successful authentication
-            if (window.DataLoader) {
-              await window.DataLoader.loadAuthenticatedDatasets();
+          try {
+            const userSession = await window.AuthService.signIn(empInput.value, pwInput.value);
+            if (userSession) {
+              pwInput.value = ""; // Clear password field immediately
+              // Load datasets on demand after successful authentication
+              if (window.DataLoader) {
+                await window.DataLoader.loadAuthenticatedDatasets();
+              }
+              window.AppRouter.navigate("/home");
+            } else {
+              errText.textContent = "เกิดข้อผิดพลาดในการเข้าสู่ระบบ";
+              errAlert.classList.add("visible");
             }
-            window.AppRouter.navigate("/home");
-          } else {
-            errText.textContent = res.error || "เกิดข้อผิดพลาดในการเข้าสู่ระบบ";
+          } catch (err) {
+            errText.textContent = err.message || "รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง";
             errAlert.classList.add("visible");
+          } finally {
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = '<span>เข้าสู่ระบบ &rarr;</span>';
           }
         });
       }
