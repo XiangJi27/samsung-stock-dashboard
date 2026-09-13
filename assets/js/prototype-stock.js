@@ -1642,7 +1642,15 @@
       drawerPn.innerHTML = `${item.pn ? `Exact P/N: ${item.pn}` : "รหัส: ไม่ระบุ P/N เฉพาะเจาะจง"} ${conn ? `<span class="badge-tag-conn ${getConnBadgeClass(conn)}" style="margin-left: 8px;">${conn}</span>` : ''}`;
 
       switchDrawerMainTab(currentDrawerTab);
-      document.getElementById("promoDrawerBackdrop").classList.add("open");
+      const promoDrawerBackdrop = document.getElementById("promoDrawerBackdrop");
+      if (promoDrawerBackdrop) {
+        promoDrawerBackdrop.classList.add("open");
+      }
+      document.body.style.overflow = "hidden";
+      const drawerBody = document.getElementById("drawerBody");
+      if (drawerBody) {
+        drawerBody.scrollTop = 0;
+      }
     }
 
     function renderCurrentDrawerBody() {
@@ -2292,16 +2300,29 @@
       });
     }
 
+    function closeDrawer() {
+      const promoDrawerBackdrop = document.getElementById("promoDrawerBackdrop");
+      if (promoDrawerBackdrop) {
+        promoDrawerBackdrop.classList.remove("open");
+      }
+      document.body.style.overflow = "";
+    }
+    window.closeDrawer = closeDrawer;
+
     function setupPrototypeStockControls() {
       // Close Drawer
       const btnCloseDrawer = document.getElementById("btnCloseDrawer");
       const promoDrawerBackdrop = document.getElementById("promoDrawerBackdrop");
       if (btnCloseDrawer && promoDrawerBackdrop) {
-        btnCloseDrawer.onclick = () => promoDrawerBackdrop.classList.remove("open");
+        btnCloseDrawer.onclick = () => closeDrawer();
         promoDrawerBackdrop.onclick = (e) => {
-          if (e.target === promoDrawerBackdrop) promoDrawerBackdrop.classList.remove("open");
+          if (e.target === promoDrawerBackdrop) closeDrawer();
         };
       }
+
+      window.onkeydown = (e) => {
+        if (e.key === "Escape") closeDrawer();
+      };
 
       // Category Card Click
       document.querySelectorAll(".category-card").forEach(card => {

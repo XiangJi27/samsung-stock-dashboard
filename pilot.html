@@ -395,35 +395,6 @@
       <!-- Dynamically Rendered -->
     </div>
   </div>
-
-  <!-- ==========================================================================
-       Promotion & Tech Specs Slide-Out Side Panel (Dual-Tab Drawer)
-       ========================================================================== -->
-  <div class="drawer-backdrop" id="promoDrawerBackdrop">
-    <div class="drawer-panel" id="promoDrawerPanel">
-      <div class="drawer-header">
-        <div class="drawer-title-group">
-          <h3 id="drawerProductTitle">Galaxy S26 Ultra (12/256GB)</h3>
-          <div class="drawer-pn-tag" id="drawerProductPn">P/N: SM-S928BZTQTHL</div>
-        </div>
-        <button class="btn-close-drawer" id="btnCloseDrawer">&times;</button>
-      </div>
-
-      <!-- Main Navigation Tabs: Promo vs Specs -->
-      <div class="drawer-nav-tabs" id="drawerMainTabs">
-        <button class="drawer-nav-btn active" id="tabBtnPromo" onclick="switchDrawerMainTab('PROMO')">
-          <span>✨ โปรโมชั่นหน้าร้าน</span>
-        </button>
-        <button class="drawer-nav-btn specs-tab" id="tabBtnSpecs" onclick="switchDrawerMainTab('SPECS')">
-          <span>📋 ข้อมูลสเปกสินค้า (Tech Specs)</span>
-        </button>
-      </div>
-
-      <div class="drawer-body" id="drawerBody">
-        <!-- Injected Dynamically -->
-      </div>
-    </div>
-  </div>
           </div>
         </section>
 
@@ -945,6 +916,36 @@
         <span>ตั้งค่า</span>
       </a>
     </nav>
+  </div>
+
+  <!-- ==========================================================================
+       Promotion & Tech Specs Slide-Out Side Panel (Dual-Tab Drawer)
+       Positioned directly under body for true fixed viewport positioning
+       ========================================================================== -->
+  <div class="drawer-backdrop" id="promoDrawerBackdrop">
+    <div class="drawer-panel" id="promoDrawerPanel">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h3 id="drawerProductTitle">Galaxy S26 Ultra (12/256GB)</h3>
+          <div class="drawer-pn-tag" id="drawerProductPn">P/N: SM-S928BZTQTHL</div>
+        </div>
+        <button class="btn-close-drawer" id="btnCloseDrawer">&times;</button>
+      </div>
+
+      <!-- Main Navigation Tabs: Promo vs Specs -->
+      <div class="drawer-nav-tabs" id="drawerMainTabs">
+        <button class="drawer-nav-btn active" id="tabBtnPromo" onclick="switchDrawerMainTab('PROMO')">
+          <span>✨ โปรโมชั่นหน้าร้าน</span>
+        </button>
+        <button class="drawer-nav-btn specs-tab" id="tabBtnSpecs" onclick="switchDrawerMainTab('SPECS')">
+          <span>📋 ข้อมูลสเปกสินค้า (Tech Specs)</span>
+        </button>
+      </div>
+
+      <div class="drawer-body" id="drawerBody">
+        <!-- Injected Dynamically -->
+      </div>
+    </div>
   </div>
 
   <!-- Phase A & B Architecture Scripts Loading Sequence -->
