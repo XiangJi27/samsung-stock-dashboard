@@ -1,0 +1,2340 @@
+
+    // ==========================================================================
+    // PROTOTYPE DATA ENGINE & COLOR PALETTE MAPPINGS
+    // ==========================================================================
+    
+    // Exact Color Swatch Map (Hex + Label)
+    const COLOR_PALETTE = {
+      "black": "#1e293b",
+      "jet black": "#0f172a",
+      "gray": "#64748b",
+      "graphite": "#334155",
+      "cream": "#fef08a",
+      "silver": "#cbd5e1",
+      "light violet": "#c4b5fd",
+      "white": "#f8fafc",
+      "sky blue": "#38bdf8",
+      "blue": "#3b82f6",
+      "cobalt violet": "#8b5cf6",
+      "lavender": "#d8b4fe",
+      "violet shadow": "#7c3aed",
+      "blue shadow": "#1d4ed8",
+      "pink": "#f472b6",
+      "pink gold": "#fbcfe8",
+      "dark blue": "#1e3a8a",
+      "violet": "#a855f7",
+      "coral red": "#f87171",
+      "yellow": "#facc15",
+      "green": "#10b981",
+      "mint": "#6ee7b7",
+      "gold": "#eab308"
+    };
+
+    function getColorHex(colorName) {
+      if (!colorName) return "#64748b";
+      const clean = colorName.toLowerCase().trim();
+      for (const [key, hex] of Object.entries(COLOR_PALETTE)) {
+        if (clean.includes(key)) return hex;
+      }
+      return "#475569";
+    }
+
+    // Default Fallback Dataset (if running completely standalone without stock_data.js)
+    const FALLBACK_STOCK = [
+      { id: 1, category: "SmartPhone", model: "Galaxy A07 4G (4/64GB)", pn: "SM-A075FLVDTHL", color: "Light Violet", f1: 0, f2: 4, total: 4, srp: 3799, productCodeType: "STANDARD_SM" },
+      { id: 2, category: "SmartPhone", model: "Galaxy A07 4G (4/64GB)", pn: "SM-A075FZKDTHL", color: "Black", f1: 2, f2: 5, total: 7, srp: 3799, productCodeType: "STANDARD_SM" },
+      { id: 3, category: "SmartPhone", model: "Galaxy A17 5G (8/128GB)", pn: "SM-A176BZKGTHL", color: "Black", f1: 3, f2: 3, total: 6, srp: 8999, productCodeType: "STANDARD_SM" },
+      { id: 4, category: "SmartPhone", model: "Galaxy A27 5G (8/128GB)", pn: "SM-A276BLIGTHL", color: "Light Violet", f1: 1, f2: 2, total: 3, srp: 10999, productCodeType: "STANDARD_SM" },
+      { id: 5, category: "SmartPhone", model: "Galaxy A37 5G (8/256GB)", pn: "SM-A376BLVTTHL", color: "Light Violet", f1: 2, f2: 1, total: 3, srp: 13999, productCodeType: "STANDARD_SM" },
+      { id: 6, category: "SmartPhone", model: "Galaxy S25 FE 5G (8/256GB)", pn: "SM-S721BLBATHL", color: "Blue", f1: 2, f2: 2, total: 4, srp: 26900, productCodeType: "STANDARD_SM" },
+      { id: 7, category: "SmartPhone", model: "Galaxy S26 Ultra 5G (12/256GB)", pn: "SM-S928BZTQTHL", color: "Titanium Black", f1: 4, f2: 3, total: 7, srp: 46900, productCodeType: "STANDARD_SM" },
+      { id: 8, category: "SmartPhone", model: "Galaxy Z Fold8 5G (12/256GB)", pn: "SM-F956BZKATHL", color: "Silver Shadow", f1: 1, f2: 2, total: 3, srp: 63900, productCodeType: "STANDARD_SM" },
+      { id: 9, category: "SmartPhone", model: "Galaxy Z Flip8 5G (8/256GB)", pn: "SM-F741BLBATHL", color: "Blue Shadow", f1: 2, f2: 0, total: 2, srp: 42900, productCodeType: "STANDARD_SM" },
+      { id: 10, category: "Tablet", model: "Galaxy Tab S10 FE 5G (8/128GB)", pn: "SM-X526BLBATHL", color: "Gray", f1: 2, f2: 2, total: 4, srp: 30900, productCodeType: "STANDARD_SM" },
+      { id: 11, category: "Tablet", model: "Galaxy Tab S10 Lite (6/128GB)", pn: "SM-X406BZAATHL", color: "Gray", f1: 3, f2: 4, total: 7, srp: 16990, productCodeType: "STANDARD_SM" },
+      { id: 12, category: "Tablet", model: "Galaxy Tab A11+ 5G (4/64GB)", pn: "SM-X226BZAATHL", color: "Graphite", f1: 5, f2: 2, total: 7, srp: 9990, productCodeType: "STANDARD_SM" },
+      { id: 13, category: "Watch", model: "Galaxy Watch8 40mm BT", pn: "SM-R930NZEATHL", color: "Cream", f1: 2, f2: 1, total: 3, srp: 9900, productCodeType: "STANDARD_SM" },
+      { id: 14, category: "Watch", model: "Galaxy Watch8 Ultra 47mm LTE", pn: "SM-R965FZKATHL", color: "Titanium Gray", f1: 1, f2: 1, total: 2, srp: 23900, productCodeType: "STANDARD_SM" },
+      { id: 15, category: "Buds", model: "Galaxy Buds3 Pro", pn: "SM-R630NZAA", color: "Silver", f1: 0, f2: 0, total: 0, srp: 7490, productCodeType: "STANDARD_SM" },
+      { id: 16, category: "Accessory", model: "25W Power Adapter (หัวชาร์จด่วน)", pn: "EP-T2510NBEGTH", color: "Black", f1: 35, f2: 24, total: 59, srp: 490, productCodeType: "STANDARD_SM" },
+      { id: 17, category: "Accessory", model: "SmartTag2 Bluetooth Tracker", pn: "EI-T5600BBEGTH", color: "Black", f1: 4, f2: 0, total: 4, srp: 990, productCodeType: "STANDARD_SM" }
+    ];
+
+    // Complete 78 Accessories Catalog from Stock.xlsx (Cases, Covers, Chargers, Adapters, Films, SmartTags)
+    const ALL_ACCESSORIES = [
+  {
+    "id": "ACC-0001",
+    "category": "Accessory",
+    "subCategory": "สมาร์ทแท็ก",
+    "model": "SmartTag2",
+    "pn": "EI-T5600BWEGWW",
+    "color": "White",
+    "srp": 1090.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0002",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10Ultra Book Cover Keyboard Slim",
+    "pn": "EF-DX920UBEGTH",
+    "color": "Black",
+    "srp": 6990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0003",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10Plus Book Cover Keyboard Slim",
+    "pn": "EF-DX820UBEGTH",
+    "color": "Black",
+    "srp": 5990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0004",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S9Plus S10Plus Smart Book Cover",
+    "pn": "EF-BX810PBEGWW",
+    "color": "Black",
+    "srp": 2990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0005",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S9Plus S10Plus Smart Book Cover",
+    "pn": "EF-BX810PLEGWW",
+    "color": "Blue",
+    "srp": 2990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0006",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10Plus Neos Pogo Keyboard Cover",
+    "pn": "GP-FCX828NNABH",
+    "color": "Black",
+    "srp": 3990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0007",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10FE Plus (AI) Book Cover Keyboard Slim",
+    "pn": "EF-DX620UBEGTH",
+    "color": "Black",
+    "srp": 5990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0008",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10FE Plus Neos Keyboard Cover (BT)",
+    "pn": "GP-FCX626NNCBH",
+    "color": "Black",
+    "srp": 2990.0,
+    "f1": 1,
+    "f2": 0,
+    "total": 1,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0009",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10FE Plus Smart Book Cover",
+    "pn": "EF-BX620PBEGWW",
+    "color": "Black",
+    "srp": 2990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0010",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S9(AI) Book Cover Keyboard",
+    "pn": "EF-DX720UBEGTH",
+    "color": "Black",
+    "srp": 4990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0011",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S9 Book Cover Keyboard",
+    "pn": "EF-DX710UBEGTH",
+    "color": "Black",
+    "srp": 4990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0012",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S9 Smart Book Cover",
+    "pn": "EF-BX710PBEGWW",
+    "color": "Black",
+    "srp": 2490.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0013",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Tab S10FE Neos Keyboard Cover",
+    "pn": "GP-FCX526NNBBH",
+    "color": "Black",
+    "srp": 2990.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0014",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Case S25FE",
+    "pn": "",
+    "color": "Black",
+    "srp": 0.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0015",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Case Flip7 / Fold7",
+    "pn": "",
+    "color": "Black",
+    "srp": 0.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0016",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Case S25 / S25Plus",
+    "pn": "",
+    "color": "Black",
+    "srp": 0.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0017",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Case S25 Ultra",
+    "pn": "",
+    "color": "Black",
+    "srp": 0.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0018",
+    "category": "Accessory",
+    "subCategory": "เคส / คีย์บอร์ด",
+    "model": "Case A57 / A37",
+    "pn": "",
+    "color": "Black",
+    "srp": 0.0,
+    "f1": 0,
+    "f2": 0,
+    "total": 0,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0019",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "[CS]UGREEN UNO RG 65W USB A*1 + USB C*2 GaN Fast Charger THAI PLUG - Gray",
+    "pn": "6941876238958",
+    "color": "Gray",
+    "srp": 999.0,
+    "f1": 8,
+    "f2": 2,
+    "total": 10,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0020",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "[CS]UGREEN Wall Charer 30W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+    "pn": "6941876265732",
+    "color": "Gray",
+    "srp": 399.0,
+    "f1": 48,
+    "f2": 9,
+    "total": 57,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0021",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "[CS]UGREEN Wall Charger 45W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+    "pn": "6941876265749",
+    "color": "Gray",
+    "srp": 599.0,
+    "f1": 9,
+    "f2": 10,
+    "total": 19,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0022",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "Samsung Adapter 25W No Cable-Black",
+    "pn": "EP-T2510NBEGTH",
+    "color": "Black",
+    "srp": 690.0,
+    "f1": 52,
+    "f2": 36,
+    "total": 88,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0023",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "Samsung Adapter 25W No Cable-White",
+    "pn": "EP-T2510NWEGTH",
+    "color": "White",
+    "srp": 690.0,
+    "f1": 42,
+    "f2": 31,
+    "total": 73,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0024",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "Samsung Adapter 45W Fastcharge with Cable - Black",
+    "pn": "EP-T4511XBEGTH",
+    "color": "Black",
+    "srp": 1290.0,
+    "f1": 7,
+    "f2": 1,
+    "total": 8,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0025",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "Samsung Adapter 45W Fastcharge with Cable (SIS) - Black",
+    "pn": "SSG-EP-T4511XBEGTH",
+    "color": "Black",
+    "srp": 1290.0,
+    "f1": 43,
+    "f2": 25,
+    "total": 68,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0026",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "Samsung Adapter 45W without cable - Black",
+    "pn": "EP-T4511NBEGTH",
+    "color": "Black",
+    "srp": 1090.0,
+    "f1": 19,
+    "f2": 21,
+    "total": 40,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0027",
+    "category": "Accessory",
+    "subCategory": "หัวชาร์จ / อะแดปเตอร์",
+    "model": "Samsung Adapter 60W without cable - Black",
+    "pn": "EP-T6010NBEGTH",
+    "color": "Black",
+    "srp": 1490.0,
+    "f1": 26,
+    "f2": 9,
+    "total": 35,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0028",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy A07 Black",
+    "pn": "8859703436409",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 10,
+    "f2": 10,
+    "total": 20,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0029",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung A07",
+    "pn": "8859216804023",
+    "color": "Clear",
+    "srp": 299.0,
+    "f1": 7,
+    "f2": 15,
+    "total": 22,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0030",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung A17",
+    "pn": "8859216803910",
+    "color": "Clear",
+    "srp": 299.0,
+    "f1": 17,
+    "f2": 33,
+    "total": 50,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0031",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy A26 5G/A17 5G Black",
+    "pn": "8859703433569",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 4,
+    "f2": 13,
+    "total": 17,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0032",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy A27 5G Black",
+    "pn": "8859703443339",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 12,
+    "f2": 0,
+    "total": 12,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0033",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A37",
+    "pn": "8859216846719",
+    "color": "Clear",
+    "srp": 299.0,
+    "f1": 35,
+    "f2": 18,
+    "total": 53,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0034",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A57",
+    "pn": "8859216846726",
+    "color": "Clear",
+    "srp": 299.0,
+    "f1": 10,
+    "f2": 29,
+    "total": 39,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0035",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy A36 5G/A56 5G Black",
+    "pn": "8859703433828",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 9,
+    "f2": 12,
+    "total": 21,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0036",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy A57 5G Black",
+    "pn": "8859703437345",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 36,
+    "f2": 17,
+    "total": 53,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0037",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "Samsung Galaxy Fold8 Anti-reflecting Film - Transparent",
+    "pn": "EF-UF971CTEGWW",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 1,
+    "f2": 1,
+    "total": 2,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0038",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy S25 FE Black",
+    "pn": "8859703436560",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 19,
+    "f2": 8,
+    "total": 27,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0039",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung S25 FE",
+    "pn": "8859216804030",
+    "color": "Clear",
+    "srp": 299.0,
+    "f1": 11,
+    "f2": 20,
+    "total": 31,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0040",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "Samsung Galaxy S26FE Anti-reflecting Film - Transparency",
+    "pn": "EF-US741CTEGWW",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 2,
+    "f2": 2,
+    "total": 4,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0041",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Ultra Clear",
+    "pn": "8859216623860",
+    "color": "Clear",
+    "srp": 290.0,
+    "f1": 32,
+    "f2": 0,
+    "total": 32,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0042",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Anti Glare Gray",
+    "pn": "8859216623877",
+    "color": "Clear",
+    "srp": 290.0,
+    "f1": 32,
+    "f2": 0,
+    "total": 32,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0043",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL Samsung S25 Black",
+    "pn": "8859703433576",
+    "color": "Black",
+    "srp": 490.0,
+    "f1": 1,
+    "f2": 2,
+    "total": 3,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0044",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL Samsung S25 Ultra Black",
+    "pn": "8859703433590",
+    "color": "Black",
+    "srp": 490.0,
+    "f1": 10,
+    "f2": 16,
+    "total": 26,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0045",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL PV Samsung S25 Ultra Black",
+    "pn": "8859703433606",
+    "color": "Black",
+    "srp": 690.0,
+    "f1": 3,
+    "f2": 5,
+    "total": 8,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0046",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass FC 2.5D Samsung S25Ultra - Black",
+    "pn": "8859216739264",
+    "color": "Black",
+    "srp": 590.0,
+    "f1": 4,
+    "f2": 5,
+    "total": 9,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0047",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "Samsung Galaxy S25Plus Screen Protector - Transparent",
+    "pn": "EF-US936CTEGWW",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 1,
+    "f2": 0,
+    "total": 1,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0048",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL Samsung Galaxy S26",
+    "pn": "8859703437451",
+    "color": "Clear",
+    "srp": 490.0,
+    "f1": 2,
+    "f2": 4,
+    "total": 6,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0049",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL Samsung Galaxy S26 Plus",
+    "pn": "8859703437468",
+    "color": "Clear",
+    "srp": 490.0,
+    "f1": 3,
+    "f2": 10,
+    "total": 13,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0050",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL Samsung Galaxy S26 Ultra",
+    "pn": "8859703437475",
+    "color": "Clear",
+    "srp": 490.0,
+    "f1": 15,
+    "f2": 33,
+    "total": 48,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0051",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL PV Samsung Galaxy S26 Ultra",
+    "pn": "8859703437482",
+    "color": "Clear",
+    "srp": 690.0,
+    "f1": 5,
+    "f2": 10,
+    "total": 15,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0052",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF SL MT Samsung Galaxy S26 Ultra",
+    "pn": "8859703437499",
+    "color": "Clear",
+    "srp": 690.0,
+    "f1": 6,
+    "f2": 5,
+    "total": 11,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0053",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF UG SL Samsung Galaxy S26 Ultra",
+    "pn": "8859703437581",
+    "color": "Clear",
+    "srp": 890.0,
+    "f1": 2,
+    "f2": 8,
+    "total": 10,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0054",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG FF Samsung Galaxy S26 FE Black",
+    "pn": "8859703446620",
+    "color": "Black",
+    "srp": 249.0,
+    "f1": 5,
+    "f2": 4,
+    "total": 9,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0055",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26",
+    "pn": "8859216829019",
+    "color": "Clear",
+    "srp": 490.0,
+    "f1": 2,
+    "f2": 8,
+    "total": 10,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0056",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Plus",
+    "pn": "8859216829026",
+    "color": "Clear",
+    "srp": 490.0,
+    "f1": 5,
+    "f2": 8,
+    "total": 13,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0057",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Ultra",
+    "pn": "8859216829033",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 21,
+    "f2": 20,
+    "total": 41,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0058",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield 2.5D Matte Glass Samsung S26",
+    "pn": "8859216829040",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 5,
+    "f2": 0,
+    "total": 5,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0059",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield 2.5D Matte Glass Samsung S26 Plus",
+    "pn": "8859216829057",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 5,
+    "f2": 0,
+    "total": 5,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0060",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield 2.5D Matte Glass Samsung S26 Ultra",
+    "pn": "8859216829064",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 6,
+    "f2": 5,
+    "total": 11,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0061",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "Samsung Galaxy S26 Anti-reflecting Film - Transparent",
+    "pn": "EF-US942CTEGWW",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 1,
+    "f2": 1,
+    "total": 2,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0062",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "Samsung Galaxy S26Plus Anti-reflecting Film - Transparent",
+    "pn": "EF-US947CTEGWW",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 2,
+    "f2": 1,
+    "total": 3,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0063",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Z Flip 7 5G",
+    "pn": "8859703435532",
+    "color": "Clear",
+    "srp": 390.0,
+    "f1": 7,
+    "f2": 3,
+    "total": 10,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0064",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Z Flip 8",
+    "pn": "8859703443599",
+    "color": "Clear",
+    "srp": 390.0,
+    "f1": 5,
+    "f2": 5,
+    "total": 10,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0065",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Flip8",
+    "pn": "8859216860241",
+    "color": "Clear",
+    "srp": 490.0,
+    "f1": 28,
+    "f2": 0,
+    "total": 28,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0066",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Z Fold 8",
+    "pn": "8859703443612",
+    "color": "Clear",
+    "srp": 390.0,
+    "f1": 3,
+    "f2": 6,
+    "total": 9,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0067",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield TemperedGlass 2.5D Clear Samsung Z Fold8",
+    "pn": "8859216860401",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 7,
+    "f2": 0,
+    "total": 7,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0068",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Z Fold 8 Ultra",
+    "pn": "8859703443605",
+    "color": "Clear",
+    "srp": 390.0,
+    "f1": 3,
+    "f2": 3,
+    "total": 6,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0069",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Fold8 Ultra",
+    "pn": "8859216860326",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 29,
+    "f2": 0,
+    "total": 29,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0070",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Tab A9 8.7",
+    "pn": "8859703426066",
+    "color": "Clear",
+    "srp": 590.0,
+    "f1": 5,
+    "f2": 2,
+    "total": 7,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0071",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Tab A9 Plus 11",
+    "pn": "8859703426073",
+    "color": "Clear",
+    "srp": 690.0,
+    "f1": 6,
+    "f2": 4,
+    "total": 10,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0072",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Tab S10 FE Plus 13.1",
+    "pn": "8859703435204",
+    "color": "Clear",
+    "srp": 990.0,
+    "f1": 6,
+    "f2": 2,
+    "total": 8,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0073",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung Tab S10 Lite",
+    "pn": "8859216804085",
+    "color": "Clear",
+    "srp": 690.0,
+    "f1": 6,
+    "f2": 3,
+    "total": 9,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0074",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Tab S11",
+    "pn": "8859703436669",
+    "color": "Clear",
+    "srp": 690.0,
+    "f1": 10,
+    "f2": 7,
+    "total": 17,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0075",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung Tab S11",
+    "pn": "8859216804108",
+    "color": "Clear",
+    "srp": 690.0,
+    "f1": 4,
+    "f2": 8,
+    "total": 12,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0076",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Tab S11 Ultra",
+    "pn": "8859703436690",
+    "color": "Clear",
+    "srp": 990.0,
+    "f1": 1,
+    "f2": 2,
+    "total": 3,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0077",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Hishield TemperedGlass 0.33mm Tab S11 Ultra",
+    "pn": "8859216804122",
+    "color": "Clear",
+    "srp": 890.0,
+    "f1": 4,
+    "f2": 3,
+    "total": 7,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  },
+  {
+    "id": "ACC-0078",
+    "category": "Accessory",
+    "subCategory": "ฟิล์มกันรอย",
+    "model": "[CS]Focus TG UC Samsung Galaxy Tab S8 Plus 12.4",
+    "pn": "8859703400226",
+    "color": "Clear",
+    "srp": 990.0,
+    "f1": 1,
+    "f2": 4,
+    "total": 5,
+    "productCodeType": "ACCESSORY",
+    "connectivity": ""
+  }
+];
+
+    // State Variables: Merge core devices (212 items) with full accessories catalog (78 items) = 290 total items
+    const coreDevices = (window.STOCK_DATABASE && window.STOCK_DATABASE.length > 0)
+      ? window.STOCK_DATABASE.filter(x => x.category !== "Accessory" && x.category !== "Adapter")
+      : FALLBACK_STOCK.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
+    let rawItems = coreDevices.concat(ALL_ACCESSORIES);
+    let promoVariants = window.PROMOTION_VARIANTS || [];
+    let currentCategory = "ALL";
+    let currentFilter = "all";
+    let searchQuery = "";
+    let currentViewMode = "table";
+
+    // ==========================================================================
+    // CONNECTIVITY & NETWORK TAG RESOLVER (4G, 5G, Wi-Fi, LTE, Bluetooth)
+    // ==========================================================================
+    function resolveConnectivity(item) {
+      if (!item) return "";
+      if (item.connectivity) return item.connectivity;
+      if (item.tag) return item.tag;
+
+      const m = (item.model || "").toUpperCase();
+      const pn = (item.pn || "").toUpperCase();
+      const cat = item.category || "";
+
+      if (cat === "SmartPhone") {
+        // Specific models requested: Galaxy A07 4/64GB - BOM SET, Galaxy A07 4/128GB - BOM SET, Galaxy A07 4/128GB, Galaxy A07 6/128GB -> 4G
+        if (m.includes("A07")) {
+          if (m.includes("5G") || pn.includes("SM-A076")) return "5G";
+          return "4G";
+        }
+        if (m.includes("A17")) {
+          if (m.includes("5G") || pn.includes("SM-A176") || pn.includes("F-A175G")) return "5G";
+          return "4G";
+        }
+        if (m.includes("4G") || m.includes("LTE") || pn.includes("4G")) return "4G";
+        if (m.includes("5G") || pn.includes("5G")) return "5G";
+
+        // Modern Galaxy Flagships / Mid-rangers: S series, Z Flip/Fold, A2x, A3x, A5x are all 5G
+        if (m.includes("S25") || m.includes("S26") || m.includes("Z FLIP") || m.includes("Z FOLD") || 
+            m.includes("A27") || m.includes("A37") || m.includes("A57")) {
+          return "5G";
+        }
+        if (pn.startsWith("SM-S") || pn.startsWith("SM-F") || pn.startsWith("F-NS") || pn.startsWith("F-N")) {
+          return "5G";
+        }
+        // Samsung phone standard digit numbering: SM-Axx5 = 4G, SM-Axx6 / SM-Sxx1/2/7/8 = 5G
+        if (pn.match(/SM-A\d\d5/)) return "4G";
+        if (pn.match(/SM-[ASFX]\d\d[678]/)) return "5G";
+
+        return "4G";
+      }
+
+      if (cat === "Tablet") {
+        if (m.includes("WIFI") || m.includes("WI-FI")) return "Wi-Fi";
+        if (m.includes("5G")) return "5G";
+        if (m.includes("4G") || m.includes("LTE")) return "4G";
+
+        // Samsung Tablet P/N conventions: SM-X...0 (Wi-Fi), SM-X...6 (5G), SM-X...5 (4G/LTE)
+        if (pn.includes("X820") || pn.includes("X730") || pn.includes("X620") || 
+            pn.includes("X520") || pn.includes("X400") || pn.includes("X230")) {
+          return "Wi-Fi";
+        }
+        if (pn.includes("X936") || pn.includes("X826") || pn.includes("X736") || 
+            pn.includes("X626") || pn.includes("X526") || pn.includes("X406") || pn.includes("X236")) {
+          return "5G";
+        }
+        if (pn.includes("X135")) {
+          return "4G";
+        }
+        return "Wi-Fi";
+      }
+
+      if (cat === "Watch") {
+        // All Galaxy Watch Ultra (SM-L705, SM-L715) are LTE cellular by hardware specification!
+        if (m.includes("ULTRA") || pn.includes("L705") || pn.includes("L715")) return "LTE";
+        if (m.includes("LTE") || pn.includes("LTE") || pn.includes("R965") || pn.includes("L505")) return "LTE";
+        // Samsung Watch rule: digit '5' indicates LTE (e.g. SM-Lxxx5, SM-Rxxx5)
+        if (pn.match(/SM-[LR]\d\d5/i)) return "LTE";
+        return "Bluetooth";
+      }
+
+      return "";
+    }
+
+    function getConnBadgeClass(conn) {
+      if (!conn) return "";
+      const c = conn.toLowerCase();
+      if (c.includes("5g")) return "tag-5g";
+      if (c.includes("4g")) return "tag-4g";
+      if (c.includes("wi-fi") || c.includes("wifi")) return "tag-wifi";
+      if (c.includes("lte")) return "tag-lte";
+      if (c.includes("bt") || c.includes("bluetooth")) return "tag-bt";
+      return "";
+    }
+
+    // Helper: Parse specs from model string & item context
+    function parseSpecs(item) {
+      const modelStr = (typeof item === 'string') ? item : (item ? (item.model || "") : "");
+      let ram = "";
+      let storage = "";
+      let net = (typeof item === 'object' && item) ? resolveConnectivity(item) : "";
+
+      const capMatch = modelStr.match(/(\d+)\s*\/\s*(\d+\s*(?:GB|TB))/i);
+      if (capMatch) {
+        ram = capMatch[1] + "GB";
+        storage = capMatch[2].toUpperCase().replace(/\s+/g, "");
+      } else {
+        const singleCap = modelStr.match(/(\d+\s*(?:GB|TB))/i);
+        if (singleCap) storage = singleCap[1].toUpperCase().replace(/\s+/g, "");
+      }
+
+      if (!net) {
+        if (modelStr.match(/\b5G\b/i)) net = "5G";
+        else if (modelStr.match(/\b4G\b/i) || modelStr.match(/\bLTE\b/i)) net = "4G";
+        else if (modelStr.match(/\bWi-?Fi\b/i)) net = "Wi-Fi";
+        else if (modelStr.match(/\bBT\b/i)) net = "Bluetooth";
+      }
+
+      return { ram, storage, net };
+    }
+
+    // Enrich all rawItems with connectivity tag
+    rawItems.forEach(item => {
+      item.connectivity = resolveConnectivity(item);
+    });
+
+    // Promotion Resolver for P/N
+    function resolvePromotion(item) {
+      if (!promoVariants || promoVariants.length === 0) {
+        return { status: "NORMAL", variants: [], badgeText: "ราคาปกติ (RRP)", badgeClass: "promo-status-normal" };
+      }
+
+      // Match by Exact P/N first
+      let matched = promoVariants.filter(v => v.pn && item.pn && v.pn.trim().toUpperCase() === item.pn.trim().toUpperCase());
+      let isModelScope = false;
+
+      // Fallback: match by Model + Capacity
+      if (matched.length === 0 && item.model) {
+        const cleanM = item.model.toLowerCase();
+        matched = promoVariants.filter(v => v.model && cleanM.includes(v.model.toLowerCase()));
+        if (matched.length > 0) isModelScope = true;
+      }
+
+      if (matched.length === 0) {
+        return { status: "NORMAL", isModelScope: false, variants: [], badgeText: "ราคาปกติ (ไม่มีโปร)", badgeClass: "promo-status-normal" };
+      }
+
+      // Check for active vs expired vs review
+      const todayISO = "2026-09-13";
+      const activeVariants = matched.filter(v => v.startDate <= todayISO && todayISO <= v.endDate && v.validationStatus !== "BLOCKED");
+      const reviewVariants = matched.filter(v => v.validationStatus === "WARNING" || v.humanReviewRequired);
+      const expiredVariants = matched.filter(v => v.endDate < todayISO);
+
+      if (activeVariants.length > 0) {
+        return {
+          status: "ACTIVE",
+          isModelScope,
+          variants: activeVariants,
+          badgeText: `มีโปรโมชั่น (${activeVariants.length})`,
+          badgeClass: "promo-status-active"
+        };
+      } else if (reviewVariants.length > 0) {
+        return {
+          status: "REVIEW",
+          isModelScope,
+          variants: reviewVariants,
+          badgeText: "ต้องตรวจสอบโปรโมชั่น",
+          badgeClass: "promo-status-review"
+        };
+      } else if (expiredVariants.length > 0) {
+        return {
+          status: "EXPIRED",
+          isModelScope,
+          variants: expiredVariants,
+          badgeText: "โปรโมชั่นหมดอายุ",
+          badgeClass: "promo-status-expired"
+        };
+      }
+
+      return { status: "NORMAL", isModelScope, variants: matched, badgeText: "ราคาปกติ", badgeClass: "promo-status-normal" };
+    }
+
+    // ==========================================================================
+    // RENDER FUNCTIONS
+    // ==========================================================================
+
+    function updateCategoryCardCounts() {
+      const counts = {
+        ALL: { models: 0, stock: 0 },
+        SmartPhone: { models: 0, stock: 0 },
+        Tablet: { models: 0, stock: 0 },
+        Watch: { models: 0, stock: 0 },
+        Buds: { models: 0, stock: 0 },
+        Accessory: { models: 0, stock: 0 }
+      };
+
+      rawItems.forEach(item => {
+        const cat = item.category || "SmartPhone";
+        const f1 = Number(item.f1 !== undefined ? item.f1 : (item.stock_f1 !== undefined ? item.stock_f1 : 0));
+        
+        counts.ALL.models++;
+        counts.ALL.stock += f1;
+
+        if (counts[cat]) {
+          counts[cat].models++;
+          counts[cat].stock += f1;
+        } else if (cat === "Adapter") {
+          counts.Accessory.models++;
+          counts.Accessory.stock += f1;
+        }
+      });
+
+      document.getElementById("countCatAllModels").textContent = `${counts.ALL.models} รุ่น`;
+      document.getElementById("countCatAllStock").textContent = counts.ALL.stock.toLocaleString('th-TH');
+
+      document.getElementById("countCatPhoneModels").textContent = `${counts.SmartPhone.models} รุ่น`;
+      document.getElementById("countCatPhoneStock").textContent = counts.SmartPhone.stock.toLocaleString('th-TH');
+
+      document.getElementById("countCatTabModels").textContent = `${counts.Tablet.models} รุ่น`;
+      document.getElementById("countCatTabStock").textContent = counts.Tablet.stock.toLocaleString('th-TH');
+
+      document.getElementById("countCatWatchModels").textContent = `${counts.Watch.models} รุ่น`;
+      document.getElementById("countCatWatchStock").textContent = counts.Watch.stock.toLocaleString('th-TH');
+
+      document.getElementById("countCatBudsModels").textContent = `${counts.Buds.models} รุ่น`;
+      document.getElementById("countCatBudsStock").textContent = counts.Buds.stock.toLocaleString('th-TH');
+
+      document.getElementById("countCatAccModels").textContent = `${counts.Accessory.models} รายการ`;
+      document.getElementById("countCatAccStock").textContent = counts.Accessory.stock.toLocaleString('th-TH');
+    }
+
+    function filterItems() {
+      return rawItems.filter(item => {
+        // 1. Category Filter
+        if (currentCategory !== "ALL") {
+          if (currentCategory === "Accessory") {
+            if (item.category !== "Accessory" && item.category !== "Adapter") return false;
+          } else if (item.category !== currentCategory) {
+            return false;
+          }
+        }
+
+        // 2. Chip Filters
+        const f1 = Number(item.f1 || 0);
+        const f2 = Number(item.f2 || 0);
+        const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
+        const isPassF = item.productCodeType === "PASS_F" || (item.model && item.model.includes("พาส F")) || (item.pn && item.pn.startsWith("F-"));
+
+        if (currentFilter === "tag-5g" && item.connectivity !== "5G") return false;
+        if (currentFilter === "tag-4g" && item.connectivity !== "4G") return false;
+        if (currentFilter === "tag-lte" && item.connectivity !== "LTE") return false;
+        if (currentFilter === "tag-bt" && item.connectivity !== "Bluetooth") return false;
+        if (currentFilter === "tag-wifi" && item.connectivity !== "Wi-Fi") return false;
+        if (currentFilter === "sub-film" && (!item.subCategory || !item.subCategory.includes("ฟิล์ม"))) return false;
+        if (currentFilter === "sub-charger" && (!item.subCategory || !item.subCategory.includes("หัวชาร์จ"))) return false;
+        if (currentFilter === "sub-case" && (!item.subCategory || !item.subCategory.includes("เคส"))) return false;
+        if (currentFilter === "sub-tag" && (!item.subCategory || !item.subCategory.includes("สมาร์ทแท็ก"))) return false;
+        if (currentFilter === "instock" && total <= 0) return false;
+        if (currentFilter === "f1" && f1 <= 0) return false;
+        if (currentFilter === "f2" && f2 <= 0) return false;
+        if (currentFilter === "passf" && !isPassF) return false;
+
+        const promo = resolvePromotion(item);
+        if (currentFilter === "haspromo" && promo.status !== "ACTIVE" && promo.status !== "REVIEW") return false;
+
+        // 3. Multi-field Smart Search
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const m = (item.model || "").toLowerCase();
+          const p = (item.pn || "").toLowerCase();
+          const c = (item.color || "").toLowerCase();
+          const cat = (item.category || "").toLowerCase();
+          const conn = (item.connectivity || "").toLowerCase();
+          const sub = (item.subCategory || "").toLowerCase();
+
+          const matchAllWords = q.split(" ").every(word => {
+            if (!word) return true;
+            return m.includes(word) || p.includes(word) || c.includes(word) || cat.includes(word) || conn.includes(word) || sub.includes(word);
+          });
+          if (!matchAllWords) return false;
+        }
+
+        return true;
+      });
+    }
+
+    function renderStockList() {
+      const items = filterItems();
+      document.getElementById("visibleCountDisplay").textContent = items.length;
+      document.getElementById("totalCountDisplay").textContent = rawItems.length;
+
+      const tbody = document.getElementById("stockTableBody");
+      const cardContainer = document.getElementById("cardViewContainer");
+      tbody.innerHTML = "";
+      cardContainer.innerHTML = "";
+
+      if (items.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--text-muted);">🔍 ไม่พบรายการสินค้าตามเงื่อนไขที่ค้นหา</td></tr>`;
+        cardContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">🔍 ไม่พบรายการสินค้าตามเงื่อนไขที่ค้นหา</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const specs = parseSpecs(item);
+        const colorName = item.color || "ไม่ระบุสี";
+        const colorHex = getColorHex(colorName);
+        const f1 = Number(item.f1 || 0);
+        const f2 = Number(item.f2 || 0);
+        const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
+        const promo = resolvePromotion(item);
+        const pnText = item.pn || "ไม่มีรหัส P/N";
+
+        // Table Row
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>
+            <div class="product-identity-group">
+              <div class="product-title-row">
+                <span class="product-model-name">${item.model || "-"}</span>
+                ${pnText !== "ไม่มีรหัส P/N" ? `<span class="badge-pn-pill">${pnText}</span>` : ''}
+              </div>
+              <div class="product-spec-row">
+                ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
+                ${specs.ram || specs.storage ? `<span class="badge-spec-pill">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</span>` : ''}
+                ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
+                ${item.srp ? `<span style="color: var(--text-muted);">RRP: ฿${Number(item.srp).toLocaleString('th-TH')}</span>` : ''}
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="color-display-cell">
+              <span class="color-swatch-dot" style="background-color: ${colorHex};"></span>
+              <span class="color-name-text">${colorName}</span>
+            </div>
+          </td>
+          <td>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">${item.category || "-"}</span>
+          </td>
+          <td style="text-align: center;">
+            <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}">${f1}</span>
+          </td>
+          <td style="text-align: center;">
+            <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}">${f2}</span>
+          </td>
+          <td style="text-align: center;">
+            <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}">${total}</strong>
+          </td>
+          <td>
+            <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
+          </td>
+          <td style="text-align: right;">
+            <div class="action-button-group">
+              <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้าอย่างละเอียด">
+                <span>📋 สเปก</span>
+              </button>
+              <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูโปรโมชั่นและราคา">
+                <span>✨ ดูโปรโมชั่น</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        // Card Item (Responsive View)
+        const card = document.createElement("div");
+        card.className = "product-card-item";
+        card.innerHTML = `
+          <div>
+            <div class="card-top-row">
+              <div>
+                <strong style="font-size: 1rem; color: #fff;">${item.model || "-"}</strong>
+                <div class="card-meta-row">
+                  <span class="badge-pn-pill">${pnText}</span>
+                  ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
+                  ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
+                  <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
+                </div>
+                ${specs.ram || specs.storage ? `<div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</div>` : ''}
+              </div>
+              <div class="color-display-cell" style="flex-direction: column; align-items: flex-end;">
+                <span class="color-swatch-dot" style="background-color: ${colorHex}; width: 20px; height: 20px;"></span>
+                <span style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 2px;">${colorName}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-stock-row">
+            <div class="card-stock-col">
+              <div class="card-stock-label">ช1 ร้านเรา</div>
+              <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f1}</span>
+            </div>
+            <div class="card-stock-col">
+              <div class="card-stock-label">ช2 สาขา</div>
+              <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f2}</span>
+            </div>
+            <div class="card-stock-col">
+              <div class="card-stock-label">รวมทั้งหมด</div>
+              <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${total}</strong>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; pt-2; gap: 8px;">
+            <div style="font-size: 0.82rem; color: var(--text-muted);">
+              ราคาปกติ: <strong style="color: #cbd5e1;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
+            </div>
+            <div class="action-button-group">
+              <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้า">
+                <span>📋 สเปก</span>
+              </button>
+              <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')">
+                <span>✨ โปรโมชั่น</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+        cardContainer.appendChild(card);
+      });
+    }
+
+    // ==========================================================================
+    // PROMOTION & SPECIFICATIONS SIDE PANEL (DUAL-TAB DRAWER) CONTROLLER
+    // ==========================================================================
+
+    let currentDrawerItem = null;
+    let currentDrawerTab = "PROMO"; // "PROMO" or "SPECS"
+
+    function openPromoDrawer(targetPn, encodedModel) {
+      currentDrawerTab = "PROMO";
+      openDualTabDrawer(targetPn, encodedModel);
+    }
+
+    function openProductSpecsDrawer(targetPn, encodedModel) {
+      currentDrawerTab = "SPECS";
+      openDualTabDrawer(targetPn, encodedModel);
+    }
+
+    function switchDrawerMainTab(tabName) {
+      currentDrawerTab = tabName;
+      const tabBtnPromo = document.getElementById("tabBtnPromo");
+      const tabBtnSpecs = document.getElementById("tabBtnSpecs");
+      
+      if (tabName === "PROMO") {
+        if (tabBtnPromo) tabBtnPromo.classList.add("active");
+        if (tabBtnSpecs) tabBtnSpecs.classList.remove("active");
+      } else {
+        if (tabBtnPromo) tabBtnPromo.classList.remove("active");
+        if (tabBtnSpecs) tabBtnSpecs.classList.add("active");
+      }
+
+      renderCurrentDrawerBody();
+    }
+
+    function openDualTabDrawer(targetPn, encodedModel) {
+      const modelTitle = decodeURIComponent(encodedModel);
+      currentDrawerItem = rawItems.find(x => (x.pn && targetPn && x.pn === targetPn) || (x.model === modelTitle));
+      if (!currentDrawerItem) {
+        currentDrawerItem = { pn: targetPn, model: modelTitle, srp: 0, color: "", f1: 0, f2: 0, total: 0 };
+      }
+
+      const item = currentDrawerItem;
+      const drawerTitle = document.getElementById("drawerProductTitle");
+      const drawerPn = document.getElementById("drawerProductPn");
+
+      const conn = item.connectivity || resolveConnectivity(item);
+      drawerTitle.textContent = item.model || modelTitle;
+      drawerPn.innerHTML = `${item.pn ? `Exact P/N: ${item.pn}` : "รหัส: ไม่ระบุ P/N เฉพาะเจาะจง"} ${conn ? `<span class="badge-tag-conn ${getConnBadgeClass(conn)}" style="margin-left: 8px;">${conn}</span>` : ''}`;
+
+      switchDrawerMainTab(currentDrawerTab);
+      document.getElementById("promoDrawerBackdrop").classList.add("open");
+    }
+
+    function renderCurrentDrawerBody() {
+      const drawerBody = document.getElementById("drawerBody");
+      const item = currentDrawerItem;
+      if (!item || !drawerBody) return;
+
+      let f1 = Number(item.f1 || 0);
+      let f2 = Number(item.f2 || 0);
+      let total = Number(item.total || 0);
+      let srp = Number(item.srp || 0);
+
+      // Summary Strip always on top
+      const commonHeader = `
+        <div class="drawer-summary-strip">
+          <div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">สีของเครื่อง</div>
+            <div class="color-display-cell" style="margin-top: 4px;">
+              <span class="color-swatch-dot" style="background-color: ${getColorHex(item.color)};"></span>
+              <strong>${item.color || 'ไม่ระบุ'}</strong>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">สถานะสต็อก</div>
+            <div style="margin-top: 4px; font-size: 0.88rem;">
+              ช1: <strong class="${f1 === 0 ? 'text-coral' : 'text-cyan'}">${f1}</strong> • 
+              ช2: <strong class="${f2 === 0 ? 'text-coral' : 'text-amber'}">${f2}</strong> • 
+              รวม: <strong class="text-emerald">${total}</strong>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (currentDrawerTab === "SPECS") {
+        drawerBody.innerHTML = commonHeader + renderDrawerSpecDetails(item);
+      } else {
+        // PROMO TAB
+        const promo = resolvePromotion(item);
+        let promoHtml = commonHeader;
+
+        if (promo.isModelScope) {
+          promoHtml += `
+            <div class="model-scope-notice">
+              <span style="font-size: 1.2rem;">⚠️</span>
+              <div>
+                <strong>โปรโมชั่นระดับรุ่น (Model Scope)</strong>
+                <div>ไฟล์โปรโมชั่นไม่มี Exact P/N กรุณาตรวจสอบสีและความจุก่อนขาย</div>
+              </div>
+            </div>
+          `;
+        }
+
+        if (!promo.variants || promo.variants.length === 0) {
+          promoHtml += `
+            <div class="empty-promo-state">
+              <div class="empty-promo-icon">🏷️</div>
+              <h4 class="empty-promo-title">ยังไม่มีโปรโมชั่นที่ผ่านการตรวจสอบ</h4>
+              <p class="empty-promo-desc">
+                ระบบตรวจสอบความเสี่ยง 95/5 Risk Guard ไม่พบโปรโมชั่นที่ผ่านเกณฑ์หรือแคมเปญอาจสิ้นสุดลงแล้ว สามารถจำหน่ายได้ในราคาปกติ
+              </p>
+              <div class="promo-price-card" style="border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                <div class="price-row-item">
+                  <span style="color: var(--text-muted);">ราคามาตรฐาน (RRP)</span>
+                  <strong style="font-size: 1.2rem; color: #fff;">฿${srp.toLocaleString('th-TH')}</strong>
+                </div>
+                <div class="price-row-item net">
+                  <span>ราคาสุทธิ (Net Price)</span>
+                  <span class="net-price-display" style="color: #38bdf8;">฿${srp.toLocaleString('th-TH')}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          const modes = [
+            { key: "NORMAL", label: "ซื้อปกติ" },
+            { key: "SF_PLUS", label: "Samsung Finance+" },
+            { key: "STUDENT", label: "โปร นศ." },
+            { key: "TRADE_UP", label: "Trade Up" },
+            { key: "BUNDLE", label: "ซื้อพ่วง" }
+          ];
+
+          promoHtml += `
+            <div class="sale-mode-tabs" id="drawerTabs">
+              ${modes.map((m, idx) => `
+                <button class="sale-mode-tab ${idx === 0 ? 'active' : ''}" onclick="switchDrawerMode('${m.key}', this)">
+                  ${m.label}
+                </button>
+              `).join("")}
+            </div>
+            <div id="drawerModeContent">
+              ${renderDrawerModeDetails(promo.variants, "NORMAL", srp)}
+            </div>
+          `;
+        }
+        drawerBody.innerHTML = promoHtml;
+      }
+    }
+
+    // Spec Details Renderer with Official Thai Sources
+    function renderDrawerSpecDetails(item) {
+      if (!window.resolveProductSpecs) {
+        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่พบฐานข้อมูลสเปกสินค้าในระบบ</div>`;
+      }
+      const spec = window.resolveProductSpecs(item);
+      if (!spec) {
+        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่มีข้อมูลสเปกสำหรับสินค้านี้</div>`;
+      }
+
+      let html = `
+        <div class="spec-card-container">
+          <div class="spec-source-box">
+            <span style="font-size: 1.4rem;">🛡️</span>
+            <div>
+              <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</div>
+              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 3px;">
+                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Samsung Thailand Official (samsung.com/th)'}</strong>
+              </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 1px;">
+                มาตรฐานโมเดล: <strong>${spec.marketRegion || 'เครื่องศูนย์ไทย (THL)'}</strong>
+              </div>
+            </div>
+          </div>
+      `;
+
+      function renderSpecGroup(icon, title, fields) {
+        const validRows = Object.entries(fields).filter(([k, v]) => v !== undefined && v !== null && v !== "");
+        if (validRows.length === 0) return "";
+        return `
+          <div class="spec-group-box">
+            <div class="spec-group-title">
+              <span>${icon}</span>
+              <span>${title}</span>
+            </div>
+            ${validRows.map(([label, val]) => `
+              <div class="spec-item-row">
+                <span class="spec-label">${label}</span>
+                <span class="spec-val">${val}</span>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      // 1. Display
+      if (spec.display) {
+        html += renderSpecGroup("📱", "หน้าจอแสดงผล (Display)", {
+          "ขนาดหน้าจอ": spec.display.screenSize,
+          "ชนิดหน้าจอ": spec.display.panelType,
+          "ความละเอียด": spec.display.resolution,
+          "อัตรารีเฟรช": spec.display.refreshRate,
+          "ความสว่างสูงสุด": spec.display.peakBrightness,
+          "กระจกกันรอย": spec.display.glassProtection
+        });
+      }
+
+      // 2. Performance & AI
+      if (spec.performance) {
+        html += renderSpecGroup("⚡", "ประสิทธิภาพ & Galaxy AI (Performance)", {
+          "ชิปเซ็ตประมวลผล": spec.performance.processor,
+          "แกนประมวลผล (CPU)": spec.performance.cpuCores,
+          "ชิปกราฟิก (GPU)": spec.performance.gpu,
+          "ระบบปัญญาประดิษฐ์": spec.performance.aiEngine
+        });
+      }
+
+      // 3. Memory & Storage
+      if (spec.memory) {
+        html += renderSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", {
+          "หน่วยความจำ (RAM)": spec.memory.ram,
+          "พื้นที่จัดเก็บ (ROM)": spec.memory.storage,
+          "ช่องใส่ MicroSD": spec.memory.expandableStorage
+        });
+      }
+
+      // 4. Camera
+      if (spec.camera) {
+        html += renderSpecGroup("📷", "กล้องถ่ายภาพ (Camera System)", {
+          "กล้องหลัง (Rear)": spec.camera.rearCamera,
+          "กล้องหน้า (Selfie)": spec.camera.frontCamera,
+          "ความละเอียดวิดีโอ": spec.camera.videoRecording
+        });
+      }
+
+      // 5. Battery & Power
+      if (spec.battery) {
+        html += renderSpecGroup("🔋", "แบตเตอรี่ & ระบบชาร์จ (Battery & Charging)", {
+          "ความจุแบตเตอรี่": spec.battery.capacity,
+          "การชาร์จไวมีสาย": spec.battery.chargingSpeed,
+          "การชาร์จไร้สาย": spec.battery.wirelessCharging,
+          "แชร์พลังงานไร้สาย": spec.battery.reverseCharging
+        });
+      }
+
+      // 5.1 Battery Usage Hours & Endurance (ระยะเวลาการใช้งานแบตเตอรี่อย่างละเอียด พร้อมแหล่งอ้างอิงทางการ)
+      const bh = spec.batteryHours || (spec.battery && spec.battery.usageHours);
+      if (bh) {
+        html += `
+          <div class="spec-group-box" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+            <div class="spec-group-title" style="color: #34d399;">
+              <span>⏱️</span>
+              <span>ระยะเวลาการใช้งานแบตเตอรี่ (Battery Usage Hours)</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 12px;">
+              ${bh.videoPlayback ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #34d399;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🎬 ดูวิดีโอต่อเนื่อง</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.videoPlayback}</strong>
+                </div>
+              ` : ''}
+              ${bh.audioPlayback ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #38bdf8;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🎵 ฟังเพลงต่อเนื่อง</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.audioPlayback}</strong>
+                </div>
+              ` : ''}
+              ${bh.internetUsage ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #818cf8;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🌐 เล่นอินเทอร์เน็ต (LTE/Wi-Fi)</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.internetUsage}</strong>
+                </div>
+              ` : ''}
+              ${bh.talkTime ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #f59e0b;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">📞 สนทนาต่อเนื่อง (4G LTE)</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.talkTime}</strong>
+                </div>
+              ` : ''}
+              ${bh.typicalUsage ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #34d399;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🕒 การใช้งานทั่วไป (Typical)</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.typicalUsage}</strong>
+                </div>
+              ` : ''}
+              ${bh.powerSavingMode ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #10b981;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🛡️ โหมดประหยัดพลังงาน</div>
+                  <strong style="color: #34d399; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.powerSavingMode}</strong>
+                </div>
+              ` : ''}
+              ${bh.exercisePowerSaving ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🏃 โหมดออกกำลังกาย GPS</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.exercisePowerSaving}</strong>
+                </div>
+              ` : ''}
+              ${bh.earbudsMusicANC ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #a855f7;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🎧 ฟังเพลง (ANC เปิด/ปิด)</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.earbudsMusicANC}</strong>
+                </div>
+              ` : ''}
+              ${bh.totalMusicWithCase ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #ec4899;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🔋 รวมตลับชาร์จสูงสุด</div>
+                  <strong style="color: #fff; font-size: 0.92rem; margin-top: 2px; display: block;">${bh.totalMusicWithCase}</strong>
+                </div>
+              ` : ''}
+            </div>
+
+            <div style="padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; font-size: 0.78rem; line-height: 1.5; color: var(--text-secondary);">
+              ${bh.chargingNote ? `<div>⚡ <strong>การชาร์จไว:</strong> ${bh.chargingNote}</div>` : ''}
+              ${bh.testCondition ? `<div style="margin-top: 4px; color: var(--text-muted);">🔬 <strong>เงื่อนไขการทดสอบอ้างอิง:</strong> ${bh.testCondition}</div>` : ''}
+              <div style="margin-top: 4px; color: #34d399;">✓ ข้อมูลการใช้งานอ้างอิงตามผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)</div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 6. Connectivity & Build
+      if (spec.connectivityAndBuild) {
+        html += renderSpecGroup("📶", "การเชื่อมต่อ & ตัวเครื่อง (Connectivity & Build)", {
+          "เครือข่ายสัญญาณ": spec.connectivityAndBuild.network,
+          "ช่องใส่ซิม (SIM)": spec.connectivityAndBuild.simType,
+          "Wi-Fi": spec.connectivityAndBuild.wifi,
+          "Bluetooth": spec.connectivityAndBuild.bluetooth,
+          "มาตรฐานกันน้ำกันฝุ่น": spec.connectivityAndBuild.waterResistance,
+          "รองรับปากกา S Pen": spec.connectivityAndBuild.spenSupport,
+          "วัสดุตัวเครื่อง": spec.connectivityAndBuild.frameMaterial,
+          "ขนาดตัวเครื่อง": spec.connectivityAndBuild.dimensions,
+          "น้ำหนัก": spec.connectivityAndBuild.weight
+        });
+      }
+
+      // 7. Audio (Buds)
+      if (spec.audioSpecs) {
+        html += renderSpecGroup("🎧", "ระบบเสียง & ไมโครโฟน (Audio & Sound)", {
+          "ระบบลำโพง": spec.audioSpecs.driver,
+          "ระบบตัดเสียงรบกวน (ANC)": spec.audioSpecs.anc,
+          "ระบบไมโครโฟน": spec.audioSpecs.microphones,
+          "คุณภาพเสียง": spec.audioSpecs.hiResAudio,
+          "อายุการใช้งานแบตเตอรี่": spec.audioSpecs.batteryLife,
+          "มาตรฐานกันน้ำ": spec.audioSpecs.waterResistance
+        });
+      }
+
+      // 8. Sensors (Watch)
+      if (spec.sensorSpecs) {
+        html += renderSpecGroup("🩺", "เซนเซอร์และสุขภาพ (Health & Sensors)", {
+          "เซนเซอร์สุขภาพ": spec.sensorSpecs.sensors,
+          "ระบบระบุตำแหน่ง GPS": spec.sensorSpecs.gps,
+          "ความทนทานทางทหาร": spec.sensorSpecs.militaryStd
+        });
+      }
+
+      // 9. Chargers / Adapters (ข้อมูลหัวชาร์จ & การจ่ายไฟละเอียด)
+      if (spec.powerSpecs) {
+        html += `
+          <div class="spec-group-box" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05);">
+            <div class="spec-group-title" style="color: #fbbf24;">
+              <span>🔌</span>
+              <span>ระบบจ่ายไฟ & กำลังวัตต์สูงสุด (Power Output Specs)</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.08);">
+              <div>
+                <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">กำลังไฟจ่ายสูงสุด</div>
+                <strong style="font-size: 1.35rem; color: #fbbf24; font-family: var(--font-display);">${spec.powerSpecs.maxOutput || 'ตามมาตรฐาน'}</strong>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">พอร์ตเชื่อมต่อ</div>
+                <strong style="color: #fff; font-size: 0.95rem;">${spec.powerSpecs.ports || '1 พอร์ต USB-C'}</strong>
+              </div>
+            </div>
+
+            ${spec.powerSpecs.smartDisplay ? `
+              <div style="margin-bottom: 12px; padding: 10px 14px; background: rgba(0, 240, 255, 0.1); border-radius: 8px; border: 1px solid rgba(0, 240, 255, 0.3); font-size: 0.84rem; color: var(--cyan); display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.2rem;">🤖</span>
+                <div><strong>หน้าจอแสดงผลอัจฉริยะ (TFT LED):</strong> ${spec.powerSpecs.smartDisplay}</div>
+              </div>
+            ` : ''}
+
+            <div style="padding: 12px; background: rgba(255,255,255,0.02); border-radius: 10px; font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+              <div>⚡ <strong>โปรโตคอลชาร์จไว:</strong> <span style="color: #fff;">${spec.powerSpecs.protocols || '-'}</span></div>
+              ${spec.powerSpecs.powerOutputMatrix ? `<div>📊 <strong>แรงดันและกระแสไฟ:</strong> <span style="color: #cbd5e1;">${spec.powerSpecs.powerOutputMatrix}</span></div>` : ''}
+              ${spec.powerSpecs.multiPortDistribution ? `
+                <div style="padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.08); white-space: pre-line;">
+                  <strong>การจ่ายไฟหลายพอร์ต (Power Matrix):</strong>\n<span style="color: #e2e8f0;">${spec.powerSpecs.multiPortDistribution}</span>
+                </div>
+              ` : ''}
+              <div style="padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.08); white-space: pre-line;">
+                📱 <strong>อุปกรณ์ที่รองรับการชาร์จ:</strong>\n<span style="color: #38bdf8;">${spec.powerSpecs.compatibility || '-'}</span>
+              </div>
+              <div>🔌 <strong>มาตรฐานขาปลั๊ก:</strong> <span style="color: #fff;">${spec.powerSpecs.plugType || 'ขาปลั๊กมาตรฐานประเทศไทย มอก.'}</span></div>
+              ${spec.powerSpecs.safetyFeatures ? `<div>🛡️ <strong>ระบบความปลอดภัย:</strong> <span>${spec.powerSpecs.safetyFeatures}</span></div>` : ''}
+              ${spec.powerSpecs.boxContents ? `<div>📦 <strong>อุปกรณ์ในกล่อง:</strong> <span style="color: #e2e8f0;">${spec.powerSpecs.boxContents}</span></div>` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      // 10. Cases & Keyboards (รุ่นที่รองรับ & ระบบชาร์จแบตเตอรี่)
+      if (spec.caseSpecs) {
+        const isNoBattery = (spec.caseSpecs.batteryStatus || "").includes("ไม่ต้องชาร์จ") || (spec.caseSpecs.batteryAndCharging || "").includes("ไม่ต้องชาร์จ") || (spec.caseSpecs.batteryStatus || "").includes("ไม่มีแบตเตอรี่");
+        const batteryBadgeColor = isNoBattery ? "rgba(16, 185, 129, 0.12)" : "rgba(245, 158, 11, 0.15)";
+        const batteryBorderColor = isNoBattery ? "rgba(16, 185, 129, 0.35)" : "rgba(245, 158, 11, 0.45)";
+        const batteryTextColor = isNoBattery ? "#34d399" : "#fbbf24";
+        const batteryIcon = isNoBattery ? "⚡" : "🔋";
+
+        html += `
+          <div class="spec-group-box" style="border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.04);">
+            <div class="spec-group-title" style="color: #38bdf8;">
+              <span>📱</span>
+              <span>รุ่นที่รองรับ (Compatibility) & สถานะแบตเตอรี่</span>
+            </div>
+            
+            <!-- Compatibility Callout Box -->
+            <div style="margin-bottom: 12px; padding: 12px 14px; background: rgba(15, 23, 42, 0.8); border-radius: 10px; border-left: 4px solid #38bdf8;">
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">
+                ใส่กับรุ่นไหนได้บ้าง (Compatibility):
+              </div>
+              <div style="font-size: 0.92rem; color: #fff; font-weight: 600; margin-top: 4px; line-height: 1.5;">
+                ${spec.caseSpecs.compatibleModels || 'ตรงรุ่นสำหรับโมเดลที่ระบุ'}
+              </div>
+            </div>
+
+            <!-- Battery & Charging Status Callout Box -->
+            <div style="padding: 12px 14px; background: ${batteryBadgeColor}; border-radius: 10px; border: 1px solid ${batteryBorderColor};">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.3rem;">${batteryIcon}</span>
+                <strong style="color: ${batteryTextColor}; font-size: 0.95rem;">
+                  ${spec.caseSpecs.batteryStatus || (isNoBattery ? 'ไม่ต้องชาร์จแบตเตอรี่' : 'ต้องชาร์จแบตเตอรี่')}
+                </strong>
+              </div>
+              <div style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 6px; line-height: 1.5;">
+                ${spec.caseSpecs.batteryAndCharging || 'ไม่มีแบตเตอรี่ในตัวเคส ไม่ต้องชาร์จไฟ'}
+              </div>
+            </div>
+          </div>
+        `;
+
+        html += renderSpecGroup("📱", "รายละเอียดตัวเคส & ฟังก์ชันการใช้งาน", {
+          "ลักษณะตัวเคส": spec.caseSpecs.formFactor,
+          "รูปแบบการเชื่อมต่อ": spec.caseSpecs.connection,
+          "ปุ่มลัด & แป้นพิมพ์": spec.caseSpecs.keyLayout,
+          "การปรับระดับองศา": spec.caseSpecs.standAngles,
+          "ช่องเก็บปากกา S Pen": spec.caseSpecs.spenHolder,
+          "การรองรับ S Pen มือถือ": spec.caseSpecs.spenCompatibility,
+          "การป้องกันตัวเครื่อง": spec.caseSpecs.protection,
+          "ฟีเจอร์พิเศษ": spec.caseSpecs.specialFeatures,
+          "วัสดุที่ใช้ผลิต": spec.caseSpecs.material
+        });
+      }
+
+      // 11. Films & Screen Protectors
+      if (spec.filmSpecs) {
+        html += `
+          <div class="spec-group-box" style="border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.04);">
+            <div class="spec-group-title" style="color: #c084fc;">
+              <span>🛡️</span>
+              <span>รุ่นอุปกรณ์ที่รองรับ & คุณสมบัติฟิล์ม</span>
+            </div>
+            <div style="margin-bottom: 12px; padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border-radius: 8px; border-left: 3px solid #c084fc;">
+              <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">อุปกรณ์ที่รองรับ:</div>
+              <div style="font-size: 0.92rem; color: #fff; font-weight: 600; margin-top: 3px;">
+                ${spec.filmSpecs.compatibleDevice || 'ตัดตรงรุ่นสำหรับอุปกรณ์ที่ระบุ'}
+              </div>
+            </div>
+          </div>
+        `;
+
+        html += renderSpecGroup("🛡️", "สเปกฟิล์มกันรอย & การปกป้องหน้าจอ", {
+          "ประเภทฟิล์ม/กระจก": spec.filmSpecs.glassType,
+          "วัสดุและความแข็งแกร่ง": spec.filmSpecs.material,
+          "คุณสมบัติเด่น": spec.filmSpecs.features,
+          "สารเคลือบผิวหน้าจอ": spec.filmSpecs.coating,
+          "การสแกนลายนิ้วมือ": spec.filmSpecs.fingerprintSupport,
+          "ความคมชัดและการแสดงผล": spec.filmSpecs.clarity,
+          "การตัดขอบกระจก": spec.filmSpecs.edgeDesign,
+          "การรับประกันฟิล์ม": spec.filmSpecs.warranty
+        });
+      }
+
+      // 12. SmartTag
+      if (spec.tagSpecs) {
+        html += renderSpecGroup("🏷️", "สเปกสมาร์ทแท็ก (SmartTag2 Specs)", {
+          "เทคโนโลยีค้นหา": spec.tagSpecs.connectivity,
+          "ระยะการค้นหา": spec.tagSpecs.findingRange,
+          "ฟังก์ชัน Compass View": spec.tagSpecs.compassView,
+          "อายุการใช้งานแบตเตอรี่": spec.tagSpecs.battery,
+          "มาตรฐานกันน้ำกันฝุ่น": spec.tagSpecs.waterResistance,
+          "ลำโพงส่งเสียง": spec.tagSpecs.speaker,
+          "โหมดสูญหาย NFC": spec.tagSpecs.lostMode
+        });
+      }
+
+      // Thai Warranty & Service Centers
+      html += `
+        <div class="spec-group-box" style="border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.05);">
+          <div class="spec-group-title" style="color: var(--emerald);">
+            <span>🇹🇭</span>
+            <span>การรับประกันและมาตรฐานศูนย์ไทย</span>
+          </div>
+          <div style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6;">
+            <div>✓ <strong>การรับประกัน:</strong> ${spec.category === 'Accessory' ? (spec.powerSpecs && spec.powerSpecs.warranty ? spec.powerSpecs.warranty : 'รับประกันศูนย์ไทย 6 เดือน - 1 ปี') : 'รับประกันศูนย์ไทย 1 ปีเต็ม จากศูนย์บริการทางการ'}</div>
+            <div>✓ <strong>บริการหลังการขาย:</strong> รองรับบริการที่ศูนย์บริการซัมซุง (Samsung Service Center) ทั่วประเทศไทย หรือศูนย์บริการตัวแทนจำหน่ายทางการ</div>
+            <div>✓ <strong>เครื่องแท้ 100%:</strong> สินค้าที่จัดจำหน่ายในสาขาเป็นโมเดลจำหน่ายในประเทศไทย ผ่านการรับรอง กสทช. ถูกต้องตามกฎหมาย</div>
+          </div>
+        </div>
+      </div>
+      `;
+
+      return html;
+    }
+
+    function renderDrawerModeDetails(variants, selectedMode, srp) {
+      const match = variants.find(v => v.saleMode === selectedMode);
+      
+      if (!match && selectedMode === "NORMAL") {
+        return `
+          <div class="promo-price-card">
+            <div class="price-row-item">
+              <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
+              <strong>฿${srp.toLocaleString('th-TH')}</strong>
+            </div>
+            <div class="price-row-item">
+              <span style="color: var(--text-muted);">ส่วนลดแคมเปญ</span>
+              <span style="color: var(--text-muted);">-฿0</span>
+            </div>
+            <div class="price-row-item net">
+              <span>ราคาชำระสุทธิ</span>
+              <span class="net-price-display">฿${srp.toLocaleString('th-TH')}</span>
+            </div>
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+            <div>💳 <strong>เงื่อนไขการชำระ:</strong> เงินสด, โอนเงิน, หรือรูดบัตรเครดิตเต็มจำนวน</div>
+            <div style="margin-top: 6px;">🛡️ รับประกันศูนย์ไทย Samsung Thailand 1 ปีเต็ม</div>
+          </div>
+        `;
+      }
+
+      if (!match) {
+        return `
+          <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.02); border-radius: 10px; color: var(--text-muted); font-size: 0.85rem;">
+            ไม่พบโปรโมชั่นในหมวดนี้สำหรับสินค้านี้
+          </div>
+        `;
+      }
+
+      const disc = Number(match.discountValue || match.discount || 0);
+      const net = Number(match.netPrice || (srp - disc));
+
+      return `
+        <div class="promo-price-card">
+          <div class="price-row-item">
+            <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
+            <span style="text-decoration: line-through; color: var(--text-muted);">฿${srp.toLocaleString('th-TH')}</span>
+          </div>
+          <div class="price-row-item">
+            <span style="color: var(--emerald);">ส่วนลดโปรโมชั่น</span>
+            <strong style="color: var(--emerald); font-size: 1.05rem;">-฿${disc.toLocaleString('th-TH')}</strong>
+          </div>
+          ${match.couponCode ? `
+            <div class="price-row-item">
+              <span style="color: var(--cyan);">คูปองโค้ด</span>
+              <span class="badge-pn-pill" style="font-size: 0.85rem;">${match.couponCode}</span>
+            </div>
+          ` : ''}
+          <div class="price-row-item net">
+            <span>ราคาสุทธิ (Net Price)</span>
+            <span class="net-price-display">฿${net.toLocaleString('th-TH')}</span>
+          </div>
+        </div>
+
+        <div style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6;">
+          <div style="margin-bottom: 8px;">
+            📅 <strong>ระยะเวลาแคมเปญ:</strong> ${match.startDate || '28 ส.ค.'} - ${match.endDate || '6 ก.ย. 2026'}
+          </div>
+          <div style="margin-bottom: 8px;">
+            📝 <strong>เงื่อนไข:</strong> ${(match.conditions && match.conditions.length) ? match.conditions.join(', ') : 'ตามเงื่อนไขแคมเปญหน้าร้าน'}
+          </div>
+          ${match.gift ? `
+            <div style="color: var(--coral);">
+              🎁 <strong>ของแถม Premium:</strong> ${match.gift}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function switchDrawerMode(mode, btnElement) {
+      document.querySelectorAll(".sale-mode-tab").forEach(tab => tab.classList.remove("active"));
+      btnElement.classList.add("active");
+      
+      const pnTag = document.getElementById("drawerProductPn").textContent.replace("Exact P/N: ", "").trim();
+      const modelTitle = document.getElementById("drawerProductTitle").textContent;
+      const item = rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle));
+      const promo = resolvePromotion(item || { pn: pnTag, model: modelTitle });
+
+      document.getElementById("drawerModeContent").innerHTML = renderDrawerModeDetails(promo.variants, mode, item ? item.srp : 0);
+    }
+
+    // Close Drawer
+    document.getElementById("btnCloseDrawer").addEventListener("click", () => {
+      document.getElementById("promoDrawerBackdrop").classList.remove("open");
+    });
+    document.getElementById("promoDrawerBackdrop").addEventListener("click", (e) => {
+      if (e.target === document.getElementById("promoDrawerBackdrop")) {
+        document.getElementById("promoDrawerBackdrop").classList.remove("open");
+      }
+    });
+
+    // ==========================================================================
+    // EVENT LISTENERS & INITIALIZATION
+    // ==========================================================================
+
+    // ==========================================================================
+    // DYNAMIC CONTEXT-AWARE FILTER CHIPS PER CATEGORY
+    // ==========================================================================
+    const CATEGORY_FILTER_CONFIG = {
+      ALL: [
+        { key: "all", label: "ทั้งหมด" },
+        { key: "tag-5g", label: "📶 5G" },
+        { key: "tag-4g", label: "📶 4G" },
+        { key: "tag-lte", label: "⌚ LTE" },
+        { key: "tag-wifi", label: "🌐 Wi-Fi" },
+        { key: "sub-film", label: "🛡️ ฟิล์ม" },
+        { key: "sub-charger", label: "🔌 หัวชาร์จ" },
+        { key: "sub-case", label: "📱 เคส/คีย์บอร์ด" },
+        { key: "instock", label: "📦 มีของพร้อมขาย (Stock > 0)" },
+        { key: "haspromo", label: "✨ มีโปรโมชั่น" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" },
+        { key: "passf", label: "🏷️ พาส F" }
+      ],
+      SmartPhone: [
+        { key: "all", label: "ทั้งหมด (มือถือ)" },
+        { key: "tag-5g", label: "📶 5G" },
+        { key: "tag-4g", label: "📶 4G" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "haspromo", label: "✨ มีโปรโมชั่น" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" },
+        { key: "passf", label: "🏷️ พาส F" }
+      ],
+      Tablet: [
+        { key: "all", label: "ทั้งหมด (แท็บเล็ต)" },
+        { key: "tag-wifi", label: "🌐 Wi-Fi" },
+        { key: "tag-5g", label: "📶 5G" },
+        { key: "tag-4g", label: "📶 4G (LTE)" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "haspromo", label: "✨ มีโปรโมชั่น" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" },
+        { key: "passf", label: "🏷️ พาส F" }
+      ],
+      Watch: [
+        { key: "all", label: "ทั้งหมด (นาฬิกา)" },
+        { key: "tag-lte", label: "⌚ LTE (ใส่ซิม/eSIM)" },
+        { key: "tag-bt", label: "📶 Bluetooth" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "haspromo", label: "✨ มีโปรโมชั่น" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" }
+      ],
+      Buds: [
+        { key: "all", label: "ทั้งหมด (หูฟัง)" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "haspromo", label: "✨ มีโปรโมชั่น" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" }
+      ],
+      Accessory: [
+        { key: "all", label: "ทั้งหมด (อุปกรณ์เสริม)" },
+        { key: "sub-film", label: "🛡️ ฟิล์มกันรอย" },
+        { key: "sub-charger", label: "🔌 หัวชาร์จ & สาย" },
+        { key: "sub-case", label: "📱 เคส & คีย์บอร์ด" },
+        { key: "sub-tag", label: "🏷️ SmartTag" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" }
+      ]
+    };
+
+    function renderFilterChips() {
+      const container = document.getElementById("filterChipsContainer");
+      if (!container) return;
+      const chips = CATEGORY_FILTER_CONFIG[currentCategory] || CATEGORY_FILTER_CONFIG.ALL;
+
+      const hasFilter = chips.some(c => c.key === currentFilter);
+      if (!hasFilter) currentFilter = "all";
+
+      container.innerHTML = chips.map(c => `
+        <button class="filter-chip ${c.key === currentFilter ? 'active' : ''}" data-filter="${c.key}">
+          ${c.label}
+        </button>
+      `).join("");
+
+      container.querySelectorAll(".filter-chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          container.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.getAttribute("data-filter");
+          renderStockList();
+        });
+      });
+    }
+
+    // Category Card Click
+    document.querySelectorAll(".category-card").forEach(card => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        currentCategory = card.getAttribute("data-cat");
+        currentFilter = "all";
+        renderFilterChips();
+        renderStockList();
+      });
+    });
+
+    // Search Input
+    const searchInput = document.getElementById("searchInput");
+    const btnClearSearch = document.getElementById("btnClearSearch");
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      btnClearSearch.style.display = searchQuery ? "block" : "none";
+      renderStockList();
+    });
+
+    btnClearSearch.addEventListener("click", () => {
+      searchInput.value = "";
+      searchQuery = "";
+      btnClearSearch.style.display = "none";
+      renderStockList();
+    });
+
+    // View Switcher
+    const btnViewTable = document.getElementById("btnViewTable");
+    const btnViewCards = document.getElementById("btnViewCards");
+    const tableContainer = document.getElementById("tableViewContainer");
+    const cardContainer = document.getElementById("cardViewContainer");
+
+    btnViewTable.addEventListener("click", () => {
+      btnViewTable.classList.add("active");
+      btnViewCards.classList.remove("active");
+      tableContainer.style.display = "block";
+      cardContainer.style.display = "none";
+    });
+
+    btnViewCards.addEventListener("click", () => {
+      btnViewCards.classList.add("active");
+      btnViewTable.classList.remove("active");
+      tableContainer.style.display = "none";
+      cardContainer.style.display = "grid";
+    });
+
+    // Init on Load
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCategoryCardCounts();
+      renderFilterChips();
+      renderStockList();
+    });
+  
