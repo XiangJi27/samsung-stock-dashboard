@@ -1,14 +1,14 @@
 {
   "auditBatchId": "AUDIT-20260907-001",
   "evaluationDate": "2026-09-07",
-  "generatedAt": "2026-09-13T10:54:50.278417+07:00",
+  "generatedAt": "2026-09-13T12:24:07.854668+07:00",
   "inputs": {
     "stockBatchId": "IMPORT-20260906-002",
     "promotionBatchId": "BATCH-20260907-105441",
     "parserVersion": "2.1.0-LTR-MERGE",
     "ruleEngineVersion": "2.5.0-STRICT",
     "businessRulesVersion": "1.0.0",
-    "applicationCommit": "833676f"
+    "applicationCommit": "a7c3390"
   },
   "importBatch": "IMPORT-20260906-002",
   "dashboardStatus": "DEVELOPMENT / PROTECTED_PREVIEW_VALIDATION",
@@ -39,8 +39,8 @@
     "failed": 0,
     "blockedByEvidence": 0,
     "overallStatus": "PASSED_GOVERNANCE_CHECKS",
-    "commitSha": "833676f",
-    "executedAt": "2026-09-13T10:54:50.278417+07:00"
+    "commitSha": "a7c3390",
+    "executedAt": "2026-09-13T12:24:07.854668+07:00"
   },
   "stockProductsCount": 236
 }

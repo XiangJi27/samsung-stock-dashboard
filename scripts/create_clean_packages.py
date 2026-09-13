@@ -143,3 +143,18 @@ with zipfile.ZipFile(full_git_zip, "w", zipfile.ZIP_DEFLATED) as zf:
 git_size_mb = os.path.getsize(full_git_zip) / (1024 * 1024)
 print(f"✅ Full Repository with .git created: {full_git_zip} ({git_size_mb:.2f} MB)")
 
+# 4. Generate Base64 Deliverable Text Files
+import base64
+runtime_txt = os.path.join(ROOT_DIR, "samsung_stock_dashboard_runtime.zip.txt")
+with open(runtime_zip, "rb") as f:
+    runtime_b64 = base64.b64encode(f.read()).decode("utf-8")
+with open(runtime_txt, "w", encoding="utf-8") as f:
+    f.write(runtime_b64)
+print(f"✅ Runtime Base64 txt created: {runtime_txt} ({os.path.getsize(runtime_txt)/(1024*1024):.2f} MB)")
+
+legacy_txt = os.path.join(ROOT_DIR, "samsung-stock-dashboard.zip.txt")
+with open(legacy_txt, "w", encoding="utf-8") as f:
+    f.write(runtime_b64)
+print(f"✅ Copilot Base64 txt created: {legacy_txt} ({os.path.getsize(legacy_txt)/(1024*1024):.2f} MB)")
+
+

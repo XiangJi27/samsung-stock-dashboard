@@ -1,26 +1,26 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-13T10:54:50.344814+07:00",
+  "generatedAt": "2026-09-13T12:24:07.931229+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/phase-a-application-shell",
-  "commitSha": "833676f",
+  "commitSha": "a7c3390",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7806812,
+    "totalSizeBytes": 7814920,
     "totalSizeMB": 7.45
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 134407,
-      "sha256": "09c483405fadf00f30ce1fac9c22b0970b0c0d2f4958cfd5a66ee0265f0df725",
+      "sizeBytes": 130505,
+      "sha256": "90fcdaacb7bf77fb59918be8dd155ef5565dc68e7a3ea2694ab5c3139195b70c",
       "status": "REQUIRED_RUNTIME"
     },
     {
       "file": "app.js",
-      "sizeBytes": 170962,
-      "sha256": "e710f0b0a95226321aa9481b93f442fb6ce9379df09d4fbe36f4d67a9b0b61a0",
+      "sizeBytes": 182511,
+      "sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -91,8 +91,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 6939,
-      "sha256": "489c0c46258663c3219d15881d65c8395c97c05811cd03e18cb0580c6d253e27",
+      "sizeBytes": 7142,
+      "sha256": "6b73f7e4c62561a389ce805e7427b27ed7451543d0780122bbd6868fed2d0220",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -103,8 +103,8 @@
     },
     {
       "file": "assets/js/router.js",
-      "sizeBytes": 6448,
-      "sha256": "cb8b7233cfbc5eb86d30f73a21cd074743a5a6022490dab65d1388e95934c698",
+      "sizeBytes": 6706,
+      "sha256": "1b6ce787866c8dd871689f84e48acc4bb516938ebc317b9d9693d818dd4b70b6",
       "status": "REQUIRED_RUNTIME"
     },
     {
