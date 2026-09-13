@@ -89,10 +89,16 @@ def build_pilot_package():
             print(f"  + Added: {rel_path} ({file_size} bytes)")
 
         # Create and write pilot_runtime_manifest.json inside zip
+        import subprocess
+        try:
+            head_commit = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], text=True).strip()
+        except Exception:
+            head_commit = "4dba2fe"
+
         manifest_data = {
             "manifestVersion": "1.0.0-pilot",
             "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
-            "applicationCommit": "9ff3196",
+            "applicationCommit": head_commit,
             "baselineCommit": "a7c3390",
             "databaseSchemaCommit": "bd509ef",
             "builtAt": datetime.now().astimezone().isoformat(),
