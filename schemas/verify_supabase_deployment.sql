@@ -61,8 +61,11 @@ ORDER BY p.proname;
 
 -- ----------------------------------------------------------------------------
 -- 5. Check Function Routine Grants for PUBLIC, anon, and authenticated
--- Expected: Only update_own_display_name and update_own_new_issue have EXECUTE for authenticated.
--- All helper and trigger functions must have NO grants to PUBLIC, anon, or authenticated.
+-- Expected:
+-- Schema 'public': ONLY update_own_display_name and update_own_new_issue have EXECUTE for authenticated.
+-- Schema 'private': ONLY has_global_role, has_branch_role, has_role, get_user_branch_id have EXECUTE for authenticated.
+-- Neither schema has any grant to PUBLIC or anon.
+-- Triggers and internal functions (validate_issue_write, write_issue_audit_event, user_has_role, generate_issue_number) have NO grants to authenticated.
 -- ----------------------------------------------------------------------------
 SELECT 
     routine_schema, 
@@ -70,12 +73,27 @@ SELECT
     grantee, 
     privilege_type 
 FROM information_schema.role_routine_grants 
-WHERE routine_schema = 'public' 
+WHERE routine_schema IN ('public', 'private') 
   AND grantee IN ('PUBLIC', 'anon', 'authenticated')
-ORDER BY routine_name, grantee;
+ORDER BY routine_schema, routine_name, grantee;
 
 -- ----------------------------------------------------------------------------
--- 6. Template: Bootstrap Your Initial Dual-Role Admin Account
+-- 6. Check that issue_number has NO column default (enforced via BEFORE trigger)
+-- Expected: column_default IS NULL
+-- ----------------------------------------------------------------------------
+SELECT 
+    table_schema, 
+    table_name, 
+    column_name, 
+    column_default, 
+    is_nullable 
+FROM information_schema.columns 
+WHERE table_schema = 'public' 
+  AND table_name = 'issues' 
+  AND column_name = 'issue_number';
+
+-- ----------------------------------------------------------------------------
+-- 7. Template: Bootstrap Your Initial Dual-Role Admin Account
 -- Replace <TARGET_USER_UUID> with your actual UUID from auth.users
 -- DO NOT commit your real UUID or Employee Code to Git!
 -- ----------------------------------------------------------------------------
@@ -110,7 +128,7 @@ ON CONFLICT DO NOTHING;
 */
 
 -- ----------------------------------------------------------------------------
--- 7. Check Dual-Role Bootstrap Verification
+-- 8. Check Dual-Role Bootstrap Verification
 -- Expected: Exactly 2 rows for your account:
 -- 1) STORE_LEADER / AYUTTHAYA_CITY_PARK
 -- 2) SYSTEM_ADMIN / NULL

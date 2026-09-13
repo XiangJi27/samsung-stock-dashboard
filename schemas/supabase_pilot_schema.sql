@@ -5,18 +5,20 @@
 -- Security Status: PREVIEW_HARDENED_PENDING_LIVE_RLS_VERIFICATION
 -- ============================================================================
 
--- 1. Enable UUID Extension
+-- 1. Enable UUID Extension & Create Private Schema for Internal Functions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE SCHEMA IF NOT EXISTS private;
 
 -- 2. Issue Number Sequence (Database-Generated: ISS-2026-000001)
-CREATE SEQUENCE IF NOT EXISTS public.issue_number_seq START WITH 1 INCREMENT BY 1;
+-- Managed exclusively inside private schema, never accessed directly by client
+CREATE SEQUENCE IF NOT EXISTS private.issue_number_seq START WITH 1 INCREMENT BY 1;
 
-CREATE OR REPLACE FUNCTION public.generate_issue_number()
+CREATE OR REPLACE FUNCTION private.generate_issue_number()
 RETURNS TEXT AS $$
 BEGIN
-    RETURN 'ISS-' || TO_CHAR(CURRENT_DATE, 'YYYY') || '-' || LPAD(NEXTVAL('public.issue_number_seq')::TEXT, 6, '0');
+    RETURN 'ISS-' || TO_CHAR(CURRENT_DATE, 'YYYY') || '-' || LPAD(NEXTVAL('private.issue_number_seq')::TEXT, 6, '0');
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, pg_temp;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = private, pg_temp;
 
 -- 3. Branches Table
 CREATE TABLE IF NOT EXISTS public.branches (
@@ -65,9 +67,10 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_branch_user_role
     WHERE branch_id IS NOT NULL;
 
 -- 6. Issues Table (Centralized Issue Tracking)
+-- Notice: issue_number has NO column default; generated strictly by BEFORE INSERT trigger!
 CREATE TABLE IF NOT EXISTS public.issues (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    issue_number TEXT UNIQUE NOT NULL DEFAULT public.generate_issue_number(),
+    issue_number TEXT UNIQUE NOT NULL,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     category TEXT NOT NULL CHECK (category IN (
@@ -160,12 +163,12 @@ CREATE TABLE IF NOT EXISTS public.issue_ai_analysis (
 );
 
 -- ============================================================================
--- HELPER FUNCTIONS & ROLE SCOPE RESOLVERS (SECURITY DEFINER)
--- Strict search_path prevents search path injection & object shadowing
+-- INTERNAL HELPER FUNCTIONS (PRIVATE SCHEMA - NOT EXPOSED TO DATA API)
+-- Security Definer with strict search_path prevents search path injection
 -- ============================================================================
 
 -- Helper: Check global role
-CREATE OR REPLACE FUNCTION public.has_global_role(required_role TEXT)
+CREATE OR REPLACE FUNCTION private.has_global_role(required_role TEXT)
 RETURNS BOOLEAN AS $$
 BEGIN
     RETURN EXISTS (
@@ -176,7 +179,7 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
 -- Helper: Check branch role
-CREATE OR REPLACE FUNCTION public.has_branch_role(required_role TEXT, target_branch_id TEXT)
+CREATE OR REPLACE FUNCTION private.has_branch_role(required_role TEXT, target_branch_id TEXT)
 RETURNS BOOLEAN AS $$
 BEGIN
     RETURN EXISTS (
@@ -186,8 +189,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
--- Helper: Check if target user has role (Used for Assignee check)
-CREATE OR REPLACE FUNCTION public.user_has_role(target_user_id UUID, required_role TEXT)
+-- Helper: Check if target user has role (Used only internally by validate_issue_write trigger)
+CREATE OR REPLACE FUNCTION private.user_has_role(target_user_id UUID, required_role TEXT)
 RETURNS BOOLEAN AS $$
 BEGIN
     IF target_user_id IS NULL THEN RETURN FALSE; END IF;
@@ -199,7 +202,7 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
 -- Helper: Check if caller has role (any scope)
-CREATE OR REPLACE FUNCTION public.has_role(required_role TEXT)
+CREATE OR REPLACE FUNCTION private.has_role(required_role TEXT)
 RETURNS BOOLEAN AS $$
 BEGIN
     RETURN EXISTS (
@@ -210,7 +213,7 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
 
 -- Helper: Get user's branch_id
-CREATE OR REPLACE FUNCTION public.get_user_branch_id()
+CREATE OR REPLACE FUNCTION private.get_user_branch_id()
 RETURNS TEXT AS $$
 BEGIN
     RETURN (SELECT branch_id FROM public.profiles WHERE id = auth.uid());
@@ -269,7 +272,7 @@ BEGIN
         RAISE EXCEPTION 'Issue not found.';
     END IF;
 
-    IF curr_issue.reporter_id != auth.uid() AND NOT public.has_role('SYSTEM_ADMIN') THEN
+    IF curr_issue.reporter_id != auth.uid() AND NOT private.has_role('SYSTEM_ADMIN') THEN
         RAISE EXCEPTION 'Forbidden: You can only edit your own issues.';
     END IF;
 
@@ -287,7 +290,7 @@ BEGIN
         updated_at = TIMEZONE('utc'::text, NOW())
     WHERE id = target_issue_id;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, private, auth, pg_temp;
 
 REVOKE ALL ON FUNCTION public.update_own_new_issue FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.update_own_new_issue TO authenticated;
@@ -319,13 +322,14 @@ BEGIN
     IF (TG_OP = 'INSERT') THEN
         IF (act_type = 'USER') THEN
             NEW.reporter_id := auth.uid();
-            NEW.branch_id := public.get_user_branch_id();
+            NEW.branch_id := private.get_user_branch_id();
             NEW.status := 'NEW';
             NEW.assigned_to := NULL; -- Regular member cannot assign on create
-        END IF;
-
-        IF NEW.issue_number IS NULL OR NEW.issue_number = '' THEN
-            NEW.issue_number := public.generate_issue_number();
+            NEW.issue_number := private.generate_issue_number(); -- Unconditionally database-generated (prevents client spoofing)
+        ELSE
+            IF NEW.issue_number IS NULL OR BTRIM(NEW.issue_number) = '' THEN
+                NEW.issue_number := private.generate_issue_number();
+            END IF;
         END IF;
 
         NEW.created_at := TIMEZONE('utc'::text, NOW());
@@ -358,10 +362,10 @@ BEGIN
             RAISE EXCEPTION 'Forbidden: application_commit is immutable.';
         END IF;
 
-        user_branch := public.get_user_branch_id();
-        is_admin := public.has_role('SYSTEM_ADMIN');
-        is_store_leader := public.has_branch_role('STORE_LEADER', OLD.branch_id);
-        is_support := public.has_role('SUPPORT');
+        user_branch := private.get_user_branch_id();
+        is_admin := private.has_role('SYSTEM_ADMIN');
+        is_store_leader := private.has_branch_role('STORE_LEADER', OLD.branch_id);
+        is_support := private.has_role('SUPPORT');
         is_reporter := (actor = OLD.reporter_id);
 
         -- Assignment Validation: Assignee must belong to same branch OR hold SUPPORT role
@@ -376,7 +380,7 @@ BEGIN
                 IF NOT EXISTS (
                     SELECT 1 FROM public.profiles p
                     WHERE p.id = NEW.assigned_to 
-                      AND (p.branch_id = OLD.branch_id OR public.user_has_role(NEW.assigned_to, 'SUPPORT'))
+                      AND (p.branch_id = OLD.branch_id OR private.user_has_role(NEW.assigned_to, 'SUPPORT'))
                 ) THEN
                     RAISE EXCEPTION 'Forbidden: Assignee must belong to the issue branch or hold SUPPORT role.';
                 END IF;
@@ -432,7 +436,7 @@ BEGIN
 
     RETURN NULL;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, auth, pg_temp;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public, private, auth, pg_temp;
 
 -- ============================================================================
 -- TRIGGER 2: AFTER INSERT OR UPDATE ON issues (Audit Event Logging)
@@ -526,34 +530,32 @@ CREATE TRIGGER trg_issue_audit
 -- EXPLICIT GRANTS & PRIVILEGE HARDENING (LEAST PRIVILEGE REVOKE & GRANT)
 -- ============================================================================
 
--- 1. Revoke all existing default permissions from anon and authenticated
-REVOKE ALL ON ALL TABLES IN SCHEMA public FROM anon;
-REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM anon;
-REVOKE ALL ON ALL FUNCTIONS IN SCHEMA public FROM anon;
+-- 1. Revoke all default permissions on public & private schemas from anon and authenticated
+REVOKE ALL ON ALL TABLES IN SCHEMA public FROM anon, authenticated;
+REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM anon, authenticated;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA public FROM anon, authenticated;
 
-REVOKE ALL ON ALL TABLES IN SCHEMA public FROM authenticated;
-REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM authenticated;
-REVOKE ALL ON ALL FUNCTIONS IN SCHEMA public FROM authenticated;
+REVOKE ALL ON ALL TABLES IN SCHEMA private FROM anon, authenticated;
+REVOKE ALL ON ALL SEQUENCES IN SCHEMA private FROM anon, authenticated;
+REVOKE ALL ON ALL FUNCTIONS IN SCHEMA private FROM PUBLIC, anon, authenticated;
 
--- 2. Revoke default privileges for future objects created in schema public
+-- 2. Revoke default privileges for future objects created in schema public and private
 ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC, anon, authenticated;
 
--- 3. Explicitly revoke EXECUTE on all internal helper/trigger functions
--- Prevents direct client invocation, privilege bypass, and user role enumeration
-REVOKE EXECUTE ON FUNCTION public.generate_issue_number() FROM PUBLIC, anon, authenticated;
-REVOKE EXECUTE ON FUNCTION public.has_global_role(TEXT) FROM PUBLIC, anon, authenticated;
-REVOKE EXECUTE ON FUNCTION public.has_branch_role(TEXT, TEXT) FROM PUBLIC, anon, authenticated;
-REVOKE EXECUTE ON FUNCTION public.user_has_role(UUID, TEXT) FROM PUBLIC, anon, authenticated;
-REVOKE EXECUTE ON FUNCTION public.has_role(TEXT) FROM PUBLIC, anon, authenticated;
-REVOKE EXECUTE ON FUNCTION public.get_user_branch_id() FROM PUBLIC, anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA private REVOKE ALL ON TABLES FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA private REVOKE ALL ON SEQUENCES FROM anon, authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA private REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC, anon, authenticated;
+
+-- 3. Explicitly revoke EXECUTE on public trigger functions
+-- Triggers are invoked directly by the Postgres engine and do not need client EXECUTE privileges
 REVOKE EXECUTE ON FUNCTION public.validate_issue_write() FROM PUBLIC, anon, authenticated;
 REVOKE EXECUTE ON FUNCTION public.write_issue_audit_event() FROM PUBLIC, anon, authenticated;
 
 -- 4. Revoke sequence access from Client
--- Sequence is consumed internally by SECURITY DEFINER generate_issue_number()
-REVOKE ALL ON SEQUENCE public.issue_number_seq FROM anon, authenticated;
+-- Sequences are consumed internally by private.generate_issue_number()
+REVOKE ALL ON SEQUENCE private.issue_number_seq FROM anon, authenticated;
 
 -- 5. Grant minimal necessary table access to authenticated users
 GRANT USAGE ON SCHEMA public TO authenticated;
@@ -567,7 +569,18 @@ GRANT SELECT, INSERT ON public.issue_comments TO authenticated;
 GRANT SELECT ON public.issue_events TO authenticated;
 GRANT SELECT ON public.issue_ai_analysis TO authenticated;
 
--- 6. Grant EXECUTE exclusively to whitelisted client RPC functions
+-- 6. Grant USAGE on private schema & EXECUTE on helper functions required by RLS
+-- The private schema is NOT exposed via PostgREST / Data API, eliminating RPC attack surface
+GRANT USAGE ON SCHEMA private TO authenticated;
+GRANT EXECUTE ON FUNCTION private.has_global_role(TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION private.has_branch_role(TEXT, TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION private.has_role(TEXT) TO authenticated;
+GRANT EXECUTE ON FUNCTION private.get_user_branch_id() TO authenticated;
+
+-- Note: private.user_has_role and private.generate_issue_number are NOT granted
+-- to authenticated because they are called exclusively inside SECURITY DEFINER triggers.
+
+-- 7. Grant EXECUTE exclusively to whitelisted client RPC functions in public
 GRANT EXECUTE ON FUNCTION public.update_own_display_name(TEXT) TO authenticated;
 GRANT EXECUTE ON FUNCTION public.update_own_new_issue(UUID, TEXT, TEXT, TEXT, TEXT, TEXT, TEXT) TO authenticated;
 
@@ -594,55 +607,55 @@ CREATE POLICY "Profiles viewable in same branch or by admin" ON public.profiles
     FOR SELECT TO authenticated
     USING (
         id = auth.uid() OR 
-        public.has_global_role('SYSTEM_ADMIN') OR 
-        public.has_role('AUDITOR') OR
-        (branch_id = public.get_user_branch_id())
+        private.has_global_role('SYSTEM_ADMIN') OR 
+        private.has_role('AUDITOR') OR
+        (branch_id = private.get_user_branch_id())
     );
 
 CREATE POLICY "Admins insert profiles" ON public.profiles
     FOR INSERT TO authenticated
-    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins update profiles" ON public.profiles
     FOR UPDATE TO authenticated
-    USING (public.has_global_role('SYSTEM_ADMIN'))
-    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+    USING (private.has_global_role('SYSTEM_ADMIN'))
+    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins delete profiles" ON public.profiles
     FOR DELETE TO authenticated
-    USING (public.has_global_role('SYSTEM_ADMIN'));
+    USING (private.has_global_role('SYSTEM_ADMIN'));
 
 -- 3. User Roles Policies
 CREATE POLICY "Roles viewable by owner or admin" ON public.user_roles
     FOR SELECT TO authenticated
     USING (
         user_id = auth.uid() OR 
-        public.has_global_role('SYSTEM_ADMIN') OR 
-        public.has_role('AUDITOR')
+        private.has_global_role('SYSTEM_ADMIN') OR 
+        private.has_role('AUDITOR')
     );
 
 CREATE POLICY "Admins insert user roles" ON public.user_roles
     FOR INSERT TO authenticated
-    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins update user roles" ON public.user_roles
     FOR UPDATE TO authenticated
-    USING (public.has_global_role('SYSTEM_ADMIN'))
-    WITH CHECK (public.has_global_role('SYSTEM_ADMIN'));
+    USING (private.has_global_role('SYSTEM_ADMIN'))
+    WITH CHECK (private.has_global_role('SYSTEM_ADMIN'));
 
 CREATE POLICY "Admins delete user roles" ON public.user_roles
     FOR DELETE TO authenticated
-    USING (public.has_global_role('SYSTEM_ADMIN'));
+    USING (private.has_global_role('SYSTEM_ADMIN'));
 
 -- 4. Issues Policies
 CREATE POLICY "Issues viewable according to role scope" ON public.issues
     FOR SELECT TO authenticated
     USING (
         reporter_id = auth.uid() OR 
-        public.has_global_role('SYSTEM_ADMIN') OR 
-        public.has_role('AUDITOR') OR
-        (public.has_role('SUPPORT') AND assigned_to = auth.uid()) OR
-        (public.has_branch_role('STORE_LEADER', branch_id))
+        private.has_global_role('SYSTEM_ADMIN') OR 
+        private.has_role('AUDITOR') OR
+        (private.has_role('SUPPORT') AND assigned_to = auth.uid()) OR
+        (private.has_branch_role('STORE_LEADER', branch_id))
     );
 
 CREATE POLICY "Members insert new issues for own branch" ON public.issues
@@ -650,15 +663,15 @@ CREATE POLICY "Members insert new issues for own branch" ON public.issues
     WITH CHECK (
         status = 'NEW' AND 
         reporter_id = auth.uid() AND
-        branch_id = public.get_user_branch_id()
+        branch_id = private.get_user_branch_id()
     );
 
 CREATE POLICY "Store leaders support and admins update issues" ON public.issues
     FOR UPDATE TO authenticated
     USING (
-        public.has_global_role('SYSTEM_ADMIN') OR 
-        public.has_branch_role('STORE_LEADER', branch_id) OR
-        (public.has_role('SUPPORT') AND assigned_to = auth.uid())
+        private.has_global_role('SYSTEM_ADMIN') OR 
+        private.has_branch_role('STORE_LEADER', branch_id) OR
+        (private.has_role('SUPPORT') AND assigned_to = auth.uid())
     );
 
 -- Notice: Members update their own NEW issues strictly via update_own_new_issue() RPC
@@ -677,7 +690,7 @@ CREATE POLICY "Attachments insertable by reporter or branch leaders" ON public.i
         EXISTS (
             SELECT 1 FROM public.issues 
             WHERE id = issue_attachments.issue_id 
-              AND (reporter_id = auth.uid() OR public.has_branch_role('STORE_LEADER', branch_id) OR public.has_global_role('SYSTEM_ADMIN'))
+              AND (reporter_id = auth.uid() OR private.has_branch_role('STORE_LEADER', branch_id) OR private.has_global_role('SYSTEM_ADMIN'))
         )
     );
 
@@ -689,17 +702,12 @@ CREATE POLICY "Comments viewable according to issue scope" ON public.issue_comme
             SELECT 1
             FROM public.issues i
             WHERE i.id = issue_comments.issue_id
-        )
-        AND (
-            is_internal = FALSE
-            OR public.has_global_role('SYSTEM_ADMIN')
-            OR public.has_role('SUPPORT')
-            OR EXISTS (
-                SELECT 1
-                FROM public.issues i
-                WHERE i.id = issue_comments.issue_id
-                  AND public.has_branch_role('STORE_LEADER', i.branch_id)
-            )
+              AND (
+                  is_internal = FALSE
+                  OR private.has_global_role('SYSTEM_ADMIN')
+                  OR (private.has_role('SUPPORT') AND i.assigned_to = auth.uid())
+                  OR private.has_branch_role('STORE_LEADER', i.branch_id)
+              )
         )
     );
 
@@ -711,17 +719,12 @@ CREATE POLICY "Comments insertable on readable issues" ON public.issue_comments
             SELECT 1
             FROM public.issues i
             WHERE i.id = issue_comments.issue_id
-        )
-        AND (
-            is_internal = FALSE
-            OR public.has_global_role('SYSTEM_ADMIN')
-            OR public.has_role('SUPPORT')
-            OR EXISTS (
-                SELECT 1
-                FROM public.issues i
-                WHERE i.id = issue_comments.issue_id
-                  AND public.has_branch_role('STORE_LEADER', i.branch_id)
-            )
+              AND (
+                  is_internal = FALSE
+                  OR private.has_global_role('SYSTEM_ADMIN')
+                  OR (private.has_role('SUPPORT') AND i.assigned_to = auth.uid())
+                  OR private.has_branch_role('STORE_LEADER', i.branch_id)
+              )
         )
     );
 
