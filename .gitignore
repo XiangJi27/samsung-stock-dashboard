@@ -38,3 +38,4 @@ scripts/test_node_resolution.js
 scratch/
 __pycache__/
 *.pyc
+.pilot-deploy/
