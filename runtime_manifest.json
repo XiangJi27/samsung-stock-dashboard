@@ -1,13 +1,14 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-07T14:45:00+07:00",
+  "generatedAt": "2026-09-13T10:54:50.344814+07:00",
   "project": "Samsung Branch Operations System",
-  "environment": "Production / Vercel Static Hosting",
+  "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/phase-a-application-shell",
+  "commitSha": "833676f",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7803369,
-    "totalSizeMB": 7.44
+    "totalSizeBytes": 7806812,
+    "totalSizeMB": 7.45
   },
   "files": [
     {

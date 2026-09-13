@@ -10,7 +10,7 @@
       "caseId": "GTC-01",
       "name": "Galaxy S25 FE Stock Baseline",
       "status": "PASS",
-      "message": "Found 8 S25 FE models in stock database"
+      "message": "Found 8 S25 FE models in stock database (All STANDARD_SM), Promo RRP=26,900, Net=23,900 (SF+ Coupon 01)"
     },
     {
       "caseId": "GTC-02",
@@ -28,19 +28,19 @@
       "caseId": "GTC-04",
       "name": "Galaxy A37 Stock Verification",
       "status": "PASS",
-      "message": "Found 3 A37 models"
+      "message": "Verified 3 A37 SKUs ['SM-A376BDGTTHL', 'SM-A376BLVTTHL', 'SM-A376BZATTHL'], RRP=13,999, Capacity=8/256GB, Stock Sums OK"
     },
     {
       "caseId": "GTC-05",
       "name": "Galaxy A27 Stock Verification",
       "status": "PASS",
-      "message": "Found 2 A27 models"
+      "message": "Verified 2 A27 SKUs ['SM-A276BLIGTHL', 'SM-A276BZKGTHL'], RRP=10,999, Net=9,999, Coupon=01, SF_PLUS"
     },
     {
       "caseId": "GTC-06",
       "name": "Galaxy A17 Stock Verification",
       "status": "PASS",
-      "message": "Found 12 A17 models"
+      "message": "Verified 12 A17 SKUs (6 Pass F, 6 Standard SM), Promo RRP=10,599, Net=8,999 (Coupon 02)"
     },
     {
       "caseId": "GTC-07",
@@ -58,7 +58,7 @@
       "caseId": "GTC-09",
       "name": "Galaxy Z Flip8 Trade Up & Gift Separation",
       "status": "PASS",
-      "message": "Trade Up Prices Verified: 256GB=37900, 512GB=45900"
+      "message": "Trade Up Prices Strictly Verified (Direct dict access): 256GB (RRP=42900.0 -> Net=37900.0), 512GB (RRP=50900.0 -> Net=45900.0)"
     },
     {
       "caseId": "GTC-10",
@@ -76,13 +76,13 @@
       "caseId": "GTC-12",
       "name": "Galaxy Tab S10 Lite Verification",
       "status": "PASS",
-      "message": "Found 7 Tab S10 Lite items"
+      "message": "Verified 7 Tab S10 Lite items (4 Pass F with KB Bundle, 3 Standard SM), Promo 5G RRP=16,990, Net=16,490 (Coupon 01)"
     },
     {
       "caseId": "GTC-13",
       "name": "Galaxy Tab S10 FE Verification",
       "status": "PASS",
-      "message": "Found 4 Tab S10 FE items"
+      "message": "Verified 4 Tab S10 FE SKUs ['SM-X520NLBATHL', 'SM-X520NZAATHL', 'SM-X526BLBATHL', 'SM-X526BZAATHL'], Promo 5G RRP=30,900, Net=25,900 (Coupon 01)"
     },
     {
       "caseId": "GTC-14",

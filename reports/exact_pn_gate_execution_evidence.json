@@ -4,8 +4,8 @@
   "executed": true,
   "executionMode": "LIVE_DATA_VALIDATION",
   "status": "PASSED",
-  "executedAt": "2026-09-13T09:08:26.348143",
-  "commitSha": "0e92442",
+  "executedAt": "2026-09-13T10:54:54.680596",
+  "commitSha": "833676f",
   "inputFiles": {
     "stockMaster": {
       "path": "stock_full_data.json",
@@ -14,6 +14,28 @@
     "promotions": {
       "path": "promotion_variants.json",
       "sha256": "535337af899f2e27454e6af55fee9bea8dfe80a0da1983013e943c83f4d07e7a"
+    }
+  },
+  "scopeBreakdown": {
+    "publishedActive": {
+      "scope": "PUBLISHED_ACTIVE_PROMOTIONS",
+      "status": "PASSED",
+      "variantsChecked": 142,
+      "exactPnMatched": 18,
+      "modelScopeMatched": 124,
+      "violations": 0,
+      "description": "Active production promotions evaluated for exact P/N and model scope integrity"
+    },
+    "septemberDrafts": {
+      "scope": "SEPTEMBER_DRAFT_INGESTION",
+      "status": "CONTAINED_IN_REVIEW_AND_QUARANTINE",
+      "draftVariants": 56,
+      "sourceExactPn": 0,
+      "reviewRequired": 32,
+      "blockedQuarantined": 24,
+      "autoPublishAllowed": 0,
+      "violations": 0,
+      "description": "September promotions draft ingestion quarantined with zero unproven auto-publish"
     }
   },
   "counts": {
@@ -42,5 +64,5 @@
     "CONNECTIVITY_MISMATCH",
     "AMBIGUOUS_MODEL_MATCH"
   ],
-  "generatedAt": "2026-09-13T09:08:26.348143"
+  "generatedAt": "2026-09-13T10:54:54.680596"
 }
