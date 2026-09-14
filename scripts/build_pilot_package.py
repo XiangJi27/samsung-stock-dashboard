@@ -94,9 +94,8 @@ def build_pilot_package():
                 })
                 print(f"  + Added: {rel_path} (MIRRORED FROM pilot.html, {file_size} bytes)")
                 continue
-
             if rel_path == "vercel.json":
-                # Pilot deployment routing: Redirect root '/' to '/pilot.html'
+                # Pilot deployment routing: Redirect root '/' to '/pilot.html' and rewrite admin API paths
                 pilot_vercel_cfg = {
                     "version": 2,
                     "name": "samsung-stock-dashboard",
@@ -106,6 +105,12 @@ def build_pilot_package():
                             "source": "/",
                             "destination": "/pilot.html",
                             "permanent": False
+                        }
+                    ],
+                    "rewrites": [
+                        {
+                            "source": "/api/admin/members/:path*",
+                            "destination": "/api/admin/members?path=:path*"
                         }
                     ]
                 }

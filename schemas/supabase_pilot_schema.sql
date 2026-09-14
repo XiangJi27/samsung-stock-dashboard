@@ -591,8 +591,19 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON public.user_roles TO authenticated;
 GRANT SELECT, INSERT, UPDATE ON public.issues TO authenticated;
 GRANT SELECT, INSERT ON public.issue_attachments TO authenticated;
 GRANT SELECT, INSERT ON public.issue_comments TO authenticated;
-GRANT SELECT ON public.issue_events TO authenticated;
+GRANT SELECT, INSERT ON public.issue_events TO authenticated;
 GRANT SELECT ON public.issue_ai_analysis TO authenticated;
+
+-- 5.1 Grant full service access to service_role (for Serverless Admin APIs)
+GRANT USAGE ON SCHEMA public TO service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO service_role;
+
+GRANT USAGE ON SCHEMA private TO service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA private TO service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA private TO service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA private TO service_role;
 
 -- 6. Grant USAGE on private schema & EXECUTE on helper functions required by RLS
 -- The private schema is NOT exposed via PostgREST / Data API, eliminating RPC attack surface

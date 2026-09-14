@@ -104,8 +104,12 @@
       adminView.style.display = 'block';
       adminView.classList.add('active');
 
-      if (window.MemberAdminView) {
-        window.MemberAdminView.render(adminView);
+      if (window.MemberAdminService) {
+        if (!adminView.querySelector('.pilot-admin-wrapper')) {
+          window.MemberAdminService.renderPage(adminView);
+        } else {
+          window.MemberAdminService.refresh();
+        }
       }
     }
 

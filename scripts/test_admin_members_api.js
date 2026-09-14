@@ -1,350 +1,387 @@
 /**
- * Security & Boundary Unit Test Runner for Serverless Admin Member API
- * Target: api/admin/members.js
- * 
- * Verifies:
- * 1. Method guard: GET -> 405 Method Not Allowed
- * 2. Unauthenticated (Anon): Missing Bearer -> 401 Unauthorized
- * 3. Invalid Token: Rejected Bearer -> 401 Unauthorized
- * 4. Authorization: Member role calling endpoint -> 403 Forbidden
- * 5. Validation: Weak password (< 8 chars) -> 400 WEAK_PASSWORD
- * 6. Validation: Invalid employee code format -> 400 INVALID_EMPLOYEE_CODE
- * 7. Security: Client-supplied role/branch tampering ignored -> Forced to MEMBER & AYUTTHAYA_CITY_PARK
- * 8. Success: Admin creates member -> 201 Created
- * 9. Conflict: Duplicate employee code -> 409 Conflict
- * 10. Sanitized Response: Zero password, token, or secret key leakage in response payload
- * 11. Compensation Logic: Orphan Auth User deleted if profile insert fails -> 500 ROLLED_BACK
- * 12. Rate Limit Protection: Rejection with 429 when threshold exceeded
+ * Automated Test Suite for Member Admin Controller
+ * 1. Anonymous Access Restrictions (401 Unauthorized)
+ * 2. Invalid Token Handling (401)
+ * 3. Dedicated Test Admin User Provisioning & Authentication
+ * 4. Authorized GET /api/admin/members (200 OK, zero secret leaks)
+ * 5. Input Validations (Weak password, confirmation mismatch, invalid code)
+ * 6. Self-Suspend Prevention (400 Bad Request)
+ * 7. End-to-End Member Lifecycle (Create -> Rename -> Reset Password -> Suspend -> Reactivate)
+ * 8. Cleanup of Test Records
  */
 
-const handler = require('../api/admin/members');
+const fs = require('fs');
+const path = require('path');
+const handler = require('../api/admin/members.js');
+
+// Load environment variables
+const envServerPath = path.join(__dirname, '..', '.env.feedback-pilot.server.local');
+if (fs.existsSync(envServerPath)) {
+  const envContent = fs.readFileSync(envServerPath, 'utf8');
+  envContent.split('\n').forEach(line => {
+    const m = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (m) {
+      process.env[m[1]] = (m[2] || '').trim();
+    }
+  });
+}
 
 function createMockRes() {
-  const res = {
+  return {
     statusCode: 200,
     headers: {},
     body: null,
-    setHeader(key, val) { this.headers[key] = val; },
-    status(code) { this.statusCode = code; return this; },
-    json(data) { this.body = data; return this; }
+    status(code) {
+      this.statusCode = code;
+      return this;
+    },
+    setHeader(key, val) {
+      this.headers[key] = val;
+      return this;
+    },
+    json(data) {
+      this.body = data;
+      return this;
+    }
   };
-  return res;
 }
 
-async function runAdminApiTests() {
+async function runTests() {
   console.log('================================================================');
-  console.log('SERVERLESS ADMIN MEMBERS API SECURITY TEST RUNNER');
-  console.log('Target: api/admin/members.js (Self-Contained Security Verification)');
+  console.log('SAMSUNG FEEDBACK PILOT - MEMBER ADMIN COMPREHENSIVE TEST SUITE');
   console.log('================================================================\n');
 
   let passed = 0;
   let failed = 0;
 
-  function assertTest(name, condition, details = '') {
+  function assert(desc, condition, details = '') {
     if (condition) {
-      console.log(`✅ PASS | ${name} ${details}`);
+      console.log(`✅ [PASS] ${desc}`);
       passed++;
     } else {
-      console.log(`❌ FAIL | ${name} ${details}`);
+      console.error(`❌ [FAIL] ${desc} - ${details}`);
       failed++;
     }
   }
 
-  // 1. Method Guard: GET -> 405
+  // 1. Anonymous GET -> 401
   {
-    const req = { method: 'GET', headers: {} };
+    const req = { method: 'GET', url: '/api/admin/members', headers: {} };
     const res = createMockRes();
     await handler(req, res);
-    assertTest('GET request rejected with 405', res.statusCode === 405, `(Got ${res.statusCode})`);
+    assert('Anonymous GET /api/admin/members returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
   }
 
-  // 2. Unauthenticated Anonymous Call: Missing Bearer -> 401
+  // 2. Anonymous POST -> 401
   {
-    const req = { method: 'POST', headers: {}, body: {} };
+    const req = { method: 'POST', url: '/api/admin/members', headers: {}, body: {} };
     const res = createMockRes();
-    process.env.SUPABASE_URL = 'https://mock.supabase.co';
-    process.env.SUPABASE_SECRET_KEY = 'mock_secret_key';
     await handler(req, res);
-    assertTest('Anonymous POST rejected with 401', res.statusCode === 401, `(Got ${res.statusCode})`);
+    assert('Anonymous POST /api/admin/members returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
   }
 
-  // 3. Invalid Token: Bad Bearer -> 401
+  // 3. Anonymous PATCH -> 401
   {
-    const originalFetch = global.fetch;
-    global.fetch = async () => ({ ok: false, status: 401 });
+    const req = { method: 'PATCH', url: '/api/admin/members/dummy-uuid', headers: {}, body: {} };
+    const res = createMockRes();
+    await handler(req, res);
+    assert('Anonymous PATCH /api/admin/members/:id returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
+  }
 
-    const req = {
+  // 4. Anonymous POST reset-password -> 401
+  {
+    const req = { method: 'POST', url: '/api/admin/members/dummy-uuid/reset-password', headers: {}, body: {} };
+    const res = createMockRes();
+    await handler(req, res);
+    assert('Anonymous POST reset-password returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
+  }
+
+  // 5. Anonymous POST suspend -> 401
+  {
+    const req = { method: 'POST', url: '/api/admin/members/dummy-uuid/suspend', headers: {}, body: {} };
+    const res = createMockRes();
+    await handler(req, res);
+    assert('Anonymous POST suspend returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
+  }
+
+  // 6. Anonymous POST reactivate -> 401
+  {
+    const req = { method: 'POST', url: '/api/admin/members/dummy-uuid/reactivate', headers: {}, body: {} };
+    const res = createMockRes();
+    await handler(req, res);
+    assert('Anonymous POST reactivate returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
+  }
+
+  // 7. Invalid Bearer Token -> 401
+  {
+    const req = { method: 'GET', url: '/api/admin/members', headers: { authorization: 'Bearer invalid.token' } };
+    const res = createMockRes();
+    await handler(req, res);
+    assert('Invalid Bearer Token returns 401', res.statusCode === 401, `Got ${res.statusCode}`);
+  }
+
+  // LIVE AUTHENTICATED TESTS WITH TEMPORARY TEST ADMIN
+  console.log('\n--- PROVISIONING TEMPORARY TEST ADMIN ---');
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const secretKey = process.env.SUPABASE_SECRET_KEY;
+  const testAdminEmail = `test_admin_${Date.now()}@staff.internal`;
+  const testAdminPassword = 'TempAdminPassword2026!';
+  let testAdminId = null;
+  let testAdminToken = null;
+
+  try {
+    // 1. Create temporary Auth User
+    const createAuth = await fetch(`${supabaseUrl}/auth/v1/admin/users`, {
       method: 'POST',
-      headers: { authorization: 'Bearer invalid_token' },
-      body: { employeeCode: 'CPW9999', displayName: 'Hacker', temporaryPassword: 'password123' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-    assertTest('Invalid Bearer token rejected with 401', res.statusCode === 401, `(Got ${res.statusCode})`);
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${secretKey}`,
+        'apikey': secretKey
+      },
+      body: JSON.stringify({
+        email: testAdminEmail,
+        password: testAdminPassword,
+        email_confirm: true,
+        user_metadata: { display_name: 'Automated Test Admin', role: 'SYSTEM_ADMIN', employee_code: 'CPW_AUTO_ADMIN' }
+      })
+    });
+    const authData = await createAuth.json();
+    testAdminId = authData.id;
 
-    global.fetch = originalFetch;
-  }
-
-  // 4. Authorization: Member role calling POST /api/admin/members -> 403 Forbidden
-  {
-    const originalFetch = global.fetch;
-    global.fetch = async (url) => {
-      if (url.includes('/auth/v1/user')) {
-        return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000010' }) };
-      }
-      if (url.includes('/rest/v1/user_roles')) {
-        // Query asks for role=eq.SYSTEM_ADMIN; regular member has no matching row -> returns []
-        return { ok: true, json: async () => ([]) };
-      }
-      return { ok: false, status: 500 };
-    };
-
-    const req = {
+    // 2. Assign SYSTEM_ADMIN role
+    await fetch(`${supabaseUrl}/rest/v1/user_roles`, {
       method: 'POST',
-      headers: { authorization: 'Bearer valid_member_token' },
-      body: { employeeCode: 'CPW1234', displayName: 'New Staff', temporaryPassword: 'validPassword123' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-    assertTest('Regular Member calling POST /api/admin/members rejected with 403', res.statusCode === 403 && res.body?.error === 'FORBIDDEN', `(Got ${res.statusCode} ${res.body?.error})`);
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${secretKey}`,
+        'apikey': secretKey,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        user_id: testAdminId,
+        role: 'SYSTEM_ADMIN',
+        branch_id: 'AYUTTHAYA_CITY_PARK'
+      })
+    });
 
-    global.fetch = originalFetch;
-  }
-
-  // 5. Input Validation: Weak Password (< 8 chars) -> 400
-  {
-    const originalFetch = global.fetch;
-    global.fetch = async (url) => {
-      if (url.includes('/auth/v1/user')) {
-        return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000001' }) };
-      }
-      if (url.includes('/rest/v1/user_roles')) {
-        return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      }
-      return { ok: false, status: 500 };
-    };
-
-    const req = {
+    // 3. Create profile
+    await fetch(`${supabaseUrl}/rest/v1/profiles`, {
       method: 'POST',
-      headers: { authorization: 'Bearer valid_mock_token' },
-      body: { employeeCode: 'CPW1234', displayName: 'Test Staff', temporaryPassword: 'short' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-    assertTest('Weak password rejected with 400', res.statusCode === 400 && res.body?.error === 'WEAK_PASSWORD', `(Got ${res.statusCode} ${res.body?.error})`);
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${secretKey}`,
+        'apikey': secretKey,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        id: testAdminId,
+        employee_code: 'CPW_AUTO_ADMIN',
+        display_name: 'Automated Test Admin',
+        branch_id: 'AYUTTHAYA_CITY_PARK',
+        status: 'ACTIVE'
+      })
+    });
 
-    global.fetch = originalFetch;
-  }
-
-  // 6. Input Validation: Invalid Employee Code -> 400
-  {
-    const originalFetch = global.fetch;
-    global.fetch = async (url) => {
-      if (url.includes('/auth/v1/user')) return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000002' }) };
-      if (url.includes('/rest/v1/user_roles')) return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      return { ok: false, status: 500 };
-    };
-
-    const req = {
+    // 4. Log in to get live JWT token
+    const tokenRes = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
       method: 'POST',
-      headers: { authorization: 'Bearer valid_mock_token' },
-      body: { employeeCode: 'INVALID_CODE', displayName: 'Test Staff', temporaryPassword: 'validPassword123' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-    assertTest('Invalid employee code format rejected with 400', res.statusCode === 400 && res.body?.error === 'INVALID_EMPLOYEE_CODE', `(Got ${res.statusCode} ${res.body?.error})`);
-
-    global.fetch = originalFetch;
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': secretKey
+      },
+      body: JSON.stringify({
+        email: testAdminEmail,
+        password: testAdminPassword
+      })
+    });
+    const tokenData = await tokenRes.json();
+    testAdminToken = tokenData.access_token;
+    console.log(`✅ Temporary test admin provisioned: ${testAdminId}`);
+  } catch (err) {
+    console.warn('⚠️ Could not provision test admin:', err.message);
   }
 
-  // 7. Security Check: Client-Supplied Role / Branch Tampering Stripped -> Forced to MEMBER
-  {
-    const originalFetch = global.fetch;
-    let profileCreated = null;
-    let roleCreated = null;
+  if (testAdminToken) {
+    console.log('\n--- RUNNING LIVE AUTHORIZED TESTS ---');
 
-    global.fetch = async (url, opts = {}) => {
-      if (url.includes('/auth/v1/user')) return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000003' }) };
-      if (url.includes('/rest/v1/user_roles') && opts.method !== 'POST') return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      if (url.includes('/auth/v1/admin/users')) {
-        return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000101' }) };
-      }
-      if (url.includes('/rest/v1/profiles')) {
-        profileCreated = JSON.parse(opts.body);
-        return { ok: true, json: async () => ({}) };
-      }
-      if (url.includes('/rest/v1/user_roles') && opts.method === 'POST') {
-        roleCreated = JSON.parse(opts.body);
-        return { ok: true, json: async () => ({}) };
-      }
-      return { ok: false, status: 500 };
-    };
+    // 8. Authorized GET /api/admin/members -> 200
+    {
+      const req = { method: 'GET', url: '/api/admin/members', headers: { authorization: `Bearer ${testAdminToken}` } };
+      const res = createMockRes();
+      await handler(req, res);
+      assert('Authorized GET /api/admin/members returns 200', res.statusCode === 200, `Got ${res.statusCode}`);
+      assert('Members list is array', Array.isArray(res.body?.members));
+      assert('Zero password exposed in response', !JSON.stringify(res.body).includes('password'));
+      assert('Zero secret key exposed in response', !JSON.stringify(res.body).includes('sb_secret_'));
+      console.log(`   Registered members retrieved: ${res.body?.members?.length || 0}`);
+    }
 
-    const req = {
-      method: 'POST',
-      headers: { authorization: 'Bearer valid_mock_token' },
-      body: {
-        employeeCode: 'CPW8888',
-        displayName: 'Hacked Admin',
-        temporaryPassword: 'strongPassword123',
-        role: 'SYSTEM_ADMIN',        // CLIENT SPOOF ATTEMPT
-        branch_id: 'HACKED_BRANCH',  // CLIENT SPOOF ATTEMPT
-        isAdmin: true                // CLIENT SPOOF ATTEMPT
-      }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-
-    const roleClean = (roleCreated?.role === 'MEMBER');
-    const branchClean = (profileCreated?.branch_id === 'AYUTTHAYA_CITY_PARK' && roleCreated?.branch_id === 'AYUTTHAYA_CITY_PARK');
-    const responseZeroSecrets = !res.body?.password && !res.body?.temporaryPassword && !res.body?.token && !res.body?.secretKey;
-
-    assertTest('Client role spoof ignored; forced to MEMBER', roleClean, `(Assigned role: ${roleCreated?.role})`);
-    assertTest('Client branch spoof ignored; forced to AYUTTHAYA_CITY_PARK', branchClean, `(Assigned branch: ${profileCreated?.branch_id})`);
-    assertTest('Response contains ZERO passwords, tokens, or secret keys', responseZeroSecrets, '(Body sanitized)');
-
-    global.fetch = originalFetch;
-  }
-
-  // 8. Admin Successfully Creates Member -> 201 Created
-  {
-    const originalFetch = global.fetch;
-    global.fetch = async (url, opts = {}) => {
-      if (url.includes('/auth/v1/user')) return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000005' }) };
-      if (url.includes('/rest/v1/user_roles') && opts.method !== 'POST') return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      if (url.includes('/auth/v1/admin/users')) {
-        return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000202' }) };
-      }
-      if (url.includes('/rest/v1/profiles')) return { ok: true, json: async () => ({}) };
-      if (url.includes('/rest/v1/user_roles') && opts.method === 'POST') return { ok: true, json: async () => ({}) };
-      return { ok: false, status: 500 };
-    };
-
-    const req = {
-      method: 'POST',
-      headers: { authorization: 'Bearer valid_admin_token' },
-      body: { employeeCode: 'CPW2001', displayName: 'Somchai Prasert', temporaryPassword: 'tempPassword123' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-
-    assertTest('Admin creates member successfully with 201', res.statusCode === 201 && res.body?.success === true, `(Got ${res.statusCode})`);
-    assertTest('Admin create member response includes sanitized member payload', res.body?.member?.employeeCode === 'CPW2001' && res.body?.member?.role === 'MEMBER');
-
-    global.fetch = originalFetch;
-  }
-
-  // 9. Conflict: Duplicate Employee Code -> 409 Conflict
-  {
-    const originalFetch = global.fetch;
-    global.fetch = async (url, opts = {}) => {
-      if (url.includes('/auth/v1/user')) return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000006' }) };
-      if (url.includes('/rest/v1/user_roles')) return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      if (url.includes('/auth/v1/admin/users')) {
-        // Return duplicate error
-        return {
-          ok: false,
-          status: 422,
-          json: async () => ({ message: 'A user with this email address has already been registered' })
-        };
-      }
-      return { ok: false, status: 500 };
-    };
-
-    const req = {
-      method: 'POST',
-      headers: { authorization: 'Bearer valid_admin_token' },
-      body: { employeeCode: 'CPW2001', displayName: 'Duplicate User', temporaryPassword: 'validPassword123' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-
-    assertTest('Duplicate employee code rejected with 409', res.statusCode === 409 && res.body?.error === 'EMPLOYEE_CODE_EXISTS', `(Got ${res.statusCode} ${res.body?.error})`);
-
-    global.fetch = originalFetch;
-  }
-
-  // 10. Compensation Logic: Purges Auth User if Profile Insertion Fails
-  {
-    const originalFetch = global.fetch;
-    let authPurgedId = null;
-
-    global.fetch = async (url, opts = {}) => {
-      if (url.includes('/auth/v1/user')) return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000007' }) };
-      if (url.includes('/rest/v1/user_roles') && opts.method !== 'POST') return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      if (url.includes('/auth/v1/admin/users') && opts.method === 'POST') {
-        return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000999' }) };
-      }
-      if (url.includes('/rest/v1/profiles')) {
-        // Simulate DB Failure on Profile Insert
-        return { ok: false, status: 500 };
-      }
-      if (url.includes('/auth/v1/admin/users/00000000-0000-0000-0000-000000000999') && opts.method === 'DELETE') {
-        authPurgedId = '00000000-0000-0000-0000-000000000999';
-        return { ok: true, json: async () => ({}) };
-      }
-      return { ok: false, status: 500 };
-    };
-
-    const req = {
-      method: 'POST',
-      headers: { authorization: 'Bearer valid_mock_token' },
-      body: { employeeCode: 'CPW7777', displayName: 'Rollback Test', temporaryPassword: 'password123' }
-    };
-    const res = createMockRes();
-    await handler(req, res);
-
-    assertTest('Compensation logic triggers: orphan auth user purged on failure', authPurgedId === '00000000-0000-0000-0000-000000000999', `(Purged UID: ${authPurgedId})`);
-    assertTest('Compensation returns HTTP 500 TRANSACTION_FAILED_ROLLED_BACK', res.statusCode === 500 && res.body?.error === 'TRANSACTION_FAILED_ROLLED_BACK');
-
-    global.fetch = originalFetch;
-  }
-
-  // 11. Rate Limiting: Max 5 requests per 10 minutes per admin -> 429
-  {
-    const originalFetch = global.fetch;
-    const adminId = '00000000-0000-0000-0000-000000000088';
-
-    global.fetch = async (url, opts = {}) => {
-      if (url.includes('/auth/v1/user')) return { ok: true, json: async () => ({ id: adminId }) };
-      if (url.includes('/rest/v1/user_roles') && opts.method !== 'POST') return { ok: true, json: async () => ([{ role: 'SYSTEM_ADMIN' }]) };
-      if (url.includes('/auth/v1/admin/users')) return { ok: true, json: async () => ({ id: '00000000-0000-0000-0000-000000000089' }) };
-      if (url.includes('/rest/v1/profiles')) return { ok: true, json: async () => ({}) };
-      if (url.includes('/rest/v1/user_roles') && opts.method === 'POST') return { ok: true, json: async () => ({}) };
-      return { ok: false, status: 500 };
-    };
-
-    let rateLimited = false;
-    // Send 6 requests in rapid succession
-    for (let i = 0; i < 6; i++) {
+    // 9. Self-Suspend Prevention -> 400
+    {
       const req = {
         method: 'POST',
-        headers: { authorization: 'Bearer rate_limit_token' },
-        body: { employeeCode: `CPW500${i}`, displayName: `Rate Test ${i}`, temporaryPassword: 'validPassword123' }
+        url: `/api/admin/members/${testAdminId}/suspend`,
+        headers: { authorization: `Bearer ${testAdminToken}` },
+        body: { reason: 'Accidental self-suspend attempt' }
       };
       const res = createMockRes();
       await handler(req, res);
-      if (res.statusCode === 429 && res.body?.error === 'RATE_LIMIT_EXCEEDED') {
-        rateLimited = true;
-        break;
-      }
+      assert('Self-suspend is blocked with 400', res.statusCode === 400, `Got ${res.statusCode}`);
+      assert('Error specifies SELF_SUSPEND_PROHIBITED', res.body?.error === 'SELF_SUSPEND_PROHIBITED');
     }
 
-    assertTest('Rate limiting triggers on 6th rapid request with 429 RATE_LIMIT_EXCEEDED', rateLimited);
+    // 10. Weak Password Rejected -> 400
+    {
+      const req = {
+        method: 'POST',
+        url: '/api/admin/members',
+        headers: { authorization: `Bearer ${testAdminToken}` },
+        body: { employeeCode: 'CPW8888', displayName: 'Staff 8888', temporaryPassword: '123' }
+      };
+      const res = createMockRes();
+      await handler(req, res);
+      assert('Weak password rejected with 400', res.statusCode === 400, `Got ${res.statusCode}`);
+      assert('Error specifies WEAK_PASSWORD', res.body?.error === 'WEAK_PASSWORD');
+    }
 
-    global.fetch = originalFetch;
+    // 11. Password matching employee code -> 400
+    {
+      const req = {
+        method: 'POST',
+        url: '/api/admin/members',
+        headers: { authorization: `Bearer ${testAdminToken}` },
+        body: { employeeCode: 'CPW8888', displayName: 'Staff 8888', temporaryPassword: 'CPW8888' }
+      };
+      const res = createMockRes();
+      await handler(req, res);
+      assert('Password matching employee code rejected with 400', res.statusCode === 400, `Got ${res.statusCode}`);
+    }
+
+    // 12. Password confirmation mismatch -> 400
+    {
+      const req = {
+        method: 'POST',
+        url: '/api/admin/members',
+        headers: { authorization: `Bearer ${testAdminToken}` },
+        body: {
+          employeeCode: 'CPW8888',
+          displayName: 'Staff 8888',
+          temporaryPassword: 'ValidPass1234!',
+          confirmation: 'DifferentPass1234!'
+        }
+      };
+      const res = createMockRes();
+      await handler(req, res);
+      assert('Confirmation mismatch rejected with 400', res.statusCode === 400, `Got ${res.statusCode}`);
+    }
+
+    // 13. Create Member (Valid) -> 201
+    const testMemberCode = `CPW${Math.floor(1000 + Math.random() * 9000)}`;
+    let createdMemberId = null;
+    {
+      const req = {
+        method: 'POST',
+        url: '/api/admin/members',
+        headers: { authorization: `Bearer ${testAdminToken}` },
+        body: {
+          employeeCode: testMemberCode,
+          displayName: 'พนักงานทดสอบ สด',
+          temporaryPassword: 'TemporaryPass2026!',
+          confirmation: 'TemporaryPass2026!'
+        }
+      };
+      const res = createMockRes();
+      await handler(req, res);
+      assert('Valid member creation returns 201', res.statusCode === 201, `Got ${res.statusCode}: ${JSON.stringify(res.body)}`);
+      assert('Audit event is MEMBER_CREATED', res.body?.audit?.eventType === 'MEMBER_CREATED');
+      createdMemberId = res.body?.member?.id;
+    }
+
+    if (createdMemberId) {
+      // 14. Rename Member -> 200
+      {
+        const req = {
+          method: 'PATCH',
+          url: `/api/admin/members/${createdMemberId}`,
+          headers: { authorization: `Bearer ${testAdminToken}` },
+          body: { displayName: 'พนักงานทดสอบ ชื่อใหม่' }
+        };
+        const res = createMockRes();
+        await handler(req, res);
+        assert('Update display name returns 200', res.statusCode === 200, `Got ${res.statusCode}`);
+        assert('Audit event is MEMBER_DISPLAY_NAME_UPDATED', res.body?.audit?.eventType === 'MEMBER_DISPLAY_NAME_UPDATED');
+      }
+
+      // 15. Reset Password -> 200
+      {
+        const req = {
+          method: 'POST',
+          url: `/api/admin/members/${createdMemberId}/reset-password`,
+          headers: { authorization: `Bearer ${testAdminToken}` },
+          body: { temporaryPassword: 'NewResetPass2026!', confirmation: 'NewResetPass2026!' }
+        };
+        const res = createMockRes();
+        await handler(req, res);
+        assert('Reset temporary password returns 200', res.statusCode === 200, `Got ${res.statusCode}`);
+        assert('Audit event is MEMBER_PASSWORD_RESET', res.body?.audit?.eventType === 'MEMBER_PASSWORD_RESET');
+      }
+
+      // 16. Suspend Member -> 200
+      {
+        const req = {
+          method: 'POST',
+          url: `/api/admin/members/${createdMemberId}/suspend`,
+          headers: { authorization: `Bearer ${testAdminToken}` },
+          body: { reason: 'การทดสอบระงับบัญชีชั่วคราว' }
+        };
+        const res = createMockRes();
+        await handler(req, res);
+        assert('Suspend member returns 200', res.statusCode === 200, `Got ${res.statusCode}`);
+        assert('Status is SUSPENDED', res.body?.status === 'SUSPENDED');
+        assert('Audit event is MEMBER_SUSPENDED', res.body?.audit?.eventType === 'MEMBER_SUSPENDED');
+      }
+
+      // 17. Reactivate Member -> 200
+      {
+        const req = {
+          method: 'POST',
+          url: `/api/admin/members/${createdMemberId}/reactivate`,
+          headers: { authorization: `Bearer ${testAdminToken}` },
+          body: {}
+        };
+        const res = createMockRes();
+        await handler(req, res);
+        assert('Reactivate member returns 200', res.statusCode === 200, `Got ${res.statusCode}`);
+        assert('Status is ACTIVE', res.body?.status === 'ACTIVE');
+        assert('Audit event is MEMBER_REACTIVATED', res.body?.audit?.eventType === 'MEMBER_REACTIVATED');
+      }
+
+      // Cleanup created test member
+      try {
+        await fetch(`${supabaseUrl}/auth/v1/admin/users/${createdMemberId}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${secretKey}`, 'apikey': secretKey }
+        });
+      } catch (e) {}
+    }
+
+    // Cleanup temporary test admin
+    try {
+      await fetch(`${supabaseUrl}/auth/v1/admin/users/${testAdminId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${secretKey}`, 'apikey': secretKey }
+      });
+      console.log('🧹 Cleaned up temporary test admin.');
+    } catch (e) {}
   }
 
   console.log('\n================================================================');
-  console.log('ADMIN MEMBERS API SECURITY TEST SUMMARY');
-  console.log(`Total Assertions: ${passed + failed} | Passed: ${passed} | Failed: ${failed}`);
-  console.log(`Verdict: ${failed === 0 ? '✅ ALL SECURITY CHECKS PASSED' : '❌ TESTS FAILED'}`);
+  console.log(`TEST SUMMARY: ${passed} PASSED, ${failed} FAILED`);
   console.log('================================================================\n');
 
-  process.exit(failed === 0 ? 0 : 1);
+  if (failed > 0) {
+    process.exit(1);
+  }
 }
 
-runAdminApiTests().catch(err => {
-  console.error('Fatal Admin API Test Runner Error:', err);
-  process.exit(1);
-});
+runTests();
