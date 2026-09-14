@@ -32,7 +32,7 @@ async def main():
         page = await context.new_page()
 
         print(f"\n=== 1. Login as {emp_id} ===")
-        await page.goto(f"{VERCEL_URL}/#/login")
+        await page.goto(f"{VERCEL_URL}/pilot.html#/login")
         await page.wait_for_selector("#loginEmployeeId", state="visible")
         await page.fill("#loginEmployeeId", emp_id)
         await page.fill("#loginPassword", password)
@@ -42,7 +42,7 @@ async def main():
         print("Logged in successfully!")
 
         print("\n=== 2. Navigate to #/stock ===")
-        await page.goto(f"{VERCEL_URL}/#/stock")
+        await page.goto(f"{VERCEL_URL}/pilot.html#/stock")
         await page.wait_for_selector("#stockTableBody tr", timeout=10000)
 
         # 1. Route Isolation
