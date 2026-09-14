@@ -72,7 +72,8 @@ async def main():
 
         print("\n=== STEP 3: Navigate to #/stock ===")
         await page.goto(f"http://localhost:{PORT}/pilot.html#/stock")
-        await page.wait_for_selector("#stockTableBody tr", timeout=10000)
+        await page.wait_for_selector("#stockTableBody", state="attached", timeout=10000)
+        await page.wait_for_timeout(800)
 
         # Check route isolation
         visible_pages = await page.evaluate("document.querySelectorAll('[data-pilot-route]:not([hidden])').length")
@@ -188,6 +189,46 @@ async def main():
         }""")
         print(f"Bad non-phone items in Smartphone view: {len(bad_items)}")
         assert len(bad_items) == 0, f"Found non-phone items in Smartphone table: {bad_items}"
+
+        # STEP 5.1: Verify Product Colors & Swatches (Golden Cases)
+        print("\n=== STEP 5.1: Verify Product Colors & Swatches ===")
+        # Switch back to All category
+        await page.click(".category-card.cat-all")
+        await page.wait_for_timeout(500)
+
+        color_map = await page.evaluate("""() => {
+            const rows = Array.from(document.querySelectorAll('#stockTableBody tr'));
+            const res = {};
+            rows.forEach(r => {
+                const pn = r.querySelector('.badge-pn-pill')?.textContent?.trim();
+                const color = r.querySelector('.color-name-text')?.textContent?.trim();
+                const dot = r.querySelector('.color-swatch-dot')?.style?.backgroundColor;
+                if (pn) res[pn] = { color, dot };
+            });
+            return res;
+        }""")
+
+        golden_cases = [
+            ('F-N1741BLGCTHL', 'Pistachio', 'rgb(184, 201, 160)'),
+            ('F-N1741BZKCTHL', 'Graphite', 'rgb(75, 85, 99)'),
+            ('F-N1938BZBBTHL', 'Titanium Silverblue', 'rgb(154, 174, 187)'),
+            ('F-N1938BZKBTHL', 'Titanium Black', 'rgb(52, 55, 58)'),
+            ('F-NS741BLGCLSV', 'Pistachio', 'rgb(184, 201, 160)'),
+            ('F-NS741BZKCLSV', 'Graphite', 'rgb(75, 85, 99)'),
+            ('F-NS741BZVCLSV', 'Blueberry', 'rgb(81, 82, 138)'),
+            ('SM-A075FLVDTHL', 'Light Violet', 'rgb(201, 184, 255)')
+        ]
+
+        for pn, expected_color, expected_dot in golden_cases:
+            info = color_map.get(pn)
+            assert info is not None, f"PN {pn} not found in table"
+            assert info['color'] == expected_color, f"PN {pn} expected color '{expected_color}', got '{info['color']}'"
+            assert info['dot'] == expected_dot, f"PN {pn} expected swatch '{expected_dot}', got '{info['dot']}'"
+            print(f"  ✅ {pn:16} -> {info['color']:20} | swatch: {info['dot']}")
+
+        total_colored = sum(1 for v in color_map.values() if v['color'] != 'ไม่ระบุสี')
+        print(f"Total products with explicit color in table: {total_colored} / {len(color_map)}")
+        assert total_colored > 250, f"Expected >250 colored products, got {total_colored}"
 
         print("\n=== STEP 6: Navigate to #/admin/members ===")
         await page.goto(f"http://localhost:{PORT}/pilot.html#/admin/members")

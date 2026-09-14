@@ -146,6 +146,41 @@ async def main():
         assert int(row_sample['total']) == int(row_sample['f1']) + int(row_sample['f2'])
         print(f"Row Arithmetic in Table Verified: {row_sample['total']} = {row_sample['f1']} + {row_sample['f2']}")
 
+        print("\n=== 4.1 Verify Golden Case Colors & Swatches ===")
+        color_map = await page.evaluate("""() => {
+            const rows = Array.from(document.querySelectorAll('#stockTableBody tr'));
+            const res = {};
+            rows.forEach(r => {
+                const pn = r.querySelector('.badge-pn-pill')?.textContent?.trim();
+                const color = r.querySelector('.color-name-text')?.textContent?.trim();
+                const dot = r.querySelector('.color-swatch-dot')?.style?.backgroundColor;
+                if (pn) res[pn] = { color, dot };
+            });
+            return res;
+        }""")
+
+        golden_cases = [
+            ('F-N1741BLGCTHL', 'Pistachio', 'rgb(184, 201, 160)'),
+            ('F-N1741BZKCTHL', 'Graphite', 'rgb(75, 85, 99)'),
+            ('F-N1938BZBBTHL', 'Titanium Silverblue', 'rgb(154, 174, 187)'),
+            ('F-N1938BZKBTHL', 'Titanium Black', 'rgb(52, 55, 58)'),
+            ('F-NS741BLGCLSV', 'Pistachio', 'rgb(184, 201, 160)'),
+            ('F-NS741BZKCLSV', 'Graphite', 'rgb(75, 85, 99)'),
+            ('F-NS741BZVCLSV', 'Blueberry', 'rgb(81, 82, 138)'),
+            ('SM-A075FLVDTHL', 'Light Violet', 'rgb(201, 184, 255)')
+        ]
+
+        for pn, expected_color, expected_dot in golden_cases:
+            info = color_map.get(pn)
+            assert info is not None, f"PN {pn} not found in live table"
+            assert info['color'] == expected_color, f"PN {pn} expected color '{expected_color}', got '{info['color']}'"
+            assert info['dot'] == expected_dot, f"PN {pn} expected swatch '{expected_dot}', got '{info['dot']}'"
+            print(f"  ✅ {pn:16} -> {info['color']:20} | swatch: {info['dot']}")
+
+        total_colored = sum(1 for v in color_map.values() if v['color'] != 'ไม่ระบุสี')
+        print(f"Live products with explicit color: {total_colored} / {len(color_map)}")
+        assert total_colored > 250, f"Expected >250 colored products, got {total_colored}"
+
         # Save Screenshot
         screenshot_path = os.path.join(os.getcwd(), "scratch", "live_vercel_stock_f1.png")
         await page.screenshot(path=screenshot_path, full_page=False)

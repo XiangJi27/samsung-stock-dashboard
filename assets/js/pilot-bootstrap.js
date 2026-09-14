@@ -138,6 +138,9 @@
                 item.includedInCoreDeviceKpi = false;
               }
             }
+            if (window.resolveProductColor && (!item.color || item.color === 'ไม่ระบุสี')) {
+              item.color = window.resolveProductColor(item);
+            }
           });
         }
 

@@ -4,39 +4,117 @@
     // ==========================================================================
     
     // Exact Color Swatch Map (Hex + Label)
-    const COLOR_PALETTE = {
-      "black": "#1e293b",
-      "jet black": "#0f172a",
-      "gray": "#64748b",
-      "graphite": "#334155",
-      "cream": "#fef08a",
-      "silver": "#cbd5e1",
-      "light violet": "#c4b5fd",
-      "white": "#f8fafc",
-      "sky blue": "#38bdf8",
-      "blue": "#3b82f6",
-      "cobalt violet": "#8b5cf6",
+    const COLOR_SWATCHES = {
+      "pistachio": "#b8c9a0",
+      "graphite": "#4b5563",
+      "titanium-silverblue": "#9aaebb",
+      "titanium-black": "#34373a",
+      "blueberry": "#51528a",
+      "light-violet": "#c9b8ff",
+      "cobalt-violet": "#6652a3",
+      "light-blue": "#a9cfe5",
+      "pink-gold": "#d9aaa5",
+      "silver": "#c5c9ce",
+      "black": "#25282d",
+      "white": "#f4f4f2",
+      "gray": "#858a90",
+      "grey": "#858a90",
+      "titanium-gray": "#787c82",
+      "titanium-white": "#f1f3f5",
+      "blue-violet": "#7c3aed",
+      "jetblack": "#0f172a",
+      "icyblue": "#bfdbfe",
       "lavender": "#d8b4fe",
-      "violet shadow": "#7c3aed",
-      "blue shadow": "#1d4ed8",
+      "cream": "#fef08a",
       "pink": "#f472b6",
-      "pink gold": "#fbcfe8",
-      "dark blue": "#1e3a8a",
+      "mint": "#6ee7b7",
+      "coral-red": "#f87171",
+      "dark-green": "#166534",
+      "dark-blue": "#1e3a8a",
+      "sky-blue": "#38bdf8",
+      "blue": "#3b82f6",
       "violet": "#a855f7",
-      "coral red": "#f87171",
       "yellow": "#facc15",
       "green": "#10b981",
-      "mint": "#6ee7b7",
       "gold": "#eab308"
     };
 
-    function getColorHex(colorName) {
-      if (!colorName) return "#64748b";
-      const clean = colorName.toLowerCase().trim();
-      for (const [key, hex] of Object.entries(COLOR_PALETTE)) {
-        if (clean.includes(key)) return hex;
+    const KNOWN_COLORS = [
+      "Titanium Silverblue",
+      "Titanium Black",
+      "Titanium Gray",
+      "Titanium White",
+      "Cobalt Violet",
+      "Light Violet",
+      "Light Blue",
+      "Blue Violet",
+      "Pink Gold",
+      "Pistachio",
+      "Graphite",
+      "Blueberry",
+      "Jetblack",
+      "Icyblue",
+      "Silver",
+      "White",
+      "Black",
+      "Gray",
+      "Grey",
+      "Violet",
+      "Lavender",
+      "Cream",
+      "Pink",
+      "Mint",
+      "Coral Red",
+      "Dark Green",
+      "Dark Blue",
+      "Sky Blue"
+    ];
+
+    function extractColorFromDescription(description) {
+      const text = String(description || "").trim();
+      if (!text) return "";
+      const parts = text.split(/\s+-\s+/).map(p => p.trim()).filter(Boolean);
+      if (parts.length < 2) return "";
+      const candidate = parts[parts.length - 1];
+      if (!candidate || /^\d/.test(candidate) || /^(5G|4G|LTE|WI-?FI)$/i.test(candidate)) {
+        return "";
       }
-      return "#475569";
+      return candidate;
+    }
+
+    function extractKnownColor(description) {
+      const text = String(description || "").trim().toLowerCase();
+      const sorted = KNOWN_COLORS.slice().sort((a, b) => b.length - a.length);
+      for (const color of sorted) {
+        if (text.endsWith(color.toLowerCase())) {
+          return color;
+        }
+      }
+      return "";
+    }
+
+    function resolveProductColor(item) {
+      const existing = String((item && item.color) || "").trim();
+      if (existing && existing !== "ไม่ระบุสี") return existing;
+      const description = (item && (item.description || item.raw_desc || item.model)) || "";
+      return extractColorFromDescription(description) || extractKnownColor(description) || "";
+    }
+
+    function normalizeColorKey(color) {
+      return String(color || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+    }
+
+    function getColorHex(colorName) {
+      if (!colorName || colorName === "ไม่ระบุสี") return "#64748b";
+      const key = normalizeColorKey(colorName);
+      if (COLOR_SWATCHES[key]) return COLOR_SWATCHES[key];
+      for (const [k, hex] of Object.entries(COLOR_SWATCHES)) {
+        if (key.includes(k) || k.includes(key)) return hex;
+      }
+      return "#858a90";
     }
 
     // Default Fallback Dataset (if running completely standalone without stock_data.js)
@@ -1181,6 +1259,9 @@
         if (!item.connectivity) {
           item.connectivity = resolveConnectivity(item);
         }
+        if (!item.color) {
+          item.color = resolveProductColor(item);
+        }
       });
 
       if (window.PROMOTION_VARIANTS && window.PROMOTION_VARIANTS.length > 0) {
@@ -1537,6 +1618,10 @@
     window.CATEGORY_ALIASES = CATEGORY_ALIASES;
     window.resolveCanonicalCategory = resolveCanonicalCategory;
     window.isSmartphone = isSmartphone;
+    window.resolveProductColor = resolveProductColor;
+    window.getColorHex = getColorHex;
+    window.COLOR_SWATCHES = COLOR_SWATCHES;
+    window.normalizeColorKey = normalizeColorKey;
 
     function updateCategoryCardCounts() {
       const counts = {
@@ -1733,8 +1818,9 @@
       items.forEach((item, index) => {
         try {
           const specs = parseSpecs(item);
-          const colorName = item.color || "ไม่ระบุสี";
-          const colorHex = getColorHex(colorName);
+          const resolvedColor = resolveProductColor(item);
+          const colorName = resolvedColor || "ไม่ระบุสี";
+          const colorHex = getColorHex(resolvedColor);
           const f1 = Number(item.f1 || 0);
           const f2 = Number(item.f2 || 0);
           const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
