@@ -24,9 +24,10 @@ def test_runtime_ui():
         print("OK: Header badge correctly displays expired status before login", flush=True)
         
         # Perform Login using correct form IDs (#loginEmployeeId, #loginPassword)
+        mock_password = os.environ.get("TEST_MOCK_PASSWORD", "SamsungDev2026!")
         print("2. Logging in with employee credentials...", flush=True)
         page.fill("#loginEmployeeId", "admin")
-        page.fill("#loginPassword", "SamsungDev2026!")
+        page.fill("#loginPassword", mock_password)
         page.click("#btnLoginSubmit")
         
         page.wait_for_timeout(1000)

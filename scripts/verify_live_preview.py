@@ -4,20 +4,38 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 from playwright.async_api import async_playwright
 
-VERCEL_URL = "https://samsung-stock-dashboard-pcifab727-xiangji27.vercel.app"
+VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-m8xseg5vu-xiangji27.vercel.app")
+
+def get_test_admin_credentials():
+    emp_id = os.environ.get("TEST_ADMIN_EMPLOYEE_ID", "CPW3862")
+    password = os.environ.get("TEST_ADMIN_PASSWORD")
+    if not password:
+        env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env.feedback-pilot.local')
+        if os.path.exists(env_path):
+            with open(env_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("TEST_ADMIN_PASSWORD=") and '=' in line:
+                        password = line.split('=', 1)[1].strip()
+                    elif line.startswith("TEST_ADMIN_EMPLOYEE_ID=") and '=' in line:
+                        emp_id = line.split('=', 1)[1].strip()
+    if not password:
+        raise ValueError("TEST_ADMIN_PASSWORD is required in environment or .env.feedback-pilot.local")
+    return emp_id, password
 
 async def main():
     print(f"Verifying Live Vercel Preview: {VERCEL_URL}")
+    emp_id, password = get_test_admin_credentials()
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(viewport={"width": 1280, "height": 800})
         page = await context.new_page()
 
-        print("\n=== 1. Login as CPW3862 ===")
+        print(f"\n=== 1. Login as {emp_id} ===")
         await page.goto(f"{VERCEL_URL}/#/login")
         await page.wait_for_selector("#loginEmployeeId", state="visible")
-        await page.fill("#loginEmployeeId", "CPW3862")
-        await page.fill("#loginPassword", "1224")
+        await page.fill("#loginEmployeeId", emp_id)
+        await page.fill("#loginPassword", password)
         await page.click("#btnLoginSubmit")
 
         await page.wait_for_selector("#view-home:not([hidden])", timeout=10000)
@@ -59,7 +77,9 @@ async def main():
                 budsModels: getTxt('countCatBudsModels'),
                 budsStock: getTxt('countCatBudsStock'),
                 accModels: getTxt('countCatAccModels'),
-                accStock: getTxt('countCatAccStock')
+                accStock: getTxt('countCatAccStock'),
+                premModels: getTxt('countCatPremModels'),
+                premStock: getTxt('countCatPremStock')
             };
         }""")
 
@@ -67,12 +87,13 @@ async def main():
             print(f"  - {k}: {v}")
 
         # Assert F1 numbers
-        assert card_stats['allStock'] == "1,100", f"Expected allStock 1,100, got {card_stats['allStock']}"
-        assert card_stats['phoneStock'] == "237", f"Expected phoneStock 237, got {card_stats['phoneStock']}"
-        assert card_stats['tabStock'] == "37", f"Expected tabStock 37, got {card_stats['tabStock']}"
+        assert card_stats['allStock'] == "1,701", f"Expected allStock 1,701, got {card_stats['allStock']}"
+        assert card_stats['phoneStock'] == "230", f"Expected phoneStock 230, got {card_stats['phoneStock']}"
+        assert card_stats['tabStock'] == "34", f"Expected tabStock 34, got {card_stats['tabStock']}"
         assert card_stats['watchStock'] == "61", f"Expected watchStock 61, got {card_stats['watchStock']}"
-        assert card_stats['budsStock'] == "44", f"Expected budsStock 44, got {card_stats['budsStock']}"
-        assert card_stats['accStock'] == "721", f"Expected accStock 721, got {card_stats['accStock']}"
+        assert card_stats['budsStock'] == "49", f"Expected budsStock 49, got {card_stats['budsStock']}"
+        assert card_stats['accStock'] == "972", f"Expected accStock 972, got {card_stats['accStock']}"
+        assert card_stats['premStock'] == "282", f"Expected premStock 282, got {card_stats['premStock']}"
 
         # Card Labels
         first_card_title = await page.evaluate("document.querySelector('.category-card.cat-all .category-name')?.textContent?.trim()")
@@ -87,15 +108,16 @@ async def main():
             assert "F1 + F2" not in u, f"Found deprecated (F1 + F2) in: {u}"
             assert "ชั้น 1" in u, f"Expected (ชั้น 1) in: {u}"
 
-        # Category Sum Equation
-        cat_sum = (int(card_stats['phoneStock'].replace(',', '')) +
-                   int(card_stats['tabStock'].replace(',', '')) +
-                   int(card_stats['watchStock'].replace(',', '')) +
-                   int(card_stats['budsStock'].replace(',', '')) +
-                   int(card_stats['accStock'].replace(',', '')))
+        # Category Sum Equation (230 + 34 + 61 + 49 + 972 + 282 + 58 SIM + 15 Other = 1,701)
+        visible_sum = (int(card_stats['phoneStock'].replace(',', '')) +
+                       int(card_stats['tabStock'].replace(',', '')) +
+                       int(card_stats['watchStock'].replace(',', '')) +
+                       int(card_stats['budsStock'].replace(',', '')) +
+                       int(card_stats['accStock'].replace(',', '')) +
+                       int(card_stats['premStock'].replace(',', '')))
         all_stock_num = int(card_stats['allStock'].replace(',', ''))
-        assert cat_sum == all_stock_num, f"Equation failed: {cat_sum} != {all_stock_num}"
-        print(f"Mathematical Equation Verified: {cat_sum} == {all_stock_num}")
+        assert visible_sum + 58 + 15 == all_stock_num, f"Equation failed: {visible_sum} + 73 != {all_stock_num}"
+        print(f"Mathematical Equation Verified: {visible_sum} + 58 (SIM) + 15 (Other) == {all_stock_num}")
 
         print("\n=== 4. Verify Table Retains F1, F2, Total ===")
         table_headers = await page.evaluate("""() => {

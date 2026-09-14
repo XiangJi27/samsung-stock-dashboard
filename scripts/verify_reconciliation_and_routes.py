@@ -21,7 +21,25 @@ def start_server():
     httpd = socketserver.TCPServer(("", PORT), Handler)
     httpd.serve_forever()
 
+def get_test_admin_credentials():
+    emp_id = os.environ.get("TEST_ADMIN_EMPLOYEE_ID", "CPW3862")
+    password = os.environ.get("TEST_ADMIN_PASSWORD")
+    if not password:
+        env_path = os.path.join(DIRECTORY, '.env.feedback-pilot.local')
+        if os.path.exists(env_path):
+            with open(env_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("TEST_ADMIN_PASSWORD=") and '=' in line:
+                        password = line.split('=', 1)[1].strip()
+                    elif line.startswith("TEST_ADMIN_EMPLOYEE_ID=") and '=' in line:
+                        emp_id = line.split('=', 1)[1].strip()
+    if not password:
+        raise ValueError("TEST_ADMIN_PASSWORD is required in environment or .env.feedback-pilot.local")
+    return emp_id, password
+
 async def main():
+    emp_id, password = get_test_admin_credentials()
     server_thread = threading.Thread(target=start_server, daemon=True)
     server_thread.start()
     time.sleep(1)
@@ -39,9 +57,9 @@ async def main():
         await page.goto(f"http://localhost:{PORT}/pilot.html#/login")
         await page.wait_for_selector("#loginEmployeeId", state="visible")
 
-        print("=== STEP 2: Login as Manager CPW3862 ===")
-        await page.fill("#loginEmployeeId", "CPW3862")
-        await page.fill("#loginPassword", "1224")
+        print(f"=== STEP 2: Login as Manager {emp_id} ===")
+        await page.fill("#loginEmployeeId", emp_id)
+        await page.fill("#loginPassword", password)
         await page.click("#btnLoginSubmit")
 
         await page.wait_for_selector("#view-home:not([hidden])", timeout=10000)

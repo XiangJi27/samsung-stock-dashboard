@@ -9,10 +9,11 @@ def test_direct_refresh():
         context = browser.new_context()
         page = context.new_page()
 
+        mock_password = os.environ.get("TEST_MOCK_PASSWORD", "SamsungDev2026!")
         print("1. Logging in to establish sessionStorage session...", flush=True)
         page.goto("http://localhost:8080/#/login", wait_until="networkidle")
         page.fill("#loginEmployeeId", "admin")
-        page.fill("#loginPassword", "SamsungDev2026!")
+        page.fill("#loginPassword", mock_password)
         page.click("#btnLoginSubmit")
         page.wait_for_timeout(1000)
         assert "#/home" in page.url
