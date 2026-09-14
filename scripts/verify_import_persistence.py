@@ -99,10 +99,37 @@ async def main():
         assert phone_stock == "230", f"Expected 230, got {phone_stock}"
         assert buds_stock == "49", f"Expected 49, got {buds_stock}"
 
+        print("\n=== TEST 2.5: Verify S25FE Navy and Focus Premium Bag ===")
+        item_checks = await page.evaluate("""() => {
+            const data = window.LATEST_STOCK_SNAPSHOT || [];
+            const s25fe = data.find(i => i.pn === 'SM-S731BDBCTHL');
+            const bag = data.find(i => i.pn === '8859703434269');
+            return { s25fe, bag };
+        }""")
+        s25fe = item_checks.get('s25fe')
+        bag = item_checks.get('bag')
+        print(f"S25FE: {s25fe}")
+        print(f"Bag: {bag}")
+
+        assert s25fe is not None, "FAIL: S25FE (SM-S731BDBCTHL) not found in stock snapshot"
+        assert s25fe.get('color') == "Navy", f"FAIL: Expected color 'Navy', got '{s25fe.get('color')}'"
+        assert s25fe.get('color') != "ไม่ระบุสี", "FAIL: S25FE is marked as 'ไม่ระบุสี'"
+
+        assert bag is not None, "FAIL: Focus Premium Bag (8859703434269) not found in stock snapshot"
+        assert bag.get('category') == "Premium", f"FAIL: Expected category 'Premium', got '{bag.get('category')}'"
+        assert bag.get('color') == "Black", f"FAIL: Expected color 'Black', got '{bag.get('color')}'"
+        assert bag.get('f1') == 1, f"FAIL: Expected f1=1, got {bag.get('f1')}"
+        assert bag.get('f2') == 0, f"FAIL: Expected f2=0, got {bag.get('f2')}"
+
         print("\n=== TEST 3: Simulate New Excel Batch Import & Persistence ===")
         test_batch_id = "STOCK-20260914-PERSISTENCE-TEST"
         import_result = await page.evaluate(f"""async () => {{
-            const sampleData = window.LATEST_STOCK_SNAPSHOT.slice();
+            // Deep copy and simulate item with unextracted color or blank color to test runtime resolution
+            const sampleData = JSON.parse(JSON.stringify(window.LATEST_STOCK_SNAPSHOT || []));
+            const target = sampleData.find(i => i.pn === 'SM-S731BDBCTHL');
+            if (target) {{
+                target.color = ''; // Test runtime extraction from description '... -Navy'
+            }}
             const record = {{
                 batchId: '{test_batch_id}',
                 createdAt: new Date().toISOString(),
@@ -137,6 +164,14 @@ async def main():
         print(f"Batch upon return to #/stock: {persisted_batch}")
         assert persisted_batch == test_batch_id, f"Expected {test_batch_id}, got {persisted_batch}"
 
+        # Verify S25FE color was auto-extracted and persisted as Navy
+        s25fe_after_nav = await page.evaluate("""() => {
+            const data = window.LATEST_STOCK_SNAPSHOT || [];
+            return data.find(i => i.pn === 'SM-S731BDBCTHL');
+        }""")
+        print(f"S25FE color after import and navigation: {s25fe_after_nav.get('color')}")
+        assert s25fe_after_nav.get('color') == "Navy", f"Expected Navy, got {s25fe_after_nav.get('color')}"
+
         print("\n=== TEST 6: Hard Reload Browser Page & Verify Active Dataset Remains ===")
         await page.reload()
         await page.wait_for_selector("#categoryGrid", state="visible")
@@ -144,19 +179,30 @@ async def main():
         reload_meta = await page.evaluate("""() => {
             const meta = window.STOCK_METADATA || {};
             const bar = document.getElementById('prototypeStockProvenanceBar');
+            const data = window.LATEST_STOCK_SNAPSHOT || [];
+            const s25fe = data.find(i => i.pn === 'SM-S731BDBCTHL');
+            const bag = data.find(i => i.pn === '8859703434269');
             return {
                 batchId: meta.stockBatchId || meta.importBatchId || '',
                 barText: bar ? bar.innerText : '',
-                allStock: document.getElementById('countCatAllStock')?.textContent?.trim() || ''
+                allStock: document.getElementById('countCatAllStock')?.textContent?.trim() || '',
+                s25feColor: s25fe ? s25fe.color : null,
+                bagCategory: bag ? bag.category : null,
+                bagColor: bag ? bag.color : null
             };
         }""")
         print(f"Batch after page reload: {reload_meta['batchId']}")
         print(f"All Stock after page reload: {reload_meta['allStock']}")
+        print(f"S25FE Color after page reload: {reload_meta['s25feColor']}")
+        print(f"Bag Category after page reload: {reload_meta['bagCategory']}, Color: {reload_meta['bagColor']}")
         assert reload_meta['batchId'] != "IMPORT-20260906-002", "FAIL: Reverted to legacy batch after reload!"
         assert "STOCK-" in reload_meta['batchId']
         assert reload_meta['allStock'] == "1,701"
+        assert reload_meta['s25feColor'] == "Navy", f"Expected Navy after reload, got {reload_meta['s25feColor']}"
+        assert reload_meta['bagCategory'] == "Premium", f"Expected Premium, got {reload_meta['bagCategory']}"
+        assert reload_meta['bagColor'] == "Black", f"Expected Black, got {reload_meta['bagColor']}"
 
-        print("\n🎉 ALL 6 IMPORT PERSISTENCE & ROUTE ISOLATION TESTS PASSED!")
+        print("\n🎉 ALL IMPORT PERSISTENCE, COLOR RESOLUTION & ROUTE ISOLATION TESTS PASSED!")
         await browser.close()
 
 if __name__ == "__main__":

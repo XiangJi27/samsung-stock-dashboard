@@ -42,20 +42,48 @@ KNOWN_COLORS = [
     "Cream",
     "Pink",
     "Mint",
+    "Navy",
     "Coral Red",
     "Dark Green",
     "Dark Blue",
     "Sky Blue"
 ]
 
+COLOR_CANONICAL_NAMES = {
+    "navy": "Navy",
+    "jetblack": "Jet Black",
+    "icyblue": "Icy Blue",
+    "lightviolet": "Light Violet",
+    "light violet": "Light Violet",
+    "titaniumblack": "Titanium Black",
+    "titanium black": "Titanium Black",
+    "titaniumsilverblue": "Titanium Silverblue",
+    "titanium silverblue": "Titanium Silverblue",
+    "graphite": "Graphite",
+    "pistachio": "Pistachio",
+    "blueberry": "Blueberry"
+}
+
+def normalize_color_name(value):
+    raw = str(value or "").strip()
+    if not raw:
+        return ""
+    key = re.sub(r'\s+', ' ', raw.lower())
+    compact = key.replace(' ', '')
+    if key in COLOR_CANONICAL_NAMES:
+        return COLOR_CANONICAL_NAMES[key]
+    if compact in COLOR_CANONICAL_NAMES:
+        return COLOR_CANONICAL_NAMES[compact]
+    return raw.title()
+
 def extract_color_from_description(description):
     text = str(description or "").strip()
     if not text:
         return ""
-    parts = [p.strip() for p in re.split(r'\s+-\s+', text) if p.strip()]
-    if len(parts) < 2:
+    m = re.search(r'\s*-\s*([^-]+)\s*$', text)
+    if not m:
         return ""
-    candidate = parts[-1]
+    candidate = m.group(1).strip()
     if not candidate or re.match(r'^\d', candidate) or re.match(r'^(5G|4G|LTE|WI-?FI)$', candidate, re.IGNORECASE):
         return ""
     return candidate
@@ -68,7 +96,8 @@ def extract_known_color(description):
     return ""
 
 def resolve_product_color(description):
-    return extract_color_from_description(description) or extract_known_color(description) or ""
+    extracted = extract_color_from_description(description) or extract_known_color(description) or ""
+    return normalize_color_name(extracted)
 
 def parse_sheet(ws, sheet_name):
     rows = []

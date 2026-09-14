@@ -28,6 +28,7 @@
       "cream": "#fef08a",
       "pink": "#f472b6",
       "mint": "#6ee7b7",
+      "navy": "#1e3a8a",
       "coral-red": "#f87171",
       "dark-green": "#166534",
       "dark-blue": "#1e3a8a",
@@ -64,18 +65,45 @@
       "Cream",
       "Pink",
       "Mint",
+      "Navy",
       "Coral Red",
       "Dark Green",
       "Dark Blue",
       "Sky Blue"
     ];
 
+    const COLOR_CANONICAL_NAMES = {
+      navy: "Navy",
+      jetblack: "Jet Black",
+      icyblue: "Icy Blue",
+      lightviolet: "Light Violet",
+      "light violet": "Light Violet",
+      titaniumblack: "Titanium Black",
+      "titanium black": "Titanium Black",
+      titaniumsilverblue: "Titanium Silverblue",
+      "titanium silverblue": "Titanium Silverblue",
+      graphite: "Graphite",
+      pistachio: "Pistachio",
+      blueberry: "Blueberry"
+    };
+
+    function normalizeColorName(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      const key = raw.toLowerCase().replace(/\s+/g, " ");
+      return (
+        COLOR_CANONICAL_NAMES[key] ||
+        COLOR_CANONICAL_NAMES[key.replace(/\s+/g, "")] ||
+        raw.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
+      );
+    }
+
     function extractColorFromDescription(description) {
       const text = String(description || "").trim();
       if (!text) return "";
-      const parts = text.split(/\s+-\s+/).map(p => p.trim()).filter(Boolean);
-      if (parts.length < 2) return "";
-      const candidate = parts[parts.length - 1];
+      const match = text.match(/\s*-\s*([^-]+)\s*$/);
+      if (!match) return "";
+      const candidate = match[1].trim();
       if (!candidate || /^\d/.test(candidate) || /^(5G|4G|LTE|WI-?FI)$/i.test(candidate)) {
         return "";
       }
@@ -95,9 +123,19 @@
 
     function resolveProductColor(item) {
       const existing = String((item && item.color) || "").trim();
-      if (existing && existing !== "ไม่ระบุสี") return existing;
+      if (existing && existing !== "ไม่ระบุสี") {
+        return normalizeColorName(existing);
+      }
       const description = (item && (item.description || item.raw_desc || item.model)) || "";
-      return extractColorFromDescription(description) || extractKnownColor(description) || "";
+      const extracted = extractColorFromDescription(description) || extractKnownColor(description) || "";
+      return normalizeColorName(extracted);
+    }
+
+    if (typeof window !== "undefined") {
+      window.COLOR_CANONICAL_NAMES = COLOR_CANONICAL_NAMES;
+      window.normalizeColorName = normalizeColorName;
+      window.extractColorFromDescription = extractColorFromDescription;
+      window.resolveProductColor = resolveProductColor;
     }
 
     function normalizeColorKey(color) {
@@ -2849,6 +2887,8 @@
     };
     window.renderMetrics = window.renderMetrics || function() {};
     window.renderPromoCampaignModal = window.renderPromoCampaignModal || function() {};
+    window.normalizeColorName = normalizeColorName;
+    window.resolveProductColor = resolveProductColor;
 
     // Hash navigation listener
     window.addEventListener("hashchange", () => {

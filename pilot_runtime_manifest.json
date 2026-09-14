@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "95a7820",
+  "packageBuiltFromCommit": "bfead0b",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-14T18:54:02.354893+07:00",
+  "builtAt": "2026-09-14T19:22:32.896237+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,7 +13,7 @@
   "totalFiles": 44,
   "summary": {
     "totalFiles": 44,
-    "totalSizeBytes": 8648960,
+    "totalSizeBytes": 8652952,
     "totalSizeMB": 8.25
   },
   "files": [
@@ -140,8 +140,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 68817,
-      "sha256": "0b418fdf028e41bd08aee88d5d865157d3cfe680c872194a453a519830b61778",
+      "sizeBytes": 70670,
+      "sha256": "98d2b50cee40870482eb8a3ffb9212a1145b59fb1630a10ba32345a7ecd2dad4",
       "status": "BASELINE_CORE"
     },
     {
@@ -176,8 +176,8 @@
     },
     {
       "file": "assets/js/prototype-stock.js",
-      "sizeBytes": 123366,
-      "sha256": "af74faf790e5e996cef3f57615576447bfcd764b5d0c1b06abedd2e4c1f98ee6",
+      "sizeBytes": 124724,
+      "sha256": "9145ac6c6c9eb28ba8876d5a92313491314753ed9a6e4822a99a950a527a2957",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -266,14 +266,14 @@
     },
     {
       "file": "assets/js/pilot-bootstrap.js",
-      "sizeBytes": 20357,
-      "sha256": "123381b514644195bcbe7525ec86acb83a474075093382c58b9c8a573a269b62",
+      "sizeBytes": 21002,
+      "sha256": "b7a4fe25b3b55f40c6a38a8236ade9fbbb9f9f4ace5565dbde68ce076ddc834c",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "assets/js/pilot-stock-snapshot.js",
-      "sizeBytes": 235043,
-      "sha256": "471569c618319d2589621b5dea3fca07a124358b5ec97d2d8e17d34c7c88947d",
+      "sizeBytes": 235179,
+      "sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
       "status": "PILOT_RUNTIME"
     },
     {

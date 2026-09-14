@@ -207,6 +207,68 @@
     }
   }
 
+  const COLOR_CANONICAL_NAMES = {
+    navy: "Navy",
+    jetblack: "Jet Black",
+    icyblue: "Icy Blue",
+    lightviolet: "Light Violet",
+    "light violet": "Light Violet",
+    titaniumblack: "Titanium Black",
+    "titanium black": "Titanium Black",
+    titaniumsilverblue: "Titanium Silverblue",
+    "titanium silverblue": "Titanium Silverblue",
+    graphite: "Graphite",
+    pistachio: "Pistachio",
+    blueberry: "Blueberry"
+  };
+
+  function normalizeColorName(value) {
+    const raw = String(value || "").trim();
+    if (!raw) {
+      return "";
+    }
+    const key = raw.toLowerCase().replace(/\s+/g, " ");
+    return (
+      COLOR_CANONICAL_NAMES[key] ||
+      COLOR_CANONICAL_NAMES[key.replace(/\s+/g, "")] ||
+      raw
+        .toLowerCase()
+        .replace(/\b\w/g, char => char.toUpperCase())
+    );
+  }
+
+  function extractColorFromDescription(description) {
+    const text = String(description || "").trim();
+    if (!text) {
+      return "";
+    }
+    const match = text.match(/\s*-\s*([^-]+)\s*$/);
+    if (!match) {
+      return "";
+    }
+    const candidate = match[1].trim();
+    if (
+      !candidate ||
+      /^\d/.test(candidate) ||
+      /^(4G|5G|LTE|WI-?FI)$/i.test(candidate)
+    ) {
+      return "";
+    }
+    return candidate;
+  }
+
+  function resolveProductColor(item) {
+    if (typeof window !== "undefined" && typeof window.resolveProductColor === "function") {
+      return window.resolveProductColor(item);
+    }
+    const existingColor = String((item && item.color) || "").trim();
+    if (existingColor && existingColor !== "ไม่ระบุสี") {
+      return normalizeColorName(existingColor);
+    }
+    const description = (item && (item.description || item.raw_desc || item.model)) || "";
+    return normalizeColorName(extractColorFromDescription(description));
+  }
+
   class StockExcelParser {
     static parseSheet(sheetObj, sheetName) {
       const range = XLSX.utils.decode_range(sheetObj['!ref'] || 'A1:M1');
@@ -470,6 +532,7 @@
           pn: pn,
           model: ref.description || pn,
           description: ref.description,
+          color: resolveProductColor(ref),
           category: categoryLabel,
           category1: ref.category1,
           category2: ref.category2,
