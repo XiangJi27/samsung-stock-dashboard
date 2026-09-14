@@ -1,7 +1,14 @@
 # รายงานโปรโมชั่นที่มีผลบังคับใช้ ณ วันที่ปัจจุบัน (Active Promotion Report)
-- **วันที่ประเมิน (Local Current Date)**: `2026-09-06`
-- **จำนวน Variant โปรโมชั่นทั้งหมดในฐานข้อมูล**: 904 รายการ
-- **จำนวนโปรโมชั่นที่เปิดใช้งานได้ในวันนี้ (Active Usable Promotions)**: 589 รายการ
+> [!WARNING]
+> **SUPERSEDED HISTORICAL ARCHIVE — NOT THE CURRENT DEPLOYMENT GATE**
+> ตัวเลขในรายงานนี้ (904 / 589) เป็นการประเมินข้อมูลดิบในอดีต (ณ วันที่ 2026-09-06) ซึ่งถูกแทนที่อย่างเป็นทางการด้วยระบบ **Dual-Scope CI Gate**:
+> - **Active Published (ใช้งานจริง)**: 142 รายการ (18 Exact P/N + 124 Model-Capacity, 0 Violations)
+> - **September Draft (รอทบทวน/กักกัน)**: 56 รายการ (32 Review Required + 24 Quarantined, 0 Auto-Publish)
+> โปรดอ้างอิงสถานะปัจจุบันจาก `reports/promotion_release_manifest.json` และ `reports/exact_pn_quality_gate.json`
+
+- **วันที่ประเมิน (Local Current Date)**: `2026-09-06` (ARCHIVED)
+- **จำนวน Variant โปรโมชั่นทั้งหมดในฐานข้อมูล (Historical)**: 904 รายการ
+- **จำนวนโปรโมชั่นที่เปิดใช้งานได้ในวันนี้ (Historical - SUPERSEDED)**: 589 รายการ
 - **จำนวนโปรโมชั่นที่หมดอายุแล้ว (Expired - ห้ามใช้ตัดขาย)**: 240 รายการ
 - **จำนวนโปรโมชั่นที่ถูกกักกัน (Blocked / Formula Error - ห้ามใช้ตัดขาย)**: 75 รายการ
 

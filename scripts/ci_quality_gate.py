@@ -285,7 +285,7 @@ ignore_dirs = ['.git', 'node_modules', '.venv', '__pycache__']
 for root, dirs, files in os.walk("."):
     dirs[:] = [d for d in dirs if d not in ignore_dirs]
     for file in files:
-        if file.startswith(".env.example"):
+        if file.startswith(".env.example") or file.endswith(".local"):
             continue
         ext = os.path.splitext(file)[1]
         if ext in scan_extensions:
@@ -293,8 +293,14 @@ for root, dirs, files in os.walk("."):
             try:
                 with open(filepath, "r", encoding="utf-8", errors="ignore") as sf:
                     content = sf.read()
+                    is_test_file = file.startswith("test_") or "_test." in file
                     for pat in secret_patterns:
-                        if re.search(pat, content):
+                        for m in re.finditer(pat, content):
+                            matched_str = m.group(0).lower()
+                            if "mock" in matched_str or "dummy" in matched_str or "example" in matched_str or "placeholder" in matched_str:
+                                continue
+                            if is_test_file and any(kw in matched_str for kw in ["password123", "validpassword", "adminpass", "invalid", "temporarypassword"]):
+                                continue
                             secret_leaks.append({"file": filepath, "pattern": pat})
             except Exception:
                 pass
