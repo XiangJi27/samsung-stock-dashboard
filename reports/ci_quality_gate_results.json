@@ -5,8 +5,8 @@
     "passedCount": 11,
     "warningCount": 0,
     "violationCount": 0,
-    "executedAt": "2026-09-14T10:34:50.365975",
-    "commitSha": "f1c8c49"
+    "executedAt": "2026-09-14T10:45:45.589457",
+    "commitSha": "cfd4306"
   },
   "gates": [
     {
@@ -19,8 +19,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-02-PRICE-EQUATION",
@@ -32,8 +32,8 @@
       "evidence": {
         "mismatches": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-03-STUDENT-RULE",
@@ -45,8 +45,8 @@
       "evidence": {
         "violations": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-04-PASS-F-ISOLATION",
@@ -58,8 +58,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-05-TRADE-UP-ISOLATION",
@@ -71,8 +71,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-06-STOCK-SUM",
@@ -84,8 +84,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-07-A07-GOLDEN",
@@ -107,8 +107,8 @@
         ],
         "mismatches": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "RULE-08-SECRET-LEAK",
@@ -120,8 +120,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "GATE-EXACT-PN",
@@ -136,8 +136,8 @@
         "executed": true,
         "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-14T10:34:50.365975",
-        "commitSha": "f1c8c49",
+        "executedAt": "2026-09-14T10:45:45.589457",
+        "commitSha": "cfd4306",
         "inputFiles": {
           "stockMaster": {
             "path": "stock_full_data.json",
@@ -196,10 +196,10 @@
           "CONNECTIVITY_MISMATCH",
           "AMBIGUOUS_MODEL_MATCH"
         ],
-        "generatedAt": "2026-09-14T10:34:50.365975"
+        "generatedAt": "2026-09-14T10:45:45.589457"
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "GATE-BATCH-CONSISTENCY",
@@ -214,8 +214,8 @@
         "executed": true,
         "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-14T10:34:50.365975",
-        "commitSha": "f1c8c49",
+        "executedAt": "2026-09-14T10:45:45.589457",
+        "commitSha": "cfd4306",
         "verifiedInputs": {
           "stockBatchId": "IMPORT-20260906-002",
           "promotionBatchId": "BATCH-20260907-105441",
@@ -229,7 +229,7 @@
           "promotion_variants.js": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
           "audit_summary.json": "6b5b49cbd91f34faaee6613f31fe5fbc9dedac87ea261480624f12ea86563a27",
           "business_rules.json": "539a8b20045528cd81fca1e7c38e51ce537daf534b88b43f910fd2551dfcaf58",
-          "runtime_manifest.json": "6e64728460e97ee60f8dbd206bac4f1687a96261d1f9a0377f52578fed2df2e8"
+          "runtime_manifest.json": "a083f2f2d756e63d9ff6ea2c61e24afc4cbb38ae59d051737127484445e70ef2"
         },
         "counts": {
           "staleAuditCount": 0,
@@ -239,10 +239,10 @@
         },
         "violationCount": 0,
         "violations": [],
-        "generatedAt": "2026-09-14T10:34:50.365975"
+        "generatedAt": "2026-09-14T10:45:45.589457"
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     },
     {
       "ruleId": "GATE-RUNTIME-HASH",
@@ -254,15 +254,15 @@
       "evidence": {
         "gate": "RUNTIME_HASH_VERIFICATION_GATE",
         "status": "PASSED",
-        "executedAt": "2026-09-14T10:34:50.365975",
-        "commitSha": "f1c8c49",
+        "executedAt": "2026-09-14T10:45:45.589457",
+        "commitSha": "cfd4306",
         "totalManifestFiles": 23,
         "verifiedFileCount": 23,
         "violationCount": 0,
         "violations": []
       },
-      "executedAt": "2026-09-14T10:34:50.365975",
-      "commitSha": "f1c8c49"
+      "executedAt": "2026-09-14T10:45:45.589457",
+      "commitSha": "cfd4306"
     }
   ]
 }

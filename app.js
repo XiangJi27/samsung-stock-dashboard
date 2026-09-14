@@ -37,7 +37,7 @@ let currentFilter = "all";
 let currentSearch = "";
 let currentView = "table"; // "table" or "cards"
 let selectedSaleMode = "ALL"; // "ALL", "NORMAL", "STANDARD_PAYMENT", "SF_PLUS", "STUDENT", "TRADE_UP"
-let activePromoVersion = "PROMO-20260828-V2";
+let activePromoVersion = "DUAL-SCOPE-202609";
 
 // Local ISO Date Helper (No Hardcoded Dates)
 function getTodayISO() {
