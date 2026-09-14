@@ -2,19 +2,19 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "d48948e",
+  "packageBuiltFromCommit": "f1c8c49",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-13T18:42:36.614429+07:00",
+  "builtAt": "2026-09-14T10:34:24.853587+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
   "primaryUseCase": "STOCK_LOOKUP",
-  "totalFiles": 39,
+  "totalFiles": 40,
   "summary": {
-    "totalFiles": 39,
-    "totalSizeBytes": 8057751,
-    "totalSizeMB": 7.68
+    "totalFiles": 40,
+    "totalSizeBytes": 7988742,
+    "totalSizeMB": 7.62
   },
   "files": [
     {
@@ -157,8 +157,8 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 133595,
-      "sha256": "4f9e53ea9d5417244720b9a29ef84af47d14534247ab08a0b62c1a6e46cd1f6a",
+      "sizeBytes": 62713,
+      "sha256": "c51bd384e5fbf5e77dfafe6034a840c7aae52b04f5c74c5599cf307b204d682c",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -235,8 +235,8 @@
     },
     {
       "file": "assets/js/pilot-dashboard-widgets.js",
-      "sizeBytes": 17904,
-      "sha256": "2d2f4578142e4c8083dedaaad30bace75f773d2e3197e0bdf9c649e5961d760a",
+      "sizeBytes": 18453,
+      "sha256": "3863acd0522a94ff8acd486fc4e827307c1838fd8d508b79c819416b8c3506e8",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -249,6 +249,12 @@
       "file": "assets/js/pilot-bootstrap.js",
       "sizeBytes": 4818,
       "sha256": "931f6314422e774b4b1f937447cbdb531f806f492e0ef4d4c21d2415147e1f5e",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "reports/promotion_release_manifest.json",
+      "sizeBytes": 1324,
+      "sha256": "ef14e7f0609303dddba673dd4ad3bd43c5bfa7d5a47befce3da7da2d5ba8dea0",
       "status": "PILOT_RUNTIME"
     }
   ]

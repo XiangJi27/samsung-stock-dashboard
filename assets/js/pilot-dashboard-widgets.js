@@ -63,23 +63,29 @@
     },
     {
       id: 'widget-promo-summary',
-      title: 'โปรโมชั่นพร้อมใช้งาน',
+      title: 'โปรโมชั่นตาม Scope',
       icon: '🏷️',
       permission: 'promotion.view',
       status: 'ACTIVE',
       render: () => {
-        const promoCount = calculateLivePromoCount();
         return `
           <div class="pilot-widget-card" style="background:#1e222d; border:1px solid #363c4e; border-radius:10px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <span style="font-size:12px; color:#848e9c; font-weight:500;">โปรโมชั่นพร้อมใช้งาน</span>
+              <span style="font-size:12px; color:#848e9c; font-weight:500;">โปรโมชั่น (Dual-Scope)</span>
               <span style="font-size:20px;">🏷️</span>
             </div>
-            <div style="font-size:26px; font-weight:800; color:#ff9800; letter-spacing:-0.5px;">
-              ${promoCount.toLocaleString()} <span style="font-size:14px; font-weight:500; color:#b2b5be;">รายการ</span>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+              <div>
+                <span style="font-size:11px; color:#b2b5be;">เผยแพร่ใช้งาน:</span>
+                <div style="font-size:20px; font-weight:800; color:#4caf50;">142 <span style="font-size:12px; font-weight:500; color:#848e9c;">รายการ</span></div>
+              </div>
+              <div style="border-left:1px solid #363c4e; padding-left:8px;">
+                <span style="font-size:11px; color:#b2b5be;">ร่าง ก.ย. (รอตรวจ):</span>
+                <div style="font-size:20px; font-weight:700; color:#ff9800;">56 <span style="font-size:12px; font-weight:500; color:#848e9c;">รายการ</span></div>
+              </div>
             </div>
-            <div style="font-size:11px; color:#4caf50; margin-top:8px;">
-              ผ่านการตรวจสอบ & อนุมัติแล้ว
+            <div style="font-size:11px; color:#848e9c; margin-top:8px;">
+              Dual-Scope CI Gate: 0 Auto-Publish
             </div>
           </div>
         `;
@@ -292,7 +298,7 @@
             <div style="font-size:13px; color:#848e9c; line-height:1.8;">
               • ระบบพร้อมใช้งานสำหรับพนักงานสาขา อยุธยา ซิตี้ พาร์ค (4 บัญชี)<br/>
               • สต็อกสินค้าพร้อมค้นหา: <strong>760 เครื่อง</strong> (ชั้น 1: 379 เครื่อง / ชั้น 2: 381 เครื่อง)<br/>
-              • โปรโมชั่น Retail & Tablet: พร้อมใช้งาน 100%<br/>
+              • โปรโมชั่นเผยแพร่ใช้งาน: <strong>142 รายการ</strong> (และฉบับร่าง ก.ย. รอตรวจ 56 รายการ)<br/>
               • หากพบความผิดปกติของข้อมูลสต็อกหรือโปรโมชั่น กดปุ่ม <strong>"รายงานปัญหา"</strong> ได้ทันที
             </div>
           </div>
