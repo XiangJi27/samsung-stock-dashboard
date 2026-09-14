@@ -1,20 +1,20 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-13T12:24:07.931229+07:00",
+  "generatedAt": "2026-09-14T18:44:38.431371+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
-  "gitBranch": "feature/phase-a-application-shell",
-  "commitSha": "a7c3390",
+  "gitBranch": "feature/user-feedback-pilot",
+  "commitSha": "307ad4d",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7814920,
-    "totalSizeMB": 7.45
+    "totalSizeBytes": 7750673,
+    "totalSizeMB": 7.39
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 130505,
-      "sha256": "90fcdaacb7bf77fb59918be8dd155ef5565dc68e7a3ea2694ab5c3139195b70c",
+      "sizeBytes": 66010,
+      "sha256": "63683997dae9f0c3f79103c4dfd97beb437d93e07ffa4ec45bcc000bf9357698",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -43,8 +43,8 @@
     },
     {
       "file": "vercel.json",
-      "sizeBytes": 77,
-      "sha256": "8b202658ee9a2426c40c5ba86da9d24246c7bc6bd89ae24b9e24c46b38d0fa68",
+      "sizeBytes": 325,
+      "sha256": "cc5ebdb14abd27ad335515562e91408624f3b3d4e3f58b14ed1b41fdb046905c",
       "status": "REQUIRED_RUNTIME"
     },
     {

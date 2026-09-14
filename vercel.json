@@ -1,5 +1,18 @@
 {
   "version": 2,
   "name": "samsung-stock-dashboard",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/pilot.html",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/admin/members/:path*",
+      "destination": "/api/admin/members?path=:path*"
+    }
+  ]
 }
