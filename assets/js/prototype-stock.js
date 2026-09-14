@@ -1238,10 +1238,72 @@
     let rawItems = [];
     let promoVariants = [];
 
+    function renderStockProvenanceBar() {
+      const container = document.getElementById("prototypeStockProvenanceBar");
+      if (!container) return;
+
+      const meta = (typeof window !== "undefined" && window.STOCK_METADATA) ? window.STOCK_METADATA : {};
+      const batchId = meta.stockBatchId || meta.importBatchId || "STOCK-20260914-LATEST";
+      const isLegacy = batchId === "IMPORT-20260906-002";
+
+      if (isLegacy && window.PILOT_MODE === true) {
+        console.error("[Pilot Stock] Legacy static snapshot selected:", batchId);
+        container.innerHTML = `
+          <div class="pilot-stock-warning-banner" style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 10px; padding: 12px 18px; margin: 12px 0; color: #fca5a5; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.3rem;">⚠️</span>
+              <div>
+                <strong>ไม่สามารถโหลด Snapshot ล่าสุดได้:</strong> ระบบกำลังอ้างข้อมูลเก่าวันที่ 6 กันยายน 2026 (Batch: ${batchId})
+                <div style="font-size: 0.76rem; color: #cbd5e1; margin-top: 2px;">กรุณานำเข้าไฟล์ stock(1).xlsx ที่เมนู "นำเข้าสต็อกจาก Excel" หรือกดรีเฟรชข้อมูล</div>
+              </div>
+            </div>
+            <button onclick="window.location.hash='#/stock-import'" style="background: #ef4444; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer; white-space: nowrap; font-size: 0.78rem;">
+              📥 ไปหน้านำเข้า Excel
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const sourceLabel = meta.sourceType || "Imported Excel Snapshot";
+      const sourceFile = meta.sourceFilename || meta.sourceFile || "stock(1).xlsx";
+      const isConfirmedLocal = meta.storageScope === "LOCAL_BROWSER_ONLY" || meta.storageScope === "CONFIRMED_IMPORT" || (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.batchId === batchId);
+      const storageDisplay = isConfirmedLocal ? "Local Browser (Confirmed Import)" : "Pilot Snapshot (stock(1).xlsx)";
+      const rawImportedAt = meta.importedAt || "2026-09-14 09:00:00";
+      const importedTime = rawImportedAt.replace("T", " ").substring(0, 19);
+
+      container.innerHTML = `
+        <div class="pilot-stock-provenance-bar" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 10px; padding: 10px 16px; margin: 12px 0 16px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: 0.82rem; color: #94a3b8; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--cyan); font-weight: 600;">แหล่งข้อมูล:</span>
+            <span style="color: #f1f5f9; font-weight: 500;">${sourceLabel}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--cyan); font-weight: 600;">ไฟล์ต้นทาง:</span>
+            <span style="color: #38bdf8; font-weight: 500;">${sourceFile}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--cyan); font-weight: 600;">Stock Batch:</span>
+            <code style="color: #38bdf8; background: rgba(56, 189, 248, 0.12); padding: 2px 8px; border-radius: 4px; font-weight: 600;">${batchId}</code>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--cyan); font-weight: 600;">Storage:</span>
+            <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: 600;">${storageDisplay}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--cyan); font-weight: 600;">อัปโหลดเมื่อ:</span>
+            <span style="color: #f1f5f9;">${importedTime}</span>
+          </div>
+        </div>
+      `;
+    }
+
     function refreshPrototypeData() {
-      const stockDb = (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE) && window.STOCK_DATABASE.length > 0)
-        ? window.STOCK_DATABASE
-        : FALLBACK_STOCK;
+      const stockDb = (typeof window !== "undefined" && typeof window.getActiveStockDataset === "function")
+        ? window.getActiveStockDataset()
+        : ((typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE) && window.STOCK_DATABASE.length > 0)
+            ? (window.LATEST_STOCK_SNAPSHOT || window.STOCK_DATABASE)
+            : FALLBACK_STOCK);
 
       const hasImportedAccessories = stockDb !== FALLBACK_STOCK && (stockDb.length > 250 || stockDb.some(x => {
         const c = String(x.category || x.category1 || '').toUpperCase();
@@ -1267,6 +1329,8 @@
       if (window.PROMOTION_VARIANTS && window.PROMOTION_VARIANTS.length > 0) {
         promoVariants = window.PROMOTION_VARIANTS;
       }
+
+      renderStockProvenanceBar();
     }
 
     refreshPrototypeData();

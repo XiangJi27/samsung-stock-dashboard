@@ -25,6 +25,7 @@
   </style>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>window.PILOT_MODE = true;</script>
 </head>
 <body>
     <div id="a11y-route-announcer" class="sr-only" aria-live="polite"></div>
@@ -266,6 +267,9 @@
         <span style="color: var(--cyan); font-weight: 600;" id="currentDateDisplay">13 ก.ย. 2026</span>
       </div>
     </header>
+
+    <!-- Pilot Stock Metadata & Provenance Bar -->
+    <div id="prototypeStockProvenanceBar"></div>
 
     <!-- 1. Category Summary Cards (Quick Click Filters) -->
     <section class="category-grid" id="categoryGrid">

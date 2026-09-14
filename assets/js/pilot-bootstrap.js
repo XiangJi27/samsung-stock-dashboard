@@ -149,6 +149,33 @@
         // 1. Update in-memory databases with sanitized catalog
         window.STOCK_DATABASE = batchRecord.data;
         window.STOCK_DATA = batchRecord.data;
+        window.LATEST_STOCK_SNAPSHOT = batchRecord.data;
+        window.CONFIRMED_LOCAL_SNAPSHOT = batchRecord;
+
+        const f1Total = batchRecord.data.reduce((sum, item) => sum + (Number(item.f1 || item.stock_f1 || 0)), 0);
+        const f2Total = batchRecord.data.reduce((sum, item) => sum + (Number(item.f2 || item.stock_f2 || 0)), 0);
+        const grandTotal = batchRecord.data.reduce((sum, item) => sum + (Number(item.total || item.stock_total || (Number(item.f1 || 0) + Number(item.f2 || 0)))), 0);
+        const uniquePns = new Set(batchRecord.data.map(i => i.pn).filter(Boolean)).size;
+
+        window.STOCK_METADATA = {
+          stockBatchId: batchRecord.batchId || "STOCK-20260914-LATEST",
+          importBatchId: batchRecord.batchId || "STOCK-20260914-LATEST",
+          sourceType: "Imported Excel Snapshot",
+          sourceFile: batchRecord.meta?.sourceFilename || batchRecord.meta?.sourceFile || "stock(1).xlsx",
+          sourceFilename: batchRecord.meta?.sourceFilename || batchRecord.meta?.sourceFile || "stock(1).xlsx",
+          storageScope: "LOCAL_BROWSER_ONLY",
+          recordCount: batchRecord.data.length,
+          uniquePn: uniquePns,
+          f1Total: f1Total,
+          f2Total: f2Total,
+          grandTotal: grandTotal,
+          importedAt: batchRecord.createdAt || new Date().toISOString()
+        };
+        window.PILOT_STOCK_METADATA = window.STOCK_METADATA;
+
+        try {
+          localStorage.setItem('samsung_active_stock_batch_id', batchRecord.batchId || 'STOCK-20260914-LATEST');
+        } catch(e) {}
 
         // 2. Clear DataLoader caches
         if (window.DataLoader) {
@@ -184,14 +211,15 @@
             meta: {
               stockBatchId: 'STOCK-20260914-LATEST',
               importBatchId: 'STOCK-20260914-LATEST',
-              sourceType: 'Manual Excel Snapshot',
+              sourceType: 'Imported Excel Snapshot',
               sourceFilename: 'stock(1).xlsx',
               recordCount: window.LATEST_STOCK_SNAPSHOT.length,
               uniquePn: window.LATEST_STOCK_SNAPSHOT.length,
               f1Total: 1701,
               f2Total: 1635,
               grandTotal: 3336,
-              storageScope: 'LOCAL_BROWSER_ONLY'
+              storageScope: 'LOCAL_BROWSER_ONLY',
+              importedAt: '2026-09-14T09:00:00+07:00'
             }
           };
           try {
@@ -217,7 +245,11 @@
           });
           window.STOCK_DATABASE = snap.data;
           window.STOCK_DATA = snap.data;
-          if (snap.meta) window.STOCK_METADATA = snap.meta;
+          window.CONFIRMED_LOCAL_SNAPSHOT = snap;
+          if (snap.meta) {
+            window.STOCK_METADATA = snap.meta;
+            window.PILOT_STOCK_METADATA = snap.meta;
+          }
         }
 
         return snap;
@@ -230,19 +262,23 @@
 
       window.DataLoader.loadAuthenticatedDatasets = async function() {
         const res = await origLoadAuth();
-        if ((!window.STOCK_DATABASE || window.STOCK_DATABASE.length <= 290) && window.LATEST_STOCK_SNAPSHOT) {
+        const curMeta = window.STOCK_METADATA;
+        const isLegacy = curMeta?.importBatchId === "IMPORT-20260906-002";
+        if ((isLegacy || !window.STOCK_DATABASE || window.STOCK_DATABASE.length < 350) && window.LATEST_STOCK_SNAPSHOT) {
           window.STOCK_DATABASE = window.LATEST_STOCK_SNAPSHOT;
           window.STOCK_DATA = window.LATEST_STOCK_SNAPSHOT;
-          window.STOCK_METADATA = {
+          window.STOCK_METADATA = window.PILOT_STOCK_METADATA || {
             stockBatchId: 'STOCK-20260914-LATEST',
             importBatchId: 'STOCK-20260914-LATEST',
-            sourceType: 'Manual Excel Snapshot',
+            sourceType: 'Imported Excel Snapshot',
             sourceFilename: 'stock(1).xlsx',
             recordCount: window.LATEST_STOCK_SNAPSHOT.length,
             uniquePn: window.LATEST_STOCK_SNAPSHOT.length,
             f1Total: 1701,
             f2Total: 1635,
-            grandTotal: 3336
+            grandTotal: 3336,
+            storageScope: 'LOCAL_BROWSER_ONLY',
+            importedAt: '2026-09-14T09:00:00+07:00'
           };
         }
         if (window.PrototypeStock && typeof window.PrototypeStock.refresh === 'function') {
@@ -252,11 +288,17 @@
       };
     }
 
+    window.renderData = function() {
+      if (window.PrototypeStock && typeof window.PrototypeStock.refresh === 'function') {
+        window.PrototypeStock.refresh();
+      }
+    };
+    window.renderMetrics = function() {
+      // In Pilot mode, PrototypeStock handles all metrics and category cards
+    };
+
     const origSync = window.syncMasterStockData;
     window.syncMasterStockData = function() {
-      if (typeof origSync === 'function') {
-        try { origSync(); } catch (e) {}
-      }
       if (window.PrototypeStock && typeof window.PrototypeStock.refresh === 'function') {
         window.PrototypeStock.refresh();
       } else if (typeof window.initPrototypeStock === 'function') {
@@ -394,6 +436,12 @@
           const homeContent = document.getElementById('homeViewContent');
           if (homeContent && window.PilotDashboardRenderer) {
             window.PilotDashboardRenderer.renderDashboard(homeContent);
+          }
+        } else if (cleanRoute === '/stock') {
+          if (window.PrototypeStock && typeof window.PrototypeStock.refresh === 'function') {
+            window.PrototypeStock.refresh();
+          } else if (typeof window.initPrototypeStock === 'function') {
+            window.initPrototypeStock();
           }
         }
       }

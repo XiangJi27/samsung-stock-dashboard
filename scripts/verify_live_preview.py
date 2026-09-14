@@ -62,6 +62,32 @@ async def main():
         assert admin_hidden is True
         assert admin_display == "none"
 
+        print("\n=== 2.1 Verify Metadata & Provenance Bar (No Legacy Snapshot) ===")
+        meta_info = await page.evaluate("""() => {
+            const meta = window.STOCK_METADATA || {};
+            const bar = document.getElementById('prototypeStockProvenanceBar');
+            const legacyBar = document.getElementById('stockSnapshotProvenanceBar');
+            return {
+                batchId: meta.stockBatchId || meta.importBatchId || '',
+                sourceType: meta.sourceType || '',
+                storageScope: meta.storageScope || '',
+                barVisible: bar ? window.getComputedStyle(bar).display !== 'none' : false,
+                barText: bar ? bar.innerText : '',
+                legacyBarPresent: legacyBar !== null,
+                isLegacyVisible: legacyBar ? window.getComputedStyle(legacyBar).display !== 'none' : false,
+                prototypeRootVisible: Boolean(document.querySelector('.prototype-stock-root'))
+            };
+        }""")
+        print(f"  - Active Batch ID: {meta_info['batchId']} (Must NOT be IMPORT-20260906-002)")
+        print(f"  - Prototype Stock Root Visible: {meta_info['prototypeRootVisible']}")
+        print(f"  - Provenance Bar Text: {meta_info['barText']}")
+        
+        assert meta_info['prototypeRootVisible'] is True, "Prototype stock root MUST be visible!"
+        assert meta_info['batchId'] != "IMPORT-20260906-002", f"FAIL: Active batch is legacy {meta_info['batchId']}"
+        assert "STOCK-" in meta_info['batchId'], f"FAIL: Expected STOCK- batch, got {meta_info['batchId']}"
+        assert meta_info['storageScope'] != "Static Assets", "Storage must not be Static Assets"
+        assert meta_info['isLegacyVisible'] is False, "Legacy provenance bar must not be visible"
+
         print("\n=== 3. Verify Stock Category Cards (F1 Only) ===")
         card_stats = await page.evaluate("""() => {
             const getTxt = id => document.getElementById(id)?.textContent?.trim() || '';

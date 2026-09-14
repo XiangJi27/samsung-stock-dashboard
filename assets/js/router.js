@@ -150,6 +150,15 @@ class AppRouter {
     if (path === "/home" && typeof window.renderHomeView === "function") {
       window.renderHomeView();
     } else if (path === "/stock") {
+      if (window.PILOT_MODE === true) {
+        // Pilot Route Isolation: strictly delegate stock view to PrototypeStock
+        if (window.PrototypeStock && typeof window.PrototypeStock.refresh === "function") {
+          window.PrototypeStock.refresh();
+        } else if (typeof window.initPrototypeStock === "function") {
+          window.initPrototypeStock();
+        }
+        return;
+      }
       // Re-trigger stock rendering and KPI synchronization
       if (typeof window.renderData === "function") {
         window.renderData();

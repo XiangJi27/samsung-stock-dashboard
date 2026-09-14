@@ -26,6 +26,22 @@
     }
 
     /**
+     * Centralized Stock Dataset Selector following 3-tier hierarchy:
+     * 1. IndexedDB Confirmed Import ล่าสุด
+     * 2. Pilot Packaged Snapshot ล่าสุด
+     * 3. Static Baseline Snapshot
+     */
+    static getActiveStockDataset() {
+      if (window.CONFIRMED_LOCAL_SNAPSHOT?.data && Array.isArray(window.CONFIRMED_LOCAL_SNAPSHOT.data) && window.CONFIRMED_LOCAL_SNAPSHOT.data.length > 0) {
+        return window.CONFIRMED_LOCAL_SNAPSHOT.data;
+      }
+      if (window.LATEST_STOCK_SNAPSHOT && Array.isArray(window.LATEST_STOCK_SNAPSHOT) && window.LATEST_STOCK_SNAPSHOT.length > 0) {
+        return window.LATEST_STOCK_SNAPSHOT;
+      }
+      return window.STOCK_DATABASE || [];
+    }
+
+    /**
      * Dynamically inject a script and wait for its completion.
      */
     _loadScript(src) {
@@ -102,10 +118,27 @@
               window.STOCK_SNAPSHOT_STATUS = "LOCAL_SNAPSHOT_INVALID";
               window.STOCK_SNAPSHOT_ERROR = e.message;
             }
-          }
-
-          if (!snapshotLoaded && !window.STOCK_SNAPSHOT_STATUS) {
-            window.STOCK_SNAPSHOT_STATUS = window.STOCK_DATABASE ? "STATIC_BASELINE" : "DATA_UNAVAILABLE";
+          if (!snapshotLoaded) {
+            if (window.PILOT_MODE === true && window.LATEST_STOCK_SNAPSHOT) {
+              window.STOCK_DATABASE = window.LATEST_STOCK_SNAPSHOT;
+              window.STOCK_METADATA = window.PILOT_STOCK_METADATA || {
+                stockBatchId: "STOCK-20260914-LATEST",
+                importBatchId: "STOCK-20260914-LATEST",
+                sourceType: "Imported Excel Snapshot",
+                sourceFile: "stock(1).xlsx",
+                sourceFilename: "stock(1).xlsx",
+                storageScope: "PILOT_SNAPSHOT",
+                recordCount: 399,
+                uniquePn: 399,
+                f1Total: 1701,
+                f2Total: 1635,
+                grandTotal: 3336,
+                importedAt: "2026-09-14T09:00:00+07:00"
+              };
+              window.STOCK_SNAPSHOT_STATUS = "PILOT_STOCK_SNAPSHOT";
+            } else if (!window.STOCK_SNAPSHOT_STATUS) {
+              window.STOCK_SNAPSHOT_STATUS = window.STOCK_DATABASE ? "STATIC_BASELINE" : "DATA_UNAVAILABLE";
+            }
           }
 
           // Sync masterStockData in app.js if app.js is already running
@@ -172,5 +205,6 @@
   }
 
   window.DataLoader = new DataLoaderGate();
+  window.getActiveStockDataset = DataLoaderGate.getActiveStockDataset;
 
 })(window);
