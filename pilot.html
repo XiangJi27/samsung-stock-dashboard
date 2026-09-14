@@ -17,6 +17,12 @@
   <link rel="stylesheet" href="assets/css/responsive.css?v=20260907-b2">
   <link rel="stylesheet" href="assets/css/importer.css?v=20260911-c1">
   <link rel="stylesheet" href="style.css?v=20260907-b2">
+  <style>
+    /* Strict Route Isolation & Accessibility Guard */
+    [hidden] {
+      display: none !important;
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
@@ -166,7 +172,7 @@
       <!-- Views Container -->
       <div id="viewsContainer" class="views-wrapper">
         <!-- VIEW 1: LOGIN -->
-        <section id="view-login" class="app-view">
+        <section id="view-login" class="app-view" data-pilot-route="/login" hidden>
           <div class="login-page-container">
             <div class="login-card">
               <div class="login-brand-header">
@@ -222,12 +228,12 @@
         </section>
 
         <!-- VIEW 2: HOME -->
-        <section id="view-home" class="app-view">
+        <section id="view-home" class="app-view" data-pilot-route="/home" hidden>
           <div id="homeDashboardContent" class="home-view-container"></div>
         </section>
 
         <!-- VIEW 3: STOCK (Wraps entire existing stock & promo dashboard) -->
-        <section id="view-stock" class="app-view">
+        <section id="view-stock" class="app-view" data-pilot-route="/stock" hidden>
           <div class="prototype-stock-root">
 <div class="ambient-glow"></div>
 
@@ -266,35 +272,35 @@
       <div class="category-card cat-all active" data-cat="ALL">
         <div class="category-top">
           <span class="category-icon">📦</span>
-          <span class="category-models-count" id="countCatAllModels">290 รายการ</span>
+          <span class="category-models-count" id="countCatAllModels">333 รายการ</span>
         </div>
-        <div class="category-name">สินค้าทั้งหมด</div>
+        <div class="category-name">สต๊อกทั้งหมด ชั้น 1</div>
         <div class="category-stats">
-          <span class="category-stock" id="countCatAllStock">1,100</span>
-          <span class="category-unit">เครื่อง/ชิ้น (ชั้น 1)</span>
+          <span class="category-stock" id="countCatAllStock">1,701</span>
+          <span class="category-unit">ชิ้น/เครื่อง (ชั้น 1)</span>
         </div>
       </div>
 
       <div class="category-card cat-phone" data-cat="SmartPhone">
         <div class="category-top">
           <span class="category-icon">📱</span>
-          <span class="category-models-count" id="countCatPhoneModels">151 รุ่น</span>
+          <span class="category-models-count" id="countCatPhoneModels">62 รุ่น</span>
         </div>
-        <div class="category-name">สมาร์ทโฟน</div>
+        <div class="category-name">Smartphone</div>
         <div class="category-stats">
-          <span class="category-stock" id="countCatPhoneStock">237</span>
+          <span class="category-stock" id="countCatPhoneStock">230</span>
           <span class="category-unit">เครื่อง (ชั้น 1)</span>
         </div>
       </div>
 
       <div class="category-card cat-tab" data-cat="Tablet">
         <div class="category-top">
-          <span class="category-icon">📟</span>
-          <span class="category-models-count" id="countCatTabModels">25 รุ่น</span>
+          <span class="category-icon">💻</span>
+          <span class="category-models-count" id="countCatTabModels">12 รุ่น</span>
         </div>
-        <div class="category-name">แท็บเล็ต (Tab)</div>
+        <div class="category-name">Tablet</div>
         <div class="category-stats">
-          <span class="category-stock" id="countCatTabStock">37</span>
+          <span class="category-stock" id="countCatTabStock">34</span>
           <span class="category-unit">เครื่อง (ชั้น 1)</span>
         </div>
       </div>
@@ -302,7 +308,7 @@
       <div class="category-card cat-watch" data-cat="Watch">
         <div class="category-top">
           <span class="category-icon">⌚</span>
-          <span class="category-models-count" id="countCatWatchModels">27 รุ่น</span>
+          <span class="category-models-count" id="countCatWatchModels">17 รุ่น</span>
         </div>
         <div class="category-name">Galaxy Watch</div>
         <div class="category-stats">
@@ -318,7 +324,7 @@
         </div>
         <div class="category-name">Galaxy Buds</div>
         <div class="category-stats">
-          <span class="category-stock" id="countCatBudsStock">44</span>
+          <span class="category-stock" id="countCatBudsStock">49</span>
           <span class="category-unit">เครื่อง (ชั้น 1)</span>
         </div>
       </div>
@@ -326,11 +332,47 @@
       <div class="category-card cat-acc" data-cat="Accessory">
         <div class="category-top">
           <span class="category-icon">🛍️</span>
-          <span class="category-models-count" id="countCatAccModels">78 รายการ</span>
+          <span class="category-models-count" id="countCatAccModels">189 รายการ</span>
         </div>
         <div class="category-name">อุปกรณ์เสริม</div>
         <div class="category-stats">
-          <span class="category-stock" id="countCatAccStock">721</span>
+          <span class="category-stock" id="countCatAccStock">972</span>
+          <span class="category-unit">ชิ้น (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-premium" id="catCardPremium" data-cat="Premium" style="display: flex;">
+        <div class="category-top">
+          <span class="category-icon">🎁</span>
+          <span class="category-models-count" id="countCatPremModels">24 รายการ</span>
+        </div>
+        <div class="category-name">ของแถม / Premium</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatPremStock">282</span>
+          <span class="category-unit">ชิ้น (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-sim" id="catCardSIM" data-cat="SIM" style="display: none !important;">
+        <div class="category-top">
+          <span class="category-icon">📶</span>
+          <span class="category-models-count" id="countCatSimModels">11 รายการ</span>
+        </div>
+        <div class="category-name">ซิมการ์ด (SIM)</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatSimStock">58</span>
+          <span class="category-unit">ใบ (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-other" id="catCardOther" data-cat="Other" style="display: none !important;">
+        <div class="category-top">
+          <span class="category-icon">🏷️</span>
+          <span class="category-models-count" id="countCatOtherModels">9 รายการ</span>
+        </div>
+        <div class="category-name">สินค้าอื่น ๆ</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatOtherStock">15</span>
           <span class="category-unit">ชิ้น (ชั้น 1)</span>
         </div>
       </div>
@@ -382,8 +424,8 @@
               <th>สินค้า / สเปก / รหัส P/N</th>
               <th>สีตัวเครื่อง</th>
               <th>หมวดหมู่</th>
-              <th style="text-align: center;">ร้านเรา (ช1)</th>
-              <th style="text-align: center;">สาขา (ช2)</th>
+              <th style="text-align: center;">ร้านเรา (ชั้น 1)</th>
+              <th style="text-align: center;">สาขา (ชั้น 2)</th>
               <th style="text-align: center;">รวมสต็อก</th>
               <th>สถานะโปรโมชั่น</th>
               <th style="text-align: right;">การดำเนินการ</th>
@@ -405,12 +447,12 @@
         </section>
 
         <!-- VIEW 4: PROMOTIONS -->
-        <section id="view-promotions" class="app-view">
+        <section id="view-promotions" class="app-view" data-pilot-route="/promotions" hidden>
           <div id="promotionsViewContent" class="home-view-container"></div>
         </section>
 
         <!-- VIEW: PROMOTION IMPORT CENTER -->
-        <section id="view-promotion-import" class="app-view">
+        <section id="view-promotion-import" class="app-view" data-pilot-route="/promotion-import" hidden>
           <div class="importer-container">
             <!-- Local Storage Banner -->
             <div class="local-store-banner">
@@ -607,7 +649,7 @@
         </section>
 
         <!-- VIEW: STOCK IMPORT -->
-        <section id="view-stock-import" class="app-view">
+        <section id="view-stock-import" class="app-view" data-pilot-route="/stock-import" hidden>
           <div class="importer-container">
             <!-- Local Storage Banner -->
             <div class="local-store-banner">
@@ -826,7 +868,7 @@
         </section>
 
         <!-- VIEW: STOCK IMPORT HISTORY -->
-        <section id="view-stock-import-history" class="app-view">
+        <section id="view-stock-import-history" class="app-view" data-pilot-route="/stock-import-history" hidden>
           <div class="importer-container">
             <div class="importer-header-card">
               <div class="importer-title-group">
@@ -850,7 +892,7 @@
         </section>
 
         <!-- VIEW 5: REPORTS -->
-        <section id="view-reports" class="app-view">
+        <section id="view-reports" class="app-view" data-pilot-route="/reports" hidden>
           <div class="home-view-container">
             <div class="home-section">
               <div class="section-title-bar">
@@ -868,7 +910,7 @@
         </section>
 
         <!-- VIEW 6: KNOWLEDGE -->
-        <section id="view-knowledge" class="app-view">
+        <section id="view-knowledge" class="app-view" data-pilot-route="/knowledge" hidden>
           <div class="home-view-container">
             <div class="home-section">
               <div class="section-title-bar">
@@ -897,12 +939,12 @@
         </section>
 
         <!-- VIEW 7: SETTINGS -->
-        <section id="view-settings" class="app-view">
+        <section id="view-settings" class="app-view" data-pilot-route="/settings" hidden>
           <div id="settingsViewContent" class="home-view-container"></div>
         </section>
 
         <!-- VIEW 8: ADMIN MEMBERS -->
-        <section id="view-admin-members" class="app-view">
+        <section id="view-admin-members" class="app-view" data-pilot-route="/admin/members" hidden>
           <div id="adminMembersViewContent"></div>
         </section>
       </div>
@@ -1004,6 +1046,7 @@
   <script src="assets/js/member-admin-service.js"></script>
   <script src="assets/js/pilot-bootstrap.js"></script>
   <script src="stock_data.js"></script>
+  <script src="assets/js/pilot-stock-snapshot.js"></script>
   <script src="promotion_variants.js"></script>
   <script src="product_specs_data.js"></script>
   <script src="assets/js/prototype-stock.js"></script>

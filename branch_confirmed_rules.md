@@ -111,3 +111,81 @@
   - **ห้ามเขียนหรือแก้ไขไฟล์ `validated_promotions.json` หรือฐานข้อมูล Dashboard โดยตรง**
   - ห้ามตัดสินใจเปลี่ยนราคาหรือคูปองโดยไม่มีกฎรองรับ
   - ห้ามปลดสถานะ `BLOCKED` หรือแก้ค่า `#ERROR!` ด้วยการคาดเดา
+
+---
+
+## 6. กฎถาวรการแสดงผลสต็อก (Permanent Stock Display Rules)
+**บังคับใช้กับ UI/UX ทุกหน้าของระบบ:**
+
+### 6.1 การ์ดสรุปด้านบน (Summary Cards) & Dashboard KPI
+- **ขอบเขตการคำนวณ:** แสดงเฉพาะยอดสต็อก **ชั้น 1 (F1) เท่านั้น**
+  - $\text{สินค้าและอุปกรณ์ทั้งหมด} = \sum(F1)$
+  - $\text{สมาร์ตโฟน} = \sum(F1)$
+  - $\text{แท็บเล็ต} = \sum(F1)$
+  - $\text{Galaxy Watch} = \sum(F1)$
+  - $\text{Galaxy Buds} = \sum(F1)$
+  - $\text{อุปกรณ์เสริม} = \sum(F1)$
+  - $\text{สินค้าอื่น ๆ} = \sum(F1)$
+- **ข้อความกำกับหน่วย:** ต้องใช้ `เครื่อง (ชั้น 1)` หรือ `ชิ้น (ชั้น 1)` หรือ `เรือน (ชั้น 1)`
+- **กฎเหล็ก (Strict Prohibition):** **ห้ามแสดงหรือคำนวณเป็น F1 + F2 บนการ์ดสรุปหรือ Widget KPI ทุกใบ**
+- **Dashboard KPI และหน้า/Widget อื่น:** ห้ามนำ F2 มารวมโดยเด็ดขาด
+
+### 6.2 ตารางรายการสินค้า (Stock Table)
+- **เฉพาะตารางนี้เท่านั้นที่อนุญาตให้แสดง 3 คอลัมน์:**
+  - `ร้านเรา (ชั้น 1)` $= F1$
+  - `สาขา (ชั้น 2)` $= F2$
+  - `รวมสต็อก` $= F1 + F2$
+- ตัวอย่างการแสดงผลแถวสินค้า:
+  - ร้านเรา (ชั้น 1): $2$
+  - สาขา (ชั้น 2): $5$
+  - รวมสต็อก: $7$
+- การกรอง:
+  - ตัวกรอง "ชั้น 1": กรองเฉพาะรายการที่ $F1 > 0$
+  - ตัวกรอง "ชั้น 2": กรองเฉพาะรายการที่ $F2 > 0$
+
+---
+
+## 7. กฎการจำแนกหมวดหมู่และการแสดงผลตามไฟล์ `stock(1).xlsx`
+
+### 7.1 ลำดับการจำแนกหมวดหมู่ (Category Classification Precedence)
+ต้องตรวจสอบคอลัมน์ `Category 1 (Cat1)`, `Category 2 (Cat2)`, `Category 3 (Cat3)` จาก Excel ก่อนรหัส P/N เสมอ:
+1. **Galaxy Buds:**
+   - $\text{Cat1} = \text{"AUDIO"} \land \text{Cat2} = \text{"HEADPHONE"} \land \text{Cat3} = \text{"TRUE WIRELESS"} \land \text{Brand} = \text{"SAMSUNG"}$
+   - หรือ $\text{Brand} = \text{"SAMSUNG"} \land (P/N \in \text{SM-R4*, SM-R5*, SM-R6*} \lor \text{Model มีคำว่า BUDS})$
+   - **กฎเหล็ก:** ห้ามจัดสินค้าที่มีรหัส `SM-R...` เป็น Smartphone โดยเด็ดขาด ต้องแยก Buds ออกก่อนเสมอ
+2. **Smartphone:**
+   - $\text{Cat1} \in \{\text{"SMART PHONES", "SMARTPHONES", "SMART PHONE"}\}$ (และ $P/N$ ต้องไม่ขึ้นต้นด้วย `SM-R`, `SM-L`, `SM-X`, `EP-`, `EF-`)
+3. **Tablet:**
+   - $\text{Cat1} \in \{\text{"COMPUTER AND TABLET", "TABLET", "TAB"}\} \lor P/N \in \text{SM-X*}$
+4. **Galaxy Watch:**
+   - $\text{Cat1} \in \{\text{"SMART WATCH", "WATCH"}\} \lor (\text{Brand} = \text{"SAMSUNG"} \land P/N \in \text{SM-R8*, SM-R9*, SM-L3*, SM-L7*})$
+5. **อุปกรณ์เสริม (Accessories):**
+   - $\text{Cat1} \in \{\text{"MOBILE AND COMPUTER ACCESSORY", "ACCESSORY", "ADAPTER"}\} \lor P/N \in \text{EP-*, EF-*, GP-*, ET-*, EJ-*, EE-*}$
+6. **ของแถม / Premium:**
+   - $\text{Cat1/Cat2 มีคำว่า PREMIUM หรือ FREE GIFT} \lor \text{Model มีคำว่า PREMIUM, GAABOR, STAINLESS STEEL}$
+7. **ซิมการ์ด (SIM):**
+   - $\text{Cat1 มีคำว่า SERVICE, INSURANCE AND WARRANTY หรือ SIM} \lor \text{Model มีคำว่า SIM}$
+8. **สินค้าอื่น ๆ (Other):**
+   - สินค้าที่ไม่เข้าเงื่อนไข 1-7 ข้างต้น เช่น ลำโพง Soundcore, พัดลม Jisulife, ไมโครเวฟ, เครื่องฟอกอากาศ
+
+### 7.2 ตัวเลขเป้าหมายบนการ์ดสรุปชั้น 1 (F1 Only)
+| การ์ดสรุป | ยอดสต็อก F1 | จำนวนรุ่น (P/N ไม่ซ้ำใน Sheet1) | สถานะการแสดงผล |
+| :--- | :---: | :---: | :---: |
+| **สต๊อกทั้งหมด ชั้น 1** | **1,701** | **333 รายการ** | แสดง |
+| **Smartphone** | **230** | **62 รุ่น** | แสดง |
+| **Tablet** | **34** | **12 รุ่น** | แสดง |
+| **Galaxy Watch** | **61** | **17 รุ่น** | แสดง |
+| **Galaxy Buds** | **49** | **9 รุ่น** | แสดง |
+| **อุปกรณ์เสริม** | **972** | **189 รายการ** | แสดง |
+| **ของแถม / Premium** | **282** | **24 รายการ** | แสดง |
+| *ซิมการ์ด (SIM)* | *58* | *11 รายการ* | **ซ่อนการ์ด** (`display: none !important;`) |
+| *สินค้าอื่น ๆ (Other)* | *15* | *9 รายการ* | **ซ่อนการ์ด** (`display: none !important;`) |
+
+### 7.3 การอัปเดตแบบ Reactive ทันทีหลัง Import
+เมื่อผู้ใช้กดยืนยันนำเข้าไฟล์ผ่าน Stock Import Center ระบบต้อง:
+1. บันทึก Snapshot ลง IndexedDB (`StockStorageAdapter.saveBatch`)
+2. อัปเดต `window.STOCK_DATABASE` และ `window.STOCK_DATA`
+3. ล้าง Cache ของ DataLoader
+4. เรียก `PrototypeStock.refresh()` เพื่อคำนวณการ์ด F1 ใหม่และเรนเดอร์ตารางทันทีโดยไม่ต้อง Hard Refresh หรือปิดเปิดเบราว์เซอร์ใหม่
+
+

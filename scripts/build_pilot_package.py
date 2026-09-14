@@ -59,6 +59,7 @@ def build_pilot_package():
         "assets/js/pilot-dashboard-widgets.js",
         "assets/js/member-admin-service.js",
         "assets/js/pilot-bootstrap.js",
+        "assets/js/pilot-stock-snapshot.js",
         "reports/promotion_release_manifest.json"
     ]
 

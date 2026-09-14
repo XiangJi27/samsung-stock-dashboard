@@ -10,7 +10,7 @@
     // --- Active Live Widgets (Real Data) ---
     {
       id: 'widget-stock-total',
-      title: 'สต็อกเครื่องหลักรวม',
+      title: 'สต็อกชั้น 1 (หน้าร้าน)',
       icon: '📦',
       permission: 'stock.view',
       status: 'ACTIVE',
@@ -19,14 +19,14 @@
         return `
           <div class="pilot-widget-card" style="background:#1e222d; border:1px solid #363c4e; border-radius:10px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <span style="font-size:12px; color:#848e9c; font-weight:500;">สต็อกเครื่องหลักรวม</span>
+              <span style="font-size:12px; color:#848e9c; font-weight:500;">สต็อกชั้น 1 (หน้าร้าน)</span>
               <span style="font-size:20px;">📦</span>
             </div>
             <div style="font-size:26px; font-weight:800; color:#2962ff; letter-spacing:-0.5px;">
-              ${stats.totalStock.toLocaleString()} <span style="font-size:14px; font-weight:500; color:#b2b5be;">เครื่อง</span>
+              ${stats.floor1Stock.toLocaleString()} <span style="font-size:14px; font-weight:500; color:#b2b5be;">เครื่อง (ชั้น 1)</span>
             </div>
             <div style="font-size:11px; color:#848e9c; margin-top:8px;">
-              สินค้าพร้อมจำหน่าย: <strong style="color:#4caf50;">${stats.inStockCount.toLocaleString()}</strong> รายการ
+              สินค้าพร้อมจำหน่าย ชั้น 1: <strong style="color:#4caf50;">${stats.inStockCount.toLocaleString()}</strong> รายการ
             </div>
           </div>
         `;

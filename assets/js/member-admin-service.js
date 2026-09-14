@@ -907,6 +907,18 @@
       const mins = String(dateObj.getMinutes()).padStart(2, '0');
       return `${day} ${month} ${year}, ${hours}:${mins} น.`;
     }
+
+    destroy() {
+      if (this.containerEl) {
+        this.containerEl.replaceChildren();
+      }
+      this.containerEl = null;
+      this.activeMember = null;
+      this.members = [];
+      this.filteredMembers = [];
+      this.isLoading = false;
+      console.info('[MemberAdminService] Cleanly destroyed and unmounted');
+    }
   }
 
   window.MemberAdminService = new MemberAdminService();

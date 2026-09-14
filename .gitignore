@@ -39,3 +39,4 @@ scratch/
 __pycache__/
 *.pyc
 .pilot-deploy/
+*.xlsx

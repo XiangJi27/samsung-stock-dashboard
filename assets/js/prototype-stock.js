@@ -1161,22 +1161,21 @@
     let promoVariants = [];
 
     function refreshPrototypeData() {
-      // ========================================================================
-      // INTENTIONAL DEDUPLICATION & RECONCILIATION LOGIC:
-      // stock_data.js contains 236 items: 212 Core Devices + 24 Partial Accessories/Adapters.
-      // Those 24 partial items (6 Adapters with f1=189, f2=123 + 18 legacy cases with 1 unit)
-      // are an incomplete subset of Sheet 8 ('Adapter&สาย&Flim' in Stock.xlsx).
-      // The complete, validated accessories catalog is ALL_ACCESSORIES (78 items, f1=721, f2=519).
-      // ALL_ACCESSORIES already includes those exact 6 adapters with identical P/Ns and stock counts!
-      // Therefore, we MUST filter out category 'Accessory' and 'Adapter' from stockDb
-      // to PREVENT DOUBLE-COUNTING (which would erroneously inflate stock by 313 units to 2,313).
-      // 212 Core Devices + 78 Full Accessories = 290 items (1,100 F1 + 900 F2 = 2,000 units).
-      // ========================================================================
       const stockDb = (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE) && window.STOCK_DATABASE.length > 0)
         ? window.STOCK_DATABASE
         : FALLBACK_STOCK;
-      const coreDevices = stockDb.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
-      rawItems = coreDevices.concat(ALL_ACCESSORIES);
+
+      const hasImportedAccessories = stockDb !== FALLBACK_STOCK && (stockDb.length > 250 || stockDb.some(x => {
+        const c = String(x.category || x.category1 || '').toUpperCase();
+        return c.includes('ACC') || c.includes('ADAPTER');
+      }));
+
+      if (hasImportedAccessories) {
+        rawItems = stockDb.slice();
+      } else {
+        const coreDevices = stockDb.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
+        rawItems = coreDevices.concat(ALL_ACCESSORIES);
+      }
 
       rawItems.forEach(item => {
         if (!item.connectivity) {
@@ -1369,29 +1368,225 @@
     // RENDER FUNCTIONS
     // ==========================================================================
 
+    // ==========================================================================
+    // CENTRALIZED CATEGORY NORMALIZATION & RECONCILIATION ENGINE
+    // ==========================================================================
+    const CATEGORY_ALIASES = {
+      "SMART_PHONE": "SMARTPHONE",
+      "PHONE": "SMARTPHONE",
+      "MOBILE": "SMARTPHONE",
+      "SMARTPHONE": "SMARTPHONE",
+      "SMARTPHONES": "SMARTPHONE",
+
+      "TAB": "TABLET",
+      "TABLET": "TABLET",
+      "TABLETS": "TABLET",
+      "GALAXY_TAB": "TABLET",
+      "COMPUTER_AND_TABLET": "TABLET",
+
+      "WATCH": "SMARTWATCH",
+      "SMART_WATCH": "SMARTWATCH",
+      "SMARTWATCH": "SMARTWATCH",
+      "GALAXY_WATCH": "SMARTWATCH",
+
+      "BUDS": "BUDS",
+      "GALAXY_BUDS": "BUDS",
+      "EARBUDS": "BUDS",
+      "AUDIO": "BUDS",
+      "WEARABLE_AUDIO": "BUDS",
+      "HEADPHONE": "BUDS",
+
+      "ACCESSORIES": "ACCESSORY",
+      "ACCESSORY": "ACCESSORY",
+      "STANDARD_ACCESSORY": "ACCESSORY",
+      "MOBILE_AND_COMPUTER_ACCESSORY": "ACCESSORY",
+      "SAMSUNG_ACCESSORY": "ACCESSORY",
+      "THIRD_PARTY_ACCESSORY": "ACCESSORY",
+
+      "ADAPTER": "ADAPTER",
+      "CHARGER": "ADAPTER",
+
+      "SIM": "SIM",
+      "SIM_CARD": "SIM",
+      "SIM_SERVICE": "SIM",
+      "SERVICE,_INSURANCE_AND_WARRANTY": "SIM",
+
+      "PREMIUM": "PREMIUM",
+      "PREMIUM_GIFT": "PREMIUM",
+      "GIFT": "PREMIUM",
+
+      "OTHER": "OTHER"
+    };
+
+    function normalizeCategory(value) {
+      return String(value || "")
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, "_");
+    }
+
+    function anyKeyword(str, keywords) {
+      return keywords.some(k => str.includes(k));
+    }
+
+    function resolveCanonicalCategory(item) {
+      if (!item) return "OTHER";
+
+      const c1 = String(item.cat1 || item.category1 || item.category || "").trim().toUpperCase();
+      const c2 = String(item.cat2 || item.category2 || "").trim().toUpperCase();
+      const c3 = String(item.cat3 || item.category3 || "").trim().toUpperCase();
+      const brand = String(item.brand || "").trim().toUpperCase();
+      const pn = String(item.pn || "").trim().toUpperCase();
+      const model = String(item.model || item.description || "").trim().toUpperCase();
+
+      // 1. Galaxy Buds (Excel Cat1=Audio, Cat2=Headphone, Cat3=True Wireless + Samsung; or Samsung + SM-R4/5/6 / BUDS)
+      // MUST be evaluated before Smartphone to prevent Buds SM-R... misclassification!
+      if ((c1 === "AUDIO" && c2 === "HEADPHONE" && c3 === "TRUE WIRELESS" && brand.includes("SAMSUNG")) ||
+          (brand.includes("SAMSUNG") && (pn.startsWith("SM-R4") || pn.startsWith("SM-R5") || pn.startsWith("SM-R6") || model.includes("BUDS")))) {
+        return "BUDS";
+      }
+
+      // 2. Smartphone (Cat1 = SMART PHONES, never Buds/Watch/Tablet/Accessory)
+      if (c1 === "SMART PHONES" || c1 === "SMARTPHONES" || c1 === "SMART PHONE" || c1 === "SMART_PHONES" || c1 === "SMART_PHONE") {
+        if (!pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X") && !pn.startsWith("EP-") && !pn.startsWith("EF-")) {
+          return "SMARTPHONE";
+        }
+      }
+
+      // 3. Tablet (Cat1 = COMPUTER AND TABLET or SM-X or TAB)
+      if (c1 === "COMPUTER AND TABLET" || c1 === "COMPUTER_AND_TABLET" || c1 === "TABLET" || c1 === "TABLETS" || c1 === "TAB" || pn.startsWith("SM-X")) {
+        return "TABLET";
+      }
+
+      // 4. Smart Watch (Cat1 = SMART WATCH or Watch P/Ns)
+      if (c1 === "SMART WATCH" || c1 === "SMART_WATCH" || c1 === "SMARTWATCH" || c1 === "WATCH" ||
+          (brand.includes("SAMSUNG") && (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L3") || pn.startsWith("SM-L7")))) {
+        return "SMARTWATCH";
+      }
+
+      // 5. Accessories (Cat1 = MOBILE AND COMPUTER ACCESSORY or Accessory prefixes)
+      if (c1 === "MOBILE AND COMPUTER ACCESSORY" || c1 === "MOBILE_AND_COMPUTER_ACCESSORY" || c1 === "ACCESSORY" || c1 === "ACCESSORIES" || c1 === "ADAPTER" ||
+          pn.startsWith("EP-") || pn.startsWith("EF-") || pn.startsWith("GP-") || pn.startsWith("ET-") || pn.startsWith("EJ-") || pn.startsWith("EE-")) {
+        return "ACCESSORY";
+      }
+
+      // 6. Premium (Gifts, promotions, premium sets)
+      if (c1.includes("PREMIUM") || c2.includes("PREMIUM") || c2.includes("FREE GIFT") || model.includes("PREMIUM") || model.includes("FREE GIFT") || c1.includes("GIFT") || model.includes("GAABOR") || model.includes("STAINLESS STEEL")) {
+        return "PREMIUM";
+      }
+
+      // 7. SIM (Service, carrier packs, insurance)
+      if (c1.includes("SERVICE, INSURANCE AND WARRANTY") || c1.includes("SERVICE,_INSURANCE_AND_WARRANTY") || c1.includes("SIM") || c2.includes("SIM") || c2.includes("CARRIER MOBILE PACKAGE") || model.includes("SIM") || model.startsWith("(AIS)")) {
+        return "SIM";
+      }
+
+      // Fallback identification by model & P/N conventions
+      if (pn.startsWith("SM-R4") || pn.startsWith("SM-R5") || pn.startsWith("SM-R6") || model.includes("BUDS")) return "BUDS";
+      if (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L3") || pn.startsWith("SM-L7") || model.includes("WATCH")) return "SMARTWATCH";
+      if (pn.startsWith("SM-X") || model.includes("TAB ") || model.includes("GALAXY TAB")) return "TABLET";
+      if ((pn.startsWith("SM-") || pn.startsWith("F-")) && !pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X")) {
+        return "SMARTPHONE";
+      }
+
+      // If category1 exists from Excel, any item reaching here is definitively OTHER
+      if (item.category1 || item.cat1) {
+        return "OTHER";
+      }
+
+      const rawCat = normalizeCategory(item.category);
+      if (CATEGORY_ALIASES[rawCat] && CATEGORY_ALIASES[rawCat] !== "SMARTPHONE") {
+        return CATEGORY_ALIASES[rawCat];
+      }
+
+      return "OTHER";
+    }
+
+    function isSmartphone(item) {
+      if (!item) return false;
+      const canonical = resolveCanonicalCategory(item);
+      if (canonical !== "SMARTPHONE") return false;
+
+      const pn = String(item.pn || "").trim().toUpperCase();
+      if (pn.startsWith("SM-R") || pn.startsWith("SM-L") || pn.startsWith("SM-X") || pn.startsWith("EP-") || pn.startsWith("EF-")) {
+        return false;
+      }
+      return true;
+    }
+
+    function calculateCategoryCard(items) {
+      const uniquePnCount = new Set(
+        items
+          .filter(item => Number(item.f1 !== undefined ? item.f1 : (item.stock_f1 !== undefined ? item.stock_f1 : 0)) > 0)
+          .map(item => String(item.pn || "").trim().toUpperCase())
+          .filter(Boolean)
+      ).size;
+
+      const floor1Units = items.reduce(
+        (sum, item) => sum + Number(item.f1 !== undefined ? item.f1 : (item.stock_f1 !== undefined ? item.stock_f1 : 0)),
+        0
+      );
+
+      return {
+        uniquePnCount,
+        floor1Units
+      };
+    }
+
+    window.calculateCategoryCard = calculateCategoryCard;
+    window.normalizeCategory = normalizeCategory;
+    window.CATEGORY_ALIASES = CATEGORY_ALIASES;
+    window.resolveCanonicalCategory = resolveCanonicalCategory;
+    window.isSmartphone = isSmartphone;
+
     function updateCategoryCardCounts() {
       const counts = {
-        ALL: { models: 0, stock: 0 },
-        SmartPhone: { models: 0, stock: 0 },
-        Tablet: { models: 0, stock: 0 },
-        Watch: { models: 0, stock: 0 },
-        Buds: { models: 0, stock: 0 },
-        Accessory: { models: 0, stock: 0 }
+        ALL: { pns: new Set(), stock: 0 },
+        SmartPhone: { pns: new Set(), stock: 0 },
+        Tablet: { pns: new Set(), stock: 0 },
+        Watch: { pns: new Set(), stock: 0 },
+        Buds: { pns: new Set(), stock: 0 },
+        Accessory: { pns: new Set(), stock: 0 },
+        SIM: { pns: new Set(), stock: 0 },
+        Premium: { pns: new Set(), stock: 0 },
+        Other: { pns: new Set(), stock: 0 }
       };
 
       rawItems.forEach(item => {
-        const cat = item.category || "SmartPhone";
+        const pn = String(item.pn || "").trim().toUpperCase();
         const f1 = Number(item.f1 !== undefined ? item.f1 : (item.stock_f1 !== undefined ? item.stock_f1 : 0));
-        
-        counts.ALL.models++;
-        counts.ALL.stock += f1;
 
-        if (counts[cat]) {
-          counts[cat].models++;
-          counts[cat].stock += f1;
-        } else if (cat === "Adapter") {
-          counts.Accessory.models++;
+        // Total Sheet1/F1 Stock: SUM(f1) and distinct P/Ns present on Floor 1
+        counts.ALL.stock += f1;
+        if (f1 > 0 && pn) {
+          counts.ALL.pns.add(pn);
+        }
+
+        const canonical = resolveCanonicalCategory(item);
+
+        if (canonical === "SMARTPHONE") {
+          counts.SmartPhone.stock += f1;
+          if (f1 > 0 && pn) counts.SmartPhone.pns.add(pn);
+        } else if (canonical === "TABLET") {
+          counts.Tablet.stock += f1;
+          if (f1 > 0 && pn) counts.Tablet.pns.add(pn);
+        } else if (canonical === "SMARTWATCH") {
+          counts.Watch.stock += f1;
+          if (f1 > 0 && pn) counts.Watch.pns.add(pn);
+        } else if (canonical === "BUDS") {
+          counts.Buds.stock += f1;
+          if (f1 > 0 && pn) counts.Buds.pns.add(pn);
+        } else if (canonical === "ACCESSORY" || canonical === "ADAPTER") {
           counts.Accessory.stock += f1;
+          if (f1 > 0 && pn) counts.Accessory.pns.add(pn);
+        } else if (canonical === "SIM") {
+          counts.SIM.stock += f1;
+          if (f1 > 0 && pn) counts.SIM.pns.add(pn);
+        } else if (canonical === "PREMIUM") {
+          counts.Premium.stock += f1;
+          if (f1 > 0 && pn) counts.Premium.pns.add(pn);
+        } else {
+          counts.Other.stock += f1;
+          if (f1 > 0 && pn) counts.Other.pns.add(pn);
         }
       });
 
@@ -1400,33 +1595,68 @@
         if (el) el.textContent = val;
       };
 
-      setTxt("countCatAllModels", `${counts.ALL.models} รุ่น`);
+      setTxt("countCatAllModels", `${counts.ALL.pns.size} รายการ`);
       setTxt("countCatAllStock", counts.ALL.stock.toLocaleString('th-TH'));
 
-      setTxt("countCatPhoneModels", `${counts.SmartPhone.models} รุ่น`);
+      setTxt("countCatPhoneModels", `${counts.SmartPhone.pns.size} รุ่น`);
       setTxt("countCatPhoneStock", counts.SmartPhone.stock.toLocaleString('th-TH'));
 
-      setTxt("countCatTabModels", `${counts.Tablet.models} รุ่น`);
+      setTxt("countCatTabModels", `${counts.Tablet.pns.size} รุ่น`);
       setTxt("countCatTabStock", counts.Tablet.stock.toLocaleString('th-TH'));
 
-      setTxt("countCatWatchModels", `${counts.Watch.models} รุ่น`);
+      setTxt("countCatWatchModels", `${counts.Watch.pns.size} รุ่น`);
       setTxt("countCatWatchStock", counts.Watch.stock.toLocaleString('th-TH'));
 
-      setTxt("countCatBudsModels", `${counts.Buds.models} รุ่น`);
+      setTxt("countCatBudsModels", `${counts.Buds.pns.size} รุ่น`);
       setTxt("countCatBudsStock", counts.Buds.stock.toLocaleString('th-TH'));
 
-      setTxt("countCatAccModels", `${counts.Accessory.models} รายการ`);
+      setTxt("countCatAccModels", `${counts.Accessory.pns.size} รายการ`);
       setTxt("countCatAccStock", counts.Accessory.stock.toLocaleString('th-TH'));
+
+      setTxt("countCatSimModels", `${counts.SIM.pns.size} รายการ`);
+      setTxt("countCatSimStock", counts.SIM.stock.toLocaleString('th-TH'));
+
+      setTxt("countCatPremModels", `${counts.Premium.pns.size} รายการ`);
+      setTxt("countCatPremStock", counts.Premium.stock.toLocaleString('th-TH'));
+
+      setTxt("countCatOtherModels", `${counts.Other.pns.size} รายการ`);
+      setTxt("countCatOtherStock", counts.Other.stock.toLocaleString('th-TH'));
+
+      const kpiTotalStock = document.getElementById("kpiTotalStock");
+      if (kpiTotalStock) {
+        kpiTotalStock.textContent = counts.ALL.stock.toLocaleString('th-TH');
+      }
+
+      // Mandatory visibility rule: Show 7 cards (Total, Phone, Tablet, Watch, Buds, Accessory, Premium), strictly hide SIM and Other
+      const simCard = document.getElementById("catCardSIM");
+      if (simCard) simCard.style.cssText = "display: none !important;";
+      const otherCard = document.getElementById("catCardOther");
+      if (otherCard) otherCard.style.cssText = "display: none !important;";
+      const premCard = document.getElementById("catCardPremium");
+      if (premCard) premCard.style.cssText = "display: flex !important;";
     }
 
     function filterItems() {
       return rawItems.filter(item => {
-        // 1. Category Filter
+        // 1. Category Filter with Centralized Normalization
         if (currentCategory !== "ALL") {
-          if (currentCategory === "Accessory") {
-            if (item.category !== "Accessory" && item.category !== "Adapter") return false;
-          } else if (item.category !== currentCategory) {
-            return false;
+          const canonical = resolveCanonicalCategory(item);
+          if (currentCategory === "SmartPhone") {
+            if (!isSmartphone(item)) return false;
+          } else if (currentCategory === "Tablet") {
+            if (canonical !== "TABLET") return false;
+          } else if (currentCategory === "Watch") {
+            if (canonical !== "SMARTWATCH") return false;
+          } else if (currentCategory === "Buds") {
+            if (canonical !== "BUDS") return false;
+          } else if (currentCategory === "Accessory") {
+            if (canonical !== "ACCESSORY" && canonical !== "ADAPTER") return false;
+          } else if (currentCategory === "SIM") {
+            if (canonical !== "SIM") return false;
+          } else if (currentCategory === "Premium") {
+            if (canonical !== "PREMIUM") return false;
+          } else if (currentCategory === "Other") {
+            if (canonical !== "OTHER") return false;
           }
         }
 
@@ -2308,6 +2538,24 @@
         { key: "sub-charger", label: "🔌 หัวชาร์จ & สาย" },
         { key: "sub-case", label: "📱 เคส & คีย์บอร์ด" },
         { key: "sub-tag", label: "🏷️ SmartTag" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" }
+      ],
+      SIM: [
+        { key: "all", label: "ทั้งหมด (ซิมการ์ด)" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" }
+      ],
+      Premium: [
+        { key: "all", label: "ทั้งหมด (ของแถม/พรีเมียม)" },
+        { key: "instock", label: "📦 มีของพร้อมขาย" },
+        { key: "f1", label: "ช1 ร้านเรา" },
+        { key: "f2", label: "ช2 สาขา" }
+      ],
+      Other: [
+        { key: "all", label: "ทั้งหมด (สินค้าอื่นๆ)" },
         { key: "instock", label: "📦 มีของพร้อมขาย" },
         { key: "f1", label: "ช1 ร้านเรา" },
         { key: "f2", label: "ช2 สาขา" }

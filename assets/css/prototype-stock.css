@@ -233,6 +233,9 @@
     .cat-watch { --card-accent: var(--amber); --card-glow: var(--amber-glow); }
     .cat-buds { --card-accent: #ec4899; --card-glow: rgba(236, 72, 153, 0.25); }
     .cat-acc { --card-accent: var(--emerald); --card-glow: var(--emerald-glow); }
+    .cat-sim { --card-accent: #06b6d4; --card-glow: rgba(6, 182, 212, 0.25); }
+    .cat-premium { --card-accent: #eab308; --card-glow: rgba(234, 179, 8, 0.25); }
+    .cat-other { --card-accent: #94a3b8; --card-glow: rgba(148, 163, 184, 0.25); }
 
     /* Control Bar: Search, Filters, View Switch */
     .control-bar {
