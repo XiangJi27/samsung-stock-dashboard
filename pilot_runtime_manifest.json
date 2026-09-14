@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "728bad6",
+  "packageBuiltFromCommit": "9bffbb1",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-14T11:02:25.049017+07:00",
+  "builtAt": "2026-09-14T11:19:54.095948+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,15 +13,15 @@
   "totalFiles": 40,
   "summary": {
     "totalFiles": 40,
-    "totalSizeBytes": 7988742,
-    "totalSizeMB": 7.62
+    "totalSizeBytes": 7921065,
+    "totalSizeMB": 7.55
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 130505,
-      "sha256": "90fcdaacb7bf77fb59918be8dd155ef5565dc68e7a3ea2694ab5c3139195b70c",
-      "status": "BASELINE_CORE"
+      "sizeBytes": 62713,
+      "sha256": "c51bd384e5fbf5e77dfafe6034a840c7aae52b04f5c74c5599cf307b204d682c",
+      "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
       "file": "app.js",
@@ -49,9 +49,10 @@
     },
     {
       "file": "vercel.json",
-      "sizeBytes": 77,
-      "sha256": "8b202658ee9a2426c40c5ba86da9d24246c7bc6bd89ae24b9e24c46b38d0fa68",
-      "status": "BASELINE_CORE"
+      "sizeBytes": 192,
+      "sha256": "b63dce9bbd573c41a506e00d309f27e9e8455dd55771abeb998b4889ca9e42b3",
+      "status": "PILOT_ROUTING_CONFIG",
+      "note": "Root redirect to /pilot.html configured for Vercel Preview"
     },
     {
       "file": "assets/css/shell.css",

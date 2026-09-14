@@ -73,6 +73,54 @@ def build_pilot_package():
             if not os.path.exists(abs_path):
                 raise FileNotFoundError(f"Missing required file for pilot package: {rel_path}")
 
+            if rel_path == "index.html":
+                # Safety Isolation: Mirror pilot.html into index.html inside Pilot package
+                # Guarantees root domain '/' serves Feedback Pilot without modifying baseline index.html on disk
+                pilot_source_path = os.path.join(ROOT_DIR, "pilot.html")
+                with open(pilot_source_path, "rb") as rf:
+                    file_bytes = rf.read()
+                file_sha = hashlib.sha256(file_bytes).hexdigest()
+                file_size = len(file_bytes)
+                zf.writestr(rel_path, file_bytes)
+                total_bytes += file_size
+                pilot_manifest_items.append({
+                    "file": "index.html",
+                    "sizeBytes": file_size,
+                    "sha256": file_sha,
+                    "status": "PILOT_ENTRYPOINT_MIRROR"
+                })
+                print(f"  + Added: {rel_path} (MIRRORED FROM pilot.html, {file_size} bytes)")
+                continue
+
+            if rel_path == "vercel.json":
+                # Pilot deployment routing: Redirect root '/' to '/pilot.html'
+                pilot_vercel_cfg = {
+                    "version": 2,
+                    "name": "samsung-stock-dashboard",
+                    "cleanUrls": True,
+                    "redirects": [
+                        {
+                            "source": "/",
+                            "destination": "/pilot.html",
+                            "permanent": False
+                        }
+                    ]
+                }
+                file_bytes = json.dumps(pilot_vercel_cfg, indent=2, ensure_ascii=False).encode("utf-8")
+                file_sha = hashlib.sha256(file_bytes).hexdigest()
+                file_size = len(file_bytes)
+                zf.writestr(rel_path, file_bytes)
+                total_bytes += file_size
+                pilot_manifest_items.append({
+                    "file": "vercel.json",
+                    "sizeBytes": file_size,
+                    "sha256": file_sha,
+                    "status": "PILOT_ROUTING_CONFIG",
+                    "note": "Root redirect to /pilot.html configured for Vercel Preview"
+                })
+                print(f"  + Added: {rel_path} (PILOT ROUTING REDIRECT, {file_size} bytes)")
+                continue
+
             with open(abs_path, "rb") as rf:
                 file_bytes = rf.read()
                 file_sha = hashlib.sha256(file_bytes).hexdigest()
