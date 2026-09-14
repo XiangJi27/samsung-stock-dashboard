@@ -4,7 +4,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 from playwright.async_api import async_playwright
 
-VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-7a7xcm0us-xiangji27.vercel.app")
+VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-qd2olexzl-xiangji27.vercel.app")
 
 def get_test_admin_credentials():
     emp_id = os.environ.get("TEST_ADMIN_EMPLOYEE_ID", "CPW3862")
