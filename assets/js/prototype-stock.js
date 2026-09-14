@@ -1172,6 +1172,9 @@
       // to PREVENT DOUBLE-COUNTING (which would erroneously inflate stock by 313 units to 2,313).
       // 212 Core Devices + 78 Full Accessories = 290 items (1,100 F1 + 900 F2 = 2,000 units).
       // ========================================================================
+      const stockDb = (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE) && window.STOCK_DATABASE.length > 0)
+        ? window.STOCK_DATABASE
+        : FALLBACK_STOCK;
       const coreDevices = stockDb.filter(x => x.category !== "Accessory" && x.category !== "Adapter");
       rawItems = coreDevices.concat(ALL_ACCESSORIES);
 
@@ -1392,23 +1395,28 @@
         }
       });
 
-      document.getElementById("countCatAllModels").textContent = `${counts.ALL.models} รุ่น`;
-      document.getElementById("countCatAllStock").textContent = counts.ALL.stock.toLocaleString('th-TH');
+      const setTxt = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      };
 
-      document.getElementById("countCatPhoneModels").textContent = `${counts.SmartPhone.models} รุ่น`;
-      document.getElementById("countCatPhoneStock").textContent = counts.SmartPhone.stock.toLocaleString('th-TH');
+      setTxt("countCatAllModels", `${counts.ALL.models} รุ่น`);
+      setTxt("countCatAllStock", counts.ALL.stock.toLocaleString('th-TH'));
 
-      document.getElementById("countCatTabModels").textContent = `${counts.Tablet.models} รุ่น`;
-      document.getElementById("countCatTabStock").textContent = counts.Tablet.stock.toLocaleString('th-TH');
+      setTxt("countCatPhoneModels", `${counts.SmartPhone.models} รุ่น`);
+      setTxt("countCatPhoneStock", counts.SmartPhone.stock.toLocaleString('th-TH'));
 
-      document.getElementById("countCatWatchModels").textContent = `${counts.Watch.models} รุ่น`;
-      document.getElementById("countCatWatchStock").textContent = counts.Watch.stock.toLocaleString('th-TH');
+      setTxt("countCatTabModels", `${counts.Tablet.models} รุ่น`);
+      setTxt("countCatTabStock", counts.Tablet.stock.toLocaleString('th-TH'));
 
-      document.getElementById("countCatBudsModels").textContent = `${counts.Buds.models} รุ่น`;
-      document.getElementById("countCatBudsStock").textContent = counts.Buds.stock.toLocaleString('th-TH');
+      setTxt("countCatWatchModels", `${counts.Watch.models} รุ่น`);
+      setTxt("countCatWatchStock", counts.Watch.stock.toLocaleString('th-TH'));
 
-      document.getElementById("countCatAccModels").textContent = `${counts.Accessory.models} รายการ`;
-      document.getElementById("countCatAccStock").textContent = counts.Accessory.stock.toLocaleString('th-TH');
+      setTxt("countCatBudsModels", `${counts.Buds.models} รุ่น`);
+      setTxt("countCatBudsStock", counts.Buds.stock.toLocaleString('th-TH'));
+
+      setTxt("countCatAccModels", `${counts.Accessory.models} รายการ`);
+      setTxt("countCatAccStock", counts.Accessory.stock.toLocaleString('th-TH'));
     }
 
     function filterItems() {
@@ -1468,11 +1476,18 @@
 
     function renderStockList() {
       const items = filterItems();
-      document.getElementById("visibleCountDisplay").textContent = items.length;
-      document.getElementById("totalCountDisplay").textContent = rawItems.length;
+      const visibleEl = document.getElementById("visibleCountDisplay");
+      const totalEl = document.getElementById("totalCountDisplay");
+      if (visibleEl) visibleEl.textContent = items.length;
+      if (totalEl) totalEl.textContent = rawItems.length;
 
       const tbody = document.getElementById("stockTableBody");
       const cardContainer = document.getElementById("cardViewContainer");
+      if (!tbody || !cardContainer) {
+        console.warn("[Stock Prototype] stockTableBody or cardViewContainer not found in DOM");
+        return;
+      }
+
       tbody.innerHTML = "";
       cardContainer.innerHTML = "";
 
@@ -1482,123 +1497,138 @@
         return;
       }
 
-      items.forEach(item => {
-        const specs = parseSpecs(item);
-        const colorName = item.color || "ไม่ระบุสี";
-        const colorHex = getColorHex(colorName);
-        const f1 = Number(item.f1 || 0);
-        const f2 = Number(item.f2 || 0);
-        const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
-        const promo = resolvePromotion(item);
-        const pnText = item.pn || "ไม่มีรหัส P/N";
+      console.info("[Stock Prototype] rendering rows:", items.length);
 
-        // Table Row
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>
-            <div class="product-identity-group">
-              <div class="product-title-row">
-                <span class="product-model-name">${item.model || "-"}</span>
-                ${pnText !== "ไม่มีรหัส P/N" ? `<span class="badge-pn-pill">${pnText}</span>` : ''}
-              </div>
-              <div class="product-spec-row">
-                ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
-                ${specs.ram || specs.storage ? `<span class="badge-spec-pill">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</span>` : ''}
-                ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
-                ${item.srp ? `<span style="color: var(--text-muted);">RRP: ฿${Number(item.srp).toLocaleString('th-TH')}</span>` : ''}
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="color-display-cell">
-              <span class="color-swatch-dot" style="background-color: ${colorHex};"></span>
-              <span class="color-name-text">${colorName}</span>
-            </div>
-          </td>
-          <td>
-            <span style="font-size: 0.8rem; color: var(--text-secondary);">${item.category || "-"}</span>
-          </td>
-          <td style="text-align: center;">
-            <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}">${f1}</span>
-          </td>
-          <td style="text-align: center;">
-            <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}">${f2}</span>
-          </td>
-          <td style="text-align: center;">
-            <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}">${total}</strong>
-          </td>
-          <td>
-            <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
-          </td>
-          <td style="text-align: right;">
-            <div class="action-button-group">
-              <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้าอย่างละเอียด">
-                <span>📋 สเปก</span>
-              </button>
-              <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูโปรโมชั่นและราคา">
-                <span>✨ ดูโปรโมชั่น</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
+      let renderedRows = 0;
+      items.forEach((item, index) => {
+        try {
+          const specs = parseSpecs(item);
+          const colorName = item.color || "ไม่ระบุสี";
+          const colorHex = getColorHex(colorName);
+          const f1 = Number(item.f1 || 0);
+          const f2 = Number(item.f2 || 0);
+          const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
+          const promo = resolvePromotion(item);
+          const pnText = item.pn || "ไม่มีรหัส P/N";
 
-        // Card Item (Responsive View)
-        const card = document.createElement("div");
-        card.className = "product-card-item";
-        card.innerHTML = `
-          <div>
-            <div class="card-top-row">
-              <div>
-                <strong style="font-size: 1rem; color: #fff;">${item.model || "-"}</strong>
-                <div class="card-meta-row">
-                  <span class="badge-pn-pill">${pnText}</span>
-                  ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
-                  ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
-                  <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
+          // Table Row
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>
+              <div class="product-identity-group">
+                <div class="product-title-row">
+                  <span class="product-model-name">${item.model || "-"}</span>
+                  ${pnText !== "ไม่มีรหัส P/N" ? `<span class="badge-pn-pill">${pnText}</span>` : ''}
                 </div>
-                ${specs.ram || specs.storage ? `<div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</div>` : ''}
+                <div class="product-spec-row">
+                  ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
+                  ${specs.ram || specs.storage ? `<span class="badge-spec-pill">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</span>` : ''}
+                  ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
+                  ${item.srp ? `<span style="color: var(--text-muted);">RRP: ฿${Number(item.srp).toLocaleString('th-TH')}</span>` : ''}
+                </div>
               </div>
-              <div class="color-display-cell" style="flex-direction: column; align-items: flex-end;">
-                <span class="color-swatch-dot" style="background-color: ${colorHex}; width: 20px; height: 20px;"></span>
-                <span style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 2px;">${colorName}</span>
+            </td>
+            <td>
+              <div class="color-display-cell">
+                <span class="color-swatch-dot" style="background-color: ${colorHex};"></span>
+                <span class="color-name-text">${colorName}</span>
+              </div>
+            </td>
+            <td>
+              <span style="font-size: 0.8rem; color: var(--text-secondary);">${item.category || "-"}</span>
+            </td>
+            <td style="text-align: center;">
+              <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}">${f1}</span>
+            </td>
+            <td style="text-align: center;">
+              <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}">${f2}</span>
+            </td>
+            <td style="text-align: center;">
+              <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}">${total}</strong>
+            </td>
+            <td>
+              <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
+            </td>
+            <td style="text-align: right;">
+              <div class="action-button-group">
+                <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้าอย่างละเอียด">
+                  <span>📋 สเปก</span>
+                </button>
+                <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูโปรโมชั่นและราคา">
+                  <span>✨ ดูโปรโมชั่น</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+
+          // Card Item (Responsive View)
+          const card = document.createElement("div");
+          card.className = "product-card-item";
+          card.innerHTML = `
+            <div>
+              <div class="card-top-row">
+                <div>
+                  <strong style="font-size: 1rem; color: #fff;">${item.model || "-"}</strong>
+                  <div class="card-meta-row">
+                    <span class="badge-pn-pill">${pnText}</span>
+                    ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
+                    ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
+                    <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
+                  </div>
+                  ${specs.ram || specs.storage ? `<div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</div>` : ''}
+                </div>
+                <div class="color-display-cell" style="flex-direction: column; align-items: flex-end;">
+                  <span class="color-swatch-dot" style="background-color: ${colorHex}; width: 20px; height: 20px;"></span>
+                  <span style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 2px;">${colorName}</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="card-stock-row">
-            <div class="card-stock-col">
-              <div class="card-stock-label">ช1 ร้านเรา</div>
-              <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f1}</span>
+            <div class="card-stock-row">
+              <div class="card-stock-col">
+                <div class="card-stock-label">ช1 ร้านเรา</div>
+                <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f1}</span>
+              </div>
+              <div class="card-stock-col">
+                <div class="card-stock-label">ช2 สาขา</div>
+                <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f2}</span>
+              </div>
+              <div class="card-stock-col">
+                <div class="card-stock-label">รวมทั้งหมด</div>
+                <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${total}</strong>
+              </div>
             </div>
-            <div class="card-stock-col">
-              <div class="card-stock-label">ช2 สาขา</div>
-              <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f2}</span>
-            </div>
-            <div class="card-stock-col">
-              <div class="card-stock-label">รวมทั้งหมด</div>
-              <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${total}</strong>
-            </div>
-          </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; pt-2; gap: 8px;">
-            <div style="font-size: 0.82rem; color: var(--text-muted);">
-              ราคาปกติ: <strong style="color: #cbd5e1;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
+            <div style="display: flex; justify-content: space-between; align-items: center; pt-2; gap: 8px;">
+              <div style="font-size: 0.82rem; color: var(--text-muted);">
+                ราคาปกติ: <strong style="color: #cbd5e1;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
+              </div>
+              <div class="action-button-group">
+                <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้า">
+                  <span>📋 สเปก</span>
+                </button>
+                <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')">
+                  <span>✨ โปรโมชั่น</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
             </div>
-            <div class="action-button-group">
-              <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้า">
-                <span>📋 สเปก</span>
-              </button>
-              <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')">
-                <span>✨ โปรโมชั่น</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
-            </div>
-          </div>
-        `;
-        cardContainer.appendChild(card);
+          `;
+          cardContainer.appendChild(card);
+          renderedRows++;
+        } catch (itemErr) {
+          console.error("[Stock Prototype] row render failed:", {
+            index,
+            productId: item?.id || "UNKNOWN",
+            pn: item?.pn || "UNKNOWN",
+            error: itemErr
+          });
+        }
       });
+
+      console.info("[Stock Prototype] rendered DOM rows:", tbody.querySelectorAll("tr").length);
     }
 
     // ==========================================================================
@@ -2387,6 +2417,13 @@
 
     // Dynamic Initialization & Route Lifecycle
     function initPrototypeStock() {
+      console.info("[Stock Prototype] initialization started");
+      console.info("[Stock Prototype] data sources", {
+        stock: (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE)) ? window.STOCK_DATABASE.length : "FALLBACK",
+        specs: (typeof window !== "undefined" && (window.PRODUCT_SPECS_DATABASE || window.PRODUCT_SPECS_PROFILES)) ? Object.keys(window.PRODUCT_SPECS_DATABASE || window.PRODUCT_SPECS_PROFILES).length : "INVALID",
+        promotions: (typeof window !== "undefined" && Array.isArray(window.PROMOTION_VARIANTS)) ? window.PROMOTION_VARIANTS.length : "INVALID"
+      });
+
       setupPrototypeStockControls();
       refreshPrototypeData();
       updateCategoryCardCounts();
@@ -2406,6 +2443,11 @@
     window.switchDrawerMode = switchDrawerMode;
     window.syncMasterStockData = function() {
       initPrototypeStock();
+    };
+    window.PrototypeStock = {
+      refresh() {
+        initPrototypeStock();
+      }
     };
     window.renderMetrics = window.renderMetrics || function() {};
     window.renderPromoCampaignModal = window.renderPromoCampaignModal || function() {};
