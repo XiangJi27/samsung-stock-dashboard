@@ -160,7 +160,7 @@
     }
 
     renderPage(targetContainer) {
-      const container = targetContainer || document.getElementById('view-admin-members');
+      const container = targetContainer || document.getElementById('adminMembersViewContent') || document.getElementById('view-admin-members');
       if (!container) return;
       this.containerEl = container;
 

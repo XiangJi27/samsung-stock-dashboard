@@ -95,9 +95,10 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const secretKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+  const rawUrl = process.env.SUPABASE_URL || 'https://anhxzffcmrihymrptsgd.supabase.co';
+  const supabaseUrl = rawUrl.replace(/\/+$/, '');
+  const secretKey = (process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '').trim();
+  const publishableKey = (process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_9eXmP6Cgb14AWbk8CrBv3A_l0Clj00v').trim();
 
   if (!supabaseUrl || !secretKey) {
     return res.status(503).json({
@@ -121,14 +122,25 @@ module.exports = async function handler(req, res) {
 
   let caller = null;
   try {
-    const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
+    let userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'apikey': publishableKey || secretKey
       }
     });
 
+    if (!userRes.ok && secretKey) {
+      userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'apikey': secretKey
+        }
+      });
+    }
+
     if (!userRes.ok) {
+      const errText = await userRes.text().catch(() => '');
+      console.error('[AdminAPI] Auth verify failed:', userRes.status, errText, 'Target URL:', `${supabaseUrl}/auth/v1/user`);
       return res.status(401).json({
         error: 'INVALID_TOKEN',
         requestId,
@@ -138,6 +150,7 @@ module.exports = async function handler(req, res) {
 
     caller = await userRes.json();
   } catch (err) {
+    console.error('[AdminAPI] Auth exception:', err.message);
     return res.status(401).json({
       error: 'AUTH_VERIFICATION_FAILED',
       requestId,

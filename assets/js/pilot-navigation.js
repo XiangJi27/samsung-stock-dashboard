@@ -59,8 +59,22 @@
           `;
           navUl.appendChild(memberAdminLi);
         }
-      } else if (memberAdminLi) {
+      }
+
+      if (memberAdminLi) {
         memberAdminLi.style.display = (isAuth && isLeader) ? 'block' : 'none';
+        const link = memberAdminLi.querySelector('a');
+        if (link && !link._hasNavClick) {
+          link._hasNavClick = true;
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.AppRouter) {
+              window.AppRouter.navigate('/admin/members');
+            } else {
+              window.location.hash = '#/admin/members';
+            }
+          });
+        }
       }
 
       // Rename menu item on screen to "📊 แดชบอร์ด"

@@ -76,6 +76,12 @@
               <span class="nav-badge-pill badge-live-count" style="background: rgba(0, 243, 255, 0.15); color: #00f3ff;">5 ด่าน</span>
             </a>
           </li>
+          <li id="navItemMemberAdmin" style="display: none;">
+            <a href="#/admin/members" class="nav-item-link" id="navLinkMemberAdmin">
+              <span class="nav-icon">👥</span>
+              <span class="nav-label">จัดการสมาชิก</span>
+            </a>
+          </li>
           <li>
             <a href="#/reports" class="nav-item-link" id="navLinkReports">
               <span class="nav-icon">📑</span>
@@ -896,7 +902,7 @@
         </section>
 
         <!-- VIEW 8: ADMIN MEMBERS -->
-        <section id="view-admin-members" class="app-view" style="display: none;">
+        <section id="view-admin-members" class="app-view">
           <div id="adminMembersViewContent"></div>
         </section>
       </div>
@@ -965,6 +971,15 @@
   <script src="assets/js/modules.js?v=20260911-d1"></script>
   <script src="assets/js/navigation.js?v=20260911-d1"></script>
   <script src="assets/js/router.js?v=20260911-d1"></script>
+  <script>
+    if (window.AppRouter && window.AppRouter.routes) {
+      window.AppRouter.routes["/admin/members"] = {
+        title: "จัดการสมาชิกสาขา • Samsung Branch Operations",
+        isProtected: true,
+        viewId: "view-admin-members"
+      };
+    }
+  </script>
 
   <!-- Official Supabase JS SDK CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

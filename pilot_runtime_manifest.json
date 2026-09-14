@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "c86265b",
+  "packageBuiltFromCommit": "d8e4c33",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-14T13:08:13.577838+07:00",
+  "builtAt": "2026-09-14T13:31:17.935932+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,14 +13,14 @@
   "totalFiles": 43,
   "summary": {
     "totalFiles": 43,
-    "totalSizeBytes": 8370061,
-    "totalSizeMB": 7.98
+    "totalSizeBytes": 8376831,
+    "totalSizeMB": 7.99
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 62982,
-      "sha256": "0a41add736feeef8c2b106ff35fb9e36c7ab9346b494fc8b028f74e670d28f21",
+      "sizeBytes": 63591,
+      "sha256": "a633b16c57faedad9c4a875834fc5c66e07a57d29c2125cef840139aae40c8ae",
       "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
@@ -158,14 +158,14 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 62982,
-      "sha256": "0a41add736feeef8c2b106ff35fb9e36c7ab9346b494fc8b028f74e670d28f21",
+      "sizeBytes": 63591,
+      "sha256": "a633b16c57faedad9c4a875834fc5c66e07a57d29c2125cef840139aae40c8ae",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "api/admin/members.js",
-      "sizeBytes": 30841,
-      "sha256": "2016a6c8bd8d7024e98485e88e414dd0f15fc7b1a52fdfe0e9f8a999981d4335",
+      "sizeBytes": 31473,
+      "sha256": "3087f2f3ce09a5121b76e0e1947acb93b8e11a1b7b02828c9b7b59161f498a7c",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -248,8 +248,8 @@
     },
     {
       "file": "assets/js/pilot-navigation.js",
-      "sizeBytes": 3181,
-      "sha256": "0c9ec68a7338b04aad413696684e11ef7d5c13e5da9654d46e1263d09814e3f3",
+      "sizeBytes": 3608,
+      "sha256": "7791fff071229bea7aa2017c898ff26621628eee72f5d1ba2b7a7338e07f1b5e",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -260,14 +260,14 @@
     },
     {
       "file": "assets/js/member-admin-service.js",
-      "sizeBytes": 49495,
-      "sha256": "d0cfaba72fffe9339c116ef636be9fc116dc8e524d61a09d5dcc6ae3932fb204",
+      "sizeBytes": 49549,
+      "sha256": "8d8593196e659c99a9fdb98e3b68b1bb907e6e0b4a96755651f3fc768c227f0a",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "assets/js/pilot-bootstrap.js",
-      "sizeBytes": 4968,
-      "sha256": "7fa52b64aa6eb517adc5fac8dc65d92a4abf48e0f0a517ade82ffafe53719df1",
+      "sizeBytes": 9407,
+      "sha256": "33941fff9c5e2958ad95182878de87688e3d122f0b5d64e0b5366515e79bcf9e",
       "status": "PILOT_RUNTIME"
     },
     {
