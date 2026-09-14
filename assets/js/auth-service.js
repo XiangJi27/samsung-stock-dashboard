@@ -47,7 +47,10 @@
       }
 
       // Map employee code to internal store alias for Supabase Auth backend
-      const loginEmail = `${cleanCode.toLowerCase()}@staff.internal`;
+      let loginEmail = cleanCode.toLowerCase();
+      if (!loginEmail.includes('@')) {
+        loginEmail = `${loginEmail}@staff.internal`;
+      }
 
       const { data, error } = await client.auth.signInWithPassword({
         email: loginEmail,
