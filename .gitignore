@@ -19,7 +19,6 @@ credentials/
 *.pem
 # Scratch and prototype files
 all_accessories.json
-product_specs_data.js
 prototype_dashboard.html
 reports/product_specs_audit_report.json
 reports/stock_audit_reconciliation_report.json

@@ -209,7 +209,73 @@ async def main():
         print(f"Live products with explicit color: {total_colored} / {len(color_map)}")
         assert total_colored > 250, f"Expected >250 colored products, got {total_colored}"
 
-        # Save Screenshot
+        print("\n=== 4.2 Verify Spec Drawer: Soundcore Select 4 Go (Deterministic Product Identity Gate) ===")
+        # Open drawer via JS function or button
+        await page.evaluate("""() => {
+            window.openProductSpecsDrawer('194644055783', encodeURIComponent('Soundcore Select 4 Go Black'));
+        }""")
+        await page.wait_for_selector("#promoDrawerBackdrop.open", timeout=5000)
+        await page.wait_for_timeout(300)
+
+        drawer_data = await page.evaluate("""() => {
+            const title = document.getElementById('drawerProductTitle')?.textContent?.trim() || '';
+            const pn = document.getElementById('drawerProductPn')?.textContent?.trim() || '';
+            const body = document.getElementById('drawerBody')?.innerText || '';
+            const bodyHtml = document.getElementById('drawerBody')?.innerHTML || '';
+            return { title, pn, body, bodyHtml };
+        }""")
+
+        print(f"  - Drawer Title: {drawer_data['title']}")
+        print(f"  - Drawer P/N Header: {drawer_data['pn']}")
+        
+        # Positive Assertions
+        assert "Soundcore Select 4 Go" in drawer_data['title'], f"Wrong title: {drawer_data['title']}"
+        assert "194644055783" in drawer_data['pn'], f"Missing PN in drawer: {drawer_data['pn']}"
+        assert "A31X1" in drawer_data['body'], "Missing manufacturer model A31X1 in evidence header"
+        assert "5W" in drawer_data['body'], "Missing 5W speaker output in specs"
+        assert "IP67" in drawer_data['body'], "Missing IP67 rating in specs"
+        assert "20 ชั่วโมง" in drawer_data['body'] or "20 Hours" in drawer_data['body'], "Missing 20h playtime in specs"
+        assert "Soundcore" in drawer_data['body'], "Missing Soundcore brand in specs"
+        assert "Anker Innovations Thailand" in drawer_data['body'], "Missing Soundcore/Anker Thailand official warranty"
+        print("  ✅ Positive Assertions Passed: Soundcore A31X1, 5W, IP67, 20h, Anker Thailand Warranty verified.")
+
+        # STRICT NEGATIVE ASSERTIONS (Zero Cross-Brand Leakage)
+        negative_leakage_terms = ["Galaxy A07", "A07 4G", "Helio G85", "Knox Vault", "6.7 นิ้ว", "6.7\""]
+        for term in negative_leakage_terms:
+            assert term not in drawer_data['body'], f"CRITICAL BUG: Spec leakage detected! '{term}' found in Soundcore drawer!"
+        print(f"  ✅ Negative Assertions Passed: Zero leakage of Galaxy A07 / Helio G85 / Knox / 6.7\" ({len(negative_leakage_terms)} terms checked).")
+
+        # Screenshot of Soundcore Spec Drawer
+        soundcore_screenshot_path = os.path.join(os.getcwd(), "scratch", "soundcore_spec_drawer.png")
+        await page.screenshot(path=soundcore_screenshot_path, full_page=False)
+        artifact_soundcore_path = r"C:\Users\JarNJay\.gemini\antigravity-ide\brain\c9c68153-b0f6-4648-a583-e0ee2c6133a9\soundcore_spec_drawer.png"
+        await page.screenshot(path=artifact_soundcore_path, full_page=False)
+        print(f"  📸 Saved Soundcore Spec Drawer screenshot to {artifact_soundcore_path}")
+
+        # Close Drawer
+        await page.click("#btnCloseDrawer")
+        await page.wait_for_timeout(200)
+
+        print("\n=== 4.3 Verify Spec Drawer: Unknown Product (Fail-Closed Policy) ===")
+        await page.evaluate("""() => {
+            window.openProductSpecsDrawer('UNKNOWN-PN-99999', encodeURIComponent('Non-Existent Mystery Item'));
+        }""")
+        await page.wait_for_selector("#promoDrawerBackdrop.open", timeout=5000)
+        await page.wait_for_timeout(300)
+
+        unverified_data = await page.evaluate("""() => {
+            return document.getElementById('drawerBody')?.innerText || '';
+        }""")
+        assert "SPEC_NOT_VERIFIED" in unverified_data, "Missing SPEC_NOT_VERIFIED badge for unknown item"
+        assert "ยังไม่มีข้อมูลสเปกที่ตรวจสอบแล้ว" in unverified_data, "Missing warning banner for unknown item"
+        assert "Galaxy A07" not in unverified_data, "Unconditional fallback leaked Galaxy A07 on unknown item!"
+        print("  ✅ Fail-Closed Policy Verified: Unknown item displays SPEC_NOT_VERIFIED banner without fake Galaxy A07 specs.")
+
+        # Close Drawer again
+        await page.click("#btnCloseDrawer")
+        await page.wait_for_timeout(200)
+
+        # Save Main Page Screenshot
         screenshot_path = os.path.join(os.getcwd(), "scratch", "live_vercel_stock_f1.png")
         await page.screenshot(path=screenshot_path, full_page=False)
         print(f"Saved live screenshot to {screenshot_path}")

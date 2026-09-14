@@ -2205,28 +2205,83 @@
       }
     }
 
-    // Spec Details Renderer with Official Thai Sources
+    // Spec Details Renderer with Deterministic Product Identity Gate & 100% ERP Coverage
     function renderDrawerSpecDetails(item) {
-      if (!window.resolveProductSpecs) {
-        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่พบฐานข้อมูลสเปกสินค้าในระบบ</div>`;
-      }
-      const spec = window.resolveProductSpecs(item);
+      const spec = (typeof window !== "undefined" && window.resolveProductSpecs) ? window.resolveProductSpecs(item) : null;
+
+      // Level 1: Basic ERP Stock Metadata Box (100% Display Coverage)
+      const catHierarchy = [item.category1, item.category2, item.category3].filter(Boolean).join(" &rarr; ");
+      const erpHtml = `
+        <div class="spec-card-container">
+          <div class="spec-group-box" style="margin-bottom: 12px; border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.02);">
+            <div class="spec-group-title" style="color: #94a3b8;">
+              <span>📦</span>
+              <span>ข้อมูลสินค้าจากระบบสต๊อก (ERP Stock Master)</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; font-size: 0.82rem;">
+              <div>
+                <span class="spec-label">รหัสสินค้า (ERP P/N):</span>
+                <strong style="color: #fff; font-family: monospace;">${item.pn || 'ไม่ระบุ'}</strong>
+              </div>
+              <div>
+                <span class="spec-label">แบรนด์สินค้า:</span>
+                <strong style="color: var(--cyan);">${item.brand || (spec && spec.brand) || 'ไม่ระบุ'}</strong>
+              </div>
+              <div>
+                <span class="spec-label">หมวดหมู่สต๊อก:</span>
+                <strong style="color: #cbd5e1;">${item.category || item.canonicalCategory || 'Other'}</strong>
+              </div>
+              <div>
+                <span class="spec-label">ราคามาตรฐาน (SRP):</span>
+                <strong style="color: #38bdf8;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
+              </div>
+            </div>
+            ${catHierarchy ? `
+              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.06); font-size: 0.76rem; color: var(--text-muted);">
+                ลำดับหมวดหมู่ ERP: <span style="color: #cbd5e1;">${catHierarchy}</span>
+              </div>
+            ` : ''}
+          </div>
+      `;
+
       if (!spec) {
-        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่มีข้อมูลสเปกสำหรับสินค้านี้</div>`;
+        // FAIL CLOSED: SPEC_NOT_VERIFIED Banner (No guess, no fallback to Galaxy A07)
+        return erpHtml + `
+          <div class="empty-promo-state" style="padding: 24px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <span style="font-size: 1.4rem;">⚠️</span>
+              <strong style="font-size: 0.95rem; color: #fbbf24;">ยังไม่มีข้อมูลสเปกที่ตรวจสอบแล้วสำหรับสินค้านี้ (SPEC_NOT_VERIFIED)</strong>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+              ระบบใช้มาตรฐาน <strong>Deterministic Product Identity Gate</strong> เพื่อป้องกันการแสดงข้อมูลผิดพลาดข้ามแบรนด์หรือข้ามหมวดหมู่<br>
+              สินค้าคงคลัง ข้อมูลสี และจำนวนสต๊อกหน้าร้าน (ชั้น 1 / ชั้น 2) ยังคงใช้งานและตรวจสอบยอดขายได้ตามปกติ 100%
+            </p>
+          </div>
+        </div>`;
       }
 
-      let html = `
-        <div class="spec-card-container">
-          <div class="spec-source-box">
+      // Level 2: Verified Technical Specs with Evidence Status Header
+      let html = erpHtml + `
+          <div class="spec-source-box" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
             <span style="font-size: 1.4rem;">🛡️</span>
             <div>
-              <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</div>
-              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 3px;">
-                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Samsung Thailand Official (samsung.com/th)'}</strong>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</span>
+                <span class="status-badge-gate pass" style="font-size: 0.7rem; padding: 2px 6px;">VERIFIED</span>
               </div>
-              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 1px;">
-                มาตรฐานโมเดล: <strong>${spec.marketRegion || 'เครื่องศูนย์ไทย (THL)'}</strong>
+              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 4px;">
+                แบรนด์: <strong>${spec.brand || item.brand || 'Samsung'}</strong> • รุ่นผู้ผลิต: <strong>${spec.manufacturerModel || spec.modelGroup || '-'}</strong> • ประเภท: <strong>${spec.productType || item.category || '-'}</strong>
               </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
+                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Official Certified Brand Specifications'}</strong>
+              </div>
+              ${spec.sourceUrl ? `
+                <div style="font-size: 0.72rem; margin-top: 2px;">
+                  <a href="${spec.sourceUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;">
+                    🔗 เปิดหน้าผลิตภัณฑ์ทางการ (${spec.brand || 'ผู้ผลิต'})
+                  </a>
+                </div>
+              ` : ''}
             </div>
           </div>
       `;
@@ -2551,7 +2606,59 @@
         });
       }
 
-      // Thai Warranty & Service Centers
+      // 13. Bluetooth Speakers (Soundcore / Anker, etc.)
+      if (spec.speakerSpecs) {
+        html += `
+          <div class="spec-group-box" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);">
+            <div class="spec-group-title" style="color: #38bdf8;">
+              <span>🔊</span>
+              <span>คุณสมบัติลำโพง & พลังเสียง (Portable Speaker Specs)</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 12px;">
+              ${spec.speakerSpecs.outputPower ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #38bdf8;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">⚡ กำลังขับเสียง (Output)</div>
+                  <strong style="color: #fff; font-size: 0.95rem; margin-top: 2px; display: block;">${spec.speakerSpecs.outputPower}</strong>
+                </div>
+              ` : ''}
+              ${spec.speakerSpecs.waterproofRating ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🌊 มาตรฐานการกันน้ำ</div>
+                  <strong style="color: #fff; font-size: 0.95rem; margin-top: 2px; display: block;">${spec.speakerSpecs.waterproofRating}</strong>
+                </div>
+              ` : ''}
+              ${spec.speakerSpecs.batteryPlaytime ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #34d399;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">🔋 เล่นเพลงต่อเนื่อง</div>
+                  <strong style="color: #fff; font-size: 0.95rem; margin-top: 2px; display: block;">${spec.speakerSpecs.batteryPlaytime}</strong>
+                </div>
+              ` : ''}
+              ${spec.speakerSpecs.bluetoothVersion ? `
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #818cf8;">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">📶 เวอร์ชัน Bluetooth</div>
+                  <strong style="color: #fff; font-size: 0.95rem; margin-top: 2px; display: block;">${spec.speakerSpecs.bluetoothVersion}</strong>
+                </div>
+              ` : ''}
+            </div>
+            
+            <div style="padding: 12px; background: rgba(255,255,255,0.02); border-radius: 10px; font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+              ${spec.speakerSpecs.wirelessStereo ? `<div>📻 <strong>ระบบเสียงสเตอริโอ (TWS):</strong> <span style="color: #38bdf8;">${spec.speakerSpecs.wirelessStereo}</span></div>` : ''}
+              ${spec.speakerSpecs.portability ? `<div>🎒 <strong>การพกพา:</strong> <span style="color: #fff;">${spec.speakerSpecs.portability}</span></div>` : ''}
+              ${spec.speakerSpecs.chargingPort ? `<div>🔌 <strong>พอร์ตชาร์จ:</strong> <span style="color: #cbd5e1;">${spec.speakerSpecs.chargingPort}</span></div>` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      // Thai Warranty & Service Centers (Brand-Aware)
+      const isSoundcore = (spec.brand && spec.brand.toUpperCase().includes("SOUNDCORE")) || (item.brand && item.brand.toUpperCase().includes("SOUNDCORE"));
+      const warrantyText = isSoundcore
+        ? 'รับประกันศูนย์ไทยแท้ 18 เดือนเต็ม โดย Anker Innovations Thailand / ตัวแทนจำหน่ายอย่างเป็นทางการ'
+        : (spec.category === 'Accessory' ? (spec.powerSpecs && spec.powerSpecs.warranty ? spec.powerSpecs.warranty : 'รับประกันศูนย์ไทย 6 เดือน - 1 ปี') : 'รับประกันศูนย์ไทย 1 ปีเต็ม จากศูนย์บริการทางการ');
+      const serviceCenterText = isSoundcore
+        ? 'รองรับบริการเคลมและเปลี่ยนสินค้าตามเงื่อนไขศูนย์บริการ Soundcore / Anker Thailand ทั่วประเทศ'
+        : 'รองรับบริการที่ศูนย์บริการซัมซุง (Samsung Service Center) ทั่วประเทศไทย หรือศูนย์บริการตัวแทนจำหน่ายทางการ';
+
       html += `
         <div class="spec-group-box" style="border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.05);">
           <div class="spec-group-title" style="color: var(--emerald);">
@@ -2559,8 +2666,8 @@
             <span>การรับประกันและมาตรฐานศูนย์ไทย</span>
           </div>
           <div style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6;">
-            <div>✓ <strong>การรับประกัน:</strong> ${spec.category === 'Accessory' ? (spec.powerSpecs && spec.powerSpecs.warranty ? spec.powerSpecs.warranty : 'รับประกันศูนย์ไทย 6 เดือน - 1 ปี') : 'รับประกันศูนย์ไทย 1 ปีเต็ม จากศูนย์บริการทางการ'}</div>
-            <div>✓ <strong>บริการหลังการขาย:</strong> รองรับบริการที่ศูนย์บริการซัมซุง (Samsung Service Center) ทั่วประเทศไทย หรือศูนย์บริการตัวแทนจำหน่ายทางการ</div>
+            <div>✓ <strong>การรับประกัน:</strong> ${warrantyText}</div>
+            <div>✓ <strong>บริการหลังการขาย:</strong> ${serviceCenterText}</div>
             <div>✓ <strong>เครื่องแท้ 100%:</strong> สินค้าที่จัดจำหน่ายในสาขาเป็นโมเดลจำหน่ายในประเทศไทย ผ่านการรับรอง กสทช. ถูกต้องตามกฎหมาย</div>
           </div>
         </div>

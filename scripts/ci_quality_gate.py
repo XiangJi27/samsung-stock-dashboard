@@ -730,6 +730,92 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 13. RULE 09: DETERMINISTIC PRODUCT IDENTITY & SPEC GUARD
+# ----------------------------------------------------------------------
+spec_guard_violations = []
+spec_js_path = "product_specs_data.js"
+
+if not os.path.exists(spec_js_path):
+    spec_guard_violations.append({"errorCode": "SPEC_FILE_MISSING", "detail": "Missing product_specs_data.js"})
+else:
+    with open(spec_js_path, "r", encoding="utf-8") as f:
+        spec_code = f.read()
+    if "return window.PRODUCT_SPECS_PROFILES.A07_4G;" in spec_code:
+        spec_guard_violations.append({
+            "errorCode": "DEFAULT_A07_FALLBACK_DETECTED",
+            "detail": "Unconditional return window.PRODUCT_SPECS_PROFILES.A07_4G still present in product_specs_data.js"
+        })
+
+    test_node_script = """
+    const fs = require('fs');
+    const code = fs.readFileSync('product_specs_data.js', 'utf8');
+    const sandbox = { window: {} };
+    eval(code.replace(/window\\./g, 'sandbox.window.'));
+    const fn = sandbox.window.resolveProductSpecs;
+
+    const tests = [];
+
+    // Test 1: Soundcore Select 4 Go Black (194644055783)
+    const sc = fn({ pn: '194644055783', model: 'Soundcore Select 4 Go Black', brand: 'SOUNDCORE', category: 'Other' });
+    if (!sc) {
+        tests.push({ error: 'SOUNDCORE_NOT_FOUND', detail: 'Failed to resolve Soundcore Select 4 Go' });
+    } else {
+        if (sc.brand !== 'Soundcore') tests.push({ error: 'SOUNDCORE_BRAND_WRONG', detail: sc.brand });
+        if (sc.productType !== 'BLUETOOTH_SPEAKER') tests.push({ error: 'SOUNDCORE_TYPE_WRONG', detail: sc.productType });
+        if (sc.manufacturerModel !== 'A31X1') tests.push({ error: 'SOUNDCORE_MODEL_WRONG', detail: sc.manufacturerModel });
+        const scStr = JSON.stringify(sc);
+        if (scStr.includes('Galaxy A07') || scStr.includes('Helio G85') || scStr.includes('Knox')) {
+            tests.push({ error: 'GALAXY_A07_LEAKAGE', detail: 'Soundcore spec contains Galaxy A07, Helio G85, or Knox' });
+        }
+        if (!sc.speakerSpecs || !sc.speakerSpecs.outputPower || !sc.speakerSpecs.outputPower.includes('5W')) {
+            tests.push({ error: 'SPEAKER_SPECS_MISSING', detail: 'Missing 5W speaker specs' });
+        }
+    }
+
+    // Test 2: Negative cross-brand leakage
+    const fake = fn({ pn: 'SM-S928BZTQTHL', model: 'Galaxy S26 Ultra Fake', brand: 'SOUNDCORE', category: 'SmartPhone' });
+    if (fake !== null) {
+        tests.push({ error: 'CROSS_BRAND_LEAK', detail: 'Cross-brand phone with Soundcore brand was not blocked' });
+    }
+
+    // Test 3: Unknown item fail-closed
+    const unk = fn({ pn: 'UNKNOWN-RANDOM-001', model: 'Unknown Generic Gadget', brand: 'OTHER', category: 'Other' });
+    if (unk !== null) {
+        tests.push({ error: 'FAIL_CLOSED_VIOLATION', detail: 'Unknown item did not return null' });
+    }
+
+    console.log(JSON.stringify(tests));
+    """
+    try:
+        res = subprocess.check_output(['node', '-e', test_node_script], stderr=subprocess.STDOUT).decode('utf-8').strip()
+        test_results = json.loads(res)
+        spec_guard_violations.extend(test_results)
+    except Exception as e:
+        spec_guard_violations.append({"errorCode": "SPEC_TEST_EXECUTION_FAILED", "detail": str(e)})
+
+spec_guard_report = {
+    "gate": "RULE_09_SPEC_IDENTITY_GUARD",
+    "status": "PASSED" if len(spec_guard_violations) == 0 else "BLOCKED",
+    "executedAt": executed_at,
+    "commitSha": commit_sha,
+    "violations": spec_guard_violations
+}
+
+os.makedirs("reports", exist_ok=True)
+with open("reports/spec_identity_guard.json", "w", encoding="utf-8") as f:
+    json.dump(spec_guard_report, f, indent=2, ensure_ascii=False)
+
+record_gate_result(
+    rule_id="RULE-09-SPEC-IDENTITY-GUARD",
+    name="Deterministic Product Identity & Cross-Brand Spec Guard",
+    expected="Zero cross-brand/cross-type spec leaks, Soundcore A31X1 verified, Fail-Closed on unknown products",
+    actual=f"{len(spec_guard_violations)} spec guard violations" if len(spec_guard_violations) > 0 else "0 violations (Soundcore A31X1 verified, 0 A07 leak, 0 cross-brand leak)",
+    status="PASS" if len(spec_guard_violations) == 0 else "FAIL",
+    affected_records=len(spec_guard_violations),
+    evidence=spec_guard_report
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -808,6 +894,11 @@ gate_metadata_map = {
         "functionName": "validate_runtime_manifest_hashes",
         "inputFiles": ["runtime_manifest.json"],
         "recordsChecked": verified_file_count + len(hash_mismatches)
+    },
+    "RULE-09-SPEC-IDENTITY-GUARD": {
+        "functionName": "validate_spec_identity_and_cross_brand_guard",
+        "inputFiles": ["product_specs_data.js"],
+        "recordsChecked": 3
     }
 }
 
