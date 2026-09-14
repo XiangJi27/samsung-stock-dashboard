@@ -4,7 +4,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 from playwright.async_api import async_playwright
 
-VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-m8xseg5vu-xiangji27.vercel.app")
+VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-1ztt9qxts-xiangji27.vercel.app")
 
 def get_test_admin_credentials():
     emp_id = os.environ.get("TEST_ADMIN_EMPLOYEE_ID", "CPW3862")
@@ -31,8 +31,8 @@ async def main():
         context = await browser.new_context(viewport={"width": 1280, "height": 800})
         page = await context.new_page()
 
-        print(f"\n=== 1. Login as {emp_id} ===")
-        await page.goto(f"{VERCEL_URL}/pilot.html#/login")
+        print(f"\n=== 1. Login as {emp_id} via ROOT DOMAIN ({VERCEL_URL}/#/login) ===")
+        await page.goto(f"{VERCEL_URL}/#/login")
         await page.wait_for_selector("#loginEmployeeId", state="visible")
         await page.fill("#loginEmployeeId", emp_id)
         await page.fill("#loginPassword", password)
@@ -41,8 +41,8 @@ async def main():
         await page.wait_for_selector("#view-home:not([hidden])", timeout=10000)
         print("Logged in successfully!")
 
-        print("\n=== 2. Navigate to #/stock ===")
-        await page.goto(f"{VERCEL_URL}/pilot.html#/stock")
+        print(f"\n=== 2. Navigate to ROOT DOMAIN #/stock ({VERCEL_URL}/#/stock) ===")
+        await page.goto(f"{VERCEL_URL}/#/stock")
         await page.wait_for_selector("#stockTableBody tr", timeout=10000)
 
         # 1. Route Isolation
