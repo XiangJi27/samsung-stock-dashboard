@@ -4,7 +4,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 from playwright.async_api import async_playwright
 
-VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-rd37vube4-xiangji27.vercel.app")
+VERCEL_URL = os.environ.get("VERCEL_PREVIEW_URL", "https://samsung-stock-dashboard-7a7xcm0us-xiangji27.vercel.app")
 
 def get_test_admin_credentials():
     emp_id = os.environ.get("TEST_ADMIN_EMPLOYEE_ID", "CPW3862")
@@ -193,7 +193,9 @@ async def main():
             ('F-NS741BLGCLSV', 'Pistachio', 'rgb(184, 201, 160)'),
             ('F-NS741BZKCLSV', 'Graphite', 'rgb(75, 85, 99)'),
             ('F-NS741BZVCLSV', 'Blueberry', 'rgb(81, 82, 138)'),
-            ('SM-A075FLVDTHL', 'Light Violet', 'rgb(201, 184, 255)')
+            ('SM-A075FLVDTHL', 'Light Violet', 'rgb(201, 184, 255)'),
+            ('SM-S731BDBCTHL', 'Navy', 'rgb(30, 58, 138)'),
+            ('8859703434269', 'Black', 'rgb(37, 40, 45)')
         ]
 
         for pn, expected_color, expected_dot in golden_cases:
