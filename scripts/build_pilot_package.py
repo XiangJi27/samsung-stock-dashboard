@@ -42,6 +42,9 @@ def build_pilot_package():
     pilot_specific_files = [
         "pilot.html",
         "api/admin/members.js",
+        "assets/css/prototype-stock.css",
+        "assets/js/prototype-stock.js",
+        "product_specs_data.js",
         "assets/js/pilot-runtime-config.js",
         "assets/js/supabase-client.js",
         "assets/js/auth-service.js",
