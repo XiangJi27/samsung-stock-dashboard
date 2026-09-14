@@ -246,7 +246,7 @@
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             <span>95/5 Risk Guard</span>
-            <span class="hdr-badge badge-emerald" id="headerAuditBadge">142 Pub • 56 Draft</span>
+            <span class="hdr-badge badge-emerald" id="headerAuditBadge">216 Pub • 4 Blocked</span>
           </button>
 
           <button id="btnPromoExpiry" class="hdr-btn" title="ดูรายละเอียดแคมเปญและวันหมดอายุโปรโมชั่น">
@@ -421,25 +421,25 @@
       <div class="auto-banner-left">
         <div class="version-pill" title="เวอร์ชันโปรโมชั่นที่ระบบตรวจสอบผ่านและกำลังใช้งานอยู่">
           <span class="version-pulse"></span>
-          <span class="version-label">PROMO RELEASE:</span>
-          <strong class="version-code" id="activeVersionCode">DUAL-SCOPE-202609</strong>
-          <span class="version-date">(Dual-Scope CI Gate)</span>
+          <span class="version-label">PROMO VERSION:</span>
+          <strong class="version-code" id="activeVersionCode">PROMO-20260828-V2</strong>
+          <span class="version-date">(รอบ 28 ส.ค. - 6 ก.ย. 2026)</span>
         </div>
         <div class="risk-stats-group">
-          <div class="risk-chip chip-low" id="chipLowRisk" title="ผ่านเกณฑ์ Dual-Scope CI Gate เผยแพร่อัตโนมัติ">
+          <div class="risk-chip chip-low" id="chipLowRisk" title="ผ่านกฎการตรวจสอบครบถ้วน 100% เผยแพร่อัตโนมัติ">
             <span class="chip-dot dot-green"></span>
-            <span class="chip-label">Published (เขียว):</span>
-            <strong id="statLowRisk">142</strong>
+            <span class="chip-label">Auto-Published (เขียว):</span>
+            <strong id="statLowRisk">216</strong>
           </div>
-          <div class="risk-chip chip-med" id="chipMedRisk" title="ฉบับร่างเดือนกันยายน รอตรวจสอบ">
+          <div class="risk-chip chip-med" id="chipMedRisk" title="ราคาถูกต้อง แต่มีเงื่อนไขเตือน">
             <span class="chip-dot dot-yellow"></span>
-            <span class="chip-label">Draft Review (เหลือง):</span>
-            <strong id="statMedRisk">32</strong>
+            <span class="chip-label">Warning (เหลือง):</span>
+            <strong id="statMedRisk">11</strong>
           </div>
-          <div class="risk-chip chip-high" id="chipHighRisk" title="ฉบับร่างเดือนกันยายน กักกันความเสี่ยง">
+          <div class="risk-chip chip-high" id="chipHighRisk" title="ข้อมูลต้นฉบับมีข้อผิดพลาด (#ERROR! / ขัดแย้ง) กักกันราคา">
             <span class="chip-dot dot-red"></span>
-            <span class="chip-label">Draft Quarantined (แดง):</span>
-            <strong id="statHighRisk">24</strong>
+            <span class="chip-label">Quarantined (แดง):</span>
+            <strong id="statHighRisk">4</strong>
           </div>
         </div>
       </div>
@@ -822,7 +822,7 @@
               <div class="audit-status-tag success">✓ 95/5 AUTOMATION MODEL ACTIVE (อนุมัติอัตโนมัติ ~95% • กักกันเสี่ยง ~5%)</div>
               <h3 class="audit-score-title">AI แปลงเอกสาร ➔ ระบบกฎตัดสิน ➔ หน้าร้านเลือก Sale Mode</h3>
               <p class="audit-score-desc">
-                ระบบจะไม่ให้คนอนุมัติทั้งไฟล์เพื่อไม่ให้เกิดคอขวด รายการจากรอบ Draft จะถูกแยกไว้เพื่อตรวจสอบและกักกันความเสี่ยง (0 Auto-Publish จาก Draft) และจะเผยแพร่เฉพาะรายการที่ผ่าน Dual-Scope CI Gate แล้วเท่านั้น (142 รายการ Active Published)
+                ระบบจะไม่ให้คนอนุมัติทั้งไฟล์เพื่อไม่ให้เกิดคอขวด รายการที่ข้อมูลครบและสมการถูกต้อง (216 รายการ) จะ Auto-Publish ทันที ส่วนรายการเสี่ยง (#ERROR! หรือเงื่อนไขขัดแย้ง) จะถูกกักไว้ใน Exception Queue
               </p>
             </div>
             <button id="btnRunLiveAudit" class="btn-rerun-audit" title="กดเพื่อรันการตรวจสอบระบบใหม่อีกครั้งแบบเรียลไทม์">
@@ -1116,36 +1116,38 @@
             <div class="version-card current">
               <div class="version-header">
                 <div class="version-history-title">
-                  <span style="color: var(--neon-cyan);">DUAL-SCOPE-202609</span> (เวอร์ชันปัจจุบัน Active)
+                  <span style="color: var(--neon-cyan);">PROMO-20260828-V2</span> (เวอร์ชันปัจจุบัน Active)
                 </div>
                 <span class="badge-auto-approved">✓ CURRENT ACTIVE</span>
               </div>
               <p style="font-size: 0.82rem; color: #cbd5e1; margin: 4px 0;">
-                นำเข้าโปรโมชั่นตามระบบ Dual-Scope CI Gate (142 Active Published / 56 September Draft Quarantined)
+                นำเข้าข้อมูลแคมเปญรอบ 28 ส.ค. - 6 ก.ย. 2026 จากไฟล์ Retail Shop และ Tablet Acc ล่าสุด
               </p>
               <div class="version-details-grid">
-                <div>📁 ต้นทาง: <strong>Dual-Scope CI Gate (Exact P/N Verified)</strong></div>
-                <div>📊 นำเข้า: <strong>198 รายการ</strong> (Published: 142, Review: 32, Quarantined: 24, Auto-Pub Draft: 0)</div>
-                <div>🕒 เวลาเผยแพร่: <strong>2026-09-14 10:00 น.</strong></div>
-                <div>🔒 Manifest: <strong>reports/promotion_release_manifest.json</strong></div>
+                <div>📁 ต้นทาง: <strong>Retail Shop Samsung (28 Aug - 6 Sep)</strong></div>
+                <div>📊 นำเข้า: <strong>231 รายการ</strong> (Auto-Pub: 216, Warn: 11, Quarantined: 4)</div>
+                <div>🕒 เวลาเผยแพร่: <strong>2026-08-28 14:00 น.</strong></div>
+                <div>🔒 File Hash: <strong>SHA256: 8f2a...c4b9</strong></div>
               </div>
             </div>
 
             <div class="version-card">
               <div class="version-header">
                 <div class="version-history-title">
-                  <span style="color: #94a3b8;">PROMO-20260828-V2</span> (แคมเปญก่อนหน้า - ARCHIVED)
+                  <span style="color: #94a3b8;">PROMO-20260819-V1</span> (เวอร์ชันก่อนหน้า)
                 </div>
-                <span class="badge-auto-approved" style="background: rgba(148, 163, 184, 0.2); color: #94a3b8; border: 1px solid #475569;">EXPIRED</span>
+                <button class="btn-exception-action approve" id="btnExecuteRollback" style="padding: 4px 10px;">
+                  🔄 สลับไปใช้ V1 (Rollback)
+                </button>
               </div>
               <p style="font-size: 0.82rem; color: #94a3b8; margin: 4px 0;">
-                แคมเปญรอบ 28 ส.ค. - 6 ก.ย. 2026 (สิ้นสุดระยะเวลาแคมเปญแล้ว จัดเก็บเป็นประวัติ)
+                แคมเปญรอบ 19 - 27 ส.ค. 2026 (สำรองไว้กรณีโปรโมชั่นรอบใหม่มีข้อผิดพลาดร้ายแรง)
               </p>
               <div class="version-details-grid">
-                <div>📁 ต้นทาง: <strong>Retail Shop Samsung (28 Aug - 6 Sep)</strong></div>
-                <div>📊 นำเข้า: <strong>231 รายการ</strong> (Historical Import Archive)</div>
-                <div>🕒 เวลาเผยแพร่: <strong>2026-08-28 14:00 น.</strong></div>
-                <div>🔒 สถานะ: <strong>EXPIRED / ARCHIVED</strong></div>
+                <div>📁 ต้นทาง: <strong>Retail Shop Samsung (19 - 27 Aug)</strong></div>
+                <div>📊 นำเข้า: <strong>228 รายการ</strong></div>
+                <div>🕒 เวลาเผยแพร่: <strong>2026-08-19 09:00 น.</strong></div>
+                <div>🔒 สถานะ: <strong>Standby for Rollback</strong></div>
               </div>
             </div>
           </div>

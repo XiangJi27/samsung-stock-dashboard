@@ -4,8 +4,8 @@
   "executed": true,
   "executionMode": "LIVE_DATA_VALIDATION",
   "status": "PASSED",
-  "executedAt": "2026-09-14T10:45:45.589457",
-  "commitSha": "cfd4306",
+  "executedAt": "2026-09-14T11:01:37.412904",
+  "commitSha": "068ffbb",
   "verifiedInputs": {
     "stockBatchId": "IMPORT-20260906-002",
     "promotionBatchId": "BATCH-20260907-105441",
@@ -19,7 +19,7 @@
     "promotion_variants.js": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
     "audit_summary.json": "6b5b49cbd91f34faaee6613f31fe5fbc9dedac87ea261480624f12ea86563a27",
     "business_rules.json": "539a8b20045528cd81fca1e7c38e51ce537daf534b88b43f910fd2551dfcaf58",
-    "runtime_manifest.json": "a083f2f2d756e63d9ff6ea2c61e24afc4cbb38ae59d051737127484445e70ef2"
+    "runtime_manifest.json": "24d0567db681e5f68eb1e93df6ad11f72645e0e64adee85ce0a8217ab7fb1b9d"
   },
   "counts": {
     "staleAuditCount": 0,
@@ -29,5 +29,5 @@
   },
   "violationCount": 0,
   "violations": [],
-  "generatedAt": "2026-09-14T10:45:45.589457"
+  "generatedAt": "2026-09-14T11:01:37.412904"
 }
