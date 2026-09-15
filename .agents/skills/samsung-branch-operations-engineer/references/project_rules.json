@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "samsung-branch-operations-project-rules",
+  "version": "1.0.0",
+  "updatedAt": "2026-09-15T08:18:00+07:00",
+  "storeLocation": "Ayutthaya City Park",
+  "baseline": {
+    "applicationCommit": "a7c3390",
+    "lockedManifestCommit": "4dd91b1",
+    "frozenFiles": [
+      "index.html",
+      "app.js",
+      "style.css",
+      "runtime_manifest.json"
+    ],
+    "pilotFiles": [
+      "pilot.html",
+      "assets/js/prototype-stock.js",
+      "product_specs_data.js",
+      "api/admin/members.js"
+    ]
+  },
+  "stockDisplayRules": {
+    "summaryCardScope": "F1_ONLY",
+    "allowF2InSummaryCards": false,
+    "dashboardKpiScope": "F1_ONLY",
+    "categoryBreakdownScope": "F1_ONLY",
+    "productTableColumns": [
+      { "name": "ร้านเรา (ชั้น 1)", "value": "F1" },
+      { "name": "สาขา (ชั้น 2)", "value": "F2" },
+      { "name": "รวมสต็อก", "equation": "F1 + F2" }
+    ],
+    "hiddenSummaryCards": [
+      "SIM",
+      "OTHER"
+    ],
+    "displayedSummaryCards": [
+      "ALL_MODELS",
+      "SMARTPHONE",
+      "TABLET",
+      "WATCH",
+      "BUDS",
+      "ACCESSORY",
+      "PREMIUM"
+    ]
+  },
+  "categoryHierarchy": {
+    "evaluationPriority": ["category1", "category2", "category3", "brand"],
+    "pnRole": "VALIDATION_ONLY_NEVER_OVERRIDE",
+    "rules": [
+      {
+        "pattern": { "category1": "AUDIO", "category2": "HEADPHONE", "category3": "TRUE WIRELESS", "brand": "SAMSUNG" },
+        "targetCategory": "BUDS"
+      },
+      {
+        "pattern": { "category1": "SMART PHONES" },
+        "targetCategory": "SMARTPHONE"
+      },
+      {
+        "pattern": { "category1": "COMPUTER AND TABLET" },
+        "targetCategory": "TABLET"
+      },
+      {
+        "pattern": { "category1": "SMART WATCH" },
+        "targetCategory": "WATCH"
+      },
+      {
+        "pattern": { "category1": "OTHER", "category2": "PREMIUM" },
+        "targetCategory": "PREMIUM"
+      },
+      {
+        "pattern": { "category1": "SERVICE, INSURANCE AND WARRANTY" },
+        "targetCategory": "SIM"
+      }
+    ]
+  },
+  "specVerificationRules": {
+    "strictIdentityRequired": true,
+    "matchCriteria": ["brand", "productType", "manufacturerModel"],
+    "failClosedOnNoMatch": true,
+    "noMatchResult": "SPEC_NOT_VERIFIED",
+    "defaultProductFallbackAllowed": false,
+    "a07FallbackBlocked": true,
+    "allowedVerificationStatuses": [
+      "VERIFIED",
+      "PARTIALLY_VERIFIED",
+      "SPEC_NOT_VERIFIED",
+      "BLOCKED_CONFLICT"
+    ],
+    "fieldLevelVerification": {
+      "enabled": true,
+      "unverifiedFieldDisplay": "ยังไม่ได้ยืนยัน",
+      "unverifiedWarrantyDisplay": "ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้",
+      "blockedUnprovenClaims": [
+        "Bluetooth 5.4 without official manual",
+        "18-month warranty without distributor certificate"
+      ]
+    }
+  },
+  "promotionGovernance": {
+    "activePublishedCount": 142,
+    "septemberDraftCount": 56,
+    "draftAutoPublishAllowed": false,
+    "blockedObsoleteCounts": [904, 589]
+  },
+  "deploymentRules": {
+    "allowedPackage": "samsung_stock_dashboard_feedback_pilot.zip",
+    "allowFullProjectZipDeploy": false,
+    "allowProductionDeploy": false,
+    "requirePreviewUrlVerification": true,
+    "requirePlaywrightBrowserAcceptance": true
+  }
+}

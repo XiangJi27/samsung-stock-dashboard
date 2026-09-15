@@ -1,0 +1,74 @@
+{
+  "fixtureId": "SPEC_IDENTITY_REGRESSION_CASES",
+  "description": "Zero cross-brand/cross-category leakage and field-level verification regression suite",
+  "cases": [
+    {
+      "testId": "REG_SPEC_01_SOUNDCORE_SELECT_4_GO",
+      "lookup": {
+        "pn": "194644055783",
+        "model": "Soundcore Select 4 Go Black",
+        "brand": "SOUNDCORE",
+        "category": "Other"
+      },
+      "expectedStatus": "PARTIALLY_VERIFIED",
+      "expectedFields": {
+        "brand": "Soundcore",
+        "manufacturerModel": "A31X1",
+        "productType": "BLUETOOTH_SPEAKER"
+      },
+      "verifiedFieldAttributes": [
+        "outputPower",
+        "ipRating",
+        "playTime",
+        "tws",
+        "builtInStrap"
+      ],
+      "pendingFieldAttributes": [
+        "bluetoothVersion",
+        "thailandWarrantyPeriod"
+      ],
+      "forbiddenSpecKeywords": [
+        "Galaxy A07",
+        "Helio G85",
+        "Knox Vault",
+        "6.7 นิ้ว",
+        "Bluetooth 5.4",
+        "18 เดือน",
+        "Samsung Thailand Official Lab"
+      ]
+    },
+    {
+      "testId": "REG_SPEC_02_CROSS_BRAND_PHONE_BLOCK",
+      "lookup": {
+        "pn": "SM-S928BZTQTHL",
+        "model": "Galaxy S26 Ultra Fake Non-Samsung",
+        "brand": "SOUNDCORE",
+        "category": "SmartPhone"
+      },
+      "expectedResult": null,
+      "expectedGateAction": "BLOCK_CROSS_BRAND"
+    },
+    {
+      "testId": "REG_SPEC_03_CROSS_TYPE_SPEAKER_AS_PHONE_BLOCK",
+      "lookup": {
+        "pn": "194644055783",
+        "model": "Soundcore Select 4 Go Black",
+        "brand": "SOUNDCORE",
+        "category": "SmartPhone"
+      },
+      "expectedResult": null,
+      "expectedGateAction": "BLOCK_CROSS_PRODUCT_TYPE"
+    },
+    {
+      "testId": "REG_SPEC_04_UNKNOWN_ITEM_FAIL_CLOSED",
+      "lookup": {
+        "pn": "UNKNOWN-GADGET-999",
+        "model": "Unbranded Generic Mystery Dongle",
+        "brand": "OTHER",
+        "category": "Other"
+      },
+      "expectedResult": null,
+      "expectedUiBehavior": "RENDER_SPEC_NOT_VERIFIED_BANNER"
+    }
+  ]
+}

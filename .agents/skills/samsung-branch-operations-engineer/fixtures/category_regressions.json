@@ -1,0 +1,62 @@
+{
+  "fixtureId": "CATEGORY_RESOLUTION_REGRESSION_CASES",
+  "description": "Critical historical bug regression tests for Cat1 -> Cat2 -> Cat3 hierarchy resolution",
+  "cases": [
+    {
+      "testId": "REG_CAT_01_SOUNDCORE_SPEAKER",
+      "input": {
+        "pn": "194644055783",
+        "model": "Soundcore Select 4 Go Black",
+        "category1": "AUDIO",
+        "category2": "SPEAKER",
+        "category3": "COMPACT SPEAKER",
+        "brand": "SOUNDCORE"
+      },
+      "expectedCategory": "Other",
+      "expectedProductType": "BLUETOOTH_SPEAKER",
+      "forbiddenCategories": ["SmartPhone", "Tablet", "Buds"]
+    },
+    {
+      "testId": "REG_CAT_02_GALAXY_BUDS",
+      "input": {
+        "pn": "SM-R410NZAAATH",
+        "model": "Galaxy Buds FE Gray",
+        "category1": "AUDIO",
+        "category2": "HEADPHONE",
+        "category3": "TRUE WIRELESS",
+        "brand": "SAMSUNG"
+      },
+      "expectedCategory": "Buds",
+      "expectedProductType": "EARBUDS",
+      "forbiddenCategories": ["SmartPhone"]
+    },
+    {
+      "testId": "REG_CAT_03_FOCUS_BAG_PREMIUM",
+      "input": {
+        "pn": "FOCUS-BAG-001",
+        "model": "Focus Premium Luggage Bag",
+        "category1": "OTHER",
+        "category2": "PREMIUM GIFT",
+        "category3": "BAG",
+        "brand": "FOCUS"
+      },
+      "expectedCategory": "Premium",
+      "expectedProductType": "PREMIUM_GIFT",
+      "forbiddenCategories": ["Accessory", "SmartPhone"]
+    },
+    {
+      "testId": "REG_CAT_04_AIS_SIM",
+      "input": {
+        "pn": "3IN1PRE2POSTP1XXX",
+        "model": "(AIS) SIM 3 In 1 Pre 2 Post P1Xxx",
+        "category1": "SERVICE, INSURANCE AND WARRANTY",
+        "category2": "SIM",
+        "category3": "POSTPAID",
+        "brand": "AIS"
+      },
+      "expectedCategory": "SIM",
+      "expectedProductType": "OTHER",
+      "summaryCardVisibility": "HIDDEN"
+    }
+  ]
+}
