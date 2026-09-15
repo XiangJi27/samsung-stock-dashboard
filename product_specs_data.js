@@ -3236,13 +3236,73 @@ window.PRODUCT_SPECS_PROFILES = {
     "category": "Other",
     "source": "Soundcore Official (soundcore.com/products/a31x1021) / Anker Innovations",
     "sourceUrl": "https://www.soundcore.com/products/a31x1021",
-    "marketRegion": "ประเทศไทย (เครื่องศูนย์แท้ รับประกัน 18 เดือน)",
-    "verificationStatus": "VERIFIED",
+    "marketRegion": "ประเทศไทย (เครื่องศูนย์ - ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้)",
+    "verificationStatus": "PARTIALLY_VERIFIED",
+    "verifiedFields": [
+      "manufacturerModel",
+      "productType",
+      "outputPower",
+      "ipRating",
+      "playTime",
+      "tws",
+      "builtInStrap"
+    ],
+    "pendingFields": [
+      "bluetoothVersion",
+      "thailandWarrantyPeriod"
+    ],
+    "fieldVerification": {
+      "outputPower": {
+        "value": "5W",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "ipRating": {
+        "value": "IP67",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "playTime": {
+        "value": "สูงสุด 20 ชั่วโมง",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "tws": {
+        "value": "รองรับ True Wireless Stereo (TWS)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "builtInStrap": {
+        "value": "มีสายคล้องพกพาในตัว (Built-in Strap)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "floating": {
+        "value": "ลอยน้ำได้ (Floatable Design)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "bluetoothSupport": {
+        "value": "รองรับ",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "bluetoothVersion": {
+        "value": null,
+        "status": "NOT_VERIFIED",
+        "note": "ยังไม่ได้ยืนยันเลขเวอร์ชันเฉพาะรุ่นจากคู่มือทางการ"
+      },
+      "thailandWarrantyPeriod": {
+        "value": null,
+        "status": "NOT_VERIFIED",
+        "note": "ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้"
+      }
+    },
     "speakerSpecs": {
       "outputPower": "5W (เสียงคมชัด เบสแน่นทรงพลัง)",
       "waterproofRating": "IP67 (กันน้ำลึก 1 เมตร และลอยน้ำได้ - Floatable Design)",
       "batteryPlaytime": "สูงสุด 20 ชั่วโมง (20-Hour Playtime)",
-      "bluetoothVersion": "Bluetooth 5.4",
+      "bluetoothVersion": "ยังไม่ได้ยืนยัน (รองรับ Bluetooth)",
       "wirelessStereo": "รองรับ True Wireless Stereo (TWS เชื่อมต่อ 2 ตัวเป็นสเตอริโอ)",
       "portability": "มีสายคล้องพกพาในตัว (Built-in Strap) กะทัดรัด น้ำหนักเบา",
       "chargingPort": "USB Type-C (5V/1A)"
@@ -3260,7 +3320,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "testCondition": "ผลทดสอบทางการ Soundcore Official Lab เล่นเพลงระดับเสียง 50%"
     },
     "connectivityAndBuild": {
-      "bluetooth": "Bluetooth 5.4 (ระยะเชื่อมต่อสูงสุด 15 เมตร)",
+      "bluetooth": "รองรับการเชื่อมต่อ Bluetooth (เวอร์ชันยังไม่ได้ยืนยัน)",
       "waterResistance": "IP67 กันน้ำและกันฝุ่นสมบูรณ์แบบ (ลอยน้ำได้)",
       "dimensions": "ดีไซน์พกพากลางแจ้ง สะดวกสบาย",
       "frameMaterial": "โครงสร้างทนทาน แข็งแกร่ง พร้อมหูคล้องพกพา"
@@ -3278,13 +3338,73 @@ window.PRODUCT_SPECS_PROFILES = {
     "category": "Other",
     "source": "Soundcore Official (soundcore.com/products/a31x1021) / Anker Innovations",
     "sourceUrl": "https://www.soundcore.com/products/a31x1021",
-    "marketRegion": "ประเทศไทย (เครื่องศูนย์แท้ รับประกัน 18 เดือน)",
-    "verificationStatus": "VERIFIED",
+    "marketRegion": "ประเทศไทย (เครื่องศูนย์ - ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้)",
+    "verificationStatus": "PARTIALLY_VERIFIED",
+    "verifiedFields": [
+      "manufacturerModel",
+      "productType",
+      "outputPower",
+      "ipRating",
+      "playTime",
+      "tws",
+      "builtInStrap"
+    ],
+    "pendingFields": [
+      "bluetoothVersion",
+      "thailandWarrantyPeriod"
+    ],
+    "fieldVerification": {
+      "outputPower": {
+        "value": "5W",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "ipRating": {
+        "value": "IP67",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "playTime": {
+        "value": "สูงสุด 20 ชั่วโมง",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "tws": {
+        "value": "รองรับ True Wireless Stereo (TWS)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "builtInStrap": {
+        "value": "มีสายคล้องพกพาในตัว (Built-in Strap)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "floating": {
+        "value": "ลอยน้ำได้ (Floatable Design)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "bluetoothSupport": {
+        "value": "รองรับ",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "bluetoothVersion": {
+        "value": null,
+        "status": "NOT_VERIFIED",
+        "note": "ยังไม่ได้ยืนยันเลขเวอร์ชันเฉพาะรุ่นจากคู่มือทางการ"
+      },
+      "thailandWarrantyPeriod": {
+        "value": null,
+        "status": "NOT_VERIFIED",
+        "note": "ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้"
+      }
+    },
     "speakerSpecs": {
       "outputPower": "5W (เสียงคมชัด เบสแน่นทรงพลัง)",
       "waterproofRating": "IP67 (กันน้ำลึก 1 เมตร และลอยน้ำได้ - Floatable Design)",
       "batteryPlaytime": "สูงสุด 20 ชั่วโมง (20-Hour Playtime)",
-      "bluetoothVersion": "Bluetooth 5.4",
+      "bluetoothVersion": "ยังไม่ได้ยืนยัน (รองรับ Bluetooth)",
       "wirelessStereo": "รองรับ True Wireless Stereo (TWS เชื่อมต่อ 2 ตัวเป็นสเตอริโอ)",
       "portability": "มีสายคล้องพกพาในตัว (Built-in Strap) กะทัดรัด น้ำหนักเบา",
       "chargingPort": "USB Type-C (5V/1A)"
@@ -3302,7 +3422,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "testCondition": "ผลทดสอบทางการ Soundcore Official Lab เล่นเพลงระดับเสียง 50%"
     },
     "connectivityAndBuild": {
-      "bluetooth": "Bluetooth 5.4 (ระยะเชื่อมต่อสูงสุด 15 เมตร)",
+      "bluetooth": "รองรับการเชื่อมต่อ Bluetooth (เวอร์ชันยังไม่ได้ยืนยัน)",
       "waterResistance": "IP67 กันน้ำและกันฝุ่นสมบูรณ์แบบ (ลอยน้ำได้)",
       "dimensions": "ดีไซน์พกพากลางแจ้ง สะดวกสบาย",
       "frameMaterial": "โครงสร้างทนทาน แข็งแกร่ง พร้อมหูคล้องพกพา"
@@ -3320,13 +3440,73 @@ window.PRODUCT_SPECS_PROFILES = {
     "category": "Other",
     "source": "Soundcore Official (soundcore.com/products/a31x1021) / Anker Innovations",
     "sourceUrl": "https://www.soundcore.com/products/a31x1021",
-    "marketRegion": "ประเทศไทย (เครื่องศูนย์แท้ รับประกัน 18 เดือน)",
-    "verificationStatus": "VERIFIED",
+    "marketRegion": "ประเทศไทย (เครื่องศูนย์ - ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้)",
+    "verificationStatus": "PARTIALLY_VERIFIED",
+    "verifiedFields": [
+      "manufacturerModel",
+      "productType",
+      "outputPower",
+      "ipRating",
+      "playTime",
+      "tws",
+      "builtInStrap"
+    ],
+    "pendingFields": [
+      "bluetoothVersion",
+      "thailandWarrantyPeriod"
+    ],
+    "fieldVerification": {
+      "outputPower": {
+        "value": "5W",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "ipRating": {
+        "value": "IP67",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "playTime": {
+        "value": "สูงสุด 20 ชั่วโมง",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "tws": {
+        "value": "รองรับ True Wireless Stereo (TWS)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "builtInStrap": {
+        "value": "มีสายคล้องพกพาในตัว (Built-in Strap)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "floating": {
+        "value": "ลอยน้ำได้ (Floatable Design)",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "bluetoothSupport": {
+        "value": "รองรับ",
+        "status": "VERIFIED",
+        "sourceType": "MANUFACTURER_OFFICIAL"
+      },
+      "bluetoothVersion": {
+        "value": null,
+        "status": "NOT_VERIFIED",
+        "note": "ยังไม่ได้ยืนยันเลขเวอร์ชันเฉพาะรุ่นจากคู่มือทางการ"
+      },
+      "thailandWarrantyPeriod": {
+        "value": null,
+        "status": "NOT_VERIFIED",
+        "note": "ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้"
+      }
+    },
     "speakerSpecs": {
       "outputPower": "5W (เสียงคมชัด เบสแน่นทรงพลัง)",
       "waterproofRating": "IP67 (กันน้ำลึก 1 เมตร และลอยน้ำได้ - Floatable Design)",
       "batteryPlaytime": "สูงสุด 20 ชั่วโมง (20-Hour Playtime)",
-      "bluetoothVersion": "Bluetooth 5.4",
+      "bluetoothVersion": "ยังไม่ได้ยืนยัน (รองรับ Bluetooth)",
       "wirelessStereo": "รองรับ True Wireless Stereo (TWS เชื่อมต่อ 2 ตัวเป็นสเตอริโอ)",
       "portability": "มีสายคล้องพกพาในตัว (Built-in Strap) กะทัดรัด น้ำหนักเบา",
       "chargingPort": "USB Type-C (5V/1A)"
@@ -3344,7 +3524,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "testCondition": "ผลทดสอบทางการ Soundcore Official Lab เล่นเพลงระดับเสียง 50%"
     },
     "connectivityAndBuild": {
-      "bluetooth": "Bluetooth 5.4 (ระยะเชื่อมต่อสูงสุด 15 เมตร)",
+      "bluetooth": "รองรับการเชื่อมต่อ Bluetooth (เวอร์ชันยังไม่ได้ยืนยัน)",
       "waterResistance": "IP67 กันน้ำและกันฝุ่นสมบูรณ์แบบ (ลอยน้ำได้)",
       "dimensions": "ดีไซน์พกพากลางแจ้ง สะดวกสบาย",
       "frameMaterial": "โครงสร้างทนทาน แข็งแกร่ง พร้อมหูคล้องพกพา"

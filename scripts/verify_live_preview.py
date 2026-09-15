@@ -232,23 +232,24 @@ async def main():
         assert "Soundcore Select 4 Go" in drawer_data['title'], f"Wrong title: {drawer_data['title']}"
         assert "194644055783" in drawer_data['pn'], f"Missing PN in drawer: {drawer_data['pn']}"
         assert "A31X1" in drawer_data['body'], "Missing manufacturer model A31X1 in evidence header"
+        assert "PARTIALLY_VERIFIED" in drawer_data['body'], "Missing PARTIALLY_VERIFIED status badge"
         assert "5W" in drawer_data['body'], "Missing 5W speaker output in specs"
         assert "IP67" in drawer_data['body'], "Missing IP67 rating in specs"
         assert "20 ชั่วโมง" in drawer_data['body'] or "20 Hours" in drawer_data['body'], "Missing 20h playtime in specs"
         assert "Soundcore" in drawer_data['body'], "Missing Soundcore brand in specs"
-        assert "Anker Innovations Thailand" in drawer_data['body'], "Missing Soundcore/Anker Thailand official warranty"
-        print("  ✅ Positive Assertions Passed: Soundcore A31X1, 5W, IP67, 20h, Anker Thailand Warranty verified.")
+        assert "ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้" in drawer_data['body'], "Missing unverified warranty caution message"
+        print("  ✅ Positive Assertions Passed: Soundcore A31X1, PARTIALLY_VERIFIED, 5W, IP67, 20h, Cautionary Warranty verified.")
 
-        # STRICT NEGATIVE ASSERTIONS (Zero Cross-Brand Leakage)
-        negative_leakage_terms = ["Galaxy A07", "A07 4G", "Helio G85", "Knox Vault", "6.7 นิ้ว", "6.7\""]
+        # STRICT NEGATIVE ASSERTIONS (Zero Cross-Brand Leakage & Zero Unverified Assertions)
+        negative_leakage_terms = ["Galaxy A07", "A07 4G", "Helio G85", "Knox Vault", "6.7 นิ้ว", "6.7\"", "Bluetooth 5.4", "5.4 VERIFIED", "18 เดือน"]
         for term in negative_leakage_terms:
             assert term not in drawer_data['body'], f"CRITICAL BUG: Spec leakage detected! '{term}' found in Soundcore drawer!"
-        print(f"  ✅ Negative Assertions Passed: Zero leakage of Galaxy A07 / Helio G85 / Knox / 6.7\" ({len(negative_leakage_terms)} terms checked).")
+        print(f"  ✅ Negative Assertions Passed: Zero leakage of Galaxy A07 / Helio G85 / Knox / 6.7\" / Bluetooth 5.4 / 18 เดือน ({len(negative_leakage_terms)} terms checked).")
 
         # Screenshot of Soundcore Spec Drawer
         soundcore_screenshot_path = os.path.join(os.getcwd(), "scratch", "soundcore_spec_drawer.png")
         await page.screenshot(path=soundcore_screenshot_path, full_page=False)
-        artifact_soundcore_path = r"C:\Users\JarNJay\.gemini\antigravity-ide\brain\c9c68153-b0f6-4648-a583-e0ee2c6133a9\soundcore_spec_drawer.png"
+        artifact_soundcore_path = r"C:\Users\JarNJay\.gemini\antigravity-ide\brain\fad28cc5-0863-4877-a316-4b1449100798\soundcore_spec_drawer.png"
         await page.screenshot(path=artifact_soundcore_path, full_page=False)
         print(f"  📸 Saved Soundcore Spec Drawer screenshot to {artifact_soundcore_path}")
 

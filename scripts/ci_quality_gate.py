@@ -763,12 +763,40 @@ else:
         if (sc.brand !== 'Soundcore') tests.push({ error: 'SOUNDCORE_BRAND_WRONG', detail: sc.brand });
         if (sc.productType !== 'BLUETOOTH_SPEAKER') tests.push({ error: 'SOUNDCORE_TYPE_WRONG', detail: sc.productType });
         if (sc.manufacturerModel !== 'A31X1') tests.push({ error: 'SOUNDCORE_MODEL_WRONG', detail: sc.manufacturerModel });
+        
+        // Verification Status & Field-Level Checks
+        if (sc.verificationStatus !== 'PARTIALLY_VERIFIED') {
+            tests.push({ error: 'SOUNDCORE_NOT_PARTIALLY_VERIFIED', detail: 'Expected PARTIALLY_VERIFIED, got ' + sc.verificationStatus });
+        }
+        if (!sc.verifiedFields || !sc.verifiedFields.includes('outputPower') || !sc.verifiedFields.includes('ipRating')) {
+            tests.push({ error: 'VERIFIED_FIELDS_INCOMPLETE', detail: 'Missing verifiedFields in Soundcore record' });
+        }
+        if (!sc.pendingFields || !sc.pendingFields.includes('bluetoothVersion') || !sc.pendingFields.includes('thailandWarrantyPeriod')) {
+            tests.push({ error: 'PENDING_FIELDS_INCOMPLETE', detail: 'Missing pendingFields (bluetoothVersion, thailandWarrantyPeriod)' });
+        }
+
         const scStr = JSON.stringify(sc);
         if (scStr.includes('Galaxy A07') || scStr.includes('Helio G85') || scStr.includes('Knox')) {
             tests.push({ error: 'GALAXY_A07_LEAKAGE', detail: 'Soundcore spec contains Galaxy A07, Helio G85, or Knox' });
         }
         if (!sc.speakerSpecs || !sc.speakerSpecs.outputPower || !sc.speakerSpecs.outputPower.includes('5W')) {
             tests.push({ error: 'SPEAKER_SPECS_MISSING', detail: 'Missing 5W speaker specs' });
+        }
+
+        // Regression Assertion: Bluetooth 5.4 without evidence = BLOCK
+        if (sc.speakerSpecs && sc.speakerSpecs.bluetoothVersion && sc.speakerSpecs.bluetoothVersion.includes('5.4')) {
+            tests.push({ error: 'UNVERIFIED_BLUETOOTH_5_4_BLOCKED', detail: 'Bluetooth 5.4 asserted without official evidence' });
+        }
+        if (sc.fieldVerification && sc.fieldVerification.bluetoothVersion && sc.fieldVerification.bluetoothVersion.status === 'VERIFIED') {
+            tests.push({ error: 'UNVERIFIED_BLUETOOTH_VERIFIED_STATUS_BLOCKED', detail: 'bluetoothVersion field marked as VERIFIED without evidence' });
+        }
+
+        // Regression Assertion: Thailand 18-month warranty without evidence = BLOCK
+        if (sc.marketRegion && sc.marketRegion.includes('18 เดือน')) {
+            tests.push({ error: 'UNVERIFIED_18_MONTH_WARRANTY_BLOCKED', detail: 'Thailand 18-month warranty asserted in marketRegion without evidence' });
+        }
+        if (sc.fieldVerification && sc.fieldVerification.thailandWarrantyPeriod && sc.fieldVerification.thailandWarrantyPeriod.status === 'VERIFIED') {
+            tests.push({ error: 'UNVERIFIED_WARRANTY_VERIFIED_STATUS_BLOCKED', detail: 'thailandWarrantyPeriod field marked as VERIFIED without evidence' });
         }
     }
 
@@ -778,7 +806,13 @@ else:
         tests.push({ error: 'CROSS_BRAND_LEAK', detail: 'Cross-brand phone with Soundcore brand was not blocked' });
     }
 
-    // Test 3: Unknown item fail-closed
+    // Test 3: Negative cross-product-type mismatch
+    const fakeType = fn({ pn: '194644055783', model: 'Soundcore Select 4 Go Black', brand: 'SOUNDCORE', category: 'SmartPhone' });
+    if (fakeType !== null) {
+        tests.push({ error: 'CROSS_TYPE_LEAK', detail: 'Cross-type mismatch (speaker as smartphone) was not blocked' });
+    }
+
+    // Test 4: Unknown item fail-closed
     const unk = fn({ pn: 'UNKNOWN-RANDOM-001', model: 'Unknown Generic Gadget', brand: 'OTHER', category: 'Other' });
     if (unk !== null) {
         tests.push({ error: 'FAIL_CLOSED_VIOLATION', detail: 'Unknown item did not return null' });
@@ -788,7 +822,8 @@ else:
     """
     try:
         res = subprocess.check_output(['node', '-e', test_node_script], stderr=subprocess.STDOUT).decode('utf-8').strip()
-        test_results = json.loads(res)
+        json_lines = [l for l in res.splitlines() if l.strip().startswith('[')]
+        test_results = json.loads(json_lines[-1]) if json_lines else []
         spec_guard_violations.extend(test_results)
     except Exception as e:
         spec_guard_violations.append({"errorCode": "SPEC_TEST_EXECUTION_FAILED", "detail": str(e)})
@@ -808,8 +843,8 @@ with open("reports/spec_identity_guard.json", "w", encoding="utf-8") as f:
 record_gate_result(
     rule_id="RULE-09-SPEC-IDENTITY-GUARD",
     name="Deterministic Product Identity & Cross-Brand Spec Guard",
-    expected="Zero cross-brand/cross-type spec leaks, Soundcore A31X1 verified, Fail-Closed on unknown products",
-    actual=f"{len(spec_guard_violations)} spec guard violations" if len(spec_guard_violations) > 0 else "0 violations (Soundcore A31X1 verified, 0 A07 leak, 0 cross-brand leak)",
+    expected="Zero cross-brand/cross-type spec leaks, Soundcore A31X1 PARTIALLY_VERIFIED (Bluetooth & warranty gated), Fail-Closed on unknown products",
+    actual=f"{len(spec_guard_violations)} spec guard violations" if len(spec_guard_violations) > 0 else "0 violations (Soundcore A31X1 PARTIALLY_VERIFIED, 0 A07 leak, 0 cross-brand leak, unverified BT 5.4/18M warranty blocked)",
     status="PASS" if len(spec_guard_violations) == 0 else "FAIL",
     affected_records=len(spec_guard_violations),
     evidence=spec_guard_report

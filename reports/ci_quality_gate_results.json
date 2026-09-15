@@ -5,8 +5,8 @@
     "passedCount": 12,
     "warningCount": 0,
     "violationCount": 0,
-    "executedAt": "2026-09-14T21:25:25.940539",
-    "commitSha": "fccd865"
+    "executedAt": "2026-09-15T07:58:09.787189",
+    "commitSha": "e111dc2"
   },
   "gates": [
     {
@@ -19,8 +19,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-02-PRICE-EQUATION",
@@ -32,8 +32,8 @@
       "evidence": {
         "mismatches": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-03-STUDENT-RULE",
@@ -45,8 +45,8 @@
       "evidence": {
         "violations": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-04-PASS-F-ISOLATION",
@@ -58,8 +58,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-05-TRADE-UP-ISOLATION",
@@ -71,8 +71,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-06-STOCK-SUM",
@@ -84,8 +84,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-07-A07-GOLDEN",
@@ -107,8 +107,8 @@
         ],
         "mismatches": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-08-SECRET-LEAK",
@@ -120,8 +120,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "GATE-EXACT-PN",
@@ -136,8 +136,8 @@
         "executed": true,
         "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-14T21:25:25.940539",
-        "commitSha": "fccd865",
+        "executedAt": "2026-09-15T07:58:09.787189",
+        "commitSha": "e111dc2",
         "inputFiles": {
           "stockMaster": {
             "path": "stock_full_data.json",
@@ -196,10 +196,10 @@
           "CONNECTIVITY_MISMATCH",
           "AMBIGUOUS_MODEL_MATCH"
         ],
-        "generatedAt": "2026-09-14T21:25:25.940539"
+        "generatedAt": "2026-09-15T07:58:09.787189"
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "GATE-BATCH-CONSISTENCY",
@@ -214,8 +214,8 @@
         "executed": true,
         "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-14T21:25:25.940539",
-        "commitSha": "fccd865",
+        "executedAt": "2026-09-15T07:58:09.787189",
+        "commitSha": "e111dc2",
         "verifiedInputs": {
           "stockBatchId": "IMPORT-20260906-002",
           "promotionBatchId": "BATCH-20260907-105441",
@@ -239,10 +239,10 @@
         },
         "violationCount": 0,
         "violations": [],
-        "generatedAt": "2026-09-14T21:25:25.940539"
+        "generatedAt": "2026-09-15T07:58:09.787189"
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "GATE-RUNTIME-HASH",
@@ -254,32 +254,32 @@
       "evidence": {
         "gate": "RUNTIME_HASH_VERIFICATION_GATE",
         "status": "PASSED",
-        "executedAt": "2026-09-14T21:25:25.940539",
-        "commitSha": "fccd865",
+        "executedAt": "2026-09-15T07:58:09.787189",
+        "commitSha": "e111dc2",
         "totalManifestFiles": 23,
         "verifiedFileCount": 23,
         "violationCount": 0,
         "violations": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     },
     {
       "ruleId": "RULE-09-SPEC-IDENTITY-GUARD",
       "name": "Deterministic Product Identity & Cross-Brand Spec Guard",
-      "expected": "Zero cross-brand/cross-type spec leaks, Soundcore A31X1 verified, Fail-Closed on unknown products",
-      "actual": "0 violations (Soundcore A31X1 verified, 0 A07 leak, 0 cross-brand leak)",
+      "expected": "Zero cross-brand/cross-type spec leaks, Soundcore A31X1 PARTIALLY_VERIFIED (Bluetooth & warranty gated), Fail-Closed on unknown products",
+      "actual": "0 violations (Soundcore A31X1 PARTIALLY_VERIFIED, 0 A07 leak, 0 cross-brand leak, unverified BT 5.4/18M warranty blocked)",
       "status": "PASS",
       "affectedRecords": 0,
       "evidence": {
         "gate": "RULE_09_SPEC_IDENTITY_GUARD",
         "status": "PASSED",
-        "executedAt": "2026-09-14T21:25:25.940539",
-        "commitSha": "fccd865",
+        "executedAt": "2026-09-15T07:58:09.787189",
+        "commitSha": "e111dc2",
         "violations": []
       },
-      "executedAt": "2026-09-14T21:25:25.940539",
-      "commitSha": "fccd865"
+      "executedAt": "2026-09-15T07:58:09.787189",
+      "commitSha": "e111dc2"
     }
   ]
 }

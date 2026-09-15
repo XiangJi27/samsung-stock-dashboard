@@ -2261,13 +2261,20 @@
       }
 
       // Level 2: Verified Technical Specs with Evidence Status Header
+      const isPartiallyVerified = spec.verificationStatus === "PARTIALLY_VERIFIED";
+      const statusBadgeClass = isPartiallyVerified ? "warn" : "pass";
+      const statusBadgeText = isPartiallyVerified ? "PARTIALLY_VERIFIED" : (spec.verificationStatus || "VERIFIED");
+      const statusBadgeStyle = isPartiallyVerified 
+        ? "background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);" 
+        : "";
+
       let html = erpHtml + `
-          <div class="spec-source-box" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
-            <span style="font-size: 1.4rem;">🛡️</span>
-            <div>
+          <div class="spec-source-box" style="border-color: ${isPartiallyVerified ? 'rgba(245, 158, 11, 0.4)' : 'rgba(16, 185, 129, 0.4)'}; background: ${isPartiallyVerified ? 'rgba(245, 158, 11, 0.05)' : 'rgba(16, 185, 129, 0.05)'};">
+            <span style="font-size: 1.4rem;">${isPartiallyVerified ? '⚠️' : '🛡️'}</span>
+            <div style="flex: 1;">
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                 <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</span>
-                <span class="status-badge-gate pass" style="font-size: 0.7rem; padding: 2px 6px;">VERIFIED</span>
+                <span class="status-badge-gate ${statusBadgeClass}" style="font-size: 0.7rem; padding: 2px 6px; ${statusBadgeStyle}">${statusBadgeText}</span>
               </div>
               <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 4px;">
                 แบรนด์: <strong>${spec.brand || item.brand || 'Samsung'}</strong> • รุ่นผู้ผลิต: <strong>${spec.manufacturerModel || spec.modelGroup || '-'}</strong> • ประเภท: <strong>${spec.productType || item.category || '-'}</strong>
@@ -2280,6 +2287,17 @@
                   <a href="${spec.sourceUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;">
                     🔗 เปิดหน้าผลิตภัณฑ์ทางการ (${spec.brand || 'ผู้ผลิต'})
                   </a>
+                </div>
+              ` : ''}
+              ${isPartiallyVerified ? `
+                <div style="margin-top: 6px; padding: 6px 10px; background: rgba(245, 158, 11, 0.08); border-radius: 6px; font-size: 0.73rem; border-left: 2px solid #fbbf24;">
+                  <div style="color: #fbbf24; font-weight: 600;">⚠️ สถานะการตรวจสอบระดับฟิลด์ (Field-Level Verification):</div>
+                  <div style="color: #e2e8f0; margin-top: 2px;">
+                    <span style="color: #34d399;">✓ ข้อมูลที่ยืนยันแล้ว:</span> ${(spec.verifiedFields || []).join(', ') || '5W, IP67, 20h, TWS, สายคล้องในตัว'}
+                  </div>
+                  <div style="color: #cbd5e1; margin-top: 2px;">
+                    <span style="color: #fbbf24;">⏳ ข้อมูลที่ยังไม่ได้ยืนยัน:</span> ${(spec.pendingFields || []).join(', ') || 'Bluetooth Version, การรับประกันในไทย'}
+                  </div>
                 </div>
               ` : ''}
             </div>
@@ -2424,7 +2442,7 @@
             <div style="padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; font-size: 0.78rem; line-height: 1.5; color: var(--text-secondary);">
               ${bh.chargingNote ? `<div>⚡ <strong>การชาร์จไว:</strong> ${bh.chargingNote}</div>` : ''}
               ${bh.testCondition ? `<div style="margin-top: 4px; color: var(--text-muted);">🔬 <strong>เงื่อนไขการทดสอบอ้างอิง:</strong> ${bh.testCondition}</div>` : ''}
-              <div style="margin-top: 4px; color: #34d399;">✓ ข้อมูลการใช้งานอ้างอิงตามผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)</div>
+              <div style="margin-top: 4px; color: #34d399;">✓ ข้อมูลการใช้งานอ้างอิงตามผลทดสอบทางการ ${(spec.brand && spec.brand.toUpperCase() === 'SAMSUNG') ? 'Samsung Thailand Official Lab (samsung.com/th)' : (spec.source || (spec.brand + ' Official Lab'))}</div>
             </div>
           </div>
         `;
@@ -2634,9 +2652,14 @@
                 </div>
               ` : ''}
               ${spec.speakerSpecs.bluetoothVersion ? `
-                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid #818cf8;">
-                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">📶 เวอร์ชัน Bluetooth</div>
-                  <strong style="color: #fff; font-size: 0.95rem; margin-top: 2px; display: block;">${spec.speakerSpecs.bluetoothVersion}</strong>
+                <div style="padding: 10px 12px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; border-left: 3px solid ${spec.speakerSpecs.bluetoothVersion.includes('ยังไม่ได้ยืนยัน') ? '#fbbf24' : '#818cf8'};">
+                  <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">📶 การเชื่อมต่อ Bluetooth</div>
+                  <strong style="color: ${spec.speakerSpecs.bluetoothVersion.includes('ยังไม่ได้ยืนยัน') ? '#38bdf8' : '#fff'}; font-size: 0.88rem; margin-top: 2px; display: block;">
+                    ${spec.speakerSpecs.bluetoothVersion.includes('ยังไม่ได้ยืนยัน') ? 'Bluetooth: รองรับ' : spec.speakerSpecs.bluetoothVersion}
+                  </strong>
+                  ${spec.speakerSpecs.bluetoothVersion.includes('ยังไม่ได้ยืนยัน') ? `
+                    <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">เวอร์ชัน Bluetooth: <span style="color: #fbbf24; font-weight: 600;">ยังไม่ได้ยืนยัน</span></div>
+                  ` : ''}
                 </div>
               ` : ''}
             </div>
@@ -2650,14 +2673,17 @@
         `;
       }
 
-      // Thai Warranty & Service Centers (Brand-Aware)
+      // Thai Warranty & Service Centers (Brand-Aware & Evidence-Dependent)
       const isSoundcore = (spec.brand && spec.brand.toUpperCase().includes("SOUNDCORE")) || (item.brand && item.brand.toUpperCase().includes("SOUNDCORE"));
-      const warrantyText = isSoundcore
-        ? 'รับประกันศูนย์ไทยแท้ 18 เดือนเต็ม โดย Anker Innovations Thailand / ตัวแทนจำหน่ายอย่างเป็นทางการ'
+      const isWarrantyPending = isSoundcore || (spec.fieldVerification && spec.fieldVerification.thailandWarrantyPeriod && spec.fieldVerification.thailandWarrantyPeriod.status === "NOT_VERIFIED");
+      const warrantyText = isWarrantyPending
+        ? 'ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่ายของสินค้ารายการนี้'
         : (spec.category === 'Accessory' ? (spec.powerSpecs && spec.powerSpecs.warranty ? spec.powerSpecs.warranty : 'รับประกันศูนย์ไทย 6 เดือน - 1 ปี') : 'รับประกันศูนย์ไทย 1 ปีเต็ม จากศูนย์บริการทางการ');
-      const serviceCenterText = isSoundcore
-        ? 'รองรับบริการเคลมและเปลี่ยนสินค้าตามเงื่อนไขศูนย์บริการ Soundcore / Anker Thailand ทั่วประเทศ'
-        : 'รองรับบริการที่ศูนย์บริการซัมซุง (Samsung Service Center) ทั่วประเทศไทย หรือศูนย์บริการตัวแทนจำหน่ายทางการ';
+      const serviceCenterText = isWarrantyPending
+        ? 'ตรวจสอบเงื่อนไขการรับประกันและศูนย์บริการจากใบรับประกันในกล่องหรือเอกสารจัดซื้อ'
+        : (isSoundcore
+          ? 'รองรับบริการเคลมและเปลี่ยนสินค้าตามเงื่อนไขศูนย์บริการ Soundcore / Anker Thailand ทั่วประเทศ'
+          : 'รองรับบริการที่ศูนย์บริการซัมซุง (Samsung Service Center) ทั่วประเทศไทย หรือศูนย์บริการตัวแทนจำหน่ายทางการ');
 
       html += `
         <div class="spec-group-box" style="border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.05);">
