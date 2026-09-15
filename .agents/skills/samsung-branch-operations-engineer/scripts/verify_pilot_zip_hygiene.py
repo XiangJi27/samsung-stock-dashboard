@@ -65,22 +65,26 @@ def verify_pilot_zip_hygiene():
         violations = []
 
         for name in all_names:
-            # Check forbidden prefixes
+            name_lower = name.lower()
+            basename_lower = os.path.basename(name).lower()
+
+            # Check forbidden prefixes (case-insensitive)
             for prefix in FORBIDDEN_PREFIXES:
-                if name.startswith(prefix):
+                if name_lower.startswith(prefix.lower()):
                     violations.append((name, f"FORBIDDEN_PREFIX: {prefix}"))
                     break
             else:
-                # Check forbidden extensions
+                # Check forbidden extensions (case-insensitive)
                 for ext in FORBIDDEN_EXTENSIONS:
-                    if name.endswith(ext):
+                    if name_lower.endswith(ext.lower()):
                         violations.append((name, f"FORBIDDEN_EXTENSION: {ext}"))
                         break
                 else:
-                    # Check forbidden exact names
-                    basename = os.path.basename(name)
-                    if basename in FORBIDDEN_EXACT:
-                        violations.append((name, f"FORBIDDEN_FILE: {basename}"))
+                    # Check forbidden exact names (case-insensitive)
+                    for exact in FORBIDDEN_EXACT:
+                        if basename_lower == exact.lower():
+                            violations.append((name, f"FORBIDDEN_FILE: {exact}"))
+                            break
 
         print(f"Total entries in ZIP: {len(all_names)}")
         print(f"Violations found: {len(violations)}")

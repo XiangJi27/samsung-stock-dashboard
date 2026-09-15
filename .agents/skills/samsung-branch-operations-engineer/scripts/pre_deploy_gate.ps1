@@ -14,14 +14,31 @@ Write-Host "SAMSUNG BRANCH OPERATIONS - PRE_DEPLOY_STATIC_GATE" -ForegroundColor
 Write-Host "================================================================`n" -ForegroundColor Cyan
 
 # 0. Pre-commit Hook Verification & Staged File Audit
-Write-Host ">>> [0/8] Verifying Pre-commit Hook & Staged File Hygiene..." -ForegroundColor Yellow
+Write-Host ">>> [0/9] Verifying Pre-commit Hook & Staged File Hygiene..." -ForegroundColor Yellow
 
 $hookPath = ".git/hooks/pre-commit"
+$sourceHookPath = ".agents/skills/samsung-branch-operations-engineer/scripts/pre-commit"
+
 if (Test-Path $hookPath) {
     Write-Host "Pre-commit hook found at $hookPath" -ForegroundColor Green
+
+    # Verify hook is up-to-date by comparing SHA-256 hashes
+    if (Test-Path $sourceHookPath) {
+        $sourceHash = (Get-FileHash -Algorithm SHA256 $sourceHookPath).Hash
+        $installedHash = (Get-FileHash -Algorithm SHA256 $hookPath).Hash
+
+        if ($sourceHash -ne $installedHash) {
+            Write-Host "WARNING: Installed pre-commit hook is OUTDATED." -ForegroundColor Red
+            Write-Host "  Source hash   : $sourceHash" -ForegroundColor Gray
+            Write-Host "  Installed hash: $installedHash" -ForegroundColor Gray
+            Write-Host "  Run: powershell -File .agents/skills/samsung-branch-operations-engineer/scripts/install_hooks.ps1" -ForegroundColor DarkYellow
+            throw "Pre-commit hook hash mismatch. Reinstall the hook."
+        }
+        Write-Host "Hook SHA-256 verified: Source matches installed." -ForegroundColor Green
+    }
 } else {
     Write-Host "WARNING: Pre-commit hook not installed at $hookPath" -ForegroundColor DarkYellow
-    Write-Host "Install: Copy .agents/skills/samsung-branch-operations-engineer/scripts/pre-commit to .git/hooks/pre-commit" -ForegroundColor DarkYellow
+    Write-Host "Install: powershell -File .agents/skills/samsung-branch-operations-engineer/scripts/install_hooks.ps1" -ForegroundColor DarkYellow
 }
 
 # Check currently staged files for forbidden patterns
