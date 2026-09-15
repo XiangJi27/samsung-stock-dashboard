@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "name": "samsung-branch-operations-project-rules",
-  "version": "2.0.0",
-  "updatedAt": "2026-09-15T08:30:00+07:00",
+  "version": "3.1.0",
+  "updatedAt": "2026-09-15T09:25:00+07:00",
   "storeLocation": "Ayutthaya City Park",
   "baseline": {
     "applicationCommit": "a7c3390",
@@ -134,13 +134,16 @@
       "script": "scripts/pre_deploy_gate.ps1",
       "successStatus": "READY_FOR_PREVIEW_DEPLOYMENT",
       "checks": [
+        "PRE_COMMIT_HOOK_VERIFICATION",
+        "STAGED_FILE_HYGIENE",
         "BASELINE_FREEZE",
         "SYNTAX_INTEGRITY",
         "UNIT_TESTS",
         "EXCEL_RECONCILIATION_HASH",
         "CI_QUALITY_GATES_12_OF_12",
         "SECRET_SCAN",
-        "ZIP_MANIFEST_VERIFICATION"
+        "ZIP_MANIFEST_VERIFICATION",
+        "PILOT_ZIP_HYGIENE"
       ]
     },
     "liveGate": {
@@ -148,6 +151,11 @@
       "script": "scripts/post_deploy_gate.ps1",
       "successStatus": "READY_FOR_INTERNAL_PILOT",
       "checks": [
+        "VERCEL_PREVIEW_URL_ACCEPTED",
+        "LIVE_MANIFEST_FETCH",
+        "LIVE_COMMIT_MATCH",
+        "LIVE_ENVIRONMENT_MATCH",
+        "LIVE_PACKAGE_IDENTITY",
         "PLAYWRIGHT_UI_SUITE",
         "ROOT_ENTRYPOINT",
         "AUTH_AND_LOGIN",
@@ -157,6 +165,11 @@
         "SPEC_DRAWER_FIELD_VERIFICATION",
         "MEMBER_ADMIN_ROUTE_ISOLATION",
         "SESSION_RESTORE",
+        "COLOR_NORMALIZATION_NAVY",
+        "BATCH_PERSISTENCE_AND_LEGACY_BLOCK",
+        "PREMIUM_BAG_CLASSIFICATION",
+        "SOUNDCORE_IDENTITY_GUARD_EXTENDED",
+        "PILOT_ZIP_RUNTIME_HYGIENE",
         "ZERO_CONSOLE_ERRORS",
         "ZERO_NETWORK_404"
       ]

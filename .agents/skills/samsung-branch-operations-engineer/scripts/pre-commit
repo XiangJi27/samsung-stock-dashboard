@@ -1,0 +1,105 @@
+#!/bin/sh
+# ==============================================================================
+# SAMSUNG BRANCH OPERATIONS - GIT PRE-COMMIT HOOK
+# ==============================================================================
+# Prevents accidental staging of forbidden file patterns:
+# - .env files (except .env.example)
+# - test-results/, playwright-report/
+# - node_modules/
+# - scratch/
+# - *.xlsx (binary data files)
+# - *.zip, *.zip.txt (archives)
+# - __pycache__/
+# - .pilot-deploy/
+#
+# Install: Copy to .git/hooks/pre-commit and chmod +x
+# ==============================================================================
+
+echo "================================================================"
+echo "SAMSUNG BRANCH OPERATIONS - PRE-COMMIT HOOK"
+echo "================================================================"
+
+BLOCKED=0
+
+# Get list of staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null)
+
+if [ -z "$STAGED_FILES" ]; then
+    echo "No staged files detected."
+    exit 0
+fi
+
+# Pattern checks
+check_pattern() {
+    local pattern="$1"
+    local reason="$2"
+    local matches
+
+    matches=$(echo "$STAGED_FILES" | grep -E "$pattern" || true)
+    if [ -n "$matches" ]; then
+        echo ""
+        echo "BLOCKED: $reason"
+        echo "$matches" | while read -r file; do
+            echo "  - $file"
+        done
+        BLOCKED=1
+    fi
+}
+
+# 1. .env files (except .env.example)
+ENV_FILES=$(echo "$STAGED_FILES" | grep -E '\.env($|\.)' | grep -v '\.env\.example$' || true)
+if [ -n "$ENV_FILES" ]; then
+    echo ""
+    echo "BLOCKED: Environment/secret files must never be committed"
+    echo "$ENV_FILES" | while read -r file; do
+        echo "  - $file"
+    done
+    BLOCKED=1
+fi
+
+# 2. test-results/
+check_pattern "^test-results/" "Test result artifacts must not be committed"
+
+# 3. playwright-report/
+check_pattern "^playwright-report/" "Playwright report artifacts must not be committed"
+
+# 4. node_modules/
+check_pattern "^node_modules/" "Node modules must not be committed (use package.json)"
+
+# 5. scratch/
+check_pattern "^scratch/" "Scratch/temporary files must not be committed"
+
+# 6. *.xlsx (binary data files)
+check_pattern '\.xlsx$' "Excel binary files must not be committed (too large)"
+
+# 7. *.zip and *.zip.txt (archives)
+check_pattern '\.(zip|zip\.txt)$' "Archive files must not be committed"
+
+# 8. __pycache__/
+check_pattern "^__pycache__/|/__pycache__/" "Python cache must not be committed"
+
+# 9. *.pyc
+check_pattern '\.pyc$' "Compiled Python files must not be committed"
+
+# 10. .pilot-deploy/
+check_pattern "^\.pilot-deploy/" "Pilot deploy artifacts must not be committed"
+
+# 11. .vercel/
+check_pattern "^\.vercel/" "Vercel config directory must not be committed"
+
+# 12. *.key and *.pem (secrets)
+check_pattern '\.(key|pem)$' "Private key/certificate files must not be committed"
+
+# Verdict
+echo ""
+if [ "$BLOCKED" = "1" ]; then
+    echo "================================================================"
+    echo "PRE-COMMIT HOOK FAILED"
+    echo "Remove the blocked files from staging: git reset HEAD <file>"
+    echo "================================================================"
+    exit 1
+else
+    echo "Pre-commit hook PASSED: All staged files are allowed."
+    echo "================================================================"
+    exit 0
+fi
