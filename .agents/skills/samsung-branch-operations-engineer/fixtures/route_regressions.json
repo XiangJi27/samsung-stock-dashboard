@@ -1,0 +1,49 @@
+{
+  "fixtureType": "ROUTE_REGRESSION_ACCEPTANCE",
+  "description": "Route isolation and UI container lifecycle expectations for Samsung Branch Operations",
+  "routes": [
+    {
+      "path": "#/stock",
+      "expectedVisibleSelector": "#view-stock, .stock-view-container",
+      "expectedHiddenSelectors": [
+        "#view-admin-members",
+        ".member-admin-container",
+        "#member-management-panel"
+      ],
+      "requiredElements": [
+        ".summary-cards",
+        "#stock-table",
+        "#search-stock"
+      ],
+      "minSummaryCards": 7,
+      "forbiddenSummaryCards": ["SIM", "OTHER"]
+    },
+    {
+      "path": "#/admin/members",
+      "rbac": "MANAGER_OR_ADMIN_ONLY",
+      "expectedVisibleSelector": "#view-admin-members, .member-admin-container",
+      "expectedHiddenSelectors": [
+        "#view-stock",
+        ".stock-view-container",
+        ".summary-cards",
+        "#stock-table"
+      ],
+      "requiredElements": [
+        "#member-list-table, .member-table",
+        "#btn-add-member, .btn-add-member"
+      ]
+    },
+    {
+      "path": "#/dashboard",
+      "expectedVisibleSelector": "#view-dashboard, .dashboard-container",
+      "expectedHiddenSelectors": [
+        "#view-admin-members"
+      ]
+    }
+  ],
+  "invariants": {
+    "zeroRouteOverlap": true,
+    "cleanDomTeardown": true,
+    "requireAuthenticatedSession": true
+  }
+}

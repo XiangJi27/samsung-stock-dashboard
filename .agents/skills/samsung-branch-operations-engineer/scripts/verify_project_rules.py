@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
 """
-Automated Project Rules and Invariant Validator for Samsung Branch Operations.
-Tests codebase against project_rules.json and all fixtures in fixtures/.
+Master Project Rules & Invariant Validator for Samsung Branch Operations.
+Tests codebase against project_rules.json, fixtures, baseline integrity, and secret hygiene.
 """
 
 import os
 import sys
 import json
+import re
 import hashlib
 import subprocess
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-SKILL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(SKILL_DIR)))
-if not os.path.exists(os.path.join(PROJECT_ROOT, "product_specs_data.js")):
-    # Fallback to current working directory if structure differs
-    PROJECT_ROOT = os.getcwd()
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SKILL_DIR = os.path.dirname(SCRIPT_DIR)
+WORKSPACE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(SKILL_DIR)))
+RULES_JSON = os.path.join(SKILL_DIR, "references", "project_rules.json")
 
 print("================================================================================")
-print("SAMSUNG BRANCH OPERATIONS - SKILL PROJECT INVARIANT VALIDATOR")
-print(f"Project Root: {PROJECT_ROOT}")
+print("SAMSUNG BRANCH OPERATIONS - MASTER PROJECT INVARIANT VALIDATOR")
+print(f"Project Root: {WORKSPACE_ROOT}")
 print("================================================================================\n")
 
 failures = []
@@ -34,7 +34,7 @@ def record_check(name, passed, detail=""):
 # ----------------------------------------------------------------------
 # 1. BASELINE FREEZE CHECK
 # ----------------------------------------------------------------------
-manifest_path = os.path.join(PROJECT_ROOT, "runtime_manifest.json")
+manifest_path = os.path.join(WORKSPACE_ROOT, "runtime_manifest.json")
 if os.path.exists(manifest_path):
     with open(manifest_path, "r", encoding="utf-8") as f:
         manifest = json.load(f)
@@ -42,7 +42,7 @@ if os.path.exists(manifest_path):
     all_frozen_match = True
     for item in manifest.get("files", []):
         if item["file"] in frozen_files:
-            file_path = os.path.join(PROJECT_ROOT, item["file"])
+            file_path = os.path.join(WORKSPACE_ROOT, item["file"])
             if os.path.exists(file_path):
                 hasher = hashlib.sha256()
                 with open(file_path, "rb") as bf:
@@ -52,93 +52,81 @@ if os.path.exists(manifest_path):
                 if actual_hash != expected_hash:
                     all_frozen_match = False
                     failures.append(f"Baseline file {item['file']} modified! Hash mismatch.")
-    record_check("BASELINE-FREEZE: Core baseline files untouched", all_frozen_match)
+    record_check("BASELINE-FREEZE: Core baseline files untouched (a7c3390)", all_frozen_match)
 else:
     record_check("BASELINE-FREEZE: runtime_manifest.json exists", False, "Missing manifest")
 
 # ----------------------------------------------------------------------
-# 2. STOCK ACCEPTANCE INVARIANTS (F1 ONLY CARDS)
+# 2. STOCK RECONCILIATION & DYNAMIC FIXTURE CHECK
 # ----------------------------------------------------------------------
-stock_snapshot_path = os.path.join(PROJECT_ROOT, "assets", "js", "pilot-stock-snapshot.js")
-if os.path.exists(stock_snapshot_path):
-    with open(stock_snapshot_path, "r", encoding="utf-8") as f:
-        txt = f.read()
-    arr_str = txt.split("window.LATEST_STOCK_SNAPSHOT =")[1].split("];")[0].strip() + "]"
-    snapshot = json.loads(arr_str)
-
-    f1_sum = sum(int(x.get("f1", 0)) for x in snapshot)
-    f2_sum = sum(int(x.get("f2", 0)) for x in snapshot)
-    total_sum = sum(int(x.get("total", 0)) for x in snapshot)
-
-    record_check("STOCK-F1-TOTAL: F1 grand total == 1701", f1_sum == 1701, f"Actual: {f1_sum}")
-    record_check("STOCK-F2-TOTAL: F2 grand total == 1635", f2_sum == 1635, f"Actual: {f2_sum}")
-    record_check("STOCK-ARITHMETIC: Total == F1 + F2", total_sum == (f1_sum + f2_sum), f"{total_sum} != {f1_sum} + {f2_sum}")
-else:
-    record_check("STOCK-SNAPSHOT: pilot-stock-snapshot.js exists", False)
+recon_script = os.path.join(SCRIPT_DIR, "verify_stock_reconciliation.py")
+try:
+    res = subprocess.run([sys.executable, recon_script], capture_output=True, encoding="utf-8", errors="replace", cwd=WORKSPACE_ROOT)
+    record_check("STOCK-RECONCILIATION: Hash-bound fixture and F1/F2 counts", res.returncode == 0, (res.stdout or "") + (res.stderr or ""))
+except Exception as e:
+    record_check("STOCK-RECONCILIATION: Execution failed", False, str(e))
 
 # ----------------------------------------------------------------------
-# 3. SPEC IDENTITY & FIELD-LEVEL VERIFICATION FIXTURES
+# 3. SPEC IDENTITY & FIELD-LEVEL VERIFICATION CHECK
 # ----------------------------------------------------------------------
-spec_file = os.path.join(PROJECT_ROOT, "product_specs_data.js")
-spec_tests_passed = True
-spec_error_detail = ""
-
-if os.path.exists(spec_file):
-    node_eval_script = """
-    const fs = require('fs');
-    const code = fs.readFileSync('product_specs_data.js', 'utf8');
-    const sandbox = { window: {}, console: { log: console.log, warn: () => {}, error: () => {} } };
-    eval(code.replace(/window\\./g, 'sandbox.window.'));
-    const fn = sandbox.window.resolveProductSpecs;
-
-    const errors = [];
-
-    // Soundcore Select 4 Go Test
-    const sc = fn({ pn: '194644055783', model: 'Soundcore Select 4 Go Black', brand: 'SOUNDCORE', category: 'Other' });
-    if (!sc) errors.push('Soundcore not resolved');
-    else {
-        if (sc.verificationStatus !== 'PARTIALLY_VERIFIED') errors.push('Status not PARTIALLY_VERIFIED');
-        if (sc.productType !== 'BLUETOOTH_SPEAKER') errors.push('Product type not BLUETOOTH_SPEAKER');
-        if (sc.manufacturerModel !== 'A31X1') errors.push('Model not A31X1');
-        const s = JSON.stringify(sc);
-        if (s.includes('Galaxy A07') || s.includes('Helio G85') || s.includes('Knox')) errors.push('Leakage of A07/Helio/Knox');
-        if (sc.speakerSpecs && sc.speakerSpecs.bluetoothVersion && sc.speakerSpecs.bluetoothVersion.includes('5.4')) {
-            errors.push('Unverified Bluetooth 5.4 found');
-        }
-        if (sc.marketRegion && sc.marketRegion.includes('18 เดือน')) {
-            errors.push('Unverified 18 months warranty found');
-        }
-    }
-
-    // Negative Cross-Brand Test
-    const fakeBrand = fn({ pn: 'SM-S928BZTQTHL', model: 'Galaxy S26 Ultra Fake', brand: 'SOUNDCORE', category: 'SmartPhone' });
-    if (fakeBrand !== null) errors.push('Cross-brand phone match was not blocked');
-
-    // Negative Cross-Type Test
-    const fakeType = fn({ pn: '194644055783', model: 'Soundcore Select 4 Go Black', brand: 'SOUNDCORE', category: 'SmartPhone' });
-    if (fakeType !== null) errors.push('Cross-type speaker as phone match was not blocked');
-
-    // Fail-Closed Unknown Test
-    const unk = fn({ pn: 'UNKNOWN-RANDOM-001', model: 'Unknown Generic Gadget', brand: 'OTHER', category: 'Other' });
-    if (unk !== null) errors.push('Unknown item failed to return null');
-
-    console.log(JSON.stringify(errors));
-    """
-    try:
-        res = subprocess.check_output(['node', '-e', node_eval_script], cwd=PROJECT_ROOT, stderr=subprocess.STDOUT).decode('utf-8').strip()
-        lines = [l for l in res.splitlines() if l.strip().startswith('[')]
-        errs = json.loads(lines[-1]) if lines else []
-        if len(errs) > 0:
-            spec_tests_passed = False
-            spec_error_detail = "; ".join(errs)
-    except Exception as e:
-        spec_tests_passed = False
-        spec_error_detail = str(e)
-
-record_check("SPEC-IDENTITY-GUARD: Field-level verification and fail-closed policies active", spec_tests_passed, spec_error_detail)
+spec_script = os.path.join(SCRIPT_DIR, "verify_spec_identity.py")
+try:
+    res = subprocess.run([sys.executable, spec_script], capture_output=True, encoding="utf-8", errors="replace", cwd=WORKSPACE_ROOT)
+    record_check("SPEC-IDENTITY-GUARD: Field-level verification and fail-closed policies", res.returncode == 0, (res.stdout or "") + (res.stderr or ""))
+except Exception as e:
+    record_check("SPEC-IDENTITY-GUARD: Execution failed", False, str(e))
 
 # ----------------------------------------------------------------------
-# 4. SUMMARY
+# 4. CREDENTIAL HYGIENE & SECRET SCANNER
+# ----------------------------------------------------------------------
+# Prohibit hardcoded test credentials in source code and test files
+suspicious_patterns = [
+    (re.compile(r'TEST_ADMIN_PASSWORD\s*=\s*["\'][^"\']+["\']'), "Hardcoded TEST_ADMIN_PASSWORD assignment"),
+    (re.compile(r'TEST_MEMBER_PASSWORD\s*=\s*["\'][^"\']+["\']'), "Hardcoded TEST_MEMBER_PASSWORD assignment"),
+    (re.compile(r'password\s*:\s*["\']-hxBrSZ'), "Known plaintext admin password embedded"),
+    (re.compile(r'password\s*:\s*["\']test1234["\']'), "Known plaintext test password embedded in source code"),
+]
+
+scan_dirs = [
+    os.path.join(SKILL_DIR, "tests"),
+    os.path.join(SKILL_DIR, "scripts"),
+    os.path.join(WORKSPACE_ROOT, "api"),
+    os.path.join(WORKSPACE_ROOT, "assets", "js")
+]
+
+secrets_found = []
+for sdir in scan_dirs:
+    if not os.path.exists(sdir):
+        continue
+    for root, _, files in os.walk(sdir):
+        for f in files:
+            if f.endswith(('.ts', '.js', '.py', '.json', '.html', '.ps1')):
+                filepath = os.path.join(root, f)
+                try:
+                    with open(filepath, 'r', encoding='utf-8', errors='ignore') as sf:
+                        content = sf.read()
+                    for pat, desc in suspicious_patterns:
+                        if pat.search(content):
+                            rel = os.path.relpath(filepath, WORKSPACE_ROOT)
+                            secrets_found.append(f"{rel}: {desc}")
+                except Exception:
+                    pass
+
+record_check("CREDENTIAL-HYGIENE: Zero hardcoded passwords/tokens in code & test suite", len(secrets_found) == 0, "; ".join(secrets_found))
+
+# ----------------------------------------------------------------------
+# 5. ROUTE ISOLATION CONFIGURATION CHECK
+# ----------------------------------------------------------------------
+route_fixture = os.path.join(SKILL_DIR, "fixtures", "route_regressions.json")
+route_check_passed = os.path.exists(route_fixture)
+if route_check_passed:
+    with open(route_fixture, "r", encoding="utf-8") as rf:
+        rdata = json.load(rf)
+    route_check_passed = len(rdata.get("routes", [])) >= 3
+record_check("ROUTE-REGRESSIONS: Route isolation rules defined for #/stock and #/admin/members", route_check_passed)
+
+# ----------------------------------------------------------------------
+# 6. SUMMARY
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
 if len(failures) == 0:

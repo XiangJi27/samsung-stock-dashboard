@@ -9,6 +9,9 @@ excel_extracted/
 .user_uploaded/
 .system_generated/
 *.ps1
+!.agents/**/*.ps1
+!scripts/pre_deploy_gate.ps1
+!scripts/post_deploy_gate.ps1
 # Environment and Secrets Protection
 .env
 .env.*
@@ -41,3 +44,6 @@ __pycache__/
 *.xlsx
 
 .vercel
+node_modules/
+playwright-report/
+test-results/

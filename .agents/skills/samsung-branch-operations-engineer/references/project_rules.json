@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "name": "samsung-branch-operations-project-rules",
-  "version": "1.0.0",
-  "updatedAt": "2026-09-15T08:18:00+07:00",
+  "version": "2.0.0",
+  "updatedAt": "2026-09-15T08:30:00+07:00",
   "storeLocation": "Ayutthaya City Park",
   "baseline": {
     "applicationCommit": "a7c3390",
@@ -20,11 +20,11 @@
       "api/admin/members.js"
     ]
   },
-  "stockDisplayRules": {
+  "stockArchitecture": {
+    "fixtureBinding": "fixtures/stock_snapshot_acceptance.json",
+    "dynamicAcceptanceRule": "Stock numbers are NOT permanent business rules. They must be bound to the SHA-256 hash of the uploaded Excel file.",
     "summaryCardScope": "F1_ONLY",
     "allowF2InSummaryCards": false,
-    "dashboardKpiScope": "F1_ONLY",
-    "categoryBreakdownScope": "F1_ONLY",
     "productTableColumns": [
       { "name": "ร้านเรา (ชั้น 1)", "value": "F1" },
       { "name": "สาขา (ชั้น 2)", "value": "F2" },
@@ -42,11 +42,18 @@
       "BUDS",
       "ACCESSORY",
       "PREMIUM"
-    ]
+    ],
+    "terminologyRules": {
+      "quantityUnit": "ชิ้น",
+      "partNumberUnit": "รายการ",
+      "simRule": "SIM quantity is 58 ชิ้น across 11 รายการ P/N. Never say '58 รายการ'.",
+      "otherRule": "Other quantity is 15 ชิ้น across 9 รายการ P/N. Never say '15 รายการ'."
+    }
   },
   "categoryHierarchy": {
     "evaluationPriority": ["category1", "category2", "category3", "brand"],
     "pnRole": "VALIDATION_ONLY_NEVER_OVERRIDE",
+    "precedence": "Buds must be evaluated before Smartphone",
     "rules": [
       {
         "pattern": { "category1": "AUDIO", "category2": "HEADPHONE", "category3": "TRUE WIRELESS", "brand": "SAMSUNG" },
@@ -63,6 +70,10 @@
       {
         "pattern": { "category1": "SMART WATCH" },
         "targetCategory": "WATCH"
+      },
+      {
+        "pattern": { "category1": "MOBILE AND COMPUTER ACCESSORY" },
+        "targetCategory": "ACCESSORY"
       },
       {
         "pattern": { "category1": "OTHER", "category2": "PREMIUM" },
@@ -97,17 +108,58 @@
       ]
     }
   },
-  "promotionGovernance": {
-    "activePublishedCount": 142,
-    "septemberDraftCount": 56,
-    "draftAutoPublishAllowed": false,
-    "blockedObsoleteCounts": [904, 589]
+  "routeGovernance": {
+    "memberAdminRoute": "#/admin/members",
+    "stockRoute": "#/stock",
+    "dashboardRoute": "#/dashboard",
+    "isolationRule": "Member Admin must be completely hidden/unmounted when not on #/admin/members. Never render underneath other views.",
+    "rbac": {
+      "adminRouteAllowedRoles": ["STORE_MANAGER", "STORE_LEADER", "SYSTEM_ADMIN"],
+      "blockedRoles": ["STAFF_MEMBER", "GUEST"]
+    }
   },
-  "deploymentRules": {
-    "allowedPackage": "samsung_stock_dashboard_feedback_pilot.zip",
-    "allowFullProjectZipDeploy": false,
-    "allowProductionDeploy": false,
-    "requirePreviewUrlVerification": true,
-    "requirePlaywrightBrowserAcceptance": true
+  "credentialHygiene": {
+    "prohibitHardcodedPasswords": true,
+    "environmentVariablesRequired": [
+      "TEST_ADMIN_EMPLOYEE_ID",
+      "TEST_ADMIN_PASSWORD"
+    ],
+    "prohibitCredentialsInLogs": true,
+    "prohibitCredentialsInWalkthrough": true,
+    "prohibitCommittedEnv": true
+  },
+  "gateArchitecture": {
+    "staticGate": {
+      "name": "PRE_DEPLOY_STATIC_GATE",
+      "script": "scripts/pre_deploy_gate.ps1",
+      "successStatus": "READY_FOR_PREVIEW_DEPLOYMENT",
+      "checks": [
+        "BASELINE_FREEZE",
+        "SYNTAX_INTEGRITY",
+        "UNIT_TESTS",
+        "EXCEL_RECONCILIATION_HASH",
+        "CI_QUALITY_GATES_12_OF_12",
+        "SECRET_SCAN",
+        "ZIP_MANIFEST_VERIFICATION"
+      ]
+    },
+    "liveGate": {
+      "name": "POST_DEPLOY_LIVE_GATE",
+      "script": "scripts/post_deploy_gate.ps1",
+      "successStatus": "READY_FOR_INTERNAL_PILOT",
+      "checks": [
+        "PLAYWRIGHT_UI_SUITE",
+        "ROOT_ENTRYPOINT",
+        "AUTH_AND_LOGIN",
+        "DASHBOARD_RENDER",
+        "F1_ONLY_SUMMARY_CARDS",
+        "PRODUCT_TABLE_F1_F2_TOTAL",
+        "SPEC_DRAWER_FIELD_VERIFICATION",
+        "MEMBER_ADMIN_ROUTE_ISOLATION",
+        "SESSION_RESTORE",
+        "ZERO_CONSOLE_ERRORS",
+        "ZERO_NETWORK_404"
+      ]
+    }
   }
 }

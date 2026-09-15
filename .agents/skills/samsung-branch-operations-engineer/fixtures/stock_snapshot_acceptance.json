@@ -1,0 +1,40 @@
+{
+  "fixtureType": "SNAPSHOT_ACCEPTANCE",
+  "sourceFilename": "stock(1).xlsx",
+  "sourceSha256": "eef4c2ee7a111333a1e2e5d85f40fbbf48512d97feae1415d1cc6e792782e799",
+  "generatedAt": "2026-09-15T08:30:16.013714+07:00",
+  "expected": {
+    "f1Total": 1701,
+    "smartphone": 230,
+    "tablet": 34,
+    "watch": 61,
+    "buds": 49,
+    "accessory": 972,
+    "premium": 282
+  },
+  "inventoryBreakdown": {
+    "sim": {
+      "quantityUnits": 58,
+      "distinctPnItems": 11,
+      "unitLabel": "ชิ้น",
+      "pnLabel": "รายการ"
+    },
+    "other": {
+      "quantityUnits": 15,
+      "distinctPnItems": 9,
+      "unitLabel": "ชิ้น",
+      "pnLabel": "รายการ"
+    },
+    "f2Total": 1635,
+    "grandTotal": 3336,
+    "totalProducts": 399
+  },
+  "rulesEnforced": {
+    "summaryCardsScope": "F1_ONLY",
+    "suppressedCards": [
+      "SIM",
+      "OTHER"
+    ],
+    "mathematicalCheck": "1628 (Hardware + Premium) + 58 (SIM) + 15 (Other) == 1701 (Total F1)"
+  }
+}
