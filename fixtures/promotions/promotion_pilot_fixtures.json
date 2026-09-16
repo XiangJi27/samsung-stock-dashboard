@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Comprehensive Promotion Upload Pilot Fixtures for 5-Stage Gate Validation",
+  "fixtures": [
+    {
+      "testId": "VALID_STANDARD_PROMOTION",
+      "expectedGateOutcome": "PASS",
+      "expectedStatus": "DRAFT",
+      "record": {
+        "promotionId": "PROMO-45W-SEP-001",
+        "promotionName": "Samsung 45W Adapter September Special",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 300.0,
+        "netPrice": 990.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 2
+      }
+    },
+    {
+      "testId": "EXACT_PN_NOT_FOUND",
+      "expectedGateOutcome": "REVIEW_REQUIRED",
+      "expectedStatus": "REVIEW_REQUIRED",
+      "expectedError": "EXACT_PN_NOT_FOUND",
+      "record": {
+        "promotionId": "PROMO-UNKNOWN-002",
+        "promotionName": "Mystery Non-Existent Device Promo",
+        "inventoryPn": "SM-UNKNOWN-9999",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 9999.0,
+        "discountAmount": 500.0,
+        "netPrice": 9499.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "REVIEW_REQUIRED",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 3
+      }
+    },
+    {
+      "testId": "DUPLICATE_PROMOTION",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "DUPLICATE_PROMOTION_DETECTED",
+      "record": {
+        "promotionId": "PROMO-45W-SEP-001",
+        "promotionName": "Duplicate Samsung 45W Promo",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 400.0,
+        "netPrice": 890.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 4
+      }
+    },
+    {
+      "testId": "EXPIRED_PROMOTION",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "PROMOTION_ALREADY_EXPIRED",
+      "record": {
+        "promotionId": "PROMO-EXPIRED-003",
+        "promotionName": "Expired August Campaign",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-08-01T00:00:00+07:00",
+        "endDate": "2026-08-31T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 200.0,
+        "netPrice": 1090.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 5
+      }
+    },
+    {
+      "testId": "END_DATE_BEFORE_START_DATE",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "INVALID_DATE_RANGE",
+      "record": {
+        "promotionId": "PROMO-DATE-ERR-004",
+        "promotionName": "Inverted Date Promotion",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-30T00:00:00+07:00",
+        "endDate": "2026-09-01T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 200.0,
+        "netPrice": 1090.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 6
+      }
+    },
+    {
+      "testId": "NEGATIVE_DISCOUNT",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "NEGATIVE_DISCOUNT_PROHIBITED",
+      "record": {
+        "promotionId": "PROMO-NEG-DISC-005",
+        "promotionName": "Negative Discount Surcharge",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": -100.0,
+        "netPrice": 1390.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 7
+      }
+    },
+    {
+      "testId": "NET_PRICE_MISMATCH",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "PRICE_EQUATION_MISMATCH",
+      "record": {
+        "promotionId": "PROMO-MISMATCH-006",
+        "promotionName": "Formula Price Calculation Error",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 200.0,
+        "netPrice": 1000.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 8
+      }
+    },
+    {
+      "testId": "DISCOUNT_GREATER_THAN_RRP",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "DISCOUNT_EXCEEDS_RRP",
+      "record": {
+        "promotionId": "PROMO-EXCESSIVE-007",
+        "promotionName": "Excessive Discount Beyond RRP",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 1500.0,
+        "netPrice": 0.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 9
+      }
+    },
+    {
+      "testId": "TRADE_UP_MIXED_WITH_STANDARD",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "TRADE_UP_STANDARD_PAYMENT_COLLISION",
+      "record": {
+        "promotionId": "PROMO-TRADEUP-COLLISION-008",
+        "promotionName": "Trade Up Promotion Misclassified as Standard Cash",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "TRADE_UP_OFFER",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 500.0,
+        "netPrice": 790.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 10
+      }
+    },
+    {
+      "testId": "STUDENT_RULE_INVALID",
+      "expectedGateOutcome": "FAIL",
+      "expectedStatus": "BLOCKED_CONFLICT",
+      "expectedError": "INVALID_STUDENT_SEGMENT_RULES",
+      "record": {
+        "promotionId": "PROMO-STUDENT-ERR-009",
+        "promotionName": "Student Promo Without Student Segment",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STUDENT_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 200.0,
+        "netPrice": 1090.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "DRAFT",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 11
+      }
+    },
+    {
+      "testId": "SUPERSEDED_PROMOTION",
+      "expectedGateOutcome": "PASS",
+      "expectedStatus": "SUPERSEDED",
+      "record": {
+        "promotionId": "PROMO-45W-SEP-OLD",
+        "promotionName": "Samsung 45W Adapter Old Flash Offer",
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "promotionType": "STANDARD_DISCOUNT",
+        "startDate": "2026-09-01T00:00:00+07:00",
+        "endDate": "2026-09-30T23:59:59+07:00",
+        "rrp": 1290.0,
+        "discountAmount": 150.0,
+        "netPrice": 1140.0,
+        "paymentMethod": "STANDARD_PAYMENT",
+        "customerSegment": "GENERAL_PUBLIC",
+        "status": "SUPERSEDED",
+        "supersededBy": "PROMO-45W-SEP-001",
+        "sourceFile": "promotions_september_2026.xlsx",
+        "sourceRow": 1
+      }
+    }
+  ]
+}

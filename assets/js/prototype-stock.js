@@ -2333,10 +2333,15 @@
           SCREEN_PROTECTOR: "ฟิล์มและกระจกกันรอย (Screen Protector Specifications)",
           WATCH_BAND: "สายนาฬิกา (Watch Band Specifications)",
           POWER_BANK: "แบตเตอรี่สำรอง (Power Bank Specifications)",
-          PREMIUM_GIFT: "ของแถมพรีเมียม (Premium Gift Specifications)"
+          PREMIUM_GIFT: "ของแถมพรีเมียม (Premium Gift Specifications)",
+          HOME_APPLIANCE: "เครื่องใช้ไฟฟ้า (Home Appliance Specifications)",
+          SOUNDBAR: "เครื่องเสียงและซาวด์บาร์ (Soundbar Specifications)"
         };
 
         const fieldLabels = {
+          applianceType: "ประเภทเครื่องใช้ไฟฟ้า",
+          capacity: "ความจุ / ขนาดบรรจุ",
+          audioChannels: "ระบบเสียง / แชนแนล (Audio Channels)",
           outputPower: "กำลังขับเสียง (Output Power)",
           bluetoothSupport: "การเชื่อมต่อ Bluetooth",
           bluetoothVersion: "เวอร์ชัน Bluetooth",

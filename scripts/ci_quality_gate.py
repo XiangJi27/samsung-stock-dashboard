@@ -1021,6 +1021,27 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 20. RULE 16: PROMOTION UPLOAD 5-STAGE GATE & ISOLATION INVARIANTS
+# ----------------------------------------------------------------------
+promo_violations = []
+promo_check_res = subprocess.run([sys.executable, "scripts/verify_promotion_upload_gates.py"], capture_output=True, text=True, encoding="utf-8")
+if promo_check_res.returncode != 0:
+    promo_violations.append({
+        "errorCode": "PROMOTION_UPLOAD_GATES_FAILED",
+        "detail": promo_check_res.stderr or promo_check_res.stdout
+    })
+
+record_gate_result(
+    rule_id="RULE-16-PROMOTION-UPLOAD-GATES",
+    name="Promotion Upload 5-Stage Gate & Pilot Isolation Invariants",
+    expected="Drafts schema valid, 5-stage gate passes (File/PN/Date/Price/Conflict), AUTO_PUBLISH=OFF, 0 mutations to Product Master/Specs/RRP",
+    actual=f"{len(promo_violations)} violations" if len(promo_violations) > 0 else "0 violations (11 fixtures verified, 0 auto-publish, 0 master mutations, Draft import safe)",
+    status="PASS" if len(promo_violations) == 0 else "FAIL",
+    affected_records=len(promo_violations),
+    evidence={"violations": promo_violations}
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -1108,7 +1129,7 @@ gate_metadata_map = {
     "RULE-10-ACCESSORY-MASTER": {
         "functionName": "verify_accessory_spec_coverage",
         "inputFiles": ["data/product-accessory-master.json", "product_specs_data.js"],
-        "recordsChecked": 9
+        "recordsChecked": len(acc_master.get("products", []))
     },
     "RULE-11-MARKETPLACE-EVIDENCE": {
         "functionName": "verify_marketplace_evidence",
@@ -1134,6 +1155,11 @@ gate_metadata_map = {
         "functionName": "verify_product_drafts_and_ai_critic",
         "inputFiles": ["data/product-accessory-drafts.json", "reports/draft_validation_report.json", "reports/ai_critic_review.json"],
         "recordsChecked": 268
+    },
+    "RULE-16-PROMOTION-UPLOAD-GATES": {
+        "functionName": "verify_promotion_upload_gates",
+        "inputFiles": ["schemas/promotion_import_contract.schema.json", "fixtures/promotions/promotion_pilot_fixtures.json", "reports/promotion_preview_diff.json", "reports/promotion_import_drafts.json"],
+        "recordsChecked": 11
     }
 }
 

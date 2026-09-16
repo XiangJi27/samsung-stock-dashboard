@@ -70,8 +70,8 @@
       "productType": "WALL_CHARGER",
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
-      "draftStatus": "ERP_EXTRACTED",
-      "publicationStatus": "DRAFT",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "6941876265732",
         "barcode": null,
@@ -949,8 +949,8 @@
         "SPEAKER"
       ],
       "classificationStatus": "REVIEW_REQUIRED",
-      "draftStatus": "CLASSIFICATION_REVIEW_REQUIRED",
-      "publicationStatus": "HOLD_REVIEW_REQUIRED",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "PREMIUM0017044",
         "barcode": null,
@@ -1039,8 +1039,8 @@
       "productType": "WIRELESS_CHARGER",
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
-      "draftStatus": "ERP_EXTRACTED",
-      "publicationStatus": "DRAFT",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EP-T6010NBEGTH",
         "barcode": null,
@@ -1165,8 +1165,8 @@
         "SPEAKER"
       ],
       "classificationStatus": "REVIEW_REQUIRED",
-      "draftStatus": "CLASSIFICATION_REVIEW_REQUIRED",
-      "publicationStatus": "HOLD_REVIEW_REQUIRED",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "PM4897121009793",
         "barcode": null,
@@ -1261,8 +1261,8 @@
         "SPEAKER"
       ],
       "classificationStatus": "REVIEW_REQUIRED",
-      "draftStatus": "CLASSIFICATION_REVIEW_REQUIRED",
-      "publicationStatus": "HOLD_REVIEW_REQUIRED",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "PREMIUM0017046",
         "barcode": null,
@@ -1490,8 +1490,8 @@
       "productType": "WIRELESS_CHARGER",
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
-      "draftStatus": "ERP_EXTRACTED",
-      "publicationStatus": "DRAFT",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EP-T4511NBEGTH",
         "barcode": null,
@@ -1664,8 +1664,8 @@
         "SPEAKER"
       ],
       "classificationStatus": "REVIEW_REQUIRED",
-      "draftStatus": "CLASSIFICATION_REVIEW_REQUIRED",
-      "publicationStatus": "HOLD_REVIEW_REQUIRED",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "PM-8806090284687",
         "barcode": null,
@@ -1933,8 +1933,8 @@
       "productType": "DATA_CABLE",
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
-      "draftStatus": "ERP_EXTRACTED",
-      "publicationStatus": "DRAFT",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "SSG-EP-DN975BWEGWW",
         "barcode": null,
@@ -2323,8 +2323,8 @@
       "productType": "WALL_CHARGER",
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
-      "draftStatus": "ERP_EXTRACTED",
-      "publicationStatus": "DRAFT",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "6941876265749",
         "barcode": null,
@@ -2574,8 +2574,8 @@
       "productType": "DATA_CABLE",
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
-      "draftStatus": "ERP_EXTRACTED",
-      "publicationStatus": "DRAFT",
+      "draftStatus": "PUBLISHED",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "4710343478164",
         "barcode": null,

@@ -3603,7 +3603,7 @@ window.normalizeProductType = normalizeProductType;
 window.PRODUCT_ACCESSORY_MASTER = {
   "schemaVersion": "1.0.0",
   "masterType": "PRODUCT_ACCESSORY_MASTER",
-  "generatedAt": "2026-09-16T11:30:00+07:00",
+  "generatedAt": "2026-09-16T14:45:46.842399",
   "matchingPolicy": {
     "matchOrder": [
       "EXACT_INVENTORY_PN",
@@ -4323,6 +4323,654 @@ window.PRODUCT_ACCESSORY_MASTER = {
           "status": "ACTIVE"
         }
       ]
+    },
+    {
+      "recordId": "ACC-UGREEN-WALL-CHARGER-30W-GREY",
+      "inventoryIdentity": {
+        "inventoryPn": "6941876265732",
+        "gtin": "6941876265732",
+        "brand": "[CS]UGREEN",
+        "erpDescription": "[CS]UGREEN Wall Charer 30W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+        "cat1": "MOBILE AND COMPUTER ACCESSORY",
+        "cat2": "CHARGER",
+        "cat3": "CHARGER"
+      },
+      "productIdentity": {
+        "canonicalName": "UGREEN 30W Wall Charger (1 USB-A + 2 USB-C)",
+        "manufacturerModel": "CD319",
+        "productType": "WALL_CHARGER",
+        "variant": {
+          "color": "Grey",
+          "cableIncluded": false
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "maximumOutputPower": {
+          "value": "30W",
+          "displayValue": "30W",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "chargerType": {
+          "value": "WALL_CHARGER",
+          "displayValue": "อะแดปเตอร์ชาร์จเร็วติดผนัง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "outputPorts": {
+          "value": "1 USB-A + 2 USB-C",
+          "displayValue": "3 ช่อง (1 USB-A + 2 USB-C PD)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "cableIncluded": {
+          "value": false,
+          "displayValue": "ไม่มีสายในกล่อง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Grey",
+          "displayValue": "สีเทา (Grey)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "pps": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "usbPowerDelivery": {
+          "value": "PD Fast Charge",
+          "displayValue": "รองรับ USB Power Delivery",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-EP-T6010-NO-CABLE-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "EP-T6010NBEGTH",
+        "gtin": "8806094567890",
+        "brand": "SAMSUNG",
+        "erpDescription": "Samsung Adapter 60W without cable - Black",
+        "cat1": "MOBILE AND COMPUTER ACCESSORY",
+        "cat2": "CHARGER",
+        "cat3": "CHARGER"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung 60W Power Adapter (No Cable)",
+        "manufacturerModel": "EP-T6010",
+        "productType": "WALL_CHARGER",
+        "variant": {
+          "color": "Black",
+          "cableIncluded": false
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "maximumOutputPower": {
+          "value": "60W",
+          "displayValue": "60W",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "chargerType": {
+          "value": "WALL_CHARGER",
+          "displayValue": "อะแดปเตอร์ชาร์จเร็วติดผนัง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "cableIncluded": {
+          "value": false,
+          "displayValue": "ไม่มีสายในกล่อง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Black",
+          "displayValue": "สีดำ (Black)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "outputPorts": {
+          "value": "1 USB-C",
+          "displayValue": "1 ช่อง (USB-C)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "usbPowerDelivery": {
+          "value": "Super Fast Charging",
+          "displayValue": "รองรับ Super Fast Charging",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-EP-T4511-NO-CABLE-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "EP-T4511NBEGTH",
+        "gtin": "8806095066347",
+        "brand": "SAMSUNG",
+        "erpDescription": "Samsung Adapter 45W without cable - Black",
+        "cat1": "MOBILE AND COMPUTER ACCESSORY",
+        "cat2": "CHARGER",
+        "cat3": "CHARGER"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung 45W Power Adapter (No Cable)",
+        "manufacturerModel": "EP-T4511",
+        "productType": "WALL_CHARGER",
+        "variant": {
+          "color": "Black",
+          "cableIncluded": false
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "maximumOutputPower": {
+          "value": "45W",
+          "displayValue": "45W (Super Fast Charging 2.0)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "chargerType": {
+          "value": "WALL_CHARGER",
+          "displayValue": "อะแดปเตอร์ชาร์จเร็วติดผนัง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "cableIncluded": {
+          "value": false,
+          "displayValue": "ไม่มีสายในกล่อง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Black",
+          "displayValue": "สีดำ (Black)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "outputPorts": {
+          "value": "1 USB-C",
+          "displayValue": "1 ช่อง (USB-C)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-EP-DN975-CABLE-WHITE",
+      "inventoryIdentity": {
+        "inventoryPn": "SSG-EP-DN975BWEGWW",
+        "gtin": "8806090104619",
+        "brand": "SAMSUNG",
+        "erpDescription": "Samsung Cable C to C (SIS) - White",
+        "cat1": "MOBILE AND COMPUTER ACCESSORY",
+        "cat2": "CABLE",
+        "cat3": "DATA CABLE"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung USB-C to USB-C Cable 5A 100W",
+        "manufacturerModel": "EP-DN975",
+        "productType": "DATA_CABLE",
+        "variant": {
+          "color": "White",
+          "length": "1M"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "connectorA": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "connectorB": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "maximumPower": {
+          "value": "100W",
+          "displayValue": "100W (5A)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "length": {
+          "value": "1M",
+          "displayValue": "1 เมตร",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "White",
+          "displayValue": "สีขาว (White)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-UGREEN-WALL-CHARGER-45W-GREY",
+      "inventoryIdentity": {
+        "inventoryPn": "6941876265749",
+        "gtin": "6941876265749",
+        "brand": "[CS]UGREEN",
+        "erpDescription": "[CS]UGREEN Wall Charger 45W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+        "cat1": "MOBILE AND COMPUTER ACCESSORY",
+        "cat2": "CHARGER",
+        "cat3": "CHARGER"
+      },
+      "productIdentity": {
+        "canonicalName": "UGREEN 45W Wall Charger (1 USB-A + 2 USB-C)",
+        "manufacturerModel": "CD320",
+        "productType": "WALL_CHARGER",
+        "variant": {
+          "color": "Grey",
+          "cableIncluded": false
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "maximumOutputPower": {
+          "value": "45W",
+          "displayValue": "45W",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "chargerType": {
+          "value": "WALL_CHARGER",
+          "displayValue": "อะแดปเตอร์ชาร์จเร็วติดผนัง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "outputPorts": {
+          "value": "1 USB-A + 2 USB-C",
+          "displayValue": "3 ช่อง (1 USB-A + 2 USB-C PD)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "cableIncluded": {
+          "value": false,
+          "displayValue": "ไม่มีสายในกล่อง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Grey",
+          "displayValue": "สีเทา (Grey)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-ADAM-ILINIO-CABLE-100W-2PK-SILVER",
+      "inventoryIdentity": {
+        "inventoryPn": "4710343478164",
+        "gtin": "4710343478164",
+        "brand": "ADAM ELEMENTS",
+        "erpDescription": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Silver",
+        "cat1": "MOBILE AND COMPUTER ACCESSORY",
+        "cat2": "CABLE",
+        "cat3": "DATA CABLE"
+      },
+      "productIdentity": {
+        "canonicalName": "ADAM elements iLinio USB-C to USB-C Cable 100W (2 Pack)",
+        "manufacturerModel": "iLinio C to C 100W",
+        "productType": "DATA_CABLE",
+        "variant": {
+          "color": "Silver",
+          "length": "1M",
+          "packageQuantity": "2 units"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "connectorA": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "connectorB": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "maximumPower": {
+          "value": "100W",
+          "displayValue": "100W",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "length": {
+          "value": "1M",
+          "displayValue": "1 เมตร",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "packageQuantity": {
+          "value": "2 units",
+          "displayValue": "2 เส้นต่อแพ็ก",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Silver",
+          "displayValue": "สีเงิน (Silver)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-PM-BACKPACK-FASHION-PHOENIX",
+      "inventoryIdentity": {
+        "inventoryPn": "PREMIUM0017044",
+        "gtin": null,
+        "brand": "EXTRA BRAND",
+        "erpDescription": "[PM] Backpack Fashion Phoenix",
+        "cat1": "OTHER",
+        "cat2": "PREMIUM",
+        "cat3": "PREMIUM"
+      },
+      "productIdentity": {
+        "canonicalName": "Fashion Backpack Phoenix (ของแถมพรีเมียม)",
+        "manufacturerBrand": "PHOENIX",
+        "manufacturerModel": "Backpack Phoenix",
+        "displayCategory": "Premium",
+        "productType": "PREMIUM_GIFT",
+        "variant": {
+          "color": "Fashion Black/Grey"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "accessoryType": {
+          "value": "BACKPACK",
+          "displayValue": "กระเป๋าเป้ของแถมพรีเมียม Phoenix",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "compatibleSeries": {
+          "value": "All Galaxy Series",
+          "displayValue": "สมาร์ทโฟนและแท็บเล็ตทุกรุ่น",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Fashion Phoenix",
+          "displayValue": "Fashion Phoenix",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-PM-GAABOR-AIR-FRYER-4L",
+      "inventoryIdentity": {
+        "inventoryPn": "PM4897121009793",
+        "gtin": "4897121009793",
+        "brand": "EXTRA BRAND",
+        "erpDescription": "[Premium] Gaabor Air Fryer 4L AF-40M01A",
+        "cat1": "OTHER",
+        "cat2": "PREMIUM",
+        "cat3": "PREMIUM"
+      },
+      "productIdentity": {
+        "canonicalName": "Gaabor Air Fryer 4L (AF-40M01A)",
+        "manufacturerBrand": "GAABOR",
+        "manufacturerModel": "AF-40M01A",
+        "displayCategory": "Premium",
+        "productType": "HOME_APPLIANCE",
+        "variant": {
+          "capacity": "4L"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "applianceType": {
+          "value": "AIR_FRYER",
+          "displayValue": "หม้อทอดไร้น้ำมัน Gaabor (Air Fryer 4L)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "capacity": {
+          "value": "4L",
+          "displayValue": "ความจุ 4 ลิตร",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "manufacturerModel": {
+          "value": "AF-40M01A",
+          "displayValue": "รุ่น AF-40M01A",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-PM-SLING-BAG-PHOENIX",
+      "inventoryIdentity": {
+        "inventoryPn": "PREMIUM0017046",
+        "gtin": null,
+        "brand": "EXTRA BRAND",
+        "erpDescription": "[PM] Sling Bag Phoenix",
+        "cat1": "OTHER",
+        "cat2": "PREMIUM",
+        "cat3": "PREMIUM"
+      },
+      "productIdentity": {
+        "canonicalName": "Sling Bag Phoenix (ของแถมพรีเมียม)",
+        "manufacturerBrand": "PHOENIX",
+        "manufacturerModel": "Sling Bag Phoenix",
+        "displayCategory": "Premium",
+        "productType": "PREMIUM_GIFT",
+        "variant": {
+          "color": "Black"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "accessoryType": {
+          "value": "SLING_BAG",
+          "displayValue": "กระเป๋าสะพายข้างของแถมพรีเมียม",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "compatibleSeries": {
+          "value": "All Galaxy Series",
+          "displayValue": "สมาร์ทโฟนและแท็บเล็ตทุกรุ่น",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-PM-SAMSUNG-SOUNDBAR-HW-T420",
+      "inventoryIdentity": {
+        "inventoryPn": "PM-8806090284687",
+        "gtin": "8806090284687",
+        "brand": "SAMSUNG",
+        "erpDescription": "Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer",
+        "cat1": "OTHER",
+        "cat2": "PREMIUM",
+        "cat3": "PREMIUM FOR SAMSUNG"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung Soundbar HW-T420 2.1ch with Subwoofer",
+        "manufacturerModel": "HW-T420",
+        "displayCategory": "Premium",
+        "productType": "SOUNDBAR",
+        "variant": {
+          "channels": "2.1ch"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "audioChannels": {
+          "value": "2.1ch",
+          "displayValue": "ระบบเสียง 2.1 แชนแนล (พร้อมซับวูฟเฟอร์)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "manufacturerModel": {
+          "value": "HW-T420",
+          "displayValue": "รุ่น HW-T420 (T-Series)",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Samsung Branch ERP Stock Master",
+          "url": null
+        }
+      ]
     }
   ]
 };
@@ -4415,6 +5063,18 @@ window.SPEC_TEMPLATES = {
     "color",
     "dimensions",
     "promotionConditions"
+  ],
+  HOME_APPLIANCE: [
+    "applianceType",
+    "capacity",
+    "manufacturerModel",
+    "color"
+  ],
+  SOUNDBAR: [
+    "audioChannels",
+    "outputPower",
+    "manufacturerModel",
+    "connectivity"
   ]
 };
 
@@ -4504,7 +5164,7 @@ function getDisplayableSpecifications(record) {
         status: "NOT_AVAILABLE"
       };
     }
-    if (field.status === "VERIFIED" || field.status === "VERIFIED_FROM_ERP" || field.status === "SUPPORTED_BY_OFFICIAL_MARKETPLACE") {
+    if (field.status === "VERIFIED" || field.status === "VERIFIED_FROM_ERP") {
       return {
         fieldKey,
         value: field.value,
@@ -4530,10 +5190,6 @@ window.resolveProductSpecs = function(item) {
   if (!item) return null;
   const m = (item.model || "").toUpperCase();
   const pn = (item.pn || "").trim().toUpperCase();
-  const cat = item.category || "";
-  const stockBrand = normalizeBrand(item.brand || (m.includes("SOUNDCORE") ? "SOUNDCORE" : ""));
-
-  let candidate = null;
 
   // 0. PRODUCT ACCESSORY MASTER EXACT IDENTITY RESOLUTION (HIGHEST PRIORITY)
   if (window.PRODUCT_ACCESSORY_MASTER) {
@@ -4574,6 +5230,11 @@ window.resolveProductSpecs = function(item) {
       };
     }
   }
+
+  const cat = item.category || "";
+  const stockBrand = normalizeBrand(item.brand || (m.includes("SOUNDCORE") ? "SOUNDCORE" : ""));
+
+  let candidate = null;
 
   // 1. EXACT PART NUMBER MATCH FIRST (100% Precision for All Brands)
   if (pn) {

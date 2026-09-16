@@ -1,6 +1,6 @@
 {
   "executionMode": "SHADOW_AUDIT",
-  "executedAt": "2026-09-16T14:30:47.693189",
+  "executedAt": "2026-09-16T14:52:47.150730",
   "policy": {
     "autoPublishExactManufacturer": true,
     "autoPublishPartialManufacturer": true,
@@ -37,35 +37,11 @@
       "productType": "WALL_CHARGER",
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "decision": "HOLD_HUMAN_REVIEW",
-      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "targetRecordStatus": "ALREADY_EXISTS",
       "reasons": [
-        "Only 2 ERP description attributes available; pending external manufacturer search"
+        "P/N already exists in Product Accessory Master"
       ],
-      "previewDiff": {
-        "inventoryPn": "6941876265732",
-        "barcode": null,
-        "brand": "[CS]UGREEN",
-        "productType": "WALL_CHARGER",
-        "changeType": "CREATE",
-        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
-        "fieldsConfigured": [
-          "maximumOutputPower",
-          "color",
-          "outputPorts",
-          "usbPowerDelivery",
-          "pps",
-          "cableIncluded",
-          "chargerType"
-        ],
-        "verifiedFieldCount": 2,
-        "mfrVerifiedCount": 0,
-        "shopeeSupportedCount": 0,
-        "totalRequiredFields": 6,
-        "decision": "HOLD_HUMAN_REVIEW",
-        "reasons": [
-          "Only 2 ERP description attributes available; pending external manufacturer search"
-        ]
-      }
+      "previewDiff": null
     },
     {
       "draftId": "DRAFT-SSG-EP-T4511XBEGTH",
@@ -360,9 +336,9 @@
       "productType": null,
       "classificationStatus": "REVIEW_REQUIRED",
       "decision": "HOLD_HUMAN_REVIEW",
-      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "targetRecordStatus": "ALREADY_EXISTS",
       "reasons": [
-        "Product Type classification is ambiguous or requires human confirmation"
+        "P/N already exists in Product Accessory Master"
       ],
       "previewDiff": null
     },
@@ -386,35 +362,11 @@
       "productType": "WIRELESS_CHARGER",
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "decision": "HOLD_HUMAN_REVIEW",
-      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "targetRecordStatus": "ALREADY_EXISTS",
       "reasons": [
-        "Only 3 ERP description attributes available; pending external manufacturer search"
+        "P/N already exists in Product Accessory Master"
       ],
-      "previewDiff": {
-        "inventoryPn": "EP-T6010NBEGTH",
-        "barcode": null,
-        "brand": "SAMSUNG",
-        "productType": "WIRELESS_CHARGER",
-        "changeType": "CREATE",
-        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
-        "fieldsConfigured": [
-          "maximumOutputPower",
-          "color",
-          "cableIncluded",
-          "chargerType",
-          "chargingDistance",
-          "fastWirelessChargingSupport",
-          "qiCertified"
-        ],
-        "verifiedFieldCount": 3,
-        "mfrVerifiedCount": 0,
-        "shopeeSupportedCount": 0,
-        "totalRequiredFields": 5,
-        "decision": "HOLD_HUMAN_REVIEW",
-        "reasons": [
-          "Only 3 ERP description attributes available; pending external manufacturer search"
-        ]
-      }
+      "previewDiff": null
     },
     {
       "draftId": "DRAFT-PM4897121009793",
@@ -423,9 +375,9 @@
       "productType": null,
       "classificationStatus": "REVIEW_REQUIRED",
       "decision": "HOLD_HUMAN_REVIEW",
-      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "targetRecordStatus": "ALREADY_EXISTS",
       "reasons": [
-        "Product Type classification is ambiguous or requires human confirmation"
+        "P/N already exists in Product Accessory Master"
       ],
       "previewDiff": null
     },
@@ -449,9 +401,9 @@
       "productType": null,
       "classificationStatus": "REVIEW_REQUIRED",
       "decision": "HOLD_HUMAN_REVIEW",
-      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "targetRecordStatus": "ALREADY_EXISTS",
       "reasons": [
-        "Product Type classification is ambiguous or requires human confirmation"
+        "P/N already exists in Product Accessory Master"
       ],
       "previewDiff": null
     },
@@ -533,35 +485,11 @@
       "productType": "WIRELESS_CHARGER",
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "decision": "HOLD_HUMAN_REVIEW",
-      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "targetRecordStatus": "ALREADY_EXISTS",
       "reasons": [
-        "Only 3 ERP description attributes available; pending external manufacturer search"
+        "P/N already exists in Product Accessory Master"
       ],
-      "previewDiff": {
-        "inventoryPn": "EP-T4511NBEGTH",
-        "barcode": null,
-        "brand": "SAMSUNG",
-        "productType": "WIRELESS_CHARGER",
-        "changeType": "CREATE",
-        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
-        "fieldsConfigured": [
-          "maximumOutputPower",
-          "color",
-          "cableIncluded",
-          "chargerType",
-          "chargingDistance",
-          "fastWirelessChargingSupport",
-          "qiCertified"
-        ],
-        "verifiedFieldCount": 3,
-        "mfrVerifiedCount": 0,
-        "shopeeSupportedCount": 0,
-        "totalRequiredFields": 5,
-        "decision": "HOLD_HUMAN_REVIEW",
-        "reasons": [
-          "Only 3 ERP description attributes available; pending external manufacturer search"
-        ]
-      }
+      "previewDiff": null
     },
     {
       "draftId": "DRAFT-PREMIUM-665478",

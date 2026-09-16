@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T14:14:24.634867",
+  "generatedAt": "2026-09-16T14:45:47.014796",
   "overallVerdict": {
     "systemTechnicallyReady": true,
     "specDataMajorityReady": false,
@@ -10,27 +10,27 @@
     "gate1_f1QuantityCoverage": {
       "name": "Floor 1 Quantity Coverage (>= 80%)",
       "targetUnits": 1361,
-      "currentUnits": 1186,
+      "currentUnits": 1386,
       "totalUnits": 1701,
-      "percentage": 69.72,
-      "gapUnits": 175,
-      "status": "IN_PROGRESS"
+      "percentage": 81.48,
+      "gapUnits": 0,
+      "status": "PASS"
     },
     "gate2_f1PnCoverage": {
       "name": "Floor 1 P/N Coverage (>= 70%)",
       "targetPns": 234,
-      "currentPns": 257,
+      "currentPns": 267,
       "totalPns": 333,
-      "percentage": 77.18,
+      "percentage": 80.18,
       "gapPns": 0,
       "status": "PASS"
     },
     "gate3_top50F1Ready": {
       "name": "Top 50 F1 Products 100% Ready",
       "targetCount": 50,
-      "currentCount": 30,
-      "percentage": 60.0,
-      "gapCount": 20,
+      "currentCount": 40,
+      "percentage": 80.0,
+      "gapCount": 10,
       "status": "IN_PROGRESS"
     },
     "gate4_safetyAndIntegrity": {
@@ -70,8 +70,8 @@
       "f1": 42,
       "name": "[CS]UGREEN Wall Charer 30W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
       "category": "Accessory",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 30W ()"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 4,
@@ -160,8 +160,8 @@
       "f1": 27,
       "name": "[PM] Backpack Fashion Phoenix",
       "category": "Premium",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 13,
@@ -180,8 +180,8 @@
       "f1": 23,
       "name": "Samsung Adapter 60W without cable - Black",
       "category": "Accessory",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "อุปกรณ์เสริม SAMSUNG (Samsung Adapter 60W without cable - Black)"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 15,
@@ -190,8 +190,8 @@
       "f1": 22,
       "name": "[Premium] Gaabor Air Fryer 4L AF-40M01A",
       "category": "Premium",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 16,
@@ -220,8 +220,8 @@
       "f1": 20,
       "name": "[PM] Sling Bag Phoenix",
       "category": "Premium",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 19,
@@ -250,8 +250,8 @@
       "f1": 17,
       "name": "Samsung Adapter 45W without cable - Black",
       "category": "Accessory",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "อุปกรณ์เสริม SAMSUNG (Samsung Adapter 45W without cable - Black)"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 22,
@@ -280,8 +280,8 @@
       "f1": 17,
       "name": "Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer",
       "category": "Premium",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer)"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 25,
@@ -350,8 +350,8 @@
       "f1": 12,
       "name": "Samsung Cable C to C (SIS) - White",
       "category": "Accessory",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "สายชาร์จและส่งข้อมูล SAMSUNG  ความยาว "
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 32,
@@ -410,8 +410,8 @@
       "f1": 10,
       "name": "[CS]UGREEN Wall Charger 45W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
       "category": "Accessory",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 45W ()"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 38,
@@ -460,8 +460,8 @@
       "f1": 10,
       "name": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Silver",
       "category": "Accessory",
-      "readinessStatus": "HOLD_REVIEW",
-      "summary": "สายชาร์จและส่งข้อมูล ADAM ELEMENTS 100W ความยาว 1M"
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
     },
     {
       "rank": 43,

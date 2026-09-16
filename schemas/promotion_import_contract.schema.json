@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PromotionImportContract",
+  "description": "Validation schema for Samsung Branch Operations Promotion Import Pipeline (Draft Pilot)",
+  "type": "object",
+  "required": [
+    "promotionId",
+    "promotionName",
+    "inventoryPn",
+    "promotionType",
+    "startDate",
+    "endDate",
+    "rrp",
+    "discountAmount",
+    "netPrice",
+    "paymentMethod",
+    "customerSegment",
+    "status",
+    "sourceFile",
+    "sourceRow"
+  ],
+  "properties": {
+    "promotionId": {
+      "type": "string",
+      "pattern": "^PROMO-[A-Z0-9_-]+"
+    },
+    "promotionName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inventoryPn": {
+      "type": "string",
+      "minLength": 1
+    },
+    "promotionType": {
+      "type": "string",
+      "enum": [
+        "STANDARD_DISCOUNT",
+        "STUDENT_DISCOUNT",
+        "TRADE_UP_OFFER",
+        "BUNDLE_DISCOUNT",
+        "FLASH_SALE"
+      ]
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rrp": {
+      "type": "number",
+      "minimum": 0
+    },
+    "discountAmount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "netPrice": {
+      "type": "number",
+      "minimum": 0
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": [
+        "ALL_PAYMENTS",
+        "STANDARD_PAYMENT",
+        "CREDIT_CARD_ONLY",
+        "CASH_ONLY",
+        "INSTALLMENT_0_PERCENT"
+      ]
+    },
+    "customerSegment": {
+      "type": "string",
+      "enum": [
+        "GENERAL_PUBLIC",
+        "STUDENT_ONLY",
+        "CORPORATE",
+        "MEMBERSHIP_VIP"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "REVIEW_REQUIRED",
+        "BLOCKED_CONFLICT",
+        "SUPERSEDED"
+      ]
+    },
+    "sourceFile": {
+      "type": "string"
+    },
+    "sourceRow": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersededBy": {
+      "type": ["string", "null"]
+    },
+    "managerApproval": {
+      "type": "object",
+      "properties": {
+        "isApproved": { "type": "boolean" },
+        "approvedBy": { "type": ["string", "null"] },
+        "approvedAt": { "type": ["string", "null"] }
+      }
+    }
+  },
+  "additionalProperties": false
+}

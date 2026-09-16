@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-09-16T14:50:50.132413",
+  "policy": "DRAFT_PILOT_ONLY",
+  "draftPromotions": [
+    {
+      "promotionId": "PROMO-45W-SEP-001",
+      "promotionName": "Samsung 45W Adapter September Special",
+      "inventoryPn": "SSG-EP-T4511XBEGTH",
+      "promotionType": "STANDARD_DISCOUNT",
+      "startDate": "2026-09-01T00:00:00+07:00",
+      "endDate": "2026-09-30T23:59:59+07:00",
+      "rrp": 1290.0,
+      "discountAmount": 300.0,
+      "netPrice": 990.0,
+      "paymentMethod": "STANDARD_PAYMENT",
+      "customerSegment": "GENERAL_PUBLIC",
+      "status": "DRAFT",
+      "sourceFile": "promotions_september_2026.xlsx",
+      "sourceRow": 2
+    },
+    {
+      "promotionId": "PROMO-UNKNOWN-002",
+      "promotionName": "Mystery Non-Existent Device Promo",
+      "inventoryPn": "SM-UNKNOWN-9999",
+      "promotionType": "STANDARD_DISCOUNT",
+      "startDate": "2026-09-01T00:00:00+07:00",
+      "endDate": "2026-09-30T23:59:59+07:00",
+      "rrp": 9999.0,
+      "discountAmount": 500.0,
+      "netPrice": 9499.0,
+      "paymentMethod": "STANDARD_PAYMENT",
+      "customerSegment": "GENERAL_PUBLIC",
+      "status": "REVIEW_REQUIRED",
+      "sourceFile": "promotions_september_2026.xlsx",
+      "sourceRow": 3
+    },
+    {
+      "promotionId": "PROMO-45W-SEP-OLD",
+      "promotionName": "Samsung 45W Adapter Old Flash Offer",
+      "inventoryPn": "SSG-EP-T4511XBEGTH",
+      "promotionType": "STANDARD_DISCOUNT",
+      "startDate": "2026-09-01T00:00:00+07:00",
+      "endDate": "2026-09-30T23:59:59+07:00",
+      "rrp": 1290.0,
+      "discountAmount": 150.0,
+      "netPrice": 1140.0,
+      "paymentMethod": "STANDARD_PAYMENT",
+      "customerSegment": "GENERAL_PUBLIC",
+      "status": "SUPERSEDED",
+      "supersededBy": "PROMO-45W-SEP-001",
+      "sourceFile": "promotions_september_2026.xlsx",
+      "sourceRow": 1
+    }
+  ]
+}

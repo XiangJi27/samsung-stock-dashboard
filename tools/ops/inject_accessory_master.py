@@ -111,6 +111,18 @@ window.SPEC_TEMPLATES = {{
     "color",
     "dimensions",
     "promotionConditions"
+  ],
+  HOME_APPLIANCE: [
+    "applianceType",
+    "capacity",
+    "manufacturerModel",
+    "color"
+  ],
+  SOUNDBAR: [
+    "audioChannels",
+    "outputPower",
+    "manufacturerModel",
+    "connectivity"
   ]
 }};
 
@@ -284,7 +296,12 @@ new_start = """window.resolveProductSpecs = function(item) {
         fieldVerification: rec.specifications
       };
     }
-  }"""
+  }
+
+  const cat = item.category || "";
+  const stockBrand = normalizeBrand(item.brand || (m.includes("SOUNDCORE") ? "SOUNDCORE" : ""));
+
+  let candidate = null;"""
 
 content = content.replace(old_start, new_start)
 

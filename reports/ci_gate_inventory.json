@@ -15,8 +15,8 @@
     "evidence": {
       "errors": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-02-PRICE-EQUATION",
@@ -34,8 +34,8 @@
     "evidence": {
       "mismatches": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-03-STUDENT-RULE",
@@ -53,8 +53,8 @@
     "evidence": {
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-04-PASS-F-ISOLATION",
@@ -72,8 +72,8 @@
     "evidence": {
       "leaks": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-05-TRADE-UP-ISOLATION",
@@ -91,8 +91,8 @@
     "evidence": {
       "leaks": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-06-STOCK-SUM",
@@ -110,8 +110,8 @@
     "evidence": {
       "errors": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-07-A07-GOLDEN",
@@ -139,8 +139,8 @@
       ],
       "mismatches": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-08-SECRET-LEAK",
@@ -158,8 +158,8 @@
     "evidence": {
       "leaks": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "GATE-EXACT-PN",
@@ -181,8 +181,8 @@
       "executed": true,
       "executionMode": "LIVE_DATA_VALIDATION",
       "status": "PASSED",
-      "executedAt": "2026-09-16T14:30:42.636958",
-      "commitSha": "209136b",
+      "executedAt": "2026-09-16T14:52:43.189581",
+      "commitSha": "1ed82ca",
       "inputFiles": {
         "stockMaster": {
           "path": "stock_full_data.json",
@@ -241,10 +241,10 @@
         "CONNECTIVITY_MISMATCH",
         "AMBIGUOUS_MODEL_MATCH"
       ],
-      "generatedAt": "2026-09-16T14:30:42.636958"
+      "generatedAt": "2026-09-16T14:52:43.189581"
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "GATE-BATCH-CONSISTENCY",
@@ -268,8 +268,8 @@
       "executed": true,
       "executionMode": "LIVE_DATA_VALIDATION",
       "status": "PASSED",
-      "executedAt": "2026-09-16T14:30:42.636958",
-      "commitSha": "209136b",
+      "executedAt": "2026-09-16T14:52:43.189581",
+      "commitSha": "1ed82ca",
       "verifiedInputs": {
         "stockBatchId": "IMPORT-20260906-002",
         "promotionBatchId": "BATCH-20260907-105441",
@@ -283,7 +283,7 @@
         "promotion_variants.js": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
         "audit_summary.json": "6b5b49cbd91f34faaee6613f31fe5fbc9dedac87ea261480624f12ea86563a27",
         "business_rules.json": "539a8b20045528cd81fca1e7c38e51ce537daf534b88b43f910fd2551dfcaf58",
-        "runtime_manifest.json": "2a1cf94b748bbca392b68d513ee01f333696396af12b7103554ce1f96c5c72f3"
+        "runtime_manifest.json": "351b878f02a9ce61b8f6a89bd4aa4652deb08efcbec95bb5cdda1dd551ce8a03"
       },
       "counts": {
         "staleAuditCount": 0,
@@ -293,10 +293,10 @@
       },
       "violationCount": 0,
       "violations": [],
-      "generatedAt": "2026-09-16T14:30:42.636958"
+      "generatedAt": "2026-09-16T14:52:43.189581"
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "GATE-RUNTIME-HASH",
@@ -314,15 +314,15 @@
     "evidence": {
       "gate": "RUNTIME_HASH_VERIFICATION_GATE",
       "status": "PASSED",
-      "executedAt": "2026-09-16T14:30:42.636958",
-      "commitSha": "209136b",
+      "executedAt": "2026-09-16T14:52:43.189581",
+      "commitSha": "1ed82ca",
       "totalManifestFiles": 23,
       "verifiedFileCount": 23,
       "violationCount": 0,
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-09-SPEC-IDENTITY-GUARD",
@@ -340,12 +340,12 @@
     "evidence": {
       "gate": "RULE_09_SPEC_IDENTITY_GUARD",
       "status": "PASSED",
-      "executedAt": "2026-09-16T14:30:42.636958",
-      "commitSha": "209136b",
+      "executedAt": "2026-09-16T14:52:43.189581",
+      "commitSha": "1ed82ca",
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-10-ACCESSORY-MASTER",
@@ -356,7 +356,7 @@
       "data/product-accessory-master.json",
       "product_specs_data.js"
     ],
-    "recordsChecked": 9,
+    "recordsChecked": 19,
     "expected": "Product Accessory Master valid, 100% exact P/N & GTIN matching, dedicated templates, zero cross-brand/cross-type leakage, fail closed on unknown",
     "actual": "0 violations (9 products, 8 templates, 100% anti-leakage verified)",
     "status": "PASS",
@@ -364,12 +364,12 @@
     "evidence": {
       "gate": "RULE_10_ACCESSORY_MASTER",
       "status": "PASSED",
-      "executedAt": "2026-09-16T14:30:42.636958",
-      "commitSha": "209136b",
+      "executedAt": "2026-09-16T14:52:43.189581",
+      "commitSha": "1ed82ca",
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-11-MARKETPLACE-EVIDENCE",
@@ -388,12 +388,12 @@
     "evidence": {
       "gate": "RULE_11_MARKETPLACE_EVIDENCE",
       "status": "PASSED",
-      "executedAt": "2026-09-16T14:30:42.636958",
-      "commitSha": "209136b",
+      "executedAt": "2026-09-16T14:52:43.189581",
+      "commitSha": "1ed82ca",
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-12-WORK-QUEUE-INTEGRITY",
@@ -412,8 +412,8 @@
     "evidence": {
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-13-AUTO-DRAFT-AND-PUBLISH",
@@ -432,8 +432,8 @@
     "evidence": {
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-14-SALES-READINESS-GOVERNANCE",
@@ -452,8 +452,8 @@
     "evidence": {
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   },
   {
     "ruleId": "RULE-15-DRAFT-VALIDATION-AND-CRITIC",
@@ -473,7 +473,29 @@
     "evidence": {
       "violations": []
     },
-    "generatedAt": "2026-09-16T14:30:42.636958",
-    "commitSha": "209136b"
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
+  },
+  {
+    "ruleId": "RULE-16-PROMOTION-UPLOAD-GATES",
+    "name": "Promotion Upload 5-Stage Gate & Pilot Isolation Invariants",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "verify_promotion_upload_gates",
+    "inputFiles": [
+      "schemas/promotion_import_contract.schema.json",
+      "fixtures/promotions/promotion_pilot_fixtures.json",
+      "reports/promotion_preview_diff.json",
+      "reports/promotion_import_drafts.json"
+    ],
+    "recordsChecked": 11,
+    "expected": "Drafts schema valid, 5-stage gate passes (File/PN/Date/Price/Conflict), AUTO_PUBLISH=OFF, 0 mutations to Product Master/Specs/RRP",
+    "actual": "0 violations (11 fixtures verified, 0 auto-publish, 0 master mutations, Draft import safe)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "violations": []
+    },
+    "generatedAt": "2026-09-16T14:52:43.189581",
+    "commitSha": "1ed82ca"
   }
 ]
