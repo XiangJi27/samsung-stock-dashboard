@@ -1,0 +1,580 @@
+{
+  "executionMode": "SHADOW_AUDIT",
+  "executedAt": "2026-09-16T14:05:13.303119",
+  "policy": {
+    "autoPublishExactManufacturer": true,
+    "autoPublishPartialManufacturer": true,
+    "autoPublishShopeeOnly": false,
+    "humanReviewAmbiguousType": true,
+    "blockCrossBrand": true
+  },
+  "stats": {
+    "totalEvaluated": 20,
+    "AUTO_PUBLISH_VERIFIED": 0,
+    "AUTO_PUBLISH_PARTIAL": 0,
+    "AUTO_PUBLISH_MARKETPLACE_SUPPORTED": 0,
+    "HOLD_HUMAN_REVIEW": 20,
+    "BLOCK_CONFLICT": 0
+  },
+  "evaluations": [
+    {
+      "draftId": "DRAFT-PM6931481215697",
+      "inventoryPn": "PM6931481215697",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    },
+    {
+      "draftId": "DRAFT-6941876265732",
+      "inventoryPn": "6941876265732",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 2 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "6941876265732",
+        "barcode": null,
+        "brand": "[CS]UGREEN",
+        "productType": "WALL_CHARGER",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "maximumOutputPower",
+          "color",
+          "outputPorts",
+          "usbPowerDelivery",
+          "pps",
+          "cableIncluded",
+          "chargerType"
+        ],
+        "verifiedFieldCount": 2,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 6,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 2 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-SSG-EP-T4511XBEGTH",
+      "inventoryPn": "SSG-EP-T4511XBEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 3 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "barcode": null,
+        "brand": "SAMSUNG",
+        "productType": "WALL_CHARGER",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "maximumOutputPower",
+          "color",
+          "cableIncluded",
+          "outputPorts",
+          "usbPowerDelivery",
+          "pps",
+          "chargerType"
+        ],
+        "verifiedFieldCount": 3,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 6,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 3 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-EP-T2510NWEGTH",
+      "inventoryPn": "EP-T2510NWEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 3 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "EP-T2510NWEGTH",
+        "barcode": null,
+        "brand": "SAMSUNG",
+        "productType": "WALL_CHARGER",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "maximumOutputPower",
+          "color",
+          "cableIncluded",
+          "outputPorts",
+          "usbPowerDelivery",
+          "pps",
+          "chargerType"
+        ],
+        "verifiedFieldCount": 3,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 6,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 3 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859703437345",
+      "inventoryPn": "8859703437345",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 2 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859703437345",
+        "barcode": null,
+        "brand": "FOCUS",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "color",
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 2,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 2 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859216623877",
+      "inventoryPn": "8859216623877",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 1 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859216623877",
+        "barcode": null,
+        "brand": "HISHIELD",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "color",
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 1,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 1 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859216623860",
+      "inventoryPn": "8859216623860",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+      "reasons": [
+        "No technical evidence collected yet"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859216623860",
+        "barcode": null,
+        "brand": "HISHIELD",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+        "fieldsConfigured": [
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 0,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "No technical evidence collected yet"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859216846719",
+      "inventoryPn": "8859216846719",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+      "reasons": [
+        "No technical evidence collected yet"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859216846719",
+        "barcode": null,
+        "brand": "HISHIELD",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+        "fieldsConfigured": [
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 0,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "No technical evidence collected yet"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859216860326",
+      "inventoryPn": "8859216860326",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+      "reasons": [
+        "No technical evidence collected yet"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859216860326",
+        "barcode": null,
+        "brand": "HISHIELD",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+        "fieldsConfigured": [
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 0,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "No technical evidence collected yet"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859216860241",
+      "inventoryPn": "8859216860241",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+      "reasons": [
+        "No technical evidence collected yet"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859216860241",
+        "barcode": null,
+        "brand": "HISHIELD",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+        "fieldsConfigured": [
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 0,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "No technical evidence collected yet"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-PREMIUM0017044",
+      "inventoryPn": "PREMIUM0017044",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    },
+    {
+      "draftId": "DRAFT-PREMIUM-665477",
+      "inventoryPn": "PREMIUM-665477",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    },
+    {
+      "draftId": "DRAFT-EP-T6010NBEGTH",
+      "inventoryPn": "EP-T6010NBEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WIRELESS_CHARGER",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 3 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "EP-T6010NBEGTH",
+        "barcode": null,
+        "brand": "SAMSUNG",
+        "productType": "WIRELESS_CHARGER",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "maximumOutputPower",
+          "color",
+          "cableIncluded",
+          "chargerType",
+          "chargingDistance",
+          "fastWirelessChargingSupport",
+          "qiCertified"
+        ],
+        "verifiedFieldCount": 3,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 3 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-PM4897121009793",
+      "inventoryPn": "PM4897121009793",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    },
+    {
+      "draftId": "DRAFT-8859763200989",
+      "inventoryPn": "8859763200989",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    },
+    {
+      "draftId": "DRAFT-PREMIUM0017046",
+      "inventoryPn": "PREMIUM0017046",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    },
+    {
+      "draftId": "DRAFT-8859703436560",
+      "inventoryPn": "8859703436560",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 2 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859703436560",
+        "barcode": null,
+        "brand": "FOCUS",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "color",
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 2,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 2 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-8859216829033",
+      "inventoryPn": "8859216829033",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+      "reasons": [
+        "No technical evidence collected yet"
+      ],
+      "previewDiff": {
+        "inventoryPn": "8859216829033",
+        "barcode": null,
+        "brand": "HISHIELD",
+        "productType": "SCREEN_PROTECTOR",
+        "changeType": "CREATE",
+        "targetRecordStatus": "NO_EVIDENCE_COLLECTED",
+        "fieldsConfigured": [
+          "compatibleModels",
+          "protectorType",
+          "hardness",
+          "thickness",
+          "privacyProtection"
+        ],
+        "verifiedFieldCount": 0,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "No technical evidence collected yet"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-EP-T4511NBEGTH",
+      "inventoryPn": "EP-T4511NBEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WIRELESS_CHARGER",
+      "classificationStatus": "CONFIRMED_FROM_ERP",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+      "reasons": [
+        "Only 3 ERP description attributes available; pending external manufacturer search"
+      ],
+      "previewDiff": {
+        "inventoryPn": "EP-T4511NBEGTH",
+        "barcode": null,
+        "brand": "SAMSUNG",
+        "productType": "WIRELESS_CHARGER",
+        "changeType": "CREATE",
+        "targetRecordStatus": "PENDING_EXTERNAL_EVIDENCE",
+        "fieldsConfigured": [
+          "maximumOutputPower",
+          "color",
+          "cableIncluded",
+          "chargerType",
+          "chargingDistance",
+          "fastWirelessChargingSupport",
+          "qiCertified"
+        ],
+        "verifiedFieldCount": 3,
+        "mfrVerifiedCount": 0,
+        "shopeeSupportedCount": 0,
+        "totalRequiredFields": 5,
+        "decision": "HOLD_HUMAN_REVIEW",
+        "reasons": [
+          "Only 3 ERP description attributes available; pending external manufacturer search"
+        ]
+      }
+    },
+    {
+      "draftId": "DRAFT-PREMIUM-665478",
+      "inventoryPn": "PREMIUM-665478",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "classificationStatus": "REVIEW_REQUIRED",
+      "decision": "HOLD_HUMAN_REVIEW",
+      "targetRecordStatus": "CLASSIFICATION_REVIEW_REQUIRED",
+      "reasons": [
+        "Product Type classification is ambiguous or requires human confirmation"
+      ],
+      "previewDiff": null
+    }
+  ]
+}
