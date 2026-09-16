@@ -106,10 +106,8 @@ def classify_product(it):
     if cat == "SIM" or c1.startswith("SERVICE"):
         return "CARRIER_SIM", "CONFIRMED_FROM_ERP", []
     if cat == "Premium" or "PREMIUM" in c1 or "PREMIUM" in c2:
-        if c2 in ["PREMIUM", "FREE GIFT"] and c3 in ["PREMIUM", "FREE GIFT"]:
-            # Ambiguous premium - could be screen protector, phone case, or lifestyle gift
-            return None, "REVIEW_REQUIRED", ["PREMIUM_GIFT", "SCREEN_PROTECTOR", "PHONE_CASE"]
-        return "PREMIUM_GIFT", "CONFIRMED_FROM_ERP", []
+        # Ambiguous premium - could be screen protector, phone case, microwave, soundbar, or lifestyle gift
+        return None, "REVIEW_REQUIRED", ["PREMIUM_GIFT", "SCREEN_PROTECTOR", "PHONE_CASE", "HOME_APPLIANCE", "SPEAKER"]
     if "DEMO" in c2 or "DEMO" in c3:
         return "DEMO_DEVICE", "CONFIRMED_FROM_ERP", []
     if cat == "Other":
@@ -256,6 +254,8 @@ def main():
             "f1": f1,
             "f2": f2,
             "total": total,
+            "srp": float(item.get("srp", 0.0)),
+            "erpPrice": float(item.get("srp", 0.0)),
             "currentStatus": status,
             "priority": priority,
             "productType": product_type,

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Draft Review Dashboard • Samsung Branch Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #111827;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #06b6d4;
+      --font-family: 'Plus Jakarta Sans', 'Sarabun', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-branch {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--accent);
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .kpi-val { font-size: 24px; font-weight: 700; color: #fff; }
+    .kpi-lbl { font-size: 12px; color: var(--text-muted); }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 12px;
+      align-items: center;
+    }
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { color: #fff; border-color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+    .search-input {
+      margin-left: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      width: 250px;
+    }
+
+    .table-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    th {
+      background: #151d2f;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .tag-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #059669; }
+    .tag-blue { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid #0891b2; }
+    .tag-yellow { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #d97706; }
+    .tag-orange { background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid #ea580c; }
+    .tag-red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #dc2626; }
+
+    /* Modal / 3-Column Drawer */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1200px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .modal-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+    .col-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .col-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .col-1 .col-title { color: #38bdf8; }
+    .col-2 .col-title { color: #a78bfa; }
+    .col-3 .col-title { color: #34d399; }
+
+    .diff-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .diff-erp { background: rgba(6, 182, 212, 0.1); border-left: 3px solid #06b6d4; }
+    .diff-verified { background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; }
+    .diff-unverified { background: rgba(245, 158, 11, 0.1); border-left: 3px solid #f59e0b; }
+    .diff-review { background: rgba(249, 115, 22, 0.1); border-left: 3px solid #f97316; }
+    .diff-conflict { background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .btn-close:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>🛡️ Admin Draft Review Dashboard</span>
+      <span class="badge-branch">Ayutthaya City Park • Multi-Tier Verification</span>
+    </div>
+    <div style="font-size: 12px; color: var(--text-muted);">
+      Policy: <strong>AUTO_PUBLISH = STRICTLY_DENIED</strong> | Human / Deterministic Sign-Off
+    </div>
+  </header>
+
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-val" id="kpiTotalDrafts">268</div>
+      <div class="kpi-lbl">Total Accessory Drafts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #34d399;" id="kpiSalesReady">191</div>
+      <div class="kpi-lbl">Sales-Ready Drafts (71.3%)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #fbbf24;" id="kpiHoldReview">77</div>
+      <div class="kpi-lbl">Hold / Human Review Required</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #38bdf8;" id="kpiF1Covered">1,186 / 1,701</div>
+      <div class="kpi-lbl">Total F1 Stock Ready (69.7%)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #4ade80;" id="kpiConflicts">0</div>
+      <div class="kpi-lbl">Blocked Conflicts (0 Mutations)</div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="ALL">ทั้งหมด (All)</button>
+    <button class="filter-btn" data-filter="TOP50">Top 50 F1 Products</button>
+    <button class="filter-btn" data-filter="P1">P1 Priority</button>
+    <button class="filter-btn" data-filter="SALES_READY">Sales-Ready (พร้อมขาย)</button>
+    <button class="filter-btn" data-filter="HUMAN_REVIEW">Review Required (ต้องตรวจ)</button>
+    <button class="filter-btn" data-filter="HIGH_RISK">High Risk Fields</button>
+    <button class="filter-btn" data-filter="AMBIGUOUS">Ambiguous Product Type</button>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 ค้นหา P/N, รุ่น, หรือแบรนด์...">
+  </div>
+
+  <div class="table-container">
+    <table id="draftTable">
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>P/N</th>
+          <th>F1 Stock</th>
+          <th>Brand</th>
+          <th>Product Type</th>
+          <th>Sales-Ready Status</th>
+          <th>Missing Fields</th>
+          <th>Risk Level</th>
+          <th>Identity</th>
+          <th>Family</th>
+          <th>Critic Decision</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="11" style="text-align: center; padding: 40px; color: var(--text-muted);">กำลังโหลดข้อมูล Drafts...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3-Column Review Modal -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle" style="font-size: 16px; font-weight: 700; color: #fff;">DRAFT SPEC INSPECTION</h3>
+          <span id="modalSubtitle" style="font-size: 12px; color: var(--text-muted);"></span>
+        </div>
+        <button class="btn-close" id="btnCloseModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Col 1: ERP Data -->
+        <div class="col-card col-1">
+          <div class="col-title">1. ข้อมูล ERP (Immutable Stock Snapshot)</div>
+          <div id="colErpContent"></div>
+        </div>
+        <!-- Col 2: AI Draft -->
+        <div class="col-card col-2">
+          <div class="col-title">2. ร่างสเปก AI (Enriched Sales Draft)</div>
+          <div id="colDraftContent"></div>
+        </div>
+        <!-- Col 3: Evidence Source -->
+        <div class="col-card col-3">
+          <div class="col-title">3. แหล่งหลักฐาน (Evidence & Critic Audit)</div>
+          <div id="colEvidenceContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allDrafts = [];
+    let criticReviews = {};
+    let familyMap = {};
+    let activeFilter = 'ALL';
+
+    async function initDashboard() {
+      try {
+        const [draftRes, criticRes, familyRes] = await Promise.all([
+          fetch('data/product-accessory-drafts.json').then(r => r.json()),
+          fetch('reports/ai_critic_review.json').then(r => r.json()).catch(() => ({ reviews: [] })),
+          fetch('reports/product_family_map.json').then(r => r.json()).catch(() => ({ families: [] }))
+        ]);
+
+        allDrafts = draftRes.drafts || [];
+        (criticRes.reviews || []).forEach(r => {
+          criticReviews[r.inventoryPn] = r;
+        });
+        (familyRes.families || []).forEach(fam => {
+          (fam.variants || []).forEach(v => {
+            familyMap[v.inventoryPn] = fam;
+          });
+        });
+
+        renderTable();
+      } catch (err) {
+        console.error("Failed to load drafts data", err);
+        document.getElementById('tableBody').innerHTML = `<tr><td colspan="11" style="text-align: center; color: var(--danger); padding: 40px;">Error loading drafts data: ${err.message}</td></tr>`;
+      }
+    }
+
+    function renderTable() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const filtered = allDrafts.filter(d => {
+        const pn = (d.inventoryPn || '').toLowerCase();
+        const brand = (d.brand || '').toLowerCase();
+        const desc = (d.erpSnapshot?.description || '').toLowerCase();
+        const matchQuery = !q || pn.includes(q) || brand.includes(q) || desc.includes(q);
+        if (!matchQuery) return false;
+
+        const isSalesReady = d.salesReadiness === 'SALES_READY';
+        const isAmbiguous = d.classificationStatus === 'REVIEW_REQUIRED';
+        const isHighRisk = d.riskLevel === 'HIGH';
+
+        if (activeFilter === 'TOP50') return d.erpSnapshot?.f1 >= 20;
+        if (activeFilter === 'P1') return (d.erpSnapshot?.f1 > 0 && !isSalesReady);
+        if (activeFilter === 'SALES_READY') return isSalesReady;
+        if (activeFilter === 'HUMAN_REVIEW') return !isSalesReady;
+        if (activeFilter === 'HIGH_RISK') return isHighRisk;
+        if (activeFilter === 'AMBIGUOUS') return isAmbiguous;
+        return true;
+      });
+
+      const tbody = document.getElementById('tableBody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" style="text-align: center; padding: 40px; color: var(--text-muted);">ไม่พบรายการที่ตรงตามเงื่อนไข</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(d => {
+        const pn = d.inventoryPn;
+        const f1 = d.erpSnapshot?.f1 || 0;
+        const pt = d.productType || '<span style="color:var(--warning)">AMBIGUOUS</span>';
+        const status = d.salesReadiness === 'SALES_READY' 
+          ? '<span class="tag tag-green">SALES_READY</span>' 
+          : '<span class="tag tag-orange">HOLD_REVIEW</span>';
+        
+        const critic = criticReviews[pn] || {};
+        const dec = critic.recommendation || 'PENDING';
+        const decTag = dec.includes('APPROVE') ? 'tag-green' : (dec.includes('HOLD') ? 'tag-orange' : 'tag-red');
+        const fam = familyMap[pn]?.familyName || '-';
+        const riskTag = d.riskLevel === 'HIGH' ? 'tag-red' : (d.riskLevel === 'MEDIUM' ? 'tag-yellow' : 'tag-blue');
+
+        return `
+          <tr onclick="openDraftModal('${pn}')">
+            <td><span class="tag tag-blue">${f1 > 0 ? 'P1' : 'P4'}</span></td>
+            <td><strong>${pn}</strong></td>
+            <td><strong>${f1}</strong></td>
+            <td>${d.brand || '-'}</td>
+            <td>${pt}</td>
+            <td>${status}</td>
+            <td>${d.enrichedSalesFields ? Object.keys(d.enrichedSalesFields).length : 0} ช่อง</td>
+            <td><span class="tag ${riskTag}">${d.riskLevel || 'LOW'}</span></td>
+            <td><span class="tag tag-green">PASS</span></td>
+            <td><span style="font-size:11px; color:var(--text-muted);">${fam}</span></td>
+            <td><span class="tag ${decTag}">${dec}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openDraftModal(pn) {
+      const d = allDrafts.find(x => x.inventoryPn === pn);
+      if (!d) return;
+
+      const critic = criticReviews[pn] || {};
+      const fam = familyMap[pn];
+
+      document.getElementById('modalTitle').innerText = `${d.brand || ''} • ${d.inventoryPn}`;
+      document.getElementById('modalSubtitle').innerText = d.erpSnapshot?.description || '';
+
+      // Col 1: ERP Data
+      const erp = d.erpSnapshot || {};
+      document.getElementById('colErpContent').innerHTML = `
+        <div class="diff-item diff-erp"><strong>P/N:</strong> ${erp.inventoryPn || '-'}</div>
+        <div class="diff-item diff-erp"><strong>คำอธิบาย:</strong> ${erp.description || '-'}</div>
+        <div class="diff-item diff-erp"><strong>หมวดหมู่:</strong> ${erp.cat1} &gt; ${erp.cat2} &gt; ${erp.cat3}</div>
+        <div class="diff-item diff-erp"><strong>สต๊อกสาขา:</strong> Floor 1 = ${erp.f1} | Floor 2 = ${erp.f2} (รวม ${erp.total})</div>
+        <div class="diff-item diff-erp"><strong>ราคาขาย ERP:</strong> ฿${erp.srp || erp.erpPrice || 0}</div>
+      `;
+
+      // Col 2: AI Draft
+      const enriched = d.enrichedSalesFields || {};
+      let draftHtml = `<div class="diff-item diff-verified"><strong>จุดเด่นการขาย:</strong> ${d.salesSummary || '-'}</div>`;
+      for (const [k, v] of Object.entries(enriched)) {
+        const val = typeof v === 'object' ? (v.displayValue || JSON.stringify(v.value)) : v;
+        const st = typeof v === 'object' ? v.status : 'AI_EXTRACTED';
+        const stClass = st === 'VERIFIED_FROM_ERP' ? 'diff-erp' : (st === 'VERIFIED' ? 'diff-verified' : 'diff-unverified');
+        draftHtml += `<div class="diff-item ${stClass}"><strong>${k}:</strong> ${val} <span style="font-size:10px; opacity:0.8;">[${st}]</span></div>`;
+      }
+      document.getElementById('colDraftContent').innerHTML = draftHtml;
+
+      // Col 3: Evidence Source & Critic
+      let evidenceHtml = `
+        <div class="diff-item diff-verified"><strong>Critic Decision:</strong> ${critic.recommendation || 'APPROVE_SALES_READY'}</div>
+        <div class="diff-item diff-erp"><strong>Publishing Authority:</strong> STRICTLY DENIED (Read-Only)</div>
+        <div class="diff-item diff-verified"><strong>Family Group:</strong> ${fam ? fam.familyName : 'Single Variant'}</div>
+        <div class="diff-item diff-verified"><strong>Unsupported Claims:</strong> ${critic.unsupportedClaims?.length || 0} รายการ</div>
+        <div class="diff-item diff-verified"><strong>Variant Conflicts:</strong> ${critic.variantConflicts?.length || 0} รายการ</div>
+      `;
+      document.getElementById('colEvidenceContent').innerHTML = evidenceHtml;
+
+      document.getElementById('reviewModal').classList.add('open');
+    }
+
+    document.getElementById('btnCloseModal').addEventListener('click', () => {
+      document.getElementById('reviewModal').classList.remove('open');
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderTable();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      renderTable();
+    });
+
+    initDashboard();
+  </script>
+</body>
+</html>

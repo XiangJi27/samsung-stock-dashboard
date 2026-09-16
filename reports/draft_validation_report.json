@@ -1,0 +1,2428 @@
+{
+  "generatedAt": "C:\\Users\\JarNJay\\.gemini\\antigravity-ide\\scratch\\samsung-stock-dashboard\\reports",
+  "totalDraftsAudited": 268,
+  "outcomes": {
+    "PASS": 191,
+    "WARNING": 0,
+    "REVIEW_REQUIRED": 77,
+    "BLOCKED_CONFLICT": 0
+  },
+  "duplicatePns": [],
+  "duplicateGtins": [],
+  "familyCollisions": [],
+  "blockedViolationsCount": 0,
+  "evaluations": [
+    {
+      "draftId": "DRAFT-PM6931481215697",
+      "inventoryPn": "PM6931481215697",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6941876265732",
+      "inventoryPn": "6941876265732",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-SSG-EP-T4511XBEGTH",
+      "inventoryPn": "SSG-EP-T4511XBEGTH",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EP-T2510NWEGTH",
+      "inventoryPn": "EP-T2510NWEGTH",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437345",
+      "inventoryPn": "8859703437345",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216623877",
+      "inventoryPn": "8859216623877",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216623860",
+      "inventoryPn": "8859216623860",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216846719",
+      "inventoryPn": "8859216846719",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216860326",
+      "inventoryPn": "8859216860326",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216860241",
+      "inventoryPn": "8859216860241",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PREMIUM0017044",
+      "inventoryPn": "PREMIUM0017044",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PREMIUM-665477",
+      "inventoryPn": "PREMIUM-665477",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EP-T6010NBEGTH",
+      "inventoryPn": "EP-T6010NBEGTH",
+      "productType": "WIRELESS_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM4897121009793",
+      "inventoryPn": "PM4897121009793",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859763200989",
+      "inventoryPn": "8859763200989",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PREMIUM0017046",
+      "inventoryPn": "PREMIUM0017046",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703436560",
+      "inventoryPn": "8859703436560",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829033",
+      "inventoryPn": "8859216829033",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EP-T4511NBEGTH",
+      "inventoryPn": "EP-T4511NBEGTH",
+      "productType": "WIRELESS_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PREMIUM-665478",
+      "inventoryPn": "PREMIUM-665478",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM-8806090284687",
+      "inventoryPn": "PM-8806090284687",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216803910",
+      "inventoryPn": "8859216803910",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6931481215710",
+      "inventoryPn": "6931481215710",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859289657762",
+      "inventoryPn": "8859289657762",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859289665477",
+      "inventoryPn": "8859289665477",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-SSG-EP-DN975BWEGWW",
+      "inventoryPn": "SSG-EP-DN975BWEGWW",
+      "productType": "DATA_CABLE",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703443339",
+      "inventoryPn": "8859703443339",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-XF966SBEGWW",
+      "inventoryPn": "EF-XF966SBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433590",
+      "inventoryPn": "8859703433590",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6941876265749",
+      "inventoryPn": "6941876265749",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703436409",
+      "inventoryPn": "8859703436409",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PREMIUM-665479",
+      "inventoryPn": "PREMIUM-665479",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-4710343478164",
+      "inventoryPn": "4710343478164",
+      "productType": "DATA_CABLE",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703436669",
+      "inventoryPn": "8859703436669",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433828",
+      "inventoryPn": "8859703433828",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299669979",
+      "inventoryPn": "8800299669979",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QS948CTEGWW",
+      "inventoryPn": "EF-QS948CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216828746",
+      "inventoryPn": "8859216828746",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6941876238958",
+      "inventoryPn": "6941876238958",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703423812",
+      "inventoryPn": "8859703423812",
+      "productType": "TABLET_CASE",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216828753",
+      "inventoryPn": "8859216828753",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EP-T4511XBEGTH",
+      "inventoryPn": "EP-T4511XBEGTH",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM-8806097071891",
+      "inventoryPn": "PM-8806097071891",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703435532",
+      "inventoryPn": "8859703435532",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437659",
+      "inventoryPn": "8859703437659",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-Z-SMARTTAG2WMR",
+      "inventoryPn": "Z-SMARTTAG2WMR",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216846726",
+      "inventoryPn": "8859216846726",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216804030",
+      "inventoryPn": "8859216804030",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829064",
+      "inventoryPn": "8859216829064",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437499",
+      "inventoryPn": "8859703437499",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703426073",
+      "inventoryPn": "8859703426073",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PF766TNEGWW",
+      "inventoryPn": "EF-PF766TNEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703435204",
+      "inventoryPn": "8859703435204",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216860401",
+      "inventoryPn": "8859216860401",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216804023",
+      "inventoryPn": "8859216804023",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437482",
+      "inventoryPn": "8859703437482",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829026",
+      "inventoryPn": "8859216829026",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299669900",
+      "inventoryPn": "8800299669900",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299703239",
+      "inventoryPn": "8800299703239",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703443599",
+      "inventoryPn": "8859703443599",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF971CVEGWW",
+      "inventoryPn": "EF-EF971CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299702874",
+      "inventoryPn": "8800299702874",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829040",
+      "inventoryPn": "8859216829040",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829057",
+      "inventoryPn": "8859216829057",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829415",
+      "inventoryPn": "8859216829415",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FPS948PGAJW",
+      "inventoryPn": "GP-FPS948PGAJW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM6936678491526",
+      "inventoryPn": "PM6936678491526",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829156",
+      "inventoryPn": "8859216829156",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433569",
+      "inventoryPn": "8859703433569",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-745883867080",
+      "inventoryPn": "745883867080",
+      "productType": "DATA_CABLE",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM-MS20A3010AL/ST",
+      "inventoryPn": "PM-MS20A3010AL/ST",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QS741CTEGWW",
+      "inventoryPn": "EF-QS741CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216804122",
+      "inventoryPn": "8859216804122",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703426066",
+      "inventoryPn": "8859703426066",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QS947CTEGWW",
+      "inventoryPn": "EF-QS947CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703446620",
+      "inventoryPn": "8859703446620",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PF766TBEGWW",
+      "inventoryPn": "EF-PF766TBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437468",
+      "inventoryPn": "8859703437468",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703443612",
+      "inventoryPn": "8859703443612",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829255",
+      "inventoryPn": "8859216829255",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433606",
+      "inventoryPn": "8859703433606",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-Z-ADAPTER45QHB",
+      "inventoryPn": "Z-ADAPTER45QHB",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216804085",
+      "inventoryPn": "8859216804085",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703443605",
+      "inventoryPn": "8859703443605",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703443650",
+      "inventoryPn": "8859703443650",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-CS741CTEGWW",
+      "inventoryPn": "EF-CS741CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF971CBEGWW",
+      "inventoryPn": "EF-EF971CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF976CBEGWW",
+      "inventoryPn": "EF-EF976CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES741CBEGWW",
+      "inventoryPn": "EF-ES741CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF776CVEGWW",
+      "inventoryPn": "EF-EF776CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-FF776CBEGWW",
+      "inventoryPn": "EF-FF776CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES947CVEGWW",
+      "inventoryPn": "EF-ES947CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM8859289684768",
+      "inventoryPn": "PM8859289684768",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216804108",
+      "inventoryPn": "8859216804108",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216829019",
+      "inventoryPn": "8859216829019",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437581",
+      "inventoryPn": "8859703437581",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437536",
+      "inventoryPn": "8859703437536",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216739264",
+      "inventoryPn": "8859216739264",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6975061532583",
+      "inventoryPn": "6975061532583",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437451",
+      "inventoryPn": "8859703437451",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF776CBEGWW",
+      "inventoryPn": "EF-EF776CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES741CLEGWW",
+      "inventoryPn": "EF-ES741CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QF971CTEGWW",
+      "inventoryPn": "EF-QF971CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-194644200176",
+      "inventoryPn": "194644200176",
+      "productType": "BLUETOOTH_SPEAKER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6975061532576",
+      "inventoryPn": "6975061532576",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6975061532590",
+      "inventoryPn": "6975061532590",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299702935",
+      "inventoryPn": "8800299702935",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703443667",
+      "inventoryPn": "8859703443667",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-CF976CTEGWW",
+      "inventoryPn": "EF-CF976CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF976CVEGWW",
+      "inventoryPn": "EF-EF976CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES947CBEGWW",
+      "inventoryPn": "EF-ES947CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KF971SBEGWW",
+      "inventoryPn": "EF-KF971SBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KF976SBEGWW",
+      "inventoryPn": "EF-KF976SBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KF976SNEGWW",
+      "inventoryPn": "EF-KF976SNEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-RA376CBEGWW",
+      "inventoryPn": "EF-RA376CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS741CBEGWW",
+      "inventoryPn": "EF-SS741CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS741CLEGWW",
+      "inventoryPn": "EF-SS741CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS942CBEGWW",
+      "inventoryPn": "EF-SS942CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS947CVEGWW",
+      "inventoryPn": "EF-SS947CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS948CVEGWW",
+      "inventoryPn": "EF-SS948CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6941876222087",
+      "inventoryPn": "6941876222087",
+      "productType": "POWER_BANK",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6941876258628",
+      "inventoryPn": "6941876258628",
+      "productType": "POWER_BANK",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-CF971CTEGWW",
+      "inventoryPn": "EF-CF971CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-DX730UBEGTH",
+      "inventoryPn": "EF-DX730UBEGTH",
+      "productType": "TABLET_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES947CLEGWW",
+      "inventoryPn": "EF-ES947CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KF971SREGWW",
+      "inventoryPn": "EF-KF971SREGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS947CBEGWW",
+      "inventoryPn": "EF-SS947CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS948CLEGWW",
+      "inventoryPn": "EF-SS948CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-UA576CTEGWW",
+      "inventoryPn": "EF-UA576CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-UF776CTEGWW",
+      "inventoryPn": "EF-UF776CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-US741CTEGWW",
+      "inventoryPn": "EF-US741CTEGWW",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-US947CTEGWW",
+      "inventoryPn": "EF-US947CTEGWW",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL32SMEGWW",
+      "inventoryPn": "ET-SNL32SMEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6902957323888",
+      "inventoryPn": "6902957323888",
+      "productType": "POWER_BANK",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6975061531258",
+      "inventoryPn": "6975061531258",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QA366CTEGWW",
+      "inventoryPn": "EF-QA366CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS942CVEGWW",
+      "inventoryPn": "EF-SS942CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS948CBEGWW",
+      "inventoryPn": "EF-SS948CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437543",
+      "inventoryPn": "8859703437543",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703400226",
+      "inventoryPn": "8859703400226",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299712668",
+      "inventoryPn": "8800299712668",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433576",
+      "inventoryPn": "8859703433576",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703436690",
+      "inventoryPn": "8859703436690",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES942CBEGWW",
+      "inventoryPn": "EF-ES942CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QF976CTEGWW",
+      "inventoryPn": "EF-QF976CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FPF966PGBTW",
+      "inventoryPn": "GP-FPF966PGBTW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-CS948CTEGWW",
+      "inventoryPn": "EF-CS948CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF776CGEGWW",
+      "inventoryPn": "EF-EF776CGEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF776CWEGWW",
+      "inventoryPn": "EF-EF776CWEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF971CGEGWW",
+      "inventoryPn": "EF-EF971CGEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF971CWEGWW",
+      "inventoryPn": "EF-EF971CWEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES741CPEGWW",
+      "inventoryPn": "EF-ES741CPEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES942CLEGWW",
+      "inventoryPn": "EF-ES942CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES947CWEGWW",
+      "inventoryPn": "EF-ES947CWEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-FF776CJEGWW",
+      "inventoryPn": "EF-FF776CJEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KF976SREGWW",
+      "inventoryPn": "EF-KF976SREGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS947SCEGWW",
+      "inventoryPn": "EF-KS947SCEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS947SNEGWW",
+      "inventoryPn": "EF-KS947SNEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS947SREGWW",
+      "inventoryPn": "EF-KS947SREGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS948SCEGWW",
+      "inventoryPn": "EF-KS948SCEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-MF966CMEGWW",
+      "inventoryPn": "EF-MF966CMEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PA576CVEGWW",
+      "inventoryPn": "EF-PA576CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS741CMEGWW",
+      "inventoryPn": "EF-SS741CMEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS942CJEGWW",
+      "inventoryPn": "EF-SS942CJEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS942CLEGWW",
+      "inventoryPn": "EF-SS942CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS947CLEGWW",
+      "inventoryPn": "EF-SS947CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-UF976CTEGWW",
+      "inventoryPn": "EF-UF976CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-US942CTEGWW",
+      "inventoryPn": "EF-US942CTEGWW",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-XF976SBEGWW",
+      "inventoryPn": "EF-XF976SBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SBL71MAEGWW",
+      "inventoryPn": "ET-SBL71MAEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SBL71MGEGWW",
+      "inventoryPn": "ET-SBL71MGEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SBL71MJEGWW",
+      "inventoryPn": "ET-SBL71MJEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SBL71MSEGWW",
+      "inventoryPn": "ET-SBL71MSEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL34SBEGWW",
+      "inventoryPn": "ET-SNL34SBEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL34SYEGWW",
+      "inventoryPn": "ET-SNL34SYEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL71MDEGWW",
+      "inventoryPn": "ET-SNL71MDEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL71MGEGWW",
+      "inventoryPn": "ET-SNL71MGEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL71MLEGWW",
+      "inventoryPn": "ET-SNL71MLEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL71MOEGWW",
+      "inventoryPn": "ET-SNL71MOEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL32SMEGWW",
+      "inventoryPn": "ET-SVL32SMEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL32SNEGWW",
+      "inventoryPn": "ET-SVL32SNEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL32SWEGWW",
+      "inventoryPn": "ET-SVL32SWEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL70MFEGWW",
+      "inventoryPn": "ET-SVL70MFEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL70MGEGWW",
+      "inventoryPn": "ET-SVL70MGEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL70MJEGWW",
+      "inventoryPn": "ET-SVL70MJEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL70MKEGWW",
+      "inventoryPn": "ET-SVL70MKEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL70MLEGWW",
+      "inventoryPn": "ET-SVL70MLEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SXL34SBEGWW",
+      "inventoryPn": "ET-SXL34SBEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SXL34SMEGWW",
+      "inventoryPn": "ET-SXL34SMEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FFF976YCATW",
+      "inventoryPn": "GP-FFF976YCATW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-SS-VC-AX32BG3100GBST",
+      "inventoryPn": "SS-VC-AX32BG3100GBST",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-6975061531234",
+      "inventoryPn": "6975061531234",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216834631",
+      "inventoryPn": "8859216834631",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES942CVEGWW",
+      "inventoryPn": "EF-ES942CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KF971SNEGWW",
+      "inventoryPn": "EF-KF971SNEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PA376CBEGWW",
+      "inventoryPn": "EF-PA376CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PA376CKEGWW",
+      "inventoryPn": "EF-PA376CKEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PA376CVEGWW",
+      "inventoryPn": "EF-PA376CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QA376CTEGWW",
+      "inventoryPn": "EF-QA376CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QS942CTEGWW",
+      "inventoryPn": "EF-QS942CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-RS947CBEGWW",
+      "inventoryPn": "EF-RS947CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-UF971CTEGWW",
+      "inventoryPn": "EF-UF971CTEGWW",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-US936CTEGWW",
+      "inventoryPn": "EF-US936CTEGWW",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-XF971SBEGWW",
+      "inventoryPn": "EF-XF971SBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL32SPEGWW",
+      "inventoryPn": "ET-SNL32SPEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FCX626NNCBH",
+      "inventoryPn": "GP-FCX626NNCBH",
+      "productType": "TABLET_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FFF971YCATW",
+      "inventoryPn": "GP-FFF971YCATW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FPS947PGAJW",
+      "inventoryPn": "GP-FPS947PGAJW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM8806094095647",
+      "inventoryPn": "PM8806094095647",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM8806094297584",
+      "inventoryPn": "PM8806094297584",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-SS-MWO-MS20A3010AL/S",
+      "inventoryPn": "SS-MWO-MS20A3010AL/S",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-Z-FLIP7FECASE1",
+      "inventoryPn": "Z-FLIP7FECASE1",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-Z-FLIP7FECASE3",
+      "inventoryPn": "Z-FLIP7FECASE3",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-Z-FLIP7FECASE4",
+      "inventoryPn": "Z-FLIP7FECASE4",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM6931481299710",
+      "inventoryPn": "PM6931481299710",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859095890766",
+      "inventoryPn": "8859095890766",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-SSG-EP-T2510NBEGTH",
+      "inventoryPn": "SSG-EP-T2510NBEGTH",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703426530",
+      "inventoryPn": "8859703426530",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM4897121002558",
+      "inventoryPn": "PM4897121002558",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM6958444604725",
+      "inventoryPn": "PM6958444604725",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216739240",
+      "inventoryPn": "8859216739240",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216739257",
+      "inventoryPn": "8859216739257",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216739301",
+      "inventoryPn": "8859216739301",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216739363",
+      "inventoryPn": "8859216739363",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216755578",
+      "inventoryPn": "8859216755578",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FCX400RLABH",
+      "inventoryPn": "GP-FCX400RLABH",
+      "productType": "TABLET_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859095890773",
+      "inventoryPn": "8859095890773",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8800299642811",
+      "inventoryPn": "8800299642811",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-UA566CTEGWW",
+      "inventoryPn": "EF-UA566CTEGWW",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-UF956CTEGWW",
+      "inventoryPn": "EF-UF956CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-TOS938HIAPW",
+      "inventoryPn": "GP-TOS938HIAPW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-S-33016170",
+      "inventoryPn": "S-33016170",
+      "productType": "WALL_CHARGER",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216765355",
+      "inventoryPn": "8859216765355",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216765379",
+      "inventoryPn": "8859216765379",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859216765386",
+      "inventoryPn": "8859216765386",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433583",
+      "inventoryPn": "8859703433583",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS948SNEGWW",
+      "inventoryPn": "EF-KS948SNEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PF766TMEGWW",
+      "inventoryPn": "EF-PF766TMEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QA576CTEGWW",
+      "inventoryPn": "EF-QA576CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EP-P2900BBEGWW",
+      "inventoryPn": "EP-P2900BBEGWW",
+      "productType": "WIRELESS_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859698210176",
+      "inventoryPn": "8859698210176",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859698210183",
+      "inventoryPn": "8859698210183",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433354",
+      "inventoryPn": "8859703433354",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703433699",
+      "inventoryPn": "8859703433699",
+      "productType": "SCREEN_PROTECTOR",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-8859703437666",
+      "inventoryPn": "8859703437666",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-BX930PBEGWW",
+      "inventoryPn": "EF-BX930PBEGWW",
+      "productType": "TABLET_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-EF976CWEGWW",
+      "inventoryPn": "EF-EF976CWEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES741CMEGWW",
+      "inventoryPn": "EF-ES741CMEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ES948CLEGWW",
+      "inventoryPn": "EF-ES948CLEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS947SSEGWW",
+      "inventoryPn": "EF-KS947SSEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS948SREGWW",
+      "inventoryPn": "EF-KS948SREGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-KS948SSEGWW",
+      "inventoryPn": "EF-KS948SSEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-PA366CVEGWW",
+      "inventoryPn": "EF-PA366CVEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-QF776CTEGWW",
+      "inventoryPn": "EF-QF776CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-RS942CBEGWW",
+      "inventoryPn": "EF-RS942CBEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS947CJEGWW",
+      "inventoryPn": "EF-SS947CJEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-SS948CJEGWW",
+      "inventoryPn": "EF-SS948CJEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-VF766PJEGWW",
+      "inventoryPn": "EF-VF766PJEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-EF-ZF766CTEGWW",
+      "inventoryPn": "EF-ZF766CTEGWW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL34SLEGWW",
+      "inventoryPn": "ET-SNL34SLEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SNL71MBEGWW",
+      "inventoryPn": "ET-SNL71MBEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SOL30SWEGWW-D",
+      "inventoryPn": "ET-SOL30SWEGWW-D",
+      "productType": "DEMO_DEVICE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL30SWEGWW-D",
+      "inventoryPn": "ET-SVL30SWEGWW-D",
+      "productType": "DEMO_DEVICE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL32SBEGWW",
+      "inventoryPn": "ET-SVL32SBEGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-ET-SVL32SREGWW",
+      "inventoryPn": "ET-SVL32SREGWW",
+      "productType": "WATCH_BAND",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-FPF966PGABW",
+      "inventoryPn": "GP-FPF966PGABW",
+      "productType": "PHONE_CASE",
+      "salesReadiness": "SALES_READY",
+      "outcome": "PASS",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-GP-PWU025WIABW",
+      "inventoryPn": "GP-PWU025WIABW",
+      "productType": "WIRELESS_CHARGER",
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    },
+    {
+      "draftId": "DRAFT-PM6931481286437",
+      "inventoryPn": "PM6931481286437",
+      "productType": null,
+      "salesReadiness": "HOLD_REVIEW",
+      "outcome": "REVIEW_REQUIRED",
+      "violations": [],
+      "warnings": []
+    }
+  ]
+}

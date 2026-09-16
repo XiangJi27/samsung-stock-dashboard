@@ -262,6 +262,8 @@ def main():
             "f1": f1,
             "f2": f2,
             "total": total,
+            "srp": float(item.get("srp", 0.0)),
+            "erpPrice": float(item.get("srp", 0.0)),
             "snapshotLockedAt": datetime.now().isoformat()
         }
         

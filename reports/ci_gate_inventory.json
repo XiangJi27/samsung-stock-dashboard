@@ -15,8 +15,8 @@
     "evidence": {
       "errors": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-02-PRICE-EQUATION",
@@ -34,8 +34,8 @@
     "evidence": {
       "mismatches": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-03-STUDENT-RULE",
@@ -53,8 +53,8 @@
     "evidence": {
       "violations": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-04-PASS-F-ISOLATION",
@@ -72,8 +72,8 @@
     "evidence": {
       "leaks": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-05-TRADE-UP-ISOLATION",
@@ -91,8 +91,8 @@
     "evidence": {
       "leaks": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-06-STOCK-SUM",
@@ -110,8 +110,8 @@
     "evidence": {
       "errors": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-07-A07-GOLDEN",
@@ -139,8 +139,8 @@
       ],
       "mismatches": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-08-SECRET-LEAK",
@@ -158,8 +158,8 @@
     "evidence": {
       "leaks": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "GATE-EXACT-PN",
@@ -181,8 +181,8 @@
       "executed": true,
       "executionMode": "LIVE_DATA_VALIDATION",
       "status": "PASSED",
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a",
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b",
       "inputFiles": {
         "stockMaster": {
           "path": "stock_full_data.json",
@@ -241,10 +241,10 @@
         "CONNECTIVITY_MISMATCH",
         "AMBIGUOUS_MODEL_MATCH"
       ],
-      "generatedAt": "2026-09-16T12:44:33.070221"
+      "generatedAt": "2026-09-16T14:30:42.636958"
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "GATE-BATCH-CONSISTENCY",
@@ -268,8 +268,8 @@
       "executed": true,
       "executionMode": "LIVE_DATA_VALIDATION",
       "status": "PASSED",
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a",
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b",
       "verifiedInputs": {
         "stockBatchId": "IMPORT-20260906-002",
         "promotionBatchId": "BATCH-20260907-105441",
@@ -293,10 +293,10 @@
       },
       "violationCount": 0,
       "violations": [],
-      "generatedAt": "2026-09-16T12:44:33.070221"
+      "generatedAt": "2026-09-16T14:30:42.636958"
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "GATE-RUNTIME-HASH",
@@ -314,15 +314,15 @@
     "evidence": {
       "gate": "RUNTIME_HASH_VERIFICATION_GATE",
       "status": "PASSED",
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a",
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b",
       "totalManifestFiles": 23,
       "verifiedFileCount": 23,
       "violationCount": 0,
       "violations": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-09-SPEC-IDENTITY-GUARD",
@@ -340,12 +340,12 @@
     "evidence": {
       "gate": "RULE_09_SPEC_IDENTITY_GUARD",
       "status": "PASSED",
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a",
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b",
       "violations": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-10-ACCESSORY-MASTER",
@@ -364,12 +364,12 @@
     "evidence": {
       "gate": "RULE_10_ACCESSORY_MASTER",
       "status": "PASSED",
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a",
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b",
       "violations": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   {
     "ruleId": "RULE-11-MARKETPLACE-EVIDENCE",
@@ -388,11 +388,92 @@
     "evidence": {
       "gate": "RULE_11_MARKETPLACE_EVIDENCE",
       "status": "PASSED",
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a",
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b",
       "violations": []
     },
-    "generatedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
+  },
+  {
+    "ruleId": "RULE-12-WORK-QUEUE-INTEGRITY",
+    "name": "Product Verification Work Queue & Scope Integrity Gate",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "verify_verification_work_queue",
+    "inputFiles": [
+      "assets/js/pilot-stock-snapshot.js",
+      "reports/product_verification_work_queue.json"
+    ],
+    "recordsChecked": 399,
+    "expected": "Zero duplicate P/Ns, exact scope partition (333 F1-active + 66 F2-only = 399), F1 quantity = 1701, priority invariants hold",
+    "actual": "0 violations (399 records verified, 333 F1-active, 66 F2-only, 1701 F1 quantity)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "violations": []
+    },
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
+  },
+  {
+    "ruleId": "RULE-13-AUTO-DRAFT-AND-PUBLISH",
+    "name": "Auto-Draft & Shadow Auto-Publish Governance Gate",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "verify_auto_draft_and_publish",
+    "inputFiles": [
+      "data/product-accessory-drafts.json",
+      "reports/auto_publish_shadow_audit.json"
+    ],
+    "recordsChecked": 268,
+    "expected": "Drafts schema valid, ERP immutability locked, ambiguity held in review, shadow mode zero master mutation",
+    "actual": "0 violations (268 drafts valid, 25 ambiguous held, shadow mode 100% safe)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "violations": []
+    },
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
+  },
+  {
+    "ruleId": "RULE-14-SALES-READINESS-GOVERNANCE",
+    "name": "Sales Readiness & 4-Gate Framework Governance",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "verify_sales_ready_fields",
+    "inputFiles": [
+      "data/product-accessory-drafts.json",
+      "reports/sales_readiness_dashboard.json"
+    ],
+    "recordsChecked": 191,
+    "expected": "SALES_READY fields populated, zero phone spec leakage in accessories, zero unproven claims, 4-gate arithmetic sound",
+    "actual": "0 violations (191 sales-ready drafts, 69.72% F1 coverage, 77.18% P/N coverage, 0 leaks)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "violations": []
+    },
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
+  },
+  {
+    "ruleId": "RULE-15-DRAFT-VALIDATION-AND-CRITIC",
+    "name": "Multi-Tier Draft Validation & AI Critic Governance Gate",
+    "gateLevel": "TOP_LEVEL_GATE",
+    "functionName": "verify_product_drafts_and_ai_critic",
+    "inputFiles": [
+      "data/product-accessory-drafts.json",
+      "reports/draft_validation_report.json",
+      "reports/ai_critic_review.json"
+    ],
+    "recordsChecked": 268,
+    "expected": "JSON Schema valid, 0 duplicate P/N/GTIN, 0 ERP immutability mutations, 0 family collisions, 0 phone spec leaks, 0 unproven high-risk claims, Critic read-only",
+    "actual": "0 violations (268 drafts audited, 191 sales-ready valid, 0 mutations, 0 collisions, 0 leaks, Critic pass)",
+    "status": "PASS",
+    "affectedRecords": 0,
+    "evidence": {
+      "violations": []
+    },
+    "generatedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   }
 ]

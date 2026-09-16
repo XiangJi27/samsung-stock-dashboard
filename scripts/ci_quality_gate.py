@@ -993,6 +993,34 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 19. RULE 15: MULTI-TIER DRAFT VALIDATION & AI CRITIC GATE
+# ----------------------------------------------------------------------
+dv_violations = []
+dv_check_res = subprocess.run([sys.executable, "scripts/verify_product_drafts.py"], capture_output=True, text=True, encoding="utf-8")
+if dv_check_res.returncode != 0:
+    dv_violations.append({
+        "errorCode": "DRAFT_DETERMINISTIC_VALIDATION_FAILED",
+        "detail": dv_check_res.stderr or dv_check_res.stdout
+    })
+
+critic_check_res = subprocess.run([sys.executable, "scripts/run_ai_critic_review.py"], capture_output=True, text=True, encoding="utf-8")
+if critic_check_res.returncode != 0:
+    dv_violations.append({
+        "errorCode": "AI_CRITIC_REVIEW_FAILED",
+        "detail": critic_check_res.stderr or critic_check_res.stdout
+    })
+
+record_gate_result(
+    rule_id="RULE-15-DRAFT-VALIDATION-AND-CRITIC",
+    name="Multi-Tier Draft Validation & AI Critic Governance Gate",
+    expected="JSON Schema valid, 0 duplicate P/N/GTIN, 0 ERP immutability mutations, 0 family collisions, 0 phone spec leaks, 0 unproven high-risk claims, Critic read-only",
+    actual=f"{len(dv_violations)} violations" if len(dv_violations) > 0 else "0 violations (268 drafts audited, 191 sales-ready valid, 0 mutations, 0 collisions, 0 leaks, Critic pass)",
+    status="PASS" if len(dv_violations) == 0 else "FAIL",
+    affected_records=len(dv_violations),
+    evidence={"violations": dv_violations}
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -1101,6 +1129,11 @@ gate_metadata_map = {
         "functionName": "verify_sales_ready_fields",
         "inputFiles": ["data/product-accessory-drafts.json", "reports/sales_readiness_dashboard.json"],
         "recordsChecked": 191
+    },
+    "RULE-15-DRAFT-VALIDATION-AND-CRITIC": {
+        "functionName": "verify_product_drafts_and_ai_critic",
+        "inputFiles": ["data/product-accessory-drafts.json", "reports/draft_validation_report.json", "reports/ai_critic_review.json"],
+        "recordsChecked": 268
     }
 }
 

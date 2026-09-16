@@ -1,12 +1,12 @@
 {
   "summary": {
     "gateStatus": "PASSED",
-    "totalGatesEvaluated": 14,
-    "passedCount": 14,
+    "totalGatesEvaluated": 18,
+    "passedCount": 18,
     "warningCount": 0,
     "violationCount": 0,
-    "executedAt": "2026-09-16T12:44:33.070221",
-    "commitSha": "ef99c6a"
+    "executedAt": "2026-09-16T14:30:42.636958",
+    "commitSha": "209136b"
   },
   "gates": [
     {
@@ -19,8 +19,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-02-PRICE-EQUATION",
@@ -32,8 +32,8 @@
       "evidence": {
         "mismatches": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-03-STUDENT-RULE",
@@ -45,8 +45,8 @@
       "evidence": {
         "violations": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-04-PASS-F-ISOLATION",
@@ -58,8 +58,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-05-TRADE-UP-ISOLATION",
@@ -71,8 +71,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-06-STOCK-SUM",
@@ -84,8 +84,8 @@
       "evidence": {
         "errors": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-07-A07-GOLDEN",
@@ -107,8 +107,8 @@
         ],
         "mismatches": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-08-SECRET-LEAK",
@@ -120,8 +120,8 @@
       "evidence": {
         "leaks": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "GATE-EXACT-PN",
@@ -136,8 +136,8 @@
         "executed": true,
         "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-16T12:44:33.070221",
-        "commitSha": "ef99c6a",
+        "executedAt": "2026-09-16T14:30:42.636958",
+        "commitSha": "209136b",
         "inputFiles": {
           "stockMaster": {
             "path": "stock_full_data.json",
@@ -196,10 +196,10 @@
           "CONNECTIVITY_MISMATCH",
           "AMBIGUOUS_MODEL_MATCH"
         ],
-        "generatedAt": "2026-09-16T12:44:33.070221"
+        "generatedAt": "2026-09-16T14:30:42.636958"
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "GATE-BATCH-CONSISTENCY",
@@ -214,8 +214,8 @@
         "executed": true,
         "executionMode": "LIVE_DATA_VALIDATION",
         "status": "PASSED",
-        "executedAt": "2026-09-16T12:44:33.070221",
-        "commitSha": "ef99c6a",
+        "executedAt": "2026-09-16T14:30:42.636958",
+        "commitSha": "209136b",
         "verifiedInputs": {
           "stockBatchId": "IMPORT-20260906-002",
           "promotionBatchId": "BATCH-20260907-105441",
@@ -239,10 +239,10 @@
         },
         "violationCount": 0,
         "violations": [],
-        "generatedAt": "2026-09-16T12:44:33.070221"
+        "generatedAt": "2026-09-16T14:30:42.636958"
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "GATE-RUNTIME-HASH",
@@ -254,15 +254,15 @@
       "evidence": {
         "gate": "RUNTIME_HASH_VERIFICATION_GATE",
         "status": "PASSED",
-        "executedAt": "2026-09-16T12:44:33.070221",
-        "commitSha": "ef99c6a",
+        "executedAt": "2026-09-16T14:30:42.636958",
+        "commitSha": "209136b",
         "totalManifestFiles": 23,
         "verifiedFileCount": 23,
         "violationCount": 0,
         "violations": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-09-SPEC-IDENTITY-GUARD",
@@ -274,12 +274,12 @@
       "evidence": {
         "gate": "RULE_09_SPEC_IDENTITY_GUARD",
         "status": "PASSED",
-        "executedAt": "2026-09-16T12:44:33.070221",
-        "commitSha": "ef99c6a",
+        "executedAt": "2026-09-16T14:30:42.636958",
+        "commitSha": "209136b",
         "violations": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-10-ACCESSORY-MASTER",
@@ -291,12 +291,12 @@
       "evidence": {
         "gate": "RULE_10_ACCESSORY_MASTER",
         "status": "PASSED",
-        "executedAt": "2026-09-16T12:44:33.070221",
-        "commitSha": "ef99c6a",
+        "executedAt": "2026-09-16T14:30:42.636958",
+        "commitSha": "209136b",
         "violations": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     },
     {
       "ruleId": "RULE-11-MARKETPLACE-EVIDENCE",
@@ -308,12 +308,64 @@
       "evidence": {
         "gate": "RULE_11_MARKETPLACE_EVIDENCE",
         "status": "PASSED",
-        "executedAt": "2026-09-16T12:44:33.070221",
-        "commitSha": "ef99c6a",
+        "executedAt": "2026-09-16T14:30:42.636958",
+        "commitSha": "209136b",
         "violations": []
       },
-      "executedAt": "2026-09-16T12:44:33.070221",
-      "commitSha": "ef99c6a"
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
+    },
+    {
+      "ruleId": "RULE-12-WORK-QUEUE-INTEGRITY",
+      "name": "Product Verification Work Queue & Scope Integrity Gate",
+      "expected": "Zero duplicate P/Ns, exact scope partition (333 F1-active + 66 F2-only = 399), F1 quantity = 1701, priority invariants hold",
+      "actual": "0 violations (399 records verified, 333 F1-active, 66 F2-only, 1701 F1 quantity)",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "violations": []
+      },
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
+    },
+    {
+      "ruleId": "RULE-13-AUTO-DRAFT-AND-PUBLISH",
+      "name": "Auto-Draft & Shadow Auto-Publish Governance Gate",
+      "expected": "Drafts schema valid, ERP immutability locked, ambiguity held in review, shadow mode zero master mutation",
+      "actual": "0 violations (268 drafts valid, 25 ambiguous held, shadow mode 100% safe)",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "violations": []
+      },
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
+    },
+    {
+      "ruleId": "RULE-14-SALES-READINESS-GOVERNANCE",
+      "name": "Sales Readiness & 4-Gate Framework Governance",
+      "expected": "SALES_READY fields populated, zero phone spec leakage in accessories, zero unproven claims, 4-gate arithmetic sound",
+      "actual": "0 violations (191 sales-ready drafts, 69.72% F1 coverage, 77.18% P/N coverage, 0 leaks)",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "violations": []
+      },
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
+    },
+    {
+      "ruleId": "RULE-15-DRAFT-VALIDATION-AND-CRITIC",
+      "name": "Multi-Tier Draft Validation & AI Critic Governance Gate",
+      "expected": "JSON Schema valid, 0 duplicate P/N/GTIN, 0 ERP immutability mutations, 0 family collisions, 0 phone spec leaks, 0 unproven high-risk claims, Critic read-only",
+      "actual": "0 violations (268 drafts audited, 191 sales-ready valid, 0 mutations, 0 collisions, 0 leaks, Critic pass)",
+      "status": "PASS",
+      "affectedRecords": 0,
+      "evidence": {
+        "violations": []
+      },
+      "executedAt": "2026-09-16T14:30:42.636958",
+      "commitSha": "209136b"
     }
   ]
 }

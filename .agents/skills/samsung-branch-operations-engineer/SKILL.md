@@ -212,6 +212,7 @@ samsung-branch-operations-engineer/
         ├── product-spec-drawer.spec.ts
         ├── accessory-spec-drawer.spec.ts
         ├── marketplace-evidence.spec.ts
+        ├── sales-ready-drawer.spec.ts
         └── session-restore.spec.ts
 ```
 

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProductAccessoryDraft",
+  "description": "Validation schema for Samsung Branch Operations Product Accessory Drafts",
+  "type": "object",
+  "required": [
+    "draftId",
+    "inventoryPn",
+    "erpSnapshot",
+    "classificationStatus",
+    "draftStatus"
+  ],
+  "properties": {
+    "draftId": {
+      "type": "string",
+      "pattern": "^DRAFT-.+"
+    },
+    "inventoryPn": {
+      "type": "string",
+      "minLength": 1
+    },
+    "barcode": {
+      "type": ["string", "null"]
+    },
+    "brand": {
+      "type": "string",
+      "minLength": 1
+    },
+    "productType": {
+      "type": ["string", "null"]
+    },
+    "classificationStatus": {
+      "type": "string",
+      "enum": [
+        "CONFIRMED_FROM_ERP",
+        "CONFIRMED_FROM_MASTER",
+        "REVIEW_REQUIRED",
+        "BLOCKED_CONFLICT"
+      ]
+    },
+    "draftStatus": {
+      "type": "string",
+      "enum": [
+        "DRAFT_CREATED",
+        "ERP_EXTRACTED",
+        "SALES_READY",
+        "EVIDENCE_COLLECTING",
+        "EVIDENCE_INCOMPLETE",
+        "CLASSIFICATION_REVIEW_REQUIRED",
+        "HUMAN_REVIEW_REQUIRED",
+        "READY_TO_PUBLISH",
+        "PUBLISHED",
+        "REJECTED",
+        "BLOCKED_CONFLICT"
+      ]
+    },
+    "salesReadiness": {
+      "type": "string",
+      "enum": [
+        "SALES_READY",
+        "HOLD_REVIEW"
+      ]
+    },
+    "erpSnapshot": {
+      "type": "object",
+      "required": [
+        "inventoryPn",
+        "brand",
+        "description",
+        "cat1",
+        "cat2",
+        "cat3",
+        "f1",
+        "f2",
+        "total",
+        "erpPrice"
+      ],
+      "properties": {
+        "inventoryPn": { "type": "string" },
+        "barcode": { "type": ["string", "null"] },
+        "brand": { "type": "string" },
+        "description": { "type": "string" },
+        "cat1": { "type": "string" },
+        "cat2": { "type": "string" },
+        "cat3": { "type": "string" },
+        "f1": { "type": "integer", "minimum": 0 },
+        "f2": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 0 },
+        "srp": { "type": "number", "minimum": 0 },
+        "erpPrice": { "type": "number", "minimum": 0 }
+      }
+    },
+    "erpExtractedAttributes": {
+      "type": "object"
+    },
+    "enrichedSalesFields": {
+      "type": "object"
+    },
+    "searchPlan": {
+      "type": "array"
+    },
+    "candidateSources": {
+      "type": "array"
+    },
+    "candidateFields": {
+      "type": "object"
+    },
+    "conflictReports": {
+      "type": "array"
+    },
+    "salesSummary": {
+      "type": "string"
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH"]
+    }
+  }
+}

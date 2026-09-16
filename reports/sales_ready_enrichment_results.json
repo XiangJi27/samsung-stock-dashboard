@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T14:14:07.152116",
+  "generatedAt": "2026-09-16T14:27:47.833493",
   "summary": {
     "totalDrafts": 268,
     "salesReadyCount": 191,
@@ -431,16 +431,15 @@
     {
       "inventoryPn": "PM-8806090284687",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 17,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
@@ -588,32 +587,30 @@
     {
       "inventoryPn": "PM-8806097071891",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 7,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG B-series Souundbar HW-B400F 2.0ch Sub woofer)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
     {
       "inventoryPn": "Z-SMARTTAG2WMR",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 7,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium Samsung SmartTag2 - S26 Series)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
@@ -652,32 +649,30 @@
     {
       "inventoryPn": "PM-MS20A3010AL/ST",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 4,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Microwave oven SRT-20 liter)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
     {
       "inventoryPn": "Z-ADAPTER45QHB",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 3,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Adapter 45W without cable - Black)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
@@ -1214,32 +1209,30 @@
     {
       "inventoryPn": "PM8806094095647",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 1,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG ([PM]Samsung The Freestyle Case - Green)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
     {
       "inventoryPn": "PM8806094297584",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 1,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG ([PM]Samsung The Freestyle Skin - Green)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
@@ -1261,48 +1254,45 @@
     {
       "inventoryPn": "Z-FLIP7FECASE1",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 1,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Flip6 Silicone Case Black)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
     {
       "inventoryPn": "Z-FLIP7FECASE3",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 1,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Flip6 Clear Case Clear Case)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
     {
       "inventoryPn": "Z-FLIP7FECASE4",
       "brand": "SAMSUNG",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 1,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Flip6 Anti-reflecting Film Film)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
@@ -1339,16 +1329,15 @@
     {
       "inventoryPn": "PM6958444604725",
       "brand": "DIVOOM",
-      "productType": "PREMIUM_GIFT",
+      "productType": null,
       "f1": 0,
       "salesReadiness": "HOLD_REVIEW",
       "reasons": [
-        "Missing required sales fields: accessoryType, compatibleSeries"
+        "Product Type classification is ambiguous; requires human confirmation"
       ],
-      "salesSummary": "อุปกรณ์เสริม DIVOOM ([PM]Divoom MiniToo - White)",
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
       "missingFields": [
-        "accessoryType",
-        "compatibleSeries"
+        "productType"
       ],
       "riskLevel": "MEDIUM"
     },
