@@ -142,15 +142,13 @@
               ? window.resolveProductColor
               : function(it) {
                   const ex = String((it && it.color) || "").trim();
-                  if (ex && ex !== "ไม่ระบุสี") return ex;
+                  if (ex && ex !== "ไม่ระบุสี" && typeof window.isKnownColor === "function" && window.isKnownColor(ex)) return ex;
                   const d = (it && (it.description || it.raw_desc || it.model)) || "";
-                  const m = String(d).match(/\s*-\s*([^-]+)\s*$/);
-                  const cand = m ? m[1].trim() : "";
-                  if (!cand || /^\d/.test(cand) || /^(4G|5G|LTE|WI-?FI)$/i.test(cand)) return "";
-                  return cand;
+                  if (typeof window.extractColorFromDescription === "function") return window.extractColorFromDescription(d) || "";
+                  return "";
                 };
             if (!item.color || item.color === 'ไม่ระบุสี') {
-              item.color = resolveColor(item);
+              item.color = resolveColor(item) || 'ไม่ระบุสี';
             }
           });
         }

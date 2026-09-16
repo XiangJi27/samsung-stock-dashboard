@@ -207,80 +207,116 @@
     }
   }
 
-  const COLOR_CANONICAL_NAMES = {
-    navy: "Navy",
-    jetblack: "Jet Black",
-    icyblue: "Icy Blue",
-    lightviolet: "Light Violet",
-    "light violet": "Light Violet",
-    titaniumblack: "Titanium Black",
-    "titanium black": "Titanium Black",
-    titaniumsilverblue: "Titanium Silverblue",
-    "titanium silverblue": "Titanium Silverblue",
-    graphite: "Graphite",
-    pistachio: "Pistachio",
-    blueberry: "Blueberry"
-  };
-
-  function normalizeColorName(value) {
-    const raw = String(value || "").trim();
-    if (!raw) {
-      return "";
-    }
-    const key = raw.toLowerCase().replace(/\s+/g, " ");
-    return (
-      COLOR_CANONICAL_NAMES[key] ||
-      COLOR_CANONICAL_NAMES[key.replace(/\s+/g, "")] ||
-      raw
-        .toLowerCase()
-        .replace(/\b\w/g, char => char.toUpperCase())
-    );
-  }
-
-  // Minimal color allowlist used when window.isKnownColor is not yet available.
-  // Must be kept in sync with KNOWN_COLORS in prototype-stock.js.
-  const IMPORTER_KNOWN_COLORS_LC = new Set([
-    "titanium silverblue", "titanium black", "titanium gray", "titanium white",
-    "cobalt violet", "light violet", "light blue", "blue violet", "pink gold",
-    "pistachio", "graphite", "blueberry", "jetblack", "icyblue",
-    "silver", "white", "black", "gray", "grey", "violet", "lavender",
-    "cream", "pink", "mint", "navy", "coral red", "dark green", "dark blue",
-    "sky blue", "blue", "red", "green", "gold", "yellow", "orange", "beige",
-    "transparent", "clear",
+  const IMPORTER_COLOR_ALIASES = new Map([
+    ["BLACK", "Black"],
+    ["WHITE", "White"],
+    ["BLUE", "Blue"],
+    ["NAVY", "Navy"],
+    ["SILVER", "Silver"],
+    ["GRAY", "Grey"],
+    ["GREY", "Grey"],
+    ["GREEN", "Green"],
+    ["RED", "Red"],
+    ["PINK", "Pink"],
+    ["PURPLE", "Purple"],
+    ["ORANGE", "Orange"],
+    ["YELLOW", "Yellow"],
+    ["GOLD", "Gold"],
+    ["BEIGE", "Beige"],
+    ["BROWN", "Brown"],
+    ["CLEAR", "Clear"],
+    ["TRANSPARENT", "Clear"],
+    ["TRANSLUCENT", "Translucent"],
+    ["TITANIUM SILVERBLUE", "Titanium Silverblue"],
+    ["TITANIUM BLACK", "Titanium Black"],
+    ["TITANIUM GRAY", "Titanium Gray"],
+    ["TITANIUM GREY", "Titanium Gray"],
+    ["TITANIUM WHITE", "Titanium White"],
+    ["COBALT VIOLET", "Cobalt Violet"],
+    ["LIGHT VIOLET", "Light Violet"],
+    ["LIGHT BLUE", "Light Blue"],
+    ["BLUE VIOLET", "Blue Violet"],
+    ["PINK GOLD", "Pink Gold"],
+    ["PISTACHIO", "Pistachio"],
+    ["GRAPHITE", "Graphite"],
+    ["BLUEBERRY", "Blueberry"],
+    ["JETBLACK", "Jet Black"],
+    ["JET BLACK", "Jet Black"],
+    ["ICYBLUE", "Icy Blue"],
+    ["ICY BLUE", "Icy Blue"],
+    ["VIOLET", "Violet"],
+    ["LAVENDER", "Lavender"],
+    ["CREAM", "Cream"],
+    ["MINT", "Mint"],
+    ["CORAL RED", "Coral Red"],
+    ["DARK GREEN", "Dark Green"],
+    ["DARK BLUE", "Dark Blue"],
+    ["SKY BLUE", "Sky Blue"]
   ]);
+
+  function canonicalizeImporterColor(value) {
+    if (!value) return null;
+    const normalized = String(value)
+      .trim()
+      .replace(/\s+/g, " ")
+      .toUpperCase();
+    return IMPORTER_COLOR_ALIASES.get(normalized) || null;
+  }
 
   function isKnownColorImporter(candidate) {
     if (!candidate) return false;
     if (typeof window !== "undefined" && typeof window.isKnownColor === "function") {
       return window.isKnownColor(candidate);
     }
-    return IMPORTER_KNOWN_COLORS_LC.has(String(candidate).trim().toLowerCase().replace(/\s+/g, " "));
+    return canonicalizeImporterColor(candidate) !== null;
+  }
+
+  function normalizeColorName(value) {
+    if (typeof window !== "undefined" && typeof window.normalizeColorName === "function") {
+      return window.normalizeColorName(value);
+    }
+    const canonical = canonicalizeImporterColor(value);
+    if (canonical) return canonical;
+    const raw = String(value || "").trim();
+    return raw ? raw.toLowerCase().replace(/\b\w/g, char => char.toUpperCase()) : "";
   }
 
   function extractColorFromDescription(description) {
-    // RULE: Require a SPACE before the hyphen to avoid splitting model codes
-    // (D-Power, HW-T420, Type-C). Candidate must pass isKnownColorImporter — fail-closed.
     const text = String(description || "").trim();
-    if (!text) return "";
-    const spacedHyphenMatch = text.match(/\s+-\s*([A-Za-z][A-Za-z ]*)(\s*\([^)]*\))?\s*$/);
-    if (spacedHyphenMatch) {
-      const candidate = spacedHyphenMatch[1].trim();
-      if (isKnownColorImporter(candidate)) return candidate;
+    if (!text) return null;
+
+    if (typeof window !== "undefined" && typeof window.extractColorFromDescription === "function") {
+      return window.extractColorFromDescription(description);
     }
-    return "";
+
+    const patterns = [
+      /\(\s*([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*\)\s*$/,
+      /\s+[-–—]\s*([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*$/,
+      /(?:\s-|-\s*)([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*$/
+    ];
+
+    for (const pattern of patterns) {
+      const match = text.match(pattern);
+      if (!match) continue;
+      const candidate = match[1].trim();
+      const color = canonicalizeImporterColor(candidate);
+      if (color) return color;
+    }
+    return null;
   }
 
-  function resolveProductColor(item) {
+  function resolveProductColor(item, masterRecord) {
     if (typeof window !== "undefined" && typeof window.resolveProductColor === "function") {
-      return window.resolveProductColor(item);
+      return window.resolveProductColor(item, masterRecord);
     }
     // Fallback (offline / before prototype-stock.js loads)
-    const erpColor = String((item && item.color) || "").trim();
-    if (erpColor && erpColor !== "ไม่ระบุสี" && isKnownColorImporter(erpColor)) {
-      return normalizeColorName(erpColor);
+    const erpColor = String((item && (item.color || item.productColor || item.variantColor)) || "").trim();
+    if (erpColor && erpColor !== "ไม่ระบุสี") {
+      const canonical = canonicalizeImporterColor(erpColor);
+      if (canonical) return canonical;
     }
-    const description = (item && (item.description || item.raw_desc || item.model)) || "";
-    return normalizeColorName(extractColorFromDescription(description));
+    const description = (item && (item.description || item.raw_desc || item.model || item.name)) || "";
+    return extractColorFromDescription(description);
   }
 
   class StockExcelParser {

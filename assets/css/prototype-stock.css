@@ -500,6 +500,17 @@
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
       flex-shrink: 0;
     }
+    .color-swatch-dot[data-color="clear"],
+    .product-color-swatch[data-color="clear"] {
+      background:
+        linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+        linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+        linear-gradient(-45deg, transparent 75%, #e5e7eb 75%) !important;
+      background-size: 6px 6px !important;
+      background-position: 0 0, 0 3px, 3px -3px, -3px 0 !important;
+      border: 1px solid #94a3b8 !important;
+    }
     .color-name-text {
       font-size: 0.84rem;
       font-weight: 500;

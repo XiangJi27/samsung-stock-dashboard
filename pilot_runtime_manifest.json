@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "4b3701c",
+  "packageBuiltFromCommit": "d20c8b4",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-16T16:06:03.877864+07:00",
+  "builtAt": "2026-09-16T16:30:49.931327+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,7 +13,7 @@
   "totalFiles": 45,
   "summary": {
     "totalFiles": 45,
-    "totalSizeBytes": 9636841,
+    "totalSizeBytes": 9639703,
     "totalSizeMB": 9.19
   },
   "files": [
@@ -31,8 +31,8 @@
     },
     {
       "file": "style.css",
-      "sizeBytes": 96846,
-      "sha256": "be6db203a2b05f4f34a1f0b5e21cfb3db3136af6a7bbd664d8fe58be126be5b5",
+      "sizeBytes": 97321,
+      "sha256": "6ea82b189239dc84b45ba07eb025b7d63eb6adb45ac5e82d45823e372fbdfb6a",
       "status": "BASELINE_CORE"
     },
     {
@@ -140,8 +140,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 71865,
-      "sha256": "b8690dddc06a01ac77d67672c49872b3e4be4f9c1de152dc7a58480f86568c04",
+      "sizeBytes": 72643,
+      "sha256": "37efd3a44ece4710f6439cafe25b18083b46af5973887bd9590151559b237629",
       "status": "BASELINE_CORE"
     },
     {
@@ -170,14 +170,14 @@
     },
     {
       "file": "assets/css/prototype-stock.css",
-      "sizeBytes": 27948,
-      "sha256": "50047daff7d7ef663841e352c217fceb46569f7ff7527cfbc53a96ac7411454a",
+      "sizeBytes": 28490,
+      "sha256": "7ea6e5e3a3421f91ebe80ce0ca21bf91a1e41e5d616b719457344909fdd5c457",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "assets/js/prototype-stock.js",
-      "sizeBytes": 146389,
-      "sha256": "c319f3c2209856c80c3c5e24076b025fd70b75e398fdab82480849b7b140bb75",
+      "sizeBytes": 147439,
+      "sha256": "7b31b9d891542b5339b641739506b843635f1c67cc15814321bbf095a744fc8a",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -266,8 +266,8 @@
     },
     {
       "file": "assets/js/pilot-bootstrap.js",
-      "sizeBytes": 21002,
-      "sha256": "b7a4fe25b3b55f40c6a38a8236ade9fbbb9f9f4ace5565dbde68ce076ddc834c",
+      "sizeBytes": 21019,
+      "sha256": "bdfa2b97ce5c19952969027e331d620985498a2b60c2aa990a311b6e626cb167",
       "status": "PILOT_RUNTIME"
     },
     {

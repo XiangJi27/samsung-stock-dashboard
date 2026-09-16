@@ -37,110 +37,128 @@
       "violet": "#a855f7",
       "yellow": "#facc15",
       "green": "#10b981",
-      "gold": "#eab308"
+      "gold": "#eab308",
+      "clear": "transparent",
+      "transparent": "transparent"
     };
 
-    const KNOWN_COLORS = [
-      "Titanium Silverblue",
-      "Titanium Black",
-      "Titanium Gray",
-      "Titanium White",
-      "Cobalt Violet",
-      "Light Violet",
-      "Light Blue",
-      "Blue Violet",
-      "Pink Gold",
-      "Pistachio",
-      "Graphite",
-      "Blueberry",
-      "Jetblack",
-      "Icyblue",
-      "Silver",
-      "White",
-      "Black",
-      "Gray",
-      "Grey",
-      "Violet",
-      "Lavender",
-      "Cream",
-      "Pink",
-      "Mint",
-      "Navy",
-      "Coral Red",
-      "Dark Green",
-      "Dark Blue",
-      "Sky Blue"
-    ];
+    const COLOR_ALIASES = new Map([
+      ["BLACK", "Black"],
+      ["WHITE", "White"],
+      ["BLUE", "Blue"],
+      ["NAVY", "Navy"],
+      ["SILVER", "Silver"],
+      ["GRAY", "Grey"],
+      ["GREY", "Grey"],
+      ["GREEN", "Green"],
+      ["RED", "Red"],
+      ["PINK", "Pink"],
+      ["PURPLE", "Purple"],
+      ["ORANGE", "Orange"],
+      ["YELLOW", "Yellow"],
+      ["GOLD", "Gold"],
+      ["BEIGE", "Beige"],
+      ["BROWN", "Brown"],
+      ["CLEAR", "Clear"],
+      ["TRANSPARENT", "Clear"],
+      ["TRANSLUCENT", "Translucent"],
+      ["TITANIUM SILVERBLUE", "Titanium Silverblue"],
+      ["TITANIUM BLACK", "Titanium Black"],
+      ["TITANIUM GRAY", "Titanium Gray"],
+      ["TITANIUM GREY", "Titanium Gray"],
+      ["TITANIUM WHITE", "Titanium White"],
+      ["COBALT VIOLET", "Cobalt Violet"],
+      ["LIGHT VIOLET", "Light Violet"],
+      ["LIGHT BLUE", "Light Blue"],
+      ["BLUE VIOLET", "Blue Violet"],
+      ["PINK GOLD", "Pink Gold"],
+      ["PISTACHIO", "Pistachio"],
+      ["GRAPHITE", "Graphite"],
+      ["BLUEBERRY", "Blueberry"],
+      ["JETBLACK", "Jet Black"],
+      ["JET BLACK", "Jet Black"],
+      ["ICYBLUE", "Icy Blue"],
+      ["ICY BLUE", "Icy Blue"],
+      ["VIOLET", "Violet"],
+      ["LAVENDER", "Lavender"],
+      ["CREAM", "Cream"],
+      ["MINT", "Mint"],
+      ["CORAL RED", "Coral Red"],
+      ["DARK GREEN", "Dark Green"],
+      ["DARK BLUE", "Dark Blue"],
+      ["SKY BLUE", "Sky Blue"]
+    ]);
 
-    const COLOR_CANONICAL_NAMES = {
-      navy: "Navy",
-      jetblack: "Jet Black",
-      icyblue: "Icy Blue",
-      lightviolet: "Light Violet",
-      "light violet": "Light Violet",
-      titaniumblack: "Titanium Black",
-      "titanium black": "Titanium Black",
-      titaniumsilverblue: "Titanium Silverblue",
-      "titanium silverblue": "Titanium Silverblue",
-      graphite: "Graphite",
-      pistachio: "Pistachio",
-      blueberry: "Blueberry"
-    };
+    const KNOWN_COLORS = Array.from(new Set(COLOR_ALIASES.values()));
 
-    function normalizeColorName(value) {
-      const raw = String(value || "").trim();
-      if (!raw) return "";
-      const key = raw.toLowerCase().replace(/\s+/g, " ");
-      return (
-        COLOR_CANONICAL_NAMES[key] ||
-        COLOR_CANONICAL_NAMES[key.replace(/\s+/g, "")] ||
-        raw.toLowerCase().replace(/\b\w/g, char => char.toUpperCase())
-      );
+    const COLOR_CANONICAL_NAMES = Object.fromEntries(COLOR_ALIASES);
+
+    function canonicalizeColor(value) {
+      if (!value) return null;
+      const normalized = String(value)
+        .trim()
+        .replace(/\s+/g, " ")
+        .toUpperCase();
+      return COLOR_ALIASES.get(normalized) || null;
     }
 
-    // --- Color Allowlist Guard ---
-    // RULE: A candidate string is only accepted as a color if it is present
-    // in KNOWN_COLORS. This prevents model codes (HW-T420, D-Power, Type-C,
-    // Subwoofer, etc.) from being misinterpreted as color values.
     function isKnownColor(candidate) {
-      if (!candidate) return false;
-      const normalized = String(candidate).trim().toLowerCase().replace(/\s+/g, " ");
-      return KNOWN_COLORS.some(c => c.toLowerCase() === normalized);
+      return canonicalizeColor(candidate) !== null;
+    }
+
+    function normalizeColorName(value) {
+      const canonical = canonicalizeColor(value);
+      if (canonical) return canonical;
+      const raw = String(value || "").trim();
+      return raw ? raw.toLowerCase().replace(/\b\w/g, char => char.toUpperCase()) : "";
+    }
+
+    function formatColorDisplay(color) {
+      if (!color || color === "ไม่ระบุสี") return "ไม่ระบุสี";
+      const canonical = canonicalizeColor(color) || color;
+      if (canonical === "Clear") return "ใส (Clear)";
+      return canonical;
     }
 
     function extractColorFromDescription(description) {
-      // Only match " - <Color>" with a SPACE before the hyphen to avoid
-      // splitting on hyphens that are part of model codes (D-Power, HW-T420, Type-C).
-      // Candidate must then pass isKnownColor — fail-closed.
       const text = String(description || "").trim();
-      if (!text) return "";
+      if (!text) return null;
 
-      // Primary: " - <candidate>" with mandatory leading whitespace
-      const spacedHyphenMatch = text.match(/\s+-\s*([A-Za-zА-Яа-яก-ฮ][A-Za-z ก-ฮ]*)\s*$/);
-      if (spacedHyphenMatch) {
-        const candidate = spacedHyphenMatch[1].trim();
-        if (isKnownColor(candidate)) return candidate;
+      const candidatePatterns = [
+        // Pattern 1: Parentheses at end, e.g. "10000mAh (Grey)", "(Clear)"
+        /\(\s*([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*\)\s*$/,
+
+        // Pattern 2: Spaced hyphen/en-dash/em-dash at end, e.g. "Case - Clear", "Bag - Black"
+        /\s+[-–—]\s*([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*$/,
+
+        // Pattern 3: Controlled suffix without a space after hyphen, e.g. "S25FE -Navy", "1M- Black"
+        /(?:\s-|-\s*)([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*$/
+      ];
+
+      for (const pattern of candidatePatterns) {
+        const match = text.match(pattern);
+        if (!match) continue;
+        const color = canonicalizeColor(match[1]);
+        if (color) return color;
       }
-      return "";
+
+      return null;
     }
 
     function extractKnownColor(description) {
-      // Scan entire description for a KNOWN_COLOR token ending the string.
-      // Longer colors are checked first to prefer "Titanium Black" over "Black".
       const text = String(description || "").trim().toLowerCase();
-      const sorted = KNOWN_COLORS.slice().sort((a, b) => b.length - a.length);
-      for (const color of sorted) {
-        const lc = color.toLowerCase();
-        // Must end with the color and be preceded by space or start-of-string
+      const sorted = Array.from(COLOR_ALIASES.keys()).sort((a, b) => b.length - a.length);
+      for (const key of sorted) {
+        const lc = key.toLowerCase();
         const idx = text.lastIndexOf(lc);
         if (idx !== -1 && idx + lc.length === text.length) {
           const before = text[idx - 1];
-          if (idx === 0 || before === " " || before === "-") {
-            return color;
+          if (idx === 0 || before === " " || before === "-" || before === "(") {
+            return COLOR_ALIASES.get(key);
           }
         }
       }
-      return "";
+      return null;
     }
 
     function resolveProductColor(item, masterRecord) {
@@ -149,30 +167,31 @@
         masterRecord.productIdentity &&
         masterRecord.productIdentity.variant &&
         masterRecord.productIdentity.variant.color;
-      if (masterColor && isKnownColor(masterColor)) {
-        return normalizeColorName(masterColor);
-      }
+      const canonicalMaster = canonicalizeColor(masterColor);
+      if (canonicalMaster) return canonicalMaster;
 
       // Step 2: Explicit ERP color field
-      const erpColor = String((item && item.color) || "").trim();
-      if (erpColor && erpColor !== "ไม่ระบุสี" && isKnownColor(erpColor)) {
-        return normalizeColorName(erpColor);
+      const explicitErpColor = item && (item.color || item.productColor || item.variantColor);
+      if (explicitErpColor && explicitErpColor !== "ไม่ระบุสี") {
+        const canonicalErp = canonicalizeColor(explicitErpColor);
+        if (canonicalErp) return canonicalErp;
       }
 
       // Step 3: Description parsing — strict allowlist gate
-      const description = (item && (item.description || item.raw_desc || item.model)) || "";
-      const extracted = extractColorFromDescription(description) || extractKnownColor(description) || "";
-      if (extracted && isKnownColor(extracted)) {
-        return normalizeColorName(extracted);
-      }
+      const description = (item && (item.description || item.raw_desc || item.model || item.name)) || "";
+      const extracted = extractColorFromDescription(description) || extractKnownColor(description);
+      if (extracted) return extracted;
 
-      // Step 4: No known color found — return empty (renders as ไม่ระบุสี)
-      return "";
+      // Step 4: No known color found — fail-closed
+      return null;
     }
 
     if (typeof window !== "undefined") {
+      window.COLOR_ALIASES = COLOR_ALIASES;
       window.COLOR_CANONICAL_NAMES = COLOR_CANONICAL_NAMES;
+      window.canonicalizeColor = canonicalizeColor;
       window.normalizeColorName = normalizeColorName;
+      window.formatColorDisplay = formatColorDisplay;
       window.isKnownColor = isKnownColor;
       window.extractColorFromDescription = extractColorFromDescription;
       window.resolveProductColor = resolveProductColor;
@@ -1961,7 +1980,7 @@
         try {
           const specs = parseSpecs(item);
           const resolvedColor = resolveProductColor(item);
-          const colorName = resolvedColor || "ไม่ระบุสี";
+          const colorName = formatColorDisplay(resolvedColor);
           const colorHex = getColorHex(resolvedColor);
           const f1 = Number(item.f1 || 0);
           const f2 = Number(item.f2 || 0);
@@ -1971,6 +1990,7 @@
 
           // Table Row
           const tr = document.createElement("tr");
+          tr.setAttribute("data-pn", item.pn || "");
           tr.innerHTML = `
             <td>
               <div class="product-identity-group">
@@ -1987,8 +2007,8 @@
               </div>
             </td>
             <td>
-              <div class="color-display-cell">
-                <span class="color-swatch-dot" style="background-color: ${colorHex};"></span>
+              <div class="color-display-cell" data-testid="product-color">
+                <span class="color-swatch-dot" data-color="${(resolvedColor || '').toLowerCase()}" style="background-color: ${colorHex};"></span>
                 <span class="color-name-text">${colorName}</span>
               </div>
             </td>
@@ -2024,6 +2044,7 @@
           // Card Item (Responsive View)
           const card = document.createElement("div");
           card.className = "product-card-item";
+          card.setAttribute("data-pn", item.pn || "");
           card.innerHTML = `
             <div>
               <div class="card-top-row">
@@ -2037,8 +2058,8 @@
                   </div>
                   ${specs.ram || specs.storage ? `<div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px;">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</div>` : ''}
                 </div>
-                <div class="color-display-cell" style="flex-direction: column; align-items: flex-end;">
-                  <span class="color-swatch-dot" style="background-color: ${colorHex}; width: 20px; height: 20px;"></span>
+                <div class="color-display-cell" data-testid="product-color" style="flex-direction: column; align-items: flex-end;">
+                  <span class="color-swatch-dot" data-color="${(resolvedColor || '').toLowerCase()}" style="background-color: ${colorHex}; width: 20px; height: 20px;"></span>
                   <span style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 2px;">${colorName}</span>
                 </div>
               </div>

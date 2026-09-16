@@ -257,4 +257,103 @@ test.describe('Color Allowlist Guard (Model Code Regression)', () => {
       }
     }
   });
+
+  // --------------------------------------------------------------------------
+  // Acceptance: supports Grey and Gray in trailing parentheses
+  // --------------------------------------------------------------------------
+  test('supports Grey and Gray in trailing parentheses', async ({ page }) => {
+    const url = getTargetUrl();
+    await loginAsAdmin(page);
+    await page.goto(`${url}/#/stock`);
+    await page.waitForSelector('#stockTableBody tr', { state: 'visible', timeout: 15000 });
+
+    const results = await page.evaluate(() => {
+      const resolver = (window as any).resolveProductColor;
+      return {
+        grey: resolver({
+          pn: "6902957323888",
+          description: "PISEN QUICK 30W QI2.0 Mag Power 10000mAh (Grey)"
+        }),
+        gray: resolver({
+          pn: "TEST-GRAY-001",
+          description: "PISEN QUICK 30W QI2.0 Mag Power 10000mAh (Gray)"
+        }),
+        modelCode: resolver({
+          pn: "PM-8806090284687",
+          description: "Samsung Soundbar HW-T420 2.1ch with Subwoofer"
+        }),
+        typeC: resolver({
+          pn: "8859289665477",
+          description: "Premium SAMSUNG TC-04 (Type-C)"
+        }),
+        dpower: resolver({
+          pn: "8859289657762",
+          description: "Premium D-Power M22 Speaker Bluetooth"
+        }),
+        hwB400f: resolver({
+          pn: "PM-8806097071891",
+          description: "Soundbar HW-B400F 2.0ch Sub Woofer"
+        })
+      };
+    });
+
+    expect(results.grey).toBe("Grey");
+    expect(results.gray).toBe("Grey");
+    expect(results.modelCode).toBeNull();
+    expect(results.typeC).toBeNull();
+    expect(results.dpower).toBeNull();
+    expect(results.hwB400f).toBeNull();
+  });
+
+  // --------------------------------------------------------------------------
+  // Acceptance: supports Clear cases and renders ใส (Clear)
+  // --------------------------------------------------------------------------
+  test('supports Clear cases and renders ใส (Clear)', async ({ page }) => {
+    const url = getTargetUrl();
+    await loginAsAdmin(page);
+    await page.goto(`${url}/#/stock`);
+    await page.waitForSelector('#stockTableBody tr', { state: 'visible', timeout: 15000 });
+
+    const results = await page.evaluate(() => {
+      const resolver = (window as any).resolveProductColor;
+      const formatColor = (window as any).formatColorDisplay || ((c: any) => c === 'Clear' ? 'ใส (Clear)' : (c || 'ไม่ระบุสี'));
+      const clearItems = [
+        { pn: "8800299642811", description: "Mercury Jelly Case for Galaxy A36 - Clear" },
+        { pn: "8800299669900", description: "Mercury Hard Case for Samsung Galaxy Flip7 - Clear" },
+        { pn: "8800299669979", description: "Mercury Hard Case for Samsung Galaxy Fold7 - Clear" },
+        { pn: "8800299702874", description: "Mercury Jelly Hard Case Magsafe Galaxy S26 - Clear" },
+        { pn: "8800299702935", description: "Mercury Jelly Hard Case Magsafe Galaxy S26 Plus - Clear" }
+      ];
+      return clearItems.map(item => {
+        const canonical = resolver(item);
+        const display = formatColor(canonical);
+        return { pn: item.pn, canonical, display };
+      });
+    });
+
+    for (const r of results) {
+      expect(r.canonical, `Canonical for ${r.pn}`).toBe("Clear");
+      expect(r.display, `Display for ${r.pn}`).toBe("ใส (Clear)");
+    }
+  });
+
+  // --------------------------------------------------------------------------
+  // Acceptance: PISEN Grey variant renders in stock table
+  // --------------------------------------------------------------------------
+  test('PISEN Grey variant renders in stock table', async ({ page }) => {
+    const url = getTargetUrl();
+    await loginAsAdmin(page);
+    await page.goto(`${url}/#/stock`);
+    await page.waitForSelector('#stockTableBody tr', { state: 'visible', timeout: 15000 });
+
+    const search = page.getByPlaceholder(/ค้นหาสินค้า|ค้นหาด้วยชื่อ|P\/N/i);
+    await search.fill("6902957323888");
+
+    const row = page.locator('[data-pn="6902957323888"]');
+    await expect(row).toBeVisible();
+
+    await expect(
+      row.getByTestId("product-color")
+    ).toHaveText(/Grey|สีเทา/);
+  });
 });
