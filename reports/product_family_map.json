@@ -1,0 +1,5239 @@
+{
+  "generatedAt": "2026-09-16T14:13:46.370292",
+  "totalAccessoryItemsAnalyzed": 276,
+  "totalProductFamiliesFormed": 136,
+  "totalAggregatedF1": 1269,
+  "multiVariantFamiliesCount": 26,
+  "topFamilies": [
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-T2510",
+      "familyName": "Samsung 25W Power Adapter (EP-T2510)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-T2510",
+      "extraContext": "25W",
+      "aggregatedF1": 85,
+      "aggregatedF2": 78,
+      "aggregatedTotal": 163,
+      "variantCount": 3,
+      "variants": [
+        {
+          "inventoryPn": "EP-T2510NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 25W No Cable-Black",
+          "color": "Black",
+          "f1": 47,
+          "f2": 36,
+          "total": 83
+        },
+        {
+          "inventoryPn": "EP-T2510NWEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 25W No Cable-White",
+          "color": "White",
+          "f1": 38,
+          "f2": 28,
+          "total": 66
+        },
+        {
+          "inventoryPn": "SSG-EP-T2510NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 25W No Cable (SIS) - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 14,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-T4511",
+      "familyName": "Samsung 45W Power Adapter (EP-T4511)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-T4511",
+      "extraContext": "45W",
+      "aggregatedF1": 65,
+      "aggregatedF2": 47,
+      "aggregatedTotal": 112,
+      "variantCount": 3,
+      "variants": [
+        {
+          "inventoryPn": "EP-T4511NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 45W without cable - Black",
+          "color": "Black",
+          "f1": 17,
+          "f2": 20,
+          "total": 37
+        },
+        {
+          "inventoryPn": "EP-T4511XBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 45W Fastcharge with Cable - Black",
+          "color": "Black",
+          "f1": 7,
+          "f2": 13,
+          "total": 20
+        },
+        {
+          "inventoryPn": "SSG-EP-T4511XBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 45W Fastcharge with Cable (SIS) - Black",
+          "color": "Black",
+          "f1": 41,
+          "f2": 14,
+          "total": 55
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-SAMSUNG",
+      "familyName": "Hi-Shield Screen Protector for SAMSUNG",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "SAMSUNG",
+      "aggregatedF1": 61,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 61,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "8859216623860",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Ultra Clear",
+          "color": "Ultra Clear",
+          "f1": 30,
+          "f2": 0,
+          "total": 30
+        },
+        {
+          "inventoryPn": "8859216623877",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Anti Glare Gray",
+          "color": "Anti Glare Gray",
+          "f1": 31,
+          "f2": 0,
+          "total": 31
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGGALAXYS26SERIES",
+      "familyName": "Samsung Protective Case for SAMSUNG GALAXY S26 SERIES",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY S26 SERIES",
+      "aggregatedF1": 54,
+      "aggregatedF2": 40,
+      "aggregatedTotal": 94,
+      "variantCount": 36,
+      "variants": [
+        {
+          "inventoryPn": "EF-CS948CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Clear Magnet Case - Transparency",
+          "color": "Transparency",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-ES942CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silicone Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-ES942CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silicone Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-ES942CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silicone Magnet Case - Blueviolet",
+          "color": "Blueviolet",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-ES947CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-ES947CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-ES947CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - Blueviolet",
+          "color": "Blueviolet",
+          "f1": 3,
+          "f2": 1,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-ES947CWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - White",
+          "color": "White",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-ES948CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silicone Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KS947SCEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Dark Blue",
+          "color": "Dark Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS947SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS947SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Red",
+          "color": "Red",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS947SSEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Dark Gray",
+          "color": "Dark Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KS948SCEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Dark Blue",
+          "color": "Dark Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS948SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS948SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Red",
+          "color": "Red",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KS948SSEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Dark Gray",
+          "color": "Dark Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-QS942CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-QS947CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 4,
+          "f2": 2,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-QS948CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 9,
+          "f2": 5,
+          "total": 14
+        },
+        {
+          "inventoryPn": "EF-RS942CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Rugged Magnet Case - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-RS947CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Rugged Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-SS942CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-SS942CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Gray",
+          "color": "Gray",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS942CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS942CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Lightviolet",
+          "color": "Light Violet",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS947CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-SS947CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Gray",
+          "color": "Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-SS947CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS947CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Lightviolet",
+          "color": "Light Violet",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-SS948CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS948CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Gray",
+          "color": "Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-SS948CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-SS948CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Blueviolet",
+          "color": "Blueviolet",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "GP-FPS947PGAJW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Capella Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "GP-FPS948PGAJW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Capella Magnet Case - Black",
+          "color": "Black",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM6931481215697",
+      "familyName": "Premiun ����Ѻ�� Mini YOUMI-SAMSUNG",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 49,
+      "aggregatedF2": 42,
+      "aggregatedTotal": 91,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM6931481215697",
+          "barcode": null,
+          "erpDescription": "Premiun ����Ѻ�� Mini YOUMI-SAMSUNG",
+          "color": "Samsung",
+          "f1": 49,
+          "f2": 42,
+          "total": 91
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-UGREEN-CHARGER-30W",
+      "familyName": "UGREEN 30W Wall Charger Family",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "baseModel": null,
+      "extraContext": "30W",
+      "aggregatedF1": 42,
+      "aggregatedF2": 8,
+      "aggregatedTotal": 50,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6941876265732",
+          "barcode": null,
+          "erpDescription": "[CS]UGREEN Wall Charer 30W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+          "color": "Grey",
+          "f1": 42,
+          "f2": 8,
+          "total": 50
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-S26SERIES",
+      "familyName": "Hi-Shield Screen Protector for S26 SERIES",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "S26 SERIES",
+      "aggregatedF1": 40,
+      "aggregatedF2": 40,
+      "aggregatedTotal": 80,
+      "variantCount": 6,
+      "variants": [
+        {
+          "inventoryPn": "8859216829019",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26",
+          "color": "",
+          "f1": 2,
+          "f2": 8,
+          "total": 10
+        },
+        {
+          "inventoryPn": "8859216829026",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Plus",
+          "color": "",
+          "f1": 5,
+          "f2": 7,
+          "total": 12
+        },
+        {
+          "inventoryPn": "8859216829033",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Ultra",
+          "color": "",
+          "f1": 17,
+          "f2": 20,
+          "total": 37
+        },
+        {
+          "inventoryPn": "8859216829040",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield 2.5D Matte Glass Samsung S26",
+          "color": "",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216829057",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield 2.5D Matte Glass Samsung S26 Plus",
+          "color": "",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216829064",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield 2.5D Matte Glass Samsung S26 Ultra",
+          "color": "",
+          "f1": 6,
+          "f2": 5,
+          "total": 11
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA575GBlack",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A57 5G Black",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A57 5G Black",
+      "aggregatedF1": 36,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 46,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703437345",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A57 5G Black",
+          "color": "Black",
+          "f1": 36,
+          "f2": 10,
+          "total": 46
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-GENERIC-SAMSUNGGALAXYS26SERIES",
+      "familyName": "Generic Protective Case for SAMSUNG GALAXY S26 SERIES",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY S26 SERIES",
+      "aggregatedF1": 35,
+      "aggregatedF2": 11,
+      "aggregatedTotal": 46,
+      "variantCount": 7,
+      "variants": [
+        {
+          "inventoryPn": "8800299702874",
+          "barcode": null,
+          "erpDescription": "Mercury Jelly Hard Case Magsafe Galaxy S26 - Clear",
+          "color": "Clear",
+          "f1": 5,
+          "f2": 4,
+          "total": 9
+        },
+        {
+          "inventoryPn": "8800299702935",
+          "barcode": null,
+          "erpDescription": "Mercury Jelly Hard Case Magsafe Galaxy S26 Plus - Clear",
+          "color": "Clear",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "8800299703239",
+          "barcode": null,
+          "erpDescription": "Mercury Silicone Case Magsafe Galaxy S26 Ultra - Black",
+          "color": "Black",
+          "f1": 5,
+          "f2": 5,
+          "total": 10
+        },
+        {
+          "inventoryPn": "8859216828746",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Mobile case for S26 Ultra Clear",
+          "color": "",
+          "f1": 9,
+          "f2": 0,
+          "total": 9
+        },
+        {
+          "inventoryPn": "8859216828753",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Mobile case for S26 Ultra Black",
+          "color": "Black",
+          "f1": 8,
+          "f2": 0,
+          "total": 8
+        },
+        {
+          "inventoryPn": "8859216829415",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Impact shield Mobile case for S26 Ultra",
+          "color": "",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216834631",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Boxset for Samsung S26 Ultra",
+          "color": "",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-A37",
+      "familyName": "Hi-Shield Screen Protector for A37",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "A37",
+      "aggregatedF1": 35,
+      "aggregatedF2": 47,
+      "aggregatedTotal": 82,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "8859216846719",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A37",
+          "color": "",
+          "f1": 29,
+          "f2": 18,
+          "total": 47
+        },
+        {
+          "inventoryPn": "8859216846726",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A57",
+          "color": "",
+          "f1": 6,
+          "f2": 29,
+          "total": 35
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-ZFOLD8ULTRA",
+      "familyName": "Hi-Shield Screen Protector for Z FOLD8 ULTRA",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Z FOLD8 ULTRA",
+      "aggregatedF1": 29,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 29,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216860326",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Fold8 Ultra",
+          "color": "",
+          "f1": 29,
+          "f2": 0,
+          "total": 29
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-ZFLIP8",
+      "familyName": "Hi-Shield Screen Protector for Z FLIP8",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Z FLIP8",
+      "aggregatedF1": 28,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 28,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216860241",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Flip8",
+          "color": "",
+          "f1": 28,
+          "f2": 0,
+          "total": 28
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS26Ultra",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S26 Ultra",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S26 Ultra",
+      "aggregatedF1": 28,
+      "aggregatedF2": 56,
+      "aggregatedTotal": 84,
+      "variantCount": 4,
+      "variants": [
+        {
+          "inventoryPn": "8859703437475",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 15,
+          "f2": 33,
+          "total": 48
+        },
+        {
+          "inventoryPn": "8859703437482",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL PV Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 5,
+          "f2": 10,
+          "total": 15
+        },
+        {
+          "inventoryPn": "8859703437499",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL MT Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 6,
+          "f2": 5,
+          "total": 11
+        },
+        {
+          "inventoryPn": "8859703437581",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF UG SL Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 2,
+          "f2": 8,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM-665477",
+      "familyName": "[PM] Small Talk TC-04 TypeC Tablet",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 27,
+      "aggregatedF2": 15,
+      "aggregatedTotal": 42,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM-665477",
+          "barcode": null,
+          "erpDescription": "[PM] Small Talk TC-04 TypeC Tablet",
+          "color": "",
+          "f1": 27,
+          "f2": 15,
+          "total": 42
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM0017044",
+      "familyName": "[PM] Backpack Fashion Phoenix",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 27,
+      "aggregatedF2": 36,
+      "aggregatedTotal": 63,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM0017044",
+          "barcode": null,
+          "erpDescription": "[PM] Backpack Fashion Phoenix",
+          "color": "",
+          "f1": 27,
+          "f2": 36,
+          "total": 63
+        }
+      ]
+    }
+  ],
+  "families": [
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-T2510",
+      "familyName": "Samsung 25W Power Adapter (EP-T2510)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-T2510",
+      "extraContext": "25W",
+      "aggregatedF1": 85,
+      "aggregatedF2": 78,
+      "aggregatedTotal": 163,
+      "variantCount": 3,
+      "variants": [
+        {
+          "inventoryPn": "EP-T2510NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 25W No Cable-Black",
+          "color": "Black",
+          "f1": 47,
+          "f2": 36,
+          "total": 83
+        },
+        {
+          "inventoryPn": "EP-T2510NWEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 25W No Cable-White",
+          "color": "White",
+          "f1": 38,
+          "f2": 28,
+          "total": 66
+        },
+        {
+          "inventoryPn": "SSG-EP-T2510NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 25W No Cable (SIS) - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 14,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-T4511",
+      "familyName": "Samsung 45W Power Adapter (EP-T4511)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-T4511",
+      "extraContext": "45W",
+      "aggregatedF1": 65,
+      "aggregatedF2": 47,
+      "aggregatedTotal": 112,
+      "variantCount": 3,
+      "variants": [
+        {
+          "inventoryPn": "EP-T4511NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 45W without cable - Black",
+          "color": "Black",
+          "f1": 17,
+          "f2": 20,
+          "total": 37
+        },
+        {
+          "inventoryPn": "EP-T4511XBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 45W Fastcharge with Cable - Black",
+          "color": "Black",
+          "f1": 7,
+          "f2": 13,
+          "total": 20
+        },
+        {
+          "inventoryPn": "SSG-EP-T4511XBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 45W Fastcharge with Cable (SIS) - Black",
+          "color": "Black",
+          "f1": 41,
+          "f2": 14,
+          "total": 55
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-SAMSUNG",
+      "familyName": "Hi-Shield Screen Protector for SAMSUNG",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "SAMSUNG",
+      "aggregatedF1": 61,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 61,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "8859216623860",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Ultra Clear",
+          "color": "Ultra Clear",
+          "f1": 30,
+          "f2": 0,
+          "total": 30
+        },
+        {
+          "inventoryPn": "8859216623877",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Anti Glare Gray",
+          "color": "Anti Glare Gray",
+          "f1": 31,
+          "f2": 0,
+          "total": 31
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGGALAXYS26SERIES",
+      "familyName": "Samsung Protective Case for SAMSUNG GALAXY S26 SERIES",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY S26 SERIES",
+      "aggregatedF1": 54,
+      "aggregatedF2": 40,
+      "aggregatedTotal": 94,
+      "variantCount": 36,
+      "variants": [
+        {
+          "inventoryPn": "EF-CS948CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Clear Magnet Case - Transparency",
+          "color": "Transparency",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-ES942CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silicone Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-ES942CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silicone Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-ES942CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silicone Magnet Case - Blueviolet",
+          "color": "Blueviolet",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-ES947CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-ES947CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-ES947CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - Blueviolet",
+          "color": "Blueviolet",
+          "f1": 3,
+          "f2": 1,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-ES947CWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silicone Magnet Case - White",
+          "color": "White",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-ES948CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silicone Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KS947SCEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Dark Blue",
+          "color": "Dark Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS947SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS947SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Red",
+          "color": "Red",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS947SSEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Carbon Magnet Case - Dark Gray",
+          "color": "Dark Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KS948SCEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Dark Blue",
+          "color": "Dark Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS948SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KS948SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Red",
+          "color": "Red",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KS948SSEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Carbon Magnet Case - Dark Gray",
+          "color": "Dark Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-QS942CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-QS947CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 4,
+          "f2": 2,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-QS948CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 9,
+          "f2": 5,
+          "total": 14
+        },
+        {
+          "inventoryPn": "EF-RS942CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Rugged Magnet Case - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-RS947CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Rugged Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-SS942CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-SS942CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Gray",
+          "color": "Gray",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS942CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS942CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Silm Magnet Case - Lightviolet",
+          "color": "Light Violet",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS947CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-SS947CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Gray",
+          "color": "Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-SS947CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS947CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Silm Magnet Case - Lightviolet",
+          "color": "Light Violet",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-SS948CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-SS948CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Gray",
+          "color": "Gray",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-SS948CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Lightblue",
+          "color": "Lightblue",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-SS948CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Silm Magnet Case - Blueviolet",
+          "color": "Blueviolet",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "GP-FPS947PGAJW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Capella Magnet Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "GP-FPS948PGAJW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Ultra Capella Magnet Case - Black",
+          "color": "Black",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM6931481215697",
+      "familyName": "Premiun ����Ѻ�� Mini YOUMI-SAMSUNG",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 49,
+      "aggregatedF2": 42,
+      "aggregatedTotal": 91,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM6931481215697",
+          "barcode": null,
+          "erpDescription": "Premiun ����Ѻ�� Mini YOUMI-SAMSUNG",
+          "color": "Samsung",
+          "f1": 49,
+          "f2": 42,
+          "total": 91
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-UGREEN-CHARGER-30W",
+      "familyName": "UGREEN 30W Wall Charger Family",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "baseModel": null,
+      "extraContext": "30W",
+      "aggregatedF1": 42,
+      "aggregatedF2": 8,
+      "aggregatedTotal": 50,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6941876265732",
+          "barcode": null,
+          "erpDescription": "[CS]UGREEN Wall Charer 30W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+          "color": "Grey",
+          "f1": 42,
+          "f2": 8,
+          "total": 50
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-S26SERIES",
+      "familyName": "Hi-Shield Screen Protector for S26 SERIES",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "S26 SERIES",
+      "aggregatedF1": 40,
+      "aggregatedF2": 40,
+      "aggregatedTotal": 80,
+      "variantCount": 6,
+      "variants": [
+        {
+          "inventoryPn": "8859216829019",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26",
+          "color": "",
+          "f1": 2,
+          "f2": 8,
+          "total": 10
+        },
+        {
+          "inventoryPn": "8859216829026",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Plus",
+          "color": "",
+          "f1": 5,
+          "f2": 7,
+          "total": 12
+        },
+        {
+          "inventoryPn": "8859216829033",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Ultra",
+          "color": "",
+          "f1": 17,
+          "f2": 20,
+          "total": 37
+        },
+        {
+          "inventoryPn": "8859216829040",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield 2.5D Matte Glass Samsung S26",
+          "color": "",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216829057",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield 2.5D Matte Glass Samsung S26 Plus",
+          "color": "",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216829064",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield 2.5D Matte Glass Samsung S26 Ultra",
+          "color": "",
+          "f1": 6,
+          "f2": 5,
+          "total": 11
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA575GBlack",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A57 5G Black",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A57 5G Black",
+      "aggregatedF1": 36,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 46,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703437345",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A57 5G Black",
+          "color": "Black",
+          "f1": 36,
+          "f2": 10,
+          "total": 46
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-GENERIC-SAMSUNGGALAXYS26SERIES",
+      "familyName": "Generic Protective Case for SAMSUNG GALAXY S26 SERIES",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY S26 SERIES",
+      "aggregatedF1": 35,
+      "aggregatedF2": 11,
+      "aggregatedTotal": 46,
+      "variantCount": 7,
+      "variants": [
+        {
+          "inventoryPn": "8800299702874",
+          "barcode": null,
+          "erpDescription": "Mercury Jelly Hard Case Magsafe Galaxy S26 - Clear",
+          "color": "Clear",
+          "f1": 5,
+          "f2": 4,
+          "total": 9
+        },
+        {
+          "inventoryPn": "8800299702935",
+          "barcode": null,
+          "erpDescription": "Mercury Jelly Hard Case Magsafe Galaxy S26 Plus - Clear",
+          "color": "Clear",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "8800299703239",
+          "barcode": null,
+          "erpDescription": "Mercury Silicone Case Magsafe Galaxy S26 Ultra - Black",
+          "color": "Black",
+          "f1": 5,
+          "f2": 5,
+          "total": 10
+        },
+        {
+          "inventoryPn": "8859216828746",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Mobile case for S26 Ultra Clear",
+          "color": "",
+          "f1": 9,
+          "f2": 0,
+          "total": 9
+        },
+        {
+          "inventoryPn": "8859216828753",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Mobile case for S26 Ultra Black",
+          "color": "Black",
+          "f1": 8,
+          "f2": 0,
+          "total": 8
+        },
+        {
+          "inventoryPn": "8859216829415",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Impact shield Mobile case for S26 Ultra",
+          "color": "",
+          "f1": 5,
+          "f2": 0,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216834631",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Boxset for Samsung S26 Ultra",
+          "color": "",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-A37",
+      "familyName": "Hi-Shield Screen Protector for A37",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "A37",
+      "aggregatedF1": 35,
+      "aggregatedF2": 47,
+      "aggregatedTotal": 82,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "8859216846719",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A37",
+          "color": "",
+          "f1": 29,
+          "f2": 18,
+          "total": 47
+        },
+        {
+          "inventoryPn": "8859216846726",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A57",
+          "color": "",
+          "f1": 6,
+          "f2": 29,
+          "total": 35
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-ZFOLD8ULTRA",
+      "familyName": "Hi-Shield Screen Protector for Z FOLD8 ULTRA",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Z FOLD8 ULTRA",
+      "aggregatedF1": 29,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 29,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216860326",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Fold8 Ultra",
+          "color": "",
+          "f1": 29,
+          "f2": 0,
+          "total": 29
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-ZFLIP8",
+      "familyName": "Hi-Shield Screen Protector for Z FLIP8",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Z FLIP8",
+      "aggregatedF1": 28,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 28,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216860241",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Flip8",
+          "color": "",
+          "f1": 28,
+          "f2": 0,
+          "total": 28
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS26Ultra",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S26 Ultra",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S26 Ultra",
+      "aggregatedF1": 28,
+      "aggregatedF2": 56,
+      "aggregatedTotal": 84,
+      "variantCount": 4,
+      "variants": [
+        {
+          "inventoryPn": "8859703437475",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 15,
+          "f2": 33,
+          "total": 48
+        },
+        {
+          "inventoryPn": "8859703437482",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL PV Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 5,
+          "f2": 10,
+          "total": 15
+        },
+        {
+          "inventoryPn": "8859703437499",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL MT Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 6,
+          "f2": 5,
+          "total": 11
+        },
+        {
+          "inventoryPn": "8859703437581",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF UG SL Samsung Galaxy S26 Ultra",
+          "color": "",
+          "f1": 2,
+          "f2": 8,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM-665477",
+      "familyName": "[PM] Small Talk TC-04 TypeC Tablet",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 27,
+      "aggregatedF2": 15,
+      "aggregatedTotal": 42,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM-665477",
+          "barcode": null,
+          "erpDescription": "[PM] Small Talk TC-04 TypeC Tablet",
+          "color": "",
+          "f1": 27,
+          "f2": 15,
+          "total": 42
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM0017044",
+      "familyName": "[PM] Backpack Fashion Phoenix",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 27,
+      "aggregatedF2": 36,
+      "aggregatedTotal": 63,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM0017044",
+          "barcode": null,
+          "erpDescription": "[PM] Backpack Fashion Phoenix",
+          "color": "",
+          "f1": 27,
+          "f2": 36,
+          "total": 63
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-T6010",
+      "familyName": "Samsung 60W Power Adapter (EP-T6010)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-T6010",
+      "extraContext": "60W",
+      "aggregatedF1": 23,
+      "aggregatedF2": 8,
+      "aggregatedTotal": 31,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EP-T6010NBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Adapter 60W without cable - Black",
+          "color": "Black",
+          "f1": 23,
+          "f2": 8,
+          "total": 31
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM4897121009793",
+      "familyName": "[Premium] Gaabor Air Fryer 4L AF-40M01A",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 22,
+      "aggregatedF2": 24,
+      "aggregatedTotal": 46,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM4897121009793",
+          "barcode": null,
+          "erpDescription": "[Premium] Gaabor Air Fryer 4L AF-40M01A",
+          "color": "",
+          "f1": 22,
+          "f2": 24,
+          "total": 46
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYFOLD8",
+      "familyName": "Samsung Protective Case for GALAXY FOLD8",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY FOLD8",
+      "aggregatedF1": 21,
+      "aggregatedF2": 17,
+      "aggregatedTotal": 38,
+      "variantCount": 11,
+      "variants": [
+        {
+          "inventoryPn": "EF-CF971CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Clear Magnet Case - Transparent",
+          "color": "Transparent",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-EF971CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Silicone Magnet Case - Graphite",
+          "color": "Graphite",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-EF971CGEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Silicone Magnet Case - Pistachio",
+          "color": "Pistachio",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-EF971CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Silicone Magnet Case - Lavender",
+          "color": "Lavender",
+          "f1": 5,
+          "f2": 5,
+          "total": 10
+        },
+        {
+          "inventoryPn": "EF-EF971CWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Silicone Magnet Case - Cream",
+          "color": "Cream",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-KF971SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Carbon Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-KF971SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Carbon Magnet Case - Blue",
+          "color": "Blue",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KF971SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Carbon Magnet Case - Violet",
+          "color": "Violet",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-QF971CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Clear Case - Transparent",
+          "color": "Transparent",
+          "f1": 2,
+          "f2": 3,
+          "total": 5
+        },
+        {
+          "inventoryPn": "EF-XF971SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Carbon Standing Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "GP-FFF971YCATW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Hinge Protection Magnet Case - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859763200989",
+      "familyName": "[PM] Phone Stand First class NO V168 Phoenix",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 20,
+      "aggregatedF2": 20,
+      "aggregatedTotal": 40,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859763200989",
+          "barcode": null,
+          "erpDescription": "[PM] Phone Stand First class NO V168 Phoenix",
+          "color": "",
+          "f1": 20,
+          "f2": 20,
+          "total": 40
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM0017046",
+      "familyName": "[PM] Sling Bag Phoenix",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 20,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 30,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM0017046",
+          "barcode": null,
+          "erpDescription": "[PM] Sling Bag Phoenix",
+          "color": "",
+          "f1": 20,
+          "f2": 10,
+          "total": 30
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS25FEBlack",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S25 FE Black",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S25 FE Black",
+      "aggregatedF1": 19,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 24,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703436560",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy S25 FE Black",
+          "color": "Black",
+          "f1": 19,
+          "f2": 5,
+          "total": 24
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-DN975",
+      "familyName": "Samsung 15W Power Adapter (EP-DN975)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-DN975",
+      "extraContext": "15W",
+      "aggregatedF1": 19,
+      "aggregatedF2": 40,
+      "aggregatedTotal": 59,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "SSG-EP-DN975BBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Cable C to C (SIS) - Black",
+          "color": "Black",
+          "f1": 7,
+          "f2": 25,
+          "total": 32
+        },
+        {
+          "inventoryPn": "SSG-EP-DN975BWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Cable C to C (SIS) - White",
+          "color": "White",
+          "f1": 12,
+          "f2": 15,
+          "total": 27
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYS26FE",
+      "familyName": "Samsung Protective Case for GALAXY S26FE",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY S26FE",
+      "aggregatedF1": 18,
+      "aggregatedF2": 20,
+      "aggregatedTotal": 38,
+      "variantCount": 9,
+      "variants": [
+        {
+          "inventoryPn": "EF-CS741CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Clear Magnet Case - Transparency",
+          "color": "Transparency",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-ES741CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Silicone Magnet Case - Black",
+          "color": "Black",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-ES741CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Silicone Magnet Case - Blue Violet",
+          "color": "Blue Violet",
+          "f1": 2,
+          "f2": 3,
+          "total": 5
+        },
+        {
+          "inventoryPn": "EF-ES741CMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Silicone Magnet Case - Mint",
+          "color": "Mint",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-ES741CPEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Silicone Magnet Case - Pink",
+          "color": "Pink",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-QS741CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Clear Case - Transparency",
+          "color": "Transparency",
+          "f1": 4,
+          "f2": 4,
+          "total": 8
+        },
+        {
+          "inventoryPn": "EF-SS741CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Slim Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-SS741CLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Slim Magnet Case - Blue Violet",
+          "color": "Blue Violet",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-SS741CMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Slim Magnet Case - Mint",
+          "color": "Mint",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM-8806090284687",
+      "familyName": "Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 17,
+      "aggregatedF2": 15,
+      "aggregatedTotal": 32,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM-8806090284687",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer",
+          "color": "T420 2.1Ch With Subwoofer",
+          "f1": 17,
+          "f2": 15,
+          "total": 32
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM-665478",
+      "familyName": "[PM] Tablet ring stand",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 17,
+      "aggregatedF2": 19,
+      "aggregatedTotal": 36,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM-665478",
+          "barcode": null,
+          "erpDescription": "[PM] Tablet ring stand",
+          "color": "",
+          "f1": 17,
+          "f2": 19,
+          "total": 36
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-A17",
+      "familyName": "Hi-Shield Screen Protector for A17",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "A17",
+      "aggregatedF1": 16,
+      "aggregatedF2": 33,
+      "aggregatedTotal": 49,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216803910",
+          "barcode": null,
+          "erpDescription": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung A17",
+          "color": "",
+          "f1": 16,
+          "f2": 33,
+          "total": 49
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYFLIP8",
+      "familyName": "Samsung Protective Case for GALAXY FLIP8",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY FLIP8",
+      "aggregatedF1": 16,
+      "aggregatedF2": 15,
+      "aggregatedTotal": 31,
+      "variantCount": 9,
+      "variants": [
+        {
+          "inventoryPn": "EF-CF776CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Clear Magnet Case - Transparent",
+          "color": "Transparent",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-EF776CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Silicone Ring Magnet Case - Graphite",
+          "color": "Graphite",
+          "f1": 2,
+          "f2": 3,
+          "total": 5
+        },
+        {
+          "inventoryPn": "EF-EF776CGEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Silicone Ring Magnet Case - Mint",
+          "color": "Mint",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-EF776CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Silicone Ring Magnet Case - Pink",
+          "color": "Pink",
+          "f1": 3,
+          "f2": 2,
+          "total": 5
+        },
+        {
+          "inventoryPn": "EF-EF776CWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Silicone Ring Magnet Case - Cream",
+          "color": "Cream",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-FF776CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Flipsuit Magnet Case - Black",
+          "color": "Black",
+          "f1": 3,
+          "f2": 2,
+          "total": 5
+        },
+        {
+          "inventoryPn": "EF-FF776CJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Flipsuit Magnet Case - Silver",
+          "color": "Silver",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-QF776CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Clear Case - Transparent",
+          "color": "Transparent",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-UF776CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip8 Anti-reflecting Film Case - Transparent",
+          "color": "Transparent",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYFOLD8ULTRA",
+      "familyName": "Samsung Protective Case for GALAXY FOLD8 ULTRA",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY FOLD8 ULTRA",
+      "aggregatedF1": 16,
+      "aggregatedF2": 18,
+      "aggregatedTotal": 34,
+      "variantCount": 11,
+      "variants": [
+        {
+          "inventoryPn": "EF-CF976CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Clear Magnet Case - Transparent",
+          "color": "Transparent",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-EF976CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Silicone Magnet Case - Graphite",
+          "color": "Graphite",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        },
+        {
+          "inventoryPn": "EF-EF976CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Silicone Magnet Case - Violet Shadow",
+          "color": "Violet Shadow",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-EF976CWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Silicone Magnet Case - Cream",
+          "color": "Cream",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-KF976SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Carbon Magnet Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-KF976SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Carbon Magnet Case - Blue",
+          "color": "Blue",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        },
+        {
+          "inventoryPn": "EF-KF976SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Carbon Magnet Case - Violet",
+          "color": "Violet",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-QF976CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxt Fold8 Ultra Clear Case - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        },
+        {
+          "inventoryPn": "EF-UF976CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Anti-reflecting Film - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-XF976SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Carbon Standing case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "GP-FFF976YCATW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Ultra Hinge Protection Magnet Case - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6931481215710",
+      "familyName": "[PM] Double Wall Stainless Steel 600ml",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 14,
+      "aggregatedF2": 11,
+      "aggregatedTotal": 25,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6931481215710",
+          "barcode": null,
+          "erpDescription": "[PM] Double Wall Stainless Steel 600ml",
+          "color": "",
+          "f1": 14,
+          "f2": 11,
+          "total": 25
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859289657762",
+      "familyName": "Premium D-Power M22 Speaker Bluetooth",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 14,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 14,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859289657762",
+          "barcode": null,
+          "erpDescription": "Premium D-Power M22 Speaker Bluetooth",
+          "color": "Power M22 Speaker Bluetooth",
+          "f1": 14,
+          "f2": 0,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-S25SERIES",
+      "familyName": "Focus Tempered Glass Screen Protector for S25 SERIES",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "S25 SERIES",
+      "aggregatedF1": 14,
+      "aggregatedF2": 22,
+      "aggregatedTotal": 36,
+      "variantCount": 4,
+      "variants": [
+        {
+          "inventoryPn": "8859703433576",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung S25 Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        },
+        {
+          "inventoryPn": "8859703433583",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung S25 Plus Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        },
+        {
+          "inventoryPn": "8859703433590",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung S25 Ultra Black",
+          "color": "Black",
+          "f1": 10,
+          "f2": 13,
+          "total": 23
+        },
+        {
+          "inventoryPn": "8859703433606",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL PV Samsung S25 Ultra Black",
+          "color": "Black",
+          "f1": 3,
+          "f2": 5,
+          "total": 8
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-WATCHBAND-GALAXYWATCHULTRA2",
+      "familyName": "Galaxy Watch Band for GALAXY WATCH ULTRA2",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "baseModel": null,
+      "extraContext": "GALAXY WATCH ULTRA2",
+      "aggregatedF1": 14,
+      "aggregatedF2": 15,
+      "aggregatedTotal": 29,
+      "variantCount": 15,
+      "variants": [
+        {
+          "inventoryPn": "ET-SBL71MAEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Peakform Band - Camel",
+          "color": "Camel",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SBL71MBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Peakform Band - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SBL71MGEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Peakform Band - Olive",
+          "color": "Olive",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SBL71MJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Peakform Band - Gray",
+          "color": "Gray",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SBL71MSEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Peakform Band - Taupe",
+          "color": "Taupe",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SNL71MBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Marine Band - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "ET-SNL71MDEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Marine Band - Mocha",
+          "color": "Mocha",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SNL71MGEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Marine Band - Olive",
+          "color": "Olive",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SNL71MLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Marine Band - Blue",
+          "color": "Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SNL71MOEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Marine Band - Orange",
+          "color": "Orange",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL70MFEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Trail Band - Orange",
+          "color": "Orange",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL70MGEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Trail Band - Olive",
+          "color": "Olive",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL70MJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Trail Band - Gray",
+          "color": "Gray",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL70MKEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Trail Band - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL70MLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch Ultra 2 Trail Band - Blue",
+          "color": "Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859289665477",
+      "familyName": "Premium SAMSUNG TC-04 (Type-C)",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 12,
+      "aggregatedF2": 21,
+      "aggregatedTotal": 33,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859289665477",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG TC-04 (Type-C)",
+          "color": "C)",
+          "f1": 12,
+          "f2": 21,
+          "total": 33
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA275GBlack",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A27 5G Black",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A27 5G Black",
+      "aggregatedF1": 12,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 12,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703443339",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A27 5G Black",
+          "color": "Black",
+          "f1": 12,
+          "f2": 0,
+          "total": 12
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGGALAXYFOLD7",
+      "familyName": "Samsung Protective Case for SAMSUNG GALAXY FOLD7",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY FOLD7",
+      "aggregatedF1": 12,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 16,
+      "variantCount": 3,
+      "variants": [
+        {
+          "inventoryPn": "EF-MF966CMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold7 Silicone Case - Mint",
+          "color": "Mint",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-XF966SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold7 Carbon Shield Case - Black",
+          "color": "Black",
+          "f1": 11,
+          "f2": 2,
+          "total": 13
+        },
+        {
+          "inventoryPn": "GP-FPF966PGABW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold7 ThinFit Case - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGGALAXYFLIP7",
+      "familyName": "Samsung Protective Case for SAMSUNG GALAXY FLIP7",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY FLIP7",
+      "aggregatedF1": 11,
+      "aggregatedF2": 11,
+      "aggregatedTotal": 22,
+      "variantCount": 6,
+      "variants": [
+        {
+          "inventoryPn": "EF-PF766TBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip7 Silicone Case with Ring - Black",
+          "color": "Black",
+          "f1": 4,
+          "f2": 1,
+          "total": 5
+        },
+        {
+          "inventoryPn": "EF-PF766TMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip7 Silicone Case with Ring - Mint",
+          "color": "Mint",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-PF766TNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip7 Silicone Case with Ring - Blue",
+          "color": "Blue",
+          "f1": 6,
+          "f2": 4,
+          "total": 10
+        },
+        {
+          "inventoryPn": "EF-VF766PJEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip7 Kindsuit Case - Taupe",
+          "color": "Taupe",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-ZF766CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Flip7 Flipsuit Case - Card Pinball",
+          "color": "Card Pinball",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "GP-FPF966PGBTW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold7 Capella Case - Frost Black",
+          "color": "Frost Black",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-4710343478164",
+      "familyName": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Silver",
+      "brand": "ADAM ELEMENTS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 10,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 13,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "4710343478164",
+          "barcode": null,
+          "erpDescription": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Silver",
+          "color": "Silver",
+          "f1": 10,
+          "f2": 3,
+          "total": 13
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-UGREEN-CHARGER-45W",
+      "familyName": "UGREEN 45W Wall Charger Family",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "baseModel": null,
+      "extraContext": "45W",
+      "aggregatedF1": 10,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 20,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6941876265749",
+          "barcode": null,
+          "erpDescription": "[CS]UGREEN Wall Charger 45W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+          "color": "Grey",
+          "f1": 10,
+          "f2": 10,
+          "total": 20
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA07Black",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A07 Black",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A07 Black",
+      "aggregatedF1": 10,
+      "aggregatedF2": 6,
+      "aggregatedTotal": 16,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703436409",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A07 Black",
+          "color": "Black",
+          "f1": 10,
+          "f2": 6,
+          "total": 16
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyTabS11",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Tab S11",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Tab S11",
+      "aggregatedF1": 10,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 13,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703436669",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab S11",
+          "color": "",
+          "f1": 10,
+          "f2": 3,
+          "total": 13
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PREMIUM-665479",
+      "familyName": "[PM] Tablet Laptop Sleeve 13 inch",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 10,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 14,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PREMIUM-665479",
+          "barcode": null,
+          "erpDescription": "[PM] Tablet Laptop Sleeve 13 inch",
+          "color": "",
+          "f1": 10,
+          "f2": 4,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-GENERIC-SAMSUNGGALAXYFOLD7",
+      "familyName": "Generic Protective Case for SAMSUNG GALAXY FOLD7",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY FOLD7",
+      "aggregatedF1": 9,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 14,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8800299669979",
+          "barcode": null,
+          "erpDescription": "Mercury Hard Case for Samsung Galaxy Fold7 - Clear",
+          "color": "Clear",
+          "f1": 9,
+          "f2": 5,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA365G",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A36 5G",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A36 5G",
+      "aggregatedF1": 9,
+      "aggregatedF2": 9,
+      "aggregatedTotal": 18,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703433828",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A36 5G/A56 5G Black",
+          "color": "Black",
+          "f1": 9,
+          "f2": 9,
+          "total": 18
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-UGREEN-CHARGER-65W",
+      "familyName": "UGREEN 65W Wall Charger Family",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "baseModel": null,
+      "extraContext": "65W",
+      "aggregatedF1": 8,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6941876238958",
+          "barcode": null,
+          "erpDescription": "[CS]UGREEN UNO RG 65W USB A*1 + USB C*2 GaN Fast Charger THAI PLUG - Gray",
+          "color": "Gray",
+          "f1": 8,
+          "f2": 2,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-FOCUS-GALAXYTABS9",
+      "familyName": "Focus Protective Case for GALAXY TAB S9",
+      "brand": "FOCUS",
+      "productType": "TABLET_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY TAB S9",
+      "aggregatedF1": 8,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703423812",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab S9 11",
+          "color": "",
+          "f1": 8,
+          "f2": 2,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyZFlip75G",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Z Flip 7 5G",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Z Flip 7 5G",
+      "aggregatedF1": 7,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703435532",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Z Flip 7 5G",
+          "color": "",
+          "f1": 7,
+          "f2": 3,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-FOCUS-SAMSUNGGALAXYS26SERIES",
+      "familyName": "Focus Protective Case for SAMSUNG GALAXY S26 SERIES",
+      "brand": "FOCUS",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY S26 SERIES",
+      "aggregatedF1": 7,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 8,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "8859703437659",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Premium Set Samsung Galaxy S26 Ultra (FF-SL)",
+          "color": "Sl)",
+          "f1": 7,
+          "f2": 0,
+          "total": 7
+        },
+        {
+          "inventoryPn": "8859703437666",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Premium Set Samsung Galaxy S26 Ultra (UG-FF)",
+          "color": "Ff)",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM-8806097071891",
+      "familyName": "Premium SAMSUNG B-series Souundbar HW-B400F 2.0ch Sub woofer",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 7,
+      "aggregatedF2": 7,
+      "aggregatedTotal": 14,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM-8806097071891",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG B-series Souundbar HW-B400F 2.0ch Sub woofer",
+          "color": "B400F 2.0Ch Sub Woofer",
+          "f1": 7,
+          "f2": 7,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-Z-SMARTTAG2WMR",
+      "familyName": "Premium Samsung SmartTag2 - S26 Series",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 7,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 7,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "Z-SMARTTAG2WMR",
+          "barcode": null,
+          "erpDescription": "Premium Samsung SmartTag2 - S26 Series",
+          "color": "S26 Series",
+          "f1": 7,
+          "f2": 0,
+          "total": 7
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-S25FE",
+      "familyName": "Hi-Shield Screen Protector for S25FE",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "S25FE",
+      "aggregatedF1": 6,
+      "aggregatedF2": 20,
+      "aggregatedTotal": 26,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216804030",
+          "barcode": null,
+          "erpDescription": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung S25 FE",
+          "color": "",
+          "f1": 6,
+          "f2": 20,
+          "total": 26
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-ZFOLD8",
+      "familyName": "Hi-Shield Screen Protector for Z FOLD8",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Z FOLD8",
+      "aggregatedF1": 6,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216860401",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield TemperedGlass 2.5D Clear Samsung Z Fold8",
+          "color": "",
+          "f1": 6,
+          "f2": 0,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyTabA9Plus11",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Tab A9 Plus 11",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Tab A9 Plus 11",
+      "aggregatedF1": 6,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703426073",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab A9 Plus 11",
+          "color": "",
+          "f1": 6,
+          "f2": 4,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyTabS10FEPlus13",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Tab S10 FE Plus 13",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Tab S10 FE Plus 13",
+      "aggregatedF1": 6,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 8,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703435204",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab S10 FE Plus 13.1",
+          "color": "",
+          "f1": 6,
+          "f2": 2,
+          "total": 8
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYA37",
+      "familyName": "Samsung Protective Case for GALAXY A37",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY A37",
+      "aggregatedF1": 6,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 8,
+      "variantCount": 5,
+      "variants": [
+        {
+          "inventoryPn": "EF-PA376CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A37 Silicone Case - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-PA376CKEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A37 Silicone Case - Dark Green",
+          "color": "Dark Green",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-PA376CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A37 Silicone Case - Light Violet",
+          "color": "Light Violet",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-QA376CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A37 Clear Case - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-RA376CBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A37 Rugged Case - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-WATCHBAND-GALAXYWATCH8",
+      "familyName": "Galaxy Watch Band for GALAXY WATCH8",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "baseModel": null,
+      "extraContext": "GALAXY WATCH8",
+      "aggregatedF1": 6,
+      "aggregatedF2": 6,
+      "aggregatedTotal": 12,
+      "variantCount": 7,
+      "variants": [
+        {
+          "inventoryPn": "ET-SNL32SMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Sport Band (S/M) - Mint",
+          "color": "Mint",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        },
+        {
+          "inventoryPn": "ET-SNL32SPEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Sport Band (S/M) - Pink",
+          "color": "Pink",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        },
+        {
+          "inventoryPn": "ET-SVL32SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Fabric Band (S/M) - Graphite",
+          "color": "Graphite",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "ET-SVL32SMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Fabric Band (S/M) - Mint",
+          "color": "Mint",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL32SNEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Fabric Band (S/M) - Blue",
+          "color": "Blue",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SVL32SREGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Fabric Band (S/M) - Red",
+          "color": "Red",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "ET-SVL32SWEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch8 Fabric Band (S/M) - White",
+          "color": "White",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-GENERIC-SAMSUNGGALAXYFLIP7",
+      "familyName": "Generic Protective Case for SAMSUNG GALAXY FLIP7",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY FLIP7",
+      "aggregatedF1": 5,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8800299669900",
+          "barcode": null,
+          "erpDescription": "Mercury Hard Case for Samsung Galaxy Flip7 - Clear",
+          "color": "Clear",
+          "f1": 5,
+          "f2": 5,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-A07",
+      "familyName": "Hi-Shield Screen Protector for A07",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "A07",
+      "aggregatedF1": 5,
+      "aggregatedF2": 15,
+      "aggregatedTotal": 20,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216804023",
+          "barcode": null,
+          "erpDescription": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung A07",
+          "color": "",
+          "f1": 5,
+          "f2": 15,
+          "total": 20
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyZFlip8",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Z Flip 8",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Z Flip 8",
+      "aggregatedF1": 5,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703443599",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Z Flip 8",
+          "color": "",
+          "f1": 5,
+          "f2": 5,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-745883867080",
+      "familyName": "Belkin BOOST CHARGE Pro Flex Double-Braided Silicone USB-A to C 1M-White",
+      "brand": "BELKIN",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 4,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 9,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "745883867080",
+          "barcode": null,
+          "erpDescription": "Belkin BOOST CHARGE Pro Flex Double-Braided Silicone USB-A to C 1M-White",
+          "color": "White",
+          "f1": 4,
+          "f2": 5,
+          "total": 9
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-TABS11ULTRA",
+      "familyName": "Hi-Shield Screen Protector for TAB S11 ULTRA",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "TAB S11 ULTRA",
+      "aggregatedF1": 4,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 7,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216804122",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield TemperedGlass 0.33mm Tab S11 Ultra",
+          "color": "",
+          "f1": 4,
+          "f2": 3,
+          "total": 7
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859216829156",
+      "familyName": "[CS]Hishield Aluminium lens Samsung S26 Ultra - Black",
+      "brand": "HISHIELD",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 4,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 14,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216829156",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Aluminium lens Samsung S26 Ultra - Black",
+          "color": "Black",
+          "f1": 4,
+          "f2": 10,
+          "total": 14
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyTabA98",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Tab A9 8",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Tab A9 8",
+      "aggregatedF1": 4,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703426066",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab A9 8.7",
+          "color": "",
+          "f1": 4,
+          "f2": 2,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA265G",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A26 5G",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A26 5G",
+      "aggregatedF1": 4,
+      "aggregatedF2": 9,
+      "aggregatedTotal": 13,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703433569",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A26 5G/A17 5G Black",
+          "color": "Black",
+          "f1": 4,
+          "f2": 9,
+          "total": 13
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS26FEBlack",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S26 FE Black",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S26 FE Black",
+      "aggregatedF1": 4,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 5,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703446620",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy S26 FE Black",
+          "color": "Black",
+          "f1": 4,
+          "f2": 1,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-WATCHBAND-GALAXYWATCH9",
+      "familyName": "Galaxy Watch Band for GALAXY WATCH9",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "baseModel": null,
+      "extraContext": "GALAXY WATCH9",
+      "aggregatedF1": 4,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 9,
+      "variantCount": 5,
+      "variants": [
+        {
+          "inventoryPn": "ET-SNL34SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch9 Sport Band (S/M) - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SNL34SLEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch9 Sport Band (S/M) - Blue",
+          "color": "Blue",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "ET-SNL34SYEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch9 Sport Band (S/M) - Yellow",
+          "color": "Yellow",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SXL34SBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch9 Misty Band (S/M) - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "ET-SXL34SMEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Watch9 Misty Band (S/M) - Olive",
+          "color": "Olive",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM-MS20A3010AL/ST",
+      "familyName": "Premium SAMSUNG Microwave oven SRT-20 liter",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 4,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 9,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM-MS20A3010AL/ST",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG Microwave oven SRT-20 liter",
+          "color": "",
+          "f1": 4,
+          "f2": 5,
+          "total": 9
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM6936678491526",
+      "familyName": "Premium Robot Portable handheld fan RT-HF01 - White",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 4,
+      "aggregatedF2": 20,
+      "aggregatedTotal": 24,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM6936678491526",
+          "barcode": null,
+          "erpDescription": "Premium Robot Portable handheld fan RT-HF01 - White",
+          "color": "White",
+          "f1": 4,
+          "f2": 20,
+          "total": 24
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-4710343478157",
+      "familyName": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Black",
+      "brand": "ADAM ELEMENTS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 3,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 5,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "4710343478157",
+          "barcode": null,
+          "erpDescription": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Black",
+          "color": "Black",
+          "f1": 3,
+          "f2": 2,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-TABS10LITE",
+      "familyName": "Hi-Shield Screen Protector for TAB S10 LITE",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "TAB S10 LITE",
+      "aggregatedF1": 3,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216804085",
+          "barcode": null,
+          "erpDescription": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung Tab S10 Lite",
+          "color": "",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859216829255",
+      "familyName": "[CS]Hishield Aluminium lens Samsung S26 Ultra - Silver",
+      "brand": "HISHIELD",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 3,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 8,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216829255",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Aluminium lens Samsung S26 Ultra - Silver",
+          "color": "Silver",
+          "f1": 3,
+          "f2": 5,
+          "total": 8
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS26Plus",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S26 Plus",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S26 Plus",
+      "aggregatedF1": 3,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 13,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703437468",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung Galaxy S26 Plus",
+          "color": "",
+          "f1": 3,
+          "f2": 10,
+          "total": 13
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyZFold8Ultra",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Z Fold 8 Ultra",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Z Fold 8 Ultra",
+      "aggregatedF1": 3,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703443605",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Z Fold 8 Ultra",
+          "color": "",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyZFold8",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Z Fold 8",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Z Fold 8",
+      "aggregatedF1": 3,
+      "aggregatedF2": 6,
+      "aggregatedTotal": 9,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703443612",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Z Fold 8",
+          "color": "",
+          "f1": 3,
+          "f2": 6,
+          "total": 9
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859703443650",
+      "familyName": "[CS]Focus Perfect Clear Ring Samsung Galaxy Z Flip 8",
+      "brand": "FOCUS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 3,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703443650",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Perfect Clear Ring Samsung Galaxy Z Flip 8",
+          "color": "",
+          "f1": 3,
+          "f2": 3,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYA57",
+      "familyName": "Samsung Protective Case for GALAXY A57",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY A57",
+      "aggregatedF1": 3,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 7,
+      "variantCount": 3,
+      "variants": [
+        {
+          "inventoryPn": "EF-PA576CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A57 Silicone Case - Violet",
+          "color": "Violet",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-QA576CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A57 Clear Case - Transparent",
+          "color": "Transparent",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        },
+        {
+          "inventoryPn": "EF-UA576CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A57 Screen Protector - Transparent",
+          "color": "Transparent",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-Z-ADAPTER45QHB",
+      "familyName": "Premium SAMSUNG Adapter 45W without cable - Black",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 3,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 7,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "Z-ADAPTER45QHB",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG Adapter 45W without cable - Black",
+          "color": "Black",
+          "f1": 3,
+          "f2": 4,
+          "total": 7
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-AUDIO-SOUNDCORE-19464405",
+      "familyName": "SOUNDCORE Audio Device",
+      "brand": "SOUNDCORE",
+      "productType": "BLUETOOTH_SPEAKER",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 4,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "194644055783",
+          "barcode": null,
+          "erpDescription": "Soundcore Select 4 Go Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-AUDIO-SOUNDCORE-19464420",
+      "familyName": "SOUNDCORE Audio Device",
+      "brand": "SOUNDCORE",
+      "productType": "BLUETOOTH_SPEAKER",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 4,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "194644200176",
+          "barcode": null,
+          "erpDescription": "Soundcore Select 4 Go Blue",
+          "color": "",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6902957323888",
+      "familyName": "PISEN QUICK 30W QI2.0 Mag Power 10000mAh (Grey)",
+      "brand": "PISEN",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6902957323888",
+          "barcode": null,
+          "erpDescription": "PISEN QUICK 30W QI2.0 Mag Power 10000mAh (Grey)",
+          "color": "",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6941876222087",
+      "familyName": "[CS]UGREEN Power Bank 10000mAh 20W Mini Magnetic Wireless Fast Charging - White",
+      "brand": "[CS]UGREEN",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6941876222087",
+          "barcode": null,
+          "erpDescription": "[CS]UGREEN Power Bank 10000mAh 20W Mini Magnetic Wireless Fast Charging - White",
+          "color": "White",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6941876258628",
+      "familyName": "[CS]UGREEN Power Bank 10000mAh 20W Mini Magnetic Wireless Fast Charging - Black",
+      "brand": "[CS]UGREEN",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6941876258628",
+          "barcode": null,
+          "erpDescription": "[CS]UGREEN Power Bank 10000mAh 20W Mini Magnetic Wireless Fast Charging - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6975061531258",
+      "familyName": "Jisulife FA53 Handheld Fan (ABS) - White",
+      "brand": "JISULIFE",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6975061531258",
+          "barcode": null,
+          "erpDescription": "Jisulife FA53 Handheld Fan (ABS) - White",
+          "color": "White",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6975061532576",
+      "familyName": "Jisulife Life 7 Handheld Fan (5,000 mAh) - Pink",
+      "brand": "JISULIFE",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 4,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6975061532576",
+          "barcode": null,
+          "erpDescription": "Jisulife Life 7 Handheld Fan (5,000 mAh) - Pink",
+          "color": "Pink",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6975061532583",
+      "familyName": "Jisulife Life 7 Handheld Fan (5,000 mAh) - Grey",
+      "brand": "JISULIFE",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6975061532583",
+          "barcode": null,
+          "erpDescription": "Jisulife Life 7 Handheld Fan (5,000 mAh) - Grey",
+          "color": "Grey",
+          "f1": 2,
+          "f2": 4,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6975061532590",
+      "familyName": "Jisulife Life 7 Handheld Fan (5,000 mAh) - Black",
+      "brand": "JISULIFE",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 4,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6975061532590",
+          "barcode": null,
+          "erpDescription": "Jisulife Life 7 Handheld Fan (5,000 mAh) - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-S25SERIES",
+      "familyName": "Hi-Shield Screen Protector for S25 SERIES",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "S25 SERIES",
+      "aggregatedF1": 2,
+      "aggregatedF2": 25,
+      "aggregatedTotal": 27,
+      "variantCount": 5,
+      "variants": [
+        {
+          "inventoryPn": "8859216739240",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S25 - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 5,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216739257",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5DSamsung S25PLus - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 5,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216739264",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D Samsung S25Ultra - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 5,
+          "total": 7
+        },
+        {
+          "inventoryPn": "8859216739301",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Selected 2.5D Matte glass Samsung S25Ultra",
+          "color": "",
+          "f1": 0,
+          "f2": 5,
+          "total": 5
+        },
+        {
+          "inventoryPn": "8859216739363",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Selected 2.5D Privacy glass Samsung S25Ultra",
+          "color": "",
+          "f1": 0,
+          "f2": 5,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-TABS11",
+      "familyName": "Hi-Shield Screen Protector for TAB S11",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "TAB S11",
+      "aggregatedF1": 2,
+      "aggregatedF2": 8,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216804108",
+          "barcode": null,
+          "erpDescription": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung Tab S11",
+          "color": "",
+          "f1": 2,
+          "f2": 8,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS26",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S26",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S26",
+      "aggregatedF1": 2,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703437451",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung Galaxy S26",
+          "color": "",
+          "f1": 2,
+          "f2": 4,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859703437536",
+      "familyName": "[CS]Focus Iron Ring Samsung Galaxy S26 Ultra Black",
+      "brand": "FOCUS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 6,
+      "aggregatedTotal": 8,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703437536",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Iron Ring Samsung Galaxy S26 Ultra Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 6,
+          "total": 8
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859703443667",
+      "familyName": "[CS]Focus Perfect Clear Ring Samsung Galaxy Z Fold 8 Ultra",
+      "brand": "FOCUS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 4,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703443667",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Perfect Clear Ring Samsung Galaxy Z Fold 8 Ultra",
+          "color": "",
+          "f1": 2,
+          "f2": 2,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYTABS11",
+      "familyName": "Samsung Protective Case for GALAXY TAB S11",
+      "brand": "SAMSUNG",
+      "productType": "TABLET_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY TAB S11",
+      "aggregatedF1": 2,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 4,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "EF-BX930PBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Tab S11Ultra Book Cover Case - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-DX730UBEGTH",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Tab S11 (AI) Book Cover Keyboard Slim - Black",
+          "color": "Black",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGASERIES",
+      "familyName": "Samsung Protective Case for SAMSUNG A SERIES",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG A SERIES",
+      "aggregatedF1": 2,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 3,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "EF-PA366CVEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A36 Silicone Case - Lavender",
+          "color": "Lavender",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        },
+        {
+          "inventoryPn": "EF-QA366CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A36 Clear Case - Transparancy",
+          "color": "Transparancy",
+          "f1": 2,
+          "f2": 0,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-EF-US741CTEGWW",
+      "familyName": "Samsung Galaxy S26FE Anti-reflecting Film - Transparency",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-US741CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26FE Anti-reflecting Film - Transparency",
+          "color": "Transparency",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-EF-US947CTEGWW",
+      "familyName": "Samsung Galaxy S26Plus Anti-reflecting Film - Transparent",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-US947CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26Plus Anti-reflecting Film - Transparent",
+          "color": "Transparent",
+          "f1": 2,
+          "f2": 1,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM8859289684768",
+      "familyName": "Premium D-Power Blackpack-SAMSUNG",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 2,
+      "aggregatedF2": 51,
+      "aggregatedTotal": 53,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM8859289684768",
+          "barcode": null,
+          "erpDescription": "Premium D-Power Blackpack-SAMSUNG",
+          "color": "Samsung",
+          "f1": 2,
+          "f2": 51,
+          "total": 53
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-6975061531234",
+      "familyName": "Jisulife FA53 Handheld Fan (ABS) - Blue",
+      "brand": "JISULIFE",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "6975061531234",
+          "barcode": null,
+          "erpDescription": "Jisulife FA53 Handheld Fan (ABS) - Blue",
+          "color": "Blue",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-GENERIC-GALAXYA37",
+      "familyName": "Generic Protective Case for GALAXY A37",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY A37",
+      "aggregatedF1": 1,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8800299712668",
+          "barcode": null,
+          "erpDescription": "Mercury Jelly Case for Galaxy A37 - Clear",
+          "color": "Clear",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyTabS8Plus12",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Tab S8 Plus 12",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Tab S8 Plus 12",
+      "aggregatedF1": 1,
+      "aggregatedF2": 4,
+      "aggregatedTotal": 5,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703400226",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab S8 Plus 12.4",
+          "color": "",
+          "f1": 1,
+          "f2": 4,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859703434269",
+      "familyName": "[CS]Focus Premium Bag For Samsung S25 Series - Black",
+      "brand": "FOCUS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703434269",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Premium Bag For Samsung S25 Series - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyTabS11Ultra",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy Tab S11 Ultra",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy Tab S11 Ultra",
+      "aggregatedF1": 1,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703436690",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG UC Samsung Galaxy Tab S11 Ultra",
+          "color": "",
+          "f1": 1,
+          "f2": 2,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859703437543",
+      "familyName": "[CS]Iron Ring Samsung Galaxy S26 Ultra Silver",
+      "brand": "FOCUS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 11,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703437543",
+          "barcode": null,
+          "erpDescription": "[CS]Iron Ring Samsung Galaxy S26 Ultra Silver",
+          "color": "Silver",
+          "f1": 1,
+          "f2": 10,
+          "total": 11
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-EF-UF971CTEGWW",
+      "familyName": "Samsung Galaxy Fold8 Anti-reflecting Film - Transparent",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-UF971CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold8 Anti-reflecting Film - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-EF-US936CTEGWW",
+      "familyName": "Samsung Galaxy S25Plus Screen Protector - Transparent",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-US936CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S25Plus Screen Protector - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-EF-US942CTEGWW",
+      "familyName": "Samsung Galaxy S26 Anti-reflecting Film - Transparent",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-US942CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S26 Anti-reflecting Film - Transparent",
+          "color": "Transparent",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYTABS10PLUS",
+      "familyName": "Samsung Protective Case for GALAXY TAB S10PLUS",
+      "brand": "SAMSUNG",
+      "productType": "TABLET_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY TAB S10PLUS",
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "GP-FCX626NNCBH",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Tab S10FE Plus Neos Keyboard Cover (BT) - Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM8806094095647",
+      "familyName": "[PM]Samsung The Freestyle Case - Green",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM8806094095647",
+          "barcode": null,
+          "erpDescription": "[PM]Samsung The Freestyle Case - Green",
+          "color": "Green",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM8806094297584",
+      "familyName": "[PM]Samsung The Freestyle Skin - Green",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM8806094297584",
+          "barcode": null,
+          "erpDescription": "[PM]Samsung The Freestyle Skin - Green",
+          "color": "Green",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-SS-MWO-MS20A3010AL/S",
+      "familyName": "Samsung Microwave MS20A3010AL/ST With Glass Door 20 Liters",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "SS-MWO-MS20A3010AL/S",
+          "barcode": null,
+          "erpDescription": "Samsung Microwave MS20A3010AL/ST With Glass Door 20 Liters",
+          "color": "",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-SS-VC-AX32BG3100GBST",
+      "familyName": "Samsung Smart Air Purifier AX32BG3100GBST",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "SS-VC-AX32BG3100GBST",
+          "barcode": null,
+          "erpDescription": "Samsung Smart Air Purifier AX32BG3100GBST",
+          "color": "",
+          "f1": 1,
+          "f2": 1,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-Z-FLIP7FECASE1",
+      "familyName": "Premium SAMSUNG Flip6 Silicone Case Black",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "Z-FLIP7FECASE1",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG Flip6 Silicone Case Black",
+          "color": "Black",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-Z-FLIP7FECASE3",
+      "familyName": "Premium SAMSUNG Flip6 Clear Case Clear Case",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "Z-FLIP7FECASE3",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG Flip6 Clear Case Clear Case",
+          "color": "",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-Z-FLIP7FECASE4",
+      "familyName": "Premium SAMSUNG Flip6 Anti-reflecting Film Film",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 1,
+      "aggregatedF2": 0,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "Z-FLIP7FECASE4",
+          "barcode": null,
+          "erpDescription": "Premium SAMSUNG Flip6 Anti-reflecting Film Film",
+          "color": "Reflecting Film Film",
+          "f1": 1,
+          "f2": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-GENERIC-GALAXYA36",
+      "familyName": "Generic Protective Case for GALAXY A36",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY A36",
+      "aggregatedF1": 0,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8800299642811",
+          "barcode": null,
+          "erpDescription": "Mercury Jelly Case for Galaxy A36 - Clear",
+          "color": "Clear",
+          "f1": 0,
+          "f2": 3,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-SAMSUNG",
+      "familyName": "Focus Tempered Glass Screen Protector for SAMSUNG",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "SAMSUNG",
+      "aggregatedF1": 0,
+      "aggregatedF2": 22,
+      "aggregatedTotal": 22,
+      "variantCount": 2,
+      "variants": [
+        {
+          "inventoryPn": "8859095890766",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Hydroplus Film - Ultra Clear",
+          "color": "Ultra Clear",
+          "f1": 0,
+          "f2": 18,
+          "total": 18
+        },
+        {
+          "inventoryPn": "8859095890773",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Hydroplus Film - Antifinger Print",
+          "color": "Antifinger Print",
+          "f1": 0,
+          "f2": 4,
+          "total": 4
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-HISHIELD-SP-A26",
+      "familyName": "Hi-Shield Screen Protector for A26",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "A26",
+      "aggregatedF1": 0,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 5,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216755578",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A26",
+          "color": "",
+          "f1": 0,
+          "f2": 5,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859216765355",
+      "familyName": "[CS]Hishield Aluminum Lens Samsung Flip7 Silver",
+      "brand": "HISHIELD",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216765355",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Aluminum Lens Samsung Flip7 Silver",
+          "color": "Silver",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859216765379",
+      "familyName": "[CS]Hishield Aluminum Lens Samsung Fold7 Black",
+      "brand": "HISHIELD",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216765379",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Aluminum Lens Samsung Fold7 Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859216765386",
+      "familyName": "[CS]Hishield Aluminum Lens Samsung Fold7 Silver",
+      "brand": "HISHIELD",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859216765386",
+          "barcode": null,
+          "erpDescription": "[CS]Hishield Aluminum Lens Samsung Fold7 Silver",
+          "color": "Silver",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859698210176",
+      "familyName": "[CS]Cool A Styler High Speed Hair Dryer CA-V11 - Blue",
+      "brand": "COOL A STYLER",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859698210176",
+          "barcode": null,
+          "erpDescription": "[CS]Cool A Styler High Speed Hair Dryer CA-V11 - Blue",
+          "color": "Blue",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859698210183",
+      "familyName": "[CS]Cool A Styler High Speed Hair Dryer CA-V11 - Pink",
+      "brand": "COOL A STYLER",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859698210183",
+          "barcode": null,
+          "erpDescription": "[CS]Cool A Styler High Speed Hair Dryer CA-V11 - Pink",
+          "color": "Pink",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyS24Ultra",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy S24 Ultra",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy S24 Ultra",
+      "aggregatedF1": 0,
+      "aggregatedF2": 10,
+      "aggregatedTotal": 10,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703426530",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF SL Samsung Galaxy S24 Ultra - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 10,
+          "total": 10
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-FOCUS-SP-GalaxyA165G",
+      "familyName": "Focus Tempered Glass Screen Protector for Galaxy A16 5G",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "baseModel": null,
+      "extraContext": "Galaxy A16 5G",
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703433354",
+          "barcode": null,
+          "erpDescription": "[CS]Focus TG FF Samsung Galaxy A16 5G - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-8859703433699",
+      "familyName": "[CS]Focus Perfect Clear Ring Samsung S25 Ultra",
+      "brand": "FOCUS",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "8859703433699",
+          "barcode": null,
+          "erpDescription": "[CS]Focus Perfect Clear Ring Samsung S25 Ultra",
+          "color": "",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-EF-UA566CTEGWW",
+      "familyName": "Samsung Galaxy A56 Screen Protector - Transparancy",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-UA566CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy A56 Screen Protector - Transparancy",
+          "color": "Transparancy",
+          "f1": 0,
+          "f2": 3,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGGALAXYZFOLD6",
+      "familyName": "Samsung Protective Case for SAMSUNG GALAXY Z FOLD6",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY Z FOLD6",
+      "aggregatedF1": 0,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EF-UF956CTEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Fold6 Front Protection Film - Transparancy",
+          "color": "Transparancy",
+          "f1": 0,
+          "f2": 3,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SAMSUNG-ADAPTER-EP-P2900",
+      "familyName": "Samsung 15W Power Adapter (EP-P2900)",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "baseModel": "EP-P2900",
+      "extraContext": "15W",
+      "aggregatedF1": 0,
+      "aggregatedF2": 2,
+      "aggregatedTotal": 2,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "EP-P2900BBEGWW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Magnet Wireless Charger 25W - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 2,
+          "total": 2
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-ET-SOL30SWEGWW-D",
+      "familyName": "[DM] Samsung Galaxy Watch7 Athleisure Band S M - Cream",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "ET-SOL30SWEGWW-D",
+          "barcode": null,
+          "erpDescription": "[DM] Samsung Galaxy Watch7 Athleisure Band S M - Cream",
+          "color": "Cream",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-ET-SVL30SWEGWW-D",
+      "familyName": "[DM] Samsung Galaxy Watch7 Fabric Band S M - Pink White",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "ET-SVL30SWEGWW-D",
+          "barcode": null,
+          "erpDescription": "[DM] Samsung Galaxy Watch7 Fabric Band S M - Pink White",
+          "color": "Pink White",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-GALAXYTABS10LITE",
+      "familyName": "Samsung Protective Case for GALAXY TAB S10LITE",
+      "brand": "SAMSUNG",
+      "productType": "TABLET_CASE",
+      "baseModel": null,
+      "extraContext": "GALAXY TAB S10LITE",
+      "aggregatedF1": 0,
+      "aggregatedF2": 5,
+      "aggregatedTotal": 5,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "GP-FCX400RLABH",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Tab S10Lite Bluetooth Keyboard Cover - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 5,
+          "total": 5
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-GP-PWU025WIABW",
+      "familyName": "Samsung Galaxy Single Pad Wireless Charger 15W",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "GP-PWU025WIABW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy Single Pad Wireless Charger 15W",
+          "color": "",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-CASE-SAMSUNG-SAMSUNGGALAXYS25SERIES",
+      "familyName": "Samsung Protective Case for SAMSUNG GALAXY S25 SERIES",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "baseModel": null,
+      "extraContext": "SAMSUNG GALAXY S25 SERIES",
+      "aggregatedF1": 0,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "GP-TOS938HIAPW",
+          "barcode": null,
+          "erpDescription": "Samsung Galaxy S25Ultra Joguman Love Lasts Flipsuit Card - Pink",
+          "color": "Pink",
+          "f1": 0,
+          "f2": 3,
+          "total": 3
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM4897121002558",
+      "familyName": "[Premium] Gaabor weighing scale GWS-M01A - Black",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 8,
+      "aggregatedTotal": 8,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM4897121002558",
+          "barcode": null,
+          "erpDescription": "[Premium] Gaabor weighing scale GWS-M01A - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 8,
+          "total": 8
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM6931481286437",
+      "familyName": "Premium YOUMI strong luggage 20in, ABS+PC- Mixed colors",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 1,
+      "aggregatedTotal": 1,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM6931481286437",
+          "barcode": null,
+          "erpDescription": "Premium YOUMI strong luggage 20in, ABS+PC- Mixed colors",
+          "color": "Mixed Colors",
+          "f1": 0,
+          "f2": 1,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM6931481299710",
+      "familyName": "Premium MINI High speed handheld fan",
+      "brand": "EXTRA BRAND",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 24,
+      "aggregatedTotal": 24,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM6931481299710",
+          "barcode": null,
+          "erpDescription": "Premium MINI High speed handheld fan",
+          "color": "",
+          "f1": 0,
+          "f2": 24,
+          "total": 24
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-PM6958444604725",
+      "familyName": "[PM]Divoom MiniToo - White",
+      "brand": "DIVOOM",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 6,
+      "aggregatedTotal": 6,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "PM6958444604725",
+          "barcode": null,
+          "erpDescription": "[PM]Divoom MiniToo - White",
+          "color": "White",
+          "f1": 0,
+          "f2": 6,
+          "total": 6
+        }
+      ]
+    },
+    {
+      "familyId": "FAM-SINGLE-S-33016170",
+      "familyName": "Samsung (Shop Ais) Adapter 25W no cable - Black",
+      "brand": "SAMSUNG",
+      "productType": "UNKNOWN_ACCESSORY",
+      "baseModel": null,
+      "extraContext": null,
+      "aggregatedF1": 0,
+      "aggregatedF2": 3,
+      "aggregatedTotal": 3,
+      "variantCount": 1,
+      "variants": [
+        {
+          "inventoryPn": "S-33016170",
+          "barcode": null,
+          "erpDescription": "Samsung (Shop Ais) Adapter 25W no cable - Black",
+          "color": "Black",
+          "f1": 0,
+          "f2": 3,
+          "total": 3
+        }
+      ]
+    }
+  ]
+}

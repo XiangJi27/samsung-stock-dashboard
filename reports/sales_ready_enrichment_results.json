@@ -1,0 +1,1499 @@
+{
+  "generatedAt": "2026-09-16T14:14:07.152116",
+  "summary": {
+    "totalDrafts": 268,
+    "salesReadyCount": 191,
+    "holdReviewCount": 77,
+    "salesReadyF1Quantity": 733,
+    "totalDraftF1Quantity": 1190,
+    "f1QuantitySalesReadyCoverage": 61.6
+  },
+  "topSalesReadyItems": [
+    {
+      "inventoryPn": "SSG-EP-T4511XBEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "f1": 41,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "อะแดปเตอร์ชาร์จ SAMSUNG 45W (Super Fast Charging 2.0) (มาพร้อมสาย 5A ในกล่อง)",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "EP-T2510NWEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WALL_CHARGER",
+      "f1": 38,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "อะแดปเตอร์ชาร์จ SAMSUNG 25W (Super Fast Charging) (ไม่มีสายในกล่อง)",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703437345",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 36,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ Galaxy A57 5G Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216623877",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 31,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ SAMSUNG สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216623860",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 30,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ SAMSUNG สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216846719",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 29,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ A37 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216860326",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 29,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ Z FOLD8 ULTRA สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216860241",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 28,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ Z FLIP8 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703436560",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 19,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ Galaxy S25 FE Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216829033",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 17,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ S26 SERIES สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216803910",
+      "brand": "HISHIELD",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 16,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย HISHIELD สำหรับ A17 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703443339",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 12,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ Galaxy A27 5G Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "EF-XF966SBEGWW",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "f1": 11,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "เคสโทรศัพท์ SAMSUNG สำหรับ SAMSUNG GALAXY FOLD7 พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703433590",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 10,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ S25 SERIES สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703436409",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 10,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ Galaxy A07 Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703436669",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 10,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ Galaxy Tab S11 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859703433828",
+      "brand": "FOCUS",
+      "productType": "SCREEN_PROTECTOR",
+      "f1": 9,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "All required sales fields successfully populated and verified from ERP/Family"
+      ],
+      "salesSummary": "กระจกกันรอย FOCUS สำหรับ Galaxy A36 5G สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H",
+      "missingFields": [],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8800299669979",
+      "brand": "MERCURY",
+      "productType": "PHONE_CASE",
+      "f1": 9,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "Core sales attributes present; non-critical field 'color' safely displayed as unverified"
+      ],
+      "salesSummary": "เคสโทรศัพท์ MERCURY สำหรับ SAMSUNG GALAXY FOLD7 พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย",
+      "missingFields": [
+        "color"
+      ],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "EF-QS948CTEGWW",
+      "brand": "SAMSUNG",
+      "productType": "PHONE_CASE",
+      "f1": 9,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "Core sales attributes present; non-critical field 'color' safely displayed as unverified"
+      ],
+      "salesSummary": "เคสโทรศัพท์ SAMSUNG สำหรับ SAMSUNG GALAXY S26 SERIES พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย",
+      "missingFields": [
+        "color"
+      ],
+      "riskLevel": "LOW"
+    },
+    {
+      "inventoryPn": "8859216828746",
+      "brand": "HISHIELD",
+      "productType": "PHONE_CASE",
+      "f1": 9,
+      "salesReadiness": "SALES_READY",
+      "reasons": [
+        "Core sales attributes present; non-critical field 'color' safely displayed as unverified"
+      ],
+      "salesSummary": "เคสโทรศัพท์ HISHIELD สำหรับ SAMSUNG GALAXY S26 SERIES พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย",
+      "missingFields": [
+        "color"
+      ],
+      "riskLevel": "LOW"
+    }
+  ],
+  "holdReviewItems": [
+    {
+      "inventoryPn": "PM6931481215697",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 49,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6941876265732",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "f1": 42,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: outputPorts, cableIncluded"
+      ],
+      "salesSummary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 30W ()",
+      "missingFields": [
+        "outputPorts",
+        "cableIncluded"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PREMIUM0017044",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 27,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PREMIUM-665477",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 27,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "EP-T6010NBEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WIRELESS_CHARGER",
+      "f1": 23,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: fastWirelessChargingSupport"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Adapter 60W without cable - Black)",
+      "missingFields": [
+        "fastWirelessChargingSupport"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM4897121009793",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 22,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "8859763200989",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 20,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PREMIUM0017046",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 20,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "EP-T4511NBEGTH",
+      "brand": "SAMSUNG",
+      "productType": "WIRELESS_CHARGER",
+      "f1": 17,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: fastWirelessChargingSupport"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Adapter 45W without cable - Black)",
+      "missingFields": [
+        "fastWirelessChargingSupport"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PREMIUM-665478",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 17,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM-8806090284687",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 17,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6931481215710",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 14,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "8859289657762",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 14,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "8859289665477",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 12,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "SSG-EP-DN975BWEGWW",
+      "brand": "SAMSUNG",
+      "productType": "DATA_CABLE",
+      "f1": 12,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: connectorA, connectorB, maximumPower, length"
+      ],
+      "salesSummary": "สายชาร์จและส่งข้อมูล SAMSUNG  ความยาว ",
+      "missingFields": [
+        "connectorA",
+        "connectorB",
+        "maximumPower",
+        "length"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6941876265749",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "f1": 10,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: outputPorts, cableIncluded"
+      ],
+      "salesSummary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 45W ()",
+      "missingFields": [
+        "outputPorts",
+        "cableIncluded"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PREMIUM-665479",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 10,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "4710343478164",
+      "brand": "ADAM ELEMENTS",
+      "productType": "DATA_CABLE",
+      "f1": 10,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: connectorA, connectorB"
+      ],
+      "salesSummary": "สายชาร์จและส่งข้อมูล ADAM ELEMENTS 100W ความยาว 1M",
+      "missingFields": [
+        "connectorA",
+        "connectorB"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6941876238958",
+      "brand": "[CS]UGREEN",
+      "productType": "WALL_CHARGER",
+      "f1": 8,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: outputPorts, cableIncluded"
+      ],
+      "salesSummary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 65W ()",
+      "missingFields": [
+        "outputPorts",
+        "cableIncluded"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "8859703423812",
+      "brand": "FOCUS",
+      "productType": "TABLET_CASE",
+      "f1": 8,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม FOCUS ([CS]Focus TG UC Samsung Galaxy Tab S9 11)",
+      "missingFields": [
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM-8806097071891",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 7,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG B-series Souundbar HW-B400F 2.0ch Sub woofer)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "Z-SMARTTAG2WMR",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 7,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium Samsung SmartTag2 - S26 Series)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM6936678491526",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 4,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "745883867080",
+      "brand": "BELKIN",
+      "productType": "DATA_CABLE",
+      "f1": 4,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: connectorA, connectorB, maximumPower"
+      ],
+      "salesSummary": "สายชาร์จและส่งข้อมูล BELKIN  ความยาว 1M",
+      "missingFields": [
+        "connectorA",
+        "connectorB",
+        "maximumPower"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM-MS20A3010AL/ST",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 4,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Microwave oven SRT-20 liter)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "Z-ADAPTER45QHB",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 3,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Adapter 45W without cable - Black)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM8859289684768",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6975061532583",
+      "brand": "JISULIFE",
+      "productType": null,
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "194644200176",
+      "brand": "SOUNDCORE",
+      "productType": "BLUETOOTH_SPEAKER",
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: outputPower, playTime, ipRating"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SOUNDCORE (Soundcore Select 4 Go Blue)",
+      "missingFields": [
+        "outputPower",
+        "playTime",
+        "ipRating"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6975061532576",
+      "brand": "JISULIFE",
+      "productType": null,
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6975061532590",
+      "brand": "JISULIFE",
+      "productType": null,
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6941876222087",
+      "brand": "[CS]UGREEN",
+      "productType": "POWER_BANK",
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: batteryCapacity"
+      ],
+      "salesSummary": "อุปกรณ์เสริม [CS]UGREEN ([CS]UGREEN Power Bank 10000mAh 20W Mini Magnetic Wireless Fast Charging - White)",
+      "missingFields": [
+        "batteryCapacity"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6941876258628",
+      "brand": "[CS]UGREEN",
+      "productType": "POWER_BANK",
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: batteryCapacity"
+      ],
+      "salesSummary": "อุปกรณ์เสริม [CS]UGREEN ([CS]UGREEN Power Bank 10000mAh 20W Mini Magnetic Wireless Fast Charging - Black)",
+      "missingFields": [
+        "batteryCapacity"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL32SMEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Sport Band (S/M) - Mint)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6902957323888",
+      "brand": "PISEN",
+      "productType": "POWER_BANK",
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: batteryCapacity"
+      ],
+      "salesSummary": "อุปกรณ์เสริม PISEN (PISEN QUICK 30W QI2.0 Mag Power 10000mAh (Grey))",
+      "missingFields": [
+        "batteryCapacity"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6975061531258",
+      "brand": "JISULIFE",
+      "productType": null,
+      "f1": 2,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SBL71MAEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Peakform Band - Camel)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SBL71MGEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Peakform Band - Olive)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SBL71MJEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Peakform Band - Gray)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SBL71MSEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Peakform Band - Taupe)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL34SBEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch9 Sport Band (S/M) - Black)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL34SYEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch9 Sport Band (S/M) - Yellow)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL71MDEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Marine Band - Mocha)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL71MGEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Marine Band - Olive)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL71MLEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Marine Band - Blue)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL71MOEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Marine Band - Orange)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL32SMEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Fabric Band (S/M) - Mint)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL32SNEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Fabric Band (S/M) - Blue)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL32SWEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Fabric Band (S/M) - White)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL70MFEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Trail Band - Orange)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL70MGEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Trail Band - Olive)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL70MJEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Trail Band - Gray)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL70MKEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Trail Band - Black)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL70MLEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Trail Band - Blue)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SXL34SBEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch9 Misty Band (S/M) - Black)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SXL34SMEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch9 Misty Band (S/M) - Olive)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "SS-VC-AX32BG3100GBST",
+      "brand": "SAMSUNG",
+      "productType": null,
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "6975061531234",
+      "brand": "JISULIFE",
+      "productType": null,
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL32SPEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Sport Band (S/M) - Pink)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM8806094095647",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG ([PM]Samsung The Freestyle Case - Green)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM8806094297584",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG ([PM]Samsung The Freestyle Skin - Green)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "SS-MWO-MS20A3010AL/S",
+      "brand": "SAMSUNG",
+      "productType": null,
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "Z-FLIP7FECASE1",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Flip6 Silicone Case Black)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "Z-FLIP7FECASE3",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Flip6 Clear Case Clear Case)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "Z-FLIP7FECASE4",
+      "brand": "SAMSUNG",
+      "productType": "PREMIUM_GIFT",
+      "f1": 1,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG Flip6 Anti-reflecting Film Film)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM6931481299710",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM4897121002558",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM6958444604725",
+      "brand": "DIVOOM",
+      "productType": "PREMIUM_GIFT",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: accessoryType, compatibleSeries"
+      ],
+      "salesSummary": "อุปกรณ์เสริม DIVOOM ([PM]Divoom MiniToo - White)",
+      "missingFields": [
+        "accessoryType",
+        "compatibleSeries"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "EP-P2900BBEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WIRELESS_CHARGER",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: chargerType, fastWirelessChargingSupport"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Magnet Wireless Charger 25W - Black)",
+      "missingFields": [
+        "chargerType",
+        "fastWirelessChargingSupport"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "8859698210176",
+      "brand": "COOL A STYLER",
+      "productType": null,
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "8859698210183",
+      "brand": "COOL A STYLER",
+      "productType": null,
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL34SLEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch9 Sport Band (S/M) - Blue)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SNL71MBEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch Ultra 2 Marine Band - Black)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL32SBEGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Fabric Band (S/M) - Graphite)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "ET-SVL32SREGWW",
+      "brand": "SAMSUNG",
+      "productType": "WATCH_BAND",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: compatibleModels, bandStyle, color"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Watch8 Fabric Band (S/M) - Red)",
+      "missingFields": [
+        "compatibleModels",
+        "bandStyle",
+        "color"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "GP-PWU025WIABW",
+      "brand": "SAMSUNG",
+      "productType": "WIRELESS_CHARGER",
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Missing required sales fields: chargerType, fastWirelessChargingSupport"
+      ],
+      "salesSummary": "อุปกรณ์เสริม SAMSUNG (Samsung Galaxy Single Pad Wireless Charger 15W)",
+      "missingFields": [
+        "chargerType",
+        "fastWirelessChargingSupport"
+      ],
+      "riskLevel": "MEDIUM"
+    },
+    {
+      "inventoryPn": "PM6931481286437",
+      "brand": "EXTRA BRAND",
+      "productType": null,
+      "f1": 0,
+      "salesReadiness": "HOLD_REVIEW",
+      "reasons": [
+        "Product Type classification is ambiguous; requires human confirmation"
+      ],
+      "salesSummary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา",
+      "missingFields": [
+        "productType"
+      ],
+      "riskLevel": "MEDIUM"
+    }
+  ]
+}

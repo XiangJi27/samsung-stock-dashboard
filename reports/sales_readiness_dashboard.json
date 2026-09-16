@@ -1,0 +1,547 @@
+{
+  "generatedAt": "2026-09-16T14:14:24.634867",
+  "overallVerdict": {
+    "systemTechnicallyReady": true,
+    "specDataMajorityReady": false,
+    "readyForStoreUsage": false,
+    "productionStatus": "HOLD"
+  },
+  "fourReadinessGates": {
+    "gate1_f1QuantityCoverage": {
+      "name": "Floor 1 Quantity Coverage (>= 80%)",
+      "targetUnits": 1361,
+      "currentUnits": 1186,
+      "totalUnits": 1701,
+      "percentage": 69.72,
+      "gapUnits": 175,
+      "status": "IN_PROGRESS"
+    },
+    "gate2_f1PnCoverage": {
+      "name": "Floor 1 P/N Coverage (>= 70%)",
+      "targetPns": 234,
+      "currentPns": 257,
+      "totalPns": 333,
+      "percentage": 77.18,
+      "gapPns": 0,
+      "status": "PASS"
+    },
+    "gate3_top50F1Ready": {
+      "name": "Top 50 F1 Products 100% Ready",
+      "targetCount": 50,
+      "currentCount": 30,
+      "percentage": 60.0,
+      "gapCount": 20,
+      "status": "IN_PROGRESS"
+    },
+    "gate4_safetyAndIntegrity": {
+      "name": "Data Safety & Zero Cross-Product Leakage",
+      "crossProductLeakage": 0,
+      "crossBrandLeakage": 0,
+      "blockedConflictCount": 0,
+      "openBlockers": 0,
+      "status": "PASS"
+    }
+  },
+  "top50F1ReadinessBreakdown": [
+    {
+      "rank": 1,
+      "inventoryPn": "PM6931481215697",
+      "brand": "EXTRA BRAND",
+      "f1": 49,
+      "name": "Premiun ����Ѻ�� Mini YOUMI-SAMSUNG",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 2,
+      "inventoryPn": "EP-T2510NBEGTH",
+      "brand": "SAMSUNG",
+      "f1": 47,
+      "name": "Samsung Adapter 25W No Cable-Black",
+      "category": "Accessory",
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
+    },
+    {
+      "rank": 3,
+      "inventoryPn": "6941876265732",
+      "brand": "[CS]UGREEN",
+      "f1": 42,
+      "name": "[CS]UGREEN Wall Charer 30W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+      "category": "Accessory",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 30W ()"
+    },
+    {
+      "rank": 4,
+      "inventoryPn": "SSG-EP-T4511XBEGTH",
+      "brand": "SAMSUNG",
+      "f1": 41,
+      "name": "Samsung Adapter 45W Fastcharge with Cable (SIS) - Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "อะแดปเตอร์ชาร์จ SAMSUNG 45W (Super Fast Charging 2.0) (มาพร้อมสาย 5A ในกล่อง)"
+    },
+    {
+      "rank": 5,
+      "inventoryPn": "EP-T2510NWEGTH",
+      "brand": "SAMSUNG",
+      "f1": 38,
+      "name": "Samsung Adapter 25W No Cable-White",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "อะแดปเตอร์ชาร์จ SAMSUNG 25W (Super Fast Charging) (ไม่มีสายในกล่อง)"
+    },
+    {
+      "rank": 6,
+      "inventoryPn": "8859703437345",
+      "brand": "FOCUS",
+      "f1": 36,
+      "name": "[CS]Focus TG FF Samsung Galaxy A57 5G Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ Galaxy A57 5G Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 7,
+      "inventoryPn": "8859216623877",
+      "brand": "HISHIELD",
+      "f1": 31,
+      "name": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Anti Glare Gray",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ SAMSUNG สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 8,
+      "inventoryPn": "8859216623860",
+      "brand": "HISHIELD",
+      "f1": 30,
+      "name": "[CS]Hishield Hydrogel Film/Size S(18x12cm) - Ultra Clear",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ SAMSUNG สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 9,
+      "inventoryPn": "8859216846719",
+      "brand": "HISHIELD",
+      "f1": 29,
+      "name": "[CS]Hishield Tempered Glass FC 2.5D for Samsung A37",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ A37 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 10,
+      "inventoryPn": "8859216860326",
+      "brand": "HISHIELD",
+      "f1": 29,
+      "name": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Fold8 Ultra",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ Z FOLD8 ULTRA สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 11,
+      "inventoryPn": "8859216860241",
+      "brand": "HISHIELD",
+      "f1": 28,
+      "name": "[CS]Hishield Tempered Glass 2.5D Clear Samsung Z Flip8",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ Z FLIP8 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 12,
+      "inventoryPn": "PREMIUM0017044",
+      "brand": "EXTRA BRAND",
+      "f1": 27,
+      "name": "[PM] Backpack Fashion Phoenix",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 13,
+      "inventoryPn": "PREMIUM-665477",
+      "brand": "EXTRA BRAND",
+      "f1": 27,
+      "name": "[PM] Small Talk TC-04 TypeC Tablet",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 14,
+      "inventoryPn": "EP-T6010NBEGTH",
+      "brand": "SAMSUNG",
+      "f1": 23,
+      "name": "Samsung Adapter 60W without cable - Black",
+      "category": "Accessory",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "อุปกรณ์เสริม SAMSUNG (Samsung Adapter 60W without cable - Black)"
+    },
+    {
+      "rank": 15,
+      "inventoryPn": "PM4897121009793",
+      "brand": "EXTRA BRAND",
+      "f1": 22,
+      "name": "[Premium] Gaabor Air Fryer 4L AF-40M01A",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 16,
+      "inventoryPn": "SIM-3IN1LNW-AWN",
+      "brand": "AIS",
+      "f1": 20,
+      "name": "(AIS) SIM 3 In 1 Pre 2 Post Lucky and Wealt",
+      "category": "SIM",
+      "readinessStatus": "SPEC_NOT_VERIFIED",
+      "summary": ""
+    },
+    {
+      "rank": 17,
+      "inventoryPn": "8859763200989",
+      "brand": "EXTRA BRAND",
+      "f1": 20,
+      "name": "[PM] Phone Stand First class NO V168 Phoenix",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 18,
+      "inventoryPn": "PREMIUM0017046",
+      "brand": "EXTRA BRAND",
+      "f1": 20,
+      "name": "[PM] Sling Bag Phoenix",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 19,
+      "inventoryPn": "8859703436560",
+      "brand": "FOCUS",
+      "f1": 19,
+      "name": "[CS]Focus TG FF Samsung Galaxy S25 FE Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ Galaxy S25 FE Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 20,
+      "inventoryPn": "8859216829033",
+      "brand": "HISHIELD",
+      "f1": 17,
+      "name": "[CS]Hishield Tempered Glass FC 2.5D Samsung S26 Ultra",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ S26 SERIES สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 21,
+      "inventoryPn": "EP-T4511NBEGTH",
+      "brand": "SAMSUNG",
+      "f1": 17,
+      "name": "Samsung Adapter 45W without cable - Black",
+      "category": "Accessory",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "อุปกรณ์เสริม SAMSUNG (Samsung Adapter 45W without cable - Black)"
+    },
+    {
+      "rank": 22,
+      "inventoryPn": "SIM-3IN1MNL-AWN",
+      "brand": "AIS",
+      "f1": 17,
+      "name": "(AIS) SIM 3 In 1 Pre 2 Post Money and Love",
+      "category": "SIM",
+      "readinessStatus": "SPEC_NOT_VERIFIED",
+      "summary": ""
+    },
+    {
+      "rank": 23,
+      "inventoryPn": "PREMIUM-665478",
+      "brand": "EXTRA BRAND",
+      "f1": 17,
+      "name": "[PM] Tablet ring stand",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 24,
+      "inventoryPn": "PM-8806090284687",
+      "brand": "SAMSUNG",
+      "f1": 17,
+      "name": "Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "อุปกรณ์เสริม SAMSUNG (Premium SAMSUNG T-series soundbar HW-T420 2.1ch with Subwoofer)"
+    },
+    {
+      "rank": 25,
+      "inventoryPn": "8859216803910",
+      "brand": "HISHIELD",
+      "f1": 16,
+      "name": "[CS]HISHIELD TemperedGlass FC 2.5D Samsung A17",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย HISHIELD สำหรับ A17 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 26,
+      "inventoryPn": "8859703437475",
+      "brand": "FOCUS",
+      "f1": 15,
+      "name": "[CS]Focus TG FF SL Samsung Galaxy S26 Ultra",
+      "category": "Accessory",
+      "readinessStatus": "VERIFIED_ACCESSORY_MASTER",
+      "summary": "Product Accessory Master Verified"
+    },
+    {
+      "rank": 27,
+      "inventoryPn": "6931481215710",
+      "brand": "EXTRA BRAND",
+      "f1": 14,
+      "name": "[PM] Double Wall Stainless Steel 600ml",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 28,
+      "inventoryPn": "8859289657762",
+      "brand": "EXTRA BRAND",
+      "f1": 14,
+      "name": "Premium D-Power M22 Speaker Bluetooth",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 29,
+      "inventoryPn": "F-N1938BZBBTHL",
+      "brand": "SAMSUNG",
+      "f1": 13,
+      "name": "Samsung (TSE) Galaxy S25 Ultra 5G 12/256GB - Titanium Silverblue",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 30,
+      "inventoryPn": "8859289665477",
+      "brand": "EXTRA BRAND",
+      "f1": 12,
+      "name": "Premium SAMSUNG TC-04 (Type-C)",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 31,
+      "inventoryPn": "SSG-EP-DN975BWEGWW",
+      "brand": "SAMSUNG",
+      "f1": 12,
+      "name": "Samsung Cable C to C (SIS) - White",
+      "category": "Accessory",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "สายชาร์จและส่งข้อมูล SAMSUNG  ความยาว "
+    },
+    {
+      "rank": 32,
+      "inventoryPn": "SM-S948BLBCTHL",
+      "brand": "SAMSUNG",
+      "f1": 12,
+      "name": "Samsung (TSE) Galaxy S26 Ultra 5G 12/512GB - SKY BLUE",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 33,
+      "inventoryPn": "8859703443339",
+      "brand": "FOCUS",
+      "f1": 12,
+      "name": "[CS]Focus TG FF Samsung Galaxy A27 5G Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ Galaxy A27 5G Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 34,
+      "inventoryPn": "SM-A176BZBJTHL",
+      "brand": "SAMSUNG",
+      "f1": 11,
+      "name": "Samsung (TSE) Galaxy A17 5G 8/128 GB - Blue",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 35,
+      "inventoryPn": "EF-XF966SBEGWW",
+      "brand": "SAMSUNG",
+      "f1": 11,
+      "name": "Samsung Galaxy Fold7 Carbon Shield Case - Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "เคสโทรศัพท์ SAMSUNG สำหรับ SAMSUNG GALAXY FOLD7 พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย"
+    },
+    {
+      "rank": 36,
+      "inventoryPn": "8859703433590",
+      "brand": "FOCUS",
+      "f1": 10,
+      "name": "[CS]Focus TG FF SL Samsung S25 Ultra Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ S25 SERIES สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 37,
+      "inventoryPn": "6941876265749",
+      "brand": "[CS]UGREEN",
+      "f1": 10,
+      "name": "[CS]UGREEN Wall Charger 45W USB Port*1 + PD*2 Fast Charger Thai plug - Grey",
+      "category": "Accessory",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "อะแดปเตอร์ชาร์จ [CS]UGREEN 45W ()"
+    },
+    {
+      "rank": 38,
+      "inventoryPn": "SM-R410NZKAASA",
+      "brand": "SAMSUNG",
+      "f1": 10,
+      "name": "Samsung Galaxy Buds Core - Black",
+      "category": "Buds",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 39,
+      "inventoryPn": "SM-R640NZKAASA",
+      "brand": "SAMSUNG",
+      "f1": 10,
+      "name": "Samsung Galaxy Buds4 Pro - Black",
+      "category": "Buds",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 40,
+      "inventoryPn": "8859703436409",
+      "brand": "FOCUS",
+      "f1": 10,
+      "name": "[CS]Focus TG FF Samsung Galaxy A07 Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ Galaxy A07 Black สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 41,
+      "inventoryPn": "PREMIUM-665479",
+      "brand": "EXTRA BRAND",
+      "f1": 10,
+      "name": "[PM] Tablet Laptop Sleeve 13 inch",
+      "category": "Premium",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "รอการยืนยันประเภทสินค้าโดยผู้จัดการสาขา"
+    },
+    {
+      "rank": 42,
+      "inventoryPn": "4710343478164",
+      "brand": "ADAM ELEMENTS",
+      "f1": 10,
+      "name": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Silver",
+      "category": "Accessory",
+      "readinessStatus": "HOLD_REVIEW",
+      "summary": "สายชาร์จและส่งข้อมูล ADAM ELEMENTS 100W ความยาว 1M"
+    },
+    {
+      "rank": 43,
+      "inventoryPn": "8859703436669",
+      "brand": "FOCUS",
+      "f1": 10,
+      "name": "[CS]Focus TG UC Samsung Galaxy Tab S11",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ Galaxy Tab S11 สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 44,
+      "inventoryPn": "SM-A576BZATTHL",
+      "brand": "SAMSUNG",
+      "f1": 9,
+      "name": "Samsung (TSE) Galaxy A57 5G 12/256GB - Gray",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 45,
+      "inventoryPn": "8859703433828",
+      "brand": "FOCUS",
+      "f1": 9,
+      "name": "[CS]Focus TG FF Samsung Galaxy A36 5G/A56 5G Black",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "กระจกกันรอย FOCUS สำหรับ Galaxy A36 5G สัมผัสลื่น ป้องกันรอยขีดข่วนระดับ 9H"
+    },
+    {
+      "rank": 46,
+      "inventoryPn": "SM-A376BZATTHL",
+      "brand": "SAMSUNG",
+      "f1": 9,
+      "name": "Samsung (TSE) Galaxy A37 5G 8/256GB - Gray",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 47,
+      "inventoryPn": "SM-A276BZKGTHL",
+      "brand": "SAMSUNG",
+      "f1": 9,
+      "name": "Samsung (TSE) Galaxy A27 5G 8/128GB - BLACK",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    },
+    {
+      "rank": 48,
+      "inventoryPn": "8800299669979",
+      "brand": "MERCURY",
+      "f1": 9,
+      "name": "Mercury Hard Case for Samsung Galaxy Fold7 - Clear",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "เคสโทรศัพท์ MERCURY สำหรับ SAMSUNG GALAXY FOLD7 พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย"
+    },
+    {
+      "rank": 49,
+      "inventoryPn": "EF-QS948CTEGWW",
+      "brand": "SAMSUNG",
+      "f1": 9,
+      "name": "Samsung Galaxy S26Ultra Clear Case - Transparency",
+      "category": "Accessory",
+      "readinessStatus": "SALES_READY",
+      "summary": "เคสโทรศัพท์ SAMSUNG สำหรับ SAMSUNG GALAXY S26 SERIES พอดีกับตัวเครื่อง รองรับการชาร์จไร้สาย"
+    },
+    {
+      "rank": 50,
+      "inventoryPn": "SM-A576BZAUTHL",
+      "brand": "SAMSUNG",
+      "f1": 9,
+      "name": "Samsung (TSE) Galaxy A57 5G 12/512GB - Gray",
+      "category": "SmartPhone",
+      "readinessStatus": "VERIFIED_OFFICIAL_CATALOG",
+      "summary": "SAMSUNG Official Device"
+    }
+  ]
+}
