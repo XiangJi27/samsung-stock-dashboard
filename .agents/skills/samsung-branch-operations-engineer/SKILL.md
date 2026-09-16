@@ -185,17 +185,21 @@ samsung-branch-operations-engineer/
 │   ├── accessory_spec_rules.md
 │   ├── member_admin_rules.md
 │   ├── release_governance.md
-│   └── post_pilot_governance_and_field_evidence.md
+│   ├── post_pilot_governance_and_field_evidence.md
+│   └── marketplace_evidence_rules.md
 ├── fixtures/
 │   ├── stock_snapshot_acceptance.json
 │   ├── category_regressions.json
 │   ├── spec_identity_regressions.json
-│   └── route_regressions.json
+│   ├── route_regressions.json
+│   └── shopee_official_regressions.json
 ├── scripts/
 │   ├── build_stock_fixture.py
 │   ├── verify_project_rules.py
 │   ├── verify_stock_reconciliation.py
 │   ├── verify_spec_identity.py
+│   ├── verify_live_manifest.py
+│   ├── verify_marketplace_evidence.py
 │   ├── pre_deploy_gate.ps1
 │   └── post_deploy_gate.ps1
 └── tests/
@@ -205,6 +209,8 @@ samsung-branch-operations-engineer/
         ├── stock-table.spec.ts
         ├── member-admin.spec.ts
         ├── product-spec-drawer.spec.ts
+        ├── accessory-spec-drawer.spec.ts
+        ├── marketplace-evidence.spec.ts
         └── session-restore.spec.ts
 ```
 

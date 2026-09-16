@@ -1,5 +1,5 @@
 {
-  "gate": "RULE_09_SPEC_IDENTITY_GUARD",
+  "gate": "RULE_11_MARKETPLACE_EVIDENCE",
   "status": "PASSED",
   "executedAt": "2026-09-16T12:44:33.070221",
   "commitSha": "ef99c6a",

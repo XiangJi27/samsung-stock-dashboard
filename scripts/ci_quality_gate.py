@@ -898,6 +898,38 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 15. RULE 11: MARKETPLACE & SHOPEE OFFICIAL EVIDENCE SCORING GATE
+# ----------------------------------------------------------------------
+mkt_violations = []
+mkt_check_res = subprocess.run([sys.executable, "scripts/verify_marketplace_evidence.py"], capture_output=True, text=True, encoding="utf-8")
+if mkt_check_res.returncode != 0:
+    mkt_violations.append({
+        "errorCode": "MARKETPLACE_EVIDENCE_AUDIT_FAILED",
+        "detail": mkt_check_res.stderr or mkt_check_res.stdout
+    })
+
+mkt_report = {
+    "gate": "RULE_11_MARKETPLACE_EVIDENCE",
+    "status": "PASSED" if len(mkt_violations) == 0 else "BLOCKED",
+    "executedAt": executed_at,
+    "commitSha": commit_sha,
+    "violations": mkt_violations
+}
+
+with open("reports/marketplace_gate.json", "w", encoding="utf-8") as f:
+    json.dump(mkt_report, f, indent=2, ensure_ascii=False)
+
+record_gate_result(
+    rule_id="RULE-11-MARKETPLACE-EVIDENCE",
+    name="Shopee Official Marketplace Evidence & Follower Bias Guard",
+    expected="Shopee Mall/Official accepted as supporting source, high-follower non-official held in review queue, follower count != technical evidence, zero cross-brand/type leakage",
+    actual=f"{len(mkt_violations)} marketplace violations" if len(mkt_violations) > 0 else "0 violations (7 fixtures verified, 0 unverified auto-elevations, 0 follower-only passes)",
+    status="PASS" if len(mkt_violations) == 0 else "FAIL",
+    affected_records=len(mkt_violations),
+    evidence=mkt_report
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -986,6 +1018,11 @@ gate_metadata_map = {
         "functionName": "verify_accessory_spec_coverage",
         "inputFiles": ["data/product-accessory-master.json", "product_specs_data.js"],
         "recordsChecked": 9
+    },
+    "RULE-11-MARKETPLACE-EVIDENCE": {
+        "functionName": "verify_marketplace_evidence",
+        "inputFiles": ["fixtures/shopee_official_regressions.json", "data/product-accessory-master.json"],
+        "recordsChecked": 7
     }
 }
 

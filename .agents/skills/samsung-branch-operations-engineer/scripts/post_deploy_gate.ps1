@@ -98,11 +98,15 @@ if ($LASTEXITCODE -ne 0) {
     throw "PILOT_ZIP_HYGIENE_FAILED: Found disallowed files inside runtime ZIP package."
 }
 
-# 3. Accessory Master Invariants & Anti-Leakage Audit
-Write-Host "`n>>> [3/5] Verifying Accessory Spec Coverage & Invariants..." -ForegroundColor Yellow
+# 3. Accessory Master & Marketplace Evidence Invariants Audit
+Write-Host "`n>>> [3/5] Verifying Accessory Spec Coverage & Marketplace Evidence Invariants..." -ForegroundColor Yellow
 python scripts/verify_accessory_spec_coverage.py
 if ($LASTEXITCODE -ne 0) {
     throw "ACCESSORY_MASTER_GATE_FAILED: Accessory rules or coverage audit failed."
+}
+python scripts/verify_marketplace_evidence.py
+if ($LASTEXITCODE -ne 0) {
+    throw "MARKETPLACE_EVIDENCE_GATE_FAILED: Marketplace evidence rules or scoring audit failed."
 }
 
 # 4. Playwright Live Browser Test Suite (11 Tests)

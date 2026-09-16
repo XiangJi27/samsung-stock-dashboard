@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shopee Official & Marketplace Evidence Regression Fixtures",
+  "version": "1.0.0",
+  "generatedAt": "2026-09-16T12:40:00+07:00",
+  "fixtures": [
+    {
+      "testId": "REG-MKT-001-ADAM-CABLE-OFFICIAL-MALL",
+      "description": "ADAM elements 100W Cable matched on Shopee Mall Official store with exact GTIN must yield SUPPORTED_BY_OFFICIAL_MARKETPLACE",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "4710343478157",
+          "gtin": "4710343478157",
+          "brand": "ADAM elements",
+          "productType": "DATA_CABLE",
+          "erpDescription": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Black",
+          "f1": 2,
+          "f2": 0
+        },
+        "marketplaceListing": {
+          "shopName": "ADAM elements Official Store",
+          "isMall": true,
+          "isOfficialBrand": true,
+          "isAuthorizedDistributor": false,
+          "matchedPn": "4710343478157",
+          "listingBrand": "ADAM elements",
+          "listingProductType": "DATA_CABLE",
+          "variant": {
+            "connector": "USB-C to USB-C",
+            "power": "100W",
+            "length": "1M",
+            "packageQuantity": 2,
+            "color": "Black"
+          },
+          "followerCount": 120000,
+          "rating": 4.9,
+          "reviewCount": 4200
+        }
+      },
+      "expected": {
+        "calculatedScore": 95,
+        "decision": "SUPPORTED_BY_OFFICIAL_MARKETPLACE",
+        "expectedSourceType": "SHOPEE_MALL_OFFICIAL",
+        "mustNotBeStatus": ["VERIFIED", "SPEC_NOT_VERIFIED", "BLOCKED_CONFLICT"],
+        "fieldStatuses": {
+          "maximumPower": "SUPPORTED_BY_OFFICIAL_MARKETPLACE",
+          "length": "SUPPORTED_BY_OFFICIAL_MARKETPLACE"
+        },
+        "inventoryUntouched": {
+          "f1": 2,
+          "f2": 0
+        }
+      }
+    },
+    {
+      "testId": "REG-MKT-002-HIGH-FOLLOWER-NON-OFFICIAL",
+      "description": "Seller with 500k followers but NO official/mall badge must NOT be auto-accepted (held in Review Queue)",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "4710343478157",
+          "brand": "ADAM elements",
+          "productType": "DATA_CABLE"
+        },
+        "marketplaceListing": {
+          "shopName": "SuperGadgetMegaStore",
+          "isMall": false,
+          "isOfficialBrand": false,
+          "isAuthorizedDistributor": false,
+          "matchedPn": "4710343478157",
+          "listingBrand": "ADAM elements",
+          "listingProductType": "DATA_CABLE",
+          "followerCount": 500000,
+          "rating": 4.95,
+          "reviewCount": 85000
+        }
+      },
+      "expected": {
+        "calculatedScore": 30,
+        "decision": "REJECTED_EVIDENCE",
+        "expectedSourceType": "SHOPEE_HIGH_REPUTATION_SELLER",
+        "mustNotBeStatus": ["VERIFIED", "SUPPORTED_BY_OFFICIAL_MARKETPLACE"]
+      }
+    },
+    {
+      "testId": "REG-MKT-003-PN-MISMATCH-REJECT",
+      "description": "Marketplace listing matching title but with mismatched P/N must be rejected",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "4710343478157",
+          "brand": "ADAM elements",
+          "productType": "DATA_CABLE"
+        },
+        "marketplaceListing": {
+          "shopName": "ADAM elements Official Store",
+          "isMall": true,
+          "isOfficialBrand": true,
+          "matchedPn": "4710343478999",
+          "listingBrand": "ADAM elements",
+          "listingProductType": "DATA_CABLE"
+        }
+      },
+      "expected": {
+        "calculatedScore": 30,
+        "decision": "REJECTED_EVIDENCE",
+        "reason": "PN_MISMATCH"
+      }
+    },
+    {
+      "testId": "REG-MKT-004-CROSS-BRAND-BLOCK",
+      "description": "Marketplace source brand contradicting ERP stock brand must be BLOCKED_CONFLICT",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "194644055783",
+          "brand": "Soundcore",
+          "productType": "BLUETOOTH_SPEAKER"
+        },
+        "marketplaceListing": {
+          "shopName": "Samsung Official Store",
+          "isMall": true,
+          "listingBrand": "Samsung",
+          "listingProductType": "BLUETOOTH_SPEAKER"
+        }
+      },
+      "expected": {
+        "decision": "BLOCKED_CONFLICT",
+        "reason": "BRAND_MISMATCH"
+      }
+    },
+    {
+      "testId": "REG-MKT-005-CROSS-TYPE-BLOCK",
+      "description": "Marketplace source product type contradicting ERP product type must be BLOCKED_CONFLICT",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "4710343478157",
+          "brand": "ADAM elements",
+          "productType": "DATA_CABLE"
+        },
+        "marketplaceListing": {
+          "shopName": "ADAM elements Official Store",
+          "isMall": true,
+          "listingBrand": "ADAM elements",
+          "listingProductType": "WALL_CHARGER"
+        }
+      },
+      "expected": {
+        "decision": "BLOCKED_CONFLICT",
+        "reason": "PRODUCT_TYPE_MISMATCH"
+      }
+    },
+    {
+      "testId": "REG-MKT-006-VARIANT-AMBIGUITY",
+      "description": "Listing containing 60W, 100W, and 240W in one page without per-variant spec mapping must be VARIANT_AMBIGUOUS",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "4710343478157",
+          "brand": "ADAM elements",
+          "productType": "DATA_CABLE"
+        },
+        "marketplaceListing": {
+          "shopName": "ADAM elements Official Store",
+          "isMall": true,
+          "listingBrand": "ADAM elements",
+          "listingProductType": "DATA_CABLE",
+          "matchedPn": "4710343478157",
+          "isMultiVariantPage": true,
+          "perVariantSpecsSpecified": false
+        }
+      },
+      "expected": {
+        "calculatedScore": 65,
+        "decision": "MARKETPLACE_SUGGESTED_REVIEW_REQUIRED",
+        "variantStatus": "VARIANT_AMBIGUOUS"
+      }
+    },
+    {
+      "testId": "REG-MKT-007-MANUFACTURER-SUPERSEDES-MARKETPLACE",
+      "description": "When manufacturer official source confirms 100W, the status must elevate to VERIFIED and supersede marketplace",
+      "input": {
+        "erpStock": {
+          "inventoryPn": "4710343478157",
+          "brand": "ADAM elements",
+          "productType": "DATA_CABLE"
+        },
+        "existingMarketplaceSource": {
+          "sourceId": "SRC-SHOPEE-ADAM-OFFICIAL-001",
+          "status": "SUPPORTED_BY_OFFICIAL_MARKETPLACE"
+        },
+        "newOfficialSource": {
+          "sourceId": "SRC-ADAM-OFFICIAL-WEBSITE",
+          "sourceType": "MANUFACTURER_OFFICIAL",
+          "publisher": "ADAM elements",
+          "url": "https://www.adamelements.com/products/ilinio-c2c-100w"
+        }
+      },
+      "expected": {
+        "elevatedFieldStatus": "VERIFIED",
+        "primarySourceType": "MANUFACTURER_OFFICIAL",
+        "supersededSourceStatus": "ACTIVE_SECONDARY"
+      }
+    }
+  ]
+}

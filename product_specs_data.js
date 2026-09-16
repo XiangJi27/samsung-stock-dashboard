@@ -4504,7 +4504,7 @@ function getDisplayableSpecifications(record) {
         status: "NOT_AVAILABLE"
       };
     }
-    if (field.status === "VERIFIED" || field.status === "VERIFIED_FROM_ERP") {
+    if (field.status === "VERIFIED" || field.status === "VERIFIED_FROM_ERP" || field.status === "SUPPORTED_BY_OFFICIAL_MARKETPLACE") {
       return {
         fieldKey,
         value: field.value,

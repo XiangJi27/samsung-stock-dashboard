@@ -2401,10 +2401,16 @@
         spec.displayableSpecs.forEach(f => {
           const label = fieldLabels[f.fieldKey] || f.fieldKey;
           const val = f.displayValue || (f.value !== null ? String(f.value) : "ยังไม่ได้ยืนยัน");
-          const isVerified = f.status === "VERIFIED" || f.status === "VERIFIED_FROM_ERP";
-          const statusTag = isVerified 
-            ? `<span style="color: #34d399; font-size: 0.72rem; margin-left: 6px;">[ยืนยันแล้ว]</span>` 
-            : `<span style="color: #fbbf24; font-size: 0.72rem; margin-left: 6px;">[ยังไม่ยืนยัน]</span>`;
+          let statusTag = `<span style="color: #fbbf24; font-size: 0.72rem; margin-left: 6px;">[ยังไม่ยืนยัน]</span>`;
+          if (f.status === "VERIFIED") {
+            statusTag = `<span style="color: #34d399; font-size: 0.72rem; margin-left: 6px;">[ผู้ผลิตยืนยัน]</span>`;
+          } else if (f.status === "VERIFIED_FROM_ERP") {
+            statusTag = `<span style="color: #38bdf8; font-size: 0.72rem; margin-left: 6px;">[ERP ระบุ]</span>`;
+          } else if (f.status === "SUPPORTED_BY_OFFICIAL_MARKETPLACE") {
+            statusTag = `<span style="color: #60a5fa; font-size: 0.72rem; margin-left: 6px;">[ร้านทางการ Shopee Mall]</span>`;
+          } else if (f.status === "MARKETPLACE_SUGGESTED_REVIEW_REQUIRED") {
+            statusTag = `<span style="color: #f59e0b; font-size: 0.72rem; margin-left: 6px;">[รอตรวจ Marketplace]</span>`;
+          }
           specMap[label] = `${val} ${statusTag}`;
         });
 

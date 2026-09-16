@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-09-16T05:45:08.467003+00:00",
+  "totalFixtures": 7,
+  "passedFixtures": 7,
+  "durationSeconds": 0.001,
+  "results": [
+    {
+      "test_id": "REG-MKT-001-ADAM-CABLE-OFFICIAL-MALL",
+      "score": 95,
+      "decision": "SUPPORTED_BY_OFFICIAL_MARKETPLACE",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "test_id": "REG-MKT-002-HIGH-FOLLOWER-NON-OFFICIAL",
+      "score": 30,
+      "decision": "REJECTED_EVIDENCE",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "test_id": "REG-MKT-003-PN-MISMATCH-REJECT",
+      "score": 30,
+      "decision": "REJECTED_EVIDENCE",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "test_id": "REG-MKT-004-CROSS-BRAND-BLOCK",
+      "score": 0,
+      "decision": "BLOCKED_CONFLICT",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "test_id": "REG-MKT-005-CROSS-TYPE-BLOCK",
+      "score": 0,
+      "decision": "BLOCKED_CONFLICT",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "test_id": "REG-MKT-006-VARIANT-AMBIGUITY",
+      "score": 65,
+      "decision": "MARKETPLACE_SUGGESTED_REVIEW_REQUIRED",
+      "passed": true,
+      "violations": []
+    },
+    {
+      "test_id": "REG-MKT-007-MANUFACTURER-SUPERSEDES-MARKETPLACE",
+      "score": 100,
+      "decision": "VERIFIED",
+      "passed": true,
+      "violations": []
+    }
+  ],
+  "masterViolations": [],
+  "violations": []
+}
