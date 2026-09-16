@@ -82,7 +82,7 @@ test.describe('Sales-Ready Product Spec Drawer & Variant Safety Guard', () => {
     bodyText = (await page.innerText('#drawerBody')) || '';
     expect(bodyText).toContain('45W');
     expect(bodyText).toContain('WALL_CHARGER');
-    expect(bodyText).toContain('ไม่มีสายในกล่อง');
+    expect(bodyText).toContain('ไม่มีสายชาร์จในกล่อง');
     expect(bodyText).not.toContain('มาพร้อมสาย 5A ในกล่อง');
     for (const term of forbiddenLeakage) {
       expect(bodyText).not.toContain(term);
