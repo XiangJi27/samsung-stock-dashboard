@@ -930,6 +930,27 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 16. RULE 12: WORK QUEUE & INVENTORY SCOPE INTEGRITY GATE
+# ----------------------------------------------------------------------
+wq_violations = []
+wq_check_res = subprocess.run([sys.executable, "scripts/verify_verification_work_queue.py"], capture_output=True, text=True, encoding="utf-8")
+if wq_check_res.returncode != 0:
+    wq_violations.append({
+        "errorCode": "WORK_QUEUE_REGRESSION_FAILED",
+        "detail": wq_check_res.stderr or wq_check_res.stdout
+    })
+
+record_gate_result(
+    rule_id="RULE-12-WORK-QUEUE-INTEGRITY",
+    name="Product Verification Work Queue & Scope Integrity Gate",
+    expected="Zero duplicate P/Ns, exact scope partition (333 F1-active + 66 F2-only = 399), F1 quantity = 1701, priority invariants hold",
+    actual=f"{len(wq_violations)} violations" if len(wq_violations) > 0 else "0 violations (399 records verified, 333 F1-active, 66 F2-only, 1701 F1 quantity)",
+    status="PASS" if len(wq_violations) == 0 else "FAIL",
+    affected_records=len(wq_violations),
+    evidence={"violations": wq_violations}
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -1023,6 +1044,11 @@ gate_metadata_map = {
         "functionName": "verify_marketplace_evidence",
         "inputFiles": ["fixtures/shopee_official_regressions.json", "data/product-accessory-master.json"],
         "recordsChecked": 7
+    },
+    "RULE-12-WORK-QUEUE-INTEGRITY": {
+        "functionName": "verify_verification_work_queue",
+        "inputFiles": ["assets/js/pilot-stock-snapshot.js", "reports/product_verification_work_queue.json"],
+        "recordsChecked": 399
     }
 }
 
