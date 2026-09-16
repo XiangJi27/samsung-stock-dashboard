@@ -115,6 +115,14 @@ def build_pilot_package():
                         {
                             "source": "/api/admin/members/:path*",
                             "destination": "/api/admin/members?path=:path*"
+                        },
+                        {
+                            "source": "/api/stock/active",
+                            "destination": "/api/stock/active"
+                        },
+                        {
+                            "source": "/api/stock-imports/:path*",
+                            "destination": "/api/stock-imports?path=:path*"
                         }
                     ]
                 }

@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "5874366",
+  "packageBuiltFromCommit": "d560c13",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-16T19:31:15.028461+07:00",
+  "builtAt": "2026-09-16T19:45:27.752808+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,7 +13,7 @@
   "totalFiles": 47,
   "summary": {
     "totalFiles": 47,
-    "totalSizeBytes": 9679630,
+    "totalSizeBytes": 9679833,
     "totalSizeMB": 9.23
   },
   "files": [
@@ -49,8 +49,8 @@
     },
     {
       "file": "vercel.json",
-      "sizeBytes": 324,
-      "sha256": "2432bee30fcf7e0ff213b1fa3a5e08cfb1066205e2653fb64a40795d3e51e630",
+      "sizeBytes": 527,
+      "sha256": "fc24bb677f9361d9178b566bebafa3dca6132d37a1f0f8815e67749061624b22",
       "status": "PILOT_ROUTING_CONFIG",
       "note": "Root redirect to /pilot.html configured for Vercel Preview"
     },
