@@ -302,18 +302,27 @@ CREATE POLICY "Staff can view items of active stock batch"
         OR public.is_branch_leader_or_admin(auth.uid(), branch_code)
     );
 
--- 11. Explicit Table Grants for PostgREST & Service Role
+-- 11. Least-Privilege Grants (Server-Mediated Ingestion Architecture)
+-- Client/Authenticated users can only READ active stock data (enforced by RLS)
+REVOKE INSERT, UPDATE, DELETE ON TABLE public.stock_import_batches FROM authenticated;
+REVOKE INSERT, UPDATE, DELETE ON TABLE public.stock_snapshot_items FROM authenticated;
+REVOKE INSERT, UPDATE, DELETE ON TABLE public.active_stock_snapshot FROM authenticated;
+
+GRANT SELECT ON TABLE public.stock_import_batches TO authenticated;
+GRANT SELECT ON TABLE public.stock_snapshot_items TO authenticated;
+GRANT SELECT ON TABLE public.active_stock_snapshot TO authenticated;
+
+-- Direct batch activation & rollback restricted to service_role (Server API only)
+REVOKE EXECUTE ON FUNCTION public.activate_stock_batch(TEXT, UUID, UUID, UUID) FROM authenticated;
+REVOKE EXECUTE ON FUNCTION public.rollback_stock_batch(TEXT, UUID, UUID) FROM authenticated;
+
+GRANT EXECUTE ON FUNCTION public.activate_stock_batch(TEXT, UUID, UUID, UUID) TO service_role;
+GRANT EXECUTE ON FUNCTION public.rollback_stock_batch(TEXT, UUID, UUID) TO service_role;
+
+-- Full service_role permissions for backend API
 GRANT ALL ON TABLE public.stock_import_batches TO postgres, service_role;
-GRANT SELECT, INSERT, UPDATE ON TABLE public.stock_import_batches TO authenticated;
-
 GRANT ALL ON TABLE public.stock_snapshot_items TO postgres, service_role;
-GRANT SELECT, INSERT ON TABLE public.stock_snapshot_items TO authenticated;
-
 GRANT ALL ON TABLE public.active_stock_snapshot TO postgres, service_role;
-GRANT SELECT, INSERT, UPDATE ON TABLE public.active_stock_snapshot TO authenticated;
-
-GRANT EXECUTE ON FUNCTION public.activate_stock_batch(TEXT, UUID, UUID, UUID) TO authenticated, service_role;
-GRANT EXECUTE ON FUNCTION public.rollback_stock_batch(TEXT, UUID, UUID) TO authenticated, service_role;
 
 -- Comments on architecture & invariants
 COMMENT ON TABLE public.stock_import_batches IS 'Immutable stock import records per Excel upload with source file hash check';

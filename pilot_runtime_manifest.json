@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "7e2dec2",
+  "packageBuiltFromCommit": "5874366",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-16T19:21:31.864297+07:00",
+  "builtAt": "2026-09-16T19:31:15.028461+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,14 +13,14 @@
   "totalFiles": 47,
   "summary": {
     "totalFiles": 47,
-    "totalSizeBytes": 9670336,
-    "totalSizeMB": 9.22
+    "totalSizeBytes": 9679630,
+    "totalSizeMB": 9.23
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 68498,
-      "sha256": "ba250c2fa0b2c9d2ac9acf9ca4257377ceec14706dca64e0171cebcf0cd34816",
+      "sizeBytes": 68614,
+      "sha256": "587648fc9dad8e203cd46095c1e8dc1478caa79ac4628f4c5742fe42d991b806",
       "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
@@ -98,8 +98,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 11833,
-      "sha256": "7837cd2f06f2fe0c0aa861c548e863f3119f80829d47553f8928e9217e6794e7",
+      "sizeBytes": 18315,
+      "sha256": "1da6717e93feb3ec688e2036c4bfb21fb0a6f0a55e98cd61a5e3675be9aa0476",
       "status": "BASELINE_CORE"
     },
     {
@@ -158,8 +158,8 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 68498,
-      "sha256": "ba250c2fa0b2c9d2ac9acf9ca4257377ceec14706dca64e0171cebcf0cd34816",
+      "sizeBytes": 68614,
+      "sha256": "587648fc9dad8e203cd46095c1e8dc1478caa79ac4628f4c5742fe42d991b806",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -176,8 +176,8 @@
     },
     {
       "file": "assets/js/prototype-stock.js",
-      "sizeBytes": 148544,
-      "sha256": "cd56ffdac17ff02f05ee7de8e2b9858de12ebe0803f1664da64e5246891a775b",
+      "sizeBytes": 149535,
+      "sha256": "8a570073576ce4d4635775cb37b0daaaa170eb32f65b4ffca7bce448196b2db5",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -278,8 +278,8 @@
     },
     {
       "file": "api/stock-imports.js",
-      "sizeBytes": 14545,
-      "sha256": "8a32f34912a37fe655d524639c4b3955d8eaa74a58eb118ab074de5df8ab9413",
+      "sizeBytes": 16134,
+      "sha256": "58c3a82ef43ca523645cfbc6328bcfe1517936730023dca659b734510f986c63",
       "status": "PILOT_RUNTIME"
     },
     {

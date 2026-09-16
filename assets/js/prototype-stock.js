@@ -1404,8 +1404,29 @@
 
       const sourceLabel = meta.sourceType || "Imported Excel Snapshot";
       const sourceFile = meta.sourceFilename || meta.sourceFile || "stock(1).xlsx";
-      const isConfirmedLocal = meta.storageScope === "LOCAL_BROWSER_ONLY" || meta.storageScope === "CONFIRMED_IMPORT" || (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.batchId === batchId);
-      const storageDisplay = isConfirmedLocal ? "Local Browser (Confirmed Import)" : "Pilot Snapshot (stock(1).xlsx)";
+
+      let storageDisplay = "Pilot Snapshot (stock(1).xlsx)";
+      let storageBadgeColor = "#10b981";
+      let storageBadgeBg = "rgba(16, 185, 129, 0.15)";
+      let storageBadgeBorder = "rgba(16, 185, 129, 0.3)";
+
+      if (meta.storageScope === "CENTRAL_DATABASE" || window.STOCK_SNAPSHOT_STATUS === "CENTRAL_DATABASE") {
+        storageDisplay = "Central Database (Supabase)";
+        storageBadgeColor = "#38bdf8";
+        storageBadgeBg = "rgba(56, 189, 248, 0.15)";
+        storageBadgeBorder = "rgba(56, 189, 248, 0.3)";
+      } else if (meta.storageScope === "CENTRAL_DATABASE_OFFLINE_CACHE" || window.STOCK_SNAPSHOT_STATUS === "CENTRAL_DATABASE_OFFLINE_CACHE") {
+        storageDisplay = "Central DB Cache (Offline)";
+        storageBadgeColor = "#f59e0b";
+        storageBadgeBg = "rgba(245, 158, 11, 0.15)";
+        storageBadgeBorder = "rgba(245, 158, 11, 0.3)";
+      } else if (meta.storageScope === "LOCAL_BROWSER_ONLY" || meta.storageScope === "CONFIRMED_IMPORT" || (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.batchId === batchId)) {
+        storageDisplay = "Local Browser (Confirmed Import)";
+        storageBadgeColor = "#e2e8f0";
+        storageBadgeBg = "rgba(148, 163, 184, 0.15)";
+        storageBadgeBorder = "rgba(148, 163, 184, 0.3)";
+      }
+
       const rawImportedAt = meta.importedAt || "2026-09-14 09:00:00";
       const importedTime = rawImportedAt.replace("T", " ").substring(0, 19);
 
@@ -1425,7 +1446,7 @@
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
             <span style="color: var(--cyan); font-weight: 600;">Storage:</span>
-            <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: 600;">${storageDisplay}</span>
+            <span style="background: ${storageBadgeBg}; color: ${storageBadgeColor}; border: 1px solid ${storageBadgeBorder}; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: 600;">${storageDisplay}</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
             <span style="color: var(--cyan); font-weight: 600;">อัปโหลดเมื่อ:</span>

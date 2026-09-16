@@ -90,6 +90,9 @@
 
           // Stock Provider Hierarchy: 1. Central Database (/api/stock/active) -> 2. IndexedDB Offline Cache -> 3. StaticDataProvider
           let snapshotLoaded = false;
+          if (typeof window.updateStockImportBanner === "function") {
+            window.updateStockImportBanner("CONNECTING");
+          }
 
           // Step 1: Query Central Database Active Batch
           try {
@@ -131,6 +134,9 @@
                 };
                 window.STOCK_SNAPSHOT_STATUS = "CENTRAL_DATABASE";
                 snapshotLoaded = true;
+                if (typeof window.updateStockImportBanner === "function") {
+                  window.updateStockImportBanner("CENTRAL_DATABASE", window.STOCK_METADATA);
+                }
                 console.info("[DataLoaderGate] Successfully loaded active stock snapshot from Central Database:", centralData.batchId);
 
                 // Cache active snapshot in IndexedDB for offline resilience
@@ -163,6 +169,9 @@
                   }
                   window.STOCK_SNAPSHOT_STATUS = localSnapshot.meta?.storageScope === 'CENTRAL_DATABASE' ? "CENTRAL_DATABASE_OFFLINE_CACHE" : "CONFIRMED_LOCAL_SNAPSHOT";
                   snapshotLoaded = true;
+                  if (typeof window.updateStockImportBanner === "function") {
+                    window.updateStockImportBanner("OFFLINE_CACHE", window.STOCK_METADATA);
+                  }
                   console.info("[DataLoaderGate] Restored validated stock snapshot from IndexedDB cache:", localSnapshot.batchId);
                 } else {
                   console.warn("[DataLoaderGate] Snapshot in IndexedDB failed validation. Falling back to static dataset:", validation.reason);
@@ -198,6 +207,9 @@
               window.STOCK_SNAPSHOT_STATUS = "PILOT_STOCK_SNAPSHOT";
             } else if (!window.STOCK_SNAPSHOT_STATUS) {
               window.STOCK_SNAPSHOT_STATUS = window.STOCK_DATABASE ? "STATIC_BASELINE" : "DATA_UNAVAILABLE";
+            }
+            if (typeof window.updateStockImportBanner === "function") {
+              window.updateStockImportBanner("STATIC_BASELINE", window.STOCK_METADATA);
             }
           }
 
@@ -266,5 +278,124 @@
 
   window.DataLoader = new DataLoaderGate();
   window.getActiveStockDataset = DataLoaderGate.getActiveStockDataset;
+
+  window.updateStockImportBanner = function(mode, meta = {}) {
+    const banner = document.getElementById("stockImportStorageBanner");
+    if (!banner) return;
+
+    const iconEl = document.getElementById("stockStorageBannerIcon");
+    const tagEl = document.getElementById("stockStorageBannerTag");
+    const descEl = document.getElementById("stockStorageBannerDesc");
+    const badgeEl = document.getElementById("stockStorageBannerBadge");
+
+    switch (mode) {
+      case "CENTRAL_DATABASE":
+        banner.style.borderColor = "rgba(56, 189, 248, 0.4)";
+        banner.style.background = "rgba(15, 23, 42, 0.75)";
+        if (iconEl) iconEl.textContent = "🌐";
+        if (tagEl) {
+          tagEl.style.color = "#38bdf8";
+          tagEl.textContent = "เชื่อมต่อฐานข้อมูลกลางแล้ว (CENTRAL_DATABASE)";
+        }
+        if (descEl) {
+          const shortBatch = meta.stockBatchId ? `(Batch: ${meta.stockBatchId.substring(0, 8)}...)` : "";
+          descEl.textContent = `ข้อมูล Stock Snapshot จัดเก็บในฐานข้อมูลกลาง Supabase PostgreSQL ${shortBatch} • ทุกอุปกรณ์ซิงค์ชุดข้อมูลเดียวกัน`;
+        }
+        if (badgeEl) {
+          badgeEl.style.background = "rgba(56, 189, 248, 0.15)";
+          badgeEl.style.color = "#38bdf8";
+          badgeEl.style.borderColor = "rgba(56, 189, 248, 0.3)";
+          badgeEl.textContent = "Storage: CENTRAL_DATABASE";
+        }
+        break;
+
+      case "OFFLINE_CACHE":
+      case "CENTRAL_DATABASE_OFFLINE_CACHE":
+        banner.style.borderColor = "rgba(245, 158, 11, 0.4)";
+        banner.style.background = "rgba(30, 27, 18, 0.75)";
+        if (iconEl) iconEl.textContent = "💾";
+        if (tagEl) {
+          tagEl.style.color = "#f59e0b";
+          tagEl.textContent = "ใช้งานออฟไลน์แคช (OFFLINE_CACHE)";
+        }
+        if (descEl) {
+          const shortBatch = meta.stockBatchId ? `(Batch: ${meta.stockBatchId.substring(0, 8)}...)` : "";
+          descEl.textContent = `ไม่สามารถเชื่อมต่อฐานข้อมูลกลางได้ชั่วคราว — แสดงผลจากแคช IndexedDB ในเบราว์เซอร์ ${shortBatch}`;
+        }
+        if (badgeEl) {
+          badgeEl.style.background = "rgba(245, 158, 11, 0.15)";
+          badgeEl.style.color = "#f59e0b";
+          badgeEl.style.borderColor = "rgba(245, 158, 11, 0.3)";
+          badgeEl.textContent = "Storage: OFFLINE_CACHE";
+        }
+        break;
+
+      case "STATIC_BASELINE":
+      case "PILOT_STOCK_SNAPSHOT":
+        banner.style.borderColor = "rgba(148, 163, 184, 0.3)";
+        banner.style.background = "rgba(15, 23, 42, 0.75)";
+        if (iconEl) iconEl.textContent = "📁";
+        if (tagEl) {
+          tagEl.style.color = "#94a3b8";
+          tagEl.textContent = "ใช้ชุดข้อมูลมาตรฐานเริ่มต้น (STATIC_BASELINE)";
+        }
+        if (descEl) {
+          descEl.textContent = "แสดงผลจากชุดข้อมูลเริ่มต้น stock(1).xlsx • ยังไม่มีการซิงค์กับฐานข้อมูลกลาง";
+        }
+        if (badgeEl) {
+          badgeEl.style.background = "rgba(148, 163, 184, 0.15)";
+          badgeEl.style.color = "#94a3b8";
+          badgeEl.style.borderColor = "rgba(148, 163, 184, 0.3)";
+          badgeEl.textContent = "Storage: STATIC_BASELINE";
+        }
+        break;
+
+      case "CONNECTION_ERROR":
+        banner.style.borderColor = "rgba(239, 68, 68, 0.4)";
+        banner.style.background = "rgba(35, 15, 15, 0.75)";
+        if (iconEl) iconEl.textContent = "⚠️";
+        if (tagEl) {
+          tagEl.style.color = "#ef4444";
+          tagEl.textContent = "เกิดข้อผิดพลาดในการโหลดข้อมูลกลาง (ERROR)";
+        }
+        if (descEl) {
+          descEl.textContent = meta.error ? `ข้อผิดพลาด: ${meta.error}` : "ไม่สามารถติดต่อเซิร์ฟเวอร์ฐานข้อมูลกลางได้";
+        }
+        if (badgeEl) {
+          badgeEl.style.background = "rgba(239, 68, 68, 0.15)";
+          badgeEl.style.color = "#ef4444";
+          badgeEl.style.borderColor = "rgba(239, 68, 68, 0.3)";
+          badgeEl.textContent = "Status: ERROR";
+        }
+        break;
+
+      case "CONNECTING":
+      default:
+        banner.style.borderColor = "rgba(56, 189, 248, 0.25)";
+        banner.style.background = "rgba(15, 23, 42, 0.75)";
+        if (iconEl) iconEl.textContent = "⏳";
+        if (tagEl) {
+          tagEl.style.color = "#38bdf8";
+          tagEl.textContent = "กำลังเชื่อมต่อฐานข้อมูลกลาง...";
+        }
+        if (descEl) {
+          descEl.textContent = "ระบบกำลังตรวจสอบสถานะการเชื่อมต่อกับ Supabase PostgreSQL";
+        }
+        if (badgeEl) {
+          badgeEl.style.background = "rgba(56, 189, 248, 0.15)";
+          badgeEl.style.color = "#38bdf8";
+          badgeEl.style.borderColor = "rgba(56, 189, 248, 0.3)";
+          badgeEl.textContent = "Status: CONNECTING";
+        }
+        break;
+    }
+  };
+
+  // Sync banner on route change
+  window.addEventListener("hashchange", () => {
+    if (window.location.hash.includes("stock-import") && typeof window.updateStockImportBanner === "function") {
+      window.updateStockImportBanner(window.STOCK_SNAPSHOT_STATUS || "STATIC_BASELINE", window.STOCK_METADATA || {});
+    }
+  });
 
 })(window);

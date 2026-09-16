@@ -73,28 +73,6 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  function requireStoreLeader() {
-    if (!caller) {
-      res.status(401).json({ error: 'UNAUTHORIZED', requestId, message: 'กรุณาเข้าสู่ระบบก่อนดำเนินการ' });
-      return false;
-    }
-    const isLeader = caller.email?.toLowerCase().includes('cpw3862') ||
-                     caller.user_metadata?.employee_code?.toUpperCase() === 'CPW3862' ||
-                     caller.user_metadata?.role === 'STORE_LEADER' ||
-                     caller.user_metadata?.role === 'STORE_MANAGER' ||
-                     caller.user_metadata?.role === 'SYSTEM_ADMIN' ||
-                     caller.app_metadata?.role === 'SYSTEM_ADMIN';
-    if (!isLeader) {
-      res.status(403).json({
-        error: 'FORBIDDEN',
-        requestId,
-        message: 'คุณไม่มีสิทธิ์นำเข้าหรือยืนยันสต็อก (เฉพาะ Store Leader / Admin เท่านั้น)'
-      });
-      return false;
-    }
-    return true;
-  }
-
   const queryKey = secretKey || publishableKey;
   const authHeaderValue = secretKey ? `Bearer ${secretKey}` : (token ? `Bearer ${token}` : `Bearer ${publishableKey}`);
 
@@ -108,6 +86,73 @@ module.exports = async function handler(req, res) {
         ...options.headers
       }
     });
+  }
+
+  async function requireStoreLeader(targetBranchCode) {
+    if (!token) {
+      res.status(401).json({
+        code: 'UNAUTHORIZED',
+        error: 'UNAUTHORIZED',
+        requestId,
+        message: 'กรุณาเข้าสู่ระบบก่อนดำเนินการ (Authorization header required)'
+      });
+      return false;
+    }
+
+    if (!caller || !caller.id) {
+      res.status(401).json({
+        code: 'INVALID_ACCESS_TOKEN',
+        error: 'INVALID_ACCESS_TOKEN',
+        requestId,
+        message: 'Access Token ไม่ถูกต้องหรือหมดอายุแล้ว'
+      });
+      return false;
+    }
+
+    // Query user_roles directly from Supabase PostgREST with server authority
+    try {
+      const roleRes = await fetch(`${supabaseUrl}/rest/v1/user_roles?user_id=eq.${encodeURIComponent(caller.id)}&select=role,branch_id`, {
+        headers: {
+          'apikey': secretKey || publishableKey,
+          'Authorization': `Bearer ${secretKey || publishableKey}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (roleRes.ok) {
+        const roles = await roleRes.json();
+        if (Array.isArray(roles) && roles.length > 0) {
+          const matched = roles.some(r => {
+            const roleName = String(r.role || '').toUpperCase();
+            const isAuthorizedRole = ['STORE_LEADER', 'STORE_MANAGER', 'SYSTEM_ADMIN', 'ADMIN'].includes(roleName);
+            if (!isAuthorizedRole) return false;
+            // Admins can manage any branch, otherwise branch_id must match targetBranchCode
+            if (roleName === 'SYSTEM_ADMIN' || roleName === 'ADMIN') return true;
+            if (!r.branch_id || !targetBranchCode) return true;
+            return String(r.branch_id).toUpperCase() === String(targetBranchCode).toUpperCase();
+          });
+
+          if (matched) {
+            return true;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('[StockImportAPI] Error querying user_roles:', e.message);
+    }
+
+    // Fallback check for system admin in app_metadata
+    if (caller.app_metadata?.role === 'SYSTEM_ADMIN' || caller.app_metadata?.role === 'ADMIN') {
+      return true;
+    }
+
+    res.status(403).json({
+      code: 'STOCK_IMPORT_PERMISSION_DENIED',
+      error: 'FORBIDDEN',
+      requestId,
+      message: 'คุณไม่มีสิทธิ์นำเข้าหรือยืนยันสต็อก (เฉพาะ Store Leader / Admin ประจำสาขาเท่านั้น)'
+    });
+    return false;
   }
 
   // ROUTE 1: GET /api/stock-imports -> List batch history
@@ -166,9 +211,9 @@ module.exports = async function handler(req, res) {
 
   // ROUTE 3: POST /api/stock-imports/:batchId/activate -> Atomic activation via Stored Procedure
   if (req.method === 'POST' && batchId && actionAfterId === 'activate') {
-    if (!requireStoreLeader()) return;
-
     const branchCode = String(body.branchCode || 'AYUTTHAYA_CITY_PARK').trim().toUpperCase();
+    if (!(await requireStoreLeader(branchCode))) return;
+
     const expectedPrev = body.expectedPreviousBatchId || null;
     const userId = caller.id;
 
@@ -209,9 +254,9 @@ module.exports = async function handler(req, res) {
 
   // ROUTE 4: POST /api/stock-imports/:batchId/rollback -> Roll back active snapshot
   if (req.method === 'POST' && batchId && actionAfterId === 'rollback') {
-    if (!requireStoreLeader()) return;
-
     const branchCode = String(body.branchCode || 'AYUTTHAYA_CITY_PARK').trim().toUpperCase();
+    if (!(await requireStoreLeader(branchCode))) return;
+
     const userId = caller.id;
 
     try {
@@ -238,9 +283,9 @@ module.exports = async function handler(req, res) {
 
   // ROUTE 5: POST /api/stock-imports -> Create DRAFT batch and insert items
   if (req.method === 'POST') {
-    if (!requireStoreLeader()) return;
-
     const branchCode = String(body.branchCode || 'AYUTTHAYA_CITY_PARK').trim().toUpperCase();
+    if (!(await requireStoreLeader(branchCode))) return;
+
     const sourceFileName = String(body.sourceFileName || 'Stock.xlsx').trim();
     const sourceFileSha256 = String(body.sourceFileSha256 || '').trim().toLowerCase();
     const items = Array.isArray(body.items) ? body.items : [];
