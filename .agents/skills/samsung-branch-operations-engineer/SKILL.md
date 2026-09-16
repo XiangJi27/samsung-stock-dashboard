@@ -186,7 +186,8 @@ samsung-branch-operations-engineer/
 │   ├── member_admin_rules.md
 │   ├── release_governance.md
 │   ├── post_pilot_governance_and_field_evidence.md
-│   └── marketplace_evidence_rules.md
+│   ├── marketplace_evidence_rules.md
+│   └── end_to_end_product_spec_verification_sop.md
 ├── fixtures/
 │   ├── stock_snapshot_acceptance.json
 │   ├── category_regressions.json
