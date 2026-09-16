@@ -1610,7 +1610,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EP-T2510NWEGTH",
@@ -1678,7 +1688,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437345",
@@ -1733,7 +1753,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216623877",
@@ -1788,7 +1818,17 @@
       "pricing": {
         "srp": 290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216623860",
@@ -1835,7 +1875,17 @@
       "pricing": {
         "srp": 290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216846719",
@@ -1882,7 +1932,17 @@
       "pricing": {
         "srp": 299.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216860326",
@@ -1929,7 +1989,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216860241",
@@ -1976,7 +2046,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703436560",
@@ -2031,7 +2111,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829033",
@@ -2078,7 +2168,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216803910",
@@ -2125,7 +2225,17 @@
       "pricing": {
         "srp": 299.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703443339",
@@ -2180,7 +2290,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-XF966SBEGWW",
@@ -2235,7 +2355,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433590",
@@ -2290,7 +2420,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703436409",
@@ -2345,7 +2485,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703436669",
@@ -2392,7 +2542,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433828",
@@ -2447,7 +2607,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299669979",
@@ -2494,7 +2664,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QS948CTEGWW",
@@ -2541,7 +2721,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216828746",
@@ -2588,7 +2778,17 @@
       "pricing": {
         "srp": 790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216828753",
@@ -2643,7 +2843,17 @@
       "pricing": {
         "srp": 790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EP-T4511XBEGTH",
@@ -2711,7 +2921,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703435532",
@@ -2758,7 +2978,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437659",
@@ -2805,7 +3035,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216846726",
@@ -2852,7 +3092,17 @@
       "pricing": {
         "srp": 299.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216804030",
@@ -2899,7 +3149,17 @@
       "pricing": {
         "srp": 299.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829064",
@@ -2946,7 +3206,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437499",
@@ -2993,7 +3263,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703426073",
@@ -3040,7 +3320,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PF766TNEGWW",
@@ -3095,7 +3385,17 @@
       "pricing": {
         "srp": 1190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703435204",
@@ -3142,7 +3442,17 @@
       "pricing": {
         "srp": 990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216860401",
@@ -3189,7 +3499,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216804023",
@@ -3236,7 +3556,17 @@
       "pricing": {
         "srp": 299.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437482",
@@ -3283,7 +3613,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829026",
@@ -3330,7 +3670,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299669900",
@@ -3377,7 +3727,17 @@
       "pricing": {
         "srp": 190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299703239",
@@ -3432,7 +3792,17 @@
       "pricing": {
         "srp": 290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703443599",
@@ -3479,7 +3849,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF971CVEGWW",
@@ -3526,7 +3906,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299702874",
@@ -3573,7 +3963,17 @@
       "pricing": {
         "srp": 290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829040",
@@ -3620,7 +4020,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829057",
@@ -3667,7 +4077,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829415",
@@ -3714,7 +4134,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FPS948PGAJW",
@@ -3769,7 +4199,17 @@
       "pricing": {
         "srp": 1190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829156",
@@ -3824,7 +4264,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433569",
@@ -3879,7 +4329,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QS741CTEGWW",
@@ -3926,7 +4386,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216804122",
@@ -3973,7 +4443,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703426066",
@@ -4020,7 +4500,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QS947CTEGWW",
@@ -4067,7 +4557,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703446620",
@@ -4122,7 +4622,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PF766TBEGWW",
@@ -4177,7 +4687,17 @@
       "pricing": {
         "srp": 1190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437468",
@@ -4224,7 +4744,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703443612",
@@ -4271,7 +4801,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829255",
@@ -4326,7 +4866,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433606",
@@ -4381,7 +4931,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216804085",
@@ -4428,7 +4988,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703443605",
@@ -4475,7 +5045,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703443650",
@@ -4522,7 +5102,17 @@
       "pricing": {
         "srp": 350.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-CS741CTEGWW",
@@ -4569,7 +5159,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF971CBEGWW",
@@ -4616,7 +5216,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF976CBEGWW",
@@ -4663,7 +5273,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES741CBEGWW",
@@ -4718,7 +5338,17 @@
       "pricing": {
         "srp": 1090.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF776CVEGWW",
@@ -4773,7 +5403,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-FF776CBEGWW",
@@ -4828,7 +5468,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES947CVEGWW",
@@ -4875,7 +5525,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216804108",
@@ -4922,7 +5582,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216829019",
@@ -4969,7 +5639,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437581",
@@ -5016,7 +5696,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437536",
@@ -5071,7 +5761,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216739264",
@@ -5126,7 +5826,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437451",
@@ -5173,7 +5883,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF776CBEGWW",
@@ -5220,7 +5940,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES741CLEGWW",
@@ -5275,7 +6005,17 @@
       "pricing": {
         "srp": 1090.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QF971CTEGWW",
@@ -5322,7 +6062,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299702935",
@@ -5369,7 +6119,17 @@
       "pricing": {
         "srp": 290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703443667",
@@ -5416,7 +6176,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-CF976CTEGWW",
@@ -5463,7 +6233,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF976CVEGWW",
@@ -5510,7 +6290,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES947CBEGWW",
@@ -5565,7 +6355,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KF971SBEGWW",
@@ -5620,7 +6420,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KF976SBEGWW",
@@ -5675,7 +6485,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KF976SNEGWW",
@@ -5730,7 +6550,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-RA376CBEGWW",
@@ -5785,7 +6615,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS741CBEGWW",
@@ -5840,7 +6680,17 @@
       "pricing": {
         "srp": 1390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS741CLEGWW",
@@ -5895,7 +6745,17 @@
       "pricing": {
         "srp": 1390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS942CBEGWW",
@@ -5950,7 +6810,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS947CVEGWW",
@@ -5997,7 +6867,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS948CVEGWW",
@@ -6044,7 +6924,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-CF971CTEGWW",
@@ -6091,7 +6981,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-DX730UBEGTH",
@@ -6146,7 +7046,17 @@
       "pricing": {
         "srp": 4990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES947CLEGWW",
@@ -6193,7 +7103,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KF971SREGWW",
@@ -6240,7 +7160,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS947CBEGWW",
@@ -6295,7 +7225,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS948CLEGWW",
@@ -6342,7 +7282,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-UA576CTEGWW",
@@ -6389,7 +7339,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-UF776CTEGWW",
@@ -6436,7 +7396,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-US741CTEGWW",
@@ -6483,7 +7453,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-US947CTEGWW",
@@ -6530,7 +7510,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QA366CTEGWW",
@@ -6577,7 +7567,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS942CVEGWW",
@@ -6624,7 +7624,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS948CBEGWW",
@@ -6679,7 +7689,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437543",
@@ -6734,7 +7754,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703400226",
@@ -6781,7 +7811,17 @@
       "pricing": {
         "srp": 990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299712668",
@@ -6828,7 +7868,17 @@
       "pricing": {
         "srp": 190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433576",
@@ -6883,7 +7933,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703436690",
@@ -6930,7 +7990,17 @@
       "pricing": {
         "srp": 990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES942CBEGWW",
@@ -6985,7 +8055,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QF976CTEGWW",
@@ -7032,7 +8112,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FPF966PGBTW",
@@ -7087,7 +8177,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-CS948CTEGWW",
@@ -7134,7 +8234,17 @@
       "pricing": {
         "srp": 1090.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF776CGEGWW",
@@ -7181,7 +8291,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF776CWEGWW",
@@ -7228,7 +8348,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF971CGEGWW",
@@ -7275,7 +8405,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF971CWEGWW",
@@ -7322,7 +8462,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES741CPEGWW",
@@ -7377,7 +8527,17 @@
       "pricing": {
         "srp": 1090.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES942CLEGWW",
@@ -7424,7 +8584,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES947CWEGWW",
@@ -7479,7 +8649,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-FF776CJEGWW",
@@ -7534,7 +8714,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KF976SREGWW",
@@ -7581,7 +8771,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS947SCEGWW",
@@ -7636,7 +8836,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS947SNEGWW",
@@ -7691,7 +8901,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS947SREGWW",
@@ -7738,7 +8958,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS948SCEGWW",
@@ -7793,7 +9023,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-MF966CMEGWW",
@@ -7840,7 +9080,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PA576CVEGWW",
@@ -7887,7 +9137,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS741CMEGWW",
@@ -7934,7 +9194,17 @@
       "pricing": {
         "srp": 1390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS942CJEGWW",
@@ -7989,7 +9259,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS942CLEGWW",
@@ -8036,7 +9316,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS947CLEGWW",
@@ -8083,7 +9373,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-UF976CTEGWW",
@@ -8130,7 +9430,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-US942CTEGWW",
@@ -8177,7 +9487,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-XF976SBEGWW",
@@ -8232,7 +9552,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FFF976YCATW",
@@ -8279,7 +9609,17 @@
       "pricing": {
         "srp": 1490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216834631",
@@ -8326,7 +9666,17 @@
       "pricing": {
         "srp": 1690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES942CVEGWW",
@@ -8373,7 +9723,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KF971SNEGWW",
@@ -8428,7 +9788,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PA376CBEGWW",
@@ -8483,7 +9853,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PA376CKEGWW",
@@ -8538,7 +9918,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PA376CVEGWW",
@@ -8585,7 +9975,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QA376CTEGWW",
@@ -8632,7 +10032,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QS942CTEGWW",
@@ -8679,7 +10089,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-RS947CBEGWW",
@@ -8734,7 +10154,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-UF971CTEGWW",
@@ -8781,7 +10211,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-US936CTEGWW",
@@ -8828,7 +10268,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-XF971SBEGWW",
@@ -8883,7 +10333,17 @@
       "pricing": {
         "srp": 2390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FCX626NNCBH",
@@ -8938,7 +10398,17 @@
       "pricing": {
         "srp": 2990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FFF971YCATW",
@@ -8985,7 +10455,17 @@
       "pricing": {
         "srp": 1490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FPS947PGAJW",
@@ -9040,7 +10520,17 @@
       "pricing": {
         "srp": 1190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859095890766",
@@ -9087,7 +10577,17 @@
       "pricing": {
         "srp": 290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-SSG-EP-T2510NBEGTH",
@@ -9155,7 +10655,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703426530",
@@ -9210,7 +10720,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216739240",
@@ -9265,7 +10785,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216739257",
@@ -9320,7 +10850,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216739301",
@@ -9367,7 +10907,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216739363",
@@ -9414,7 +10964,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216755578",
@@ -9461,7 +11021,17 @@
       "pricing": {
         "srp": 299.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FCX400RLABH",
@@ -9516,7 +11086,17 @@
       "pricing": {
         "srp": 1990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859095890773",
@@ -9563,7 +11143,17 @@
       "pricing": {
         "srp": 350.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8800299642811",
@@ -9610,7 +11200,17 @@
       "pricing": {
         "srp": 190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-UA566CTEGWW",
@@ -9657,7 +11257,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-UF956CTEGWW",
@@ -9704,7 +11314,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-TOS938HIAPW",
@@ -9759,7 +11379,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-S-33016170",
@@ -9813,7 +11443,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216765355",
@@ -9868,7 +11508,17 @@
       "pricing": {
         "srp": 390.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216765379",
@@ -9923,7 +11573,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859216765386",
@@ -9978,7 +11638,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433583",
@@ -10033,7 +11703,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS948SNEGWW",
@@ -10088,7 +11768,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PF766TMEGWW",
@@ -10135,7 +11825,17 @@
       "pricing": {
         "srp": 1190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QA576CTEGWW",
@@ -10182,7 +11882,17 @@
       "pricing": {
         "srp": 490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433354",
@@ -10237,7 +11947,17 @@
       "pricing": {
         "srp": 249.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703433699",
@@ -10284,7 +12004,17 @@
       "pricing": {
         "srp": 590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-8859703437666",
@@ -10331,7 +12061,17 @@
       "pricing": {
         "srp": 2090.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-BX930PBEGWW",
@@ -10386,7 +12126,17 @@
       "pricing": {
         "srp": 3490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-EF976CWEGWW",
@@ -10433,7 +12183,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES741CMEGWW",
@@ -10480,7 +12240,17 @@
       "pricing": {
         "srp": 1090.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ES948CLEGWW",
@@ -10527,7 +12297,17 @@
       "pricing": {
         "srp": 1290.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS947SSEGWW",
@@ -10582,7 +12362,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS948SREGWW",
@@ -10629,7 +12419,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-KS948SSEGWW",
@@ -10684,7 +12484,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-PA366CVEGWW",
@@ -10731,7 +12541,17 @@
       "pricing": {
         "srp": 690.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-QF776CTEGWW",
@@ -10778,7 +12598,17 @@
       "pricing": {
         "srp": 890.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-RS942CBEGWW",
@@ -10833,7 +12663,17 @@
       "pricing": {
         "srp": 1790.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS947CJEGWW",
@@ -10888,7 +12728,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-SS948CJEGWW",
@@ -10943,7 +12793,17 @@
       "pricing": {
         "srp": 1590.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-VF766PJEGWW",
@@ -10990,7 +12850,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-EF-ZF766CTEGWW",
@@ -11037,7 +12907,17 @@
       "pricing": {
         "srp": 1190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-ET-SOL30SWEGWW-D",
@@ -11069,7 +12949,17 @@
       "pricing": {
         "srp": 1990.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-ET-SVL30SWEGWW-D",
@@ -11110,7 +13000,17 @@
       "pricing": {
         "srp": 1490.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     },
     {
       "recordId": "PUB-GP-FPF966PGABW",
@@ -11165,7 +13065,17 @@
       "pricing": {
         "srp": 2190.0,
         "currency": "THB"
-      }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
     }
   ],
   "publishedBatchAt": "2026-09-16T15:51:48.188314",

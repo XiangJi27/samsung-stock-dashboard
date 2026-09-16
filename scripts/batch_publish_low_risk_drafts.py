@@ -139,7 +139,17 @@ def build_master_record(draft: dict) -> Optional[dict]:
         "pricing": {
             "srp": srp,
             "currency": "THB"
-        }
+        },
+        "sources": [
+            {
+                "sourceId": "SRC-ERP-STOCK",
+                "sourceType": "ERP_STOCK_MASTER",
+                "publisher": "Internal Inventory System",
+                "url": None,
+                "checkedAt": datetime.now().strftime("%Y-%m-%d"),
+                "status": "ACTIVE"
+            }
+        ]
     }
 
     return record

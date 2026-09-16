@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "tested_url": "https://samsung-stock-pilot.vercel.app",
-  "tested_at": "2026-09-16T08:34:08.746480+00:00",
-  "expected_commit": "a456a86",
-  "live_commit": "a456a86",
+  "tested_at": "2026-09-16T08:55:17.103689+00:00",
+  "expected_commit": "ddfff1d",
+  "live_commit": "ddfff1d",
   "expected_environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "live_environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
-  "manifest_url": "https://samsung-stock-pilot.vercel.app/pilot_runtime_manifest.json?live_gate=1789547626544",
+  "manifest_url": "https://samsung-stock-pilot.vercel.app/pilot_runtime_manifest.json?live_gate=1789548895394",
   "manifest_schema_passed": true,
   "manifest_file_count": 45,
   "duplicate_manifest_paths": [],
@@ -19,18 +19,18 @@
   "file_results": [
     {
       "path": "index.html",
-      "url": "https://samsung-stock-pilot.vercel.app/index.html?live_gate=1789547626544",
-      "expected_sha256": "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004",
-      "actual_sha256": "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004",
-      "expected_size": 66160,
-      "actual_size": 66160,
+      "url": "https://samsung-stock-pilot.vercel.app/index.html?live_gate=1789548895394",
+      "expected_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
+      "actual_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
+      "expected_size": 68293,
+      "actual_size": 68293,
       "http_status": 200,
       "matched": true,
       "error": null
     },
     {
       "path": "app.js",
-      "url": "https://samsung-stock-pilot.vercel.app/app.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/app.js?live_gate=1789548895394",
       "expected_sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
       "actual_sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
       "expected_size": 182511,
@@ -41,7 +41,7 @@
     },
     {
       "path": "style.css",
-      "url": "https://samsung-stock-pilot.vercel.app/style.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/style.css?live_gate=1789548895394",
       "expected_sha256": "be6db203a2b05f4f34a1f0b5e21cfb3db3136af6a7bbd664d8fe58be126be5b5",
       "actual_sha256": "be6db203a2b05f4f34a1f0b5e21cfb3db3136af6a7bbd664d8fe58be126be5b5",
       "expected_size": 96846,
@@ -52,7 +52,7 @@
     },
     {
       "path": "stock_data.js",
-      "url": "https://samsung-stock-pilot.vercel.app/stock_data.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/stock_data.js?live_gate=1789548895394",
       "expected_sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
       "actual_sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
       "expected_size": 5423699,
@@ -63,7 +63,7 @@
     },
     {
       "path": "promotion_variants.js",
-      "url": "https://samsung-stock-pilot.vercel.app/promotion_variants.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/promotion_variants.js?live_gate=1789548895394",
       "expected_sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
       "actual_sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
       "expected_size": 1673474,
@@ -74,7 +74,7 @@
     },
     {
       "path": "vercel.json",
-      "url": "https://samsung-stock-pilot.vercel.app/vercel.json?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/vercel.json?live_gate=1789548895394",
       "expected_sha256": "2432bee30fcf7e0ff213b1fa3a5e08cfb1066205e2653fb64a40795d3e51e630",
       "actual_sha256": "2432bee30fcf7e0ff213b1fa3a5e08cfb1066205e2653fb64a40795d3e51e630",
       "expected_size": 324,
@@ -85,7 +85,7 @@
     },
     {
       "path": "assets/css/shell.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/shell.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/shell.css?live_gate=1789548895394",
       "expected_sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
       "actual_sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
       "expected_size": 5284,
@@ -96,7 +96,7 @@
     },
     {
       "path": "assets/css/login.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/login.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/login.css?live_gate=1789548895394",
       "expected_sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
       "actual_sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
       "expected_size": 4773,
@@ -107,7 +107,7 @@
     },
     {
       "path": "assets/css/navigation.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/navigation.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/navigation.css?live_gate=1789548895394",
       "expected_sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
       "actual_sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
       "expected_size": 2981,
@@ -118,7 +118,7 @@
     },
     {
       "path": "assets/css/home.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/home.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/home.css?live_gate=1789548895394",
       "expected_sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
       "actual_sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
       "expected_size": 9028,
@@ -129,7 +129,7 @@
     },
     {
       "path": "assets/css/responsive.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/responsive.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/responsive.css?live_gate=1789548895394",
       "expected_sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
       "actual_sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
       "expected_size": 2341,
@@ -140,7 +140,7 @@
     },
     {
       "path": "assets/js/config.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/config.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/config.js?live_gate=1789548895394",
       "expected_sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
       "actual_sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
       "expected_size": 1427,
@@ -151,7 +151,7 @@
     },
     {
       "path": "assets/js/auth.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth.js?live_gate=1789548895394",
       "expected_sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
       "actual_sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
       "expected_size": 3227,
@@ -162,7 +162,7 @@
     },
     {
       "path": "assets/js/data-loader.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-loader.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-loader.js?live_gate=1789548895394",
       "expected_sha256": "895a3de091f9e1467a9501575d8ed7079cbaab2cdbadd9a33251898bff629b98",
       "actual_sha256": "895a3de091f9e1467a9501575d8ed7079cbaab2cdbadd9a33251898bff629b98",
       "expected_size": 8786,
@@ -173,7 +173,7 @@
     },
     {
       "path": "assets/js/data-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-service.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-service.js?live_gate=1789548895394",
       "expected_sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
       "actual_sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
       "expected_size": 17719,
@@ -184,7 +184,7 @@
     },
     {
       "path": "assets/js/router.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/router.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/router.js?live_gate=1789548895394",
       "expected_sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
       "actual_sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
       "expected_size": 7105,
@@ -195,7 +195,7 @@
     },
     {
       "path": "assets/js/navigation.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/navigation.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/navigation.js?live_gate=1789548895394",
       "expected_sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
       "actual_sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
       "expected_size": 2913,
@@ -206,7 +206,7 @@
     },
     {
       "path": "assets/js/home.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/home.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/home.js?live_gate=1789548895394",
       "expected_sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
       "actual_sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
       "expected_size": 17231,
@@ -217,7 +217,7 @@
     },
     {
       "path": "assets/js/modules.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/modules.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/modules.js?live_gate=1789548895394",
       "expected_sha256": "d581b36c2cffe2e6bb91ad6438b295977d7fdd78bcef46ad2b90a7603c404125",
       "actual_sha256": "d581b36c2cffe2e6bb91ad6438b295977d7fdd78bcef46ad2b90a7603c404125",
       "expected_size": 17517,
@@ -228,7 +228,7 @@
     },
     {
       "path": "assets/css/importer.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/importer.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/importer.css?live_gate=1789548895394",
       "expected_sha256": "8a1c422a4c5518873fc31a7001c58c7ea16b7ac8e9c0b098035f07e99235fb30",
       "actual_sha256": "8a1c422a4c5518873fc31a7001c58c7ea16b7ac8e9c0b098035f07e99235fb30",
       "expected_size": 14879,
@@ -239,7 +239,7 @@
     },
     {
       "path": "assets/js/stock-importer.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/stock-importer.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/stock-importer.js?live_gate=1789548895394",
       "expected_sha256": "98d2b50cee40870482eb8a3ffb9212a1145b59fb1630a10ba32345a7ecd2dad4",
       "actual_sha256": "98d2b50cee40870482eb8a3ffb9212a1145b59fb1630a10ba32345a7ecd2dad4",
       "expected_size": 70670,
@@ -250,7 +250,7 @@
     },
     {
       "path": "assets/js/promotion-importer.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/promotion-importer.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/promotion-importer.js?live_gate=1789548895394",
       "expected_sha256": "6c1e07e7ba982318f90344e7b6b54d86d97bf8e3e4caace017615ff941ab8d41",
       "actual_sha256": "6c1e07e7ba982318f90344e7b6b54d86d97bf8e3e4caace017615ff941ab8d41",
       "expected_size": 104923,
@@ -261,7 +261,7 @@
     },
     {
       "path": "assets/js/sheet-sync.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/sheet-sync.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/sheet-sync.js?live_gate=1789548895394",
       "expected_sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
       "actual_sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
       "expected_size": 20900,
@@ -272,18 +272,18 @@
     },
     {
       "path": "pilot.html",
-      "url": "https://samsung-stock-pilot.vercel.app/pilot.html?live_gate=1789547626544",
-      "expected_sha256": "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004",
-      "actual_sha256": "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004",
-      "expected_size": 66160,
-      "actual_size": 66160,
+      "url": "https://samsung-stock-pilot.vercel.app/pilot.html?live_gate=1789548895394",
+      "expected_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
+      "actual_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
+      "expected_size": 68293,
+      "actual_size": 68293,
       "http_status": 200,
       "matched": true,
       "error": null
     },
     {
       "path": "api/admin/members.js",
-      "url": "https://samsung-stock-pilot.vercel.app/api/admin/members.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/api/admin/members.js?live_gate=1789548895394",
       "expected_sha256": "3087f2f3ce09a5121b76e0e1947acb93b8e11a1b7b02828c9b7b59161f498a7c",
       "actual_sha256": "3087f2f3ce09a5121b76e0e1947acb93b8e11a1b7b02828c9b7b59161f498a7c",
       "expected_size": 31473,
@@ -294,7 +294,7 @@
     },
     {
       "path": "assets/css/prototype-stock.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/prototype-stock.css?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/prototype-stock.css?live_gate=1789548895394",
       "expected_sha256": "50047daff7d7ef663841e352c217fceb46569f7ff7527cfbc53a96ac7411454a",
       "actual_sha256": "50047daff7d7ef663841e352c217fceb46569f7ff7527cfbc53a96ac7411454a",
       "expected_size": 27948,
@@ -305,7 +305,7 @@
     },
     {
       "path": "assets/js/prototype-stock.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/prototype-stock.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/prototype-stock.js?live_gate=1789548895394",
       "expected_sha256": "55dccbb93c48846378db6bcdf5881455c26a2f05211548dcfa5e85a2206ace30",
       "actual_sha256": "55dccbb93c48846378db6bcdf5881455c26a2f05211548dcfa5e85a2206ace30",
       "expected_size": 144374,
@@ -316,18 +316,18 @@
     },
     {
       "path": "product_specs_data.js",
-      "url": "https://samsung-stock-pilot.vercel.app/product_specs_data.js?live_gate=1789547626544",
-      "expected_sha256": "2060eb793384d2870d70232882f10df9c8bd8103bccda4c1172c2b9cb0eebaf5",
-      "actual_sha256": "2060eb793384d2870d70232882f10df9c8bd8103bccda4c1172c2b9cb0eebaf5",
-      "expected_size": 336701,
-      "actual_size": 336701,
+      "url": "https://samsung-stock-pilot.vercel.app/product_specs_data.js?live_gate=1789548895394",
+      "expected_sha256": "82fce030791951efde25e78f32b050b2ede9b30d690b15c6cd384ba17cc58ae0",
+      "actual_sha256": "82fce030791951efde25e78f32b050b2ede9b30d690b15c6cd384ba17cc58ae0",
+      "expected_size": 696246,
+      "actual_size": 696246,
       "http_status": 200,
       "matched": true,
       "error": null
     },
     {
       "path": "assets/js/pilot-runtime-config.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-runtime-config.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-runtime-config.js?live_gate=1789548895394",
       "expected_sha256": "ef0833dd6e856a5d2dd8e05c22e4900b73fc615aba43b8a50e18c0e889769a53",
       "actual_sha256": "ef0833dd6e856a5d2dd8e05c22e4900b73fc615aba43b8a50e18c0e889769a53",
       "expected_size": 1276,
@@ -338,7 +338,7 @@
     },
     {
       "path": "assets/js/supabase-client.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/supabase-client.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/supabase-client.js?live_gate=1789548895394",
       "expected_sha256": "392a08912350690b90641c78c256a3e6eece39f7bea8ac8d1c022de85bcdce69",
       "actual_sha256": "392a08912350690b90641c78c256a3e6eece39f7bea8ac8d1c022de85bcdce69",
       "expected_size": 1917,
@@ -349,7 +349,7 @@
     },
     {
       "path": "assets/js/auth-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-service.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-service.js?live_gate=1789548895394",
       "expected_sha256": "980c725ad5b6d72c8e7a5f7932eb693b661d01717ad8cbe451a17cba47aba51c",
       "actual_sha256": "980c725ad5b6d72c8e7a5f7932eb693b661d01717ad8cbe451a17cba47aba51c",
       "expected_size": 5484,
@@ -360,7 +360,7 @@
     },
     {
       "path": "assets/js/permission-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/permission-service.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/permission-service.js?live_gate=1789548895394",
       "expected_sha256": "e1c913bc0712d1029014a480c9c0cb19695cd791074de05af54a9714cfb3086d",
       "actual_sha256": "e1c913bc0712d1029014a480c9c0cb19695cd791074de05af54a9714cfb3086d",
       "expected_size": 1979,
@@ -371,7 +371,7 @@
     },
     {
       "path": "assets/js/session-guard.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/session-guard.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/session-guard.js?live_gate=1789548895394",
       "expected_sha256": "2478369d3250caf399b148a0518918be4caf125d42c9083de979f66cb78c8f8f",
       "actual_sha256": "2478369d3250caf399b148a0518918be4caf125d42c9083de979f66cb78c8f8f",
       "expected_size": 3560,
@@ -382,7 +382,7 @@
     },
     {
       "path": "assets/js/issue-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-service.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-service.js?live_gate=1789548895394",
       "expected_sha256": "63d9616bbf811b09352aba3081e78cf343cfc02a195f3356c3a3ae1b0380f002",
       "actual_sha256": "63d9616bbf811b09352aba3081e78cf343cfc02a195f3356c3a3ae1b0380f002",
       "expected_size": 4273,
@@ -393,7 +393,7 @@
     },
     {
       "path": "assets/js/auth-modal.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-modal.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-modal.js?live_gate=1789548895394",
       "expected_sha256": "961605f657f928f3bbea6aaf634e60fb78483a73fda0c19fc9e6d1990e74444f",
       "actual_sha256": "961605f657f928f3bbea6aaf634e60fb78483a73fda0c19fc9e6d1990e74444f",
       "expected_size": 5037,
@@ -404,7 +404,7 @@
     },
     {
       "path": "assets/js/user-status-bar.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/user-status-bar.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/user-status-bar.js?live_gate=1789548895394",
       "expected_sha256": "a2efe935f2f39b2d8a6f6ac450f3cef5430b0c737ba4732193656571a2e04b75",
       "actual_sha256": "a2efe935f2f39b2d8a6f6ac450f3cef5430b0c737ba4732193656571a2e04b75",
       "expected_size": 3984,
@@ -415,7 +415,7 @@
     },
     {
       "path": "assets/js/issue-report-modal.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-report-modal.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-report-modal.js?live_gate=1789548895394",
       "expected_sha256": "4d4a7ad5450310c3fe42538a94d0f28638fe512848ab19c14b938141726caff8",
       "actual_sha256": "4d4a7ad5450310c3fe42538a94d0f28638fe512848ab19c14b938141726caff8",
       "expected_size": 12592,
@@ -426,7 +426,7 @@
     },
     {
       "path": "assets/js/issue-list.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-list.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-list.js?live_gate=1789548895394",
       "expected_sha256": "338e309d4311fd75c8cbfa5e5a43c21cf3560972b3949b6df10524d141b88893",
       "actual_sha256": "338e309d4311fd75c8cbfa5e5a43c21cf3560972b3949b6df10524d141b88893",
       "expected_size": 19343,
@@ -437,7 +437,7 @@
     },
     {
       "path": "assets/js/pilot-navigation.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-navigation.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-navigation.js?live_gate=1789548895394",
       "expected_sha256": "7791fff071229bea7aa2017c898ff26621628eee72f5d1ba2b7a7338e07f1b5e",
       "actual_sha256": "7791fff071229bea7aa2017c898ff26621628eee72f5d1ba2b7a7338e07f1b5e",
       "expected_size": 3608,
@@ -448,7 +448,7 @@
     },
     {
       "path": "assets/js/pilot-dashboard-widgets.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-dashboard-widgets.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-dashboard-widgets.js?live_gate=1789548895394",
       "expected_sha256": "21d545286debf5c3e639c77d9bb351b810d96d379fbff593adb2958413d1a186",
       "actual_sha256": "21d545286debf5c3e639c77d9bb351b810d96d379fbff593adb2958413d1a186",
       "expected_size": 18484,
@@ -459,7 +459,7 @@
     },
     {
       "path": "assets/js/member-admin-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/member-admin-service.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/member-admin-service.js?live_gate=1789548895394",
       "expected_sha256": "7ebdb6f2c2400c57b13f4e5787c37ffa160e44f26d729c8c01972b95f26c38dd",
       "actual_sha256": "7ebdb6f2c2400c57b13f4e5787c37ffa160e44f26d729c8c01972b95f26c38dd",
       "expected_size": 49881,
@@ -470,7 +470,7 @@
     },
     {
       "path": "assets/js/pilot-bootstrap.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-bootstrap.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-bootstrap.js?live_gate=1789548895394",
       "expected_sha256": "b7a4fe25b3b55f40c6a38a8236ade9fbbb9f9f4ace5565dbde68ce076ddc834c",
       "actual_sha256": "b7a4fe25b3b55f40c6a38a8236ade9fbbb9f9f4ace5565dbde68ce076ddc834c",
       "expected_size": 21002,
@@ -481,7 +481,7 @@
     },
     {
       "path": "assets/js/pilot-stock-snapshot.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-stock-snapshot.js?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-stock-snapshot.js?live_gate=1789548895394",
       "expected_sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
       "actual_sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
       "expected_size": 235179,
@@ -492,7 +492,7 @@
     },
     {
       "path": "reports/promotion_release_manifest.json",
-      "url": "https://samsung-stock-pilot.vercel.app/reports/promotion_release_manifest.json?live_gate=1789547626544",
+      "url": "https://samsung-stock-pilot.vercel.app/reports/promotion_release_manifest.json?live_gate=1789548895394",
       "expected_sha256": "ef14e7f0609303dddba673dd4ad3bd43c5bfa7d5a47befce3da7da2d5ba8dea0",
       "actual_sha256": "ef14e7f0609303dddba673dd4ad3bd43c5bfa7d5a47befce3da7da2d5ba8dea0",
       "expected_size": 1324,
@@ -503,11 +503,11 @@
     },
     {
       "path": "data/product-accessory-master.json",
-      "url": "https://samsung-stock-pilot.vercel.app/data/product-accessory-master.json?live_gate=1789547626544",
-      "expected_sha256": "446e551964e052e59c5b024a212845d7ad921d48cd1bae2c3e669669cd42d88c",
-      "actual_sha256": "446e551964e052e59c5b024a212845d7ad921d48cd1bae2c3e669669cd42d88c",
-      "expected_size": 52254,
-      "actual_size": 52254,
+      "url": "https://samsung-stock-pilot.vercel.app/data/product-accessory-master.json?live_gate=1789548895394",
+      "expected_sha256": "85e55daff5363aae2c64dbda145a226f61c9f069d99ca2047dafd1841993451b",
+      "actual_sha256": "85e55daff5363aae2c64dbda145a226f61c9f069d99ca2047dafd1841993451b",
+      "expected_size": 411799,
+      "actual_size": 411799,
       "http_status": 200,
       "matched": true,
       "error": null
@@ -515,16 +515,2340 @@
   ],
   "accessory_master": {
     "fetched": true,
-    "record_count": 19,
+    "record_count": 210,
     "duplicate_inventory_pn": [],
     "duplicate_gtin": [],
     "missing_required_pn": [],
     "mismatched_required_pn": [],
     "missing_identity_fields": [],
-    "verified_fields_without_source": [],
-    "passed": true,
+    "verified_fields_without_source": [
+      {
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "field": "maximumOutputPower",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "field": "cableIncluded",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "field": "outputPorts",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T4511XBEGTH",
+        "field": "chargerType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T2510NWEGTH",
+        "field": "maximumOutputPower",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T2510NWEGTH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T2510NWEGTH",
+        "field": "cableIncluded",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T2510NWEGTH",
+        "field": "outputPorts",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T2510NWEGTH",
+        "field": "chargerType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437345",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437345",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437345",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216623877",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216623877",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216623877",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216623860",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216623860",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216846719",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216846719",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216860326",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216860326",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216860241",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216860241",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436560",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436560",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436560",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829033",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829033",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216803910",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216803910",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443339",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443339",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443339",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF966SBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF966SBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF966SBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433590",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433590",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433590",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436409",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436409",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436409",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436669",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436669",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433828",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433828",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433828",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299669979",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299669979",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS948CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS948CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216828746",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216828746",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216828753",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216828753",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216828753",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T4511XBEGTH",
+        "field": "maximumOutputPower",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T4511XBEGTH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T4511XBEGTH",
+        "field": "cableIncluded",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T4511XBEGTH",
+        "field": "outputPorts",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EP-T4511XBEGTH",
+        "field": "chargerType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703435532",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703435532",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437659",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437659",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216846726",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216846726",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804030",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804030",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829064",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829064",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437499",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437499",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426073",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426073",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TNEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TNEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TNEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703435204",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703435204",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216860401",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216860401",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804023",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804023",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437482",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437482",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829026",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829026",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299669900",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299669900",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299703239",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299703239",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299703239",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443599",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443599",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299702874",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299702874",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829040",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829040",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829057",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829057",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829415",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829415",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPS948PGAJW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPS948PGAJW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPS948PGAJW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829156",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829156",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829156",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433569",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433569",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433569",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS741CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS741CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804122",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804122",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426066",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426066",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS947CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS947CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703446620",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703446620",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703446620",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437468",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437468",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443612",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443612",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829255",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829255",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829255",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433606",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433606",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433606",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804085",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804085",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443605",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443605",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443650",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443650",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CS741CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CS741CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF976CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF976CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CVEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-FF776CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-FF776CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-FF776CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804108",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216804108",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829019",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216829019",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437581",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437581",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437536",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437536",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437536",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739264",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739264",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739264",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437451",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437451",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CLEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QF971CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QF971CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299702935",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299702935",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443667",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703443667",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CF976CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CF976CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF976CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF976CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SNEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SNEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SNEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RA376CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RA376CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RA376CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CLEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CF971CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CF971CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-DX730UBEGTH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-DX730UBEGTH",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-DX730UBEGTH",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SREGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SREGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UA576CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UA576CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF776CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF776CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US741CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US741CTEGWW",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US947CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US947CTEGWW",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QA366CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QA366CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437543",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437543",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437543",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703400226",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703400226",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299712668",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299712668",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433576",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433576",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433576",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436690",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703436690",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QF976CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QF976CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPF966PGBTW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPF966PGBTW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPF966PGBTW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CS948CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-CS948CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CGEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CGEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CWEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF776CWEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CGEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CGEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CWEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF971CWEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CPEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CPEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CPEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CWEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CWEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES947CWEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-FF776CJEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-FF776CJEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-FF776CJEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SREGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF976SREGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SCEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SCEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SCEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SNEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SNEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SNEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SREGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SREGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SCEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SCEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SCEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-MF966CMEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-MF966CMEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA576CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA576CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CMEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS741CMEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CJEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CJEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CJEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS942CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF976CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF976CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US942CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US942CTEGWW",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF976SBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF976SBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF976SBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FFF976YCATW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FFF976YCATW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216834631",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216834631",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES942CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SNEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SNEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KF971SNEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CKEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CKEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CKEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA376CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QA376CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QA376CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS942CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QS942CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RS947CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RS947CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RS947CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF971CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF971CTEGWW",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US936CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-US936CTEGWW",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF971SBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF971SBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-XF971SBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FCX626NNCBH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FCX626NNCBH",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FCX626NNCBH",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FFF971YCATW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FFF971YCATW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPS947PGAJW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPS947PGAJW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPS947PGAJW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859095890766",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859095890766",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T2510NBEGTH",
+        "field": "maximumOutputPower",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T2510NBEGTH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T2510NBEGTH",
+        "field": "cableIncluded",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T2510NBEGTH",
+        "field": "outputPorts",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "SSG-EP-T2510NBEGTH",
+        "field": "chargerType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426530",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426530",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703426530",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739240",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739240",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739240",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739257",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739257",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739257",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739301",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739301",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739363",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216739363",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216755578",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216755578",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FCX400RLABH",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FCX400RLABH",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FCX400RLABH",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859095890773",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859095890773",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299642811",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8800299642811",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UA566CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UA566CTEGWW",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF956CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-UF956CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-TOS938HIAPW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-TOS938HIAPW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-TOS938HIAPW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "S-33016170",
+        "field": "maximumOutputPower",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "S-33016170",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "S-33016170",
+        "field": "cableIncluded",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765355",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765355",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765355",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765379",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765379",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765379",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765386",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765386",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859216765386",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433583",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433583",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433583",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SNEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SNEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SNEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TMEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PF766TMEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QA576CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QA576CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433354",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433354",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433354",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433699",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703433699",
+        "field": "protectorType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437666",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "8859703437666",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-BX930PBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-BX930PBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-BX930PBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF976CWEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-EF976CWEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CMEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES741CMEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES948CLEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ES948CLEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SSEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SSEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS947SSEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SREGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SREGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SSEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SSEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-KS948SSEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA366CVEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-PA366CVEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QF776CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-QF776CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RS942CBEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RS942CBEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-RS942CBEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CJEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CJEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS947CJEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CJEGWW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CJEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-SS948CJEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-VF766PJEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-VF766PJEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ZF766CTEGWW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "EF-ZF766CTEGWW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "ET-SVL30SWEGWW-D",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPF966PGABW",
+        "field": "color",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPF966PGABW",
+        "field": "compatibleModels",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      },
+      {
+        "inventoryPn": "GP-FPF966PGABW",
+        "field": "caseType",
+        "reason": "SOURCE_ID_NOT_FOUND_IN_RECORD"
+      }
+    ],
+    "passed": false,
     "error": null
   },
-  "violations": [],
-  "duration_seconds": 22.211
+  "violations": [
+    "ACCESSORY_MASTER_VERIFICATION_FAILED",
+    "Accessory Fields Missing Sources: 464"
+  ],
+  "duration_seconds": 21.73
 }
