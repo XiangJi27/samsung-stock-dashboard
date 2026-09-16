@@ -170,7 +170,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "SSG-EP-T4511XBEGTH",
         "barcode": null,
@@ -280,7 +280,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209593"
     },
     {
       "draftId": "DRAFT-EP-T2510NWEGTH",
@@ -291,7 +292,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EP-T2510NWEGTH",
         "barcode": null,
@@ -401,7 +402,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209604"
     },
     {
       "draftId": "DRAFT-8859703437345",
@@ -412,7 +414,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437345",
         "barcode": null,
@@ -505,7 +507,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209608"
     },
     {
       "draftId": "DRAFT-8859216623877",
@@ -516,7 +519,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216623877",
         "barcode": null,
@@ -601,7 +604,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209610"
     },
     {
       "draftId": "DRAFT-8859216623860",
@@ -612,7 +616,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216623860",
         "barcode": null,
@@ -684,7 +688,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209612"
     },
     {
       "draftId": "DRAFT-8859216846719",
@@ -695,7 +700,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216846719",
         "barcode": null,
@@ -767,7 +772,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209614"
     },
     {
       "draftId": "DRAFT-8859216860326",
@@ -778,7 +784,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216860326",
         "barcode": null,
@@ -850,7 +856,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209617"
     },
     {
       "draftId": "DRAFT-8859216860241",
@@ -861,7 +868,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216860241",
         "barcode": null,
@@ -933,7 +940,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209619"
     },
     {
       "draftId": "DRAFT-PREMIUM0017044",
@@ -1304,7 +1312,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703436560",
         "barcode": null,
@@ -1397,7 +1405,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209623"
     },
     {
       "draftId": "DRAFT-8859216829033",
@@ -1408,7 +1417,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829033",
         "barcode": null,
@@ -1480,7 +1489,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209626"
     },
     {
       "draftId": "DRAFT-EP-T4511NBEGTH",
@@ -1707,7 +1717,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216803910",
         "barcode": null,
@@ -1779,7 +1789,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209629"
     },
     {
       "draftId": "DRAFT-6931481215710",
@@ -2020,7 +2031,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703443339",
         "barcode": null,
@@ -2113,7 +2124,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209634"
     },
     {
       "draftId": "DRAFT-EF-XF966SBEGWW",
@@ -2124,7 +2136,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-XF966SBEGWW",
         "barcode": null,
@@ -2217,7 +2229,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209636"
     },
     {
       "draftId": "DRAFT-8859703433590",
@@ -2228,7 +2241,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433590",
         "barcode": null,
@@ -2313,7 +2326,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209638"
     },
     {
       "draftId": "DRAFT-6941876265749",
@@ -2423,7 +2437,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703436409",
         "barcode": null,
@@ -2516,7 +2530,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209641"
     },
     {
       "draftId": "DRAFT-PREMIUM-665479",
@@ -2689,7 +2704,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703436669",
         "barcode": null,
@@ -2770,7 +2785,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209644"
     },
     {
       "draftId": "DRAFT-8859703433828",
@@ -2781,7 +2797,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433828",
         "barcode": null,
@@ -2874,7 +2890,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209646"
     },
     {
       "draftId": "DRAFT-8800299669979",
@@ -2885,7 +2902,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299669979",
         "barcode": null,
@@ -2966,7 +2983,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209648"
     },
     {
       "draftId": "DRAFT-EF-QS948CTEGWW",
@@ -2977,7 +2995,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QS948CTEGWW",
         "barcode": null,
@@ -3058,7 +3076,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209650"
     },
     {
       "draftId": "DRAFT-8859216828746",
@@ -3069,7 +3088,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216828746",
         "barcode": null,
@@ -3141,7 +3160,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209653"
     },
     {
       "draftId": "DRAFT-6941876238958",
@@ -3343,7 +3363,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216828753",
         "barcode": null,
@@ -3428,7 +3448,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209656"
     },
     {
       "draftId": "DRAFT-EP-T4511XBEGTH",
@@ -3439,7 +3460,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EP-T4511XBEGTH",
         "barcode": null,
@@ -3549,7 +3570,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209658"
     },
     {
       "draftId": "DRAFT-PM-8806097071891",
@@ -3608,7 +3630,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703435532",
         "barcode": null,
@@ -3689,7 +3711,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209660"
     },
     {
       "draftId": "DRAFT-8859703437659",
@@ -3700,7 +3723,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437659",
         "barcode": null,
@@ -3781,7 +3804,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209663"
     },
     {
       "draftId": "DRAFT-Z-SMARTTAG2WMR",
@@ -3840,7 +3864,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216846726",
         "barcode": null,
@@ -3912,7 +3936,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209665"
     },
     {
       "draftId": "DRAFT-8859216804030",
@@ -3923,7 +3948,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216804030",
         "barcode": null,
@@ -3995,7 +4020,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209668"
     },
     {
       "draftId": "DRAFT-8859216829064",
@@ -4006,7 +4032,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829064",
         "barcode": null,
@@ -4078,7 +4104,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209670"
     },
     {
       "draftId": "DRAFT-8859703437499",
@@ -4089,7 +4116,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437499",
         "barcode": null,
@@ -4170,7 +4197,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209672"
     },
     {
       "draftId": "DRAFT-8859703426073",
@@ -4181,7 +4209,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703426073",
         "barcode": null,
@@ -4262,7 +4290,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209674"
     },
     {
       "draftId": "DRAFT-EF-PF766TNEGWW",
@@ -4273,7 +4302,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PF766TNEGWW",
         "barcode": null,
@@ -4366,7 +4395,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209677"
     },
     {
       "draftId": "DRAFT-8859703435204",
@@ -4377,7 +4407,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703435204",
         "barcode": null,
@@ -4458,7 +4488,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209679"
     },
     {
       "draftId": "DRAFT-8859216860401",
@@ -4469,7 +4500,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216860401",
         "barcode": null,
@@ -4541,7 +4572,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209681"
     },
     {
       "draftId": "DRAFT-8859216804023",
@@ -4552,7 +4584,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216804023",
         "barcode": null,
@@ -4624,7 +4656,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209683"
     },
     {
       "draftId": "DRAFT-8859703437482",
@@ -4635,7 +4668,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437482",
         "barcode": null,
@@ -4716,7 +4749,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209686"
     },
     {
       "draftId": "DRAFT-8859216829026",
@@ -4727,7 +4761,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829026",
         "barcode": null,
@@ -4799,7 +4833,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209688"
     },
     {
       "draftId": "DRAFT-8800299669900",
@@ -4810,7 +4845,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299669900",
         "barcode": null,
@@ -4891,7 +4926,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209690"
     },
     {
       "draftId": "DRAFT-8800299703239",
@@ -4902,7 +4938,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299703239",
         "barcode": null,
@@ -4995,7 +5031,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209692"
     },
     {
       "draftId": "DRAFT-8859703443599",
@@ -5006,7 +5043,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703443599",
         "barcode": null,
@@ -5087,7 +5124,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209694"
     },
     {
       "draftId": "DRAFT-EF-EF971CVEGWW",
@@ -5098,7 +5136,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF971CVEGWW",
         "barcode": null,
@@ -5179,7 +5217,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209696"
     },
     {
       "draftId": "DRAFT-8800299702874",
@@ -5190,7 +5229,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299702874",
         "barcode": null,
@@ -5271,7 +5310,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209698"
     },
     {
       "draftId": "DRAFT-8859216829040",
@@ -5282,7 +5322,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829040",
         "barcode": null,
@@ -5354,7 +5394,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209701"
     },
     {
       "draftId": "DRAFT-8859216829057",
@@ -5365,7 +5406,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829057",
         "barcode": null,
@@ -5437,7 +5478,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209703"
     },
     {
       "draftId": "DRAFT-8859216829415",
@@ -5448,7 +5490,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829415",
         "barcode": null,
@@ -5520,7 +5562,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209705"
     },
     {
       "draftId": "DRAFT-GP-FPS948PGAJW",
@@ -5531,7 +5574,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FPS948PGAJW",
         "barcode": null,
@@ -5624,7 +5667,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209708"
     },
     {
       "draftId": "DRAFT-PM6936678491526",
@@ -5683,7 +5727,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829156",
         "barcode": null,
@@ -5768,7 +5812,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209711"
     },
     {
       "draftId": "DRAFT-8859703433569",
@@ -5779,7 +5824,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433569",
         "barcode": null,
@@ -5872,7 +5917,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209713"
     },
     {
       "draftId": "DRAFT-745883867080",
@@ -6031,7 +6077,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QS741CTEGWW",
         "barcode": null,
@@ -6112,7 +6158,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209716"
     },
     {
       "draftId": "DRAFT-8859216804122",
@@ -6123,7 +6170,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216804122",
         "barcode": null,
@@ -6195,7 +6242,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209724"
     },
     {
       "draftId": "DRAFT-8859703426066",
@@ -6206,7 +6254,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703426066",
         "barcode": null,
@@ -6287,7 +6335,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209726"
     },
     {
       "draftId": "DRAFT-EF-QS947CTEGWW",
@@ -6298,7 +6347,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QS947CTEGWW",
         "barcode": null,
@@ -6379,7 +6428,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209727"
     },
     {
       "draftId": "DRAFT-8859703446620",
@@ -6390,7 +6440,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703446620",
         "barcode": null,
@@ -6483,7 +6533,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209729"
     },
     {
       "draftId": "DRAFT-EF-PF766TBEGWW",
@@ -6494,7 +6545,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PF766TBEGWW",
         "barcode": null,
@@ -6587,7 +6638,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209730"
     },
     {
       "draftId": "DRAFT-8859703437468",
@@ -6598,7 +6650,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437468",
         "barcode": null,
@@ -6679,7 +6731,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209733"
     },
     {
       "draftId": "DRAFT-8859703443612",
@@ -6690,7 +6743,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703443612",
         "barcode": null,
@@ -6771,7 +6824,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209735"
     },
     {
       "draftId": "DRAFT-8859216829255",
@@ -6782,7 +6836,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829255",
         "barcode": null,
@@ -6867,7 +6921,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209736"
     },
     {
       "draftId": "DRAFT-8859703433606",
@@ -6878,7 +6933,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433606",
         "barcode": null,
@@ -6963,7 +7018,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209738"
     },
     {
       "draftId": "DRAFT-Z-ADAPTER45QHB",
@@ -7022,7 +7078,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216804085",
         "barcode": null,
@@ -7094,7 +7150,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209740"
     },
     {
       "draftId": "DRAFT-8859703443605",
@@ -7105,7 +7162,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703443605",
         "barcode": null,
@@ -7186,7 +7243,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209741"
     },
     {
       "draftId": "DRAFT-8859703443650",
@@ -7197,7 +7255,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703443650",
         "barcode": null,
@@ -7278,7 +7336,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209742"
     },
     {
       "draftId": "DRAFT-EF-CS741CTEGWW",
@@ -7289,7 +7348,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-CS741CTEGWW",
         "barcode": null,
@@ -7370,7 +7429,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209744"
     },
     {
       "draftId": "DRAFT-EF-EF971CBEGWW",
@@ -7381,7 +7441,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF971CBEGWW",
         "barcode": null,
@@ -7462,7 +7522,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209745"
     },
     {
       "draftId": "DRAFT-EF-EF976CBEGWW",
@@ -7473,7 +7534,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF976CBEGWW",
         "barcode": null,
@@ -7554,7 +7615,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209747"
     },
     {
       "draftId": "DRAFT-EF-ES741CBEGWW",
@@ -7565,7 +7627,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES741CBEGWW",
         "barcode": null,
@@ -7658,7 +7720,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209748"
     },
     {
       "draftId": "DRAFT-EF-EF776CVEGWW",
@@ -7669,7 +7732,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF776CVEGWW",
         "barcode": null,
@@ -7762,7 +7825,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209750"
     },
     {
       "draftId": "DRAFT-EF-FF776CBEGWW",
@@ -7773,7 +7837,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-FF776CBEGWW",
         "barcode": null,
@@ -7866,7 +7930,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209751"
     },
     {
       "draftId": "DRAFT-EF-ES947CVEGWW",
@@ -7877,7 +7942,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES947CVEGWW",
         "barcode": null,
@@ -7958,7 +8023,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209752"
     },
     {
       "draftId": "DRAFT-PM8859289684768",
@@ -8017,7 +8083,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216804108",
         "barcode": null,
@@ -8089,7 +8155,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209756"
     },
     {
       "draftId": "DRAFT-8859216829019",
@@ -8100,7 +8167,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216829019",
         "barcode": null,
@@ -8172,7 +8239,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209757"
     },
     {
       "draftId": "DRAFT-8859703437581",
@@ -8183,7 +8251,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437581",
         "barcode": null,
@@ -8264,7 +8332,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209759"
     },
     {
       "draftId": "DRAFT-8859703437536",
@@ -8275,7 +8344,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437536",
         "barcode": null,
@@ -8368,7 +8437,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209760"
     },
     {
       "draftId": "DRAFT-8859216739264",
@@ -8379,7 +8449,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216739264",
         "barcode": null,
@@ -8464,7 +8534,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209762"
     },
     {
       "draftId": "DRAFT-6975061532583",
@@ -8520,7 +8591,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437451",
         "barcode": null,
@@ -8601,7 +8672,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209763"
     },
     {
       "draftId": "DRAFT-EF-EF776CBEGWW",
@@ -8612,7 +8684,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF776CBEGWW",
         "barcode": null,
@@ -8693,7 +8765,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209765"
     },
     {
       "draftId": "DRAFT-EF-ES741CLEGWW",
@@ -8704,7 +8777,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES741CLEGWW",
         "barcode": null,
@@ -8797,7 +8870,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209767"
     },
     {
       "draftId": "DRAFT-EF-QF971CTEGWW",
@@ -8808,7 +8882,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QF971CTEGWW",
         "barcode": null,
@@ -8889,7 +8963,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209768"
     },
     {
       "draftId": "DRAFT-194644200176",
@@ -9075,7 +9150,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299702935",
         "barcode": null,
@@ -9156,7 +9231,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209771"
     },
     {
       "draftId": "DRAFT-8859703443667",
@@ -9167,7 +9243,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703443667",
         "barcode": null,
@@ -9248,7 +9324,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209772"
     },
     {
       "draftId": "DRAFT-EF-CF976CTEGWW",
@@ -9259,7 +9336,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-CF976CTEGWW",
         "barcode": null,
@@ -9340,7 +9417,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209774"
     },
     {
       "draftId": "DRAFT-EF-EF976CVEGWW",
@@ -9351,7 +9429,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF976CVEGWW",
         "barcode": null,
@@ -9432,7 +9510,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209776"
     },
     {
       "draftId": "DRAFT-EF-ES947CBEGWW",
@@ -9443,7 +9522,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES947CBEGWW",
         "barcode": null,
@@ -9536,7 +9615,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209777"
     },
     {
       "draftId": "DRAFT-EF-KF971SBEGWW",
@@ -9547,7 +9627,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KF971SBEGWW",
         "barcode": null,
@@ -9640,7 +9720,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209779"
     },
     {
       "draftId": "DRAFT-EF-KF976SBEGWW",
@@ -9651,7 +9732,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KF976SBEGWW",
         "barcode": null,
@@ -9744,7 +9825,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209781"
     },
     {
       "draftId": "DRAFT-EF-KF976SNEGWW",
@@ -9755,7 +9837,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KF976SNEGWW",
         "barcode": null,
@@ -9848,7 +9930,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209782"
     },
     {
       "draftId": "DRAFT-EF-RA376CBEGWW",
@@ -9859,7 +9942,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-RA376CBEGWW",
         "barcode": null,
@@ -9952,7 +10035,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209784"
     },
     {
       "draftId": "DRAFT-EF-SS741CBEGWW",
@@ -9963,7 +10047,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS741CBEGWW",
         "barcode": null,
@@ -10056,7 +10140,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209785"
     },
     {
       "draftId": "DRAFT-EF-SS741CLEGWW",
@@ -10067,7 +10152,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS741CLEGWW",
         "barcode": null,
@@ -10160,7 +10245,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209787"
     },
     {
       "draftId": "DRAFT-EF-SS942CBEGWW",
@@ -10171,7 +10257,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS942CBEGWW",
         "barcode": null,
@@ -10264,7 +10350,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209789"
     },
     {
       "draftId": "DRAFT-EF-SS947CVEGWW",
@@ -10275,7 +10362,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS947CVEGWW",
         "barcode": null,
@@ -10356,7 +10443,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209790"
     },
     {
       "draftId": "DRAFT-EF-SS948CVEGWW",
@@ -10367,7 +10455,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS948CVEGWW",
         "barcode": null,
@@ -10448,7 +10536,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209792"
     },
     {
       "draftId": "DRAFT-6941876222087",
@@ -10655,7 +10744,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-CF971CTEGWW",
         "barcode": null,
@@ -10736,7 +10825,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209794"
     },
     {
       "draftId": "DRAFT-EF-DX730UBEGTH",
@@ -10747,7 +10837,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-DX730UBEGTH",
         "barcode": null,
@@ -10840,7 +10930,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209795"
     },
     {
       "draftId": "DRAFT-EF-ES947CLEGWW",
@@ -10851,7 +10942,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES947CLEGWW",
         "barcode": null,
@@ -10932,7 +11023,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209797"
     },
     {
       "draftId": "DRAFT-EF-KF971SREGWW",
@@ -10943,7 +11035,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KF971SREGWW",
         "barcode": null,
@@ -11024,7 +11116,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209798"
     },
     {
       "draftId": "DRAFT-EF-SS947CBEGWW",
@@ -11035,7 +11128,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS947CBEGWW",
         "barcode": null,
@@ -11128,7 +11221,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209800"
     },
     {
       "draftId": "DRAFT-EF-SS948CLEGWW",
@@ -11139,7 +11233,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS948CLEGWW",
         "barcode": null,
@@ -11220,7 +11314,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209801"
     },
     {
       "draftId": "DRAFT-EF-UA576CTEGWW",
@@ -11231,7 +11326,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-UA576CTEGWW",
         "barcode": null,
@@ -11312,7 +11407,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209802"
     },
     {
       "draftId": "DRAFT-EF-UF776CTEGWW",
@@ -11323,7 +11419,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-UF776CTEGWW",
         "barcode": null,
@@ -11404,7 +11500,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209805"
     },
     {
       "draftId": "DRAFT-EF-US741CTEGWW",
@@ -11415,7 +11512,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-US741CTEGWW",
         "barcode": null,
@@ -11496,7 +11593,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209806"
     },
     {
       "draftId": "DRAFT-EF-US947CTEGWW",
@@ -11507,7 +11605,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-US947CTEGWW",
         "barcode": null,
@@ -11588,7 +11686,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209810"
     },
     {
       "draftId": "DRAFT-ET-SNL32SMEGWW",
@@ -11812,7 +11911,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QA366CTEGWW",
         "barcode": null,
@@ -11893,7 +11992,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209812"
     },
     {
       "draftId": "DRAFT-EF-SS942CVEGWW",
@@ -11904,7 +12004,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS942CVEGWW",
         "barcode": null,
@@ -11985,7 +12085,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209814"
     },
     {
       "draftId": "DRAFT-EF-SS948CBEGWW",
@@ -11996,7 +12097,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS948CBEGWW",
         "barcode": null,
@@ -12089,7 +12190,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209815"
     },
     {
       "draftId": "DRAFT-8859703437543",
@@ -12100,7 +12202,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437543",
         "barcode": null,
@@ -12193,7 +12295,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209817"
     },
     {
       "draftId": "DRAFT-8859703400226",
@@ -12204,7 +12307,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703400226",
         "barcode": null,
@@ -12285,7 +12388,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209818"
     },
     {
       "draftId": "DRAFT-8800299712668",
@@ -12296,7 +12400,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299712668",
         "barcode": null,
@@ -12377,7 +12481,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209820"
     },
     {
       "draftId": "DRAFT-8859703433576",
@@ -12388,7 +12493,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433576",
         "barcode": null,
@@ -12473,7 +12578,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209822"
     },
     {
       "draftId": "DRAFT-8859703436690",
@@ -12484,7 +12590,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703436690",
         "barcode": null,
@@ -12565,7 +12671,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209823"
     },
     {
       "draftId": "DRAFT-EF-ES942CBEGWW",
@@ -12576,7 +12683,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES942CBEGWW",
         "barcode": null,
@@ -12669,7 +12776,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209825"
     },
     {
       "draftId": "DRAFT-EF-QF976CTEGWW",
@@ -12680,7 +12788,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QF976CTEGWW",
         "barcode": null,
@@ -12752,7 +12860,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209826"
     },
     {
       "draftId": "DRAFT-GP-FPF966PGBTW",
@@ -12763,7 +12872,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FPF966PGBTW",
         "barcode": null,
@@ -12856,7 +12965,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209828"
     },
     {
       "draftId": "DRAFT-EF-CS948CTEGWW",
@@ -12867,7 +12977,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-CS948CTEGWW",
         "barcode": null,
@@ -12948,7 +13058,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209829"
     },
     {
       "draftId": "DRAFT-EF-EF776CGEGWW",
@@ -12959,7 +13070,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF776CGEGWW",
         "barcode": null,
@@ -13040,7 +13151,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209831"
     },
     {
       "draftId": "DRAFT-EF-EF776CWEGWW",
@@ -13051,7 +13163,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF776CWEGWW",
         "barcode": null,
@@ -13132,7 +13244,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209832"
     },
     {
       "draftId": "DRAFT-EF-EF971CGEGWW",
@@ -13143,7 +13256,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF971CGEGWW",
         "barcode": null,
@@ -13224,7 +13337,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209834"
     },
     {
       "draftId": "DRAFT-EF-EF971CWEGWW",
@@ -13235,7 +13349,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF971CWEGWW",
         "barcode": null,
@@ -13316,7 +13430,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209836"
     },
     {
       "draftId": "DRAFT-EF-ES741CPEGWW",
@@ -13327,7 +13442,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES741CPEGWW",
         "barcode": null,
@@ -13420,7 +13535,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209837"
     },
     {
       "draftId": "DRAFT-EF-ES942CLEGWW",
@@ -13431,7 +13547,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES942CLEGWW",
         "barcode": null,
@@ -13512,7 +13628,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209839"
     },
     {
       "draftId": "DRAFT-EF-ES947CWEGWW",
@@ -13523,7 +13640,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES947CWEGWW",
         "barcode": null,
@@ -13616,7 +13733,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209841"
     },
     {
       "draftId": "DRAFT-EF-FF776CJEGWW",
@@ -13627,7 +13745,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-FF776CJEGWW",
         "barcode": null,
@@ -13720,7 +13838,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209842"
     },
     {
       "draftId": "DRAFT-EF-KF976SREGWW",
@@ -13731,7 +13850,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KF976SREGWW",
         "barcode": null,
@@ -13812,7 +13931,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209844"
     },
     {
       "draftId": "DRAFT-EF-KS947SCEGWW",
@@ -13823,7 +13943,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS947SCEGWW",
         "barcode": null,
@@ -13916,7 +14036,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209845"
     },
     {
       "draftId": "DRAFT-EF-KS947SNEGWW",
@@ -13927,7 +14048,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS947SNEGWW",
         "barcode": null,
@@ -14020,7 +14141,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209847"
     },
     {
       "draftId": "DRAFT-EF-KS947SREGWW",
@@ -14031,7 +14153,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS947SREGWW",
         "barcode": null,
@@ -14112,7 +14234,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209849"
     },
     {
       "draftId": "DRAFT-EF-KS948SCEGWW",
@@ -14123,7 +14246,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS948SCEGWW",
         "barcode": null,
@@ -14216,7 +14339,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209850"
     },
     {
       "draftId": "DRAFT-EF-MF966CMEGWW",
@@ -14227,7 +14351,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-MF966CMEGWW",
         "barcode": null,
@@ -14308,7 +14432,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209851"
     },
     {
       "draftId": "DRAFT-EF-PA576CVEGWW",
@@ -14319,7 +14444,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PA576CVEGWW",
         "barcode": null,
@@ -14400,7 +14525,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209853"
     },
     {
       "draftId": "DRAFT-EF-SS741CMEGWW",
@@ -14411,7 +14537,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS741CMEGWW",
         "barcode": null,
@@ -14492,7 +14618,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209855"
     },
     {
       "draftId": "DRAFT-EF-SS942CJEGWW",
@@ -14503,7 +14630,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS942CJEGWW",
         "barcode": null,
@@ -14596,7 +14723,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209856"
     },
     {
       "draftId": "DRAFT-EF-SS942CLEGWW",
@@ -14607,7 +14735,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS942CLEGWW",
         "barcode": null,
@@ -14688,7 +14816,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209858"
     },
     {
       "draftId": "DRAFT-EF-SS947CLEGWW",
@@ -14699,7 +14828,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS947CLEGWW",
         "barcode": null,
@@ -14780,7 +14909,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209859"
     },
     {
       "draftId": "DRAFT-EF-UF976CTEGWW",
@@ -14791,7 +14921,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-UF976CTEGWW",
         "barcode": null,
@@ -14872,7 +15002,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209861"
     },
     {
       "draftId": "DRAFT-EF-US942CTEGWW",
@@ -14883,7 +15014,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-US942CTEGWW",
         "barcode": null,
@@ -14964,7 +15095,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209862"
     },
     {
       "draftId": "DRAFT-EF-XF976SBEGWW",
@@ -14975,7 +15107,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-XF976SBEGWW",
         "barcode": null,
@@ -15068,7 +15200,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209863"
     },
     {
       "draftId": "DRAFT-ET-SBL71MAEGWW",
@@ -16619,7 +16752,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FFF976YCATW",
         "barcode": null,
@@ -16700,7 +16833,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209870"
     },
     {
       "draftId": "DRAFT-SS-VC-AX32BG3100GBST",
@@ -16801,7 +16935,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216834631",
         "barcode": null,
@@ -16873,7 +17007,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209872"
     },
     {
       "draftId": "DRAFT-EF-ES942CVEGWW",
@@ -16884,7 +17019,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES942CVEGWW",
         "barcode": null,
@@ -16965,7 +17100,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209874"
     },
     {
       "draftId": "DRAFT-EF-KF971SNEGWW",
@@ -16976,7 +17112,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KF971SNEGWW",
         "barcode": null,
@@ -17069,7 +17205,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209875"
     },
     {
       "draftId": "DRAFT-EF-PA376CBEGWW",
@@ -17080,7 +17217,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PA376CBEGWW",
         "barcode": null,
@@ -17173,7 +17310,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209877"
     },
     {
       "draftId": "DRAFT-EF-PA376CKEGWW",
@@ -17184,7 +17322,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PA376CKEGWW",
         "barcode": null,
@@ -17277,7 +17415,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209878"
     },
     {
       "draftId": "DRAFT-EF-PA376CVEGWW",
@@ -17288,7 +17427,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PA376CVEGWW",
         "barcode": null,
@@ -17369,7 +17508,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209880"
     },
     {
       "draftId": "DRAFT-EF-QA376CTEGWW",
@@ -17380,7 +17520,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QA376CTEGWW",
         "barcode": null,
@@ -17461,7 +17601,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209881"
     },
     {
       "draftId": "DRAFT-EF-QS942CTEGWW",
@@ -17472,7 +17613,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QS942CTEGWW",
         "barcode": null,
@@ -17553,7 +17694,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209883"
     },
     {
       "draftId": "DRAFT-EF-RS947CBEGWW",
@@ -17564,7 +17706,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-RS947CBEGWW",
         "barcode": null,
@@ -17657,7 +17799,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209884"
     },
     {
       "draftId": "DRAFT-EF-UF971CTEGWW",
@@ -17668,7 +17811,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-UF971CTEGWW",
         "barcode": null,
@@ -17749,7 +17892,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209886"
     },
     {
       "draftId": "DRAFT-EF-US936CTEGWW",
@@ -17760,7 +17904,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-US936CTEGWW",
         "barcode": null,
@@ -17841,7 +17985,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209888"
     },
     {
       "draftId": "DRAFT-EF-XF971SBEGWW",
@@ -17852,7 +17997,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-XF971SBEGWW",
         "barcode": null,
@@ -17945,7 +18090,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209889"
     },
     {
       "draftId": "DRAFT-ET-SNL32SPEGWW",
@@ -18040,7 +18186,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FCX626NNCBH",
         "barcode": null,
@@ -18133,7 +18279,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209891"
     },
     {
       "draftId": "DRAFT-GP-FFF971YCATW",
@@ -18144,7 +18291,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FFF971YCATW",
         "barcode": null,
@@ -18225,7 +18372,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209893"
     },
     {
       "draftId": "DRAFT-GP-FPS947PGAJW",
@@ -18236,7 +18384,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FPS947PGAJW",
         "barcode": null,
@@ -18329,7 +18477,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209894"
     },
     {
       "draftId": "DRAFT-PM8806094095647",
@@ -18673,7 +18822,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859095890766",
         "barcode": null,
@@ -18745,7 +18894,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209897"
     },
     {
       "draftId": "DRAFT-SSG-EP-T2510NBEGTH",
@@ -18756,7 +18906,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "SSG-EP-T2510NBEGTH",
         "barcode": null,
@@ -18866,7 +19016,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209899"
     },
     {
       "draftId": "DRAFT-8859703426530",
@@ -18877,7 +19028,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703426530",
         "barcode": null,
@@ -18970,7 +19121,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209901"
     },
     {
       "draftId": "DRAFT-PM4897121002558",
@@ -19077,7 +19229,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216739240",
         "barcode": null,
@@ -19162,7 +19314,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209904"
     },
     {
       "draftId": "DRAFT-8859216739257",
@@ -19173,7 +19326,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216739257",
         "barcode": null,
@@ -19258,7 +19411,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209905"
     },
     {
       "draftId": "DRAFT-8859216739301",
@@ -19269,7 +19423,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216739301",
         "barcode": null,
@@ -19341,7 +19495,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209907"
     },
     {
       "draftId": "DRAFT-8859216739363",
@@ -19352,7 +19507,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216739363",
         "barcode": null,
@@ -19424,7 +19579,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209908"
     },
     {
       "draftId": "DRAFT-8859216755578",
@@ -19435,7 +19591,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216755578",
         "barcode": null,
@@ -19507,7 +19663,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209910"
     },
     {
       "draftId": "DRAFT-GP-FCX400RLABH",
@@ -19518,7 +19675,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FCX400RLABH",
         "barcode": null,
@@ -19611,7 +19768,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209911"
     },
     {
       "draftId": "DRAFT-8859095890773",
@@ -19622,7 +19780,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859095890773",
         "barcode": null,
@@ -19694,7 +19852,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209913"
     },
     {
       "draftId": "DRAFT-8800299642811",
@@ -19705,7 +19864,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8800299642811",
         "barcode": null,
@@ -19786,7 +19945,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209914"
     },
     {
       "draftId": "DRAFT-EF-UA566CTEGWW",
@@ -19797,7 +19957,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-UA566CTEGWW",
         "barcode": null,
@@ -19878,7 +20038,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209916"
     },
     {
       "draftId": "DRAFT-EF-UF956CTEGWW",
@@ -19889,7 +20050,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-UF956CTEGWW",
         "barcode": null,
@@ -19970,7 +20131,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209917"
     },
     {
       "draftId": "DRAFT-GP-TOS938HIAPW",
@@ -19981,7 +20143,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-TOS938HIAPW",
         "barcode": null,
@@ -20074,7 +20236,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209919"
     },
     {
       "draftId": "DRAFT-S-33016170",
@@ -20085,7 +20248,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "S-33016170",
         "barcode": null,
@@ -20185,7 +20348,8 @@
           "evidenceLocator": "ERP Description > No Cable"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209921"
     },
     {
       "draftId": "DRAFT-8859216765355",
@@ -20196,7 +20360,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216765355",
         "barcode": null,
@@ -20281,7 +20445,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209922"
     },
     {
       "draftId": "DRAFT-8859216765379",
@@ -20292,7 +20457,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216765379",
         "barcode": null,
@@ -20377,7 +20542,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209924"
     },
     {
       "draftId": "DRAFT-8859216765386",
@@ -20388,7 +20554,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859216765386",
         "barcode": null,
@@ -20473,7 +20639,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209926"
     },
     {
       "draftId": "DRAFT-8859703433583",
@@ -20484,7 +20651,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433583",
         "barcode": null,
@@ -20569,7 +20736,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209927"
     },
     {
       "draftId": "DRAFT-EF-KS948SNEGWW",
@@ -20580,7 +20748,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS948SNEGWW",
         "barcode": null,
@@ -20673,7 +20841,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209929"
     },
     {
       "draftId": "DRAFT-EF-PF766TMEGWW",
@@ -20684,7 +20853,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PF766TMEGWW",
         "barcode": null,
@@ -20765,7 +20934,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209931"
     },
     {
       "draftId": "DRAFT-EF-QA576CTEGWW",
@@ -20776,7 +20946,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QA576CTEGWW",
         "barcode": null,
@@ -20857,7 +21027,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209932"
     },
     {
       "draftId": "DRAFT-EP-P2900BBEGWW",
@@ -21056,7 +21227,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433354",
         "barcode": null,
@@ -21149,7 +21320,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209934"
     },
     {
       "draftId": "DRAFT-8859703433699",
@@ -21160,7 +21332,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703433699",
         "barcode": null,
@@ -21232,7 +21404,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209936"
     },
     {
       "draftId": "DRAFT-8859703437666",
@@ -21243,7 +21416,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "8859703437666",
         "barcode": null,
@@ -21324,7 +21497,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209937"
     },
     {
       "draftId": "DRAFT-EF-BX930PBEGWW",
@@ -21335,7 +21509,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-BX930PBEGWW",
         "barcode": null,
@@ -21428,7 +21602,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209939"
     },
     {
       "draftId": "DRAFT-EF-EF976CWEGWW",
@@ -21439,7 +21614,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-EF976CWEGWW",
         "barcode": null,
@@ -21520,7 +21695,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209940"
     },
     {
       "draftId": "DRAFT-EF-ES741CMEGWW",
@@ -21531,7 +21707,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES741CMEGWW",
         "barcode": null,
@@ -21612,7 +21788,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209942"
     },
     {
       "draftId": "DRAFT-EF-ES948CLEGWW",
@@ -21623,7 +21800,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ES948CLEGWW",
         "barcode": null,
@@ -21704,7 +21881,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209943"
     },
     {
       "draftId": "DRAFT-EF-KS947SSEGWW",
@@ -21715,7 +21893,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS947SSEGWW",
         "barcode": null,
@@ -21808,7 +21986,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209945"
     },
     {
       "draftId": "DRAFT-EF-KS948SREGWW",
@@ -21819,7 +21998,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS948SREGWW",
         "barcode": null,
@@ -21900,7 +22079,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209946"
     },
     {
       "draftId": "DRAFT-EF-KS948SSEGWW",
@@ -21911,7 +22091,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-KS948SSEGWW",
         "barcode": null,
@@ -22004,7 +22184,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209948"
     },
     {
       "draftId": "DRAFT-EF-PA366CVEGWW",
@@ -22015,7 +22196,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-PA366CVEGWW",
         "barcode": null,
@@ -22096,7 +22277,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209949"
     },
     {
       "draftId": "DRAFT-EF-QF776CTEGWW",
@@ -22107,7 +22289,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-QF776CTEGWW",
         "barcode": null,
@@ -22188,7 +22370,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209951"
     },
     {
       "draftId": "DRAFT-EF-RS942CBEGWW",
@@ -22199,7 +22382,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-RS942CBEGWW",
         "barcode": null,
@@ -22292,7 +22475,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209952"
     },
     {
       "draftId": "DRAFT-EF-SS947CJEGWW",
@@ -22303,7 +22487,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS947CJEGWW",
         "barcode": null,
@@ -22396,7 +22580,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209954"
     },
     {
       "draftId": "DRAFT-EF-SS948CJEGWW",
@@ -22407,7 +22592,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-SS948CJEGWW",
         "barcode": null,
@@ -22500,7 +22685,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209956"
     },
     {
       "draftId": "DRAFT-EF-VF766PJEGWW",
@@ -22511,7 +22697,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-VF766PJEGWW",
         "barcode": null,
@@ -22592,7 +22778,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209957"
     },
     {
       "draftId": "DRAFT-EF-ZF766CTEGWW",
@@ -22603,7 +22790,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "EF-ZF766CTEGWW",
         "barcode": null,
@@ -22684,7 +22871,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209959"
     },
     {
       "draftId": "DRAFT-ET-SNL34SLEGWW",
@@ -22863,7 +23051,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "ET-SOL30SWEGWW-D",
         "barcode": null,
@@ -22919,7 +23107,8 @@
       "salesReadiness": "SALES_READY",
       "salesSummary": "อุปกรณ์เสริม SAMSUNG ([DM] Samsung Galaxy Watch7 Athleisure Band S M - Cream)",
       "enrichedSalesFields": {},
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209961"
     },
     {
       "draftId": "DRAFT-ET-SVL30SWEGWW-D",
@@ -22930,7 +23119,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "ET-SVL30SWEGWW-D",
         "barcode": null,
@@ -23000,7 +23189,8 @@
           "evidenceLocator": "ERP Description > Color"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209962"
     },
     {
       "draftId": "DRAFT-ET-SVL32SBEGWW",
@@ -23151,7 +23341,7 @@
       "suggestedProductTypes": [],
       "classificationStatus": "CONFIRMED_FROM_ERP",
       "draftStatus": "SALES_READY",
-      "publicationStatus": "DRAFT",
+      "publicationStatus": "PUBLISHED",
       "erpSnapshot": {
         "inventoryPn": "GP-FPF966PGABW",
         "barcode": null,
@@ -23244,7 +23434,8 @@
           "status": "VERIFIED_FROM_ERP"
         }
       },
-      "riskLevel": "LOW"
+      "riskLevel": "LOW",
+      "publishedAt": "2026-09-16T15:51:48.209964"
     },
     {
       "draftId": "DRAFT-GP-PWU025WIABW",
@@ -23388,5 +23579,6 @@
     "salesReadyF1Quantity": 733,
     "totalDraftF1Quantity": 1190,
     "f1QuantitySalesReadyCoverage": 61.6
-  }
+  },
+  "lastBatchPublishAt": "2026-09-16T15:51:48.209967"
 }

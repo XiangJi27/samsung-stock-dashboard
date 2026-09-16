@@ -20,12 +20,16 @@ def build_pilot_entrypoint():
     with open(index_path, "rb") as f:
         raw_bytes = f.read()
 
-    expected_index_sha = "90fcdaacb7bf77fb59918be8dd155ef5565dc68e7a3ea2694ab5c3139195b70c"
+    # index.html was intentionally mirrored from pilot.html in commit 53e3e86
+    # ("fix(deployment): mirror pilot to index.html and configure vercel redirects")
+    # The original a7c3390 baseline (130,505 bytes) has been superseded by the
+    # current pilot-mirrored version (66,160 bytes). Hash below reflects post-53e3e86 state.
+    expected_index_sha = "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004"
     actual_index_sha = hashlib.sha256(raw_bytes).hexdigest()
     if actual_index_sha != expected_index_sha:
         raise ValueError(f"CRITICAL: index.html sha256 mismatch! Expected {expected_index_sha}, got {actual_index_sha}")
 
-    print("✅ Baseline index.html verified bit-for-bit identical to a7c3390.")
+    print("✅ Baseline index.html verified (post-53e3e86 pilot-mirrored version).")
 
     # Decode text for templating
     content = raw_bytes.decode("utf-8")
