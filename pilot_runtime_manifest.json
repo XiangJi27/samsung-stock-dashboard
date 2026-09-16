@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "113e062",
+  "packageBuiltFromCommit": "4b3701c",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-16T15:56:34.114408+07:00",
+  "builtAt": "2026-09-16T16:06:03.877864+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,7 +13,7 @@
   "totalFiles": 45,
   "summary": {
     "totalFiles": 45,
-    "totalSizeBytes": 9633631,
+    "totalSizeBytes": 9636841,
     "totalSizeMB": 9.19
   },
   "files": [
@@ -140,8 +140,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 70670,
-      "sha256": "98d2b50cee40870482eb8a3ffb9212a1145b59fb1630a10ba32345a7ecd2dad4",
+      "sizeBytes": 71865,
+      "sha256": "b8690dddc06a01ac77d67672c49872b3e4be4f9c1de152dc7a58480f86568c04",
       "status": "BASELINE_CORE"
     },
     {
@@ -176,8 +176,8 @@
     },
     {
       "file": "assets/js/prototype-stock.js",
-      "sizeBytes": 144374,
-      "sha256": "55dccbb93c48846378db6bcdf5881455c26a2f05211548dcfa5e85a2206ace30",
+      "sizeBytes": 146389,
+      "sha256": "c319f3c2209856c80c3c5e24076b025fd70b75e398fdab82480849b7b140bb75",
       "status": "PILOT_RUNTIME"
     },
     {

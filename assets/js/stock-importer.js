@@ -237,33 +237,47 @@
     );
   }
 
+  // Minimal color allowlist used when window.isKnownColor is not yet available.
+  // Must be kept in sync with KNOWN_COLORS in prototype-stock.js.
+  const IMPORTER_KNOWN_COLORS_LC = new Set([
+    "titanium silverblue", "titanium black", "titanium gray", "titanium white",
+    "cobalt violet", "light violet", "light blue", "blue violet", "pink gold",
+    "pistachio", "graphite", "blueberry", "jetblack", "icyblue",
+    "silver", "white", "black", "gray", "grey", "violet", "lavender",
+    "cream", "pink", "mint", "navy", "coral red", "dark green", "dark blue",
+    "sky blue", "blue", "red", "green", "gold", "yellow", "orange", "beige",
+    "transparent", "clear",
+  ]);
+
+  function isKnownColorImporter(candidate) {
+    if (!candidate) return false;
+    if (typeof window !== "undefined" && typeof window.isKnownColor === "function") {
+      return window.isKnownColor(candidate);
+    }
+    return IMPORTER_KNOWN_COLORS_LC.has(String(candidate).trim().toLowerCase().replace(/\s+/g, " "));
+  }
+
   function extractColorFromDescription(description) {
+    // RULE: Require a SPACE before the hyphen to avoid splitting model codes
+    // (D-Power, HW-T420, Type-C). Candidate must pass isKnownColorImporter — fail-closed.
     const text = String(description || "").trim();
-    if (!text) {
-      return "";
+    if (!text) return "";
+    const spacedHyphenMatch = text.match(/\s+-\s*([A-Za-z][A-Za-z ]*)(\s*\([^)]*\))?\s*$/);
+    if (spacedHyphenMatch) {
+      const candidate = spacedHyphenMatch[1].trim();
+      if (isKnownColorImporter(candidate)) return candidate;
     }
-    const match = text.match(/\s*-\s*([^-]+)\s*$/);
-    if (!match) {
-      return "";
-    }
-    const candidate = match[1].trim();
-    if (
-      !candidate ||
-      /^\d/.test(candidate) ||
-      /^(4G|5G|LTE|WI-?FI)$/i.test(candidate)
-    ) {
-      return "";
-    }
-    return candidate;
+    return "";
   }
 
   function resolveProductColor(item) {
     if (typeof window !== "undefined" && typeof window.resolveProductColor === "function") {
       return window.resolveProductColor(item);
     }
-    const existingColor = String((item && item.color) || "").trim();
-    if (existingColor && existingColor !== "ไม่ระบุสี") {
-      return normalizeColorName(existingColor);
+    // Fallback (offline / before prototype-stock.js loads)
+    const erpColor = String((item && item.color) || "").trim();
+    if (erpColor && erpColor !== "ไม่ระบุสี" && isKnownColorImporter(erpColor)) {
+      return normalizeColorName(erpColor);
     }
     const description = (item && (item.description || item.raw_desc || item.model)) || "";
     return normalizeColorName(extractColorFromDescription(description));

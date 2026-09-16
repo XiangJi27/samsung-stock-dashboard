@@ -98,42 +98,82 @@
       );
     }
 
+    // --- Color Allowlist Guard ---
+    // RULE: A candidate string is only accepted as a color if it is present
+    // in KNOWN_COLORS. This prevents model codes (HW-T420, D-Power, Type-C,
+    // Subwoofer, etc.) from being misinterpreted as color values.
+    function isKnownColor(candidate) {
+      if (!candidate) return false;
+      const normalized = String(candidate).trim().toLowerCase().replace(/\s+/g, " ");
+      return KNOWN_COLORS.some(c => c.toLowerCase() === normalized);
+    }
+
     function extractColorFromDescription(description) {
+      // Only match " - <Color>" with a SPACE before the hyphen to avoid
+      // splitting on hyphens that are part of model codes (D-Power, HW-T420, Type-C).
+      // Candidate must then pass isKnownColor — fail-closed.
       const text = String(description || "").trim();
       if (!text) return "";
-      const match = text.match(/\s*-\s*([^-]+)\s*$/);
-      if (!match) return "";
-      const candidate = match[1].trim();
-      if (!candidate || /^\d/.test(candidate) || /^(5G|4G|LTE|WI-?FI)$/i.test(candidate)) {
-        return "";
+
+      // Primary: " - <candidate>" with mandatory leading whitespace
+      const spacedHyphenMatch = text.match(/\s+-\s*([A-Za-zА-Яа-яก-ฮ][A-Za-z ก-ฮ]*)\s*$/);
+      if (spacedHyphenMatch) {
+        const candidate = spacedHyphenMatch[1].trim();
+        if (isKnownColor(candidate)) return candidate;
       }
-      return candidate;
+      return "";
     }
 
     function extractKnownColor(description) {
+      // Scan entire description for a KNOWN_COLOR token ending the string.
+      // Longer colors are checked first to prefer "Titanium Black" over "Black".
       const text = String(description || "").trim().toLowerCase();
       const sorted = KNOWN_COLORS.slice().sort((a, b) => b.length - a.length);
       for (const color of sorted) {
-        if (text.endsWith(color.toLowerCase())) {
-          return color;
+        const lc = color.toLowerCase();
+        // Must end with the color and be preceded by space or start-of-string
+        const idx = text.lastIndexOf(lc);
+        if (idx !== -1 && idx + lc.length === text.length) {
+          const before = text[idx - 1];
+          if (idx === 0 || before === " " || before === "-") {
+            return color;
+          }
         }
       }
       return "";
     }
 
-    function resolveProductColor(item) {
-      const existing = String((item && item.color) || "").trim();
-      if (existing && existing !== "ไม่ระบุสี") {
-        return normalizeColorName(existing);
+    function resolveProductColor(item, masterRecord) {
+      // Step 1: Master record variant color (highest priority — spec-verified)
+      const masterColor = masterRecord &&
+        masterRecord.productIdentity &&
+        masterRecord.productIdentity.variant &&
+        masterRecord.productIdentity.variant.color;
+      if (masterColor && isKnownColor(masterColor)) {
+        return normalizeColorName(masterColor);
       }
+
+      // Step 2: Explicit ERP color field
+      const erpColor = String((item && item.color) || "").trim();
+      if (erpColor && erpColor !== "ไม่ระบุสี" && isKnownColor(erpColor)) {
+        return normalizeColorName(erpColor);
+      }
+
+      // Step 3: Description parsing — strict allowlist gate
       const description = (item && (item.description || item.raw_desc || item.model)) || "";
       const extracted = extractColorFromDescription(description) || extractKnownColor(description) || "";
-      return normalizeColorName(extracted);
+      if (extracted && isKnownColor(extracted)) {
+        return normalizeColorName(extracted);
+      }
+
+      // Step 4: No known color found — return empty (renders as ไม่ระบุสี)
+      return "";
     }
 
     if (typeof window !== "undefined") {
       window.COLOR_CANONICAL_NAMES = COLOR_CANONICAL_NAMES;
       window.normalizeColorName = normalizeColorName;
+      window.isKnownColor = isKnownColor;
       window.extractColorFromDescription = extractColorFromDescription;
       window.resolveProductColor = resolveProductColor;
     }
