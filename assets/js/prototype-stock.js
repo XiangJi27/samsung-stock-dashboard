@@ -237,7 +237,7 @@
       window.resolveProductColor = resolveProductColor;
     }
 
-    function normalizeColorKey(color) {
+    function normalizeSwatchKey(color) {
       return String(color || "")
         .trim()
         .toLowerCase()
@@ -246,7 +246,7 @@
 
     function getColorHex(colorName) {
       if (!colorName || colorName === "ไม่ระบุสี") return "#64748b";
-      const key = normalizeColorKey(colorName);
+      const key = normalizeSwatchKey(colorName);
       if (COLOR_SWATCHES[key]) return COLOR_SWATCHES[key];
       for (const [k, hex] of Object.entries(COLOR_SWATCHES)) {
         if (key.includes(k) || k.includes(key)) return hex;

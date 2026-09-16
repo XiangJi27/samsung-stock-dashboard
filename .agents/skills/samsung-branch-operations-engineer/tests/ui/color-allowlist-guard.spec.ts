@@ -452,7 +452,7 @@ test.describe('Color Allowlist Guard (Model Code Regression)', () => {
     const cases = [
       { pn: "ET-SBL71MAEGWW", expected: "Camel" },
       { pn: "ET-SBL71MGEGWW", expected: "Olive" },
-      { pn: "ET-SBL71M5EGWW", expected: "Taupe" }
+      { pn: "ET-SBL71MSEGWW", expected: "Taupe" }
     ];
 
     for (const testCase of cases) {
