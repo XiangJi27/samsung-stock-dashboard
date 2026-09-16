@@ -871,6 +871,10 @@ body {
   background-position: 0 0, 0 3px, 3px -3px, -3px 0 !important;
   border-color: #94a3b8 !important;
 }
+.color-swatch.swatch-camel { background: #c19a6b !important; border-color: #d4b28c !important; }
+.color-swatch.swatch-olive { background: #6b7c52 !important; border-color: #839665 !important; }
+.color-swatch.swatch-taupe { background: #8b8589 !important; border-color: #a49ea2 !important; }
+.color-swatch.swatch-violet-shadow { background: #8b7ca8 !important; border-color: #a497be !important; }
 .color-swatch.swatch-default { background: #475569 !important; border-color: #64748b !important; }
 
 .color-name {

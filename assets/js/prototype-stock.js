@@ -39,7 +39,13 @@
       "green": "#10b981",
       "gold": "#eab308",
       "clear": "transparent",
-      "transparent": "transparent"
+      "transparent": "transparent",
+      "camel": "#c19a6b",
+      "olive": "#6b7c52",
+      "taupe": "#8b8589",
+      "violet-shadow": "#8b7ca8",
+      "blue-shadow": "#5c768d",
+      "silver-shadow": "#c5c9ce"
     };
 
     const COLOR_ALIASES = new Map([
@@ -48,20 +54,45 @@
       ["BLUE", "Blue"],
       ["NAVY", "Navy"],
       ["SILVER", "Silver"],
+
       ["GRAY", "Grey"],
       ["GREY", "Grey"],
+
       ["GREEN", "Green"],
       ["RED", "Red"],
       ["PINK", "Pink"],
       ["PURPLE", "Purple"],
+      ["VIOLET", "Violet"],
       ["ORANGE", "Orange"],
       ["YELLOW", "Yellow"],
       ["GOLD", "Gold"],
       ["BEIGE", "Beige"],
       ["BROWN", "Brown"],
+
+      ["CAMEL", "Camel"],
+      ["OLIVE", "Olive"],
+      ["TAUPE", "Taupe"],
+
+      // Transparent case aliases
       ["CLEAR", "Clear"],
       ["TRANSPARENT", "Clear"],
+      ["TRANSPARENCY", "Clear"],
       ["TRANSLUCENT", "Translucent"],
+
+      // Multi-word and joined color aliases
+      ["VIOLET SHADOW", "Violet Shadow"],
+      ["VIOLETSHADOW", "Violet Shadow"],
+      ["BLUE SHADOW", "Blue Shadow"],
+      ["BLUESHADOW", "Blue Shadow"],
+      ["SILVER SHADOW", "Silver Shadow"],
+      ["SILVERSHADOW", "Silver Shadow"],
+
+      ["LIGHT BLUE", "Light Blue"],
+      ["LIGHTBLUE", "Light Blue"],
+
+      ["BLUE VIOLET", "Blue Violet"],
+      ["BLUEVIOLET", "Blue Violet"],
+
       ["TITANIUM SILVERBLUE", "Titanium Silverblue"],
       ["TITANIUM BLACK", "Titanium Black"],
       ["TITANIUM GRAY", "Titanium Gray"],
@@ -69,8 +100,7 @@
       ["TITANIUM WHITE", "Titanium White"],
       ["COBALT VIOLET", "Cobalt Violet"],
       ["LIGHT VIOLET", "Light Violet"],
-      ["LIGHT BLUE", "Light Blue"],
-      ["BLUE VIOLET", "Blue Violet"],
+      ["LIGHTVIOLET", "Light Violet"],
       ["PINK GOLD", "Pink Gold"],
       ["PISTACHIO", "Pistachio"],
       ["GRAPHITE", "Graphite"],
@@ -79,7 +109,6 @@
       ["JET BLACK", "Jet Black"],
       ["ICYBLUE", "Icy Blue"],
       ["ICY BLUE", "Icy Blue"],
-      ["VIOLET", "Violet"],
       ["LAVENDER", "Lavender"],
       ["CREAM", "Cream"],
       ["MINT", "Mint"],
@@ -93,13 +122,22 @@
 
     const COLOR_CANONICAL_NAMES = Object.fromEntries(COLOR_ALIASES);
 
-    function canonicalizeColor(value) {
-      if (!value) return null;
-      const normalized = String(value)
+    function normalizeColorKey(value) {
+      return String(value || "")
         .trim()
         .replace(/\s+/g, " ")
         .toUpperCase();
-      return COLOR_ALIASES.get(normalized) || null;
+    }
+
+    function canonicalizeColor(value) {
+      if (!value) return null;
+      const normalized = normalizeColorKey(value);
+      if (!normalized) return null;
+      return (
+        COLOR_ALIASES.get(normalized) ||
+        COLOR_ALIASES.get(normalized.replace(/\s+/g, "")) ||
+        null
+      );
     }
 
     function isKnownColor(candidate) {
@@ -128,7 +166,7 @@
         // Pattern 1: Parentheses at end, e.g. "10000mAh (Grey)", "(Clear)"
         /\(\s*([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*\)\s*$/,
 
-        // Pattern 2: Spaced hyphen/en-dash/em-dash at end, e.g. "Case - Clear", "Bag - Black"
+        // Pattern 2: Spaced hyphen/en-dash/em-dash at end, e.g. "Case - Clear", "Bag - Black", "Band - Camel"
         /\s+[-–—]\s*([A-Za-zก-ฮ][A-Za-z ก-ฮ]*)\s*$/,
 
         // Pattern 3: Controlled suffix without a space after hyphen, e.g. "S25FE -Navy", "1M- Black"
@@ -190,8 +228,10 @@
       window.COLOR_ALIASES = COLOR_ALIASES;
       window.COLOR_CANONICAL_NAMES = COLOR_CANONICAL_NAMES;
       window.canonicalizeColor = canonicalizeColor;
+      window.normalizeColorKey = normalizeColorKey;
       window.normalizeColorName = normalizeColorName;
       window.formatColorDisplay = formatColorDisplay;
+      window.formatColorLabel = formatColorDisplay;
       window.isKnownColor = isKnownColor;
       window.extractColorFromDescription = extractColorFromDescription;
       window.resolveProductColor = resolveProductColor;

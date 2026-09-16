@@ -356,4 +356,111 @@ test.describe('Color Allowlist Guard (Model Code Regression)', () => {
       row.getByTestId("product-color")
     ).toHaveText(/Grey|สีเทา/);
   });
+
+  // --------------------------------------------------------------------------
+  // Acceptance: Multi-word colors and Transparency aliases resolve correctly
+  // --------------------------------------------------------------------------
+  test('recognizes Transparency, Violet Shadow, Light Blue, Blue Violet, Camel, Olive, Taupe', async ({ page }) => {
+    const url = getTargetUrl();
+    await loginAsAdmin(page);
+    await page.goto(`${url}/#/stock`);
+    await page.waitForSelector('#stockTableBody tr', { state: 'visible', timeout: 15000 });
+
+    const results = await page.evaluate(() => {
+      const resolver = (window as any).resolveProductColor;
+      const formatColor = (window as any).formatColorDisplay || ((c: any) => c === 'Clear' ? 'ใส (Clear)' : (c || 'ไม่ระบุสี'));
+
+      const testCases = [
+        {
+          pn: "EF-CS741CTEGWW",
+          description: "Samsung Galaxy S26FE Clear Magnet Case - Transparency",
+          expectedCanonical: "Clear",
+          expectedDisplay: "ใส (Clear)"
+        },
+        {
+          pn: "EF-CS948CTEGWW",
+          description: "Samsung Galaxy S26Ultra Clear Magnet Case - Transparency",
+          expectedCanonical: "Clear",
+          expectedDisplay: "ใส (Clear)"
+        },
+        {
+          pn: "EF-EF976CVEGWW",
+          description: "Samsung Galaxy Fold8 Ultra Silicone Magnet Case - Violet Shadow",
+          expectedCanonical: "Violet Shadow",
+          expectedDisplay: "Violet Shadow"
+        },
+        {
+          pn: "EF-ES942CLEGWW",
+          description: "Samsung Galaxy S26 Silicone Magnet Case - Lightblue",
+          expectedCanonical: "Light Blue",
+          expectedDisplay: "Light Blue"
+        },
+        {
+          pn: "EF-ES942CVEGWW",
+          description: "Samsung Galaxy S26 Silicone Magnet Case - Blueviolet",
+          expectedCanonical: "Blue Violet",
+          expectedDisplay: "Blue Violet"
+        },
+        {
+          pn: "ET-SBL71MAEGWW",
+          description: "Samsung Galaxy Watch Ultra 2 Peakform Band - Camel",
+          expectedCanonical: "Camel",
+          expectedDisplay: "Camel"
+        },
+        {
+          pn: "ET-SBL71MGEGWW",
+          description: "Samsung Galaxy Watch Ultra 2 Peakform Band - Olive",
+          expectedCanonical: "Olive",
+          expectedDisplay: "Olive"
+        },
+        {
+          pn: "ET-SBL71M5EGWW",
+          description: "Samsung Galaxy Watch Ultra 2 Peakform Band - Taupe",
+          expectedCanonical: "Taupe",
+          expectedDisplay: "Taupe"
+        }
+      ];
+
+      return testCases.map(tc => {
+        const canonical = resolver({ pn: tc.pn, description: tc.description });
+        const display = formatColor(canonical);
+        return {
+          pn: tc.pn,
+          canonical,
+          display,
+          expectedCanonical: tc.expectedCanonical,
+          expectedDisplay: tc.expectedDisplay
+        };
+      });
+    });
+
+    for (const r of results) {
+      expect(r.canonical, `Canonical for ${r.pn}`).toBe(r.expectedCanonical);
+      expect(r.display, `Display for ${r.pn}`).toBe(r.expectedDisplay);
+    }
+  });
+
+  // --------------------------------------------------------------------------
+  // Acceptance: renders Watch Band colors in stock table
+  // --------------------------------------------------------------------------
+  test('renders Watch Band colors in stock table', async ({ page }) => {
+    const url = getTargetUrl();
+    await loginAsAdmin(page);
+    await page.goto(`${url}/#/stock`);
+    await page.waitForSelector('#stockTableBody tr', { state: 'visible', timeout: 15000 });
+
+    const cases = [
+      { pn: "ET-SBL71MAEGWW", expected: "Camel" },
+      { pn: "ET-SBL71MGEGWW", expected: "Olive" },
+      { pn: "ET-SBL71M5EGWW", expected: "Taupe" }
+    ];
+
+    for (const testCase of cases) {
+      const search = page.getByPlaceholder(/ค้นหาสินค้า|ค้นหาด้วยชื่อ|P\/N/i);
+      await search.fill(testCase.pn);
+      const row = page.locator(`tr[data-pn="${testCase.pn}"]`);
+      await expect(row).toBeVisible();
+      await expect(row.getByTestId("product-color")).toContainText(testCase.expected);
+    }
+  });
 });
