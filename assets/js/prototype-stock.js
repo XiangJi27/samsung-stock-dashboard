@@ -2323,6 +2323,94 @@
         `;
       }
 
+      // 0. Dedicated Product Type Template (for Product Accessory Master)
+      if (spec.isAccessoryMaster && spec.displayableSpecs && spec.displayableSpecs.length > 0) {
+        const typeLabels = {
+          BLUETOOTH_SPEAKER: "ลำโพงบลูทูธ (Bluetooth Speaker Specifications)",
+          WALL_CHARGER: "อะแดปเตอร์ชาร์จเร็ว (Wall Charger Specifications)",
+          DATA_CABLE: "สายชาร์จและรับส่งข้อมูล (Data & Charging Cable)",
+          PHONE_CASE: "เคสสมาร์ตโฟน (Phone Case Specifications)",
+          SCREEN_PROTECTOR: "ฟิล์มและกระจกกันรอย (Screen Protector Specifications)",
+          WATCH_BAND: "สายนาฬิกา (Watch Band Specifications)",
+          POWER_BANK: "แบตเตอรี่สำรอง (Power Bank Specifications)",
+          PREMIUM_GIFT: "ของแถมพรีเมียม (Premium Gift Specifications)"
+        };
+
+        const fieldLabels = {
+          outputPower: "กำลังขับเสียง (Output Power)",
+          bluetoothSupport: "การเชื่อมต่อ Bluetooth",
+          bluetoothVersion: "เวอร์ชัน Bluetooth",
+          playTime: "ระยะเวลาใช้งานแบตเตอรี่ (Playtime)",
+          ipRating: "มาตรฐานป้องกันน้ำและฝุ่น (IP Rating)",
+          floating: "การลอยน้ำ",
+          tws: "รองรับ True Wireless Stereo (TWS)",
+          builtInStrap: "สายคล้องในตัว",
+          chargingPort: "พอร์ตสำหรับชาร์จไฟ",
+          dimensions: "ขนาดมิติ",
+          weight: "น้ำหนัก",
+          maximumOutputPower: "กำลังไฟสูงสุด (Max Output Power)",
+          chargerType: "ประเภทหัวชาร์จ (Charger Type)",
+          cableIncluded: "สายชาร์จในกล่อง",
+          outputPorts: "ช่องจ่ายไฟ (Output Ports)",
+          usbPowerDelivery: "มาตรฐาน USB-PD",
+          pps: "มาตรฐาน Programmable Power Supply (PPS)",
+          inputVoltage: "แรงดันไฟขาเข้า (Input Voltage)",
+          outputProfiles: "โพรไฟล์การจ่ายไฟ",
+          connectorA: "หัวเชื่อมต่อด้านที่ 1 (Connector A)",
+          connectorB: "หัวเชื่อมต่อด้านที่ 2 (Connector B)",
+          cableType: "ประเภทสาย (Cable Type)",
+          maximumPower: "กำลังไฟสูงสุดที่รองรับ (Max Wattage)",
+          maximumCurrent: "กระแสไฟสูงสุด (Max Current)",
+          dataTransferSpeed: "ความเร็วรับส่งข้อมูล (Transfer Speed)",
+          length: "ความยาวสาย (Cable Length)",
+          packageQuantity: "จำนวนเส้นต่อแพ็ก",
+          material: "วัสดุที่ใช้ผลิต",
+          eMarkerChip: "ชิป E-Marker ควบคุมกระแสไฟ",
+          videoOutput: "รองรับการส่งสัญญาณภาพ (DisplayPort Alt Mode)",
+          compatibleDevices: "อุปกรณ์ที่รองรับการใช้งาน",
+          compatibleModels: "รุ่นสมาร์ตโฟนที่รองรับ",
+          compatibleSeries: "ซีรีส์ที่รองรับ",
+          caseType: "ประเภทของเคส",
+          wirelessChargingCompatible: "รองรับการชาร์จไร้สาย",
+          magneticCompatible: "รองรับอุปกรณ์แม่เหล็ก / Magnetic",
+          standIncluded: "ขาตั้งในตัว",
+          protectorType: "ประเภทของกระจก/ฟิล์ม",
+          hardness: "ระดับความแข็ง (Hardness Rating)",
+          thickness: "ความหนา",
+          antiFingerprint: "การเคลือบสารลดรอยนิ้วมือ",
+          antiReflection: "การลดแสงสะท้อน",
+          privacyProtection: "ระบบป้องกันการมองเห็นด้านข้าง (Privacy)",
+          installationKitIncluded: "มีชุดช่วยติดตั้งในกล่อง",
+          bandStyle: "สไตล์ของสาย",
+          caseSizeCompatibility: "ขนาดตัวเรือนที่รองรับ",
+          wristSize: "ขนาดข้อมือที่รองรับ",
+          claspType: "ประเภทตัวล็อก",
+          waterResistance: "คุณสมบัติกันน้ำ",
+          accessoryType: "ประเภทของชำร่วย/อุปกรณ์",
+          color: "สี",
+          batteryCapacity: "ความจุแบตเตอรี่",
+          inputPower: "กำลังไฟขาเข้า",
+          ports: "พอร์ตเชื่อมต่อ",
+          wirelessCharging: "การชาร์จไร้สาย",
+          magneticCharging: "การชาร์จแบบแม่เหล็ก",
+          promotionConditions: "เงื่อนไขการรับของแถม"
+        };
+
+        const title = typeLabels[spec.productType] || "คุณสมบัติสินค้าตามประเภท (Product Specifications)";
+        const specMap = {};
+        spec.displayableSpecs.forEach(f => {
+          const label = fieldLabels[f.fieldKey] || f.fieldKey;
+          const val = f.displayValue || (f.value !== null ? String(f.value) : "ยังไม่ได้ยืนยัน");
+          const isVerified = f.status === "VERIFIED" || f.status === "VERIFIED_FROM_ERP";
+          const statusTag = isVerified 
+            ? `<span style="color: #34d399; font-size: 0.72rem; margin-left: 6px;">[ยืนยันแล้ว]</span>` 
+            : `<span style="color: #fbbf24; font-size: 0.72rem; margin-left: 6px;">[ยังไม่ยืนยัน]</span>`;
+          specMap[label] = `${val} ${statusTag}`;
+        });
+
+        html += renderSpecGroup("⚙️", title, specMap);
+      }
+
       // 1. Display
       if (spec.display) {
         html += renderSpecGroup("📱", "หน้าจอแสดงผล (Display)", {

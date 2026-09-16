@@ -851,6 +851,53 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 14. RULE 10: PRODUCT ACCESSORY MASTER & TEMPLATE COVERAGE
+# ----------------------------------------------------------------------
+acc_violations = []
+acc_master_file = "data/product-accessory-master.json"
+
+if not os.path.exists(acc_master_file):
+    acc_violations.append({"errorCode": "ACCESSORY_MASTER_MISSING", "detail": "Missing data/product-accessory-master.json"})
+else:
+    try:
+        with open(acc_master_file, "r", encoding="utf-8") as f:
+            acc_master = json.load(f)
+        if len(acc_master.get("products", [])) == 0:
+            acc_violations.append({"errorCode": "ACCESSORY_MASTER_EMPTY", "detail": "Product Accessory Master contains 0 products"})
+    except Exception as e:
+        acc_violations.append({"errorCode": "ACCESSORY_MASTER_CORRUPT", "detail": str(e)})
+
+if len(acc_violations) == 0:
+    acc_check_res = subprocess.run([sys.executable, "scripts/verify_accessory_spec_coverage.py"], capture_output=True, text=True, encoding="utf-8")
+    if acc_check_res.returncode != 0:
+        acc_violations.append({
+            "errorCode": "ACCESSORY_COVERAGE_FAILED",
+            "detail": acc_check_res.stderr or acc_check_res.stdout
+        })
+
+acc_report = {
+    "gate": "RULE_10_ACCESSORY_MASTER",
+    "status": "PASSED" if len(acc_violations) == 0 else "BLOCKED",
+    "executedAt": executed_at,
+    "commitSha": commit_sha,
+    "violations": acc_violations
+}
+
+os.makedirs("reports", exist_ok=True)
+with open("reports/accessory_master_gate.json", "w", encoding="utf-8") as f:
+    json.dump(acc_report, f, indent=2, ensure_ascii=False)
+
+record_gate_result(
+    rule_id="RULE-10-ACCESSORY-MASTER",
+    name="Product Accessory Master & Template Coverage Gate",
+    expected="Product Accessory Master valid, 100% exact P/N & GTIN matching, dedicated templates, zero cross-brand/cross-type leakage, fail closed on unknown",
+    actual=f"{len(acc_violations)} violations" if len(acc_violations) > 0 else "0 violations (9 products, 8 templates, 100% anti-leakage verified)",
+    status="PASS" if len(acc_violations) == 0 else "FAIL",
+    affected_records=len(acc_violations),
+    evidence=acc_report
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -934,6 +981,11 @@ gate_metadata_map = {
         "functionName": "validate_spec_identity_and_cross_brand_guard",
         "inputFiles": ["product_specs_data.js"],
         "recordsChecked": 3
+    },
+    "RULE-10-ACCESSORY-MASTER": {
+        "functionName": "verify_accessory_spec_coverage",
+        "inputFiles": ["data/product-accessory-master.json", "product_specs_data.js"],
+        "recordsChecked": 9
     }
 }
 

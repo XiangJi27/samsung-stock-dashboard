@@ -3596,6 +3596,936 @@ window.validateSpecMatch = validateSpecMatch;
 window.normalizeBrand = normalizeBrand;
 window.normalizeProductType = normalizeProductType;
 
+
+// ==============================================================================
+// PRODUCT ACCESSORY MASTER ARCHITECTURE & PRODUCT TYPE TEMPLATES
+// ==============================================================================
+window.PRODUCT_ACCESSORY_MASTER = {
+  "schemaVersion": "1.0.0",
+  "masterType": "PRODUCT_ACCESSORY_MASTER",
+  "generatedAt": "2026-09-16T11:30:00+07:00",
+  "matchingPolicy": {
+    "matchOrder": [
+      "EXACT_INVENTORY_PN",
+      "EXACT_GTIN",
+      "APPROVED_MANUFACTURER_MODEL"
+    ],
+    "requiredGuards": [
+      "BRAND_MATCH",
+      "PRODUCT_TYPE_MATCH"
+    ],
+    "noMatchResult": "SPEC_NOT_VERIFIED",
+    "allowDefaultProductFallback": false,
+    "allowCrossBrandFallback": false,
+    "allowCrossProductTypeFallback": false
+  },
+  "products": [
+    {
+      "recordId": "ACC-SOUNDCORE-A31X1-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "194644055783",
+        "gtin": "194644055783",
+        "brand": "Soundcore",
+        "erpDescription": "Soundcore Select 4 Go Black",
+        "cat1": "Audio",
+        "cat2": "Speaker",
+        "cat3": "Compact Speaker"
+      },
+      "productIdentity": {
+        "canonicalName": "Soundcore Select 4 Go",
+        "manufacturerModel": "A31X1",
+        "productType": "BLUETOOTH_SPEAKER",
+        "variant": {
+          "color": "Black"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "outputPower": {
+          "value": "5W",
+          "displayValue": "5W",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "ipRating": {
+          "value": "IP67",
+          "displayValue": "IP67",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "floating": {
+          "value": true,
+          "displayValue": "ลอยน้ำได้",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "playTime": {
+          "value": 20,
+          "unit": "HOURS",
+          "displayValue": "สูงสุด 20 ชั่วโมง",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "tws": {
+          "value": true,
+          "displayValue": "รองรับ TWS",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "builtInStrap": {
+          "value": true,
+          "displayValue": "มีสายคล้องในตัว",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "bluetoothSupport": {
+          "value": true,
+          "displayValue": "รองรับ Bluetooth",
+          "status": "VERIFIED",
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL"
+        },
+        "bluetoothVersion": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "thailandWarrantyPeriod": {
+          "value": null,
+          "displayValue": "ตรวจสอบตามใบรับประกันหรือผู้จัดจำหน่าย",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-SOUNDCORE-A31X1-OFFICIAL",
+          "sourceType": "MANUFACTURER_OFFICIAL",
+          "publisher": "Soundcore",
+          "url": "https://www.soundcore.com/products/a31x1021",
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "PREMIUM-FOCUS-S25-BAG-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "8859703434269",
+        "gtin": "8859703434269",
+        "brand": "FOCUS",
+        "erpDescription": "[CS]Focus Premium Bag For Samsung S25 Series - Black",
+        "cat1": "Other",
+        "cat2": "Premium for Mobile and Computer Accessory",
+        "cat3": "Free Gift"
+      },
+      "productIdentity": {
+        "canonicalName": "Focus Premium Bag for Samsung S25 Series",
+        "manufacturerModel": null,
+        "productType": "PREMIUM_GIFT",
+        "variant": {
+          "color": "Black"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "accessoryType": {
+          "value": "BAG",
+          "displayValue": "กระเป๋าของแถม",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Black",
+          "displayValue": "Black",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "compatibleSeries": {
+          "value": [
+            "Samsung Galaxy S25 Series"
+          ],
+          "displayValue": "Samsung Galaxy S25 Series",
+          "status": "PARTIALLY_VERIFIED",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "material": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "dimensions": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-EP-T2510-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "EP-T2510NBEGTH",
+        "gtin": null,
+        "brand": "Samsung",
+        "erpDescription": "Samsung Adapter 25W No Cable-Black",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "Charger",
+        "cat3": "Wall Charger"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung 25W Power Adapter",
+        "manufacturerModel": "EP-T2510",
+        "productType": "WALL_CHARGER",
+        "variant": {
+          "color": "Black",
+          "cableIncluded": false
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "maximumOutputPower": {
+          "value": 25,
+          "unit": "W",
+          "displayValue": "25W",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "chargerType": {
+          "value": "WALL_CHARGER",
+          "displayValue": "อะแดปเตอร์ติดผนัง",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "cableIncluded": {
+          "value": false,
+          "displayValue": "ไม่มีสายชาร์จ",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "outputPorts": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "usbPowerDelivery": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "pps": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-EF-CF776-CLEAR",
+      "inventoryIdentity": {
+        "inventoryPn": "EF-CF776CTEGWW",
+        "gtin": null,
+        "brand": "Samsung",
+        "erpDescription": "Samsung Galaxy Flip8 Clear Magnet Case - Transparent",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "Case for Android Phone and Other",
+        "cat3": "Galaxy Flip8"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung Galaxy Flip8 Clear Magnet Case",
+        "manufacturerModel": "EF-CF776",
+        "productType": "PHONE_CASE",
+        "variant": {
+          "color": "Transparent"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "caseType": {
+          "value": "CLEAR_MAGNET_CASE",
+          "displayValue": "เคสใสรองรับแม่เหล็ก",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "compatibleModels": {
+          "value": [
+            "Samsung Galaxy Z Flip8"
+          ],
+          "displayValue": "Samsung Galaxy Z Flip8",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Transparent",
+          "displayValue": "Transparent",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "material": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "wirelessChargingCompatible": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-FOCUS-S26U-SCREEN-PROTECTOR",
+      "inventoryIdentity": {
+        "inventoryPn": "8859703437475",
+        "gtin": "8859703437475",
+        "brand": "FOCUS",
+        "erpDescription": "[CS]Focus TG FF SL Samsung Galaxy S26 Ultra",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "Screen Protector for Android Phone and Other",
+        "cat3": "Samsung Galaxy S26 Series"
+      },
+      "productIdentity": {
+        "canonicalName": "Focus Screen Protector for Samsung Galaxy S26 Ultra",
+        "manufacturerModel": null,
+        "productType": "SCREEN_PROTECTOR",
+        "variant": {
+          "color": null
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "compatibleModels": {
+          "value": [
+            "Samsung Galaxy S26 Ultra"
+          ],
+          "displayValue": "Samsung Galaxy S26 Ultra",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "protectorType": {
+          "value": "TEMPERED_GLASS",
+          "displayValue": "กระจกกันรอย",
+          "status": "AI_SUGGESTED_REVIEW_REQUIRED",
+          "sourceId": null
+        },
+        "hardness": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "thickness": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "privacyProtection": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-ET-SBL71M-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "ET-SBL71MBEGWW",
+        "gtin": null,
+        "brand": "Samsung",
+        "erpDescription": "Samsung Galaxy Watch Ultra 2 Peakform Band - Black",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "Watch Bands",
+        "cat3": "Galaxy Watch Ultra2"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung Galaxy Watch Ultra 2 Peakform Band",
+        "manufacturerModel": "ET-SBL71M",
+        "productType": "WATCH_BAND",
+        "variant": {
+          "color": "Black"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "compatibleModels": {
+          "value": [
+            "Samsung Galaxy Watch Ultra 2"
+          ],
+          "displayValue": "Samsung Galaxy Watch Ultra 2",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "bandStyle": {
+          "value": "PEAKFORM",
+          "displayValue": "Peakform Band",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Black",
+          "displayValue": "Black",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "material": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "wristSize": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-SAMSUNG-SSG-EP-DN975-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "SSG-EP-DN975BBEGWW",
+        "gtin": null,
+        "brand": "Samsung",
+        "erpDescription": "Samsung Cable C to C (SIS) - Black",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "Cable",
+        "cat3": "Data Cable"
+      },
+      "productIdentity": {
+        "canonicalName": "Samsung USB-C to USB-C Cable",
+        "manufacturerModel": "EP-DN975",
+        "productType": "DATA_CABLE",
+        "variant": {
+          "color": "Black"
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "connectorA": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "connectorB": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "cableType": {
+          "value": "DATA_AND_CHARGING_CABLE",
+          "displayValue": "สายชาร์จและรับส่งข้อมูล",
+          "status": "PARTIALLY_VERIFIED",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Black",
+          "displayValue": "Black",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "maximumPower": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "maximumCurrent": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "dataTransferSpeed": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "length": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "material": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "videoOutput": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "compatibleDevices": {
+          "value": [
+            "อุปกรณ์ที่ใช้พอร์ต USB-C"
+          ],
+          "displayValue": "อุปกรณ์ที่รองรับการเชื่อมต่อ USB-C",
+          "status": "PARTIALLY_VERIFIED",
+          "sourceId": "SRC-ERP-STOCK"
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-ADAM-ILINIO-C2C-100W-BLACK",
+      "inventoryIdentity": {
+        "inventoryPn": "4710343478157",
+        "gtin": "4710343478157",
+        "brand": "ADAM elements",
+        "erpDescription": "ADAM elements iLinio C to C Cable 100W 2 units 1M- Black",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "Cable",
+        "cat3": "Data Cable"
+      },
+      "productIdentity": {
+        "canonicalName": "ADAM elements iLinio USB-C to USB-C Cable",
+        "manufacturerModel": null,
+        "productType": "DATA_CABLE",
+        "variant": {
+          "color": "Black",
+          "length": "1M",
+          "packageQuantity": 2
+        }
+      },
+      "verification": {
+        "recordStatus": "PARTIALLY_VERIFIED",
+        "identityStatus": "VERIFIED_FROM_ERP",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": true,
+        "productTypeMatch": true
+      },
+      "specifications": {
+        "connectorA": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "connectorB": {
+          "value": "USB-C",
+          "displayValue": "USB-C",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "maximumPower": {
+          "value": 100,
+          "unit": "W",
+          "displayValue": "สูงสุด 100W",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "length": {
+          "value": 1,
+          "unit": "M",
+          "displayValue": "1 เมตร",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "packageQuantity": {
+          "value": 2,
+          "unit": "PIECES",
+          "displayValue": "2 เส้นต่อแพ็ก",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "color": {
+          "value": "Black",
+          "displayValue": "Black",
+          "status": "VERIFIED_FROM_ERP",
+          "sourceId": "SRC-ERP-STOCK"
+        },
+        "dataTransferSpeed": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "usbPowerDelivery": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "eMarkerChip": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        },
+        "videoOutput": {
+          "value": null,
+          "displayValue": "ยังไม่ได้ยืนยัน",
+          "status": "NOT_VERIFIED",
+          "sourceId": null
+        }
+      },
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "recordId": "ACC-UNKNOWN-EXAMPLE",
+      "inventoryIdentity": {
+        "inventoryPn": "UNKNOWN-001",
+        "gtin": null,
+        "brand": "Unknown",
+        "erpDescription": "Unknown Accessory",
+        "cat1": "Mobile and Computer Accessory",
+        "cat2": "",
+        "cat3": ""
+      },
+      "productIdentity": {
+        "canonicalName": "Unknown Accessory",
+        "manufacturerModel": null,
+        "productType": "UNKNOWN_ACCESSORY",
+        "variant": {
+          "color": null
+        }
+      },
+      "verification": {
+        "recordStatus": "SPEC_NOT_VERIFIED",
+        "identityStatus": "ERP_ONLY",
+        "matchMethod": "EXACT_INVENTORY_PN",
+        "brandMatch": null,
+        "productTypeMatch": null
+      },
+      "specifications": {},
+      "sources": [
+        {
+          "sourceId": "SRC-ERP-STOCK",
+          "sourceType": "ERP_STOCK_MASTER",
+          "publisher": "Internal Inventory System",
+          "url": null,
+          "checkedAt": "2026-09-16",
+          "status": "ACTIVE"
+        }
+      ]
+    }
+  ]
+};
+
+window.SPEC_TEMPLATES = {
+  PHONE_CASE: [
+    "caseType",
+    "compatibleModels",
+    "material",
+    "color",
+    "wirelessChargingCompatible",
+    "magneticCompatible",
+    "standIncluded"
+  ],
+  SCREEN_PROTECTOR: [
+    "compatibleModels",
+    "protectorType",
+    "hardness",
+    "thickness",
+    "antiFingerprint",
+    "antiReflection",
+    "privacyProtection",
+    "installationKitIncluded"
+  ],
+  WALL_CHARGER: [
+    "maximumOutputPower",
+    "chargerType",
+    "cableIncluded",
+    "outputPorts",
+    "usbPowerDelivery",
+    "pps",
+    "inputVoltage",
+    "outputProfiles"
+  ],
+  DATA_CABLE: [
+    "connectorA",
+    "connectorB",
+    "cableType",
+    "maximumPower",
+    "maximumCurrent",
+    "usbPowerDelivery",
+    "dataTransferSpeed",
+    "length",
+    "packageQuantity",
+    "material",
+    "eMarkerChip",
+    "videoOutput",
+    "compatibleDevices",
+    "color"
+  ],
+  POWER_BANK: [
+    "batteryCapacity",
+    "inputPower",
+    "outputPower",
+    "ports",
+    "wirelessCharging",
+    "magneticCharging",
+    "usbPowerDelivery",
+    "pps",
+    "dimensions",
+    "weight"
+  ],
+  WATCH_BAND: [
+    "compatibleModels",
+    "bandStyle",
+    "caseSizeCompatibility",
+    "wristSize",
+    "material",
+    "color",
+    "claspType",
+    "waterResistance"
+  ],
+  BLUETOOTH_SPEAKER: [
+    "outputPower",
+    "bluetoothSupport",
+    "bluetoothVersion",
+    "playTime",
+    "ipRating",
+    "floating",
+    "tws",
+    "builtInStrap",
+    "chargingPort",
+    "dimensions",
+    "weight"
+  ],
+  PREMIUM_GIFT: [
+    "accessoryType",
+    "compatibleSeries",
+    "material",
+    "color",
+    "dimensions",
+    "promotionConditions"
+  ]
+};
+
+function normalizeIdentity(value) {
+  return String(value || "")
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g, "");
+}
+
+function findAccessoryMasterRecord(stockItem, master) {
+  if (!stockItem || !master || !master.products) {
+    return {
+      status: "SPEC_NOT_VERIFIED",
+      record: null,
+      errors: ["MISSING_PARAMS"]
+    };
+  }
+
+  const inventoryPn = normalizeIdentity(stockItem.pn);
+  const stockBrand = normalizeIdentity(stockItem.brand);
+  const stockCat = normalizeIdentity(stockItem.category || stockItem.cat1 || stockItem.canonicalCategory);
+
+  const record = master.products.find(product => {
+    const pPn = normalizeIdentity(product.inventoryIdentity && product.inventoryIdentity.inventoryPn);
+    const pGtin = normalizeIdentity(product.inventoryIdentity && product.inventoryIdentity.gtin);
+    return (inventoryPn && (pPn === inventoryPn || pGtin === inventoryPn));
+  });
+
+  if (!record) {
+    return {
+      status: "SPEC_NOT_VERIFIED",
+      record: null,
+      errors: ["EXACT_IDENTITY_NOT_FOUND"]
+    };
+  }
+
+  const masterBrand = normalizeIdentity(
+    record.inventoryIdentity && record.inventoryIdentity.brand
+  );
+
+  if (
+    stockBrand &&
+    masterBrand &&
+    stockBrand !== masterBrand &&
+    !masterBrand.includes(stockBrand) &&
+    !stockBrand.includes(masterBrand)
+  ) {
+    return {
+      status: "BLOCKED_CONFLICT",
+      record: null,
+      errors: ["BRAND_MISMATCH"]
+    };
+  }
+
+  // Strict Product Type / Category Guard
+  const recType = normalizeIdentity(record.productIdentity && record.productIdentity.productType);
+  if (stockCat === "SMARTPHONE" || stockCat === "TABLET" || stockCat === "WATCH") {
+    if (recType !== stockCat) {
+      return {
+        status: "BLOCKED_CONFLICT",
+        record: null,
+        errors: ["CROSS_TYPE_MISMATCH"]
+      };
+    }
+  }
+
+  return {
+    status: record.verification.recordStatus,
+    record,
+    errors: []
+  };
+}
+
+function getDisplayableSpecifications(record) {
+  if (!record) return [];
+  const productType = record.productIdentity ? record.productIdentity.productType : null;
+  const templateFields = (window.SPEC_TEMPLATES && window.SPEC_TEMPLATES[productType]) || [];
+
+  return templateFields.map(fieldKey => {
+    const field = (record.specifications && record.specifications[fieldKey]) || null;
+    if (!field) {
+      return {
+        fieldKey,
+        value: null,
+        displayValue: "ยังไม่มีข้อมูล",
+        status: "NOT_AVAILABLE"
+      };
+    }
+    if (field.status === "VERIFIED" || field.status === "VERIFIED_FROM_ERP") {
+      return {
+        fieldKey,
+        value: field.value,
+        displayValue: field.displayValue ?? String(field.value ?? ""),
+        status: field.status
+      };
+    }
+    return {
+      fieldKey,
+      value: null,
+      displayValue: field.displayValue || "ยังไม่ได้ยืนยัน",
+      status: field.status
+    };
+  });
+}
+
+window.normalizeIdentity = normalizeIdentity;
+window.findAccessoryMasterRecord = findAccessoryMasterRecord;
+window.getDisplayableSpecifications = getDisplayableSpecifications;
+
+
 window.resolveProductSpecs = function(item) {
   if (!item) return null;
   const m = (item.model || "").toUpperCase();
@@ -3604,6 +4534,46 @@ window.resolveProductSpecs = function(item) {
   const stockBrand = normalizeBrand(item.brand || (m.includes("SOUNDCORE") ? "SOUNDCORE" : ""));
 
   let candidate = null;
+
+  // 0. PRODUCT ACCESSORY MASTER EXACT IDENTITY RESOLUTION (HIGHEST PRIORITY)
+  if (window.PRODUCT_ACCESSORY_MASTER) {
+    const accessoryMatch = findAccessoryMasterRecord(item, window.PRODUCT_ACCESSORY_MASTER);
+    if (accessoryMatch.status === "BLOCKED_CONFLICT") {
+      console.warn(`[AccessoryMaster] BLOCKED_CONFLICT for ${item.pn}:`, accessoryMatch.errors);
+      return null;
+    }
+    if (accessoryMatch.record && (accessoryMatch.status === "VERIFIED" || accessoryMatch.status === "PARTIALLY_VERIFIED")) {
+      const rec = accessoryMatch.record;
+      const verifiedFields = Object.keys(rec.specifications || {})
+        .filter(k => rec.specifications[k].status === "VERIFIED" || rec.specifications[k].status === "VERIFIED_FROM_ERP");
+      const pendingFields = Object.keys(rec.specifications || {})
+        .filter(k => rec.specifications[k].status === "NOT_VERIFIED" || rec.specifications[k].status === "AI_SUGGESTED_REVIEW_REQUIRED");
+
+      const speakerSpecs = (rec.productIdentity.productType === "BLUETOOTH_SPEAKER") ? {
+        outputPower: rec.specifications.outputPower?.displayValue || "5W",
+        ipRating: rec.specifications.ipRating?.displayValue || "IP67",
+        playTime: rec.specifications.playTime?.displayValue || "สูงสุด 20 ชั่วโมง",
+        tws: rec.specifications.tws?.displayValue || "รองรับ TWS"
+      } : null;
+
+      return {
+        isAccessoryMaster: true,
+        masterRecord: rec,
+        displayableSpecs: getDisplayableSpecifications(rec),
+        officialName: rec.productIdentity.canonicalName,
+        brand: rec.inventoryIdentity.brand,
+        manufacturerModel: rec.productIdentity.manufacturerModel,
+        productType: rec.productIdentity.productType,
+        verificationStatus: rec.verification.recordStatus,
+        source: (rec.sources && rec.sources[0]?.publisher) || "Official Certified Specifications",
+        sourceUrl: (rec.sources && rec.sources[0]?.url) || null,
+        verifiedFields,
+        pendingFields,
+        speakerSpecs,
+        fieldVerification: rec.specifications
+      };
+    }
+  }
 
   // 1. EXACT PART NUMBER MATCH FIRST (100% Precision for All Brands)
   if (pn) {

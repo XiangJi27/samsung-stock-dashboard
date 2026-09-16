@@ -1,5 +1,5 @@
 {
-  "gate": "RULE_09_SPEC_IDENTITY_GUARD",
+  "gate": "RULE_10_ACCESSORY_MASTER",
   "status": "PASSED",
   "executedAt": "2026-09-16T12:06:22.090413",
   "commitSha": "2540964",

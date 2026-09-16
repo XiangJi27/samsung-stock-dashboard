@@ -60,7 +60,8 @@ def build_pilot_package():
         "assets/js/member-admin-service.js",
         "assets/js/pilot-bootstrap.js",
         "assets/js/pilot-stock-snapshot.js",
-        "reports/promotion_release_manifest.json"
+        "reports/promotion_release_manifest.json",
+        "data/product-accessory-master.json"
     ]
 
     all_pilot_files = baseline_files + pilot_specific_files

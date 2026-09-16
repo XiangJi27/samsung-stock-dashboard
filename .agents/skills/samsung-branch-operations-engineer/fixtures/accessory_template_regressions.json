@@ -1,0 +1,92 @@
+{
+  "description": "Product Type Specification Template Definitions & Verification Requirements",
+  "version": "1.0.0",
+  "templates": {
+    "PHONE_CASE": [
+      "caseType",
+      "compatibleModels",
+      "material",
+      "color",
+      "wirelessChargingCompatible",
+      "magneticCompatible",
+      "standIncluded"
+    ],
+    "SCREEN_PROTECTOR": [
+      "compatibleModels",
+      "protectorType",
+      "hardness",
+      "thickness",
+      "antiFingerprint",
+      "antiReflection",
+      "privacyProtection",
+      "installationKitIncluded"
+    ],
+    "WALL_CHARGER": [
+      "maximumOutputPower",
+      "outputPorts",
+      "usbPowerDelivery",
+      "pps",
+      "inputVoltage",
+      "outputProfiles",
+      "cableIncluded"
+    ],
+    "DATA_CABLE": [
+      "connectorA",
+      "connectorB",
+      "cableType",
+      "maximumPower",
+      "maximumCurrent",
+      "usbPowerDelivery",
+      "dataTransferSpeed",
+      "length",
+      "packageQuantity",
+      "material",
+      "eMarkerChip",
+      "videoOutput",
+      "compatibleDevices",
+      "color"
+    ],
+    "POWER_BANK": [
+      "batteryCapacity",
+      "inputPower",
+      "outputPower",
+      "ports",
+      "wirelessCharging",
+      "magneticCharging",
+      "usbPowerDelivery",
+      "pps",
+      "dimensions",
+      "weight"
+    ],
+    "WATCH_BAND": [
+      "compatibleModels",
+      "caseSizeCompatibility",
+      "wristSize",
+      "material",
+      "color",
+      "claspType",
+      "waterResistance"
+    ],
+    "BLUETOOTH_SPEAKER": [
+      "outputPower",
+      "bluetoothSupport",
+      "bluetoothVersion",
+      "playTime",
+      "ipRating",
+      "floating",
+      "tws",
+      "builtInStrap",
+      "chargingPort",
+      "dimensions",
+      "weight"
+    ],
+    "PREMIUM_GIFT": [
+      "accessoryType",
+      "compatibleSeries",
+      "material",
+      "color",
+      "dimensions",
+      "promotionConditions"
+    ]
+  }
+}

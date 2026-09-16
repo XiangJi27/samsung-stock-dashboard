@@ -1,0 +1,156 @@
+{
+  "description": "Accessory Exact Identity & Anti-Leakage Golden Cases",
+  "version": "1.0.0",
+  "fixtures": [
+    {
+      "inventoryPn": "194644055783",
+      "brand": "Soundcore",
+      "expectedProductType": "BLUETOOTH_SPEAKER",
+      "expectedModel": "A31X1",
+      "expectedVerificationStatus": "PARTIALLY_VERIFIED",
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "WALL_CHARGER",
+        "PHONE_CASE"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "A07 4G",
+        "Helio G85",
+        "Knox Vault",
+        "6.7 นิ้ว"
+      ]
+    },
+    {
+      "inventoryPn": "8859703434269",
+      "brand": "FOCUS",
+      "expectedProductType": "PREMIUM_GIFT",
+      "expectedColor": "Black",
+      "forbiddenCategory": "ACCESSORY",
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "BLUETOOTH_SPEAKER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85"
+      ]
+    },
+    {
+      "inventoryPn": "EP-T2510NBEGTH",
+      "brand": "Samsung",
+      "expectedProductType": "WALL_CHARGER",
+      "expectedPower": "25W",
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "BLUETOOTH_SPEAKER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85",
+        "Knox Vault"
+      ]
+    },
+    {
+      "inventoryPn": "EF-CF776CTEGWW",
+      "brand": "Samsung",
+      "expectedProductType": "PHONE_CASE",
+      "expectedCompatibility": [
+        "Samsung Galaxy Z Flip8"
+      ],
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "WALL_CHARGER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85"
+      ]
+    },
+    {
+      "inventoryPn": "8859703437475",
+      "brand": "FOCUS",
+      "expectedProductType": "SCREEN_PROTECTOR",
+      "expectedCompatibility": [
+        "Samsung Galaxy S26 Ultra"
+      ],
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "BLUETOOTH_SPEAKER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85"
+      ]
+    },
+    {
+      "inventoryPn": "ET-SBL71MBEGWW",
+      "brand": "Samsung",
+      "expectedProductType": "WATCH_BAND",
+      "expectedCompatibility": [
+        "Samsung Galaxy Watch Ultra 2"
+      ],
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "WALL_CHARGER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85"
+      ]
+    },
+    {
+      "inventoryPn": "SSG-EP-DN975BBEGWW",
+      "brand": "Samsung",
+      "expectedProductType": "DATA_CABLE",
+      "expectedConnectorA": "USB-C",
+      "expectedConnectorB": "USB-C",
+      "expectedColor": "Black",
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "WALL_CHARGER",
+        "BLUETOOTH_SPEAKER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85",
+        "Knox Vault"
+      ]
+    },
+    {
+      "inventoryPn": "4710343478157",
+      "brand": "ADAM elements",
+      "expectedProductType": "DATA_CABLE",
+      "expectedMaximumPower": "100W",
+      "expectedLength": "1M",
+      "expectedPackageQuantity": 2,
+      "expectedColor": "Black",
+      "unverifiedFields": [
+        "dataTransferSpeed",
+        "usbPowerDelivery",
+        "eMarkerChip",
+        "videoOutput"
+      ],
+      "forbiddenTemplates": [
+        "SMARTPHONE",
+        "WALL_CHARGER"
+      ],
+      "forbiddenText": [
+        "Galaxy A07",
+        "Helio G85",
+        "Knox Vault"
+      ]
+    },
+    {
+      "inventoryPn": "UNKNOWN-001",
+      "brand": "Unknown",
+      "expectedStatus": "SPEC_NOT_VERIFIED",
+      "expectedDefaultFallback": null,
+      "forbiddenText": [
+        "Galaxy A07",
+        "A07 4G",
+        "Helio G85"
+      ]
+    }
+  ]
+}
