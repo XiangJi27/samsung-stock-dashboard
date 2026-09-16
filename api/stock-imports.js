@@ -175,6 +175,8 @@ module.exports = async function handler(req, res) {
   // ROUTE 2: POST /api/stock-imports/validate -> Validate payload without saving
   if (req.method === 'POST' && subAction === 'validate') {
     const branchCode = String(body.branchCode || 'AYUTTHAYA_CITY_PARK').trim().toUpperCase();
+    if (!(await requireStoreLeader(branchCode))) return;
+
     const sha256 = String(body.sourceFileSha256 || '').trim().toLowerCase();
 
     // Check duplicate file in DB

@@ -38,9 +38,47 @@ module.exports = async function handler(req, res) {
       });
       if (userRes.ok) {
         caller = await userRes.json();
+      } else {
+        return res.status(401).json({
+          code: 'INVALID_ACCESS_TOKEN',
+          requestId,
+          message: 'Access Token ไม่ถูกต้องหรือหมดอายุแล้ว'
+        });
       }
     } catch (e) {
-      console.warn('[ActiveStockAPI] Auth check error, proceeding with anonymous/read-only token:', e.message);
+      console.warn('[ActiveStockAPI] Auth check error:', e.message);
+    }
+
+    // If authenticated, enforce branch scope
+    if (caller && caller.id) {
+      try {
+        const roleRes = await fetch(`${supabaseUrl}/rest/v1/user_roles?user_id=eq.${encodeURIComponent(caller.id)}&select=role,branch_id`, {
+          headers: {
+            'apikey': secretKey || publishableKey,
+            'Authorization': `Bearer ${secretKey || publishableKey}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        if (roleRes.ok) {
+          const roles = await roleRes.json();
+          if (Array.isArray(roles) && roles.length > 0) {
+            const hasBranchAccess = roles.some(r => {
+              const rName = String(r.role || '').toUpperCase();
+              if (rName === 'SYSTEM_ADMIN' || rName === 'ADMIN') return true;
+              return !r.branch_id || String(r.branch_id).toUpperCase() === String(branchCode).toUpperCase();
+            });
+            if (!hasBranchAccess) {
+              return res.status(403).json({
+                code: 'BRANCH_ACCESS_DENIED',
+                requestId,
+                message: 'คุณไม่มีสิทธิ์เข้าถึงข้อมูลสต็อกของสาขานี้'
+              });
+            }
+          }
+        }
+      } catch (roleErr) {
+        console.warn('[ActiveStockAPI] Role verification error:', roleErr.message);
+      }
     }
   }
 
