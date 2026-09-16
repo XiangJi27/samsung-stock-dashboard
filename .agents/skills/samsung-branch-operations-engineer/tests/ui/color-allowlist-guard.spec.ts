@@ -349,7 +349,7 @@ test.describe('Color Allowlist Guard (Model Code Regression)', () => {
     const search = page.getByPlaceholder(/ค้นหาสินค้า|ค้นหาด้วยชื่อ|P\/N/i);
     await search.fill("6902957323888");
 
-    const row = page.locator('[data-pn="6902957323888"]');
+    const row = page.locator('tr[data-pn="6902957323888"]');
     await expect(row).toBeVisible();
 
     await expect(
