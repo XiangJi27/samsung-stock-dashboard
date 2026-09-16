@@ -64,7 +64,7 @@ export function getMemberCredentials(): TestCredentials {
 }
 
 export function getTargetUrl(): string {
-  return process.env.PREVIEW_URL || 'https://samsung-stock-dashboard-5g9hz2byr-xiangji27.vercel.app';
+  return process.env.VERCEL_PREVIEW_URL || process.env.PREVIEW_URL || 'https://samsung-stock-pilot.vercel.app';
 }
 
 export interface PageDiagnostics {
