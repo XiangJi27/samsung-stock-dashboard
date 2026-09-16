@@ -1,14 +1,14 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-16T17:55:06.455842+07:00",
+  "generatedAt": "2026-09-16T19:21:19.665027+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/user-feedback-pilot",
-  "commitSha": "0f15922",
+  "commitSha": "7e2dec2",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7758209,
-    "totalSizeMB": 7.4
+    "totalSizeBytes": 7766092,
+    "totalSizeMB": 7.41
   },
   "files": [
     {
@@ -43,8 +43,8 @@
     },
     {
       "file": "vercel.json",
-      "sizeBytes": 325,
-      "sha256": "cc5ebdb14abd27ad335515562e91408624f3b3d4e3f58b14ed1b41fdb046905c",
+      "sizeBytes": 528,
+      "sha256": "9c2bef81caec602a136c1f76fc4089d7cc63a3a48db65bd40371cf50229ead6b",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -91,8 +91,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 8786,
-      "sha256": "895a3de091f9e1467a9501575d8ed7079cbaab2cdbadd9a33251898bff629b98",
+      "sizeBytes": 11833,
+      "sha256": "7837cd2f06f2fe0c0aa861c548e863f3119f80829d47553f8928e9217e6794e7",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -133,8 +133,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 73285,
-      "sha256": "c6f76c0da29699f1d8a1a3e341e9da7528616394426f8d184a2fb9b2f04501f6",
+      "sizeBytes": 77918,
+      "sha256": "616298a834826db24c23be876e494cb1e9f9db0248cad27af7f41673488718c2",
       "status": "REQUIRED_RUNTIME"
     },
     {

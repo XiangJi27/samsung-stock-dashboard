@@ -1,12 +1,12 @@
 {
   "status": "PASS",
   "tested_url": "https://samsung-stock-pilot.vercel.app",
-  "tested_at": "2026-09-16T09:36:02.426423+00:00",
-  "expected_commit": "1e46704",
-  "live_commit": "1e46704",
+  "tested_at": "2026-09-16T10:58:43.341473+00:00",
+  "expected_commit": "0f15922",
+  "live_commit": "0f15922",
   "expected_environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "live_environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
-  "manifest_url": "https://samsung-stock-pilot.vercel.app/pilot_runtime_manifest.json?live_gate=1789551351086",
+  "manifest_url": "https://samsung-stock-pilot.vercel.app/pilot_runtime_manifest.json?live_gate=1789556312350",
   "manifest_schema_passed": true,
   "manifest_file_count": 45,
   "duplicate_manifest_paths": [],
@@ -19,7 +19,7 @@
   "file_results": [
     {
       "path": "index.html",
-      "url": "https://samsung-stock-pilot.vercel.app/index.html?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/index.html?live_gate=1789556312350",
       "expected_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
       "actual_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
       "expected_size": 68293,
@@ -30,7 +30,7 @@
     },
     {
       "path": "app.js",
-      "url": "https://samsung-stock-pilot.vercel.app/app.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/app.js?live_gate=1789556312350",
       "expected_sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
       "actual_sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
       "expected_size": 182511,
@@ -41,18 +41,18 @@
     },
     {
       "path": "style.css",
-      "url": "https://samsung-stock-pilot.vercel.app/style.css?live_gate=1789551351086",
-      "expected_sha256": "6ea82b189239dc84b45ba07eb025b7d63eb6adb45ac5e82d45823e372fbdfb6a",
-      "actual_sha256": "6ea82b189239dc84b45ba07eb025b7d63eb6adb45ac5e82d45823e372fbdfb6a",
-      "expected_size": 97321,
-      "actual_size": 97321,
+      "url": "https://samsung-stock-pilot.vercel.app/style.css?live_gate=1789556312350",
+      "expected_sha256": "1a3822422fe2dacdbfa551c47cb61b18736c7264eb23f6774e4d789211d307e1",
+      "actual_sha256": "1a3822422fe2dacdbfa551c47cb61b18736c7264eb23f6774e4d789211d307e1",
+      "expected_size": 97721,
+      "actual_size": 97721,
       "http_status": 200,
       "matched": true,
       "error": null
     },
     {
       "path": "stock_data.js",
-      "url": "https://samsung-stock-pilot.vercel.app/stock_data.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/stock_data.js?live_gate=1789556312350",
       "expected_sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
       "actual_sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
       "expected_size": 5423699,
@@ -63,7 +63,7 @@
     },
     {
       "path": "promotion_variants.js",
-      "url": "https://samsung-stock-pilot.vercel.app/promotion_variants.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/promotion_variants.js?live_gate=1789556312350",
       "expected_sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
       "actual_sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
       "expected_size": 1673474,
@@ -74,7 +74,7 @@
     },
     {
       "path": "vercel.json",
-      "url": "https://samsung-stock-pilot.vercel.app/vercel.json?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/vercel.json?live_gate=1789556312350",
       "expected_sha256": "2432bee30fcf7e0ff213b1fa3a5e08cfb1066205e2653fb64a40795d3e51e630",
       "actual_sha256": "2432bee30fcf7e0ff213b1fa3a5e08cfb1066205e2653fb64a40795d3e51e630",
       "expected_size": 324,
@@ -85,7 +85,7 @@
     },
     {
       "path": "assets/css/shell.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/shell.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/shell.css?live_gate=1789556312350",
       "expected_sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
       "actual_sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
       "expected_size": 5284,
@@ -96,7 +96,7 @@
     },
     {
       "path": "assets/css/login.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/login.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/login.css?live_gate=1789556312350",
       "expected_sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
       "actual_sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
       "expected_size": 4773,
@@ -107,7 +107,7 @@
     },
     {
       "path": "assets/css/navigation.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/navigation.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/navigation.css?live_gate=1789556312350",
       "expected_sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
       "actual_sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
       "expected_size": 2981,
@@ -118,7 +118,7 @@
     },
     {
       "path": "assets/css/home.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/home.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/home.css?live_gate=1789556312350",
       "expected_sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
       "actual_sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
       "expected_size": 9028,
@@ -129,7 +129,7 @@
     },
     {
       "path": "assets/css/responsive.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/responsive.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/responsive.css?live_gate=1789556312350",
       "expected_sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
       "actual_sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
       "expected_size": 2341,
@@ -140,7 +140,7 @@
     },
     {
       "path": "assets/js/config.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/config.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/config.js?live_gate=1789556312350",
       "expected_sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
       "actual_sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
       "expected_size": 1427,
@@ -151,7 +151,7 @@
     },
     {
       "path": "assets/js/auth.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth.js?live_gate=1789556312350",
       "expected_sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
       "actual_sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
       "expected_size": 3227,
@@ -162,7 +162,7 @@
     },
     {
       "path": "assets/js/data-loader.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-loader.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-loader.js?live_gate=1789556312350",
       "expected_sha256": "895a3de091f9e1467a9501575d8ed7079cbaab2cdbadd9a33251898bff629b98",
       "actual_sha256": "895a3de091f9e1467a9501575d8ed7079cbaab2cdbadd9a33251898bff629b98",
       "expected_size": 8786,
@@ -173,7 +173,7 @@
     },
     {
       "path": "assets/js/data-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-service.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/data-service.js?live_gate=1789556312350",
       "expected_sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
       "actual_sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
       "expected_size": 17719,
@@ -184,7 +184,7 @@
     },
     {
       "path": "assets/js/router.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/router.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/router.js?live_gate=1789556312350",
       "expected_sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
       "actual_sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
       "expected_size": 7105,
@@ -195,7 +195,7 @@
     },
     {
       "path": "assets/js/navigation.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/navigation.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/navigation.js?live_gate=1789556312350",
       "expected_sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
       "actual_sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
       "expected_size": 2913,
@@ -206,7 +206,7 @@
     },
     {
       "path": "assets/js/home.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/home.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/home.js?live_gate=1789556312350",
       "expected_sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
       "actual_sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
       "expected_size": 17231,
@@ -217,7 +217,7 @@
     },
     {
       "path": "assets/js/modules.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/modules.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/modules.js?live_gate=1789556312350",
       "expected_sha256": "d581b36c2cffe2e6bb91ad6438b295977d7fdd78bcef46ad2b90a7603c404125",
       "actual_sha256": "d581b36c2cffe2e6bb91ad6438b295977d7fdd78bcef46ad2b90a7603c404125",
       "expected_size": 17517,
@@ -228,7 +228,7 @@
     },
     {
       "path": "assets/css/importer.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/importer.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/importer.css?live_gate=1789556312350",
       "expected_sha256": "8a1c422a4c5518873fc31a7001c58c7ea16b7ac8e9c0b098035f07e99235fb30",
       "actual_sha256": "8a1c422a4c5518873fc31a7001c58c7ea16b7ac8e9c0b098035f07e99235fb30",
       "expected_size": 14879,
@@ -239,18 +239,18 @@
     },
     {
       "path": "assets/js/stock-importer.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/stock-importer.js?live_gate=1789551351086",
-      "expected_sha256": "37efd3a44ece4710f6439cafe25b18083b46af5973887bd9590151559b237629",
-      "actual_sha256": "37efd3a44ece4710f6439cafe25b18083b46af5973887bd9590151559b237629",
-      "expected_size": 72643,
-      "actual_size": 72643,
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/stock-importer.js?live_gate=1789556312350",
+      "expected_sha256": "c6f76c0da29699f1d8a1a3e341e9da7528616394426f8d184a2fb9b2f04501f6",
+      "actual_sha256": "c6f76c0da29699f1d8a1a3e341e9da7528616394426f8d184a2fb9b2f04501f6",
+      "expected_size": 73285,
+      "actual_size": 73285,
       "http_status": 200,
       "matched": true,
       "error": null
     },
     {
       "path": "assets/js/promotion-importer.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/promotion-importer.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/promotion-importer.js?live_gate=1789556312350",
       "expected_sha256": "6c1e07e7ba982318f90344e7b6b54d86d97bf8e3e4caace017615ff941ab8d41",
       "actual_sha256": "6c1e07e7ba982318f90344e7b6b54d86d97bf8e3e4caace017615ff941ab8d41",
       "expected_size": 104923,
@@ -261,7 +261,7 @@
     },
     {
       "path": "assets/js/sheet-sync.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/sheet-sync.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/sheet-sync.js?live_gate=1789556312350",
       "expected_sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
       "actual_sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
       "expected_size": 20900,
@@ -272,7 +272,7 @@
     },
     {
       "path": "pilot.html",
-      "url": "https://samsung-stock-pilot.vercel.app/pilot.html?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/pilot.html?live_gate=1789556312350",
       "expected_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
       "actual_sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
       "expected_size": 68293,
@@ -283,7 +283,7 @@
     },
     {
       "path": "api/admin/members.js",
-      "url": "https://samsung-stock-pilot.vercel.app/api/admin/members.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/api/admin/members.js?live_gate=1789556312350",
       "expected_sha256": "3087f2f3ce09a5121b76e0e1947acb93b8e11a1b7b02828c9b7b59161f498a7c",
       "actual_sha256": "3087f2f3ce09a5121b76e0e1947acb93b8e11a1b7b02828c9b7b59161f498a7c",
       "expected_size": 31473,
@@ -294,7 +294,7 @@
     },
     {
       "path": "assets/css/prototype-stock.css",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/css/prototype-stock.css?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/css/prototype-stock.css?live_gate=1789556312350",
       "expected_sha256": "7ea6e5e3a3421f91ebe80ce0ca21bf91a1e41e5d616b719457344909fdd5c457",
       "actual_sha256": "7ea6e5e3a3421f91ebe80ce0ca21bf91a1e41e5d616b719457344909fdd5c457",
       "expected_size": 28490,
@@ -305,18 +305,18 @@
     },
     {
       "path": "assets/js/prototype-stock.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/prototype-stock.js?live_gate=1789551351086",
-      "expected_sha256": "7b31b9d891542b5339b641739506b843635f1c67cc15814321bbf095a744fc8a",
-      "actual_sha256": "7b31b9d891542b5339b641739506b843635f1c67cc15814321bbf095a744fc8a",
-      "expected_size": 147439,
-      "actual_size": 147439,
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/prototype-stock.js?live_gate=1789556312350",
+      "expected_sha256": "cd56ffdac17ff02f05ee7de8e2b9858de12ebe0803f1664da64e5246891a775b",
+      "actual_sha256": "cd56ffdac17ff02f05ee7de8e2b9858de12ebe0803f1664da64e5246891a775b",
+      "expected_size": 148544,
+      "actual_size": 148544,
       "http_status": 200,
       "matched": true,
       "error": null
     },
     {
       "path": "product_specs_data.js",
-      "url": "https://samsung-stock-pilot.vercel.app/product_specs_data.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/product_specs_data.js?live_gate=1789556312350",
       "expected_sha256": "2031c330552807997dc9286dd2b40a734c7aaf4de9cfef99ae1e10cf2d157e93",
       "actual_sha256": "2031c330552807997dc9286dd2b40a734c7aaf4de9cfef99ae1e10cf2d157e93",
       "expected_size": 750108,
@@ -327,7 +327,7 @@
     },
     {
       "path": "assets/js/pilot-runtime-config.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-runtime-config.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-runtime-config.js?live_gate=1789556312350",
       "expected_sha256": "ef0833dd6e856a5d2dd8e05c22e4900b73fc615aba43b8a50e18c0e889769a53",
       "actual_sha256": "ef0833dd6e856a5d2dd8e05c22e4900b73fc615aba43b8a50e18c0e889769a53",
       "expected_size": 1276,
@@ -338,7 +338,7 @@
     },
     {
       "path": "assets/js/supabase-client.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/supabase-client.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/supabase-client.js?live_gate=1789556312350",
       "expected_sha256": "392a08912350690b90641c78c256a3e6eece39f7bea8ac8d1c022de85bcdce69",
       "actual_sha256": "392a08912350690b90641c78c256a3e6eece39f7bea8ac8d1c022de85bcdce69",
       "expected_size": 1917,
@@ -349,7 +349,7 @@
     },
     {
       "path": "assets/js/auth-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-service.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-service.js?live_gate=1789556312350",
       "expected_sha256": "980c725ad5b6d72c8e7a5f7932eb693b661d01717ad8cbe451a17cba47aba51c",
       "actual_sha256": "980c725ad5b6d72c8e7a5f7932eb693b661d01717ad8cbe451a17cba47aba51c",
       "expected_size": 5484,
@@ -360,7 +360,7 @@
     },
     {
       "path": "assets/js/permission-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/permission-service.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/permission-service.js?live_gate=1789556312350",
       "expected_sha256": "e1c913bc0712d1029014a480c9c0cb19695cd791074de05af54a9714cfb3086d",
       "actual_sha256": "e1c913bc0712d1029014a480c9c0cb19695cd791074de05af54a9714cfb3086d",
       "expected_size": 1979,
@@ -371,7 +371,7 @@
     },
     {
       "path": "assets/js/session-guard.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/session-guard.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/session-guard.js?live_gate=1789556312350",
       "expected_sha256": "2478369d3250caf399b148a0518918be4caf125d42c9083de979f66cb78c8f8f",
       "actual_sha256": "2478369d3250caf399b148a0518918be4caf125d42c9083de979f66cb78c8f8f",
       "expected_size": 3560,
@@ -382,7 +382,7 @@
     },
     {
       "path": "assets/js/issue-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-service.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-service.js?live_gate=1789556312350",
       "expected_sha256": "63d9616bbf811b09352aba3081e78cf343cfc02a195f3356c3a3ae1b0380f002",
       "actual_sha256": "63d9616bbf811b09352aba3081e78cf343cfc02a195f3356c3a3ae1b0380f002",
       "expected_size": 4273,
@@ -393,7 +393,7 @@
     },
     {
       "path": "assets/js/auth-modal.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-modal.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/auth-modal.js?live_gate=1789556312350",
       "expected_sha256": "961605f657f928f3bbea6aaf634e60fb78483a73fda0c19fc9e6d1990e74444f",
       "actual_sha256": "961605f657f928f3bbea6aaf634e60fb78483a73fda0c19fc9e6d1990e74444f",
       "expected_size": 5037,
@@ -404,7 +404,7 @@
     },
     {
       "path": "assets/js/user-status-bar.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/user-status-bar.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/user-status-bar.js?live_gate=1789556312350",
       "expected_sha256": "a2efe935f2f39b2d8a6f6ac450f3cef5430b0c737ba4732193656571a2e04b75",
       "actual_sha256": "a2efe935f2f39b2d8a6f6ac450f3cef5430b0c737ba4732193656571a2e04b75",
       "expected_size": 3984,
@@ -415,7 +415,7 @@
     },
     {
       "path": "assets/js/issue-report-modal.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-report-modal.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-report-modal.js?live_gate=1789556312350",
       "expected_sha256": "4d4a7ad5450310c3fe42538a94d0f28638fe512848ab19c14b938141726caff8",
       "actual_sha256": "4d4a7ad5450310c3fe42538a94d0f28638fe512848ab19c14b938141726caff8",
       "expected_size": 12592,
@@ -426,7 +426,7 @@
     },
     {
       "path": "assets/js/issue-list.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-list.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/issue-list.js?live_gate=1789556312350",
       "expected_sha256": "338e309d4311fd75c8cbfa5e5a43c21cf3560972b3949b6df10524d141b88893",
       "actual_sha256": "338e309d4311fd75c8cbfa5e5a43c21cf3560972b3949b6df10524d141b88893",
       "expected_size": 19343,
@@ -437,7 +437,7 @@
     },
     {
       "path": "assets/js/pilot-navigation.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-navigation.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-navigation.js?live_gate=1789556312350",
       "expected_sha256": "7791fff071229bea7aa2017c898ff26621628eee72f5d1ba2b7a7338e07f1b5e",
       "actual_sha256": "7791fff071229bea7aa2017c898ff26621628eee72f5d1ba2b7a7338e07f1b5e",
       "expected_size": 3608,
@@ -448,7 +448,7 @@
     },
     {
       "path": "assets/js/pilot-dashboard-widgets.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-dashboard-widgets.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-dashboard-widgets.js?live_gate=1789556312350",
       "expected_sha256": "21d545286debf5c3e639c77d9bb351b810d96d379fbff593adb2958413d1a186",
       "actual_sha256": "21d545286debf5c3e639c77d9bb351b810d96d379fbff593adb2958413d1a186",
       "expected_size": 18484,
@@ -459,7 +459,7 @@
     },
     {
       "path": "assets/js/member-admin-service.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/member-admin-service.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/member-admin-service.js?live_gate=1789556312350",
       "expected_sha256": "7ebdb6f2c2400c57b13f4e5787c37ffa160e44f26d729c8c01972b95f26c38dd",
       "actual_sha256": "7ebdb6f2c2400c57b13f4e5787c37ffa160e44f26d729c8c01972b95f26c38dd",
       "expected_size": 49881,
@@ -470,7 +470,7 @@
     },
     {
       "path": "assets/js/pilot-bootstrap.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-bootstrap.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-bootstrap.js?live_gate=1789556312350",
       "expected_sha256": "bdfa2b97ce5c19952969027e331d620985498a2b60c2aa990a311b6e626cb167",
       "actual_sha256": "bdfa2b97ce5c19952969027e331d620985498a2b60c2aa990a311b6e626cb167",
       "expected_size": 21019,
@@ -481,7 +481,7 @@
     },
     {
       "path": "assets/js/pilot-stock-snapshot.js",
-      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-stock-snapshot.js?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/assets/js/pilot-stock-snapshot.js?live_gate=1789556312350",
       "expected_sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
       "actual_sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
       "expected_size": 235179,
@@ -492,7 +492,7 @@
     },
     {
       "path": "reports/promotion_release_manifest.json",
-      "url": "https://samsung-stock-pilot.vercel.app/reports/promotion_release_manifest.json?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/reports/promotion_release_manifest.json?live_gate=1789556312350",
       "expected_sha256": "ef14e7f0609303dddba673dd4ad3bd43c5bfa7d5a47befce3da7da2d5ba8dea0",
       "actual_sha256": "ef14e7f0609303dddba673dd4ad3bd43c5bfa7d5a47befce3da7da2d5ba8dea0",
       "expected_size": 1324,
@@ -503,7 +503,7 @@
     },
     {
       "path": "data/product-accessory-master.json",
-      "url": "https://samsung-stock-pilot.vercel.app/data/product-accessory-master.json?live_gate=1789551351086",
+      "url": "https://samsung-stock-pilot.vercel.app/data/product-accessory-master.json?live_gate=1789556312350",
       "expected_sha256": "5b752fb2bdf5b376f6fbbff26315a33ee20a8bfac7362096a2d01e17526a51e0",
       "actual_sha256": "5b752fb2bdf5b376f6fbbff26315a33ee20a8bfac7362096a2d01e17526a51e0",
       "expected_size": 465661,
@@ -526,5 +526,5 @@
     "error": null
   },
   "violations": [],
-  "duration_seconds": 11.341
+  "duration_seconds": 11.004
 }

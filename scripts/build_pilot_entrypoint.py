@@ -38,6 +38,26 @@ def build_pilot_entrypoint():
     pilot_title = "<title>SAMSUNG Stock & Promotion Dashboard [FEEDBACK PILOT] - Ayutthaya City Park</title>"
     content = content.replace("<title>SAMSUNG Stock & Promotion Dashboard - Copperwired Branch</title>", pilot_title)
 
+    # Central Database Banner Injection for Stock Import View
+    target_pos = content.find("MANUAL_EXCEL_SNAPSHOT")
+    if target_pos != -1:
+        start_div = content.rfind('<div class="local-store-banner">', 0, target_pos)
+        end_div = content.find('</div>', target_pos) + 6
+        if start_div != -1 and end_div > start_div:
+            central_banner = """<div class="local-store-banner central-db-banner" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(15, 23, 42, 0.75);">
+              <div class="local-store-banner-left">
+                <span class="local-store-icon">🌐</span>
+                <div>
+                  <strong class="local-store-tag" style="color: #38bdf8;">CENTRAL_DATABASE</strong>
+                  <span class="local-store-desc">ข้อมูล Stock Snapshot จัดเก็บในฐานข้อมูลกลาง (Supabase PostgreSQL) • ทุกอุปกรณ์ซิงค์ชุดข้อมูลเดียวกัน</span>
+                </div>
+              </div>
+              <span class="local-store-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">Update Method: NIMBUS_EXCEL_DATABASE_SNAPSHOT</span>
+            </div>"""
+            if "\r\n" in content:
+                central_banner = central_banner.replace("\n", "\r\n")
+            content = content[:start_div] + central_banner + content[end_div:]
+
     pilot_scripts = """
   <!-- Official Supabase JS SDK CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

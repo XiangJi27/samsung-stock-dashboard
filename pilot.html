@@ -656,15 +656,15 @@
         <section id="view-stock-import" class="app-view" data-pilot-route="/stock-import" hidden>
           <div class="importer-container">
             <!-- Local Storage Banner -->
-            <div class="local-store-banner">
+            <div class="local-store-banner central-db-banner" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(15, 23, 42, 0.75);">
               <div class="local-store-banner-left">
-                <span class="local-store-icon">⚠️</span>
+                <span class="local-store-icon">🌐</span>
                 <div>
-                  <strong class="local-store-tag">LOCAL_BROWSER_ONLY</strong>
-                  <span class="local-store-desc">ข้อมูล Stock Snapshot จัดเก็บใน IndexedDB ของเครื่องนี้เท่านั้น ยังไม่ได้เชื่อมต่อ API Nimbus หรือฐานข้อมูลกลาง</span>
+                  <strong class="local-store-tag" style="color: #38bdf8;">CENTRAL_DATABASE</strong>
+                  <span class="local-store-desc">ข้อมูล Stock Snapshot จัดเก็บในฐานข้อมูลกลาง (Supabase PostgreSQL) • ทุกอุปกรณ์ซิงค์ชุดข้อมูลเดียวกัน</span>
                 </div>
               </div>
-              <span class="local-store-badge">Update Method: MANUAL_EXCEL_SNAPSHOT</span>
+              <span class="local-store-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">Update Method: NIMBUS_EXCEL_DATABASE_SNAPSHOT</span>
             </div>
 
             <!-- Importer Header Card -->

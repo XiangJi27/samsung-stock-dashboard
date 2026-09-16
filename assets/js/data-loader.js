@@ -88,9 +88,67 @@
           await this._loadScript("stock_data.js");
           await this._loadScript("promotion_variants.js");
 
-          // Stock Provider Hierarchy: 1. Confirmed IndexedDB Snapshot -> 2. StaticDataProvider -> 3. DATA_UNAVAILABLE
+          // Stock Provider Hierarchy: 1. Central Database (/api/stock/active) -> 2. IndexedDB Offline Cache -> 3. StaticDataProvider
           let snapshotLoaded = false;
-          if (window.StockStorageAdapter && typeof window.StockStorageAdapter.getActiveSnapshot === "function") {
+
+          // Step 1: Query Central Database Active Batch
+          try {
+            const client = window.SupabaseAdapter?.getClient();
+            let token = null;
+            if (client) {
+              const { data } = await client.auth.getSession();
+              token = data?.session?.access_token;
+            }
+            const headers = { 'Cache-Control': 'no-store' };
+            if (token) headers['Authorization'] = `Bearer ${token}`;
+
+            const response = await fetch('/api/stock/active?branch_code=AYUTTHAYA_CITY_PARK', {
+              headers,
+              cache: 'no-store'
+            });
+
+            if (response.ok) {
+              const centralData = await response.json();
+              if (centralData && Array.isArray(centralData.items) && centralData.items.length > 0) {
+                window.STOCK_DATABASE = centralData.items;
+                window.STOCK_DATA = centralData.items;
+                window.STOCK_METADATA = {
+                  stockBatchId: centralData.batchId,
+                  importBatchId: centralData.batchId,
+                  sourceType: "Nimbus Excel Database Snapshot",
+                  sourceFile: centralData.sourceFileName,
+                  sourceFilename: centralData.sourceFileName,
+                  sourceFileHash: centralData.sourceFileSha256,
+                  importedAt: centralData.importedAt,
+                  activatedAt: centralData.activatedAt,
+                  storageScope: 'CENTRAL_DATABASE',
+                  storageMode: 'NIMBUS_EXCEL_DATABASE_SNAPSHOT',
+                  recordCount: centralData.summary.totalRows,
+                  uniquePn: centralData.summary.totalRows,
+                  f1Total: centralData.summary.f1Total,
+                  f2Total: centralData.summary.f2Total,
+                  grandTotal: centralData.summary.totalQuantity || (centralData.summary.f1Total + centralData.summary.f2Total)
+                };
+                window.STOCK_SNAPSHOT_STATUS = "CENTRAL_DATABASE";
+                snapshotLoaded = true;
+                console.info("[DataLoaderGate] Successfully loaded active stock snapshot from Central Database:", centralData.batchId);
+
+                // Cache active snapshot in IndexedDB for offline resilience
+                if (window.StockStorageAdapter && typeof window.StockStorageAdapter.saveBatch === "function") {
+                  window.StockStorageAdapter.saveBatch({
+                    batchId: centralData.batchId,
+                    data: centralData.items,
+                    meta: window.STOCK_METADATA
+                  }).catch(e => console.warn("[DataLoaderGate] Failed to cache snapshot in IndexedDB:", e));
+                }
+              }
+            }
+          } catch (netErr) {
+            console.warn("[DataLoaderGate] Central database unavailable, falling back to local offline cache:", netErr.message);
+          }
+
+          // Step 2: Fallback to local IndexedDB if Central Database was unreachable or returned 404
+          if (!snapshotLoaded && window.StockStorageAdapter && typeof window.StockStorageAdapter.getActiveSnapshot === "function") {
             try {
               const localSnapshot = await window.StockStorageAdapter.getActiveSnapshot();
               if (localSnapshot) {
@@ -103,14 +161,13 @@
                   if (localSnapshot.meta) {
                     window.STOCK_METADATA = localSnapshot.meta;
                   }
-                  window.STOCK_SNAPSHOT_STATUS = "CONFIRMED_LOCAL_SNAPSHOT";
+                  window.STOCK_SNAPSHOT_STATUS = localSnapshot.meta?.storageScope === 'CENTRAL_DATABASE' ? "CENTRAL_DATABASE_OFFLINE_CACHE" : "CONFIRMED_LOCAL_SNAPSHOT";
                   snapshotLoaded = true;
-                  console.info("[DataLoaderGate] Restored validated active stock snapshot from IndexedDB (LOCAL_BROWSER_ONLY):", localSnapshot.batchId);
+                  console.info("[DataLoaderGate] Restored validated stock snapshot from IndexedDB cache:", localSnapshot.batchId);
                 } else {
                   console.warn("[DataLoaderGate] Snapshot in IndexedDB failed validation. Falling back to static dataset:", validation.reason);
                   window.STOCK_SNAPSHOT_STATUS = "LOCAL_SNAPSHOT_INVALID";
                   window.STOCK_SNAPSHOT_ERROR = validation.reason;
-                  // Strict Safety: NEVER use partial corrupt data; keep static dataset from stock_data.js intact
                 }
               }
             } catch (e) {
@@ -118,6 +175,9 @@
               window.STOCK_SNAPSHOT_STATUS = "LOCAL_SNAPSHOT_INVALID";
               window.STOCK_SNAPSHOT_ERROR = e.message;
             }
+          }
+
+          // Step 3: Fallback to pilot static baseline
           if (!snapshotLoaded) {
             if (window.PILOT_MODE === true && window.LATEST_STOCK_SNAPSHOT) {
               window.STOCK_DATABASE = window.LATEST_STOCK_SNAPSHOT;

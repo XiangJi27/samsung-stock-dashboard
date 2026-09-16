@@ -41,6 +41,7 @@ scratch/
 __pycache__/
 *.pyc
 .pilot-deploy/
+deploy_preview/
 *.xlsx
 
 .vercel

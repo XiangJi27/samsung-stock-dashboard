@@ -60,6 +60,8 @@ def build_pilot_package():
         "assets/js/member-admin-service.js",
         "assets/js/pilot-bootstrap.js",
         "assets/js/pilot-stock-snapshot.js",
+        "api/stock-imports.js",
+        "api/stock/active.js",
         "reports/promotion_release_manifest.json",
         "data/product-accessory-master.json"
     ]

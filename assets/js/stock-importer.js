@@ -1223,17 +1223,120 @@
       const btnConfirm = document.getElementById('btnConfirmStockImport');
       if (btnConfirm) {
         btnConfirm.disabled = true;
-        btnConfirm.innerHTML = '<span>⏳ กำลังบันทึก Snapshot...</span>';
+        btnConfirm.innerHTML = '<span>⏳ กำลังส่งข้อมูลไปยังฐานข้อมูลกลาง...</span>';
       }
 
       try {
+        let isCentralSaved = false;
+        let centralBatchId = b.batchId;
+
+        // 1. Attempt Server API Import (Central Database Mode)
+        try {
+          const client = window.SupabaseAdapter?.getClient();
+          let token = null;
+          if (client) {
+            const { data } = await client.auth.getSession();
+            token = data?.session?.access_token;
+          }
+
+          if (token) {
+            const expectedPrevId = (window.STOCK_METADATA?.stockBatchId && !String(window.STOCK_METADATA.stockBatchId).startsWith('STOCK-INITIAL'))
+              ? window.STOCK_METADATA.stockBatchId
+              : null;
+
+            const importPayload = {
+              branchCode: 'AYUTTHAYA_CITY_PARK',
+              sourceFileName: b.sourceFilename,
+              sourceFileSha256: b.fileHash,
+              expectedPreviousBatchId: expectedPrevId,
+              summary: {
+                totalRows: b.stats.totalProducts,
+                f1Total: b.stats.f1Total,
+                f2Total: b.stats.f2Total,
+                totalQuantity: b.stats.grandTotal
+              },
+              items: b.mergedResult.items.map(it => ({
+                inventoryPn: it.pn,
+                barcode: it.barcode || null,
+                description: it.description,
+                brand: it.brand || null,
+                category: it.category || null,
+                cat1: it.cat1 || null,
+                cat2: it.cat2 || null,
+                cat3: it.cat3 || null,
+                color: it.color || null,
+                erpRrp: it.price || it.rrp || null,
+                f1: it.f1,
+                f2: it.f2,
+                total: it.f1 + it.f2,
+                sourceRows: it.sourceRows || {}
+              }))
+            };
+
+            // Post Draft
+            const draftRes = await fetch('/api/stock-imports', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(importPayload)
+            });
+
+            if (draftRes.status === 409) {
+              const dupJson = await draftRes.json().catch(() => ({}));
+              throw new Error(`ไฟล์นี้เคยถูกนำเข้าแล้วในระบบ (Batch: ${dupJson.existingBatchId || 'N/A'})`);
+            }
+
+            if (!draftRes.ok) {
+              const errJson = await draftRes.json().catch(() => ({}));
+              throw new Error(`สร้าง Draft ไม่สำเร็จ: ${errJson.message || draftRes.statusText}`);
+            }
+
+            const draftData = await draftRes.json();
+            centralBatchId = draftData.batchId;
+
+            // Post Activate
+            if (btnConfirm) btnConfirm.innerHTML = '<span>⏳ กำลังเปิดใช้งาน Snapshot (Atomic Activation)...</span>';
+            const actRes = await fetch(`/api/stock-imports/${centralBatchId}/activate`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                branchCode: 'AYUTTHAYA_CITY_PARK',
+                expectedPreviousBatchId: expectedPrevId
+              })
+            });
+
+            if (!actRes.ok) {
+              const actErr = await actRes.json().catch(() => ({}));
+              throw new Error(`เปิดใช้งาน Batch ไม่สำเร็จ: ${actErr.message || actRes.statusText}`);
+            }
+
+            isCentralSaved = true;
+            console.info('[StockImporter] Successfully created and activated batch in Central Database:', centralBatchId);
+          }
+        } catch (apiErr) {
+          console.warn('[StockImporter] Central server import encountered issue:', apiErr.message);
+          if (apiErr.message.includes('เคยถูกนำเข้าแล้ว') || apiErr.message.includes('EXPECTED_BATCH_MISMATCH')) {
+            throw apiErr; // Hard stop for integrity constraints
+          }
+          // Fallback to local storage if network is unreachable
+        }
+
+        const effectiveBatchId = isCentralSaved ? centralBatchId : b.batchId;
+        const storageScope = isCentralSaved ? 'CENTRAL_DATABASE' : 'LOCAL_BROWSER_ONLY';
+        const storageMode = isCentralSaved ? 'NIMBUS_EXCEL_DATABASE_SNAPSHOT' : 'LOCAL_BROWSER_ONLY';
+
         const batchRecord = {
-          batchId: b.batchId,
+          batchId: effectiveBatchId,
           data: b.mergedResult.items,
           meta: {
-            stockBatchId: b.batchId,
-            importBatchId: b.batchId,
-            batchId: b.batchId,
+            stockBatchId: effectiveBatchId,
+            importBatchId: effectiveBatchId,
+            batchId: effectiveBatchId,
             importedAt: b.importedAt,
             sourceFilename: b.sourceFilename,
             sourceFileHash: b.fileHash,
@@ -1243,12 +1346,12 @@
             f1Total: b.stats.f1Total,
             f2Total: b.stats.f2Total,
             grandTotal: b.stats.grandTotal,
-            storageScope: 'LOCAL_BROWSER_ONLY',
+            storageScope: storageScope,
+            storageMode: storageMode,
             schemaVersion: '2.0.0',
             applicationVersion: '20260907-b2',
             stats: b.stats,
-            storageMode: 'LOCAL_BROWSER_ONLY',
-            status: 'IMPORTED'
+            status: 'ACTIVE'
           }
         };
 
@@ -1268,11 +1371,10 @@
             newItem.registrationStatus = stagedDiff.registrationStatus || 'PENDING_PRODUCT_REVIEW';
             newItem.isApprovedMaster = false;
             newItem.riskFlags = stagedDiff.riskFlags || [];
-            newItem.discoveredBatchId = b.batchId;
+            newItem.discoveredBatchId = effectiveBatchId;
             newItem.discoveredAt = b.importedAt;
             newItem.sourceFilename = b.sourceFilename;
             newItem.sourceFileHash = b.fileHash;
-            console.info(`[AutoCatalog] Auto-registered product draft into system database: ${newItem.pn} (${newItem.model || newItem.description}) [Status: ${newItem.registrationStatus}]`);
           } else {
             const existing = currentStockDb.find(it => it.pn === newItem.pn);
             newItem.registrationStatus = (existing && existing.registrationStatus) || 'APPROVED_MASTER';
@@ -1298,7 +1400,7 @@
         batchRecord.data = combinedMaster;
         batchRecord.meta.autoRegisteredNewItemsCount = newItemsRegistered;
 
-        // Save to IndexedDB
+        // Save to IndexedDB (as Primary or Offline Cache)
         await StockStorageAdapter.saveBatch(batchRecord);
 
         // Update in-memory databases with complete catalog
@@ -1310,9 +1412,9 @@
         const coreF2 = coreItems.reduce((acc, it) => acc + it.f2, 0);
 
         window.STOCK_METADATA = {
-          stockBatchId: b.batchId,
-          importBatchId: b.batchId,
-          sourceType: "Manual Excel Snapshot",
+          stockBatchId: effectiveBatchId,
+          importBatchId: effectiveBatchId,
+          sourceType: isCentralSaved ? "Nimbus Excel Database Snapshot" : "Manual Excel Snapshot",
           sourceFile: b.sourceFilename,
           sourceFilename: b.sourceFilename,
           sourceFileHash: b.fileHash,
@@ -1330,11 +1432,12 @@
             total: coreF1 + coreF2
           },
           importedInventoryTotal: b.stats.grandTotal,
-          storageScope: 'LOCAL_BROWSER_ONLY',
-          storageMode: 'LOCAL_BROWSER_ONLY',
+          storageScope: storageScope,
+          storageMode: storageMode,
           schemaVersion: '2.0.0',
           applicationVersion: '20260907-b2'
         };
+        window.STOCK_SNAPSHOT_STATUS = isCentralSaved ? "CENTRAL_DATABASE" : "CONFIRMED_LOCAL_SNAPSHOT";
 
         // If DataService exists, update it as well
         if (window.DataService && typeof window.DataService.setStockData === 'function') {
@@ -1346,20 +1449,22 @@
           window.syncMasterStockData();
         }
 
-        // Update Last Sync / Snapshot label in top header (Never use new Date() on refresh)
         const importTimeFormatted = b.importedAt ? b.importedAt.replace('T', ' ').substring(0, 19) : '2026-09-11 13:31:00';
         const lastSyncLabel = document.getElementById('lastSyncTime');
         if (lastSyncLabel) {
           lastSyncLabel.textContent = `Excel Snapshot (${importTimeFormatted})`;
         }
 
-        // Truthful local disclosure dialog
-        alert(`✓ นำเข้า Stock Snapshot ในเบราว์เซอร์นี้แล้ว\n\n` +
-              `• Batch ID: ${b.batchId}\n` +
-              `• สถานะการบันทึก: LOCAL_BROWSER_ONLY (IndexedDB)\n` +
+        // Truthful disclosure dialog
+        const storageNotice = isCentralSaved
+          ? `• สถานะการบันทึก: CENTRAL_DATABASE (Supabase PostgreSQL)\n• เผยแพร่ไปยังทุกอุปกรณ์ที่ใช้งานพร้อมกันเรียบร้อยแล้ว`
+          : `• สถานะการบันทึก: LOCAL_BROWSER_ONLY (IndexedDB Offline Cache)\n• ข้อมูลถูกจัดเก็บในเครื่องนี้ (ยังไม่ได้เชื่อมต่อฐานข้อมูลกลาง)`;
+
+        alert(`✓ นำเข้า Stock Snapshot สำเร็จ\n\n` +
+              `• Batch ID: ${effectiveBatchId}\n` +
+              `${storageNotice}\n` +
               `• เครื่องหลักรวม (Core Devices): ${(coreF1 + coreF2).toLocaleString()} เครื่อง (ช1: ${coreF1} | ช2: ${coreF2})\n` +
-              `• ยอดคงเหลือรวมทุกหมวด: ${b.stats.grandTotal.toLocaleString()} รายการ (${b.stats.totalProducts} SKUs)\n\n` +
-              `ระบบได้อัปเดตหน้า Dashboard ในเบราว์เซอร์นี้เรียบร้อยแล้ว (ยังไม่มีการกระจายไปยังอุปกรณ์อื่นอัตโนมัติ)`);
+              `• ยอดคงเหลือรวมทุกหมวด: ${b.stats.grandTotal.toLocaleString()} รายการ (${b.stats.totalProducts} SKUs)`);
 
         // Navigate to Stock View
         if (window.AppRouter) {

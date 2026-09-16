@@ -2,25 +2,25 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "0f15922",
+  "packageBuiltFromCommit": "7e2dec2",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-16T17:55:06.933236+07:00",
+  "builtAt": "2026-09-16T19:21:31.864297+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
   "primaryUseCase": "STOCK_LOOKUP",
-  "totalFiles": 45,
+  "totalFiles": 47,
   "summary": {
-    "totalFiles": 45,
-    "totalSizeBytes": 9641850,
-    "totalSizeMB": 9.2
+    "totalFiles": 47,
+    "totalSizeBytes": 9670336,
+    "totalSizeMB": 9.22
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 68293,
-      "sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
+      "sizeBytes": 68498,
+      "sha256": "ba250c2fa0b2c9d2ac9acf9ca4257377ceec14706dca64e0171cebcf0cd34816",
       "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
@@ -98,8 +98,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 8786,
-      "sha256": "895a3de091f9e1467a9501575d8ed7079cbaab2cdbadd9a33251898bff629b98",
+      "sizeBytes": 11833,
+      "sha256": "7837cd2f06f2fe0c0aa861c548e863f3119f80829d47553f8928e9217e6794e7",
       "status": "BASELINE_CORE"
     },
     {
@@ -140,8 +140,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 73285,
-      "sha256": "c6f76c0da29699f1d8a1a3e341e9da7528616394426f8d184a2fb9b2f04501f6",
+      "sizeBytes": 77918,
+      "sha256": "616298a834826db24c23be876e494cb1e9f9db0248cad27af7f41673488718c2",
       "status": "BASELINE_CORE"
     },
     {
@@ -158,8 +158,8 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 68293,
-      "sha256": "d6ede9bedc6a2f3d656ab793102af668f623cabe680a9337da536af9123c85de",
+      "sizeBytes": 68498,
+      "sha256": "ba250c2fa0b2c9d2ac9acf9ca4257377ceec14706dca64e0171cebcf0cd34816",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -274,6 +274,18 @@
       "file": "assets/js/pilot-stock-snapshot.js",
       "sizeBytes": 235179,
       "sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/stock-imports.js",
+      "sizeBytes": 14545,
+      "sha256": "8a32f34912a37fe655d524639c4b3955d8eaa74a58eb118ab074de5df8ab9413",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/stock/active.js",
+      "sizeBytes": 5851,
+      "sha256": "94d2f130ded6fde1b4c143b7f4d82394a98da5ae4c3fe52c9788721eae4563f2",
       "status": "PILOT_RUNTIME"
     },
     {
