@@ -182,8 +182,10 @@ samsung-branch-operations-engineer/
 │   ├── stock_rules.md
 │   ├── category_rules.md
 │   ├── spec_verification_rules.md
+│   ├── accessory_spec_rules.md
 │   ├── member_admin_rules.md
-│   └── release_governance.md
+│   ├── release_governance.md
+│   └── post_pilot_governance_and_field_evidence.md
 ├── fixtures/
 │   ├── stock_snapshot_acceptance.json
 │   ├── category_regressions.json
@@ -221,5 +223,5 @@ Before completing any engineering task or declaring a release candidate ready:
 - [ ] Confirmed unknown items fail closed (`SPEC_NOT_VERIFIED`) with zero Galaxy A07 fallback.
 - [ ] Scanned repository for zero plaintext credentials in source code or tests.
 - [ ] Passed `PRE_DEPLOY_STATIC_GATE` (`scripts/pre_deploy_gate.ps1`) $\longrightarrow$ `READY_FOR_PREVIEW_DEPLOYMENT`.
-- [ ] Deployed pilot package to preview environment.
-- [ ] Passed `POST_DEPLOY_LIVE_GATE` (`scripts/post_deploy_gate.ps1`) with all 5 Playwright specs $\longrightarrow$ `READY_FOR_INTERNAL_PILOT`.
+- [ ] Passed `POST_DEPLOY_LIVE_GATE` (`scripts/post_deploy_gate.ps1`) with 5-stage automated gate (100% SHA-256 live file match, Accessory Master integrity, and 11 Playwright UI specs) $\longrightarrow$ `READY_FOR_INTERNAL_PILOT`.
+- [ ] Confirmed compliance with Post-Pilot Governance & Field Evidence Protocol (`references/post_pilot_governance_and_field_evidence.md`) $\longrightarrow$ `PRODUCTION = HOLD`.
