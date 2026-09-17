@@ -285,6 +285,18 @@
         });
       }
 
+      // 5. Unknown Coupon Review Guard (Fail-Closed: never inherit rules from 01 or 02)
+      const cCode = String(rawRow.couponCode || '').trim();
+      const knownCoupons = ['คูปอง 01', 'COUPON_01', 'คูปอง 02', 'COUPON_02', 'Studentcrd', 'T-UP-CO-S'];
+      if (cCode && !knownCoupons.includes(cCode)) {
+        issues.push({
+          code: 'UNKNOWN_COUPON',
+          severity: 'REVIEW_REQUIRED',
+          field: 'couponCode',
+          message: `พบคูปองใหม่ [${cCode}] ที่ยังไม่มีในสารบบ ห้ามนำกฎคูปอง 01 หรือ 02 มาใช้แทนโดยพลการ ต้องให้ผู้จัดการตรวจ`
+        });
+      }
+
       return {
         isValid: issues.filter(i => i.severity === 'BLOCKER').length === 0,
         needsReview: issues.some(i => i.severity === 'REVIEW_REQUIRED'),

@@ -55,6 +55,17 @@ module.exports = async function handler(req, res) {
 
     const activeCampaign = campaigns[0];
 
+    // Expiry Automation Gate: Never display campaign past end_at
+    if (activeCampaign.end_at && new Date(activeCampaign.end_at).getTime() < Date.now()) {
+      return res.status(200).json({
+        status: 'EXPIRED',
+        branchCode,
+        campaign: null,
+        offers: [],
+        message: `Campaign ${activeCampaign.campaign_code} has expired (end_at: ${activeCampaign.end_at})`
+      });
+    }
+
     // 2. Fetch active offers for active campaign
     const offersRes = await queryPostgrest(
       `promotion_offers?campaign_id=eq.${encodeURIComponent(activeCampaign.id)}&status=eq.ACTIVE&order=priority.asc`

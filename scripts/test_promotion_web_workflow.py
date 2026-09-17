@@ -19,8 +19,11 @@ def run_web_workflow_test():
     print("SAMSUNG BRANCH OPERATIONS - PROMOTION WEB WORKFLOW E2E TEST (6 ROUNDS)")
     print("======================================================================\n")
 
-    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    target_url = f"file:///{os.path.join(root_dir, 'promotion_review_dashboard.html').replace('\\', '/')}"
+    if len(sys.argv) > 1 and sys.argv[1].startswith("http"):
+        target_url = sys.argv[1]
+    else:
+        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        target_url = f"file:///{os.path.join(root_dir, 'promotion_review_dashboard.html').replace('\\', '/')}"
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)

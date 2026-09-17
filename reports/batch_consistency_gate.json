@@ -4,8 +4,8 @@
   "executed": true,
   "executionMode": "LIVE_DATA_VALIDATION",
   "status": "PASSED",
-  "executedAt": "2026-09-17T16:34:15.247665",
-  "commitSha": "37ea294",
+  "executedAt": "2026-09-17T16:57:08.586212",
+  "commitSha": "d433762",
   "verifiedInputs": {
     "stockBatchId": "IMPORT-20260906-002",
     "promotionBatchId": "BATCH-20260907-105441",
@@ -29,5 +29,5 @@
   },
   "violationCount": 0,
   "violations": [],
-  "generatedAt": "2026-09-17T16:34:15.247665"
+  "generatedAt": "2026-09-17T16:57:08.586212"
 }
