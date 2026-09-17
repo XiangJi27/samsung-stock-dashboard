@@ -260,6 +260,7 @@ module.exports = async function handler(req, res) {
     }
 
     // 1. Attempt Atomic Transaction via PostgreSQL RPC: create_promotion_draft_batch
+    let rpcErrorDetail = null;
     try {
       const rpcRes = await queryPostgrest('rpc/create_promotion_draft_batch', {
         method: 'POST',
@@ -291,16 +292,30 @@ module.exports = async function handler(req, res) {
           summary: body.summary || {},
           message: 'บันทึก Promotion Draft สำเร็จแบบ Atomic Transaction ผ่าน PostgreSQL RPC'
         });
+      } else {
+        const errJson = await rpcRes.json().catch(() => ({}));
+        rpcErrorDetail = errJson.message || `HTTP_${rpcRes.status}`;
       }
     } catch (rpcErr) {
-      console.warn('[PromotionImportAPI] RPC unavailable, using REST with compensation:', rpcErr.message);
+      rpcErrorDetail = rpcErr.message;
+      console.warn('[PromotionImportAPI] RPC unavailable or failed:', rpcErr.message);
+    }
+
+    // Fail-Closed Policy: Disallow non-atomic REST fallback unless explicitly permitted via environment
+    const allowNonAtomicFallback = process.env.PROMOTION_ALLOW_NON_ATOMIC_FALLBACK === 'true';
+    if (!allowNonAtomicFallback) {
+      return res.status(503).json({
+        error: 'PROMOTION_DRAFT_RPC_UNAVAILABLE',
+        message: 'Atomic Database RPC (create_promotion_draft_batch) ไม่พร้อมใช้งาน และระบบเปิดโหมด Fail-Closed ปิดการบันทึกแบบ Non-Atomic REST Fallback เพื่อป้องกันข้อมูลค้างครึ่งชุด',
+        detail: rpcErrorDetail
+      });
     }
 
     let newBatchId = null;
     let campaignId = null;
 
     try {
-      // 1. Insert promotion_import_batches (REST fallback)
+      // 1. Insert promotion_import_batches (REST fallback - Non-Atomic)
       const batchPayload = {
         branch_code: branchCode,
         source_file_name: fileName,

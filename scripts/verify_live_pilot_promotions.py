@@ -184,17 +184,22 @@ async def verify_live_promotions():
         assert int(kpi_passed_after) == 25
         print(f"  KPI Passed After Confirm: {kpi_passed_after}", flush=True)
 
-        # Test Database Preview Modal (5 groups)
+        # Test Database Preview Modal (5 groups + Summary Metrics)
         await page.click("#btnPreviewPromoDatabase")
         await page.wait_for_timeout(300)
         preview_text = await page.inner_text("#promoDbPreviewContent")
+        assert "Source Rows Passed" in preview_text
+        assert "Target P/N Confirmed" in preview_text
+        assert "Database Offer Records" in preview_text
+        assert "Stacking Rules" in preview_text
+        assert "Validation Errors (Total)" in preview_text
         assert "promotion_import_batches" in preview_text
         assert "promotion_campaigns" in preview_text
         assert "promotion_offers" in preview_text
         assert "promotion_stacking_rules" in preview_text
         assert "promotion_validation_errors" in preview_text
         assert "Galaxy S26 Ultra" in preview_text
-        print("  ✓ [CHECKLIST 10a PASS] Database Preview opened with all 5 groups verified", flush=True)
+        print("  ✓ [CHECKLIST 10a PASS] Database Preview opened with Summary Metrics & all 5 groups verified", flush=True)
         await page.click("#btnClosePromoDbPreview")
         await page.wait_for_timeout(300)
 

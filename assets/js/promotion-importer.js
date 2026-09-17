@@ -1396,9 +1396,21 @@
       const reviewItems = (b.variants || []).filter(v => v.validationStatus === 'REVIEW_REQUIRED');
       const blockedItems = (b.variants || []).filter(v => v.validationStatus && v.validationStatus.startsWith('BLOCKED'));
 
-      let totalExpandedOffers = 0;
-      passedItems.forEach(item => {
-        totalExpandedOffers += (item.confirmedPns && item.confirmedPns.length > 0 ? item.confirmedPns.length : 1);
+      // Calculate distinct Target P/Ns and actual planned Offer records from the real payload construction
+      const distinctTargetPns = new Set();
+      const plannedOfferRecords = [];
+      passedItems.forEach((item, idx) => {
+        const targetPns = (item.confirmedPns && item.confirmedPns.length > 0) ? item.confirmedPns : (item.pn ? [item.pn] : []);
+        targetPns.forEach((pn, pIdx) => {
+          distinctTargetPns.add(pn);
+          plannedOfferRecords.push({
+            inventoryPn: pn,
+            model: item.model,
+            capacity: item.capacity,
+            promotionType: item.saleMode === 'TRADE_UP' ? 'TRADE_UP_CONDITIONAL' : (item.coupon === 'Studentcrd' ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
+            sourceRow: item.sourceTrace?.row || idx + 1
+          });
+        });
       });
 
       const campaignCode = `SEP2026-RETAIL-MOBILE`;
@@ -1410,8 +1422,8 @@
           <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Import Batch</span><br/><strong style="color: #38bdf8; font-size: 1.15rem;">1</strong></div>
           <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Campaign</span><br/><strong style="color: #fbbf24; font-size: 1.15rem;">1</strong></div>
           <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Source Rows Passed</span><br/><strong style="color: #4ade80; font-size: 1.15rem;">${passedItems.length}</strong></div>
-          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Target P/N Confirmed</span><br/><strong style="color: #60a5fa; font-size: 1.15rem;">${totalExpandedOffers}</strong></div>
-          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Database Offer Records</span><br/><strong style="color: #38bdf8; font-size: 1.15rem;">${totalExpandedOffers}</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Target P/N Confirmed</span><br/><strong style="color: #60a5fa; font-size: 1.15rem;">${distinctTargetPns.size}</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Database Offer Records</span><br/><strong style="color: #38bdf8; font-size: 1.15rem;">${plannedOfferRecords.length}</strong></div>
           <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Stacking Rules</span><br/><strong style="color: #c084fc; font-size: 1.15rem;">3</strong></div>
           <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Validation Errors (Total)</span><br/><strong style="color: #f87171; font-size: 1.15rem;">${reviewItems.length + blockedItems.length}</strong> <span style="font-size: 0.7rem; color: #94a3b8;">(Review: ${reviewItems.length} | Blocked: ${blockedItems.length})</span></div>
         </div>
@@ -1579,6 +1591,8 @@
         btnModalSave.textContent = '⏳ กำลังบันทึก...';
       }
 
+      this.updateStorageBanner('SAVING_TO_DATABASE');
+
       try {
         let token = '';
         if (window.AuthService && typeof window.AuthService.getSession === 'function') {
@@ -1686,6 +1700,7 @@
         alert(`💾 บันทึกแบบร่างโปรโมชั่นลงฐานข้อมูลกลางสำเร็จ!\n\n` +
           `• Batch ID: ${result.batchId}\n` +
           `• Campaign ID: ${result.campaignId}\n` +
+          `• Transaction: ${result.transactionType || 'ATOMIC_DATABASE_RPC'}\n` +
           `• สถานะแคมเปญ: DRAFT (ยังไม่ถูก Activate สู่หน้าร้าน)\n` +
           `• จำนวน Offers ที่บันทึก: ${result.offerCount} รายการ\n` +
           `• จำนวน Blockers: 0 รายการ\n` +
@@ -1693,7 +1708,8 @@
           `ขั้นตอนต่อไป: ส่งให้ Store Leader ตรวจสอบและอนุมัติในหน้า Review Dashboard`);
       } catch (err) {
         console.error('[Save Database Draft Error]', err);
-        alert(`เกิดข้อผิดพลาดในการบันทึกแบบร่างลงฐานข้อมูล:\n${err.message}`);
+        this.updateStorageBanner('LOCAL_BROWSER_ONLY', 'SAVE_FAILED', { error: err.message });
+        alert(`เกิดข้อผิดพลาดในการบันทึกแบบร่างลงฐานข้อมูล (PROMOTION_DRAFT_SAVE_FAILED):\n${err.message}\n\nสถานะ: LOCAL_BROWSER_ONLY (ไม่มีการสร้างแบบร่างตกค้างในฐานข้อมูล)`);
       } finally {
         if (btnSave && (!b.databaseBatchId)) {
           btnSave.disabled = false;
@@ -1716,7 +1732,22 @@
 
       if (!banner) return;
 
-      if (scope === 'CENTRAL_DATABASE') {
+      if (scope === 'SAVING_TO_DATABASE') {
+        if (icon) icon.textContent = '⏳';
+        if (tag) {
+          tag.textContent = 'SAVING TO DATABASE...';
+          tag.style.color = '#fbbf24';
+        }
+        if (desc) {
+          desc.innerHTML = `<span style="color: #fbbf24;">กำลังบันทึก Draft ลงฐานข้อมูลกลางแบบ Atomic Database Transaction (ห้ามปิดหน้าจอ)...</span>`;
+        }
+        if (badge) {
+          badge.textContent = 'Storage: SAVING_TO_DATABASE';
+          badge.style.background = 'rgba(251, 191, 36, 0.2)';
+          badge.style.color = '#fbbf24';
+          badge.style.border = '1px solid #fbbf24';
+        }
+      } else if (scope === 'CENTRAL_DATABASE') {
         if (icon) icon.textContent = '🗄️';
         if (tag) {
           tag.textContent = 'PROMOTION DATABASE DRAFT';
@@ -1724,8 +1755,8 @@
         }
         if (desc) {
           desc.innerHTML = `
-            บันทึกร่างแคมเปญลงฐานข้อมูลกลางเรียบร้อย &bull; Batch: <code>${details?.batchId || '-'}</code> | Campaign: <code>${details?.campaignId || '-'}</code><br/>
-            <span style="color: #cbd5e1;">Offers: <strong>${details?.offerCount || 25}</strong> รายการ | Blocker: <strong>0</strong> | Held/Review: <strong>${details?.reviewRequiredCount || 2}</strong> (เช่น S26 Ultra 1TB)</span>
+            บันทึกร่างแคมเปญลงฐานข้อมูลกลางเรียบร้อย &bull; Batch: <code>${details?.batchId || '-'}</code> | Campaign: <code>${details?.campaignId || '-'}</code> | Transaction: <code>${details?.transactionType || 'ATOMIC_DATABASE_RPC'}</code><br/>
+            <span style="color: #cbd5e1;">Offers: <strong>${details?.offerCount ?? '-'}</strong> รายการ | Blocker: <strong>0</strong> | Held/Review: <strong>${details?.reviewRequiredCount ?? '-'}</strong> (เช่น S26 Ultra 1TB)</span>
           `;
         }
         if (badge) {
@@ -1733,6 +1764,21 @@
           badge.style.background = 'rgba(56, 189, 248, 0.2)';
           badge.style.color = '#38bdf8';
           badge.style.border = '1px solid #38bdf8';
+        }
+      } else if (status === 'SAVE_FAILED') {
+        if (icon) icon.textContent = '⚠️';
+        if (tag) {
+          tag.textContent = 'DATABASE DRAFT SAVE FAILED';
+          tag.style.color = '#f87171';
+        }
+        if (desc) {
+          desc.innerHTML = `<span style="color: #fca5a5;">การบันทึกล้มเหลว (PROMOTION_DRAFT_SAVE_FAILED): ${details?.error || 'Unknown Error'} &bull; ข้อมูลยังคงอยู่เฉพาะใน Browser เท่านั้น</span>`;
+        }
+        if (badge) {
+          badge.textContent = 'Storage: LOCAL_BROWSER_ONLY';
+          badge.style.background = 'rgba(239, 68, 68, 0.2)';
+          badge.style.color = '#f87171';
+          badge.style.border = '1px solid #f87171';
         }
       } else {
         if (icon) icon.textContent = '🛡️';
