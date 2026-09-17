@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "ca45c60",
+  "packageBuiltFromCommit": "55437e8",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-17T18:58:19.244139+07:00",
+  "builtAt": "2026-09-17T19:07:13.269584+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,7 +13,7 @@
   "totalFiles": 53,
   "summary": {
     "totalFiles": 53,
-    "totalSizeBytes": 9901329,
+    "totalSizeBytes": 9901349,
     "totalSizeMB": 9.44
   },
   "files": [
@@ -146,8 +146,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 154015,
-      "sha256": "9b7c2ccec32da03703a2b06a0383031fb8f30fdc418ce4670cc153fddfa3a82a",
+      "sizeBytes": 153975,
+      "sha256": "91bf37f5722421ca45ee208677049cfd9a2d33917945b5564ef3ae6c49b6ba4c",
       "status": "BASELINE_CORE"
     },
     {
@@ -290,8 +290,8 @@
     },
     {
       "file": "api/promotion-imports.js",
-      "sizeBytes": 18532,
-      "sha256": "51b3b9e6b7d1e0f77c25974f66da5578855bfe52d69836d512b471219bd99b9a",
+      "sizeBytes": 18592,
+      "sha256": "48a845e5d1fa7261f6df0dba3f6101535cb8b9999dde5b89fafc3a1dbc1d7799",
       "status": "PILOT_RUNTIME"
     },
     {
