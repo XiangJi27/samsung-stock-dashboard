@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "049d104",
+  "packageBuiltFromCommit": "37ea294",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-17T16:11:21.921218+07:00",
+  "builtAt": "2026-09-17T16:34:13.752186+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,14 +13,14 @@
   "totalFiles": 53,
   "summary": {
     "totalFiles": 53,
-    "totalSizeBytes": 9816304,
-    "totalSizeMB": 9.36
+    "totalSizeBytes": 9848986,
+    "totalSizeMB": 9.39
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 67598,
-      "sha256": "dbc6dc0c6265aa7d6b89cf064e4736b82da5892e4982fae06b1182f21902b4b1",
+      "sizeBytes": 68676,
+      "sha256": "3594b467607e73e8b195b9555e1370dde4ef51f72f50489190dc334136d0684b",
       "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
@@ -158,8 +158,8 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 67598,
-      "sha256": "dbc6dc0c6265aa7d6b89cf064e4736b82da5892e4982fae06b1182f21902b4b1",
+      "sizeBytes": 68676,
+      "sha256": "3594b467607e73e8b195b9555e1370dde4ef51f72f50489190dc334136d0684b",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -320,8 +320,8 @@
     },
     {
       "file": "promotion_review_dashboard.html",
-      "sizeBytes": 40133,
-      "sha256": "71b0bce7bde55ffcea2904c03f043c45e68335e1355af000c80d0eaec0d103d5",
+      "sizeBytes": 70659,
+      "sha256": "36e69a978bf2af809ad4efdfabc2617715ccc4f4a51c898bc84261af826411aa",
       "status": "PILOT_RUNTIME"
     },
     {

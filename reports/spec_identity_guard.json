@@ -1,7 +1,7 @@
 {
   "gate": "RULE_09_SPEC_IDENTITY_GUARD",
   "status": "PASSED",
-  "executedAt": "2026-09-16T20:03:53.638748",
-  "commitSha": "8a54aea",
+  "executedAt": "2026-09-17T16:34:15.247665",
+  "commitSha": "37ea294",
   "violations": []
 }
