@@ -1405,6 +1405,22 @@
       const campaignName = `โปรโมชั่นมือถือ เดือนกันยายน 2026 (Retail Shop)`;
 
       content.innerHTML = `
+        <!-- Summary Metrics Panel (User Requested Breakdown) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; padding: 12px 16px;">
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Import Batch</span><br/><strong style="color: #38bdf8; font-size: 1.15rem;">1</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Campaign</span><br/><strong style="color: #fbbf24; font-size: 1.15rem;">1</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Source Rows Passed</span><br/><strong style="color: #4ade80; font-size: 1.15rem;">${passedItems.length}</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Target P/N Confirmed</span><br/><strong style="color: #60a5fa; font-size: 1.15rem;">${totalExpandedOffers}</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Database Offer Records</span><br/><strong style="color: #38bdf8; font-size: 1.15rem;">${totalExpandedOffers}</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Stacking Rules</span><br/><strong style="color: #c084fc; font-size: 1.15rem;">3</strong></div>
+          <div><span style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Validation Errors (Total)</span><br/><strong style="color: #f87171; font-size: 1.15rem;">${reviewItems.length + blockedItems.length}</strong> <span style="font-size: 0.7rem; color: #94a3b8;">(Review: ${reviewItems.length} | Blocked: ${blockedItems.length})</span></div>
+        </div>
+
+        <div style="padding: 10px 14px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; border-radius: 6px; font-size: 0.78rem; color: #fca5a5; line-height: 1.5;">
+          ℹ️ <strong>ข้อกำหนดนโยบายความปลอดภัย (Fail-Closed Policy):</strong><br/>
+          รายการสถานะ <code>REVIEW_REQUIRED</code> (${reviewItems.length} รายการ เช่น Galaxy S26 Ultra 1TB) และ <code>BLOCKED</code> (${blockedItems.length} รายการ) จะถูกจัดเก็บลงตาราง <code>promotion_validation_errors</code> เพื่อรอตรวจสอบ โดย <strong>ห้ามสร้างเป็น Promotion Offer เด็ดขาด (DO_NOT_INSERT_OFFER)</strong>
+        </div>
+
         <!-- Group 1: Import Batch -->
         <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 14px 18px;">
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between;">

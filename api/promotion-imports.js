@@ -259,8 +259,48 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'EMPTY_ITEMS', message: 'No promotion items or errors provided' });
     }
 
+    // 1. Attempt Atomic Transaction via PostgreSQL RPC: create_promotion_draft_batch
     try {
-      // 1. Insert promotion_import_batches
+      const rpcRes = await queryPostgrest('rpc/create_promotion_draft_batch', {
+        method: 'POST',
+        body: JSON.stringify({
+          p_payload: {
+            branchCode,
+            sourceFileName: fileName,
+            sourceFileSha256: sha256 || `sha_${Date.now()}`,
+            campaign: body.campaign || {},
+            summary: body.summary || {},
+            offers: incomingItems,
+            validationErrors: incomingErrors
+          },
+          p_user_id: caller.id
+        })
+      });
+
+      if (rpcRes.ok) {
+        const rpcData = await rpcRes.json();
+        return res.status(200).json({
+          status: 'DRAFT_CREATED',
+          batchId: rpcData.batchId,
+          campaignId: rpcData.campaignId,
+          branchCode: branchCode,
+          offerCount: rpcData.offerCount,
+          blockerCount: 0,
+          reviewRequiredCount: rpcData.reviewRequiredCount,
+          transactionType: 'ATOMIC_DATABASE_RPC',
+          summary: body.summary || {},
+          message: 'บันทึก Promotion Draft สำเร็จแบบ Atomic Transaction ผ่าน PostgreSQL RPC'
+        });
+      }
+    } catch (rpcErr) {
+      console.warn('[PromotionImportAPI] RPC unavailable, using REST with compensation:', rpcErr.message);
+    }
+
+    let newBatchId = null;
+    let campaignId = null;
+
+    try {
+      // 1. Insert promotion_import_batches (REST fallback)
       const batchPayload = {
         branch_code: branchCode,
         source_file_name: fileName,
@@ -286,7 +326,7 @@ module.exports = async function handler(req, res) {
       }
 
       const insertedBatch = (await batchRes.json())[0];
-      const newBatchId = insertedBatch.id;
+      newBatchId = insertedBatch.id;
 
       // 2. Insert promotion_campaigns
       const campaignPayload = {
@@ -421,7 +461,14 @@ module.exports = async function handler(req, res) {
         message: 'บันทึก Promotion Draft เข้าสู่ฐานข้อมูลกลางเรียบร้อย (สถานะ: DRAFT ต้องผ่านการอนุมัติก่อน Activate)'
       });
     } catch (err) {
-      return res.status(500).json({ error: 'SERVER_ERROR', message: err.message });
+      console.error('[PromotionImportAPI] Error creating batch, initiating compensation rollback:', err);
+      if (campaignId) {
+        await queryPostgrest(`promotion_campaigns?id=eq.${campaignId}`, { method: 'DELETE' }).catch(() => {});
+      }
+      if (newBatchId) {
+        await queryPostgrest(`promotion_import_batches?id=eq.${newBatchId}`, { method: 'DELETE' }).catch(() => {});
+      }
+      return res.status(500).json({ error: 'SERVER_ERROR', message: err.message, compensated: true });
     }
   }
 

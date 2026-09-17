@@ -575,7 +575,219 @@ end;
 $$;
 
 -- ============================================================================
--- 12. ROW LEVEL SECURITY (RLS) & LEAST-PRIVILEGE GRANTS
+-- 12. ATOMIC PROMOTION DRAFT INGESTION RPC (Single Transaction Draft Creation)
+-- ============================================================================
+create or replace function public.create_promotion_draft_batch(
+  p_payload jsonb,
+  p_user_id uuid
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_batch_id uuid;
+  v_campaign_id uuid;
+  v_branch_code text;
+  v_file_name text;
+  v_sha256 text;
+  v_campaign_code text;
+  v_campaign_name text;
+  v_start_at timestamptz;
+  v_end_at timestamptz;
+  v_offer jsonb;
+  v_err jsonb;
+  v_offer_count int := 0;
+  v_error_count int := 0;
+  v_pn text;
+begin
+  -- 1. Extract and sanitize inputs
+  v_branch_code := upper(trim(coalesce(p_payload->>'branchCode', 'AYUTTHAYA_CITY_PARK')));
+  v_file_name := trim(coalesce(p_payload->>'sourceFileName', 'Promotion.xlsx'));
+  v_sha256 := lower(trim(coalesce(p_payload->>'sourceFileSha256', md5(random()::text))));
+
+  v_campaign_code := coalesce(p_payload->'campaign'->>'campaignCode', 'SEP2026-RETAIL-MOBILE');
+  v_campaign_name := coalesce(p_payload->'campaign'->>'campaignName', 'Promotion Campaign Draft');
+  v_start_at := coalesce((p_payload->'campaign'->>'startAt')::timestamptz, now());
+  v_end_at := coalesce((p_payload->'campaign'->>'endAt')::timestamptz, now() + interval '30 days');
+
+  -- 2. Insert Batch
+  insert into promotion_import_batches (
+    branch_code,
+    source_file_name,
+    source_file_sha256,
+    status,
+    total_rows,
+    passed_rows,
+    warning_rows,
+    blocked_rows,
+    validation_summary,
+    imported_by
+  ) values (
+    v_branch_code,
+    v_file_name,
+    v_sha256,
+    'DRAFT',
+    coalesce((p_payload->'summary'->>'totalRows')::int, 0),
+    coalesce((p_payload->'summary'->>'passedRows')::int, 0),
+    coalesce((p_payload->'summary'->>'warningRows')::int, 0),
+    coalesce((p_payload->'summary'->>'blockedRows')::int, 0),
+    coalesce(p_payload->'summary', '{}'::jsonb),
+    p_user_id
+  ) returning id into v_batch_id;
+
+  -- 3. Insert Campaign
+  insert into promotion_campaigns (
+    import_batch_id,
+    branch_code,
+    campaign_code,
+    campaign_name,
+    start_at,
+    end_at,
+    status,
+    priority,
+    created_by
+  ) values (
+    v_batch_id,
+    v_branch_code,
+    v_campaign_code,
+    v_campaign_name,
+    v_start_at,
+    v_end_at,
+    'DRAFT',
+    100,
+    p_user_id
+  ) returning id into v_campaign_id;
+
+  -- 4. Insert Offers
+  if jsonb_typeof(p_payload->'offers') = 'array' then
+    for v_offer in select * from jsonb_array_elements(p_payload->'offers') loop
+      v_pn := v_offer->>'inventoryPn';
+      
+      -- Accessory Guard: Reject accessories like EF-, GP-, EP-, EE- from smartphone campaigns
+      if v_pn like 'EF-%' or v_pn like 'GP-%' or v_pn like 'EP-%' or v_pn like 'EE-%' or v_pn like 'ITFIT%' then
+        raise exception using
+          errcode = 'P0001',
+          message = 'ACCESSORY_PN_REJECTED_FROM_SMARTPHONE_CAMPAIGN: ' || v_pn;
+      end if;
+
+      insert into promotion_offers (
+        campaign_id,
+        branch_code,
+        inventory_pn,
+        model_name,
+        capacity,
+        offer_code,
+        promotion_type,
+        coupon_code,
+        regular_price,
+        discount_type,
+        discount_amount,
+        discount_percent,
+        payment_condition,
+        customer_segment,
+        requires_trade_in,
+        down_payment_max_percent,
+        estimated_down_payment,
+        stacking_policy,
+        exclusive_group,
+        blocks_all_other_promotions,
+        status,
+        source_sheet,
+        source_row
+      ) values (
+        v_campaign_id,
+        v_branch_code,
+        v_pn,
+        v_offer->>'model',
+        v_offer->>'capacity',
+        coalesce(v_offer->>'offerCode', 'OFFER_' || v_offer_count + 1),
+        coalesce(v_offer->>'promotionType', 'STANDARD_DISCOUNT'),
+        v_offer->>'couponCode',
+        coalesce((v_offer->>'regularPrice')::numeric, 1),
+        coalesce(v_offer->>'discountType', 'FIXED_AMOUNT'),
+        coalesce((v_offer->>'discountAmount')::numeric, 0),
+        coalesce((v_offer->>'discountPercent')::numeric, 0),
+        coalesce(v_offer->>'paymentCondition', 'ANY'),
+        coalesce(v_offer->>'customerSegment', 'GENERAL'),
+        coalesce((v_offer->>'requiresTradeIn')::boolean, false),
+        (v_offer->>'downPaymentMaxPercent')::numeric,
+        (v_offer->>'estimatedDownPayment')::numeric,
+        coalesce(v_offer->>'stackingPolicy', 'STACKABLE_CONDITIONAL'),
+        v_offer->>'exclusiveGroup',
+        coalesce((v_offer->>'blocksAllOtherPromotions')::boolean, false),
+        'DRAFT',
+        coalesce(v_offer->>'sourceSheet', 'Promotion'),
+        (v_offer->>'sourceRow')::int
+      );
+      v_offer_count := v_offer_count + 1;
+    end loop;
+  end if;
+
+  -- 5. Insert Validation Errors (e.g. S26 Ultra 1TB PN_NOT_FOUND)
+  if jsonb_typeof(p_payload->'validationErrors') = 'array' then
+    for v_err in select * from jsonb_array_elements(p_payload->'validationErrors') loop
+      insert into promotion_validation_errors (
+        import_batch_id,
+        campaign_id,
+        severity,
+        error_code,
+        field_name,
+        source_sheet,
+        source_row,
+        inventory_pn,
+        message,
+        resolution_status
+      ) values (
+        v_batch_id,
+        v_campaign_id,
+        coalesce(v_err->>'severity', 'REVIEW_REQUIRED'),
+        coalesce(v_err->>'errorCode', 'VALIDATION_ERROR'),
+        v_err->>'fieldName',
+        coalesce(v_err->>'sourceSheet', 'Promotion'),
+        (v_err->>'sourceRow')::int,
+        v_err->>'inventoryPn',
+        coalesce(v_err->>'message', 'Validation error reported'),
+        'OPEN'
+      );
+      v_error_count := v_error_count + 1;
+    end loop;
+  end if;
+
+  -- 6. Insert Audit Log
+  insert into promotion_audit_logs (
+    campaign_id,
+    action,
+    new_value,
+    performed_by,
+    reason
+  ) values (
+    v_campaign_id,
+    'CREATE_DRAFT_BATCH',
+    jsonb_build_object(
+      'batchId', v_batch_id,
+      'campaignId', v_campaign_id,
+      'offerCount', v_offer_count,
+      'errorCount', v_error_count,
+      'fileName', v_file_name
+    ),
+    p_user_id,
+    'Atomic creation of promotion draft batch via PostgreSQL RPC'
+  );
+
+  return jsonb_build_object(
+    'status', 'DRAFT_CREATED',
+    'batchId', v_batch_id,
+    'campaignId', v_campaign_id,
+    'offerCount', v_offer_count,
+    'reviewRequiredCount', v_error_count
+  );
+end;
+$$;
+
+-- ============================================================================
+-- 13. ROW LEVEL SECURITY (RLS) & LEAST-PRIVILEGE GRANTS
 -- ============================================================================
 alter table public.promotion_import_batches enable row level security;
 alter table public.promotion_campaigns enable row level security;
@@ -632,9 +844,11 @@ grant select on table public.promotion_offers to authenticated;
 grant select on table public.promotion_calculations to authenticated;
 
 -- Direct RPC execution restricted to service_role and postgres
+revoke execute on function public.create_promotion_draft_batch(jsonb, uuid) from authenticated, anon;
 revoke execute on function public.activate_promotion_campaign(uuid, uuid, uuid) from authenticated, anon;
 revoke execute on function public.rollback_promotion_campaign(uuid, uuid, uuid, text) from authenticated, anon;
 
+grant execute on function public.create_promotion_draft_batch(jsonb, uuid) to postgres, service_role;
 grant execute on function public.activate_promotion_campaign(uuid, uuid, uuid) to postgres, service_role;
 grant execute on function public.rollback_promotion_campaign(uuid, uuid, uuid, text) to postgres, service_role;
 
