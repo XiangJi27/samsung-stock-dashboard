@@ -464,8 +464,21 @@
             const stockData = window.STOCK_DATABASE || window.STOCK_DATA || [];
             const cleanM = modelRaw.toLowerCase().replace('galaxy', '').replace(/\(.*?\)/g, '').trim();
             const cleanMNoSpace = cleanM.replace(/\s+/g, '');
-            const cleanCap = capacityRaw.toLowerCase().replace('gb', '').replace('tb', '').trim();
-            const cleanCapNoSpace = cleanCap.replace(/\s+/g, '');
+            const capLower = capacityRaw.toLowerCase().trim();
+
+            // Detect target product type from promotion model / row
+            const isTargetPhone = (
+              modelRaw.toLowerCase().includes('galaxy') ||
+              modelRaw.toLowerCase().includes('s2') ||
+              modelRaw.toLowerCase().includes('a0') ||
+              modelRaw.toLowerCase().includes('a1') ||
+              modelRaw.toLowerCase().includes('a2') ||
+              modelRaw.toLowerCase().includes('a3') ||
+              modelRaw.toLowerCase().includes('a5') ||
+              modelRaw.toLowerCase().includes('fold') ||
+              modelRaw.toLowerCase().includes('flip') ||
+              (colMap['category'] !== undefined && String(row[colMap['category']] || '').toLowerCase().includes('series'))
+            );
 
             // Detect if row explicitly specifies a specific color (Default: promotions apply to ALL colors)
             const fullRowText = (modelRaw + ' ' + (colMap['category'] !== undefined ? String(row[colMap['category']] || '') : '')).toLowerCase();
@@ -498,37 +511,101 @@
             }
 
             const seenPns = new Set();
+            const candidateDetails = [];
+
             stockData.forEach(s => {
+              // 1. Strict Product Type & Category Gate
+              const isItemPhone = (
+                (s.category && s.category.toLowerCase() === 'smartphone') ||
+                (s.canonicalCategory && s.canonicalCategory.toLowerCase() === 'smartphone') ||
+                (s.category1 && s.category1.toUpperCase().includes('SMART PHONE'))
+              );
+
+              // 2. Strict Accessory Blacklist (Exclude even if product name mentions phone model!)
+              const isAccessory = (
+                (s.category && ['accessory', 'phone_case', 'screen_protector', 'watch_band', 'premium_gift', 'premium', 'other', 'sim', 'watch', 'buds', 'tablet'].includes(s.category.toLowerCase())) ||
+                (s.category1 && (s.category1.toUpperCase().includes('ACCESSORY') || s.category1.toUpperCase().includes('OTHER'))) ||
+                s.pn.startsWith('EF-') ||
+                s.pn.startsWith('GP-') ||
+                s.pn.startsWith('EP-') ||
+                s.pn.startsWith('EE-') ||
+                s.pn.startsWith('ITFIT')
+              );
+
+              if (isTargetPhone) {
+                if (!isItemPhone || isAccessory) {
+                  return; // Strictly reject accessories, cases, protectors, and unknown non-smartphones
+                }
+              }
+
               const sm = (s.model || '').toLowerCase();
               const smNoSpace = sm.replace(/\s+/g, '');
               const scolor = (s.color || '').toLowerCase();
 
-              const modelMatches = (cleanM && sm.includes(cleanM)) || (cleanMNoSpace && smNoSpace.includes(cleanMNoSpace));
-              let capMatches = false;
-              if (capacityRaw.toLowerCase().includes('tb')) {
-                capMatches = smNoSpace.includes('1tb') || smNoSpace.includes('tb');
-              } else {
-                capMatches = !cleanCap || sm.includes(cleanCap) || smNoSpace.includes(cleanCapNoSpace) || sm.includes(capacityRaw.toLowerCase());
+              // 3. Model Family Hierarchy Matching
+              // Distinguish Ultra vs +/Plus vs Standard Base
+              if (cleanM.includes('ultra') && !sm.includes('ultra')) return;
+              if ((cleanM.includes('+') || cleanM.includes('plus')) && (!sm.includes('+') && !sm.includes('plus'))) return;
+              if (!cleanM.includes('ultra') && !cleanM.includes('+') && !cleanM.includes('plus')) {
+                if (sm.includes('ultra') || sm.includes('+') || sm.includes('plus')) return;
               }
 
-              if (modelMatches && capMatches) {
-                // If explicit color specified in file, filter strictly to that color
-                if (explicitColorFilter && !scolor.includes(explicitColorFilter)) {
-                  return;
-                }
-                if (!seenPns.has(s.pn)) {
-                  seenPns.add(s.pn);
-                  candidateList.push(s.pn);
-                }
+              // Base model number matching (e.g. s26, s25, fold8, flip7)
+              const mBase = cleanM.replace(/ultra|\+|\s+|plus/g, '');
+              const smBase = sm.replace(/ultra|\+|\s+|plus/g, '');
+              if (mBase && !smBase.includes(mBase)) return;
+
+              // 4. Strict Capacity Matching (NEVER match substring 'tb' inside 'lightblue'!)
+              let capMatches = false;
+              if (capLower.includes('1tb') || capLower.includes('1 tb')) {
+                capMatches = /(?:^|\D)(?:12\/|16\/)?1\s*tb(?:\b|\D|$)/i.test(sm);
+              } else if (capLower.includes('512')) {
+                capMatches = /(?:^|\D)(?:12\/|16\/)?512\s*gb(?:\b|\D|$)/i.test(sm);
+              } else if (capLower.includes('256')) {
+                capMatches = /(?:^|\D)(?:8\/|12\/)?256\s*gb(?:\b|\D|$)/i.test(sm);
+              } else if (capLower.includes('128')) {
+                capMatches = /(?:^|\D)(?:4\/|6\/|8\/)?128\s*gb(?:\b|\D|$)/i.test(sm);
+              } else if (capLower.includes('64')) {
+                capMatches = /(?:^|\D)(?:3\/|4\/)?64\s*gb(?:\b|\D|$)/i.test(sm);
+              } else if (!capLower || capLower === '-') {
+                capMatches = true;
+              }
+
+              if (!capMatches) return;
+
+              // 5. Explicit Color Filter (if specified in promotion row)
+              if (explicitColorFilter && !scolor.includes(explicitColorFilter)) {
+                return;
+              }
+
+              if (!seenPns.has(s.pn)) {
+                seenPns.add(s.pn);
+                candidateList.push(s.pn);
+                candidateDetails.push({
+                  pn: s.pn,
+                  model: s.model,
+                  color: s.color || '-',
+                  capacity: capacityRaw || '-',
+                  productType: 'SMARTPHONE',
+                  modelMatch: 'PASS',
+                  capacityMatch: 'PASS',
+                  productCodeType: s.pn.startsWith('F-') ? 'PASS_F' : 'STANDARD_SM',
+                  f1: s.f1 || 0,
+                  f2: s.f2 || 0,
+                  total: (s.f1 || 0) + (s.f2 || 0)
+                });
               }
             });
 
             if (candidateList.length === 1) {
               productMatchStatus = 'UNIQUE_MODEL_CAPACITY_CANDIDATE';
+              codeType = candidateList[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
             } else if (candidateList.length > 1) {
               productMatchStatus = 'MULTIPLE_PN_CANDIDATES';
+              codeType = candidateList[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
             } else {
               productMatchStatus = 'PN_NOT_FOUND';
+              codeType = 'UNKNOWN';
             }
           }
 
@@ -557,9 +634,9 @@
               stdReason = 'ไม่สามารถสกัดราคาสุทธิได้ (Net Price is null)';
             } else if (!pn) {
               if (productMatchStatus === 'PN_NOT_FOUND') {
-                stdStatus = 'BLOCKED_UNPROVEN';
-                stdFlags.push('PN_NOT_FOUND');
-                stdReason = `ไม่พบรหัส P/N ที่ตรงกับ ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
+                stdStatus = 'REVIEW_REQUIRED';
+                stdFlags.push('PN_NOT_FOUND', 'EXACT_PN_UNRESOLVED');
+                stdReason = `ไม่พบ P/N ตัวเครื่อง ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
               } else {
                 stdStatus = 'REVIEW_REQUIRED';
                 stdFlags.push('WARNING_DERIVED_STANDARD_NET', 'EXACT_PN_UNRESOLVED');
@@ -580,8 +657,9 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
-              selectedPns: [...candidateList],
+              selectedPns: [],
               confirmedPns: [],
+              targetPns: [],
               rrp,
               discount: stdDiscount || 0,
               standardDiscount: stdDiscount || 0,
@@ -634,9 +712,9 @@
               tupReason = 'ไม่สามารถสกัดราคาสุทธิ Trade Up ได้';
             } else if (!pn) {
               if (productMatchStatus === 'PN_NOT_FOUND') {
-                tupStatus = 'BLOCKED_UNPROVEN';
-                tupFlags.push('PN_NOT_FOUND');
-                tupReason = `ไม่พบรหัส P/N ที่ตรงกับ ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
+                tupStatus = 'REVIEW_REQUIRED';
+                tupFlags.push('PN_NOT_FOUND', 'EXACT_PN_UNRESOLVED');
+                tupReason = `ไม่พบ P/N ตัวเครื่อง ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
               } else {
                 tupStatus = 'REVIEW_REQUIRED';
                 tupFlags.push('EXACT_PN_UNRESOLVED', 'TRADE_UP_PROVISIONAL');
@@ -657,8 +735,9 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
-              selectedPns: [...candidateList],
+              selectedPns: [],
               confirmedPns: [],
+              targetPns: [],
               rrp,
               discount: (stdDiscount || 0) + tradeUpDiscount,
               standardDiscount: stdDiscount || 0,
@@ -737,9 +816,9 @@
               reason = `สมการราคาไม่ลงตัว: RRP (฿${rrp}) - ส่วนลด (฿${activeDiscount}) != สุทธิ (฿${resolvedNet})`;
             } else if (!pn) {
               if (productMatchStatus === 'PN_NOT_FOUND') {
-                status = 'BLOCKED_UNPROVEN';
-                flags.push('PN_NOT_FOUND');
-                reason = `ไม่พบรหัส P/N ที่ตรงกับ ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
+                status = 'REVIEW_REQUIRED';
+                flags.push('PN_NOT_FOUND', 'EXACT_PN_UNRESOLVED');
+                reason = `ไม่พบ P/N ตัวเครื่อง ${modelRaw} (${capacityRaw}) ในระบบสต็อก`;
               } else {
                 status = 'REVIEW_REQUIRED';
                 flags.push('EXACT_PN_UNRESOLVED');
@@ -760,8 +839,9 @@
               sourceProvidedPn,
               humanConfirmationRequired,
               candidatePns: candidateList,
-              selectedPns: [...candidateList],
+              selectedPns: [],
               confirmedPns: [],
+              targetPns: [],
               rrp,
               discount: activeDiscount,
               standardDiscount: stdDiscount || 0,
@@ -1604,40 +1684,48 @@
             const selectedList = item.selectedPns || [];
             return `
               <div style="font-size: 0.76rem; color: #93c5fd; font-weight: 600; margin-bottom: 4px;">
-                🔍 พบ ${item.candidatePn.length} Candidate P/N ในสต็อก:
+                🔍 พบ ${item.candidatePn.length} Candidate P/N ตัวเครื่อง (SMARTPHONE) ในสต็อก:
               </div>
-              <div class="candidate-selector-box">
+              <div class="candidate-selector-box" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 6px; padding: 4px;">
                 ${item.candidatePn.map(pn => {
                   const s = stockMap[pn] || { pn, color: '-', productCodeType: (pn.startsWith('F-') ? 'PASS_F' : 'STANDARD_SM'), f1: 0, f2: 0, total: 0 };
                   const isChecked = selectedList.includes(pn);
                   const isPassF = s.productCodeType === 'PASS_F' || pn.startsWith('F-');
                   return `
-                    <div class="candidate-item-row">
-                      <div class="candidate-item-left">
-                        <input type="checkbox" class="candidate-cb" data-row-id="${item.draftRowId}" data-pn="${pn}" ${isChecked ? 'checked' : ''} />
-                        <span class="candidate-pn-code">${pn}</span>
-                        <span class="type-pill ${isPassF ? 'pass-f' : 'std-sm'}" style="font-size: 0.65rem; padding: 1px 4px;">${isPassF ? 'F-' : 'SM-'}</span>
-                        <span class="candidate-color-badge">🎨 ${s.color || '-'}</span>
+                    <div class="candidate-item-row" style="padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                      <div class="candidate-item-left" style="display: flex; flex-direction: column; gap: 2px;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <input type="checkbox" class="candidate-cb" data-row-id="${item.draftRowId}" data-pn="${pn}" ${isChecked ? 'checked' : ''} />
+                          <span class="candidate-pn-code" style="color: #60a5fa; font-weight: 700;">${pn}</span>
+                          <span class="type-pill ${isPassF ? 'pass-f' : 'std-sm'}" style="font-size: 0.65rem; padding: 1px 4px;">${isPassF ? 'F-' : 'SM-'}</span>
+                          <span class="candidate-color-badge" style="font-size: 0.70rem;">🎨 ${s.color || '-'}</span>
+                        </div>
+                        <div style="font-size: 0.66rem; color: #94a3b8; margin-left: 20px; display: flex; gap: 8px; flex-wrap: wrap;">
+                          <span>Product Type: <strong style="color: #34d399;">SMARTPHONE</strong></span>
+                          <span>Capacity: <strong style="color: #34d399;">${item.capacity || '-'}</strong></span>
+                          <span>Exact Model: <span style="color: #34d399;">PASS</span></span>
+                          <span>Exact Capacity: <span style="color: #34d399;">PASS</span></span>
+                        </div>
                       </div>
-                      <div class="candidate-stock-tag">
+                      <div class="candidate-stock-tag" style="font-size: 0.70rem;">
                         ช1: <strong>${s.f1}</strong> | ช2: <strong>${s.f2}</strong> (รวม <strong>${s.total}</strong>)
                       </div>
                     </div>
                   `;
                 }).join('')}
               </div>
-              <div class="candidate-row-actions">
+              <div class="candidate-row-actions" style="margin-top: 6px; display: flex; gap: 6px;">
                 <button type="button" class="btn-row-action btn-select-row-all" data-row-id="${item.draftRowId}">
                   เลือกทุกสี (${item.candidatePn.length})
                 </button>
-                <button type="button" class="btn-row-action btn-row-confirm" data-row-id="${item.draftRowId}">
+                <button type="button" class="btn-row-action btn-row-confirm" data-row-id="${item.draftRowId}" ${selectedList.length === 0 ? 'disabled style="opacity:0.45; cursor:not-allowed;"' : ''}>
                   ✓ ยืนยัน P/N (${selectedList.length})
                 </button>
               </div>
             `;
           }
 
-          // 3. Trade Up Payment Code Missing (6 items)
+          // 3. Trade Up Payment Code Missing
           if (item.validationFlags && item.validationFlags.includes('TRADE_UP_PAYMENT_CODE_MISSING')) {
             return `
               <div class="tup-fix-box">
@@ -1655,14 +1743,22 @@
             `;
           }
 
-          // 4. PN Not Found (18 items)
-          if (item.validationFlags && item.validationFlags.includes('PN_NOT_FOUND')) {
+          // 4. PN Not Found / No Smartphone Candidates
+          if ((item.validationFlags && item.validationFlags.includes('PN_NOT_FOUND')) || !item.candidatePn || item.candidatePn.length === 0) {
             return `
-              <div class="pn-not-found-box">
-                <div style="font-weight: 700;">🚫 ไม่พบ P/N ใน Stock Master (18 รายการ)</div>
-                <div style="font-size: 0.70rem; margin-top: 2px;">
-                  ต้องอัปเดต Stock Master หรือจับคู่ Product Master ที่ครบกว่า (ระบบระงับการสร้างหรือเดา P/N เอง)
+              <div class="pn-not-found-box" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 8px 10px;">
+                <div style="font-size: 0.78rem; color: #fca5a5; font-weight: 700; display: flex; align-items: center; gap: 5px;">
+                  <span>🚫 ไม่พบ P/N ตัวเครื่อง ${item.model} ${item.capacity ? '(' + item.capacity + ')' : ''}</span>
                 </div>
+                <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4;">
+                  สถานะ: <strong style="color: #fbbf24;">REVIEW_REQUIRED</strong> (ไม่มีสต็อกตัวเครื่องในระบบสาขา)<br/>
+                  <span style="color: #f87171; font-weight: 600;">⛔ ห้ามจับคู่กับอุปกรณ์เสริม • ปิดปุ่มยืนยันและระงับการบันทึก Draft แบบ Fail-Closed</span>
+                </div>
+                ${item.saleMode === 'TRADE_UP' ? `
+                  <div style="font-size: 0.66rem; color: #fbbf24; margin-top: 4px; border-top: 1px dashed rgba(251, 191, 36, 0.3); padding-top: 3px;">
+                    ℹ️ ส่วนลด Trade Up ใช้ได้เฉพาะเมื่อลูกค้านำเครื่องมา Trade Up (หากไม่มีเครื่องมา Trade Up ระบบต้องกลับไปใช้เส้นทาง STANDARD_PAYMENT ราคาสุทธิ ฿${(item.standardNetPrice || (item.rrp - (item.standardDiscount || 0))).toLocaleString()} บาท)
+                  </div>
+                ` : ''}
               </div>
             `;
           }
@@ -1689,13 +1785,35 @@
             </td>
             <td><span class="type-pill ${item.productCodeType === 'STANDARD_SM' ? 'active' : (item.productCodeType === 'PASS_F' ? 'pass-f' : '')}">${item.productCodeType}</span></td>
             <td>${item.rrp > 0 ? `฿${item.rrp.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
-            <td class="text-coral">${item.discount > 0 ? `-฿${item.discount.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
-            <td style="font-weight: 700; color: var(--neon-cyan);">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
+            <td class="text-coral" style="min-width: 170px;">
+              ${item.saleMode === 'TRADE_UP' ? `
+                <div style="font-weight: 700; color: #f87171; font-size: 0.88rem;">-฿${item.discount.toLocaleString()}</div>
+                <div style="font-size: 0.67rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 5px 7px; border-radius: 6px; border: 1px solid rgba(248, 113, 113, 0.2);">
+                  <div style="white-space: nowrap;">ต่อที่ 1 คูปอง ${item.coupon || '01'}: <strong style="color: #fca5a5;">-฿${(item.standardDiscount || 0).toLocaleString()}</strong></div>
+                  <div style="white-space: nowrap;">ต่อที่ 2 Trade Up: <strong style="color: #fca5a5;">-฿${(item.tradeUpDiscount || 0).toLocaleString()}</strong></div>
+                  <div style="color: #93c5fd; font-weight: 600; margin-top: 2px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 2px; white-space: nowrap;">ส่วนลดรวม: -฿${item.discount.toLocaleString()}</div>
+                </div>
+              ` : (item.discount > 0 ? `-฿${item.discount.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>')}
+            </td>
+            <td style="font-weight: 700; color: var(--neon-cyan); min-width: 135px;">
+              <div style="font-size: 0.95rem;">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</div>
+              ${item.saleMode === 'TRADE_UP' ? `
+                <div style="font-size: 0.64rem; color: #94a3b8; font-weight: 400; margin-top: 3px; line-height: 1.25;">
+                  <span style="color: #fbbf24; font-weight: 600;">*เมื่อนำเครื่องมาแลก</span><br/>
+                  (ไม่มีเครื่องแลก: ฿${(item.standardNetPrice || (item.rrp - (item.standardDiscount || 0))).toLocaleString()})
+                </div>
+              ` : ''}
+            </td>
             <td>
               <span class="type-pill">${item.coupon || '-'}</span>
               ${item.tradeUpPaymentCode ? `<div style="font-size: 0.70rem; color: #fbbf24; margin-top: 2px; font-family: monospace;">ชำระ: ${item.tradeUpPaymentCode}</div>` : ''}
             </td>
-            <td><span class="type-pill" style="font-size: 0.72rem;">${item.saleMode}</span></td>
+            <td>
+              <span class="type-pill" style="font-size: 0.72rem;">${item.saleMode}</span>
+              ${item.saleMode === 'TRADE_UP' ? `
+                <div style="font-size: 0.64rem; color: #fbbf24; margin-top: 2px;">*เงื่อนไขเก่าแลกใหม่</div>
+              ` : ''}
+            </td>
             <td>${renderStatusBadge()}</td>
             <td>
               ${renderActionCell()}
@@ -1703,6 +1821,92 @@
           </tr>
         `;
       }).join('');
+    }
+
+    validateCandidateSelection(selectedPns, item) {
+      if (!selectedPns || selectedPns.length === 0) {
+        return { allowed: false, code: 'NO_SELECTION', message: 'กรุณาเลือก Candidate P/N อย่างน้อย 1 รายการก่อนกดยืนยัน' };
+      }
+
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
+
+      for (const pn of selectedPns) {
+        const s = stockMap[pn];
+        if (!s) {
+          return { allowed: false, code: 'PN_NOT_IN_STOCK', message: `ไม่พบรหัส P/N ${pn} ในระบบสต็อก` };
+        }
+
+        const isSmartphone = (
+          (s.category && s.category.toLowerCase() === 'smartphone') ||
+          (s.canonicalCategory && s.canonicalCategory.toLowerCase() === 'smartphone') ||
+          (s.category1 && s.category1.toUpperCase().includes('SMART PHONE'))
+        );
+        const isAccessory = (
+          (s.category && ['accessory', 'phone_case', 'screen_protector', 'watch_band', 'premium_gift', 'premium', 'other', 'sim', 'watch', 'buds', 'tablet'].includes(s.category.toLowerCase())) ||
+          (s.category1 && (s.category1.toUpperCase().includes('ACCESSORY') || s.category1.toUpperCase().includes('OTHER'))) ||
+          pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('EP-') || pn.startsWith('EE-') || pn.startsWith('ITFIT')
+        );
+
+        if (!isSmartphone || isAccessory) {
+          return {
+            allowed: false,
+            code: 'PROMOTION_TARGET_TYPE_MISMATCH',
+            message: `ไม่อนุญาตให้ยืนยัน ${pn} เพราะไม่ใช่ตัวเครื่องประเภท SMARTPHONE (เป็นอุปกรณ์เสริมหรือหมวดหมู่อื่น)`
+          };
+        }
+
+        if (item.capacity) {
+          const promoCap = String(item.capacity).toUpperCase();
+          const sm = (s.model || '').toUpperCase();
+          if (promoCap.includes('1TB') && !sm.includes('1TB') && !sm.includes('1 TB')) {
+            return {
+              allowed: false,
+              code: 'PROMOTION_TARGET_CAPACITY_MISMATCH',
+              message: `ไม่อนุญาตให้ยืนยัน ${pn} เพราะความจุไม่ตรงกับโปรโมชั่น (${item.capacity})`
+            };
+          }
+          if (promoCap.includes('512') && !sm.includes('512')) {
+            return {
+              allowed: false,
+              code: 'PROMOTION_TARGET_CAPACITY_MISMATCH',
+              message: `ไม่อนุญาตให้ยืนยัน ${pn} เพราะความจุไม่ตรงกับโปรโมชั่น (${item.capacity})`
+            };
+          }
+          if (promoCap.includes('256') && !sm.includes('256')) {
+            return {
+              allowed: false,
+              code: 'PROMOTION_TARGET_CAPACITY_MISMATCH',
+              message: `ไม่อนุญาตให้ยืนยัน ${pn} เพราะความจุไม่ตรงกับโปรโมชั่น (${item.capacity})`
+            };
+          }
+          if (promoCap.includes('128') && !sm.includes('128')) {
+            return {
+              allowed: false,
+              code: 'PROMOTION_TARGET_CAPACITY_MISMATCH',
+              message: `ไม่อนุญาตให้ยืนยัน ${pn} เพราะความจุไม่ตรงกับโปรโมชั่น (${item.capacity})`
+            };
+          }
+        }
+      }
+
+      // Check variant multi-P/N: must differ only in color
+      if (selectedPns.length > 1) {
+        const first = stockMap[selectedPns[0]];
+        for (let i = 1; i < selectedPns.length; i++) {
+          const curr = stockMap[selectedPns[i]];
+          if (first.srp !== curr.srp || (first.category3 && curr.category3 && first.category3 !== curr.category3)) {
+            return {
+              allowed: false,
+              code: 'MULTIPLE_PN_NOT_COLOR_VARIANTS',
+              message: 'อนุญาตให้เลือกหลาย P/N ในข้อเสนอเดียวกันได้เฉพาะกรณีที่เป็นรุ่นและความจุเดียวกัน แต่ต่างสีเท่านั้น'
+            };
+          }
+        }
+      }
+
+      return { allowed: true };
     }
 
     toggleCandidateCheckbox(draftRowId, pn, isChecked) {
@@ -1722,6 +1926,15 @@
       const btn = document.querySelector(`.btn-row-confirm[data-row-id="${draftRowId}"]`);
       if (btn) {
         btn.textContent = `✓ ยืนยัน P/N (${item.selectedPns.length})`;
+        if (item.selectedPns.length === 0) {
+          btn.setAttribute('disabled', 'true');
+          btn.style.opacity = '0.45';
+          btn.style.cursor = 'not-allowed';
+        } else {
+          btn.removeAttribute('disabled');
+          btn.style.opacity = '1';
+          btn.style.cursor = 'pointer';
+        }
       }
     }
 
@@ -1731,7 +1944,28 @@
       const item = b.variants.find(v => v.draftRowId === draftRowId);
       if (!item || !item.candidatePn) return;
 
-      item.selectedPns = [...item.candidatePn];
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
+
+      // Only select genuine smartphone candidates
+      const validPns = item.candidatePn.filter(pn => {
+        const s = stockMap[pn];
+        if (!s) return false;
+        const isSmartphone = (
+          (s.category && s.category.toLowerCase() === 'smartphone') ||
+          (s.canonicalCategory && s.canonicalCategory.toLowerCase() === 'smartphone') ||
+          (s.category1 && s.category1.toUpperCase().includes('SMART PHONE'))
+        );
+        const isAccessory = (
+          (s.category && ['accessory', 'phone_case', 'screen_protector', 'watch_band', 'premium_gift', 'premium', 'other', 'sim', 'watch', 'buds', 'tablet'].includes(s.category.toLowerCase())) ||
+          (s.category1 && (s.category1.toUpperCase().includes('ACCESSORY') || s.category1.toUpperCase().includes('OTHER'))) ||
+          pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('EP-') || pn.startsWith('EE-') || pn.startsWith('ITFIT')
+        );
+        return isSmartphone && !isAccessory;
+      });
+
+      item.selectedPns = [...validPns];
       this.filterDiffTable(this.currentFilterType);
     }
 
@@ -1741,19 +1975,33 @@
       const item = b.variants.find(v => v.draftRowId === draftRowId);
       if (!item) return;
 
-      if (!item.selectedPns || item.selectedPns.length === 0) {
-        alert('กรุณาเลือก Candidate P/N อย่างน้อย 1 รายการก่อนกดยืนยัน');
+      const gate = this.validateCandidateSelection(item.selectedPns, item);
+      if (!gate.allowed) {
+        alert(`⛔ Quality Gate ปฏิเสธการยืนยัน:\n${gate.message}\n(Error Code: ${gate.code})`);
         return;
       }
 
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
+
       item.confirmedPns = [...item.selectedPns];
+      item.targetPns = item.selectedPns.map(p => {
+        const s = stockMap[p] || {};
+        return {
+          inventoryPn: p,
+          color: s.color || '-',
+          productType: 'SMARTPHONE',
+          matchStatus: 'CONFIRMED'
+        };
+      });
       item.pn = item.selectedPns.join(', ');
       item.productCodeType = item.selectedPns[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
       item.validationStatus = 'PASSED_VALIDATION';
       item.humanReviewRequired = false;
       item.autoPublishAllowed = true;
-      item.validationFlags = (item.validationFlags || []).filter(f => f !== 'EXACT_PN_UNRESOLVED');
-      item.reasonText = `✓ ยืนยัน Exact P/N แล้ว (${item.selectedPns.length} P/N)`;
+      item.validationFlags = (item.validationFlags || []).filter(f => f !== 'EXACT_PN_UNRESOLVED' && f !== 'PN_NOT_FOUND');
+      item.reasonText = `✓ ยืนยัน Exact P/N ตัวเครื่องแล้ว (${item.selectedPns.length} P/N)`;
 
       this.updateBatchStats();
       this.filterDiffTable(this.currentFilterType);
@@ -1766,6 +2014,7 @@
       if (!item) return;
 
       item.confirmedPns = [];
+      item.targetPns = [];
       item.pn = null;
       item.productCodeType = 'UNKNOWN';
       item.validationStatus = 'REVIEW_REQUIRED';
@@ -1802,9 +2051,9 @@
         if (!item.validationFlags.includes('EXACT_PN_UNRESOLVED')) item.validationFlags.push('EXACT_PN_UNRESOLVED');
         item.reasonText = `โปรโมชั่น Trade Up (สุทธิ ฿${item.netPrice} | รหัสชำระ ${cleanCode}) • ต้องจับคู่ Exact P/N ก่อนเผยแพร่`;
       } else {
-        item.validationStatus = 'BLOCKED_UNPROVEN';
+        item.validationStatus = 'REVIEW_REQUIRED';
         if (!item.validationFlags.includes('PN_NOT_FOUND')) item.validationFlags.push('PN_NOT_FOUND');
-        item.reasonText = `บันทึกรหัสตัดชำระ ${cleanCode} แล้ว แต่ไม่พบรหัส P/N ในระบบสต็อก`;
+        item.reasonText = `บันทึกรหัสตัดชำระ ${cleanCode} แล้ว แต่ไม่พบรหัส P/N ตัวเครื่องในระบบสต็อก`;
       }
 
       this.updateBatchStats();
@@ -1816,45 +2065,89 @@
       const b = this.currentStagedBatch;
       if (!b) return;
 
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
+
       let selectedCount = 0;
       b.variants.forEach(v => {
         if (v.validationStatus === 'REVIEW_REQUIRED' && v.candidatePn && v.candidatePn.length > 0) {
-          v.selectedPns = [...v.candidatePn];
-          selectedCount += v.candidatePn.length;
+          const validPns = v.candidatePn.filter(pn => {
+            const s = stockMap[pn];
+            if (!s) return false;
+            const isSmartphone = (
+              (s.category && s.category.toLowerCase() === 'smartphone') ||
+              (s.canonicalCategory && s.canonicalCategory.toLowerCase() === 'smartphone') ||
+              (s.category1 && s.category1.toUpperCase().includes('SMART PHONE'))
+            );
+            const isAccessory = (
+              (s.category && ['accessory', 'phone_case', 'screen_protector', 'watch_band', 'premium_gift', 'premium', 'other', 'sim', 'watch', 'buds', 'tablet'].includes(s.category.toLowerCase())) ||
+              (s.category1 && (s.category1.toUpperCase().includes('ACCESSORY') || s.category1.toUpperCase().includes('OTHER'))) ||
+              pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('EP-') || pn.startsWith('EE-') || pn.startsWith('ITFIT')
+            );
+            return isSmartphone && !isAccessory;
+          });
+
+          if (validPns.length > 0) {
+            v.selectedPns = [...validPns];
+            selectedCount += validPns.length;
+          } else {
+            v.selectedPns = [];
+          }
         }
       });
 
       this.filterDiffTable(this.currentFilterType);
-      alert(`☑ เลือก Candidate ทั้งหมดแล้ว (${selectedCount} รหัส P/N) ในรายการรอตรวจสอบ\n\nกดปุ่ม "✓ ยืนยัน P/N ที่เลือกทั้งหมด" เพื่ออนุมัติรายการ`);
+      alert(`☑ เลือกเฉพาะ Candidate P/N ตัวเครื่อง SMARTPHONE (${selectedCount} รหัส P/N)\n\nระบบคัดกรองอุปกรณ์เสริมออกเรียบร้อยแล้ว\nกดปุ่ม "✓ ยืนยัน P/N ที่เลือกทั้งหมด" เพื่ออนุมัติรายการที่ผ่านเกณฑ์`);
     }
 
     confirmAllSelectedCandidates() {
       const b = this.currentStagedBatch;
       if (!b) return;
 
+      const stockDb = window.STOCK_DATABASE || window.STOCK_DATA || [];
+      const stockMap = {};
+      stockDb.forEach(s => { stockMap[s.pn] = s; });
+
       let confirmedCount = 0;
+      let blockedCount = 0;
+
       b.variants.forEach(v => {
         if (v.validationStatus === 'REVIEW_REQUIRED' && v.selectedPns && v.selectedPns.length > 0) {
-          v.confirmedPns = [...v.selectedPns];
-          v.pn = v.selectedPns.join(', ');
-          v.productCodeType = v.selectedPns[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
-          v.validationStatus = 'PASSED_VALIDATION';
-          v.humanReviewRequired = false;
-          v.autoPublishAllowed = true;
-          v.validationFlags = (v.validationFlags || []).filter(f => f !== 'EXACT_PN_UNRESOLVED');
-          v.reasonText = `✓ ยืนยัน Exact P/N แล้ว (${v.selectedPns.length} P/N)`;
-          confirmedCount++;
+          const gate = this.validateCandidateSelection(v.selectedPns, v);
+          if (gate.allowed) {
+            v.confirmedPns = [...v.selectedPns];
+            v.targetPns = v.selectedPns.map(p => {
+              const s = stockMap[p] || {};
+              return {
+                inventoryPn: p,
+                color: s.color || '-',
+                productType: 'SMARTPHONE',
+                matchStatus: 'CONFIRMED'
+              };
+            });
+            v.pn = v.selectedPns.join(', ');
+            v.productCodeType = v.selectedPns[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
+            v.validationStatus = 'PASSED_VALIDATION';
+            v.humanReviewRequired = false;
+            v.autoPublishAllowed = true;
+            v.validationFlags = (v.validationFlags || []).filter(f => f !== 'EXACT_PN_UNRESOLVED' && f !== 'PN_NOT_FOUND');
+            v.reasonText = `✓ ยืนยัน Exact P/N ตัวเครื่องแล้ว (${v.selectedPns.length} P/N)`;
+            confirmedCount++;
+          } else {
+            blockedCount++;
+          }
         }
       });
 
       if (confirmedCount === 0) {
-        alert('ยังไม่มีรายการที่ถูกเลือก Candidate P/N กรุณาเลือก P/N ในตารางก่อนกดยืนยัน (หรือกด "เลือก Candidate ทั้งหมด")');
+        alert('ยังไม่มีรายการที่ผ่านเกณฑ์ Candidate P/N ตัวเครื่อง SMARTPHONE\n\n(รายการที่ไม่พบตัวเครื่อง หรือมีความจุ/ประเภทไม่ตรง จะถูกระงับการยืนยันเพื่อความปลอดภัย)');
         return;
       }
 
       this.updateBatchStats();
       this.filterDiffTable(this.currentFilterType);
-      alert(`✓ ยืนยัน Exact P/N สำเร็จ ${confirmedCount} รายการ!\n\nรายการที่ผ่านเกณฑ์พร้อมสำหรับการ Publish แล้ว`);
+      alert(`✓ ยืนยัน Exact P/N ตัวเครื่องสำเร็จ ${confirmedCount} รายการ!\n${blockedCount > 0 ? `(ระงับ ${blockedCount} รายการที่ไม่ผ่านเกณฑ์ Quality Gate)\n\n` : ''}รายการที่ผ่านเกณฑ์พร้อมสำหรับการ Publish แล้ว`);
     }
 
     resetCandidateSelections() {
@@ -1865,6 +2158,7 @@
         v.selectedPns = [];
         if (v.confirmedPns && v.confirmedPns.length > 0) {
           v.confirmedPns = [];
+          v.targetPns = [];
           v.pn = null;
           v.productCodeType = 'UNKNOWN';
           v.validationStatus = 'REVIEW_REQUIRED';

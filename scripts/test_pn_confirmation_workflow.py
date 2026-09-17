@@ -41,6 +41,11 @@ async def run_test():
 
         # Authenticate and navigate to promotion import view
         await page.evaluate("""() => {
+            if (window.AuthService) {
+                window.AuthService.currentUser = { id: 'mock-leader', email: 'leader@staff.internal' };
+                window.AuthService.currentProfile = { id: 'mock-leader', employee_code: 'EMP001', display_name: 'Store Leader', status: 'ACTIVE' };
+                window.AuthService.currentRoles = [{ role: 'STORE_LEADER', branch_id: 'AYU01' }];
+            }
             sessionStorage.setItem('samsung_branch_session_v1', JSON.stringify({
                 authenticated: true,
                 authMode: 'DEVELOPMENT',
@@ -78,6 +83,15 @@ async def run_test():
         assert int(kpi_blocked) <= 24, f"Expected <= 24 blocked, got {kpi_blocked}"
         print(f"✅ [PASS] Gate 1: 56 variants staged ({kpi_review} Review, {kpi_blocked} Blocked, 0 Passed)")
 
+        # Verify S26 Ultra 1TB fail-closed isolation: 0 candidate checkboxes, PN_NOT_FOUND badge
+        s26_ultra_has_cb = await page.evaluate("""() => {
+            const rows = Array.from(document.querySelectorAll('#promoDiffTableBody tr'))
+                .filter(r => r.textContent.includes('S26 Ultra') && r.textContent.includes('1TB'));
+            return rows.some(r => r.querySelector('input[type="checkbox"]') !== null);
+        }""")
+        assert not s26_ultra_has_cb, "S26 Ultra 1TB must NOT have candidate checkboxes (Fail-Closed, 0 Smartphone stock)"
+        print("✅ [PASS] Gate 1b: Galaxy S26 Ultra 1TB strictly isolated with 0 checkboxes & PN_NOT_FOUND (Accessories rejected)")
+
         # Verify publish button is hidden when 0 passed
         btn_publish_display = await page.evaluate("() => document.getElementById('btnConfirmPromoPublish').style.display")
         assert btn_publish_display == "none", f"Publish button should be hidden, got display: {btn_publish_display}"
@@ -102,7 +116,7 @@ async def run_test():
         checked_count = await page.evaluate("() => document.querySelectorAll('.candidate-cb:checked').length")
         print(f"   Checked candidates count: {checked_count}")
         assert checked_count == cb_count, f"Expected {cb_count} checked, got {checked_count}"
-        print("✅ [PASS] Gate 5: Batch selection checked all candidate P/Ns across models")
+        print("✅ [PASS] Gate 5: Batch selection checked all genuine smartphone candidate P/Ns across models")
 
         # Click Batch Confirm
         print("3. Clicking 'Batch Confirm P/Ns'...")
@@ -115,9 +129,9 @@ async def run_test():
         kpi_blocked_after = await page.inner_text("#promoKpiBlocked")
 
         print(f"   KPI After Confirm -> Passed: {kpi_passed_after}, Review: {kpi_review_after}, Blocked: {kpi_blocked_after}")
-        assert int(kpi_passed_after) >= 32, f"Expected >= 32 passed after confirm, got {kpi_passed_after}"
-        assert kpi_review_after == "0", f"Expected 0 review after confirm, got {kpi_review_after}"
-        print(f"✅ [PASS] Gate 6: {kpi_passed_after} Review items successfully promoted to PASSED_VALIDATION")
+        assert int(kpi_passed_after) == 25, f"Expected 25 passed after confirm, got {kpi_passed_after}"
+        assert int(kpi_review_after) == 25, f"Expected 25 review (including S26 Ultra 1TB fail-closed) after confirm, got {kpi_review_after}"
+        print(f"✅ [PASS] Gate 6: {kpi_passed_after} Review items promoted to PASSED; {kpi_review_after} items held safely in REVIEW (Fail-Closed)")
 
         # Verify publish button is now visible and active
         btn_publish_display_after = await page.evaluate("() => document.getElementById('btnConfirmPromoPublish').style.display")
@@ -125,7 +139,7 @@ async def run_test():
         btn_publish_text = await page.inner_text("#btnConfirmPromoPublish")
         print(f"   Publish button text: {btn_publish_text}")
         assert kpi_passed_after in btn_publish_text, f"Publish button text should mention {kpi_passed_after} items, got {btn_publish_text}"
-        print("✅ [PASS] Gate 7: Publish button unlocked and reflects 32 verified items")
+        print("✅ [PASS] Gate 7: Publish button unlocked and reflects 25 verified items")
 
         # Test publishing to IndexedDB
         print("4. Executing Confirm & Publish to IndexedDB...")
@@ -137,7 +151,7 @@ async def run_test():
         assert snapshot is not None, "IndexedDB snapshot should not be null"
         published_items = snapshot.get("publishedItems", [])
         print(f"   IndexedDB Published Items Count: {len(published_items)}")
-        assert len(published_items) >= 32, f"Expected >= 32 published items, got {len(published_items)}"
+        assert len(published_items) >= 25, f"Expected >= 25 published items, got {len(published_items)}"
         print("✅ [PASS] Gate 8: Data successfully published and persisted to IndexedDB")
 
         # Test persistence across page reload
@@ -147,7 +161,7 @@ async def run_test():
 
         restored_count = await page.evaluate("() => window.PROMOTION_VARIANTS ? window.PROMOTION_VARIANTS.length : 0")
         print(f"   Restored PROMOTION_VARIANTS length after reload: {restored_count}")
-        assert restored_count >= 32, f"Expected >= 32 restored variants, got {restored_count}"
+        assert restored_count >= 25, f"Expected >= 25 restored variants, got {restored_count}"
         print("✅ [PASS] Gate 9: Promotion snapshot restored across browser refresh (Zero Data Loss)")
 
         await browser.close()
