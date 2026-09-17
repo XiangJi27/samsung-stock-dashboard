@@ -66,13 +66,15 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  let caller = null;
+
   // 1. Authenticate caller using Supabase Auth
   async function requireStoreLeader(targetBranchCode) {
     const authHeader = req.headers.authorization || '';
     const token = authHeader.replace(/^Bearer\s+/i, '').trim();
 
-  let caller = null;
-  if (token) {
+    caller = null;
+    if (token) {
     try {
       const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
         headers: {
@@ -274,7 +276,7 @@ module.exports = async function handler(req, res) {
             offers: incomingItems,
             validationErrors: incomingErrors
           },
-          p_user_id: caller.id
+          p_user_id: caller?.id || null
         })
       });
 
