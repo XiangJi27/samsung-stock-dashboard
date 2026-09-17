@@ -257,8 +257,93 @@
       errors.push('GATE_8_APPRAISAL_VALUE_MIXED_WITH_CAMPAIGN');
     }
 
+    // Gate 9: Student promotion must be exclusive
+    if (promo.promotionType === 'STUDENT_EXCLUSIVE' || promo.couponCode === 'Studentcrd') {
+      if (promo.canCombineWithOtherPromotions !== false || promo.stackingPolicy !== 'EXCLUSIVE') {
+        errors.push('GATE_9_STUDENT_PROMOTION_MUST_BE_EXCLUSIVE');
+      }
+      if (promo.standardDiscount > 0 || promo.tradeUpDiscount > 0) {
+        errors.push('GATE_9_STUDENT_PROMOTION_CANNOT_COMBINE_DISCOUNTS');
+      }
+    }
+
     return {
       isValid: errors.length === 0,
+      errors
+    };
+  }
+
+  /**
+   * Enterprise Promotion Option Validator (Field-level & Conflict Detection)
+   */
+  function validatePromotionOption(option) {
+    const errors = [];
+    const regularPrice = Number(option.regularPrice || 0);
+    const standardDiscount = Number(option.standardDiscount || 0);
+    const tradeUpDiscount = Number(option.tradeUpDiscount || 0);
+    const studentDiscount = Number(option.studentDiscountAmount || (option.discountPercent ? Math.round((regularPrice * option.discountPercent) / 100) : 0));
+
+    // Check 1: Price calculation equation
+    const expectedNet = regularPrice - standardDiscount - tradeUpDiscount - studentDiscount;
+    if (option.netPrice !== undefined && option.netPrice !== expectedNet) {
+      errors.push({
+        code: 'NET_PRICE_MISMATCH',
+        severity: 'BLOCKER',
+        expected: expectedNet,
+        actual: option.netPrice,
+        message: `ราคาสุทธิไม่ตรงสูตร (คาดหวัง ${expectedNet} แต่ได้ ${option.netPrice})`
+      });
+    }
+
+    // Check 2: Trade Up requires trade-in
+    if (tradeUpDiscount > 0 && option.requiresTradeIn !== true) {
+      errors.push({
+        code: 'TRADE_UP_REQUIREMENT_MISSING',
+        severity: 'BLOCKER',
+        field: 'requiresTradeIn',
+        message: 'ส่วนลด Trade Up ต้องมีเครื่องมาแลก (requiresTradeIn = true)'
+      });
+    }
+
+    // Check 3: Student must be exclusive
+    if (option.optionType === 'STUDENT_EXCLUSIVE' || option.couponCode === 'Studentcrd') {
+      if (option.canCombineWithOtherPromotions !== false || option.stackingPolicy !== 'EXCLUSIVE') {
+        errors.push({
+          code: 'STUDENT_PROMOTION_MUST_BE_EXCLUSIVE',
+          severity: 'BLOCKER',
+          field: 'stackingPolicy',
+          message: 'โปรนักเรียน/นักศึกษาต้องเป็น Exclusive และไม่ร่วมโปรอื่น'
+        });
+      }
+      if (standardDiscount > 0 || tradeUpDiscount > 0) {
+        errors.push({
+          code: 'STUDENT_STACKING_CONFLICT',
+          severity: 'BLOCKER',
+          message: 'Studentcrd ห้ามใช้ร่วมกับคูปอง 01 หรือ Trade Up'
+        });
+      }
+    }
+
+    // Check 4: SF+ down payment vs discount confusion
+    if (option.paymentCondition === 'SF_PLUS' && option.downPaymentAsDiscount === true) {
+      errors.push({
+        code: 'DOWN_PAYMENT_MISCLASSIFIED',
+        severity: 'BLOCKER',
+        message: 'เงินดาวน์ไม่ใช่ส่วนลดราคาสินค้า ห้ามจัดเข้า standardDiscount'
+      });
+    }
+
+    // Check 5: Discount cannot exceed regular price
+    if (standardDiscount + tradeUpDiscount + studentDiscount > regularPrice) {
+      errors.push({
+        code: 'DISCOUNT_EXCEEDS_REGULAR_PRICE',
+        severity: 'BLOCKER',
+        message: 'ยอดส่วนลดรวมเกินราคาปกติของสินค้า'
+      });
+    }
+
+    return {
+      isValid: errors.filter(e => e.severity === 'BLOCKER').length === 0,
       errors
     };
   }
@@ -269,7 +354,8 @@
     calculateS25FePromotion,
     calculateA57Promotion,
     calculateStudentPromotion,
-    validatePromotionGates
+    validatePromotionGates,
+    validatePromotionOption
   };
 
   if (typeof module !== 'undefined' && module.exports) {
@@ -279,3 +365,4 @@
     window.PromotionCalculator = api;
   }
 })(typeof window !== 'undefined' ? window : global);
+

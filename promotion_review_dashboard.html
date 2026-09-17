@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promotion Review & Guided Learning • Samsung Branch Operations</title>
+  <meta name="description" content="หน้าจอตรวจสอบโปรโมชั่น 3 คอลัมน์ (ข้อมูล Excel • AI ตีความ • Rules Engine) พร้อมระบบบันทึกการเรียนรู้ของผู้จัดการ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #111827;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6;
+      --cyan: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+      --font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-branch {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--accent);
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .kpi-val { font-size: 24px; font-weight: 700; color: #fff; }
+    .kpi-lbl { font-size: 12px; color: var(--text-muted); }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 12px;
+      align-items: center;
+    }
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { color: #fff; border-color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+    .search-input {
+      margin-left: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      width: 250px;
+    }
+
+    .table-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    th {
+      background: #151d2f;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+    }
+
+    /* Badges */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .pill-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #059669; }
+    .pill-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid #2563eb; }
+    .pill-orange { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #d97706; }
+    .pill-red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #dc2626; }
+
+    /* Modal / 3-Column Review Grid */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1240px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+    .modal-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr 1fr;
+      gap: 20px;
+    }
+    .col-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .col-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .col-1 .col-title { color: #38bdf8; }
+    .col-2 .col-title { color: #a78bfa; }
+    .col-3 .col-title { color: #34d399; }
+
+    .diff-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: #0d1322;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-approve { background: rgba(16, 185, 129, 0.2); border-color: #059669; color: #34d399; }
+    .btn-approve:hover { background: #059669; color: #fff; }
+    .btn-edit { background: rgba(59, 130, 246, 0.2); border-color: #2563eb; color: #60a5fa; }
+    .btn-edit:hover { background: #2563eb; color: #fff; }
+    .btn-exclusive { background: rgba(139, 92, 246, 0.2); border-color: #7c3aed; color: #c4b5fd; }
+    .btn-exclusive:hover { background: #7c3aed; color: #fff; }
+    .btn-reject { background: rgba(239, 68, 68, 0.2); border-color: #dc2626; color: #f87171; }
+    .btn-reject:hover { background: #dc2626; color: #fff; }
+
+    /* Manager Teaching Prompt Modal */
+    .teach-dialog-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      padding: 20px;
+    }
+    .teach-dialog-overlay.open { display: flex; }
+    .teach-card {
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .radio-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      margin-top: 12px;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.4);
+    }
+    .radio-option:hover { border-color: var(--accent); }
+    .radio-option input[type="radio"] { margin-top: 3px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand-title">
+      <span>🛡️ Promotion Review & Guided Learning Center</span>
+      <span class="badge-branch">Ayutthaya City Park • 3-Column Inspection</span>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <span style="font-size: 12px; color: var(--text-muted);">
+        Policy: <strong>AUTO_PUBLISH = OFF</strong> | Manager Guided Learning
+      </span>
+      <button class="btn-action btn-approve" onclick="activateCampaign()">
+        🚀 ทำการ Activate แคมเปญแบบ Transactional
+      </button>
+    </div>
+  </header>
+
+  <!-- KPI Strip -->
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-val" id="kpiTotal">12</div>
+      <div class="kpi-lbl">Total Promotion Drafts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #34d399;" id="kpiPassed">9</div>
+      <div class="kpi-lbl">สูตรผ่านและโครงสร้างชัดเจน (High 95-100)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #fbbf24;" id="kpiReview">2</div>
+      <div class="kpi-lbl">ต้องให้ผู้จัดการตรวจ (Review 60-79)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #f87171;" id="kpiBlockers">1</div>
+      <div class="kpi-lbl">ไม่อนุญาตให้นำเข้า (Blockers &lt;60)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #60a5fa;" id="kpiRulesLearned">5</div>
+      <div class="kpi-lbl">Knowledge Rules ในคลังกลาง</div>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="ALL">ทั้งหมด (All Drafts)</button>
+    <button class="filter-btn" data-filter="HIGH">ความมั่นใจสูง (95–100)</button>
+    <button class="filter-btn" data-filter="REVIEW">รอผู้จัดการตรวจ (60–79)</button>
+    <button class="filter-btn" data-filter="BLOCKED">มีข้อผิดพลาดบล็อก (&lt;60)</button>
+    <button class="filter-btn" data-filter="S26U">Galaxy S26 Ultra</button>
+    <button class="filter-btn" data-filter="S25FE">Galaxy S25 FE</button>
+    <button class="filter-btn" data-filter="A57">Galaxy A57 5G</button>
+    <button class="filter-btn" data-filter="STUDENT">Studentcrd 15%</button>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 ค้นหารุ่น, P/N, คูปอง...">
+  </div>
+
+  <!-- Table View -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>สถานะ</th>
+          <th>ความมั่นใจ AI</th>
+          <th>Exact P/N</th>
+          <th>ชื่อรุ่น &amp; ความจุ</th>
+          <th>ประเภทโปรโมชั่น</th>
+          <th>คูปอง / แคมเปญ</th>
+          <th>ราคาปกติ RRP</th>
+          <th>ส่วนลด</th>
+          <th>Trade Up</th>
+          <th>ราคาสุทธิ Net</th>
+          <th>สูตร Rules Engine</th>
+          <th>การกระทำ</th>
+        </tr>
+      </thead>
+      <tbody id="promoTableBody">
+        <!-- Rendered by JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3-Column Inspection Modal -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle" style="font-size: 16px; font-weight: 700; color: #fff;">PROMOTION ROW INSPECTION</h3>
+          <span id="modalSubtitle" style="font-size: 12px; color: var(--text-muted);"></span>
+        </div>
+        <button style="background: transparent; border: none; color: #94a3b8; font-size: 22px; cursor: pointer;" onclick="closeModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Column 1: ข้อมูลจาก Excel -->
+        <div class="col-card col-1">
+          <div class="col-title">
+            <span>1. ข้อมูลจาก Excel (Raw Sheet)</span>
+            <span style="font-size: 10px; color: #38bdf8;">INPUT SOURCE</span>
+          </div>
+          <div id="col1Content"></div>
+        </div>
+
+        <!-- Column 2: AI ตีความ & ความมั่นใจ -->
+        <div class="col-card col-2">
+          <div class="col-title">
+            <span>2. AI ตีความ &amp; ความมั่นใจ</span>
+            <span id="col2ConfidenceBadge"></span>
+          </div>
+          <div id="col2Content"></div>
+        </div>
+
+        <!-- Column 3: Rules Engine ตรวจสูตร & ข้อห้าม -->
+        <div class="col-card col-3">
+          <div class="col-title">
+            <span>3. ผลคำนวณ Rules Engine</span>
+            <span id="col3FormulaBadge"></span>
+          </div>
+          <div id="col3Content"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div style="font-size: 12px; color: #94a3b8;">
+          ผู้จัดการตรวจสอบ: คลิกปุ่มเพื่อดำเนินการ หรือแก้ไขเพื่อสอนระบบ
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-action btn-approve" onclick="handleApprove()">✓ อนุมัติรายการนี้</button>
+          <button class="btn-action btn-edit" onclick="openTeachingPrompt('EDIT_TYPE')">✏️ แก้ประเภทโปรโมชั่น</button>
+          <button class="btn-action btn-edit" onclick="openTeachingPrompt('EDIT_COUPON')">🏷️ แก้คูปอง / ส่วนลด</button>
+          <button class="btn-action btn-exclusive" onclick="openTeachingPrompt('SET_EXCLUSIVE')">⛔ กำหนดเป็น Exclusive</button>
+          <button class="btn-action btn-reject" onclick="handleReject()">✕ ปฏิเสธรายการ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teaching Prompt Dialog (Modal on Edit) -->
+  <div class="teach-dialog-overlay" id="teachDialog">
+    <div class="teach-card">
+      <h3 style="color: #fff; font-size: 16px; margin-bottom: 8px;">🧠 บันทึกการแก้ไขของผู้จัดการเพื่อสอนระบบ</h3>
+      <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5;">
+        ต้องการให้ระบบจดจำรูปแบบการแก้ไขนี้อย่างไรสำหรับไฟล์โปรโมชั่นในรอบเดือนถัดไป?
+      </p>
+
+      <div class="radio-option">
+        <input type="radio" id="optOneOff" name="teachScope" value="ONE_OFF" checked>
+        <label for="optOneOff">
+          <strong style="color: #fff; display: block; font-size: 13px;">ใช้การแก้นี้เฉพาะรายการนี้ (แนะนำ)</strong>
+          <span style="color: #94a3b8; font-size: 12px;">แก้ไขเฉพาะรายการปัจจุบัน ไม่สร้างกฎถาวร เพื่อลดความเสี่ยงจากการสร้างกฎที่กว้างเกินไป</span>
+        </label>
+      </div>
+
+      <div class="radio-option">
+        <input type="radio" id="optKnowledgeRule" name="teachScope" value="KNOWLEDGE_RULE">
+        <label for="optKnowledgeRule">
+          <strong style="color: #60a5fa; display: block; font-size: 13px;">สร้างกฎความรู้สำหรับรายการรูปแบบเดียวกันในอนาคต</strong>
+          <span style="color: #94a3b8; font-size: 12px;">บันทึกลง Promotion Knowledge Base เมื่อพบคำหรือรูปแบบเดียวกันในเดือนถัดไป ระบบจะจัดหมวดหมู่อัตโนมัติ</span>
+        </label>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn-action" style="background: #334155; color: #fff;" onclick="closeTeachingDialog()">ยกเลิก</button>
+        <button class="btn-action btn-approve" onclick="saveTeachingCorrection()">ยืนยันการแก้ไข</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Knowledge Base & Calculator -->
+  <script src="assets/js/promotion-knowledge-base.js"></script>
+  <script src="assets/js/promotion-calculator.js"></script>
+
+  <script>
+    // Promotion Draft Master Sample Data Grounded on Prompt Specifications
+    let drafts = [
+      {
+        id: 'DRAFT-001',
+        sheet: 'Promotion Mobile Sep',
+        row: 14,
+        cellRange: 'B14:K14',
+        inventoryPn: 'SM-S938B-1TB',
+        model: 'Galaxy S26 Ultra',
+        capacity: '1TB',
+        regularPrice: 66900,
+        standardDiscount: 5000,
+        tradeUpDiscount: 5000,
+        couponCode: 'COUPON_01',
+        tradeUpCampaign: 'T-UP-CO-S',
+        promotionType: 'STANDARD_WITH_TRADE_UP',
+        requiresTradeIn: true,
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
+        customerSegment: 'GENERAL',
+        paymentCondition: 'ANY',
+        rawText: 'S26 Ultra 1TB ลด 5,000 ต่อที่ 1 คูปอง 01 และลด Trade Up 5,000 ต่อที่ 2',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-002',
+        sheet: 'Promotion Mobile Sep',
+        row: 15,
+        cellRange: 'B15:K15',
+        inventoryPn: 'SM-S938B-512',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        regularPrice: 54900,
+        standardDiscount: 5000,
+        tradeUpDiscount: 5000,
+        couponCode: 'COUPON_01',
+        tradeUpCampaign: 'T-UP-CO-S',
+        promotionType: 'STANDARD_WITH_TRADE_UP',
+        requiresTradeIn: true,
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
+        customerSegment: 'GENERAL',
+        paymentCondition: 'ANY',
+        rawText: 'S26 Ultra 512GB ลด 5,000 + Trade Up 5,000',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-003',
+        sheet: 'Promotion Mobile Sep',
+        row: 16,
+        cellRange: 'B16:K16',
+        inventoryPn: 'SM-S938B-512',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        regularPrice: 54900,
+        standardDiscount: 0,
+        tradeUpDiscount: 0,
+        discountPercent: 15,
+        studentDiscountAmount: 8235,
+        couponCode: 'Studentcrd',
+        promotionType: 'STUDENT_EXCLUSIVE',
+        requiresTradeIn: false,
+        stackingPolicy: 'EXCLUSIVE',
+        blocksAllOtherPromotions: true,
+        customerSegment: 'STUDENT',
+        paymentCondition: 'ANY',
+        rawText: 'โปรนักเรียน/นักศึกษา Studentcrd ลด 15% ไม่ร่วมคูปอง 01/02 และไม่ร่วม Trade Up',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-004',
+        sheet: 'Promotion Mobile Sep',
+        row: 22,
+        cellRange: 'B22:K22',
+        inventoryPn: 'SM-S721B-256',
+        model: 'Galaxy S25 FE',
+        capacity: '256GB',
+        regularPrice: 26900,
+        standardDiscount: 3000,
+        tradeUpDiscount: 0,
+        couponCode: 'COUPON_01',
+        promotionType: 'SF_PLUS_FINANCING',
+        paymentCondition: 'SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        rawText: 'S25 FE 256GB (SF+ คูปอง 01 ลด 3,000 ดาวน์ไม่เกิน 10% ไม่มีส่วนลดอื่น)',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-005',
+        sheet: 'Promotion Mobile Sep',
+        row: 23,
+        cellRange: 'B23:K23',
+        inventoryPn: 'SM-S721B-256',
+        model: 'Galaxy S25 FE',
+        capacity: '256GB',
+        regularPrice: 26900,
+        standardDiscount: 6000,
+        tradeUpDiscount: 0,
+        couponCode: 'COUPON_02',
+        promotionType: 'NON_SF_PLUS_DISCOUNT',
+        paymentCondition: 'NON_SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        rawText: 'S25 FE 256GB ไม่ร่วม SF+ / ลด 6,000 คูปอง 02',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-006',
+        sheet: 'Promotion Mobile Sep',
+        row: 24,
+        cellRange: 'B24:K24',
+        inventoryPn: 'SM-S721B-128',
+        model: 'Galaxy S25 FE',
+        capacity: '128GB',
+        regularPrice: 22900,
+        standardDiscount: 5000,
+        tradeUpDiscount: 0,
+        couponCode: 'COUPON_02',
+        promotionType: 'NON_SF_PLUS_DISCOUNT',
+        paymentCondition: 'NON_SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        rawText: 'S25 FE 128GB ไม่ร่วม SF+ / ลด 5,000 คูปอง 02',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-007',
+        sheet: 'Promotion Mobile Sep',
+        row: 35,
+        cellRange: 'B35:K35',
+        inventoryPn: 'SM-A576B-512',
+        model: 'Galaxy A57 5G',
+        capacity: '12/512GB',
+        regularPrice: 27999,
+        standardDiscount: 0,
+        estimatedDownPayment: 1400,
+        couponCode: null,
+        promotionType: 'SF_PLUS_FINANCING',
+        paymentCondition: 'SF_PLUS',
+        exclusiveGroup: 'A57_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        rawText: 'Galaxy A57 5G 512GB (SF+ ดาวน์ไม่เกิน 5% วงเล็บ 1,400 คือเงินดาวน์ ไม่ใช่ส่วนลด)',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-008',
+        sheet: 'Promotion Mobile Sep',
+        row: 36,
+        cellRange: 'B36:K36',
+        inventoryPn: 'SM-A576B-512',
+        model: 'Galaxy A57 5G',
+        capacity: '12/512GB',
+        regularPrice: 27999,
+        standardDiscount: 2000,
+        couponCode: 'COUPON_01',
+        promotionType: 'NON_SF_PLUS_DISCOUNT',
+        paymentCondition: 'NON_SF_PLUS',
+        exclusiveGroup: 'A57_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        rawText: 'Galaxy A57 5G ไม่ร่วม SF+ / คูปอง 01 ลด 2,000',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-009',
+        sheet: 'Promotion Mobile Sep',
+        row: 48,
+        cellRange: 'B48:K48',
+        inventoryPn: 'SM-F966B-1TB',
+        model: 'Galaxy Z Fold8',
+        capacity: '1TB',
+        regularPrice: 79900,
+        standardDiscount: 0,
+        tradeUpDiscount: 7000,
+        couponCode: 'T-UP-CO-S',
+        promotionType: 'TRADE_UP_ONLY',
+        requiresTradeIn: true,
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
+        rawText: 'Fold8 1TB Trade Up Only ลด 7,000 เมื่อนำเครื่องมาเทรด (ไม่มีส่วนลดปกติ)',
+        status: 'DRAFT'
+      },
+      // 2 Review Required Items
+      {
+        id: 'DRAFT-010',
+        sheet: 'Promotion Mobile Sep',
+        row: 52,
+        cellRange: 'B52:K52',
+        inventoryPn: null, // Missing exact PN
+        model: 'Galaxy S26+',
+        capacity: '512GB',
+        regularPrice: 48900,
+        standardDiscount: 12000,
+        couponCode: 'COUPON_01',
+        promotionType: 'STANDARD_DISCOUNT',
+        rawText: 'S26+ 512GB ลด 12,000 คูปอง 01 (ไม่มี P/N ในไฟล์)',
+        status: 'REVIEW_REQUIRED'
+      },
+      {
+        id: 'DRAFT-011',
+        sheet: 'Promotion Mobile Sep',
+        row: 55,
+        cellRange: 'B55:K55',
+        inventoryPn: 'SM-S938B-1TB',
+        model: 'Galaxy S26 Ultra',
+        capacity: '1TB',
+        regularPrice: 66900,
+        hasPromoMention: true,
+        discountAmount: null, // Empty cell
+        couponCode: null,
+        promotionType: 'REVIEW_REQUIRED',
+        rawText: 'S26 Ultra 1TB ช่องส่วนลดนักศึกษาเป็นช่องว่าง (ห้ามเดาส่วนลด 15%)',
+        status: 'REVIEW_REQUIRED'
+      },
+      // 1 Blocker Error
+      {
+        id: 'DRAFT-012',
+        sheet: 'Promotion Mobile Sep',
+        row: 60,
+        cellRange: 'B60:K60',
+        inventoryPn: 'SM-S938B-512',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        regularPrice: 54900,
+        standardDiscount: 5000,
+        tradeUpDiscount: 5000,
+        requiresTradeIn: false, // ILLEGAL: Trade Up discount without requiring trade-in
+        netPrice: 44900,
+        promotionType: 'STANDARD_WITH_TRADE_UP',
+        rawText: 'S26 Ultra 512GB ระบุส่วนลดเทรดอัพ แต่ไม่ได้ติ๊กเงื่อนไขต้องมีเครื่องแลก',
+        status: 'BLOCKED'
+      }
+    ];
+
+    let selectedDraft = null;
+    let activeFilter = 'ALL';
+
+    function calculateNetPrice(d) {
+      const regular = Number(d.regularPrice || 0);
+      const std = Number(d.standardDiscount || 0);
+      const tu = Number(d.tradeUpDiscount || 0);
+      const stu = d.discountPercent ? Math.round((regular * d.discountPercent) / 100) : Number(d.studentDiscountAmount || 0);
+      return regular - std - tu - stu;
+    }
+
+    function renderTable() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const tbody = document.getElementById('promoTableBody');
+
+      const filtered = drafts.filter(d => {
+        const matchQ = !q || 
+          (d.model && d.model.toLowerCase().includes(q)) ||
+          (d.inventoryPn && d.inventoryPn.toLowerCase().includes(q)) ||
+          (d.couponCode && d.couponCode.toLowerCase().includes(q));
+
+        if (!matchQ) return false;
+
+        if (activeFilter === 'HIGH') return d.status === 'DRAFT' || d.status === 'APPROVED';
+        if (activeFilter === 'REVIEW') return d.status === 'REVIEW_REQUIRED';
+        if (activeFilter === 'BLOCKED') return d.status === 'BLOCKED';
+        if (activeFilter === 'S26U') return d.model.includes('S26 Ultra');
+        if (activeFilter === 'S25FE') return d.model.includes('S25 FE');
+        if (activeFilter === 'A57') return d.model.includes('A57');
+        if (activeFilter === 'STUDENT') return d.promotionType === 'STUDENT_EXCLUSIVE' || d.couponCode === 'Studentcrd';
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="12" style="text-align: center; padding: 40px; color: var(--text-muted);">ไม่พบรายการโปรโมชั่น</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(d => {
+        const net = calculateNetPrice(d);
+        const bounds = PromotionKnowledgeBase.validateDraftBounds(d);
+        const conf = PromotionKnowledgeBase.calculateConfidenceScore(d, bounds.issues);
+
+        let statusPill = `<span class="pill pill-blue">DRAFT</span>`;
+        if (d.status === 'APPROVED') statusPill = `<span class="pill pill-green">APPROVED</span>`;
+        if (d.status === 'REVIEW_REQUIRED' || bounds.needsReview) statusPill = `<span class="pill pill-orange">REVIEW_REQUIRED</span>`;
+        if (d.status === 'BLOCKED' || !bounds.isValid) statusPill = `<span class="pill pill-red">BLOCKED</span>`;
+
+        let confPill = `<span class="pill pill-green">98 (สูง)</span>`;
+        if (conf.score < 60) confPill = `<span class="pill pill-red">${conf.score} (บล็อก)</span>`;
+        else if (conf.score < 80) confPill = `<span class="pill pill-orange">${conf.score} (ตรวจ)</span>`;
+        else if (conf.score < 95) confPill = `<span class="pill pill-blue">${conf.score} (ใหม่)</span>`;
+
+        let formulaPill = `<span class="pill pill-green">PASS</span>`;
+        if (d.requiresTradeIn === false && (d.tradeUpDiscount || 0) > 0) {
+          formulaPill = `<span class="pill pill-red">MISSING_TU</span>`;
+        } else if (!bounds.isValid) {
+          formulaPill = `<span class="pill pill-red">FAIL</span>`;
+        } else if (bounds.needsReview) {
+          formulaPill = `<span class="pill pill-orange">CHECK</span>`;
+        }
+
+        return `
+          <tr onclick="openInspectionModal('${d.id}')">
+            <td>${statusPill}</td>
+            <td>${confPill}</td>
+            <td><strong>${d.inventoryPn || '<span style="color:var(--danger)">NOT_SPECIFIED</span>'}</strong></td>
+            <td>${d.model} <span style="color:var(--text-muted); font-size:11px;">(${d.capacity})</span></td>
+            <td><span class="pill pill-blue">${d.promotionType}</span></td>
+            <td>${d.couponCode || d.tradeUpCampaign || '-'}</td>
+            <td>฿${(d.regularPrice || 0).toLocaleString('th-TH')}</td>
+            <td>${d.standardDiscount ? '฿' + d.standardDiscount.toLocaleString('th-TH') : (d.discountPercent ? d.discountPercent + '%' : '-')}</td>
+            <td>${d.tradeUpDiscount ? '฿' + d.tradeUpDiscount.toLocaleString('th-TH') : '-'}</td>
+            <td><strong style="color:#34d399;">฿${net.toLocaleString('th-TH')}</strong></td>
+            <td>${formulaPill}</td>
+            <td>
+              <button class="btn-action btn-edit" style="padding: 4px 8px; font-size: 11px;" onclick="event.stopPropagation(); openInspectionModal('${d.id}')">
+                ตรวจ 3 คอลัมน์ &rarr;
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openInspectionModal(id) {
+      selectedDraft = drafts.find(x => x.id === id);
+      if (!selectedDraft) return;
+
+      const d = selectedDraft;
+      const net = calculateNetPrice(d);
+      const bounds = PromotionKnowledgeBase.validateDraftBounds(d);
+      const conf = PromotionKnowledgeBase.calculateConfidenceScore(d, bounds.issues);
+
+      document.getElementById('modalTitle').innerText = `${d.model} (${d.capacity}) • ${d.inventoryPn || 'MISSING_PN'}`;
+      document.getElementById('modalSubtitle').innerText = `Source: ${d.sheet} [${d.cellRange}] • Row ${d.row}`;
+
+      // 1. Column 1: ข้อมูลจาก Excel
+      document.getElementById('col1Content').innerHTML = `
+        <div class="diff-box">
+          <div><strong>แถวไฟล์ Excel:</strong> Row ${d.row} (${d.cellRange})</div>
+          <div><strong>ข้อความต้นทาง:</strong> <em>"${d.rawText}"</em></div>
+          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:8px 0;">
+          <div><strong>รุ่น &amp; ความจุ:</strong> ${d.model} ${d.capacity}</div>
+          <div><strong>Exact P/N:</strong> ${d.inventoryPn || '<span style="color:var(--danger)">ไม่พบในไฟล์ (ห้ามเดา)</span>'}</div>
+          <div><strong>ราคาป้าย RRP:</strong> ฿${(d.regularPrice || 0).toLocaleString('th-TH')}</div>
+          <div><strong>ส่วนลดในช่อง:</strong> ${d.standardDiscount ? '฿' + d.standardDiscount.toLocaleString('th-TH') : (d.discountPercent ? d.discountPercent + '%' : 'ว่าง / ไม่ระบุ')}</div>
+          <div><strong>Trade Up ในช่อง:</strong> ${d.tradeUpDiscount ? '฿' + d.tradeUpDiscount.toLocaleString('th-TH') : 'ไม่มี'}</div>
+        </div>
+      `;
+
+      // 2. Column 2: AI ตีความ & ความมั่นใจ
+      document.getElementById('col2ConfidenceBadge').innerHTML = `
+        <span class="pill ${conf.score >= 95 ? 'pill-green' : (conf.score >= 80 ? 'pill-blue' : (conf.score >= 60 ? 'pill-orange' : 'pill-red'))}">
+          ความมั่นใจ ${conf.score}% (${conf.tier})
+        </span>
+      `;
+
+      document.getElementById('col2Content').innerHTML = `
+        <div class="diff-box">
+          <div><strong>ประเภทโปรโมชั่น:</strong> <span class="pill pill-blue">${d.promotionType}</span></div>
+          <div><strong>คูปองที่จับคู่:</strong> ${d.couponCode || 'ไม่มีคูปอง'}</div>
+          <div><strong>เงื่อนไขชำระเงิน:</strong> ${d.paymentCondition || 'ANY'}</div>
+          <div><strong>กลุ่มลูกค้า:</strong> ${d.customerSegment || 'GENERAL'}</div>
+          <div><strong>นโยบาย Stacking:</strong> <span class="pill pill-orange">${d.stackingPolicy || 'SINGLE'}</span></div>
+          <div><strong>Exclusive Group:</strong> ${d.exclusiveGroup || '-'}</div>
+          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:8px 0;">
+          <div style="font-size:11.5px; color:#cbd5e1;">
+            <strong>การประเมินความมั่นใจ:</strong>
+            <ul style="padding-left:18px; margin-top:4px;">
+              ${conf.reasons.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `;
+
+      // 3. Column 3: Rules Engine ตรวจสอบสูตร
+      const isTuMissing = d.requiresTradeIn === false && (d.tradeUpDiscount || 0) > 0;
+      const isEquationPass = !bounds.issues.some(i => i.code === 'NET_PRICE_MISMATCH') && !isTuMissing;
+
+      document.getElementById('col3FormulaBadge').innerHTML = `
+        <span class="pill ${isEquationPass ? 'pill-green' : 'pill-red'}">
+          ${isEquationPass ? 'FORMULA_PASS' : 'GATE_VIOLATION'}
+        </span>
+      `;
+
+      document.getElementById('col3Content').innerHTML = `
+        <div class="diff-box">
+          <div><strong>สูตรคำนวณสุทธิ:</strong></div>
+          <div style="font-family:monospace; background:rgba(0,0,0,0.4); padding:6px 10px; border-radius:6px; margin:6px 0; color:#34d399;">
+            ${(d.regularPrice || 0).toLocaleString()} - ${(d.standardDiscount || 0).toLocaleString()} - ${(d.tradeUpDiscount || 0).toLocaleString()} ${d.discountPercent ? '- (' + d.discountPercent + '%)' : ''} = ฿${net.toLocaleString('th-TH')}
+          </div>
+          <div><strong>ผลตรวจ Rules Engine:</strong></div>
+          <div style="margin-top:6px;">
+            ${isTuMissing ? '<div style="color:var(--danger)">✕ TRADE_UP_REQUIREMENT_MISSING: มีส่วนลด Trade Up แต่ requiresTradeIn เป็น false</div>' : '<div style="color:#34d399;">✓ Trade Up Rule: ผ่านเกณฑ์</div>'}
+            ${d.promotionType === 'STUDENT_EXCLUSIVE' ? '<div style="color:#34d399;">✓ Student Exclusive Gate: แยกเส้นทางเด็ดขาด ไม่ปนคูปอง 01/Trade Up</div>' : ''}
+            ${d.exclusiveGroup ? `<div style="color:#60a5fa;">✓ Exclusive Group Gate: ควบคุมในกลุ่ม [${d.exclusiveGroup}] ห้ามเลือกซ้อน</div>` : ''}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('reviewModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('reviewModal').classList.remove('open');
+    }
+
+    function handleApprove() {
+      if (!selectedDraft) return;
+      selectedDraft.status = 'APPROVED';
+      closeModal();
+      renderTable();
+      alert(`✓ อนุมัติรายการ [${selectedDraft.model} ${selectedDraft.capacity}] เรียบร้อยแล้ว (สถานะเป็น APPROVED พร้อม Activate)`);
+    }
+
+    function handleReject() {
+      if (!selectedDraft) return;
+      selectedDraft.status = 'BLOCKED';
+      closeModal();
+      renderTable();
+      alert(`✕ ปฏิเสธรายการ [${selectedDraft.model} ${selectedDraft.capacity}] ป้องกันไม่ให้นำเข้าระบบ`);
+    }
+
+    let currentActionType = 'EDIT_TYPE';
+    function openTeachingPrompt(actionType) {
+      currentActionType = actionType;
+      document.getElementById('teachDialog').classList.add('open');
+    }
+
+    function closeTeachingDialog() {
+      document.getElementById('teachDialog').classList.remove('open');
+    }
+
+    function saveTeachingCorrection() {
+      const isKnowledgeRule = document.getElementById('optKnowledgeRule').checked;
+      if (!selectedDraft) return;
+
+      if (isKnowledgeRule) {
+        // Teach system and save permanent rule
+        PromotionKnowledgeBase.addCorrectionRule({
+          correctionType: 'SEMANTIC_MAPPING',
+          sourceTextPattern: selectedDraft.rawText.substring(0, 20),
+          incorrectField: 'standardDiscount',
+          correctField: 'estimatedDownPayment',
+          approvedBy: 'STORE_LEADER'
+        });
+        document.getElementById('kpiRulesLearned').innerText = Number(document.getElementById('kpiRulesLearned').innerText) + 1;
+        alert(`🧠 ระบบได้บันทึกกฎความรู้ใหม่ลง Promotion Knowledge Base เรียบร้อยแล้ว!\nครั้งถัดไปเมื่อพบข้อความคล้ายกัน ระบบจะจัดเข้ากลุ่มที่ถูกต้องอัตโนมัติ`);
+      } else {
+        alert(`✓ บันทึกการแก้ไขเฉพาะรายการนี้เรียบร้อย (ไม่สร้างกฎกว้างเกินไป)`);
+      }
+
+      selectedDraft.status = 'APPROVED';
+      closeTeachingDialog();
+      closeModal();
+      renderTable();
+    }
+
+    function activateCampaign() {
+      const blockers = drafts.filter(d => d.status === 'BLOCKED');
+      const reviews = drafts.filter(d => d.status === 'REVIEW_REQUIRED');
+
+      if (blockers.length > 0) {
+        alert(`⛔ การ Activate ถูกบล็อก (Fail-Closed Gate)!\nพบ Blocker ค้างอยู่ ${blockers.length} รายการ ต้องแก้ไขหรือคัดออกก่อนดำเนินการ`);
+        return;
+      }
+
+      if (reviews.length > 0) {
+        alert(`⚠️ การ Activate ถูกบล็อก!\nพบรายการรอผู้จัดการตรวจ ${reviews.length} รายการ กรุณาตรวจให้ครบทุกรายการ`);
+        return;
+      }
+
+      alert(`🎉 แคมเปญโปรโมชั่นผ่านการ Activate แบบ Transactional เรียบร้อยแล้ว!\nทุก Offer เปิดใช้งาน (ACTIVE) และแคมเปญเดิมถูกระงับ (SUPERSEDED) โดยสมบูรณ์`);
+    }
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderTable();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      renderTable();
+    });
+
+    renderTable();
+  </script>
+</body>
+</html>
