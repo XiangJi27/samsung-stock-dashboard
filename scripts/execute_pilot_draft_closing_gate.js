@@ -1,6 +1,7 @@
 /**
  * Samsung Branch Operations - Execute Pilot Promotion Draft & Closing Gate Suite
- * Ingests a production-like promotion draft via Atomic RPC and validates all 19 queries.
+ * Ingests a production-like promotion draft via Atomic RPC using genuine active stock P/Ns
+ * and validates all 22 closing gate queries against Supabase PostgreSQL.
  */
 const fs = require('fs');
 const path = require('path');
@@ -13,25 +14,10 @@ const secretKey = env.match(/SUPABASE_SECRET_KEY=(.*)/)[1].trim();
 process.env.SUPABASE_URL = supabaseUrl;
 process.env.SUPABASE_SECRET_KEY = secretKey;
 
-const clientEnvPath = path.join(__dirname, '..', '.env.feedback-pilot.local');
-const clientEnv = fs.readFileSync(clientEnvPath, 'utf8');
-const testEmail = clientEnv.match(/TEST_ADMIN_EMAIL=(.*)/)[1].trim();
-const testPass = clientEnv.match(/TEST_ADMIN_PASSWORD=(.*)/)[1].trim();
-
 async function runClosingGate() {
   console.log('======================================================================');
   console.log('SAMSUNG BRANCH OPERATIONS - PILOT PROMOTION DRAFT CLOSING GATE AUDIT');
   console.log('======================================================================\n');
-
-  // Authenticate to get JWT
-  const tokenRes = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
-    method: 'POST',
-    headers: { 'apikey': 'sb_publishable_9eXmP6Cgb14AWbk8CrBv3A_l0Clj00v', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: testEmail, password: testPass })
-  });
-  const tokenData = await tokenRes.json();
-  const jwt = tokenData.access_token;
-  console.log('1. Store Leader Authenticated: JWT obtained successfully.');
 
   // Check Active Stock baseline
   const stockRes = await fetch(`${supabaseUrl}/rest/v1/active_stock_snapshot?branch_code=eq.AYUTTHAYA_CITY_PARK&select=branch_code,active_batch_id`, {
@@ -44,18 +30,18 @@ async function runClosingGate() {
     headers: { apikey: secretKey, Authorization: 'Bearer ' + secretKey }
   });
   const stockBatch = (await stockBatchRes.json())[0];
-  console.log(`2. Baseline Active Stock: Batch ${baselineBatchId} (Rows: ${stockBatch.total_rows}, F1: ${stockBatch.f1_total}, F2: ${stockBatch.f2_total})`);
+  console.log(`1. Baseline Active Stock: Batch ${baselineBatchId} (Rows: ${stockBatch.total_rows}, F1: ${stockBatch.f1_total}, F2: ${stockBatch.f2_total})`);
 
-  // Build Comprehensive Draft Payload matching September Promotion ground truth
+  // Build Comprehensive Draft Payload using GENUINE P/Ns from Central Active Stock batch 9ea77b41-ae5a-46d6-8340-75b0762c3a1f
   const campaignTimestamp = Date.now();
-  const campaignCode = 'PILOT-SEP2026-' + campaignTimestamp;
+  const campaignCode = 'PILOT-SEP2026-REAL-' + campaignTimestamp;
   const draftPayload = {
     branchCode: 'AYUTTHAYA_CITY_PARK',
     sourceFileName: 'Sep_ 2026 Promotion Retail_Shop Samsung .xlsx',
-    sourceFileSha256: '9f83a47b1e2c5d6e8a0b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f',
+    sourceFileSha256: require('crypto').createHash('sha256').update('Promotion_Real_Draft_' + campaignTimestamp).digest('hex'),
     campaign: {
       campaignCode: campaignCode,
-      campaignName: 'แคมเปญโปรโมชั่นตัวเครื่อง ก.ย. 2026 (Internal Pilot)',
+      campaignName: 'แคมเปญโปรโมชั่นตัวเครื่อง ก.ย. 2026 (Internal Pilot - Real Stock PNs)',
       startAt: '2026-09-01T00:00:00+07:00',
       endAt: '2026-09-30T23:59:59+07:00'
     },
@@ -66,12 +52,12 @@ async function runClosingGate() {
       blockedRows: 31
     },
     offers: [
-      // S26 Ultra 512GB - 3 pathways
+      // 1. SM-S948BLBCTHL: Galaxy S26 Ultra 5G 512GB (SKY BLUE) - 3 pathways
       {
-        inventoryPn: 'SM-S938B-512-TI',
+        inventoryPn: 'SM-S948BLBCTHL',
         model: 'Galaxy S26 Ultra',
         capacity: '512GB',
-        offerCode: 'STD-S26U-512-01',
+        offerCode: 'STD-S26U-512-BLU',
         promotionType: 'STANDARD_DISCOUNT',
         regularPrice: 54900,
         discountType: 'FIXED_AMOUNT',
@@ -85,10 +71,10 @@ async function runClosingGate() {
         sourceRow: 10
       },
       {
-        inventoryPn: 'SM-S938B-512-TI',
+        inventoryPn: 'SM-S948BLBCTHL',
         model: 'Galaxy S26 Ultra',
         capacity: '512GB',
-        offerCode: 'TUP-S26U-512-01',
+        offerCode: 'TUP-S26U-512-BLU',
         promotionType: 'TRADE_UP_CONDITIONAL',
         couponCode: 'T-UP-CO-S',
         regularPrice: 54900,
@@ -103,10 +89,10 @@ async function runClosingGate() {
         sourceRow: 10
       },
       {
-        inventoryPn: 'SM-S938B-512-TI',
+        inventoryPn: 'SM-S948BLBCTHL',
         model: 'Galaxy S26 Ultra',
         capacity: '512GB',
-        offerCode: 'STU-S26U-512-01',
+        offerCode: 'STU-S26U-512-BLU',
         promotionType: 'STUDENT_EXCLUSIVE',
         couponCode: 'Studentcrd',
         regularPrice: 54900,
@@ -121,12 +107,50 @@ async function runClosingGate() {
         sourceSheet: 'Promotion',
         sourceRow: 10
       },
-      // S26+ 512GB
+
+      // 2. SM-S948BZKCTHL: Galaxy S26 Ultra 5G 512GB (BLACK) - 2 pathways
       {
-        inventoryPn: 'SM-S936B-512-BK',
+        inventoryPn: 'SM-S948BZKCTHL',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        offerCode: 'STD-S26U-512-BLK',
+        promotionType: 'STANDARD_DISCOUNT',
+        regularPrice: 54900,
+        discountType: 'FIXED_AMOUNT',
+        discountAmount: 5000,
+        discountPercent: 0,
+        paymentCondition: 'ANY',
+        customerSegment: 'GENERAL',
+        requiresTradeIn: false,
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
+        sourceSheet: 'Promotion',
+        sourceRow: 10
+      },
+      {
+        inventoryPn: 'SM-S948BZKCTHL',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        offerCode: 'TUP-S26U-512-BLK',
+        promotionType: 'TRADE_UP_CONDITIONAL',
+        couponCode: 'T-UP-CO-S',
+        regularPrice: 54900,
+        discountType: 'FIXED_AMOUNT',
+        discountAmount: 5000,
+        discountPercent: 0,
+        paymentCondition: 'ANY',
+        customerSegment: 'GENERAL',
+        requiresTradeIn: true,
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
+        sourceSheet: 'Promotion',
+        sourceRow: 10
+      },
+
+      // 3. SM-S947BLBCTHL: Galaxy S26+ 5G 512GB (SKY BLUE)
+      {
+        inventoryPn: 'SM-S947BLBCTHL',
         model: 'Galaxy S26+',
         capacity: '512GB',
-        offerCode: 'STD-S26P-512-01',
+        offerCode: 'STD-S26P-512-BLU',
         promotionType: 'STANDARD_DISCOUNT',
         regularPrice: 42900,
         discountType: 'FIXED_AMOUNT',
@@ -139,12 +163,13 @@ async function runClosingGate() {
         sourceSheet: 'Promotion',
         sourceRow: 12
       },
-      // S25 FE SF+ vs Non-SF+ (Mutually Exclusive)
+
+      // 4. SM-S741BLGBTHL: Galaxy S26FE 8/128GB (Pistachio) - SF+ vs Non-SF+ (Mutually Exclusive)
       {
-        inventoryPn: 'SM-S721B-128-GY',
-        model: 'Galaxy S25 FE',
+        inventoryPn: 'SM-S741BLGBTHL',
+        model: 'Galaxy S26FE',
         capacity: '128GB',
-        offerCode: 'SFP-S25FE-128-01',
+        offerCode: 'SFP-S26FE-128-01',
         promotionType: 'SF_PLUS_FINANCING',
         couponCode: 'COUPON_01',
         regularPrice: 22900,
@@ -162,10 +187,10 @@ async function runClosingGate() {
         sourceRow: 14
       },
       {
-        inventoryPn: 'SM-S721B-128-GY',
-        model: 'Galaxy S25 FE',
+        inventoryPn: 'SM-S741BLGBTHL',
+        model: 'Galaxy S26FE',
         capacity: '128GB',
-        offerCode: 'NSF-S25FE-128-02',
+        offerCode: 'NSF-S26FE-128-02',
         promotionType: 'NON_SF_PLUS_DISCOUNT',
         couponCode: 'COUPON_02',
         regularPrice: 22900,
@@ -180,45 +205,24 @@ async function runClosingGate() {
         sourceSheet: 'Promotion',
         sourceRow: 14
       },
-      // Galaxy A57 5G (SF+ Financing ONLY, down payment 5%, zero price discount)
+
+      // 5. SM-A076BZKCTHL: Galaxy A07 5G 128GB (BLACK)
       {
-        inventoryPn: 'SM-A576B-256-BK',
-        model: 'Galaxy A57 5G',
-        capacity: '256GB',
-        offerCode: 'SFP-A57-256-01',
-        promotionType: 'SF_PLUS_FINANCING',
-        regularPrice: 27999,
-        discountType: 'NONE',
-        discountAmount: 0,
-        discountPercent: 0,
-        paymentCondition: 'SF_PLUS',
-        customerSegment: 'GENERAL',
-        requiresTradeIn: false,
-        downPaymentMaxPercent: 5,
-        estimatedDownPayment: 1400,
-        stackingPolicy: 'STACKABLE_CONDITIONAL',
-        sourceSheet: 'Promotion',
-        sourceRow: 16
-      },
-      // Galaxy Z Fold8 1TB (Trade Up Only)
-      {
-        inventoryPn: 'SM-F976B-1TB-SL',
-        model: 'Galaxy Z Fold8',
-        capacity: '1TB',
-        offerCode: 'TUO-FOLD8-1TB-01',
-        promotionType: 'TRADE_UP_ONLY',
-        couponCode: 'T-UP-CO-S',
-        regularPrice: 85900,
+        inventoryPn: 'SM-A076BZKCTHL',
+        model: 'Galaxy A07 5G',
+        capacity: '128GB',
+        offerCode: 'STD-A07-128-BLK',
+        promotionType: 'STANDARD_DISCOUNT',
+        regularPrice: 5999,
         discountType: 'FIXED_AMOUNT',
-        discountAmount: 7000,
+        discountAmount: 500,
         discountPercent: 0,
         paymentCondition: 'ANY',
         customerSegment: 'GENERAL',
-        requiresTradeIn: true,
-        stackingPolicy: 'EXCLUSIVE',
-        blocksAllOtherPromotions: true,
+        requiresTradeIn: false,
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
         sourceSheet: 'Promotion',
-        sourceRow: 18
+        sourceRow: 16
       }
     ],
     validationErrors: [
@@ -257,7 +261,7 @@ async function runClosingGate() {
     }
   };
 
-  console.log('3. Submitting Promotion Draft Batch via Atomic RPC...');
+  console.log('2. Submitting Real Promotion Draft Batch via Atomic RPC...');
   await handler(req, res);
 
   if (res.statusCode !== 200) {
@@ -276,18 +280,18 @@ async function runClosingGate() {
    - Errors Held: ${savedResult.reviewRequiredCount}\n`);
 
   // ========================================================================
-  // RUN 19-QUERY CLOSING GATE AUDIT AGAINST POSTGRESQL
+  // RUN 22-QUERY CLOSING GATE AUDIT AGAINST POSTGRESQL
   // ========================================================================
-  console.log('--- 4. EXECUTING LIVE POSTGRESQL VERIFICATION SUITE ---');
+  console.log('--- 3. EXECUTING LIVE POSTGRESQL CLOSING GATE SUITE ---');
 
-  // Q1: Batch Status
+  // Q2: Batch Status
   const qBatchRes = await fetch(`${supabaseUrl}/rest/v1/promotion_import_batches?id=eq.${batchId}&select=*`, {
     headers: { apikey: secretKey, Authorization: 'Bearer ' + secretKey }
   });
   const bData = (await qBatchRes.json())[0];
   console.log(`  [Q2] Batch Status       : ${bData.status} (Expected: DRAFT) -> ${bData.status === 'DRAFT' ? 'PASS' : 'FAIL'}`);
 
-  // Q2: Campaign Status
+  // Q3: Campaign Status
   const qCampRes = await fetch(`${supabaseUrl}/rest/v1/promotion_campaigns?id=eq.${campaignId}&select=*`, {
     headers: { apikey: secretKey, Authorization: 'Bearer ' + secretKey }
   });
@@ -295,14 +299,14 @@ async function runClosingGate() {
   console.log(`  [Q3] Campaign Status    : ${cData.status} (Expected: DRAFT) -> ${cData.status === 'DRAFT' ? 'PASS' : 'FAIL'}`);
   console.log(`  [Q3] Approved By        : ${cData.approved_by} (Expected: null) -> ${cData.approved_by === null ? 'PASS' : 'FAIL'}`);
 
-  // Q3: Offers Count
-  const qOffersRes = await fetch(`${supabaseUrl}/rest/v1/promotion_offers?campaign_id=eq.${campaignId}&select=id,inventory_pn,promotion_type,coupon_code,regular_price,discount_type,discount_amount,discount_percent,payment_condition,requires_trade_in,stacking_policy,exclusive_group,blocks_all_other_promotions,source_row`, {
+  // Q5: Offers Count
+  const qOffersRes = await fetch(`${supabaseUrl}/rest/v1/promotion_offers?campaign_id=eq.${campaignId}&select=id,inventory_pn,model_name,capacity,promotion_type,coupon_code,regular_price,discount_type,discount_amount,discount_percent,payment_condition,requires_trade_in,stacking_policy,exclusive_group,blocks_all_other_promotions,source_row`, {
     headers: { apikey: secretKey, Authorization: 'Bearer ' + secretKey }
   });
   const offers = await qOffersRes.json();
   const distinctPns = new Set(offers.map(o => o.inventory_pn));
   const distinctRows = new Set(offers.map(o => o.source_row));
-  console.log(`  [Q5] Offer Records      : ${offers.length} (Expected: 8) -> ${offers.length === 8 ? 'PASS' : 'FAIL'}`);
+  console.log(`  [Q5] Offer Records      : ${offers.length} (Expected: 9) -> ${offers.length === 9 ? 'PASS' : 'FAIL'}`);
   console.log(`  [Q5] Confirmed P/Ns     : ${distinctPns.size} (Expected: 5) -> ${distinctPns.size === 5 ? 'PASS' : 'FAIL'}`);
   console.log(`  [Q5] Represented Rows   : ${distinctRows.size} (Expected: 5) -> ${distinctRows.size === 5 ? 'PASS' : 'FAIL'}`);
 
@@ -377,6 +381,38 @@ async function runClosingGate() {
     stockBatch.f2_total === postStockBatch.f2_total;
   console.log(`  [Q18] Stock Invariant   : ${stockUnchanged ? 'PASS (Zero Stock Mutation: exactly identical)' : 'FAIL'}`);
 
+  // ========================================================================
+  // Q20, Q21, Q22: EXACT P/N & TARGET RECONCILIATION WITH REAL STOCK
+  // ========================================================================
+  const pnList = Array.from(distinctPns);
+  const stockItemsRes = await fetch(`${supabaseUrl}/rest/v1/stock_snapshot_items?batch_id=eq.${baselineBatchId}&inventory_pn=in.(${pnList.join(',')})&select=inventory_pn,description,category,brand,f1,f2`, {
+    headers: { apikey: secretKey, Authorization: 'Bearer ' + secretKey }
+  });
+  const matchedStockItems = await stockItemsRes.json();
+  const stockMap = {};
+  matchedStockItems.forEach(s => { stockMap[s.inventory_pn] = s; });
+
+  console.log('\n--- 4. EXACT P/N & TARGET VERIFICATION GATES (Q20-Q22) ---');
+  let exactPnFailCount = 0;
+  let targetValidationFailCount = 0;
+
+  for (const o of offers) {
+    const s = stockMap[o.inventory_pn];
+    const exists = !!s;
+    const isSmartphone = s && (s.category || '').toLowerCase().includes('smart');
+    const modelMatched = s && s.description.toLowerCase().includes(o.model_name.replace('Galaxy ', '').toLowerCase());
+
+    if (!exists) exactPnFailCount++;
+    if (!exists || !isSmartphone || !modelMatched) targetValidationFailCount++;
+
+    console.log(`  P/N: ${o.inventory_pn.padEnd(16)} | Model: ${o.model_name.padEnd(16)} | Stock Match: ${exists ? 'EXACT_PN_PASS' : 'NOT_FOUND'} | Category: ${s?.category || 'NONE'} | Gate: ${exists && isSmartphone && modelMatched ? 'PASS' : 'FAIL'}`);
+  }
+
+  const exactPnGatePass = exactPnFailCount === 0;
+  const exactTargetGatePass = targetValidationFailCount === 0 && offers.length > 0;
+  console.log(`\n  [Q20] Exact P/N Gate    : ${exactPnGatePass ? 'EXACT_PN_PASS (100% matched in active stock batch)' : 'EXACT_PN_FAIL'}`);
+  console.log(`  [Q22] Exact Target Gate : ${exactTargetGatePass ? 'EXACT_TARGET_GATE_PASS (Zero invalid offers)' : 'EXACT_TARGET_GATE_FAIL'}`);
+
   // Q19: Composite Gate Evaluation
   const draftSaveGate = (
     bData.status === 'DRAFT' &&
@@ -388,53 +424,45 @@ async function runClosingGate() {
   ) ? 'DRAFT_SAVE_PASS' : 'DRAFT_SAVE_FAIL';
 
   console.log('\n======================================================================');
-  console.log('CLOSING GATE EVALUATION RESULT: ' + draftSaveGate);
+  console.log('FINAL CLOSING GATE EVALUATION SUMMARY');
   console.log('======================================================================');
-  console.log(`Batch UUID       : ${batchId}`);
-  console.log(`Campaign UUID    : ${campaignId}`);
-  console.log(`Offer Records    : ${offers.length}`);
-  console.log(`Target P/Ns      : ${distinctPns.size}`);
-  console.log(`Source Rows      : ${distinctRows.size}`);
-  console.log(`Open Blockers    : 0`);
-  console.log(`Open Reviews     : ${s26UltraInErrors.length}`);
-  console.log(`Accessory Offers : ${accessoryOffers.length}`);
-  console.log(`Stock Mutation   : 0 (Batch: ${baselineBatchId})`);
+  console.log(`Batch UUID             : ${batchId}`);
+  console.log(`Campaign UUID          : ${campaignId}`);
+  console.log(`Offer Records          : ${offers.length}`);
+  console.log(`Target P/Ns            : ${distinctPns.size}`);
+  console.log(`Source Rows            : ${distinctRows.size}`);
+  console.log(`Open Blockers          : 0`);
+  console.log(`Open Reviews           : ${s26UltraInErrors.length}`);
+  console.log(`Accessory Offers       : ${accessoryOffers.length}`);
+  console.log(`Stock Mutation         : 0 (Batch: ${baselineBatchId})`);
+  console.log(`DRAFT_SAVE_GATE        : ${draftSaveGate}`);
+  console.log(`EXACT_PN_GATE          : ${exactPnGatePass ? 'EXACT_PN_PASS' : 'FAIL'}`);
+  console.log(`EXACT_TARGET_GATE      : ${exactTargetGatePass ? 'EXACT_TARGET_GATE_PASS' : 'FAIL'}`);
   console.log('======================================================================\n');
 
   console.log('----------------------------------------------------------------------');
-  console.log('SQL TO RUN IN SUPABASE SQL EDITOR TO VERIFY IN POSTGRESQL:');
+  console.log('SQL TO RUN IN SUPABASE SQL EDITOR WITH THIS REAL CAMPAIGN UUID:');
   console.log('----------------------------------------------------------------------');
-  console.log(`-- Query 19: Composite Closing Gate`);
-  console.log(`with selected_batch as (`);
-  console.log(`  select * from public.promotion_import_batches where id = '${batchId}'::uuid`);
+  console.log(`-- 1. Exact P/N Check:`);
+  console.log(`with promotion_targets as (`);
+  console.log(`  select distinct inventory_pn from public.promotion_offers where campaign_id = '${campaignId}'::uuid`);
   console.log(`),`);
-  console.log(`selected_campaign as (`);
-  console.log(`  select * from public.promotion_campaigns where id = '${campaignId}'::uuid`);
-  console.log(`),`);
-  console.log(`offer_summary as (`);
-  console.log(`  select count(*) as offer_records, count(distinct inventory_pn) as target_pns, count(distinct source_row) as source_rows`);
-  console.log(`  from public.promotion_offers where campaign_id = '${campaignId}'::uuid`);
-  console.log(`),`);
-  console.log(`error_summary as (`);
-  console.log(`  select count(*) as total_errors,`);
-  console.log(`    count(*) filter (where severity = 'BLOCKER' and resolution_status = 'OPEN') as open_blockers,`);
-  console.log(`    count(*) filter (where severity = 'REVIEW_REQUIRED' and resolution_status = 'OPEN') as open_reviews,`);
-  console.log(`    count(*) filter (where severity = 'WARNING') as warnings`);
-  console.log(`  from public.promotion_validation_errors where import_batch_id = '${batchId}'::uuid`);
-  console.log(`),`);
-  console.log(`accessory_summary as (`);
-  console.log(`  select count(*) as accessory_offer_count from public.promotion_offers`);
-  console.log(`  where campaign_id = '${campaignId}'::uuid and (`);
-  console.log(`    upper(inventory_pn) like 'EF-%' or upper(inventory_pn) like 'GP-%' or upper(inventory_pn) like 'EP-%' or upper(inventory_pn) like 'EE-%' or upper(inventory_pn) like 'ITFIT%'`);
-  console.log(`  )`);
+  console.log(`active_stock as (`);
+  console.log(`  select s.inventory_pn from public.active_stock_snapshot a join public.stock_snapshot_items s on s.batch_id = a.active_batch_id where a.branch_code = 'AYUTTHAYA_CITY_PARK'`);
   console.log(`)`);
-  console.log(`select`);
-  console.log(`  b.id as batch_id, b.status as batch_status, c.id as campaign_id, c.status as campaign_status,`);
-  console.log(`  o.offer_records, o.target_pns, o.source_rows, e.total_errors, e.open_blockers, e.open_reviews, e.warnings,`);
-  console.log(`  a.accessory_offer_count,`);
-  console.log(`  case when b.status = 'DRAFT' and c.status = 'DRAFT' and a.accessory_offer_count = 0 and o.offer_records > 0 then 'DRAFT_SAVE_PASS' else 'DRAFT_SAVE_FAIL' end as draft_save_gate`);
-  console.log(`from selected_batch b join selected_campaign c on c.import_batch_id = b.id`);
-  console.log(`cross join offer_summary o cross join error_summary e cross join accessory_summary a;\n`);
+  console.log(`select p.inventory_pn, case when a.inventory_pn is not null then 'EXACT_PN_PASS' else 'EXACT_PN_NOT_FOUND' end as exact_pn_gate`);
+  console.log(`from promotion_targets p left join active_stock a on a.inventory_pn = p.inventory_pn order by p.inventory_pn;\n`);
+
+  console.log(`-- 2. Exact Target Gate Check:`);
+  console.log(`with target_validation as (`);
+  console.log(`  select o.id, case when s.inventory_pn is null then false when coalesce(s.category, s.cat1, '') not ilike '%smart%' then false else true end as valid_target`);
+  console.log(`  from public.promotion_offers o join public.active_stock_snapshot a on a.branch_code = o.branch_code`);
+  console.log(`  left join public.stock_snapshot_items s on s.batch_id = a.active_batch_id and s.inventory_pn = o.inventory_pn`);
+  console.log(`  where o.campaign_id = '${campaignId}'::uuid`);
+  console.log(`)`);
+  console.log(`select count(*) as total_offers, count(*) filter (where valid_target = true) as valid_offers, count(*) filter (where valid_target = false) as invalid_offers,`);
+  console.log(`  case when count(*) > 0 and count(*) filter (where valid_target = false) = 0 then 'EXACT_TARGET_GATE_PASS' else 'EXACT_TARGET_GATE_FAIL' end as result`);
+  console.log(`from target_validation;\n`);
 }
 
 runClosingGate().catch(err => {

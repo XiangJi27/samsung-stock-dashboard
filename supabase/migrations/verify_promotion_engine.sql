@@ -533,3 +533,82 @@ cross join offer_summary o
 cross join error_summary e
 cross join accessory_summary a;
 -- Expected: batch_status = 'DRAFT', campaign_status = 'DRAFT', accessory_offer_count = 0, draft_save_gate = 'DRAFT_SAVE_PASS'
+
+-- ============================================================================
+-- 20. EXACT P/N VERIFICATION AGAINST CENTRAL ACTIVE STOCK
+-- ============================================================================
+with promotion_targets as (
+  select distinct inventory_pn
+  from public.promotion_offers
+  where campaign_id = 'CAMPAIGN_UUID'::uuid
+),
+active_stock as (
+  select s.inventory_pn
+  from public.active_stock_snapshot a
+  join public.stock_snapshot_items s
+    on s.batch_id = a.active_batch_id
+  where a.branch_code = 'AYUTTHAYA_CITY_PARK'
+)
+select
+  p.inventory_pn,
+  case
+    when a.inventory_pn is not null then 'EXACT_PN_PASS'
+    else 'EXACT_PN_NOT_FOUND'
+  end as exact_pn_gate
+from promotion_targets p
+left join active_stock a on a.inventory_pn = p.inventory_pn
+order by p.inventory_pn;
+-- Expected: All rows must be 'EXACT_PN_PASS' (Zero EXACT_PN_NOT_FOUND)
+
+-- ============================================================================
+-- 21. PRODUCT TYPE, MODEL FAMILY & CAPACITY RECONCILIATION
+-- ============================================================================
+select
+  o.inventory_pn,
+  o.model_name as promotion_model,
+  o.capacity as promotion_capacity,
+  s.description as stock_description,
+  s.category,
+  s.cat1,
+  s.f1,
+  s.f2,
+  case
+    when s.inventory_pn is null then 'PN_NOT_FOUND'
+    when coalesce(s.category, s.cat1, '') not ilike '%smart%' then 'PRODUCT_TYPE_MISMATCH'
+    when s.description not ilike '%' || replace(o.model_name, 'Galaxy ', '') || '%' then 'MODEL_REVIEW_REQUIRED'
+    else 'PASS'
+  end as target_validation
+from public.promotion_offers o
+left join public.active_stock_snapshot a on a.branch_code = o.branch_code
+left join public.stock_snapshot_items s on s.batch_id = a.active_batch_id and s.inventory_pn = o.inventory_pn
+where o.campaign_id = 'CAMPAIGN_UUID'::uuid
+order by o.inventory_pn, o.promotion_type;
+-- Expected: target_validation = 'PASS' for all rows
+
+-- ============================================================================
+-- 22. COMPOSITE EXACT TARGET QUALITY GATE (EXACT_TARGET_GATE_PASS)
+-- ============================================================================
+with target_validation as (
+  select
+    o.id,
+    case
+      when s.inventory_pn is null then false
+      when coalesce(s.category, s.cat1, '') not ilike '%smart%' then false
+      else true
+    end as valid_target
+  from public.promotion_offers o
+  join public.active_stock_snapshot a on a.branch_code = o.branch_code
+  left join public.stock_snapshot_items s on s.batch_id = a.active_batch_id and s.inventory_pn = o.inventory_pn
+  where o.campaign_id = 'CAMPAIGN_UUID'::uuid
+)
+select
+  count(*) as total_offers,
+  count(*) filter (where valid_target = true) as valid_offers,
+  count(*) filter (where valid_target = false) as invalid_offers,
+  case
+    when count(*) > 0 and count(*) filter (where valid_target = false) = 0 then 'EXACT_TARGET_GATE_PASS'
+    else 'EXACT_TARGET_GATE_FAIL'
+  end as result
+from target_validation;
+-- Expected: invalid_offers = 0, result = 'EXACT_TARGET_GATE_PASS'
+
