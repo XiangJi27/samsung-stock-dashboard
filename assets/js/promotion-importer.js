@@ -1609,22 +1609,32 @@
         passedItems.forEach((item, idx) => {
           const targetPns = item.confirmedPns || [item.pn];
           targetPns.forEach((pn, pIdx) => {
+            const isStudent = item.coupon === 'Studentcrd' || item.promotionType === 'STUDENT_EXCLUSIVE';
+            const isTradeUp = item.saleMode === 'TRADE_UP' || item.promotionType === 'TRADE_UP_CONDITIONAL' || item.promotionType === 'TRADE_UP_ONLY';
+            const rawDiscount = Number(item.standardDiscount || item.discount || item.tradeUpDiscount || 0);
+            const discAmount = isStudent ? 0 : rawDiscount;
+            const discType = isStudent ? 'PERCENT' : (discAmount > 0 ? 'FIXED_AMOUNT' : 'NONE');
+
             offersPayload.push({
               inventoryPn: pn,
               model: item.model,
               capacity: item.capacity,
-              offerCode: `${item.saleMode === 'TRADE_UP' ? 'TUP' : 'STD'}-${item.model.replace(/\s+/g, '')}-${item.capacity || 'STD'}-${pIdx + 1}`,
-              promotionType: item.saleMode === 'TRADE_UP' ? 'TRADE_UP_CONDITIONAL' : (item.coupon === 'Studentcrd' ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
+              offerCode: `${isTradeUp ? 'TUP' : 'STD'}-${item.model.replace(/\s+/g, '')}-${item.capacity || 'STD'}-${pIdx + 1}`,
+              promotionType: isTradeUp ? 'TRADE_UP_CONDITIONAL' : (isStudent ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
               couponCode: item.coupon || null,
               regularPrice: item.rrp,
-              standardDiscount: item.standardDiscount || item.discount,
-              tradeUpDiscount: item.tradeUpDiscount || 0,
-              discountPercent: item.discountPercent || 0,
+              discountType: discType,
+              discountAmount: discAmount,
+              discountPercent: isStudent ? 15 : (item.discountPercent || 0),
               netPrice: item.netPrice,
               paymentCondition: item.saleMode === 'SF_PLUS' ? 'SF_PLUS' : 'ANY',
-              customerSegment: item.coupon === 'Studentcrd' ? 'STUDENT' : 'GENERAL',
-              requiresTradeIn: item.saleMode === 'TRADE_UP',
-              stackingPolicy: item.coupon === 'Studentcrd' ? 'EXCLUSIVE' : 'STACKABLE_CONDITIONAL',
+              customerSegment: isStudent ? 'STUDENT' : 'GENERAL',
+              requiresTradeIn: isTradeUp,
+              downPaymentMaxPercent: item.downPaymentMaxPercent || (item.saleMode === 'SF_PLUS' ? 5 : null),
+              estimatedDownPayment: item.estimatedDownPayment || null,
+              stackingPolicy: isStudent ? 'EXCLUSIVE' : 'STACKABLE_CONDITIONAL',
+              exclusiveGroup: isStudent ? 'STUDENT_GROUP' : (item.saleMode === 'SF_PLUS' ? 'PAYMENT_EXCLUSIVE' : null),
+              blocksAllOtherPromotions: isStudent,
               status: 'DRAFT',
               sourceSheet: item.sourceTrace?.sheet || 'Promotion',
               sourceRow: item.sourceTrace?.row || idx + 1

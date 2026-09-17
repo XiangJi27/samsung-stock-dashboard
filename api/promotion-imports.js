@@ -261,7 +261,97 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'EMPTY_ITEMS', message: 'No promotion items or errors provided' });
     }
 
-    // 1. Attempt Atomic Transaction via PostgreSQL RPC: create_promotion_draft_batch
+    // 1. Sanitize offers payload according to database check constraints
+    const sanitizedOffers = incomingItems.map((item, idx) => {
+      const pn = item.inventoryPn || item.pn;
+      const model = item.model || item.modelName || 'Samsung Device';
+      const capacity = item.capacity || '';
+      let promoType = item.promotionType || (item.saleMode === 'TRADE_UP' ? 'TRADE_UP_CONDITIONAL' : 'STANDARD_DISCOUNT');
+      let coupon = item.couponCode || item.coupon || null;
+      let regPrice = Number(item.regularPrice || item.rrp || 1);
+      if (regPrice <= 0) regPrice = 1;
+
+      let discPercent = Number(item.discountPercent || 0);
+      let discAmount = Number(
+        item.discountAmount !== undefined ? item.discountAmount :
+        (item.standardDiscount !== undefined ? item.standardDiscount :
+        (item.discount !== undefined ? item.discount :
+        (item.tradeUpDiscount !== undefined ? item.tradeUpDiscount : 0)))
+      );
+
+      let discType = item.discountType;
+      let custSegment = item.customerSegment || 'GENERAL';
+      let requiresTradeIn = Boolean(item.requiresTradeIn || promoType === 'TRADE_UP_CONDITIONAL' || promoType === 'TRADE_UP_ONLY');
+      let stackingPolicy = item.stackingPolicy || 'STACKABLE_CONDITIONAL';
+      let blocksAll = Boolean(item.blocksAllOtherPromotions);
+
+      if (coupon === 'Studentcrd' || promoType === 'STUDENT_EXCLUSIVE' || custSegment === 'STUDENT') {
+        promoType = 'STUDENT_EXCLUSIVE';
+        coupon = 'Studentcrd';
+        discType = 'PERCENT';
+        discPercent = 15;
+        discAmount = 0;
+        custSegment = 'STUDENT';
+        requiresTradeIn = false;
+        stackingPolicy = 'EXCLUSIVE';
+        blocksAll = true;
+      } else {
+        if (!discType) {
+          if (discPercent > 0) discType = 'PERCENT';
+          else if (discAmount > 0) discType = 'FIXED_AMOUNT';
+          else discType = 'NONE';
+        }
+        if (discType === 'PERCENT') {
+          discAmount = 0;
+          if (discPercent <= 0) discType = 'NONE';
+        } else if (discType === 'FIXED_AMOUNT') {
+          discPercent = 0;
+          if (discAmount <= 0) discType = 'NONE';
+          if (discAmount > regPrice) discAmount = regPrice;
+        } else {
+          discType = 'NONE';
+          discAmount = 0;
+          discPercent = 0;
+        }
+      }
+
+      let payCond = item.paymentCondition || 'ANY';
+      if (promoType === 'SF_PLUS_FINANCING') payCond = 'SF_PLUS';
+      if (promoType === 'NON_SF_PLUS_DISCOUNT') payCond = 'NON_SF_PLUS';
+
+      return {
+        inventoryPn: pn,
+        model,
+        capacity,
+        offerCode: item.offerCode || `${promoType.slice(0, 3)}_${idx + 1}`,
+        promotionType: promoType,
+        couponCode: coupon,
+        regularPrice: regPrice,
+        discountType: discType,
+        discountAmount: discAmount,
+        discountPercent: discPercent,
+        paymentCondition: payCond,
+        customerSegment: custSegment,
+        requiresTradeIn,
+        downPaymentMaxPercent: item.downPaymentMaxPercent !== undefined ? item.downPaymentMaxPercent : null,
+        estimatedDownPayment: item.estimatedDownPayment !== undefined ? item.estimatedDownPayment : null,
+        stackingPolicy,
+        exclusiveGroup: item.exclusiveGroup || (stackingPolicy === 'MUTUALLY_EXCLUSIVE' ? 'PAYMENT_EXCLUSIVE' : null),
+        blocksAllOtherPromotions: blocksAll,
+        status: 'DRAFT',
+        sourceSheet: item.sourceSheet || 'Promotion',
+        sourceRow: item.sourceRow || idx + 1
+      };
+    });
+
+    const campaignObj = {
+      campaignCode: body.campaign?.campaignCode || body.campaignCode || `SEP2026-RETAIL-MOBILE-${Date.now().toString(36).toUpperCase()}`,
+      campaignName: body.campaign?.campaignName || body.campaignName || `September 2026 Retail Campaign (${fileName})`,
+      startAt: body.campaign?.startAt || body.startAt || new Date().toISOString(),
+      endAt: body.campaign?.endAt || body.endAt || new Date(Date.now() + 30 * 86400000).toISOString()
+    };
+
+    // 2. Attempt Atomic Transaction via PostgreSQL RPC: create_promotion_draft_batch
     let rpcErrorDetail = null;
     try {
       const rpcRes = await queryPostgrest('rpc/create_promotion_draft_batch', {
@@ -271,9 +361,9 @@ module.exports = async function handler(req, res) {
             branchCode,
             sourceFileName: fileName,
             sourceFileSha256: sha256 || `sha_${Date.now()}`,
-            campaign: body.campaign || {},
+            campaign: campaignObj,
             summary: body.summary || {},
-            offers: incomingItems,
+            offers: sanitizedOffers,
             validationErrors: incomingErrors
           },
           p_user_id: caller?.id || null

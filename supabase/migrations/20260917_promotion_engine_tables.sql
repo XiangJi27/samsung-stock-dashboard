@@ -706,16 +706,32 @@ begin
         coalesce(v_offer->>'promotionType', 'STANDARD_DISCOUNT'),
         v_offer->>'couponCode',
         coalesce((v_offer->>'regularPrice')::numeric, 1),
-        coalesce(v_offer->>'discountType', 'FIXED_AMOUNT'),
-        coalesce((v_offer->>'discountAmount')::numeric, 0),
-        coalesce((v_offer->>'discountPercent')::numeric, 0),
+        coalesce(
+          v_offer->>'discountType',
+          case
+            when coalesce((v_offer->>'discountPercent')::numeric, 0) > 0 then 'PERCENT'
+            when coalesce((v_offer->>'discountAmount')::numeric, (v_offer->>'standardDiscount')::numeric, (v_offer->>'tradeUpDiscount')::numeric, 0) > 0 then 'FIXED_AMOUNT'
+            else 'NONE'
+          end
+        ),
+        case
+          when coalesce(v_offer->>'discountType', '') = 'PERCENT' or coalesce((v_offer->>'discountPercent')::numeric, 0) > 0 then 0
+          else coalesce((v_offer->>'discountAmount')::numeric, (v_offer->>'standardDiscount')::numeric, (v_offer->>'tradeUpDiscount')::numeric, 0)
+        end,
+        case
+          when coalesce(v_offer->>'discountType', '') = 'PERCENT' or coalesce(v_offer->>'promotionType', '') = 'STUDENT_EXCLUSIVE' or coalesce(v_offer->>'couponCode', '') = 'Studentcrd' then coalesce((v_offer->>'discountPercent')::numeric, 15)
+          else coalesce((v_offer->>'discountPercent')::numeric, 0)
+        end,
         coalesce(v_offer->>'paymentCondition', 'ANY'),
         coalesce(v_offer->>'customerSegment', 'GENERAL'),
-        coalesce((v_offer->>'requiresTradeIn')::boolean, false),
+        case
+          when coalesce(v_offer->>'promotionType', '') in ('TRADE_UP_CONDITIONAL', 'TRADE_UP_ONLY') then true
+          else coalesce((v_offer->>'requiresTradeIn')::boolean, false)
+        end,
         (v_offer->>'downPaymentMaxPercent')::numeric,
         (v_offer->>'estimatedDownPayment')::numeric,
         coalesce(v_offer->>'stackingPolicy', 'STACKABLE_CONDITIONAL'),
-        v_offer->>'exclusiveGroup',
+        coalesce(v_offer->>'exclusiveGroup', case when coalesce(v_offer->>'stackingPolicy', '') = 'MUTUALLY_EXCLUSIVE' then 'PAYMENT_EXCLUSIVE' else null end),
         coalesce((v_offer->>'blocksAllOtherPromotions')::boolean, false),
         'DRAFT',
         coalesce(v_offer->>'sourceSheet', 'Promotion'),
