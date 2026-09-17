@@ -1,6 +1,6 @@
 {
   "executionMode": "SHADOW_AUDIT",
-  "executedAt": "2026-09-17T19:22:43.552087",
+  "executedAt": "2026-09-17T19:30:21.048923",
   "policy": {
     "autoPublishExactManufacturer": true,
     "autoPublishPartialManufacturer": true,

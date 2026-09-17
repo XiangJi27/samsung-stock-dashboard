@@ -1464,7 +1464,7 @@
         <!-- Group 3: Promotion Offers -->
         <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 14px 18px;">
           <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between;">
-            <span>3. รายการโปรโมชั่นที่พร้อมบันทึก (ตาราง promotion_offers: ${passedItems.length} โปรโมชั่น / ${totalExpandedOffers} P/N Targets)</span>
+            <span>3. รายการโปรโมชั่นที่พร้อมบันทึก (ตาราง promotion_offers: ${passedItems.length} โปรโมชั่น / ${distinctTargetPns.size} P/N Targets / ${plannedOfferRecords.length} Offer Records)</span>
             <span class="type-pill pass">EXACT P/N VERIFIED</span>
           </div>
           <div style="margin-top: 8px; max-height: 220px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.05); border-radius: 6px;">
