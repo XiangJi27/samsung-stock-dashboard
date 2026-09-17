@@ -62,6 +62,7 @@ def build_pilot_package():
         "assets/js/pilot-stock-snapshot.js",
         "api/stock-imports.js",
         "api/stock/active.js",
+        "assets/js/promotion-calculator.js",
         "reports/promotion_release_manifest.json",
         "data/product-accessory-master.json"
     ]
