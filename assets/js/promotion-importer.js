@@ -1634,7 +1634,7 @@
         };
 
         let result;
-        if (window.location.protocol === 'file:' && typeof window.mockPromoImportHandler === 'function') {
+        if (typeof window.mockPromoImportHandler === 'function') {
           result = await window.mockPromoImportHandler(payload);
         } else {
           const response = await fetch('/api/promotion-imports', {

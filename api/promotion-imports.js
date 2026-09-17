@@ -67,8 +67,9 @@ module.exports = async function handler(req, res) {
   }
 
   // 1. Authenticate caller using Supabase Auth
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+  async function requireStoreLeader(targetBranchCode) {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
 
   let caller = null;
   if (token) {
