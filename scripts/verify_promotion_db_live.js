@@ -45,6 +45,7 @@ async function verifyPromotionDatabase() {
   ];
 
   const EXPECTED_RPCS = [
+    'create_promotion_draft_batch',
     'activate_promotion_campaign',
     'rollback_promotion_campaign'
   ];
@@ -80,7 +81,7 @@ async function verifyPromotionDatabase() {
 
     console.log(`\nTables Status: ${tablesFound}/${EXPECTED_TABLES.length} tables present`);
 
-    console.log('\n--- 2. TRANSACTIONAL RPCS (Target: 2) ---');
+    console.log(`\n--- 2. TRANSACTIONAL RPCS (Target: ${EXPECTED_RPCS.length}) ---`);
     let rpcsFound = 0;
     for (const rpc of EXPECTED_RPCS) {
       if (existingRpcs.includes(rpc)) {
