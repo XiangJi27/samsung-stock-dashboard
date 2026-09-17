@@ -88,6 +88,18 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  function validateRequiredProductNames(items) {
+    const missing = [];
+    for (const it of items) {
+      const pn = String(it.inventoryPn || it.pn || '').trim();
+      const desc = String(it.description ?? it.productName ?? it.model ?? it.name ?? '').trim();
+      if (!desc) {
+        missing.push(pn || 'UNKNOWN_PN');
+      }
+    }
+    return missing;
+  }
+
   async function requireStoreLeader(targetBranchCode) {
     if (!token) {
       res.status(401).json({
@@ -194,6 +206,18 @@ module.exports = async function handler(req, res) {
     }
 
     const items = Array.isArray(body.items) ? body.items : [];
+    const missingProductNames = validateRequiredProductNames(items);
+    if (missingProductNames.length > 0) {
+      return res.status(422).json({
+        error: 'PRODUCT_NAME_REQUIRED',
+        code: 'PRODUCT_NAME_REQUIRED',
+        message: `พบรายการไม่มีชื่อสินค้า ${missingProductNames.length} รายการ ไม่อนุญาตให้นำเข้า`,
+        missingCount: missingProductNames.length,
+        samplePns: missingProductNames.slice(0, 20),
+        valid: false
+      });
+    }
+
     const calculatedF1 = items.reduce((sum, it) => sum + Number(it.f1 || 0), 0);
     const calculatedF2 = items.reduce((sum, it) => sum + Number(it.f2 || 0), 0);
 
@@ -220,6 +244,22 @@ module.exports = async function handler(req, res) {
     const userId = caller.id;
 
     try {
+      // Fail-closed verification: Ensure batch does not have items without product names
+      const checkItemsRes = await queryPostgrest(
+        `stock_snapshot_items?batch_id=eq.${encodeURIComponent(batchId)}&description=eq.&select=id,inventory_pn&limit=5`
+      );
+      if (checkItemsRes.ok) {
+        const emptyDescItems = await checkItemsRes.json();
+        if (Array.isArray(emptyDescItems) && emptyDescItems.length > 0) {
+          return res.status(422).json({
+            code: 'PRODUCT_NAME_REQUIRED',
+            error: 'PRODUCT_NAME_REQUIRED',
+            message: 'ไม่สามารถ Activate ได้เนื่องจากพบรายการที่ไม่มีชื่อสินค้าใน Batch นี้',
+            samplePns: emptyDescItems.map(i => i.inventory_pn)
+          });
+        }
+      }
+
       const rpcRes = await queryPostgrest('rpc/activate_stock_batch', {
         method: 'POST',
         body: JSON.stringify({
@@ -313,6 +353,18 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    // 1.5 Fail-Closed Guard: Ensure all items have product names / descriptions
+    const missingProductNames = validateRequiredProductNames(items);
+    if (missingProductNames.length > 0) {
+      return res.status(422).json({
+        code: 'PRODUCT_NAME_REQUIRED',
+        error: 'PRODUCT_NAME_REQUIRED',
+        message: 'พบรายการที่ไม่มีชื่อสินค้า ห้ามสร้างหรือ Activate Snapshot',
+        missingCount: missingProductNames.length,
+        samplePns: missingProductNames.slice(0, 20)
+      });
+    }
+
     // 2. Check for duplicate file hash in branch
     const dupCheck = await queryPostgrest(
       `stock_import_batches?branch_code=eq.${encodeURIComponent(branchCode)}&source_file_sha256=eq.${encodeURIComponent(sourceFileSha256)}&select=id,status`
@@ -367,23 +419,26 @@ module.exports = async function handler(req, res) {
 
     // 4. Insert Items in Chunks of 100 to avoid payload size limits
     const CHUNK_SIZE = 100;
-    const formattedItems = items.map(it => ({
-      batch_id: newBatchId,
-      branch_code: branchCode,
-      inventory_pn: String(it.inventoryPn || it.pn).trim().toUpperCase(),
-      barcode: it.barcode ? String(it.barcode).trim() : null,
-      description: String(it.description || '').trim(),
-      brand: it.brand ? String(it.brand).trim() : null,
-      category: it.category ? String(it.category).trim() : null,
-      cat1: it.cat1 ? String(it.cat1).trim() : null,
-      cat2: it.cat2 ? String(it.cat2).trim() : null,
-      cat3: it.cat3 ? String(it.cat3).trim() : null,
-      color: it.color ? String(it.color).trim() : null,
-      erp_rrp: it.erpRrp != null ? Number(it.erpRrp) : (it.price != null ? Number(it.price) : null),
-      f1: Math.max(0, parseInt(it.f1, 10) || 0),
-      f2: Math.max(0, parseInt(it.f2, 10) || 0),
-      source_rows: it.sourceRows || {}
-    }));
+    const formattedItems = items.map(it => {
+      const desc = String(it.description ?? it.productName ?? it.model ?? it.name ?? '').trim();
+      return {
+        batch_id: newBatchId,
+        branch_code: branchCode,
+        inventory_pn: String(it.inventoryPn || it.pn).trim().toUpperCase(),
+        barcode: it.barcode ? String(it.barcode).trim() : null,
+        description: desc,
+        brand: it.brand ? String(it.brand).trim() : null,
+        category: it.category ? String(it.category).trim() : null,
+        cat1: it.cat1 ? String(it.cat1).trim() : null,
+        cat2: it.cat2 ? String(it.cat2).trim() : null,
+        cat3: it.cat3 ? String(it.cat3).trim() : null,
+        color: it.color ? String(it.color).trim() : null,
+        erp_rrp: it.erpRrp != null ? Number(it.erpRrp) : (it.price != null ? Number(it.price) : null),
+        f1: Math.max(0, parseInt(it.f1, 10) || 0),
+        f2: Math.max(0, parseInt(it.f2, 10) || 0),
+        source_rows: it.sourceRows || {}
+      };
+    });
 
     for (let i = 0; i < formattedItems.length; i += CHUNK_SIZE) {
       const chunk = formattedItems.slice(i, i + CHUNK_SIZE);

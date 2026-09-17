@@ -385,7 +385,17 @@
           else if (val === 'P/N' || val === 'PN' || val === 'PART NUMBER') colMap['pn'] = c;
           else if (val.includes('KOAN SKU')) colMap['koanSku'] = c;
           else if (val.includes('APPLE PART')) colMap['applePart'] = c;
-          else if (val === 'DESCRIPTION') colMap['description'] = c;
+          else if ([
+            'DESCRIPTION',
+            'ITEM DESCRIPTION',
+            'PRODUCT DESCRIPTION',
+            'PRODUCT NAME',
+            'ITEM NAME',
+            'MODEL',
+            'MATERIAL DESCRIPTION',
+            'ชื่อสินค้า',
+            'รายละเอียดสินค้า'
+          ].includes(val)) colMap['description'] = c;
           else if (val === 'ON HAND' || val === 'ONHAND') colMap['onHand'] = c;
           else if (val.includes('ON B/R')) colMap['onBr'] = c;
           else if (val.includes('ON ALLOC')) colMap['onAlloc'] = c;
@@ -395,6 +405,10 @@
 
       if (colMap['pn'] === undefined || colMap['onHand'] === undefined) {
         throw new Error(`คอลัมน์ P/N หรือ On Hand ไม่ครบถ้วนใน ${sheetName}`);
+      }
+
+      if (colMap['description'] === undefined) {
+        throw new Error(`ไม่พบคอลัมน์ชื่อสินค้า (Description / Item Description / Model) ในชีต ${sheetName}`);
       }
 
       const rows = [];
@@ -1217,6 +1231,12 @@
       const b = this.currentStagedBatch;
       const confirmMsg = `ยืนยันการนำเข้า Stock Snapshot ชุดใหม่?\n\n- Batch ID: ${b.batchId}\n- ไฟล์ต้นทาง: ${b.sourceFilename}\n- จำนวนสินค้า: ${b.stats.totalProducts} รายการ\n- ผลรวม F1: ${b.stats.f1Total} | F2: ${b.stats.f2Total} (รวม ${b.stats.grandTotal})\n- สินค้าที่สต็อกเปลี่ยน: ${b.stats.changedCount} รายการ\n- สินค้าใหม่ที่ตรวจพบ: ${b.stats.newCount} รายการ (บันทึกเป็น Draft: PENDING_PRODUCT_REVIEW พร้อม Batch ID กำกับ)\n\nข้อมูลจะถูกบันทึกในเครื่องนี้ (LOCAL_BROWSER_ONLY) และอัปเดตหน้า Dashboard ทันที`;
 
+      const missingNames = (b.mergedResult?.items || []).filter(it => !String(it.description || it.model || it.name || '').trim());
+      if (missingNames.length > 0) {
+        alert(`❌ ไม่สามารถนำเข้าได้: พบสินค้าที่ไม่มีชื่อสินค้า ${missingNames.length} รายการ (ระบบบังคับชื่อสินค้า 100%)\nตัวอย่าง P/N: ${missingNames.slice(0, 5).map(i => i.pn).join(', ')}`);
+        return;
+      }
+
       if (!confirm(confirmMsg)) return;
 
       this.isSubmitting = true;
@@ -1255,22 +1275,28 @@
                 f2Total: b.stats.f2Total,
                 totalQuantity: b.stats.grandTotal
               },
-              items: b.mergedResult.items.map(it => ({
-                inventoryPn: it.pn,
-                barcode: it.barcode || null,
-                description: it.description,
-                brand: it.brand || null,
-                category: it.category || null,
-                cat1: it.cat1 || null,
-                cat2: it.cat2 || null,
-                cat3: it.cat3 || null,
-                color: it.color || null,
-                erpRrp: it.price || it.rrp || null,
-                f1: it.f1,
-                f2: it.f2,
-                total: it.f1 + it.f2,
-                sourceRows: it.sourceRows || {}
-              }))
+              items: b.mergedResult.items.map(it => {
+                const desc = String(it.description || it.model || it.name || '').trim();
+                return {
+                  inventoryPn: it.pn,
+                  barcode: it.barcode || null,
+                  description: desc,
+                  model: desc,
+                  name: desc,
+                  productName: desc,
+                  brand: it.brand || null,
+                  category: it.category || null,
+                  cat1: it.cat1 || null,
+                  cat2: it.cat2 || null,
+                  cat3: it.cat3 || null,
+                  color: it.color || null,
+                  erpRrp: it.price || it.rrp || null,
+                  f1: it.f1,
+                  f2: it.f2,
+                  total: it.f1 + it.f2,
+                  sourceRows: it.sourceRows || {}
+                };
+              })
             };
 
             // Post Draft

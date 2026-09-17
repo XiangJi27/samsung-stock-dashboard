@@ -29,8 +29,12 @@ HEADER_ALIASES = {
     },
     "description": {
         "DESCRIPTION",
+        "ITEM DESCRIPTION",
         "PRODUCT DESCRIPTION",
         "PRODUCT NAME",
+        "ITEM NAME",
+        "MODEL",
+        "MATERIAL DESCRIPTION",
         "ชื่อสินค้า",
         "รายละเอียดสินค้า",
     },
@@ -436,6 +440,19 @@ def parse_nimbus_excel(
         read_only=True,
     )
 
+    available_sheets = set(workbook.sheetnames)
+    if f1_sheet not in available_sheets:
+        for candidate in ["Stock1", "Sheet 1", "Floor1", "ชั้น 1"]:
+            if candidate in available_sheets:
+                f1_sheet = candidate
+                break
+
+    if f2_sheet not in available_sheets:
+        for candidate in ["Stock2", "Sheet 2", "Floor2", "ชั้น 2"]:
+            if candidate in available_sheets:
+                f2_sheet = candidate
+                break
+
     f1_items = read_stock_sheet(
         workbook,
         f1_sheet,
@@ -450,6 +467,17 @@ def parse_nimbus_excel(
         f1_items,
         f2_items,
     )
+
+    missing_names = [
+        item["inventoryPn"]
+        for item in items
+        if not str(item.get("description") or "").strip()
+    ]
+    if missing_names:
+        raise ValueError(
+            f"PRODUCT_NAME_REQUIRED: {len(missing_names)} items missing description. "
+            f"Examples: {missing_names[:10]}"
+        )
 
     summary = {
         "totalRows": len(items),

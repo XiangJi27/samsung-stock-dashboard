@@ -1,14 +1,14 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-16T20:03:53.459206+07:00",
+  "generatedAt": "2026-09-17T13:22:02.746371+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/user-feedback-pilot",
-  "commitSha": "8a54aea",
+  "commitSha": "4ab8f87",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7772574,
-    "totalSizeMB": 7.41
+    "totalSizeBytes": 7775823,
+    "totalSizeMB": 7.42
   },
   "files": [
     {
@@ -91,8 +91,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 18315,
-      "sha256": "1da6717e93feb3ec688e2036c4bfb21fb0a6f0a55e98cd61a5e3675be9aa0476",
+      "sizeBytes": 20229,
+      "sha256": "1038ca7507d2a59e7b910c27b112346a2bd89bb65c0fd333ac2f7b12fe08de53",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -133,8 +133,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 77918,
-      "sha256": "616298a834826db24c23be876e494cb1e9f9db0248cad27af7f41673488718c2",
+      "sizeBytes": 79253,
+      "sha256": "bd8c8df156e5d719846e75c8ca3ba2761d46d3f9410dbcbbcb692be4f1ae5242",
       "status": "REQUIRED_RUNTIME"
     },
     {

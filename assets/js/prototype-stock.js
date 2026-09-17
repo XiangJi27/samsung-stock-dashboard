@@ -2048,15 +2048,18 @@
           const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
           const promo = resolvePromotion(item);
           const pnText = item.pn || "ไม่มีรหัส P/N";
+          const displayModelName = item.model || item.description || item.name || item.productName || "-";
+          const modelDrawerParam = encodeURIComponent(item.model || item.description || item.name || item.productName || '');
 
           // Table Row
           const tr = document.createElement("tr");
           tr.setAttribute("data-pn", item.pn || "");
+          tr.setAttribute("data-stock-row", "true");
           tr.innerHTML = `
             <td>
               <div class="product-identity-group">
                 <div class="product-title-row">
-                  <span class="product-model-name">${item.model || "-"}</span>
+                  <span class="product-model-name" data-testid="product-name">${displayModelName}</span>
                   ${pnText !== "ไม่มีรหัส P/N" ? `<span class="badge-pn-pill">${pnText}</span>` : ''}
                 </div>
                 <div class="product-spec-row">
@@ -2090,10 +2093,10 @@
             </td>
             <td style="text-align: right;">
               <div class="action-button-group">
-                <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้าอย่างละเอียด">
+                <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${modelDrawerParam}')" title="ดูข้อมูลสเปกสินค้าอย่างละเอียด">
                   <span>📋 สเปก</span>
                 </button>
-                <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูโปรโมชั่นและราคา">
+                <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${modelDrawerParam}')" title="ดูโปรโมชั่นและราคา">
                   <span>✨ ดูโปรโมชั่น</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                 </button>
@@ -2106,11 +2109,12 @@
           const card = document.createElement("div");
           card.className = "product-card-item";
           card.setAttribute("data-pn", item.pn || "");
+          card.setAttribute("data-stock-row", "true");
           card.innerHTML = `
             <div>
               <div class="card-top-row">
                 <div>
-                  <strong style="font-size: 1rem; color: #fff;">${item.model || "-"}</strong>
+                  <strong style="font-size: 1rem; color: #fff;" data-testid="product-name">${displayModelName}</strong>
                   <div class="card-meta-row">
                     <span class="badge-pn-pill">${pnText}</span>
                     ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}

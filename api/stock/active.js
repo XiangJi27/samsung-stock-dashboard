@@ -6,6 +6,84 @@
  * Enforces authenticated access and zero secret leakage.
  */
 
+function normalizeText(value) {
+  if (value === null || value === undefined) {
+    return "";
+  }
+  return String(value).trim();
+}
+
+function normalizeNumber(value, fallback = 0) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : fallback;
+}
+
+function mapStockItem(row) {
+  const inventoryPn = normalizeText(
+    row.inventory_pn ??
+    row.inventoryPn ??
+    row.pn
+  );
+
+  /*
+   * PostgreSQL stores the product name in "description".
+   * The existing frontend may read model, name, or productName.
+   * Return all compatibility aliases to prevent blank product names.
+   */
+  const description = normalizeText(
+    row.description ??
+    row.product_description ??
+    row.product_name ??
+    row.model ??
+    row.name
+  );
+
+  const f1 = normalizeNumber(row.f1);
+  const f2 = normalizeNumber(row.f2);
+
+  const erpRrp =
+    row.erp_rrp === null || row.erp_rrp === undefined || row.erp_rrp === ""
+      ? null
+      : normalizeNumber(row.erp_rrp, null);
+
+  return {
+    // Canonical identifiers
+    inventoryPn,
+    pn: inventoryPn,
+    barcode: normalizeText(row.barcode ?? row.gtin),
+
+    // Canonical product name
+    description,
+
+    // Compatibility aliases for the current UI
+    model: description,
+    name: description,
+    productName: description,
+
+    brand: normalizeText(row.brand),
+    category: normalizeText(row.category),
+
+    cat1: normalizeText(row.cat1 ?? row.category1),
+    cat2: normalizeText(row.cat2 ?? row.category2),
+    cat3: normalizeText(row.cat3 ?? row.category3),
+
+    category1: normalizeText(row.cat1 ?? row.category1),
+    category2: normalizeText(row.cat2 ?? row.category2),
+    category3: normalizeText(row.cat3 ?? row.category3),
+
+    color: normalizeText(row.color),
+
+    erpRrp,
+    rrp: erpRrp,
+    price: erpRrp,
+
+    f1,
+    f2,
+    total: f1 + f2,
+    sourceRows: row.source_rows || {}
+  };
+}
+
 module.exports = async function handler(req, res) {
   const requestId = `req_stock_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
   res.setHeader('X-Request-Id', requestId);
@@ -166,23 +244,32 @@ module.exports = async function handler(req, res) {
 
     const rawItems = await itemsRes.json();
 
-    // Map to client format
-    const items = (rawItems || []).map(row => ({
-      pn: row.inventory_pn,
-      barcode: row.barcode,
-      description: row.description,
-      brand: row.brand,
-      category: row.category,
-      cat1: row.cat1,
-      cat2: row.cat2,
-      cat3: row.cat3,
-      color: row.color,
-      price: row.erp_rrp != null ? Number(row.erp_rrp) : null,
-      f1: Number(row.f1 || 0),
-      f2: Number(row.f2 || 0),
-      total: Number(row.total || (Number(row.f1 || 0) + Number(row.f2 || 0))),
-      sourceRows: row.source_rows || {}
-    }));
+    // Map to client format with complete canonical & compatibility fields
+    const items = (rawItems || []).map(mapStockItem);
+
+    // Fail-Closed Guard: Ensure active batch does not serve missing product names
+    const missingProductNames = items
+      .filter((item) => !item.description)
+      .map((item) => item.inventoryPn || item.pn || "UNKNOWN_PN");
+
+    if (missingProductNames.length > 0) {
+      console.error(
+        "[ACTIVE_STOCK_PRODUCT_NAMES_MISSING]",
+        {
+          batchId: batch.id,
+          missingCount: missingProductNames.length,
+          samplePns: missingProductNames.slice(0, 20)
+        }
+      );
+
+      return res.status(500).json({
+        code: "ACTIVE_STOCK_PRODUCT_NAMES_MISSING",
+        message: "Active Stock Batch contains items without product names.",
+        batchId: batch.id,
+        missingCount: missingProductNames.length,
+        samplePns: missingProductNames.slice(0, 20)
+      });
+    }
 
     return res.status(200).json({
       status: 'ACTIVE',

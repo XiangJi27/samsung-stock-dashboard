@@ -11,7 +11,57 @@
 (function(window) {
   'use strict';
 
+  function normalizeCentralStockItem(rawItem) {
+    if (!rawItem || typeof rawItem !== 'object') return rawItem;
+
+    const inventoryPn = String(
+      rawItem.inventoryPn ||
+      rawItem.inventory_pn ||
+      rawItem.pn ||
+      ""
+    ).trim();
+
+    const description = String(
+      rawItem.description ||
+      rawItem.productName ||
+      rawItem.product_name ||
+      rawItem.model ||
+      rawItem.name ||
+      ""
+    ).trim();
+
+    const f1 = Number(rawItem.f1 || 0);
+    const f2 = Number(rawItem.f2 || 0);
+    const total = rawItem.total !== undefined ? Number(rawItem.total) : (f1 + f2);
+
+    return {
+      ...rawItem,
+      inventoryPn,
+      pn: inventoryPn,
+      barcode: rawItem.barcode || "",
+      description,
+      model: description || rawItem.model || "-",
+      name: description || rawItem.name || "-",
+      productName: description || rawItem.productName || "-",
+      brand: rawItem.brand || "",
+      category: rawItem.category || "",
+      category1: rawItem.category1 || rawItem.cat1 || "",
+      category2: rawItem.category2 || rawItem.cat2 || "",
+      category3: rawItem.category3 || rawItem.cat3 || "",
+      cat1: rawItem.cat1 || rawItem.category1 || "",
+      cat2: rawItem.cat2 || rawItem.category2 || "",
+      cat3: rawItem.cat3 || rawItem.category3 || "",
+      color: rawItem.color || "",
+      price: rawItem.price !== undefined ? rawItem.price : (rawItem.erpRrp !== undefined ? rawItem.erpRrp : null),
+      erpRrp: rawItem.erpRrp !== undefined ? rawItem.erpRrp : (rawItem.price !== undefined ? rawItem.price : null),
+      f1,
+      f2,
+      total
+    };
+  }
+
   class DataLoaderGate {
+    static normalizeCentralStockItem = normalizeCentralStockItem;
     constructor() {
       this.isLoaded = false;
       this.isLoading = false;
@@ -113,8 +163,9 @@
             if (response.ok) {
               const centralData = await response.json();
               if (centralData && Array.isArray(centralData.items) && centralData.items.length > 0) {
-                window.STOCK_DATABASE = centralData.items;
-                window.STOCK_DATA = centralData.items;
+                const normalizedItems = centralData.items.map(normalizeCentralStockItem);
+                window.STOCK_DATABASE = normalizedItems;
+                window.STOCK_DATA = normalizedItems;
                 window.STOCK_METADATA = {
                   stockBatchId: centralData.batchId,
                   importBatchId: centralData.batchId,
@@ -143,7 +194,7 @@
                 if (window.StockStorageAdapter && typeof window.StockStorageAdapter.saveBatch === "function") {
                   window.StockStorageAdapter.saveBatch({
                     batchId: centralData.batchId,
-                    data: centralData.items,
+                    data: normalizedItems,
                     meta: window.STOCK_METADATA
                   }).catch(e => console.warn("[DataLoaderGate] Failed to cache snapshot in IndexedDB:", e));
                 }
@@ -163,7 +214,9 @@
                   : { valid: Boolean(localSnapshot.data && localSnapshot.data.length > 0) };
 
                 if (validation.valid) {
-                  window.STOCK_DATABASE = localSnapshot.data;
+                  const normalizedCached = (localSnapshot.data || []).map(normalizeCentralStockItem);
+                  window.STOCK_DATABASE = normalizedCached;
+                  window.STOCK_DATA = normalizedCached;
                   if (localSnapshot.meta) {
                     window.STOCK_METADATA = localSnapshot.meta;
                   }

@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "8a54aea",
+  "packageBuiltFromCommit": "4ab8f87",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-16T20:03:51.943899+07:00",
+  "builtAt": "2026-09-17T13:22:11.463369+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,8 +13,8 @@
   "totalFiles": 47,
   "summary": {
     "totalFiles": 47,
-    "totalSizeBytes": 9681464,
-    "totalSizeMB": 9.23
+    "totalSizeBytes": 9689801,
+    "totalSizeMB": 9.24
   },
   "files": [
     {
@@ -98,8 +98,8 @@
     },
     {
       "file": "assets/js/data-loader.js",
-      "sizeBytes": 18315,
-      "sha256": "1da6717e93feb3ec688e2036c4bfb21fb0a6f0a55e98cd61a5e3675be9aa0476",
+      "sizeBytes": 20229,
+      "sha256": "1038ca7507d2a59e7b910c27b112346a2bd89bb65c0fd333ac2f7b12fe08de53",
       "status": "BASELINE_CORE"
     },
     {
@@ -140,8 +140,8 @@
     },
     {
       "file": "assets/js/stock-importer.js",
-      "sizeBytes": 77918,
-      "sha256": "616298a834826db24c23be876e494cb1e9f9db0248cad27af7f41673488718c2",
+      "sizeBytes": 79253,
+      "sha256": "bd8c8df156e5d719846e75c8ca3ba2761d46d3f9410dbcbbcb692be4f1ae5242",
       "status": "BASELINE_CORE"
     },
     {
@@ -176,8 +176,8 @@
     },
     {
       "file": "assets/js/prototype-stock.js",
-      "sizeBytes": 149535,
-      "sha256": "8a570073576ce4d4635775cb37b0daaaa170eb32f65b4ffca7bce448196b2db5",
+      "sizeBytes": 149892,
+      "sha256": "266c4dee3307e9b40755189a619e67467c9e6d48a8747425b57c9086e5d8869d",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -278,14 +278,14 @@
     },
     {
       "file": "api/stock-imports.js",
-      "sizeBytes": 16192,
-      "sha256": "f969dc97d3440d390950c12293b0bcfa54f99b72665aecfdcf8b895be960f7b2",
+      "sizeBytes": 18671,
+      "sha256": "5f1ddaaf4f9d91baa2e0b1110da168d1abb0cf2dcba27db32da2dd839a0ea030",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "api/stock/active.js",
-      "sizeBytes": 7424,
-      "sha256": "1b2da04230c57aad2c9edae595e44cf1f144ba6e535e88a38e2c1efd07e54bdd",
+      "sizeBytes": 9676,
+      "sha256": "b2f19c6fa8425c44f52d962ffa06bd89b1a9ceae18630513d1054716b724ee17",
       "status": "PILOT_RUNTIME"
     },
     {
