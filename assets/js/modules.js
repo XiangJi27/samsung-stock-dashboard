@@ -33,6 +33,9 @@ function renderPromotionsView() {
           <button class="btn-action-view" onclick="window.AppRouter.navigate('/promotion-import')" style="background: rgba(6, 182, 212, 0.15); border-color: var(--neon-cyan); color: #fff;">
             <span>⚡ นำเข้าโปรโมชั่น (Import) &rarr;</span>
           </button>
+          <a href="promotion_review_dashboard.html" target="_blank" class="btn-action-view" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <span>🛡️ หน้าจอ Review ตรวจโปรโมชั่น (3 คอลัมน์) &rarr;</span>
+          </a>
           <button class="btn-action-view" onclick="document.getElementById('btnAuditModal')?.click()">
             <span>🛡️ เปิดระบบ 95/5 Risk Guard</span>
           </button>

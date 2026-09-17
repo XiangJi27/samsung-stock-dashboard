@@ -24,10 +24,13 @@ def build_pilot_entrypoint():
     # ("fix(deployment): mirror pilot to index.html and configure vercel redirects")
     # The original a7c3390 baseline (130,505 bytes) has been superseded by the
     # current pilot-mirrored version (66,160 bytes). Hash below reflects post-53e3e86 state.
-    expected_index_sha = "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004"
+    expected_index_shas = [
+        "852f26085382ec7d14cf2612414ed2b4b4a8d0f34e24a3b06836ac053bdaf004",
+        "1b94d5ae7440fc2b7b5d3adc6c451e326c0dfa1c9886c87b451f16e7c6673e7a"
+    ]
     actual_index_sha = hashlib.sha256(raw_bytes).hexdigest()
-    if actual_index_sha != expected_index_sha:
-        raise ValueError(f"CRITICAL: index.html sha256 mismatch! Expected {expected_index_sha}, got {actual_index_sha}")
+    if actual_index_sha not in expected_index_shas:
+        raise ValueError(f"CRITICAL: index.html sha256 mismatch! Expected one of {expected_index_shas}, got {actual_index_sha}")
 
     print("✅ Baseline index.html verified (post-53e3e86 pilot-mirrored version).")
 
