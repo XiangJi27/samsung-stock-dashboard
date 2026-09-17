@@ -441,7 +441,7 @@
       <strong>Central DB (Supabase):</strong> CONNECTED
     </div>
     <div class="status-item" id="stockBatchInfo">
-      <strong>Active Stock Batch:</strong> <code>9ea77b41-ae5a-46d6-8340-75b0762c3a1f</code> (398 P/N | F1: 1,644 | F2: 1,605)
+      <strong>Active Stock Batch:</strong> <code>STOCK-20260914-LATEST</code> (399 P/N | F1: 1,701 | F2: 1,635)
     </div>
     <div class="status-item" id="campaignStatusInfo">
       <strong>Active Campaign:</strong> <span class="pill pill-green" id="activeCampCode">BASELINE-AUG-2026</span> (<span id="activeCampStatus">ACTIVE</span>)
@@ -687,10 +687,10 @@
 
   <script>
     // Invariants & State
-    const ACTIVE_STOCK_BATCH_ID = '9ea77b41-ae5a-46d6-8340-75b0762c3a1f';
-    const ACTIVE_STOCK_F1 = 1644;
-    const ACTIVE_STOCK_F2 = 1605;
-    const ACTIVE_STOCK_ROWS = 398;
+    const ACTIVE_STOCK_BATCH_ID = 'STOCK-20260914-LATEST';
+    const ACTIVE_STOCK_F1 = 1701;
+    const ACTIVE_STOCK_F2 = 1635;
+    const ACTIVE_STOCK_ROWS = 399;
 
     // Grounded Active Stock Master Catalog (Exact P/N Lookup Map)
     // Rule: Found P/N in Active Stock -> Create Offer; Missing P/N -> REVIEW_REQUIRED (Never guess!)

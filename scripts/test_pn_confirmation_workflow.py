@@ -133,13 +133,83 @@ async def run_test():
         assert int(kpi_review_after) == 25, f"Expected 25 review (including S26 Ultra 1TB fail-closed) after confirm, got {kpi_review_after}"
         print(f"✅ [PASS] Gate 6: {kpi_passed_after} Review items promoted to PASSED; {kpi_review_after} items held safely in REVIEW (Fail-Closed)")
 
-        # Verify publish button is now visible and active
+        # Verify publish and database buttons are now visible and active
         btn_publish_display_after = await page.evaluate("() => document.getElementById('btnConfirmPromoPublish').style.display")
         assert btn_publish_display_after != "none", "Publish button should be visible after confirmation"
         btn_publish_text = await page.inner_text("#btnConfirmPromoPublish")
         print(f"   Publish button text: {btn_publish_text}")
         assert kpi_passed_after in btn_publish_text, f"Publish button text should mention {kpi_passed_after} items, got {btn_publish_text}"
         print("✅ [PASS] Gate 7: Publish button unlocked and reflects 25 verified items")
+
+        # Gate 7a: Test Database Preview Modal (5 groups)
+        print("3.1 Testing 'ดูข้อมูลที่จะบันทึก (Database Preview)'...")
+        btn_preview_display = await page.evaluate("() => document.getElementById('btnPreviewPromoDatabase')?.style.display")
+        assert btn_preview_display != "none", "Database Preview button should be visible"
+        await page.click("#btnPreviewPromoDatabase")
+        await page.wait_for_timeout(300)
+
+        preview_visible = await page.evaluate("() => document.getElementById('promoDatabasePreviewModal')?.style.display !== 'none'")
+        assert preview_visible, "Database Preview modal should be visible"
+        preview_html = await page.inner_text("#promoDbPreviewContent")
+        assert "promotion_import_batches" in preview_html
+        assert "promotion_campaigns" in preview_html
+        assert "promotion_offers" in preview_html
+        assert "promotion_stacking_rules" in preview_html
+        assert "promotion_validation_errors" in preview_html
+        assert "Galaxy S26 Ultra" in preview_html
+        print("✅ [PASS] Gate 7a: Database Preview verified with all 5 groups (Batch, Campaign, Offers, Stacking, Errors/Held)")
+
+        # Close Database Preview modal
+        await page.click("#btnClosePromoDbPreview")
+        await page.wait_for_timeout(300)
+
+        # Gate 7b: Test Save Draft to Database API & Dynamic Banner Transition
+        print("3.2 Testing '💾 บันทึก Draft ลงฐานข้อมูล' & Storage Banner transition...")
+        btn_save_db_display = await page.evaluate("() => document.getElementById('btnSavePromoDraftDatabase')?.style.display")
+        assert btn_save_db_display != "none", "Save Draft Database button should be visible"
+
+        # Set mockPromoImportHandler for file:// context in test
+        await page.evaluate("""() => {
+            window.BYPASS_OFFLINE_DEV = true;
+            window.mockPromoImportHandler = async (payload) => {
+                return {
+                    status: 'DRAFT_CREATED',
+                    batchId: '7fc7c065-707a-48dd-b50c-d6bfb924be2c',
+                    campaignId: '3c651d46-b730-4388-b14c-145af2b927d2',
+                    branchCode: 'AYUTTHAYA_CITY_PARK',
+                    offerCount: 71,
+                    blockerCount: 0,
+                    reviewRequiredCount: 25,
+                    summary: {
+                        totalRows: 56,
+                        passedRows: 25,
+                        warningRows: 25,
+                        blockedRows: 6
+                    }
+                };
+            };
+        }""")
+
+        # Click save draft to database
+        await page.click("#btnSavePromoDraftDatabase")
+        await page.wait_for_timeout(600)
+
+        # Verify Banner changed from LOCAL_BROWSER_ONLY to CENTRAL_DATABASE • DRAFT
+        banner_badge = await page.inner_text("#promoStorageBannerBadge")
+        banner_tag = await page.inner_text("#promoStorageBannerTag")
+        banner_desc = await page.inner_text("#promoStorageBannerDesc")
+
+        print(f"   Storage Banner Badge: {banner_badge}")
+        print(f"   Storage Banner Tag: {banner_tag}")
+        assert "CENTRAL_DATABASE" in banner_badge, f"Expected CENTRAL_DATABASE in badge, got {banner_badge}"
+        assert "DRAFT" in banner_badge, f"Expected DRAFT in badge, got {banner_badge}"
+        assert "PROMOTION DATABASE DRAFT" in banner_tag, f"Expected PROMOTION DATABASE DRAFT in tag, got {banner_tag}"
+        assert "7fc7c065" in banner_desc, f"Expected batch UUID in desc, got {banner_desc}"
+        assert "3c651d46" in banner_desc, f"Expected campaign UUID in desc, got {banner_desc}"
+        print("✅ [PASS] Gate 7b: Draft successfully saved to Central Database with banner transition: Storage: CENTRAL_DATABASE • DRAFT")
+
+        await page.screenshot(path="reports/candidate_database_draft_saved.png")
+        print("   Saved screenshot: reports/candidate_database_draft_saved.png")
 
         # Test publishing to IndexedDB
         print("4. Executing Confirm & Publish to IndexedDB...")

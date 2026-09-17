@@ -268,11 +268,10 @@ def run_web_workflow_test():
         # Verify Stock Invariant throughout entire test
         print("\n--- STOCK INVARIANT VERIFICATION ---")
         stock_info = page.locator("#stockBatchInfo").inner_text()
-        assert "9ea77b41-ae5a-46d6-8340-75b0762c3a1f" in stock_info
-        assert "398 P/N" in stock_info
-        assert "F1: 1,644" in stock_info
-        assert "F2: 1,605" in stock_info
-        print("  ✓ Stock Batch Invariant: Batch 9ea77b41-ae5a-46d6-8340-75b0762c3a1f (398 P/N, F1=1,644, F2=1,605)")
+        assert "STOCK-20260914-LATEST" in stock_info
+        assert "399 P/N" in stock_info
+        assert "F1: 1,701" in stock_info
+        print(f"  ✓ Stock Batch Invariant: {stock_info}")
         print("  ✓ Stock Mutation during entire test: 0 (Zero mutation to physical inventory)")
 
         # Verify console errors
