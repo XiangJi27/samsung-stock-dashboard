@@ -570,3 +570,59 @@ test("มูลค่าเครื่องเก่าและโบนั�
   assert.equal(result.totalBenefit, 3000);
 });
 
+const {
+  calculatePromotionPrice,
+  calculatePromotionPrices
+} = require("../assets/js/promotion-calculator.js");
+
+test("ไม่พบราคาปกติ (null, 0, หรือไม่มี) ต้องระงับการคำนวณและคืน REGULAR_PRICE_NOT_AVAILABLE", () => {
+  const resultNull = calculatePromotionPrice({ regularPrice: null, discountAmount: 4000 });
+  assert.equal(resultNull.valid, false);
+  assert.equal(resultNull.code, "REGULAR_PRICE_NOT_AVAILABLE");
+  assert.equal(resultNull.netPrice, null);
+
+  const resultZero = calculatePromotionPrice({ regularPrice: 0, discountAmount: 12000 });
+  assert.equal(resultZero.valid, false);
+  assert.equal(resultZero.code, "REGULAR_PRICE_NOT_AVAILABLE");
+  assert.equal(resultZero.netPrice, null);
+
+  const resultNegative = calculatePromotionPrice({ regularPrice: -100, discountAmount: 50 });
+  assert.equal(resultNegative.valid, false);
+  assert.equal(resultNegative.code, "REGULAR_PRICE_NOT_AVAILABLE");
+  assert.equal(resultNegative.netPrice, null);
+});
+
+test("ส่วนลดติดลบหรือเกินราคาปกติ ต้องคืน INVALID_DISCOUNT_AMOUNT และปิดราคาสุทธิ", () => {
+  const resultOver = calculatePromotionPrice({ regularPrice: 10000, discountAmount: 15000 });
+  assert.equal(resultOver.valid, false);
+  assert.equal(resultOver.code, "INVALID_DISCOUNT_AMOUNT");
+  assert.equal(resultOver.netPrice, null);
+
+  const resultNegDiscount = calculatePromotionPrice({ regularPrice: 10000, discountAmount: -500 });
+  assert.equal(resultNegDiscount.valid, false);
+  assert.equal(resultNegDiscount.code, "INVALID_DISCOUNT_AMOUNT");
+  assert.equal(resultNegDiscount.netPrice, null);
+});
+
+test("ราคาปกติและส่วนลดถูกต้อง ต้องคำนวณราคาสุทธิได้ถูกต้องและไม่ติดลบ", () => {
+  const result = calculatePromotionPrice({ regularPrice: 49900, discountAmount: 4000 });
+  assert.equal(result.valid, true);
+  assert.equal(result.code, "PRICE_CALCULATION_VALID");
+  assert.equal(result.regularPrice, 49900);
+  assert.equal(result.discountAmount, 4000);
+  assert.equal(result.netPrice, 45900);
+});
+
+test("calculatePromotionPrices ต้องแยกส่วนลดปกติและโบนัส Trade Up และปิดกั้นเมื่อ RRP เป็น 0", () => {
+  const zeroRrp = calculatePromotionPrices({ regularPrice: 0, standardDiscount: 4000, tradeUpDiscount: 2000 });
+  assert.equal(zeroRrp.valid, false);
+  assert.equal(zeroRrp.standardNetPrice, null);
+  assert.equal(zeroRrp.tradeUpNetPrice, null);
+
+  const validPricing = calculatePromotionPrices({ regularPrice: 49900, standardDiscount: 4000, tradeUpDiscount: 2000 });
+  assert.equal(validPricing.valid, true);
+  assert.equal(validPricing.standardNetPrice, 45900);
+  assert.equal(validPricing.tradeUpNetPrice, 43900);
+  assert.notEqual(validPricing.standardNetPrice, validPricing.tradeUpNetPrice);
+});
+

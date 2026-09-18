@@ -8,25 +8,83 @@
   'use strict';
 
   /**
+   * Safe Promotion Price Calculator & Validation Guard
+   * Enforces: RRP > 0, Discount >= 0, Discount <= RRP, Net = RRP - Discount (Net >= 0).
+   * Never allows negative price or RRP=0.
+   */
+  function calculatePromotionPrice(params) {
+    const rawPrice = params ? (params.regularPrice !== undefined ? params.regularPrice : params.rrp) : null;
+    const rawDiscount = params ? (params.discountAmount !== undefined ? params.discountAmount : params.discount) : null;
+
+    const price = (rawPrice === null || rawPrice === undefined || rawPrice === "") ? null : Number(rawPrice);
+    const discount = (rawDiscount === null || rawDiscount === undefined || rawDiscount === "") ? 0 : Number(rawDiscount);
+
+    if (!Number.isFinite(price) || price <= 0) {
+      return {
+        valid: false,
+        code: "REGULAR_PRICE_NOT_AVAILABLE",
+        regularPrice: null,
+        discountAmount: Number.isFinite(discount) ? discount : null,
+        netPrice: null
+      };
+    }
+
+    if (!Number.isFinite(discount) || discount < 0 || discount > price) {
+      return {
+        valid: false,
+        code: "INVALID_DISCOUNT_AMOUNT",
+        regularPrice: price,
+        discountAmount: discount,
+        netPrice: null
+      };
+    }
+
+    return {
+      valid: true,
+      code: "PRICE_CALCULATION_VALID",
+      regularPrice: price,
+      discountAmount: discount,
+      netPrice: price - discount
+    };
+  }
+
+  /**
    * Tier 1 vs Tier 2 Standard Promotion & Trade Up Calculator
    */
   function calculatePromotionPrices(params) {
-    const regularPrice = Number(params.regularPrice || 0);
-    const standardDiscount = Number(params.standardDiscount || 0);
-    const tradeUpDiscount = Number(params.tradeUpDiscount || 0);
+    const rawPrice = params ? (params.regularPrice !== undefined ? params.regularPrice : params.rrp) : null;
+    const price = (rawPrice === null || rawPrice === undefined || rawPrice === "") ? null : Number(rawPrice);
+    const standardDiscount = Number(params?.standardDiscount || 0);
+    const tradeUpBonus = Number(params?.tradeUpDiscount || params?.tradeUpBonusAmount || 0);
 
-    const standardNetPrice = regularPrice - standardDiscount;
-    const tradeUpNetPrice = standardNetPrice - tradeUpDiscount;
+    if (!Number.isFinite(price) || price <= 0) {
+      return {
+        valid: false,
+        code: "REGULAR_PRICE_NOT_AVAILABLE",
+        regularPrice: null,
+        standardDiscount,
+        standardNetPrice: null,
+        tradeUpDiscount: tradeUpBonus,
+        tradeUpNetPrice: null,
+        tradeUpEligible: tradeUpBonus > 0
+      };
+    }
+
+    const standardNetPrice = price - standardDiscount;
+    const tradeUpNetPrice = standardNetPrice - tradeUpBonus;
 
     return {
-      regularPrice,
+      valid: standardNetPrice >= 0 && tradeUpNetPrice >= 0,
+      code: "PRICE_CALCULATION_VALID",
+      regularPrice: price,
       standardDiscount,
-      standardNetPrice,
-      tradeUpDiscount,
-      tradeUpNetPrice,
-      tradeUpEligible: tradeUpDiscount > 0
+      standardNetPrice: Math.max(0, standardNetPrice),
+      tradeUpDiscount: tradeUpBonus,
+      tradeUpNetPrice: Math.max(0, tradeUpNetPrice),
+      tradeUpEligible: tradeUpBonus > 0
     };
   }
+
 
   /**
    * Galaxy S25 FE Mutually Exclusive Payment Option Calculator
@@ -981,6 +1039,7 @@
 
   // Export for browser & node
   const api = {
+    calculatePromotionPrice,
     calculatePromotionPrices,
     calculateS25FePromotion,
     calculateA57Promotion,

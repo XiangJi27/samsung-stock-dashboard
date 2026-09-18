@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "1c5de04",
+  "packageBuiltFromCommit": "5a921f1",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-18T14:54:01.708319+07:00",
+  "builtAt": "2026-09-18T16:50:15.861050+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,8 +13,8 @@
   "totalFiles": 55,
   "summary": {
     "totalFiles": 55,
-    "totalSizeBytes": 10026160,
-    "totalSizeMB": 9.56
+    "totalSizeBytes": 10046209,
+    "totalSizeMB": 9.58
   },
   "files": [
     {
@@ -170,14 +170,14 @@
     },
     {
       "file": "assets/css/prototype-stock.css",
-      "sizeBytes": 31986,
-      "sha256": "c1103f9fc57ef716ee34a834c7bf566bcf0f77e52774080110e2d4f528e6d0ba",
+      "sizeBytes": 34923,
+      "sha256": "258a422d4d4858bb622fc432e91cfe64b06b8ef464325a3d783b218c62035ee0",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "assets/js/prototype-stock.js",
-      "sizeBytes": 170149,
-      "sha256": "cb901989d3e99da401d38624f6c9f5c0f4c9af4036741ffd25549bea1d6e21ea",
+      "sizeBytes": 185124,
+      "sha256": "0bc85d4d483450b397e8b663e336d9c3379b63e46d3cc1416d2985a0c77539ab",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -326,8 +326,8 @@
     },
     {
       "file": "assets/js/promotion-calculator.js",
-      "sizeBytes": 35887,
-      "sha256": "fdde6fb769a71be9e89b7e7e99fd8bc3d0cd8f9d6ddfc85266523e00d0eb4da5",
+      "sizeBytes": 38024,
+      "sha256": "5866e4d8d2514ff0a7655e8df6612e4b440a2335457c7b278e5d584b22a94a72",
       "status": "PILOT_RUNTIME"
     },
     {

@@ -1,7 +1,7 @@
 {
   "gate": "RULE_11_MARKETPLACE_EVIDENCE",
   "status": "PASSED",
-  "executedAt": "2026-09-18T14:54:47.280584",
-  "commitSha": "1c5de04",
+  "executedAt": "2026-09-18T16:49:46.399888",
+  "commitSha": "5a921f1",
   "violations": []
 }
