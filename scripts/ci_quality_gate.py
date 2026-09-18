@@ -1042,6 +1042,81 @@ record_gate_result(
 )
 
 # ----------------------------------------------------------------------
+# 21. RULE 17: MANAGER RESOLUTION API & UI SECURITY GOVERNANCE
+# ----------------------------------------------------------------------
+res_violations = []
+
+# 1. Check promotion-errors.js exists
+if not os.path.exists("api/promotion-errors.js"):
+    res_violations.append({"errorCode": "MISSING_PROMOTION_ERRORS_API", "detail": "api/promotion-errors.js not found"})
+
+# 2. Check vercel.json rewrite
+try:
+    with open("vercel.json", "r", encoding="utf-8") as f:
+        vcfg = json.load(f)
+        rewrites = vcfg.get("rewrites", [])
+        has_err_rw = any(r.get("source") == "/api/promotion-errors/:path*" and r.get("destination", "").startswith("/api/promotion-errors") for r in rewrites)
+        if not has_err_rw:
+            res_violations.append({"errorCode": "MISSING_ERROR_REWRITE", "detail": "vercel.json missing /api/promotion-errors rewrite"})
+except Exception as e:
+    res_violations.append({"errorCode": "VERCEL_CONFIG_READ_ERROR", "detail": str(e)})
+
+# 3. Structural inspection of api/promotion-errors.js
+if os.path.exists("api/promotion-errors.js"):
+    with open("api/promotion-errors.js", "r", encoding="utf-8") as f:
+        err_code = f.read()
+        if "verifiedUser.id" not in err_code:
+            res_violations.append({"errorCode": "MISSING_VERIFIED_USER_ID", "detail": "Server does not use verifiedUser.id"})
+        if "STORE_LEADER" not in err_code:
+            res_violations.append({"errorCode": "MISSING_ROLE_CHECK", "detail": "Server does not check STORE_LEADER role"})
+        if "BRANCH_SCOPE_MISMATCH" not in err_code:
+            res_violations.append({"errorCode": "MISSING_BRANCH_SCOPE_CHECK", "detail": "Server does not enforce branch scope"})
+        if "EXPECTED_STATUS_MISMATCH" not in err_code:
+            res_violations.append({"errorCode": "MISSING_EXPECTED_STATUS_LOCK", "detail": "Server does not enforce optimistic lock check"})
+
+# 4. Structural inspection of promotion_review_dashboard.html
+if os.path.exists("promotion_review_dashboard.html"):
+    with open("promotion_review_dashboard.html", "r", encoding="utf-8") as f:
+        dash_html = f.read()
+        if "userId:" in dash_html and "/resolve" in dash_html:
+            res_violations.append({"errorCode": "LEAKED_CLIENT_USER_ID", "detail": "Dashboard sends userId in resolve body"})
+        if "p_user_id" in dash_html:
+            res_violations.append({"errorCode": "LEAKED_CLIENT_P_USER_ID", "detail": "Dashboard references p_user_id"})
+        if "Bearer ${accessToken}" not in dash_html and "Bearer " not in dash_html:
+            res_violations.append({"errorCode": "MISSING_BEARER_AUTH", "detail": "Dashboard does not send Bearer token"})
+        if "expectedStatus" not in dash_html:
+            res_violations.append({"errorCode": "MISSING_EXPECTED_STATUS_SUBMIT", "detail": "Dashboard does not submit expectedStatus"})
+        if "setSubmitting(true)" not in dash_html:
+            res_violations.append({"errorCode": "MISSING_DOUBLE_SUBMIT_GUARD", "detail": "Dashboard does not disable button in flight"})
+        if "response.ok" not in dash_html:
+            res_violations.append({"errorCode": "MISSING_RESPONSE_OK_GUARD", "detail": "Dashboard does not gate updates on response.ok"})
+
+# 5. Structural inspection of migration RPC permissions
+mig_path = "supabase/migrations/20260917_color_scope_and_resolution_code.sql"
+if os.path.exists(mig_path):
+    with open(mig_path, "r", encoding="utf-8") as f:
+        mig_sql = f.read()
+        if "resolve_promotion_validation_error" not in mig_sql or "from authenticated, anon, public" not in mig_sql:
+            res_violations.append({"errorCode": "RPC_PERMISSIONS_NOT_REVOKED", "detail": "RPC resolve function not revoked from public/anon/authenticated"})
+
+# 6. Structural inspection of legacy backfill activation guard
+if os.path.exists("api/promotion-campaigns.js"):
+    with open("api/promotion-campaigns.js", "r", encoding="utf-8") as f:
+        camp_code = f.read()
+        if "LEGACY_BACKFILL_ACTIVATION_NOT_ALLOWED" not in camp_code:
+            res_violations.append({"errorCode": "MISSING_LEGACY_BACKFILL_GUARD", "detail": "Campaign API does not enforce LEGACY_BACKFILL_ACTIVATION_NOT_ALLOWED"})
+
+record_gate_result(
+    rule_id="RULE-17-MANAGER-RESOLUTION-SECURITY",
+    name="Manager Resolution API & UI Security Governance Gate",
+    expected="promotion-errors API exists, rewrite present, client payload zero userId, Bearer JWT used, verifiedUser.id enforced, role & branch checked, optimistic expectedStatus, double-submit disabled, response.ok verified, RPC server-only, legacy backfill blocked",
+    actual=f"{len(res_violations)} violations" if len(res_violations) > 0 else "0 violations (All 12 Manager Resolution security invariants verified)",
+    status="PASS" if len(res_violations) == 0 else "FAIL",
+    affected_records=len(res_violations),
+    evidence={"violations": res_violations}
+)
+
+# ----------------------------------------------------------------------
 # OVERALL SUMMARY & PERSISTENCE
 # ----------------------------------------------------------------------
 print("\n" + "=" * 80)
@@ -1160,6 +1235,11 @@ gate_metadata_map = {
         "functionName": "verify_promotion_upload_gates",
         "inputFiles": ["schemas/promotion_import_contract.schema.json", "fixtures/promotions/promotion_pilot_fixtures.json", "reports/promotion_preview_diff.json", "reports/promotion_import_drafts.json"],
         "recordsChecked": 11
+    },
+    "RULE-17-MANAGER-RESOLUTION-SECURITY": {
+        "functionName": "validate_manager_resolution_security_invariants",
+        "inputFiles": ["api/promotion-errors.js", "vercel.json", "promotion_review_dashboard.html", "api/promotion-campaigns.js", "supabase/migrations/20260917_color_scope_and_resolution_code.sql"],
+        "recordsChecked": 12
     }
 }
 

@@ -1,13 +1,13 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-17T19:56:17.493678+07:00",
+  "generatedAt": "2026-09-18T12:18:31.274349+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/user-feedback-pilot",
-  "commitSha": "c7e1efe",
+  "commitSha": "cb224b7",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7831807,
+    "totalSizeBytes": 7834083,
     "totalSizeMB": 7.47
   },
   "files": [
@@ -43,8 +43,8 @@
     },
     {
       "file": "vercel.json",
-      "sizeBytes": 873,
-      "sha256": "c2678d87c4bd77588eacfef5063abf69294a9d52ccf242959d28f0f4433729c1",
+      "sizeBytes": 991,
+      "sha256": "57885fb01db4b46e9aa404ba8e842564d888fcf87efeabd5c520117f6b864c99",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -139,8 +139,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 160103,
-      "sha256": "228bc5df12e90f6556723c86faa01174d571a3d827321e3057a5f432dd0c794c",
+      "sizeBytes": 162261,
+      "sha256": "6a19867b0688083cc52c283f41ec31b8a3d3bbd80aae2ba3e4200084a08b8a35",
       "status": "REQUIRED_RUNTIME"
     },
     {

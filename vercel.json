@@ -31,6 +31,10 @@
       "destination": "/api/promotion-campaigns?path=:path*"
     },
     {
+      "source": "/api/promotion-errors/:path*",
+      "destination": "/api/promotion-errors?path=:path*"
+    },
+    {
       "source": "/api/promotions/active",
       "destination": "/api/promotions/active"
     }

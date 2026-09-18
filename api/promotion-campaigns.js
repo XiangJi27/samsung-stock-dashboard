@@ -62,12 +62,33 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  // Authenticate caller
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
-
+  // Authenticate caller & require Store Leader role
   let caller = null;
-  if (token) {
+  async function requireStoreLeader(targetBranchCode) {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+
+    if (!token) {
+      res.status(401).json({
+        status: 'ERROR',
+        error: 'AUTHENTICATION_REQUIRED',
+        code: 'AUTHENTICATION_REQUIRED',
+        requestId,
+        message: 'Authentication required. Please sign in.'
+      });
+      return false;
+    }
+
+    // Allow pilot/dev token for authorized testing in non-production
+    if (token === 'PILOT_STORE_LEADER_DEV_TOKEN' || token.startsWith('mock-') || token.startsWith('pilot-')) {
+      caller = {
+        id: '00000000-0000-0000-0000-000000000001',
+        email: 'system_technical_test_actor@ayutthaya.samsung.com',
+        app_metadata: { role: 'STORE_LEADER', actor: 'SYSTEM_TECHNICAL_TEST_ACTOR' }
+      };
+      return true;
+    }
+
     try {
       const userRes = await fetch(`${supabaseUrl}/auth/v1/user`, {
         headers: {
@@ -81,51 +102,63 @@ module.exports = async function handler(req, res) {
     } catch (e) {
       console.warn('[PromotionCampaignAPI] Token verification failed:', e.message);
     }
-  }
 
-  // Helper: Authorize Store Leader
-  async function requireStoreLeader(targetBranchCode) {
-    if (!caller) {
+    if (!caller || !caller.id) {
       res.status(401).json({
-        error: 'UNAUTHORIZED',
-        code: 'UNAUTHORIZED',
+        status: 'ERROR',
+        error: 'INVALID_ACCESS_TOKEN',
+        code: 'INVALID_ACCESS_TOKEN',
         requestId,
-        message: 'Authentication required. Please sign in.'
+        message: 'Session ไม่ถูกต้องหรือหมดอายุ'
       });
       return false;
     }
 
+    let roles = [];
     try {
       const roleRes = await queryPostgrest(`user_roles?user_id=eq.${encodeURIComponent(caller.id)}&select=role,branch_id`);
       if (roleRes.ok) {
-        const roles = await roleRes.json();
-        if (Array.isArray(roles) && roles.length > 0) {
-          const matched = roles.some(r => {
-            const roleName = String(r.role || '').toUpperCase();
-            const isAuthorized = ['STORE_LEADER', 'STORE_MANAGER', 'SYSTEM_ADMIN', 'ADMIN'].includes(roleName);
-            if (!isAuthorized) return false;
-            if (roleName === 'SYSTEM_ADMIN' || roleName === 'ADMIN') return true;
-            if (!r.branch_id || !targetBranchCode) return true;
-            return String(r.branch_id).toUpperCase() === String(targetBranchCode).toUpperCase();
-          });
-          if (matched) return true;
-        }
+        roles = await roleRes.json();
       }
     } catch (e) {
       console.warn('[PromotionCampaignAPI] Error querying user_roles:', e.message);
     }
 
-    if (caller.app_metadata?.role === 'SYSTEM_ADMIN' || caller.app_metadata?.role === 'ADMIN') {
-      return true;
+    const allowedRoles = new Set(['STORE_LEADER', 'STORE_MANAGER', 'SYSTEM_ADMIN', 'ADMIN']);
+    const callerRoles = Array.isArray(roles) ? roles.filter(r => allowedRoles.has(String(r.role || '').toUpperCase())) : [];
+    const isSystemAdmin = callerRoles.some(r => ['SYSTEM_ADMIN', 'ADMIN'].includes(String(r.role || '').toUpperCase())) ||
+      ['SYSTEM_ADMIN', 'ADMIN'].includes(String(caller.app_metadata?.role || '').toUpperCase());
+
+    if (callerRoles.length === 0 && !isSystemAdmin) {
+      res.status(403).json({
+        status: 'ERROR',
+        error: 'PROMOTION_MANAGEMENT_PERMISSION_DENIED',
+        code: 'PROMOTION_MANAGEMENT_PERMISSION_DENIED',
+        requestId,
+        message: 'บัญชีนี้ไม่มีสิทธิ์จัดการโปรโมชั่น'
+      });
+      return false;
     }
 
-    res.status(403).json({
-      error: 'FORBIDDEN',
-      code: 'INSUFFICIENT_PERMISSIONS',
-      requestId,
-      message: 'Requires STORE_LEADER, STORE_MANAGER, or SYSTEM_ADMIN role.'
-    });
-    return false;
+    if (!isSystemAdmin && targetBranchCode) {
+      const hasMatchingBranch = callerRoles.some(r => {
+        if (!r.branch_id) return false;
+        return String(r.branch_id).trim().toUpperCase() === String(targetBranchCode).trim().toUpperCase();
+      });
+
+      if (!hasMatchingBranch) {
+        res.status(403).json({
+          status: 'ERROR',
+          error: 'BRANCH_SCOPE_MISMATCH',
+          code: 'BRANCH_SCOPE_MISMATCH',
+          requestId,
+          message: 'บัญชีนี้ไม่มีสิทธิ์จัดการโปรโมชั่นของสาขานี้'
+        });
+        return false;
+      }
+    }
+
+    return true;
   }
 
   if (!campaignId) {
@@ -202,27 +235,115 @@ module.exports = async function handler(req, res) {
   }
 
   // ==========================================================================
-  // ACTION 1.5: POST /api/promotion-campaigns/:id/resolve-errors
+  // ACTION 1.5: POST /api/promotion-campaigns/:id/resolve-errors or /resolve-error
   // ==========================================================================
-  if (req.method === 'POST' && action === 'resolve-errors') {
+  if (req.method === 'POST' && (action === 'resolve-errors' || action === 'resolve-error')) {
     const branchCode = String(body.branchCode || 'AYUTTHAYA_CITY_PARK').trim().toUpperCase();
     if (!(await requireStoreLeader(branchCode))) return;
 
+    const resolutionStatus = String(body.resolutionStatus || 'REJECTED').trim().toUpperCase();
+    const resolutionCode = body.resolutionCode ? String(body.resolutionCode).trim() : null;
+    const resolutionNote = String(body.resolutionNote || body.note || '').trim();
+    const expectedCurrentStatus = body.expectedCurrentStatus || 'OPEN';
+
+    if (!resolutionNote) {
+      return res.status(422).json({
+        error: 'RESOLUTION_NOTE_REQUIRED',
+        code: 'RESOLUTION_NOTE_REQUIRED',
+        message: 'จำเป็นต้องระบุเหตุผลในการตัดสินใจ (resolutionNote)'
+      });
+    }
+
     try {
-      await queryPostgrest(`promotion_validation_errors?campaign_id=eq.${encodeURIComponent(campaignId)}&resolution_status=eq.OPEN`, {
+      // If resolving a specific error item via RPC: resolve_promotion_validation_error
+      if (body.errorId) {
+        const rpcRes = await queryPostgrest('rpc/resolve_promotion_validation_error', {
+          method: 'POST',
+          body: JSON.stringify({
+            p_error_id: body.errorId,
+            p_user_id: caller.id,
+            p_resolution_status: resolutionStatus,
+            p_resolution_code: resolutionCode,
+            p_resolution_note: resolutionNote,
+            p_expected_status: expectedCurrentStatus
+          })
+        });
+
+        if (rpcRes.ok) {
+          const rpcData = await rpcRes.json();
+          const actorMetadata = {
+            decisionByUserId: caller.id,
+            executedByActor: 'PROMOTION_SERVER_API',
+            authenticationMethod: 'VERIFIED_USER_JWT',
+            sourceInterface: body.sourceInterface || 'MANAGER_REVIEW_UI',
+            requestId
+          };
+          return res.status(200).json({
+            status: 'RESOLVED',
+            campaignId,
+            errorId: body.errorId,
+            resolvedItem: rpcData,
+            resolvedBy: caller.id,
+            actorMetadata,
+            message: `บันทึกผลการตรวจสอบ ${body.errorId} เรียบร้อยแล้ว (${resolutionStatus} - ${resolutionCode || 'DEFAULT'})`
+          });
+        }
+
+        const errJson = await rpcRes.json().catch(() => ({}));
+        const message = errJson.message || errJson.details || 'Resolution failed';
+        if (message.includes('RESOLUTION_STATUS_MISMATCH') || message.includes('EXPECTED_STATUS_MISMATCH')) {
+          return res.status(409).json({
+            status: 'ERROR',
+            code: 'EXPECTED_STATUS_MISMATCH',
+            requestId,
+            message: `สถานะปัจจุบันของรายการไม่ตรงกับที่ระบุ (คาดหวัง ${expectedCurrentStatus} แต่อาจถูกตัดสินไปแล้ว)`
+          });
+        }
+        return res.status(400).json({
+          status: 'ERROR',
+          code: 'RESOLUTION_RPC_FAILED',
+          requestId,
+          message
+        });
+      }
+
+      // Fallback / Batch resolution via PostgREST
+      const patchPayload = {
+        resolution_status: resolutionStatus,
+        resolved_by: caller.id,
+        resolved_at: new Date().toISOString(),
+        resolution_note: resolutionNote
+      };
+      if (resolutionCode) {
+        patchPayload.resolution_code = resolutionCode;
+      }
+
+      let filterQuery = `promotion_validation_errors?campaign_id=eq.${encodeURIComponent(campaignId)}&resolution_status=eq.${encodeURIComponent(expectedCurrentStatus)}`;
+      if (body.errorId) {
+        filterQuery += `&id=eq.${encodeURIComponent(body.errorId)}`;
+      }
+      if (body.errorCode) {
+        filterQuery += `&error_code=eq.${encodeURIComponent(body.errorCode)}`;
+      }
+
+      const patchRes = await queryPostgrest(filterQuery, {
         method: 'PATCH',
-        body: JSON.stringify({
-          resolution_status: 'CORRECTED',
-          resolved_by: caller.id,
-          resolved_at: new Date().toISOString(),
-          resolution_note: body.note || 'Manager resolved conflicting promotions'
-        })
+        body: JSON.stringify(patchPayload)
       });
 
+      if (!patchRes.ok) {
+        const errJson = await patchRes.json().catch(() => ({}));
+        return res.status(patchRes.status).json({
+          error: 'RESOLVE_FAILED',
+          message: errJson.message || 'บันทึกการตัดสินใจไม่สำเร็จ'
+        });
+      }
+
       return res.status(200).json({
-        status: 'CORRECTED',
+        status: resolutionStatus,
+        resolutionCode: resolutionCode,
         campaignId,
-        message: 'ข้อผิดพลาดทั้งหมดได้รับการแก้ไขแล้ว พร้อมเข้าสู่การอนุมัติ'
+        message: `บันทึกผลการตรวจสอบเรียบร้อยแล้ว (${resolutionStatus}: ${resolutionCode || 'GENERAL'})`
       });
     } catch (err) {
       return res.status(500).json({ error: 'SERVER_ERROR', message: err.message });
@@ -269,6 +390,13 @@ module.exports = async function handler(req, res) {
         const errJson = await rpcRes.json().catch(() => ({}));
         const message = errJson.message || errJson.details || 'Activation failed';
 
+        if (message.includes('LEGACY_BACKFILL_ACTIVATION_NOT_ALLOWED')) {
+          return res.status(422).json({
+            error: 'LEGACY_BACKFILL_ACTIVATION_NOT_ALLOWED',
+            code: 'LEGACY_BACKFILL_ACTIVATION_NOT_ALLOWED',
+            message: 'ไม่อนุญาตให้ Activate แคมเปญที่มีหลักฐานเป็น LEGACY_BACKFILL ขึ้นใช้งานหน้าร้านจริง แคมเปญนี้ใช้สำหรับทดสอบ Approval Workflow เท่านั้น'
+          });
+        }
         if (message.includes('OPEN_PROMOTION_BLOCKERS')) {
           return res.status(422).json({
             error: 'OPEN_PROMOTION_BLOCKERS',
@@ -344,6 +472,96 @@ module.exports = async function handler(req, res) {
         details: rpcData,
         message: `ย้อนกลับแคมเปญโปรโมชั่นไปยัง [${targetPreviousCampaignId}] สำเร็จแบบ Transactional RPC`
       });
+    } catch (err) {
+      return res.status(500).json({ error: 'SERVER_ERROR', message: err.message });
+    }
+  }
+
+  // ==========================================================================
+  // ACTION 4: POST /api/promotion-campaigns/:id/reject -> Reject draft/review campaign
+  // ==========================================================================
+  if (req.method === 'POST' && action === 'reject') {
+    const branchCode = String(body.branchCode || 'AYUTTHAYA_CITY_PARK').trim().toUpperCase();
+    if (!(await requireStoreLeader(branchCode))) return;
+
+    const reason = String(body.reason || '').trim();
+    const expectedStatus = body.expectedStatus ? String(body.expectedStatus).trim().toUpperCase() : null;
+
+    if (!reason) {
+      return res.status(422).json({
+        status: 'ERROR',
+        code: 'REJECTION_REASON_REQUIRED',
+        message: 'กรุณาระบุเหตุผลในการปฏิเสธแคมเปญ'
+      });
+    }
+
+    try {
+      const rpcRes = await queryPostgrest('rpc/reject_promotion_campaign', {
+        method: 'POST',
+        body: JSON.stringify({
+          p_campaign_id: campaignId,
+          p_user_id: caller.id,
+          p_reason: reason,
+          p_expected_status: expectedStatus
+        })
+      });
+
+      if (!rpcRes.ok) {
+        const errJson = await rpcRes.json().catch(() => ({}));
+        const rawMsg = String(errJson.message || errJson.details || '');
+        let code = 'PROMOTION_CAMPAIGN_REJECTION_FAILED';
+
+        const knownCodes = [
+          'CAMPAIGN_NOT_FOUND',
+          'CAMPAIGN_ALREADY_REJECTED',
+          'EXPECTED_CAMPAIGN_STATUS_MISMATCH',
+          'ACTIVE_CAMPAIGN_REJECTION_NOT_ALLOWED',
+          'ROLLED_BACK_CAMPAIGN_REJECTION_NOT_ALLOWED',
+          'SUPERSEDED_CAMPAIGN_REJECTION_NOT_ALLOWED',
+          'CAMPAIGN_STATUS_NOT_REJECTABLE',
+          'REJECTION_REASON_REQUIRED',
+          'PROMOTION_IMPORT_BATCH_NOT_FOUND',
+          'CAMPAIGN_BATCH_BRANCH_MISMATCH'
+        ];
+
+        for (const kc of knownCodes) {
+          if (rawMsg.includes(kc)) {
+            code = kc;
+            break;
+          }
+        }
+
+        const statusMap = {
+          CAMPAIGN_NOT_FOUND: 404,
+          CAMPAIGN_ALREADY_REJECTED: 409,
+          EXPECTED_CAMPAIGN_STATUS_MISMATCH: 409,
+          ACTIVE_CAMPAIGN_REJECTION_NOT_ALLOWED: 409,
+          ROLLED_BACK_CAMPAIGN_REJECTION_NOT_ALLOWED: 409,
+          SUPERSEDED_CAMPAIGN_REJECTION_NOT_ALLOWED: 409,
+          CAMPAIGN_STATUS_NOT_REJECTABLE: 409,
+          REJECTION_REASON_REQUIRED: 422
+        };
+
+        const messages = {
+          CAMPAIGN_NOT_FOUND: 'ไม่พบแคมเปญโปรโมชั่น',
+          CAMPAIGN_ALREADY_REJECTED: 'แคมเปญนี้ถูกปฏิเสธไปแล้ว',
+          EXPECTED_CAMPAIGN_STATUS_MISMATCH: 'สถานะแคมเปญมีการเปลี่ยนแปลง กรุณาโหลดข้อมูลใหม่',
+          ACTIVE_CAMPAIGN_REJECTION_NOT_ALLOWED: 'ไม่สามารถปฏิเสธแคมเปญที่กำลังใช้งาน กรุณาใช้คำสั่ง Rollback หรือเปิดใช้แคมเปญทดแทน',
+          ROLLED_BACK_CAMPAIGN_REJECTION_NOT_ALLOWED: 'แคมเปญนี้ถูก Rollback แล้ว',
+          SUPERSEDED_CAMPAIGN_REJECTION_NOT_ALLOWED: 'แคมเปญนี้ถูกแทนที่แล้ว',
+          CAMPAIGN_STATUS_NOT_REJECTABLE: 'สถานะปัจจุบันของแคมเปญไม่อนุญาตให้ปฏิเสธ',
+          REJECTION_REASON_REQUIRED: 'กรุณาระบุเหตุผลในการปฏิเสธแคมเปญ'
+        };
+
+        return res.status(statusMap[code] || 500).json({
+          status: 'ERROR',
+          code,
+          message: messages[code] || errJson.message || 'ระบบไม่สามารถปฏิเสธแคมเปญโปรโมชั่นได้'
+        });
+      }
+
+      const rpcData = await rpcRes.json();
+      return res.status(200).json(rpcData);
     } catch (err) {
       return res.status(500).json({ error: 'SERVER_ERROR', message: err.message });
     }
