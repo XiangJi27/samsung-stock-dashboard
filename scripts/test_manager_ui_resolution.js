@@ -324,9 +324,15 @@ async function main() {
     }
   });
 
+  const testedUrl = process.env.PROMOTION_REVIEW_TEST_URL || 
+                    process.env.TEST_TARGET_URL || 
+                    process.env.LIVE_PILOT_URL || 
+                    `http://localhost:${PORT}/promotion_review_dashboard.html`;
+
   try {
     // Navigate to dashboard
-    await page.goto(`http://localhost:${PORT}/promotion_review_dashboard.html`);
+    console.log(`Navigating to target URL: ${testedUrl}`);
+    await page.goto(testedUrl);
     await page.waitForLoadState('networkidle');
 
     // Inject Store Leader session and isolated test error fixture into browser
@@ -666,20 +672,31 @@ async function main() {
   } catch (e) {}
 
   const testFinishedAt = new Date().toISOString();
-  const isLive = Boolean(process.env.TEST_TARGET_URL || process.env.LIVE_PILOT_URL);
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(testedUrl);
+  } catch (e) {
+    parsedUrl = new URL(`http://localhost:${PORT}/promotion_review_dashboard.html`);
+  }
+  const isLive = !parsedUrl.hostname.includes('localhost') && !parsedUrl.hostname.includes('127.0.0.1');
   const testType = isLive ? 'MANAGER_UI_LIVE_PREVIEW_E2E' : 'MANAGER_UI_BROWSER_E2E';
-  const targetHost = isLive ? (process.env.TEST_TARGET_URL || process.env.LIVE_PILOT_URL) : `localhost:${PORT}`;
+  const apiBaseUrl = parsedUrl.origin;
+  const deploymentHost = parsedUrl.host;
+  const aliasHost = 'samsung-stock-pilot.vercel.app';
 
   console.log('\n======================================================================');
   console.log('TEST EXECUTION METADATA & ISOLATION REPORT:');
   console.log(`  testType:          ${testType}`);
-  console.log(`  testedUrl:         ${isLive ? targetHost : `http://localhost:${PORT}/promotion_review_dashboard.html`}`);
-  console.log(`  deploymentHost:    ${targetHost}`);
-  console.log(`  aliasHost:         samsung-stock-pilot.vercel.app`);
-  console.log(`  testCampaignCode:  ${TEST_CAMPAIGN_CODE}`);
+  console.log(`  testedUrl:         ${testedUrl}`);
+  console.log(`  apiBaseUrl:        ${apiBaseUrl}`);
+  console.log(`  deploymentHost:    ${deploymentHost}`);
+  console.log(`  aliasHost:         ${aliasHost}`);
   console.log(`  runtimeCommit:     ${gitCommit}`);
   console.log(`  testStartedAt:     ${testStartedAt}`);
   console.log(`  testFinishedAt:    ${testFinishedAt}`);
+  console.log(`  testCampaignCode:  ${TEST_CAMPAIGN_CODE}`);
+  console.log(`  testCampaignId:    ${CAMPAIGN_ID}`);
+  console.log(`  testErrorId:       ${TARGET_ERROR_ID}`);
   console.log(`  businessDataState: UNTOUCHED (Zero mutations to real review campaign)`);
   console.log('======================================================================');
 

@@ -130,6 +130,22 @@ def build_pilot_package():
                         {
                             "source": "/api/stock-imports/:path*",
                             "destination": "/api/stock-imports?path=:path*"
+                        },
+                        {
+                            "source": "/api/promotion-imports/:path*",
+                            "destination": "/api/promotion-imports?path=:path*"
+                        },
+                        {
+                            "source": "/api/promotion-campaigns/:path*",
+                            "destination": "/api/promotion-campaigns?path=:path*"
+                        },
+                        {
+                            "source": "/api/promotion-errors/:path*",
+                            "destination": "/api/promotion-errors?path=:path*"
+                        },
+                        {
+                            "source": "/api/promotions/active",
+                            "destination": "/api/promotions/active"
                         }
                     ]
                 }
