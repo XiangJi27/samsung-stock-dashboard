@@ -1,9 +1,9 @@
 {
   "status": "PASS",
-  "verifiedAt": "2026-09-18T11:35:40.950355+00:00",
+  "verifiedAt": "2026-09-18T11:38:40.674525+00:00",
   "totalFixtures": 7,
   "passedFixtures": 7,
-  "durationSeconds": 0.007,
+  "durationSeconds": 0.01,
   "results": [
     {
       "test_id": "REG-MKT-001-ADAM-CABLE-OFFICIAL-MALL",
