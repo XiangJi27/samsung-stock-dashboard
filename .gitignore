@@ -48,3 +48,5 @@ deploy_preview/
 node_modules/
 playwright-report/
 test-results/
+*.png
+supabase/.temp/

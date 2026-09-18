@@ -720,10 +720,6 @@
               tupStatus = 'BLOCKED_INVALID';
               tupFlags.push('SOURCE_FORMULA_ERROR');
               tupReason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail})`;
-            } else if (!tradeUpPaymentCode) {
-              tupStatus = 'BLOCKED_UNPROVEN';
-              tupFlags.push('TRADE_UP_PAYMENT_CODE_MISSING');
-              tupReason = 'มีส่วนลด Trade Up แต่ไม่มีรหัสตัดชำระ (Payment Code ว่างในไฟล์)';
             } else if (tupNet === null) {
               tupStatus = 'BLOCKED_INVALID';
               tupFlags.push('NET_PRICE_NOT_EXTRACTED');
@@ -736,7 +732,7 @@
               } else {
                 tupStatus = 'REVIEW_REQUIRED';
                 tupFlags.push('EXACT_PN_UNRESOLVED', 'TRADE_UP_PROVISIONAL');
-                tupReason = `โปรโมชั่น Trade Up (สุทธิ ฿${tupNet} | รหัสชำระ ${tradeUpPaymentCode}) • ต้องจับคู่ Exact P/N ก่อนเผยแพร่`;
+                tupReason = `โบนัส Trade Up ฿${(tradeUpDiscount || 0).toLocaleString()} • รอยืนยัน Exact P/N ก่อนเผยแพร่`;
               }
             }
 
@@ -760,19 +756,23 @@
               discount: (stdDiscount || 0) + tradeUpDiscount,
               standardDiscount: stdDiscount || 0,
               tradeUpDiscount,
+              tradeUpBonusAmount: tradeUpDiscount,
+              requiresTradeIn: true,
               standardNetPrice: stdExpectedNet,
               tradeUpNetPrice: tupNet,
-              tradeUpPaymentCode,
+              tradeUpPaymentCode: tradeUpPaymentCode || null,
               netPrice: tupNet,
               netPriceOrigin: tupOrigin,
               coupon: normalizedCoupon,
+              paymentCondition: parsedHeading?.paymentCondition || 'ANY',
               saleMode: 'TRADE_UP',
+              promotionType: 'TRADE_UP_BONUS',
               promotionSourceType: 'EXCEL_CONFIRMED',
               validationStatus: tupStatus,
               validationFlags: tupFlags,
               autoPublishAllowed: false,
               humanReviewRequired: !pn,
-              reasonText: tupReason || 'ผ่านการตรวจสอบความถูกต้องสมบูรณ์',
+              reasonText: tupReason || 'ผ่านการตรวจสอบความถูกต้องสมบูรณ์ (Trade Up Bonus)',
               sourceEvidence: {
                 rrp: colMap['rrp'] !== undefined ? `${getColLetter(colMap['rrp'])}${r + 1}` : null,
                 standardDiscount: colMap['standardDiscount'] !== undefined ? `${getColLetter(colMap['standardDiscount'])}${r + 1}` : null,
@@ -2356,22 +2356,9 @@
             `;
           }
 
-          // 3. Trade Up Payment Code Missing
-          if (item.validationFlags && item.validationFlags.includes('TRADE_UP_PAYMENT_CODE_MISSING')) {
-            return `
-              <div class="tup-fix-box">
-                <div style="font-size: 0.74rem; color: #fca5a5; font-weight: 700;">
-                  ⚠️ ขาดรหัสตัดชำระ Trade Up (Payment Code)
-                </div>
-                <div style="font-size: 0.70rem; color: #cbd5e1;">
-                  ใส่รหัสตัดชำระจากเอกสารต้นทาง (เช่น TUP-01):
-                </div>
-                <div style="display: flex; gap: 6px; margin-top: 4px;">
-                  <input type="text" id="tup-code-${item.draftRowId}" class="tup-code-input" placeholder="เช่น TUP-01" value="" />
-                  <button type="button" class="btn-save-tup" data-row-id="${item.draftRowId}">บันทึก</button>
-                </div>
-              </div>
-            `;
+          // 3. Trade Up Bonus (no payment code required)
+          if (item.saleMode === 'TRADE_UP' && (!item.candidatePn || item.candidatePn.length === 0)) {
+            // Handled by PN Not Found below
           }
 
           // 4. PN Not Found / No Smartphone Candidates
@@ -2418,11 +2405,11 @@
             <td>${item.rrp > 0 ? `฿${item.rrp.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
             <td class="text-coral" style="min-width: 170px;">
               ${item.saleMode === 'TRADE_UP' ? `
-                <div style="font-weight: 700; color: #f87171; font-size: 0.88rem;">-฿${item.discount.toLocaleString()}</div>
-                <div style="font-size: 0.67rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 5px 7px; border-radius: 6px; border: 1px solid rgba(248, 113, 113, 0.2);">
-                  <div style="white-space: nowrap;">ต่อที่ 1 คูปอง ${item.coupon || '01'}: <strong style="color: #fca5a5;">-฿${(item.standardDiscount || 0).toLocaleString()}</strong></div>
-                  <div style="white-space: nowrap;">ต่อที่ 2 Trade Up: <strong style="color: #fca5a5;">-฿${(item.tradeUpDiscount || 0).toLocaleString()}</strong></div>
-                  <div style="color: #93c5fd; font-weight: 600; margin-top: 2px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 2px; white-space: nowrap;">ส่วนลดรวม: -฿${item.discount.toLocaleString()}</div>
+                <div style="font-weight: 700; color: #60a5fa; font-size: 0.88rem;">-฿${item.discount.toLocaleString()}</div>
+                <div style="font-size: 0.67rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 5px 7px; border-radius: 6px; border: 1px solid rgba(96, 165, 250, 0.25);">
+                  <div style="white-space: nowrap;">ส่วนลดมาตรฐาน: <strong style="color: #cbd5e1;">฿${(item.standardDiscount || 0).toLocaleString()}</strong></div>
+                  <div style="white-space: nowrap;">โบนัส Trade Up: <strong style="color: #60a5fa;">-฿${(item.tradeUpDiscount || 0).toLocaleString()}</strong></div>
+                  <div style="color: #93c5fd; font-weight: 600; margin-top: 2px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 2px; white-space: nowrap;">ส่วนลดที่มีผล: Trade Up -฿${item.discount.toLocaleString()}</div>
                 </div>
               ` : (item.discount > 0 ? `-฿${item.discount.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>')}
             </td>
@@ -2430,19 +2417,19 @@
               <div style="font-size: 0.95rem;">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</div>
               ${item.saleMode === 'TRADE_UP' ? `
                 <div style="font-size: 0.64rem; color: #94a3b8; font-weight: 400; margin-top: 3px; line-height: 1.25;">
-                  <span style="color: #fbbf24; font-weight: 600;">*เมื่อนำเครื่องมาแลก</span><br/>
+                  <span style="color: #60a5fa; font-weight: 600;">*เมื่อนำเครื่องเก่ามาเทริน</span><br/>
                   (ไม่มีเครื่องแลก: ฿${(item.standardNetPrice || (item.rrp - (item.standardDiscount || 0))).toLocaleString()})
                 </div>
               ` : ''}
             </td>
             <td>
               <span class="type-pill">${item.coupon || '-'}</span>
-              ${item.tradeUpPaymentCode ? `<div style="font-size: 0.70rem; color: #fbbf24; margin-top: 2px; font-family: monospace;">ชำระ: ${item.tradeUpPaymentCode}</div>` : ''}
+              ${item.saleMode === 'TRADE_UP' ? `<div style="font-size: 0.68rem; color: #93c5fd; margin-top: 2px;">Trade Up Bonus</div>` : ''}
             </td>
             <td>
               <span class="type-pill" style="font-size: 0.72rem;">${item.saleMode}</span>
               ${item.saleMode === 'TRADE_UP' ? `
-                <div style="font-size: 0.64rem; color: #fbbf24; margin-top: 2px;">*เงื่อนไขเก่าแลกใหม่</div>
+                <div style="font-size: 0.64rem; color: #60a5fa; margin-top: 2px;">*โบนัสเก่าแลกใหม่</div>
               ` : ''}
             </td>
             <td>${renderStatusBadge()}</td>

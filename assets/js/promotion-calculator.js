@@ -955,6 +955,30 @@
     };
   }
 
+  function validateTradeUpOffer(offer) {
+    const parser = getHeadingParser();
+    if (parser && typeof parser.validateTradeUpOffer === 'function') {
+      return parser.validateTradeUpOffer(offer);
+    }
+    const bonus = Number(offer?.tradeUpBonusAmount !== undefined ? offer.tradeUpBonusAmount : (offer?.tradeUpDiscount || 0));
+    if (bonus <= 0) return { valid: false, code: 'TRADE_UP_BONUS_NOT_CONFIGURED' };
+    return { valid: true, code: 'TRADE_UP_OFFER_VALID' };
+  }
+
+  function calculateTradeUpBenefit(params) {
+    const parser = getHeadingParser();
+    if (parser && typeof parser.calculateTradeUpBenefit === 'function') {
+      return parser.calculateTradeUpBenefit(params);
+    }
+    const { appraisedValue = 0, tradeUpBonusAmount = 0, hasEligibleTradeInDevice = false } = params || {};
+    const appraised = Number(appraisedValue || 0);
+    const bonus = Number(tradeUpBonusAmount || 0);
+    if (!hasEligibleTradeInDevice) {
+      return { tradeUpBonusApplied: 0, appraisedValueApplied: 0, totalBenefit: 0, code: 'TRADE_IN_DEVICE_REQUIRED' };
+    }
+    return { appraisedValueApplied: appraised, tradeUpBonusApplied: bonus, totalBenefit: appraised + bonus, code: 'TRADE_IN_BENEFIT_CALCULATED' };
+  }
+
   // Export for browser & node
   const api = {
     calculatePromotionPrices,
@@ -963,6 +987,8 @@
     calculateStudentPromotion,
     validatePromotionGates,
     validatePromotionOption,
+    validateTradeUpOffer,
+    calculateTradeUpBenefit,
     normalizeSamsungModelFamily,
     normalizeCapacity,
     normalizeColorToken,

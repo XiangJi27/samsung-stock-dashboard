@@ -9,6 +9,8 @@ const {
   extractStoreScope,
   extractDownPayment,
   validateTradeUpPaymentCode,
+  validateTradeUpOffer,
+  calculateTradeUpBenefit,
   normalizeSamsungModelFamily,
   normalizeMemoryMatch,
   findPromotionDate,
@@ -498,3 +500,73 @@ test("ห้ามจับคู่เคส A37 แม้ชื่อรุ่
   assert.equal(gate.allowed, false);
   assert.equal(gate.code, "PRODUCT_TYPE_MISMATCH");
 });
+
+test("Fold8 Ultra ต้องไม่ถูกจัดเป็น Fold8 รุ่นปกติ", () => {
+  assert.equal(
+    normalizeSamsungModelFamily("Galaxy Z Fold8 Ultra"),
+    "FOLD8_ULTRA"
+  );
+
+  assert.equal(
+    normalizeSamsungModelFamily("Galaxy Z Fold8"),
+    "FOLD8"
+  );
+
+  assert.notEqual(
+    normalizeSamsungModelFamily("Galaxy Z Fold8 Ultra"),
+    normalizeSamsungModelFamily("Galaxy Z Fold8")
+  );
+});
+
+test("Trade Up ไม่ต้องใช้ Payment Code", () => {
+  const offer = {
+    promotionType: "TRADE_UP_BONUS",
+    tradeUpBonusAmount: 2000,
+    requiresTradeIn: true,
+    paymentCode: null,
+    couponCode: null
+  };
+
+  const result = validateTradeUpOffer(offer);
+
+  assert.equal(result.valid, true);
+  assert.equal(result.code, "TRADE_UP_OFFER_VALID");
+});
+
+test("Trade Up ต้องมี Bonus Amount", () => {
+  const offer = {
+    promotionType: "TRADE_UP_BONUS",
+    tradeUpBonusAmount: 0,
+    requiresTradeIn: true
+  };
+
+  const result = validateTradeUpOffer(offer);
+
+  assert.equal(result.valid, false);
+  assert.equal(result.code, "TRADE_UP_BONUS_NOT_CONFIGURED");
+});
+
+test("ไม่มีเครื่องเก่าห้ามใช้ Trade Up Bonus", () => {
+  const result = calculateTradeUpBenefit({
+    appraisedValue: 0,
+    tradeUpBonusAmount: 2000,
+    hasEligibleTradeInDevice: false
+  });
+
+  assert.equal(result.tradeUpBonusApplied, 0);
+  assert.equal(result.totalBenefit, 0);
+  assert.equal(result.code, "TRADE_IN_DEVICE_REQUIRED");
+});
+
+test("มูลค่าเครื่องเก่าและโบนัสต้องรวมกันถูกต้อง", () => {
+  const result = calculateTradeUpBenefit({
+    appraisedValue: 1000,
+    tradeUpBonusAmount: 2000,
+    hasEligibleTradeInDevice: true
+  });
+
+  assert.equal(result.appraisedValueApplied, 1000);
+  assert.equal(result.tradeUpBonusApplied, 2000);
+  assert.equal(result.totalBenefit, 3000);
+});
+

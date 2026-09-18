@@ -561,41 +561,118 @@ order by p.inventory_pn;
 -- Expected: All rows must be 'EXACT_PN_PASS' (Zero EXACT_PN_NOT_FOUND)
 
 -- ============================================================================
--- 21. PRODUCT TYPE, MODEL FAMILY & CAPACITY RECONCILIATION
+-- 21. 4-TIER SEMANTIC MODEL FAMILY & CAPACITY RECONCILIATION
 -- ============================================================================
+with evaluated_targets as (
+  select
+    o.id as offer_id,
+    o.inventory_pn,
+    o.model_name as promotion_model,
+    o.capacity as promotion_capacity,
+    o.promotion_type,
+    s.description as stock_description,
+    s.category as stock_category,
+    s.cat1 as stock_cat1,
+    s.f1,
+    s.f2,
+
+    -- Tier 1: Exact P/N
+    case when s.inventory_pn is not null then 'PASS' else 'FAIL' end as exact_pn_gate,
+
+    -- Tier 2: Product Type
+    case when lower(coalesce(s.category, s.cat1, '')) like '%smart%' then 'PASS' else 'FAIL' end as product_type_gate,
+
+    -- Canonical Model Family
+    case
+      when upper(o.model_name) ~ '\mS26\s*ULTRA\M' then 'S26_ULTRA'
+      when upper(o.model_name) ~ '\mS26\s*(\+|PLUS)\M' then 'S26_PLUS'
+      when upper(o.model_name) ~ '\mS26\s*FE\M' or upper(o.model_name) ~ '\mS26FE\M' then 'S26_FE'
+      when upper(o.model_name) ~ '\mS26\M' then 'S26_BASE'
+      when upper(o.model_name) ~ '\mS25\s*FE\M' or upper(o.model_name) ~ '\mS25FE\M' then 'S25_FE'
+      when upper(o.model_name) ~ '\mS25\s*ULTRA\M' then 'S25_ULTRA'
+      when upper(o.model_name) ~ '\mS25\s*(\+|PLUS)\M' then 'S25_PLUS'
+      when upper(o.model_name) ~ '\mS25\M' then 'S25_BASE'
+      when upper(o.model_name) ~ '\mA57\s*5G\M' or upper(o.model_name) ~ '\mA57\M' then 'A57_5G'
+      when upper(o.model_name) ~ '\mA07\s*5G\M' or upper(o.model_name) ~ '\mA07\M' then 'A07_5G'
+      when upper(o.model_name) ~ '\mA17\s*5G\M' or upper(o.model_name) ~ '\mA17\M' then 'A17_5G'
+      when upper(o.model_name) ~ '\mZ?\s*FOLD8\s*ULTRA\M' then 'FOLD8_ULTRA'
+      when upper(o.model_name) ~ '\mZ?\s*FOLD8\M' then 'FOLD8'
+      else upper(trim(o.model_name))
+    end as promo_model_family,
+
+    case
+      when upper(s.description) ~ '\mS26\s*ULTRA\M' then 'S26_ULTRA'
+      when upper(s.description) ~ '\mS26\s*(\+|PLUS)\M' then 'S26_PLUS'
+      when upper(s.description) ~ '\mS26\s*FE\M' or upper(s.description) ~ '\mS26FE\M' then 'S26_FE'
+      when upper(s.description) ~ '\mS26\M' then 'S26_BASE'
+      when upper(s.description) ~ '\mS25\s*FE\M' or upper(s.description) ~ '\mS25FE\M' then 'S25_FE'
+      when upper(s.description) ~ '\mS25\s*ULTRA\M' then 'S25_ULTRA'
+      when upper(s.description) ~ '\mS25\s*(\+|PLUS)\M' then 'S25_PLUS'
+      when upper(s.description) ~ '\mS25\M' then 'S25_BASE'
+      when upper(s.description) ~ '\mA57\s*5G\M' or upper(s.description) ~ '\mA57\M' then 'A57_5G'
+      when upper(s.description) ~ '\mA07\s*5G\M' or upper(s.description) ~ '\mA07\M' then 'A07_5G'
+      when upper(s.description) ~ '\mA17\s*5G\M' or upper(s.description) ~ '\mA17\M' then 'A17_5G'
+      when upper(s.description) ~ '\mZ?\s*FOLD8\s*ULTRA\M' then 'FOLD8_ULTRA'
+      when upper(s.description) ~ '\mZ?\s*FOLD8\M' then 'FOLD8'
+      else upper(trim(coalesce(s.description, '')))
+    end as stock_model_family,
+
+    -- Capacity Normalization
+    (regexp_match(upper(replace(o.capacity, ' ', '')), '(128GB|256GB|512GB|1TB)'))[1] as promo_capacity_norm,
+    (regexp_match(upper(replace(s.description, ' ', '')), '(?:\d+/)?(128GB|256GB|512GB|1TB)'))[1] as stock_capacity_norm
+  from public.promotion_offers o
+  join public.active_stock_snapshot a on a.branch_code = o.branch_code
+  left join public.stock_snapshot_items s on s.batch_id = a.active_batch_id and s.inventory_pn = o.inventory_pn
+  where o.campaign_id = 'CAMPAIGN_UUID'::uuid
+)
 select
-  o.inventory_pn,
-  o.model_name as promotion_model,
-  o.capacity as promotion_capacity,
-  s.description as stock_description,
-  s.category,
-  s.cat1,
-  s.f1,
-  s.f2,
+  offer_id,
+  inventory_pn,
+  promotion_model,
+  stock_description,
+  exact_pn_gate,
+  product_type_gate,
+  case when promo_model_family = stock_model_family then 'PASS' else 'FAIL' end as model_family_gate,
+  case when promo_capacity_norm = stock_capacity_norm then 'PASS' else 'FAIL' end as capacity_gate,
   case
-    when s.inventory_pn is null then 'PN_NOT_FOUND'
-    when coalesce(s.category, s.cat1, '') not ilike '%smart%' then 'PRODUCT_TYPE_MISMATCH'
-    when s.description not ilike '%' || replace(o.model_name, 'Galaxy ', '') || '%' then 'MODEL_REVIEW_REQUIRED'
-    else 'PASS'
-  end as target_validation
-from public.promotion_offers o
-left join public.active_stock_snapshot a on a.branch_code = o.branch_code
-left join public.stock_snapshot_items s on s.batch_id = a.active_batch_id and s.inventory_pn = o.inventory_pn
-where o.campaign_id = 'CAMPAIGN_UUID'::uuid
-order by o.inventory_pn, o.promotion_type;
--- Expected: target_validation = 'PASS' for all rows
+    when exact_pn_gate = 'FAIL' then 'EXACT_PN_NOT_FOUND'
+    when product_type_gate = 'FAIL' then 'PRODUCT_TYPE_MISMATCH'
+    when promo_model_family <> stock_model_family then 'PROMOTION_TARGET_MODEL_MISMATCH'
+    when promo_capacity_norm <> stock_capacity_norm then 'PROMOTION_TARGET_CAPACITY_MISMATCH'
+    else 'EXACT_TARGET_PASS'
+  end as semantic_decision,
+  promo_model_family,
+  stock_model_family,
+  promo_capacity_norm,
+  stock_capacity_norm
+from evaluated_targets
+order by promotion_model, promo_capacity_norm, inventory_pn, promotion_type;
+-- Expected: semantic_decision = 'EXACT_TARGET_PASS' for genuine promotion offers
 
 -- ============================================================================
--- 22. COMPOSITE EXACT TARGET QUALITY GATE (EXACT_TARGET_GATE_PASS)
+-- 22. COMPOSITE 4-TIER EXACT TARGET QUALITY GATE (EXACT_TARGET_GATE_PASS)
 -- ============================================================================
-with target_validation as (
+with evaluated_targets as (
   select
     o.id,
+    case when s.inventory_pn is not null then true else false end as pn_match,
+    case when lower(coalesce(s.category, s.cat1, '')) like '%smart%' then true else false end as type_match,
     case
-      when s.inventory_pn is null then false
-      when coalesce(s.category, s.cat1, '') not ilike '%smart%' then false
-      else true
-    end as valid_target
+      when upper(o.model_name) ~ '\mS26\s*ULTRA\M' and upper(s.description) ~ '\mS26\s*ULTRA\M' then true
+      when upper(o.model_name) ~ '\mS26\s*(\+|PLUS)\M' and upper(s.description) ~ '\mS26\s*(\+|PLUS)\M' then true
+      when (upper(o.model_name) ~ '\mS26\s*FE\M' or upper(o.model_name) ~ '\mS26FE\M') and (upper(s.description) ~ '\mS26\s*FE\M' or upper(s.description) ~ '\mS26FE\M') then true
+      when upper(o.model_name) ~ '\mS26\M' and upper(s.description) ~ '\mS26\M' and upper(s.description) !~ '\mS26\s*(ULTRA|\+|PLUS|FE)\M' then true
+      when (upper(o.model_name) ~ '\mS25\s*FE\M' or upper(o.model_name) ~ '\mS25FE\M') and (upper(s.description) ~ '\mS25\s*FE\M' or upper(s.description) ~ '\mS25FE\M') then true
+      when (upper(o.model_name) ~ '\mA07\s*5G\M' or upper(o.model_name) ~ '\mA07\M') and (upper(s.description) ~ '\mA07\s*5G\M' or upper(s.description) ~ '\mA07\M') then true
+      when (upper(o.model_name) ~ '\mA57\s*5G\M' or upper(o.model_name) ~ '\mA57\M') and (upper(s.description) ~ '\mA57\s*5G\M' or upper(s.description) ~ '\mA57\M') then true
+      else false
+    end as model_match,
+    case
+      when (regexp_match(upper(replace(o.capacity, ' ', '')), '(128GB|256GB|512GB|1TB)'))[1] =
+           (regexp_match(upper(replace(s.description, ' ', '')), '(?:\d+/)?(128GB|256GB|512GB|1TB)'))[1]
+      then true
+      else false
+    end as cap_match
   from public.promotion_offers o
   join public.active_stock_snapshot a on a.branch_code = o.branch_code
   left join public.stock_snapshot_items s on s.batch_id = a.active_batch_id and s.inventory_pn = o.inventory_pn
@@ -603,12 +680,51 @@ with target_validation as (
 )
 select
   count(*) as total_offers,
-  count(*) filter (where valid_target = true) as valid_offers,
-  count(*) filter (where valid_target = false) as invalid_offers,
+  count(*) filter (where pn_match and type_match and model_match and cap_match) as valid_offers,
+  count(*) filter (where not (pn_match and type_match and model_match and cap_match)) as mismatched_offers,
   case
-    when count(*) > 0 and count(*) filter (where valid_target = false) = 0 then 'EXACT_TARGET_GATE_PASS'
+    when count(*) filter (where not pn_match) = 0 then 'PASS' else 'FAIL'
+  end as exact_pn_gate,
+  case
+    when count(*) filter (where not type_match) = 0 then 'PASS' else 'FAIL'
+  end as product_type_gate,
+  case
+    when count(*) filter (where not model_match) = 0 then 'PASS' else 'FAIL'
+  end as model_gate,
+  case
+    when count(*) filter (where not cap_match) = 0 then 'PASS' else 'FAIL'
+  end as capacity_gate,
+  case
+    when count(*) > 0 and count(*) filter (where not (pn_match and type_match and model_match and cap_match)) = 0
+    then 'EXACT_TARGET_GATE_PASS'
     else 'EXACT_TARGET_GATE_FAIL'
-  end as result
-from target_validation;
--- Expected: invalid_offers = 0, result = 'EXACT_TARGET_GATE_PASS'
+  end as exact_target_gate
+from evaluated_targets;
+-- Expected: mismatched_offers = 0, exact_target_gate = 'EXACT_TARGET_GATE_PASS'
+
+-- ============================================================================
+-- 23. REJECTION AUDIT VERIFICATION (POST-REJECTION AUDIT)
+-- ============================================================================
+select
+  c.id as campaign_id,
+  c.status as campaign_status,
+  b.id as batch_id,
+  b.status as batch_status,
+  count(o.id) as offer_count,
+  count(o.id) filter (where o.status = 'REJECTED') as rejected_offers,
+  a.action as latest_audit_action,
+  a.reason as rejection_reason
+from public.promotion_campaigns c
+join public.promotion_import_batches b on b.id = c.import_batch_id
+left join public.promotion_offers o on o.campaign_id = c.id
+left join lateral (
+  select action, reason
+  from public.promotion_audit_logs
+  where campaign_id = c.id
+  order by performed_at desc
+  limit 1
+) a on true
+where c.id = 'CAMPAIGN_UUID'::uuid
+group by c.id, c.status, b.id, b.status, a.action, a.reason;
+-- Expected: campaign_status = 'REJECTED', batch_status = 'REJECTED', offer_count = rejected_offers, latest_audit_action = 'REJECT'
 

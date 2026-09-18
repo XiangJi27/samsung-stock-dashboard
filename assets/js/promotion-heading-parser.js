@@ -526,6 +526,43 @@ function validateTradeUpPaymentCode(value) {
   };
 }
 
+function validateTradeUpOffer(offer) {
+  if (!offer || typeof offer !== "object") {
+    return { valid: false, code: "INVALID_OFFER_OBJECT" };
+  }
+  const bonus = Number(
+    offer.tradeUpBonusAmount !== undefined
+      ? offer.tradeUpBonusAmount
+      : offer.tradeUpDiscount || 0
+  );
+  if (bonus <= 0) {
+    return { valid: false, code: "TRADE_UP_BONUS_NOT_CONFIGURED" };
+  }
+  return { valid: true, code: "TRADE_UP_OFFER_VALID" };
+}
+
+function calculateTradeUpBenefit(params) {
+  const { appraisedValue = 0, tradeUpBonusAmount = 0, hasEligibleTradeInDevice = false } = params || {};
+  const appraised = Number(appraisedValue || 0);
+  const bonus = Number(tradeUpBonusAmount || 0);
+
+  if (!hasEligibleTradeInDevice) {
+    return {
+      tradeUpBonusApplied: 0,
+      appraisedValueApplied: 0,
+      totalBenefit: 0,
+      code: "TRADE_IN_DEVICE_REQUIRED"
+    };
+  }
+
+  return {
+    appraisedValueApplied: appraised,
+    tradeUpBonusApplied: bonus,
+    totalBenefit: appraised + bonus,
+    code: "TRADE_IN_BENEFIT_CALCULATED"
+  };
+}
+
 function parsePromotionProductHeading(rawValue) {
   const originalText = cleanInput(rawValue);
 
@@ -722,6 +759,8 @@ const exported = {
   extractStoreScope,
   extractDownPayment,
   validateTradeUpPaymentCode,
+  validateTradeUpOffer,
+  calculateTradeUpBenefit,
   normalizeSamsungModelFamily,
   normalizeMemoryMatch,
   findPromotionDate,
