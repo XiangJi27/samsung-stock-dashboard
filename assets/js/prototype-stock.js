@@ -2395,17 +2395,18 @@
           }
 
           promoHtml += `
-            <div class="sale-mode-tabs promotion-path-tabs" id="drawerTabs">
+            <div class="sale-mode-tabs promotion-path-tabs" id="drawerTabs" role="tablist" aria-label="รูปแบบโปรโมชั่น">
               ${modes.map((m, idx) => {
                 const hasP = hasPromoForMode(m.key);
                 return `
-                  <button class="sale-mode-tab promotion-path-tab ${idx === 0 ? 'active is-active' : ''} ${!hasP ? 'is-empty' : ''}" 
+                  <button type="button"
+                          class="sale-mode-tab promotion-path-tab ${idx === 0 ? 'active is-active' : ''} ${!hasP ? 'is-empty' : ''}" 
                           onclick="switchDrawerMode('${m.key}', this)"
-                          data-mode="${m.key}">
-                    <span>${m.label}</span>
-                    <span style="font-size: 0.68rem; font-weight: normal; opacity: 0.8; margin-top: 2px;">
-                      ${hasP ? 'มีโปรโมชั่น' : 'ไม่มีโปร'}
-                    </span>
+                          data-mode="${m.key}"
+                          role="tab"
+                          aria-selected="${idx === 0 ? 'true' : 'false'}">
+                    <span class="promotion-path-tab__title">${m.label}</span>
+                    <small class="promotion-path-tab__status">${hasP ? 'มีโปรโมชั่น' : 'ไม่มีโปร'}</small>
                   </button>
                 `;
               }).join("")}
@@ -3566,9 +3567,30 @@
       }
 
       // =============================================================
+      // =============================================================
       // 5. ซื้อพ่วง (BUNDLE)
       // =============================================================
       if (selectedMode === "BUNDLE") {
+        const hasBundlePromo = (variants || []).some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
+        if (!hasBundlePromo) {
+          return `
+            <section class="promotion-price-card" style="border-color: #334155;">
+              <header class="promotion-card-header">
+                <span class="price-tier-badge" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid #475569;">
+                  🎁 โปรโมชั่นซื้อพ่วง (Bundle)
+                </span>
+                <span class="badge-pn-pill" style="border-color: #475569; color: #94a3b8;">ไม่มีโปร</span>
+              </header>
+              <div style="padding: 24px 16px; text-align: center; color: var(--text-muted);">
+                <div style="font-size: 1.8rem; margin-bottom: 8px;">📦</div>
+                <div style="font-size: 0.95rem; font-weight: 600; color: #cbd5e1;">ไม่มีโปรโมชั่นซื้อพ่วงสำหรับสินค้านี้</div>
+                <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">สินค้ารายการนี้ไม่มีรายการส่งเสริมการขายแบบซื้อพ่วงในปัจจุบัน</div>
+              </div>
+              ${renderTechDetails("ซื้อพ่วง")}
+            </section>
+          `;
+        }
+
         return `
           <section class="promotion-price-card" style="border-color: rgba(56, 189, 248, 0.35);">
             <header class="promotion-card-header">
@@ -3632,10 +3654,12 @@
       document.querySelectorAll(".sale-mode-tab, .promotion-path-tab").forEach(tab => {
         tab.classList.remove("active");
         tab.classList.remove("is-active");
+        tab.setAttribute("aria-selected", "false");
       });
       if (btnElement) {
         btnElement.classList.add("active");
         btnElement.classList.add("is-active");
+        btnElement.setAttribute("aria-selected", "true");
       }
       
       const pnTag = document.getElementById("drawerProductPn") ? document.getElementById("drawerProductPn").textContent.replace("Exact P/N: ", "").trim() : "";
