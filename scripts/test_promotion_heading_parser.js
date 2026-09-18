@@ -6,6 +6,9 @@ const assert = require("node:assert/strict");
 const {
   parsePromotionProductHeading,
   parsePaymentCondition,
+  extractStoreScope,
+  extractDownPayment,
+  validateTradeUpPaymentCode,
   normalizeSamsungModelFamily,
   normalizeMemoryMatch,
   findPromotionDate,
@@ -48,6 +51,85 @@ test("ต้องตรวจไม่ร่วม SF+ ก่อนร่วม
 
   assert.equal(result.paymentCondition, "NON_SF_PLUS");
   assert.equal(result.modelText, "Galaxy A37 5G");
+});
+
+test("แยก A27 5G ร่วม SF+ ในวงเล็บ", () => {
+  const result = parsePromotionProductHeading(
+    "Galaxy A27 5G (ร่วม SF+) (8/128GB)"
+  );
+
+  assert.equal(result.model, "Galaxy A27 5G");
+  assert.equal(result.modelFamily, "A27_5G");
+  assert.equal(result.ram, "8GB");
+  assert.equal(result.capacity, "128GB");
+  assert.equal(result.paymentCondition, "SF_PLUS");
+  assert.equal(result.promotionType, "SF_PLUS_FINANCING");
+  assert.equal(result.parsingStatus, "PARSED");
+});
+
+test("แยก A27 5G ไม่ร่วม SF+ ในวงเล็บ", () => {
+  const result = parsePromotionProductHeading(
+    "Galaxy A27 5G (ไม่ร่วม SF+) (8/128GB)"
+  );
+
+  assert.equal(result.model, "Galaxy A27 5G");
+  assert.equal(result.modelFamily, "A27_5G");
+  assert.equal(result.capacity, "128GB");
+  assert.equal(result.paymentCondition, "NON_SF_PLUS");
+  assert.equal(result.promotionType, "NON_SF_PLUS_DISCOUNT");
+  assert.equal(result.parsingStatus, "PARSED");
+});
+
+test("ไม่ร่วม SF+ ในวงเล็บต้องไม่ถูกอ่านเป็นร่วม SF+", () => {
+  const result = parsePaymentCondition(
+    "Galaxy A27 5G (ไม่ร่วม SF+)"
+  );
+
+  assert.equal(result.paymentCondition, "NON_SF_PLUS");
+  assert.equal(result.modelText, "Galaxy A27 5G");
+});
+
+test("แยก Flip8 ร้านค้าที่ร่วมรายการและเงินดาวน์", () => {
+  const result = parsePromotionProductHeading(
+    "สำหรับร้านค้าที่ร่วมรายการเท่านั้น Galaxy Z Flip8 ดาวน์ไม่เกิน10% (8/128GB)"
+  );
+
+  assert.equal(result.model, "Galaxy Z Flip8");
+  assert.equal(result.modelFamily, "FLIP8");
+  assert.equal(result.ram, "8GB");
+  assert.equal(result.capacity, "128GB");
+  assert.equal(result.storeScope, "PARTICIPATING_STORES_ONLY");
+  assert.equal(result.downPaymentType, "MAX_PERCENT");
+  assert.equal(result.downPaymentPercent, 10);
+  assert.equal(result.parsingStatus, "PARSED");
+});
+
+test("แยก Flip8 สำหรับทุกหน้าร้าน", () => {
+  const result = parsePromotionProductHeading(
+    "สำหรับทุกหน้าร้าน Galaxy Z Flip8 (512GB)"
+  );
+
+  assert.equal(result.model, "Galaxy Z Flip8");
+  assert.equal(result.modelFamily, "FLIP8");
+  assert.equal(result.capacity, "512GB");
+  assert.equal(result.storeScope, "ALL_STORES");
+  assert.equal(result.parsingStatus, "PARSED");
+});
+
+test("Store Scope ต้องไม่เหลืออยู่ในชื่อรุ่น", () => {
+  const result = parsePromotionProductHeading(
+    "สำหรับทุกหน้าร้าน Galaxy Z Flip8 (512GB)"
+  );
+
+  assert.equal(result.model.includes("ทุกหน้าร้าน"), false);
+});
+
+test("เงื่อนไขเงินดาวน์ต้องไม่เหลือในชื่อรุ่น", () => {
+  const result = parsePromotionProductHeading(
+    "สำหรับร้านค้าที่ร่วมรายการเท่านั้น Galaxy Z Flip8 ดาวน์ไม่เกิน 10 % (8/128GB)"
+  );
+
+  assert.equal(result.model.includes("ดาวน์"), false);
 });
 
 test("รองรับช่องว่างและเครื่องหมายบวกหลายรูปแบบ", () => {
@@ -184,6 +266,11 @@ test("แยก A37 5G ออกจาก A37 LTE", () => {
   assert.equal(normalizeSamsungModelFamily("Galaxy A37 LTE"), "A37_LTE");
 });
 
+test("แยก A27 5G ออกจาก A27 LTE", () => {
+  assert.equal(normalizeSamsungModelFamily("Galaxy A27 5G"), "A27_5G");
+  assert.equal(normalizeSamsungModelFamily("Galaxy A27 LTE"), "A27_LTE");
+});
+
 test("SF+ ที่ไม่มีคำว่าร่วมหรือไม่ร่วมต้องกักกัน", () => {
   const result = parsePromotionProductHeading(
     "Galaxy A37 5G SF+ (8/256GB)"
@@ -208,6 +295,20 @@ test("รุ่นไม่รู้จักต้องกักกัน", ()
 
   assert.equal(result.parsingStatus, "REVIEW_REQUIRED");
   assert.equal(result.errorCode, "UNKNOWN_MODEL_FAMILY");
+});
+
+test("Trade Up Payment Code Validation", () => {
+  const valid = validateTradeUpPaymentCode("TUP-01");
+  assert.equal(valid.valid, true);
+  assert.equal(valid.normalizedCode, "TUP-01");
+
+  const invalid = validateTradeUpPaymentCode("");
+  assert.equal(invalid.valid, false);
+  assert.equal(invalid.code, "TRADE_UP_PAYMENT_CODE_REQUIRED");
+
+  const badFormat = validateTradeUpPaymentCode("?");
+  assert.equal(badFormat.valid, false);
+  assert.equal(badFormat.code, "INVALID_TRADE_UP_PAYMENT_CODE_FORMAT");
 });
 
 test("รองรับ RAM และ Storage ที่ถูกต้อง", () => {
@@ -240,6 +341,8 @@ test("ปฏิเสธค่าความจุที่หน่วยไ�
 
 test("ตรวจจับ Condition Noise ที่ยังหลงเหลือ", () => {
   assert.equal(containsUnparsedConditionNoise("Galaxy A37 5G ร่วม SF+"), true);
+  assert.equal(containsUnparsedConditionNoise("Galaxy Z Flip8 ดาวน์ 10%"), true);
+  assert.equal(containsUnparsedConditionNoise("Galaxy Z Flip8 ทุกหน้าร้าน"), true);
   assert.equal(containsUnparsedConditionNoise("Galaxy A37 5G"), false);
 });
 
@@ -307,6 +410,38 @@ function validateParsedTarget(promotion, stockItem) {
 
   return { allowed: true, code: "EXACT_TARGET_PASS" };
 }
+
+test("A27 5G ต้องไม่จับคู่ A37 5G", () => {
+  const promotion = parsePromotionProductHeading(
+    "Galaxy A27 5G (ร่วม SF+) (8/128GB)"
+  );
+
+  const stockItem = {
+    inventoryPn: "SM-A376B-TEST",
+    description: "Samsung Galaxy A37 5G 8/128GB - Black",
+    category: "SmartPhone"
+  };
+
+  const gate = validateParsedTarget(promotion, stockItem);
+  assert.equal(gate.allowed, false);
+  assert.equal(gate.code, "PROMOTION_TARGET_MODEL_MISMATCH");
+});
+
+test("Flip8 128GB ต้องไม่จับคู่ Flip8 512GB", () => {
+  const promotion = parsePromotionProductHeading(
+    "Galaxy Z Flip8 (8/128GB)"
+  );
+
+  const stockItem = {
+    inventoryPn: "SM-F761B-512-TEST",
+    description: "Samsung Galaxy Z Flip8 12/512GB - Black",
+    category: "SmartPhone"
+  };
+
+  const gate = validateParsedTarget(promotion, stockItem);
+  assert.equal(gate.allowed, false);
+  assert.equal(gate.code, "PROMOTION_TARGET_CAPACITY_MISMATCH");
+});
 
 test("A37 5G ร่วม SF+ จับคู่ Stock รุ่นเดียวกันได้", () => {
   const promotion = parsePromotionProductHeading(

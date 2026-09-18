@@ -570,6 +570,11 @@
       [/\bA37\s*(?:LTE|4G)\b/, 'A37_LTE'],
       [/\bA37\b/, 'A37_BASE'],
 
+      // Decouple A27 5G / LTE / BASE strictly
+      [/\bA27\s*5G\b/, 'A27_5G'],
+      [/\bA27\s*(?:LTE|4G)\b/, 'A27_LTE'],
+      [/\bA27\b/, 'A27_BASE'],
+
       // Separate A07 LTE / 4G from A07 5G strictly
       [/\bA07\s*(?:LTE|4G)\b/, 'A07_LTE'],
       [/\bA07\s*5G\b/, 'A07_5G'],

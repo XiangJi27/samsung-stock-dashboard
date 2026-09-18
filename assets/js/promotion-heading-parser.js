@@ -33,6 +33,31 @@ const SINGLE_DATE_REGEX = new RegExp(
   "iu"
 );
 
+const STORE_SCOPE_PATTERNS = [
+  {
+    pattern: /สำหรับ\s*ร้านค้า(?:ที่)?\s*ร่วมรายการ\s*เท่านั้น/iu,
+    storeScope: "PARTICIPATING_STORES_ONLY"
+  },
+  {
+    pattern: /เฉพาะ\s*ร้านค้า(?:ที่)?\s*ร่วมรายการ/iu,
+    storeScope: "PARTICIPATING_STORES_ONLY"
+  },
+  {
+    pattern: /สำหรับ\s*ทุก\s*หน้าร้าน/iu,
+    storeScope: "ALL_STORES"
+  },
+  {
+    pattern: /ทุก\s*หน้าร้าน/iu,
+    storeScope: "ALL_STORES"
+  }
+];
+
+const DOWN_PAYMENT_MAX_PATTERN =
+  /(?:เงิน\s*)?ดาวน์\s*ไม่\s*เกิน\s*(\d{1,3}(?:\.\d+)?)\s*%/iu;
+
+const DOWN_PAYMENT_EXACT_PATTERN =
+  /(?:เงิน\s*)?ดาวน์\s*(\d{1,3}(?:\.\d+)?)\s*%/iu;
+
 const MEMORY_PATTERN =
   /\(?\s*(\d{1,2})\s*[\/+]\s*(32|64|128|256|512|1|2)\s*(GB|TB)\s*\)?/iu;
 
@@ -40,53 +65,53 @@ const CAPACITY_ONLY_PATTERN =
   /(?:^|[^\d])(32|64|128|256|512)\s*(GB)(?=$|[^\w])|(?:^|[^\d])(1|2)\s*(TB)(?=$|[^\w])/iu;
 
 const CONDITION_CLEANUP_PATTERNS = [
-  // 1. NON_SF_PLUS patterns (Specific / longer phrases FIRST)
+  // 1. NON_SF_PLUS patterns (Specific / longer phrases FIRST, supports optional surrounding parentheses)
   {
-    pattern: /ชำระ(?:เงิน)?\s*แบบ\s*ไม่\s*(?:ใช้|ร่วม)(?:\s*กับ)?\s*SF\s*\+/iu,
+    pattern: /\(?\s*ชำระ(?:เงิน)?\s*แบบ\s*ไม่\s*(?:ใช้|ร่วม)(?:\s*กับ)?\s*SF\s*\+\s*\)?/iu,
     paymentCondition: "NON_SF_PLUS",
     saleMode: "NON_SF_PLUS",
     promotionType: "NON_SF_PLUS_DISCOUNT"
   },
   {
-    pattern: /ไม่(?:\s*สามารถ)?\s*(?:ใช้)?\s*ร่วม(?:\s*กับ)?\s*SF\s*\+(?:\s*ได้)?/iu,
+    pattern: /\(?\s*ไม่(?:\s*สามารถ)?\s*(?:ใช้)?\s*ร่วม(?:\s*กับ)?\s*SF\s*\+(?:\s*ได้)?\s*\)?/iu,
     paymentCondition: "NON_SF_PLUS",
     saleMode: "NON_SF_PLUS",
     promotionType: "NON_SF_PLUS_DISCOUNT"
   },
   {
-    pattern: /ไม่\s*ร่วม\s*SF\s*\+/iu,
+    pattern: /\(?\s*ไม่\s*ร่วม\s*SF\s*\+\s*\)?/iu,
     paymentCondition: "NON_SF_PLUS",
     saleMode: "NON_SF_PLUS",
     promotionType: "NON_SF_PLUS_DISCOUNT"
   },
   {
-    pattern: /ไม่\s*ใช้(?:\s*สิทธิ์)?\s*SF\s*\+/iu,
+    pattern: /\(?\s*ไม่\s*ใช้(?:\s*สิทธิ์)?\s*SF\s*\+\s*\)?/iu,
     paymentCondition: "NON_SF_PLUS",
     saleMode: "NON_SF_PLUS",
     promotionType: "NON_SF_PLUS_DISCOUNT"
   },
 
-  // 2. SF_PLUS patterns (Specific / longer phrases FIRST)
+  // 2. SF_PLUS patterns (Specific / longer phrases FIRST, supports optional surrounding parentheses)
   {
-    pattern: /ชำระ(?:เงิน)?\s*ผ่าน\s*SF\s*\+/iu,
+    pattern: /\(?\s*ชำระ(?:เงิน)?\s*ผ่าน\s*SF\s*\+\s*\)?/iu,
     paymentCondition: "SF_PLUS",
     saleMode: "SF_PLUS",
     promotionType: "SF_PLUS_FINANCING"
   },
   {
-    pattern: /ใช้\s*สิทธิ์\s*SF\s*\+/iu,
+    pattern: /\(?\s*ใช้\s*สิทธิ์\s*SF\s*\+\s*\)?/iu,
     paymentCondition: "SF_PLUS",
     saleMode: "SF_PLUS",
     promotionType: "SF_PLUS_FINANCING"
   },
   {
-    pattern: /(?<!ไม่\s*)(?:สามารถ\s*)?(?:ใช้\s*)?ร่วม(?:\s*กับ)?\s*SF\s*\+(?:\s*ได้)?/iu,
+    pattern: /(?<!ไม่\s*)\(?\s*(?:สามารถ\s*)?(?:ใช้\s*)?ร่วม(?:\s*กับ)?\s*SF\s*\+(?:\s*ได้)?\s*\)?/iu,
     paymentCondition: "SF_PLUS",
     saleMode: "SF_PLUS",
     promotionType: "SF_PLUS_FINANCING"
   },
   {
-    pattern: /ร่วม\s*SF\s*\+/iu,
+    pattern: /\(?\s*ร่วม\s*SF\s*\+\s*\)?/iu,
     paymentCondition: "SF_PLUS",
     saleMode: "SF_PLUS",
     promotionType: "SF_PLUS_FINANCING"
@@ -94,23 +119,23 @@ const CONDITION_CLEANUP_PATTERNS = [
 ];
 
 const STANDALONE_SF_PLUS_PATTERN =
-  /(?:^|\s)SF\s*\+(?:\s|$)/iu;
+  /(?:^|\s|\()SF\s*\+(?:\)|\s|$)/iu;
 
 const REMOVABLE_PROMOTION_CONDITIONS = [
   {
-    pattern: /Trade\s*Up\s*Only/iu,
+    pattern: /\(?\s*Trade\s*Up\s*Only\s*\)?/iu,
     code: "TRADE_UP_ONLY"
   },
   {
-    pattern: /Trade\s*Up/iu,
+    pattern: /\(?\s*Trade\s*Up\s*\)?/iu,
     code: "TRADE_UP"
   },
   {
-    pattern: /Studentcrd/iu,
+    pattern: /\(?\s*Studentcrd\s*\)?/iu,
     code: "STUDENT_EXCLUSIVE"
   },
   {
-    pattern: /โปร(?:โมชั่น|โมชัน)?พิเศษ/iu,
+    pattern: /\(?\s*โปร(?:โมชั่น|โมชัน)?พิเศษ\s*\)?/iu,
     code: "SPECIAL_PROMOTION"
   }
 ];
@@ -120,6 +145,16 @@ function cleanInput(value) {
     .normalize("NFC")
     .replace(/\u0e4d\u0e32/g, "\u0e33")
     .replace(/\u00a0/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function cleanupEmptyBrackets(value) {
+  return cleanInput(value)
+    .replace(/\(\s*\)/g, " ")
+    .replace(/\[\s*\]/g, " ")
+    .replace(/^[\s|:;,–—-]+/, "")
+    .replace(/[\s|:;,–—-]+$/, "")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -155,19 +190,97 @@ function findPromotionDate(text) {
   return null;
 }
 
+function extractStoreScope(rawText) {
+  const originalText = cleanInput(rawText);
+
+  for (const rule of STORE_SCOPE_PATTERNS) {
+    const match = originalText.match(rule.pattern);
+    if (!match) continue;
+
+    return {
+      cleanedText: cleanupEmptyBrackets(originalText.replace(match[0], " ")),
+      storeScope: rule.storeScope,
+      scopeText: match[0].trim(),
+      status: "PARSED"
+    };
+  }
+
+  return {
+    cleanedText: originalText,
+    storeScope: "UNSPECIFIED",
+    scopeText: null,
+    status: "PARSED"
+  };
+}
+
+function extractDownPayment(rawText) {
+  const originalText = cleanInput(rawText);
+
+  const maxMatch = originalText.match(DOWN_PAYMENT_MAX_PATTERN);
+  if (maxMatch) {
+    const percent = Number(maxMatch[1]);
+    if (percent < 0 || percent > 100) {
+      return {
+        cleanedText: originalText,
+        downPaymentType: null,
+        downPaymentPercent: percent,
+        conditionText: maxMatch[0].trim(),
+        status: "REVIEW_REQUIRED",
+        errorCode: "INVALID_DOWN_PAYMENT_PERCENT"
+      };
+    }
+    return {
+      cleanedText: cleanupEmptyBrackets(originalText.replace(maxMatch[0], " ")),
+      downPaymentType: "MAX_PERCENT",
+      downPaymentPercent: percent,
+      conditionText: maxMatch[0].trim(),
+      status: "PARSED"
+    };
+  }
+
+  const exactMatch = originalText.match(DOWN_PAYMENT_EXACT_PATTERN);
+  if (exactMatch) {
+    const percent = Number(exactMatch[1]);
+    if (percent < 0 || percent > 100) {
+      return {
+        cleanedText: originalText,
+        downPaymentType: null,
+        downPaymentPercent: percent,
+        conditionText: exactMatch[0].trim(),
+        status: "REVIEW_REQUIRED",
+        errorCode: "INVALID_DOWN_PAYMENT_PERCENT"
+      };
+    }
+    return {
+      cleanedText: cleanupEmptyBrackets(originalText.replace(exactMatch[0], " ")),
+      downPaymentType: "EXACT_PERCENT",
+      downPaymentPercent: percent,
+      conditionText: exactMatch[0].trim(),
+      status: "PARSED"
+    };
+  }
+
+  return {
+    cleanedText: originalText,
+    downPaymentType: null,
+    downPaymentPercent: null,
+    conditionText: null,
+    status: "PARSED"
+  };
+}
+
 function parsePaymentCondition(text) {
+  const normalized = cleanInput(text);
+
   for (const condition of CONDITION_CLEANUP_PATTERNS) {
-    const match = text.match(condition.pattern);
+    const match = normalized.match(condition.pattern);
 
     if (!match) {
       continue;
     }
 
     return {
-      modelText: text
-        .replace(match[0], " ")
-        .replace(/\s+/g, " ")
-        .trim(),
+      modelText: cleanupEmptyBrackets(normalized.replace(match[0], " ")),
       conditionText: match[0].trim(),
       paymentCondition: condition.paymentCondition,
       saleMode: condition.saleMode,
@@ -176,9 +289,9 @@ function parsePaymentCondition(text) {
     };
   }
 
-  if (STANDALONE_SF_PLUS_PATTERN.test(text)) {
+  if (STANDALONE_SF_PLUS_PATTERN.test(normalized)) {
     return {
-      modelText: text,
+      modelText: normalized,
       conditionText: "SF+",
       paymentCondition: null,
       saleMode: null,
@@ -189,7 +302,7 @@ function parsePaymentCondition(text) {
   }
 
   return {
-    modelText: text,
+    modelText: normalized,
     conditionText: null,
     paymentCondition: "ANY",
     saleMode: "STANDARD_PAYMENT",
@@ -218,9 +331,7 @@ function extractPromotionConditions(text) {
   }
 
   return {
-    modelText: workingText
-      .replace(/\s+/g, " ")
-      .trim(),
+    modelText: cleanupEmptyBrackets(workingText),
     conditions
   };
 }
@@ -288,10 +399,7 @@ function extractCapacityOnly(text) {
     .trim();
 
   return {
-    modelText: text
-      .replace(match[0], " ")
-      .replace(/\s+/g, " ")
-      .trim(),
+    modelText: cleanupEmptyBrackets(text.replace(match[0], " ")),
     capacity: rawCapacity
       .replace(/\s+/g, "")
       .toUpperCase()
@@ -331,6 +439,11 @@ function normalizeSamsungModelFamily(value) {
     [/\bA37\s*5G\b/, "A37_5G"],
     [/\bA37\s*(?:LTE|4G)\b/, "A37_LTE"],
     [/\bA37\b/, "A37_BASE"],
+
+    // Decouple A27 5G / LTE / BASE
+    [/\bA27\s*5G\b/, "A27_5G"],
+    [/\bA27\s*(?:LTE|4G)\b/, "A27_LTE"],
+    [/\bA27\b/, "A27_BASE"],
 
     // Decouple A07 5G / LTE / BASE
     [/\bA07\s*(?:LTE|4G)\b/, "A07_LTE"],
@@ -378,13 +491,39 @@ function containsUnparsedConditionNoise(model) {
     /ใช้\s*สิทธิ์\s*SF\s*\+/iu,
     /Trade\s*Up/iu,
     /Studentcrd/iu,
-    /เงินดาวน์/iu,
-    /ผ่อน/iu
+    /เงินดาวน์|ดาวน์/iu,
+    /ผ่อน/iu,
+    /สำหรับทุกหน้าร้าน|ทุกหน้าร้าน/iu,
+    /ร้านค้า(?:ที่)?\s*ร่วมรายการ/iu,
+    /คูปอง|ส่วนลด/iu
   ];
 
   return noisePatterns.some(
     (pattern) => pattern.test(model)
   );
+}
+
+function validateTradeUpPaymentCode(value) {
+  const code = String(value || "").trim().toUpperCase();
+
+  if (!code) {
+    return {
+      valid: false,
+      code: "TRADE_UP_PAYMENT_CODE_REQUIRED"
+    };
+  }
+
+  if (!/^[A-Z0-9][A-Z0-9_-]{2,30}$/.test(code)) {
+    return {
+      valid: false,
+      code: "INVALID_TRADE_UP_PAYMENT_CODE_FORMAT"
+    };
+  }
+
+  return {
+    valid: true,
+    normalizedCode: code
+  };
 }
 
 function parsePromotionProductHeading(rawValue) {
@@ -403,90 +542,87 @@ function parsePromotionProductHeading(rawValue) {
 
   let workingText = originalText;
 
+  // 1. Date range extraction
   const dateResult = findPromotionDate(workingText);
-
   if (dateResult) {
-    workingText = workingText.replace(
-      dateResult.match[0],
-      " "
-    );
+    workingText = workingText.replace(dateResult.match[0], " ");
   }
 
-  const paymentResult =
-    parsePaymentCondition(workingText);
+  // 2. Store scope extraction
+  const storeResult = extractStoreScope(workingText);
+  workingText = storeResult.cleanedText;
 
+  // 3. Payment condition extraction (SF+ / NON_SF_PLUS)
+  const paymentResult = parsePaymentCondition(workingText);
   if (paymentResult.ambiguous) {
     return {
       originalText,
       model: null,
       modelFamily: null,
-      promotionDateText:
-        dateResult?.text || null,
+      storeScope: storeResult.storeScope,
+      promotionDateText: dateResult?.text || null,
       parsingStatus: "REVIEW_REQUIRED",
-      errorCode:
-        paymentResult.errorCode,
-      databaseAction:
-        "DO_NOT_INSERT_OFFER"
+      errorCode: paymentResult.errorCode,
+      databaseAction: "DO_NOT_INSERT_OFFER"
     };
   }
-
   workingText = paymentResult.modelText;
 
-  const conditionResult =
-    extractPromotionConditions(workingText);
+  // 4. Down payment extraction
+  const downPaymentResult = extractDownPayment(workingText);
+  if (downPaymentResult.status === "REVIEW_REQUIRED") {
+    return {
+      originalText,
+      model: null,
+      modelFamily: null,
+      storeScope: storeResult.storeScope,
+      downPaymentPercent: downPaymentResult.downPaymentPercent,
+      parsingStatus: "REVIEW_REQUIRED",
+      errorCode: downPaymentResult.errorCode,
+      databaseAction: "DO_NOT_INSERT_OFFER"
+    };
+  }
+  workingText = downPaymentResult.cleanedText;
 
+  // 5. Additional promotion conditions extraction (Trade Up, Studentcrd, etc.)
+  const conditionResult = extractPromotionConditions(workingText);
   workingText = conditionResult.modelText;
 
-  const memoryMatch =
-    workingText.match(MEMORY_PATTERN);
-
+  // 6. Memory and capacity extraction
+  const memoryMatch = workingText.match(MEMORY_PATTERN);
   let memory = null;
   let ram = null;
   let capacity = null;
 
   if (memoryMatch) {
-    const normalizedMemory =
-      normalizeMemoryMatch(memoryMatch);
-
+    const normalizedMemory = normalizeMemoryMatch(memoryMatch);
     if (!normalizedMemory.valid) {
       return {
         originalText,
         model: null,
         modelFamily: null,
         parsingStatus: "REVIEW_REQUIRED",
-        errorCode:
-          normalizedMemory.errorCode,
-        databaseAction:
-          "DO_NOT_INSERT_OFFER"
+        errorCode: normalizedMemory.errorCode,
+        databaseAction: "DO_NOT_INSERT_OFFER"
       };
     }
 
     memory = normalizedMemory.memory;
     ram = normalizedMemory.ram;
     capacity = normalizedMemory.capacity;
-
-    workingText = workingText.replace(
-      memoryMatch[0],
-      " "
-    );
+    workingText = workingText.replace(memoryMatch[0], " ");
   } else {
-    const capacityResult =
-      extractCapacityOnly(workingText);
-
+    const capacityResult = extractCapacityOnly(workingText);
     workingText = capacityResult.modelText;
     capacity = capacityResult.capacity;
   }
 
-  const model = workingText
-    .replace(
-      /\b(?:โปรโมชั่น|โปรโมชัน|promotion|promo)\b/giu,
-      " "
-    )
-    .replace(/[()[\]]/g, " ")
-    .replace(/^[\s|:,-]+/, "")
-    .replace(/[\s|:,-]+$/, "")
-    .replace(/\s+/g, " ")
-    .trim();
+  // 7. Cleanup remaining model string
+  let model = cleanupEmptyBrackets(
+    workingText
+      .replace(/\b(?:โปรโมชั่น|โปรโมชัน|promotion|promo)\b/giu, " ")
+      .replace(/[()[\]]/g, " ")
+  );
 
   if (!model) {
     return {
@@ -498,11 +634,11 @@ function parsePromotionProductHeading(rawValue) {
       capacity,
       parsingStatus: "REVIEW_REQUIRED",
       errorCode: "MODEL_NAME_NOT_FOUND",
-      databaseAction:
-        "DO_NOT_INSERT_OFFER"
+      databaseAction: "DO_NOT_INSERT_OFFER"
     };
   }
 
+  // 8. Fail-closed noise checks
   if (findPromotionDate(model)) {
     return {
       originalText,
@@ -512,10 +648,8 @@ function parsePromotionProductHeading(rawValue) {
       ram,
       capacity,
       parsingStatus: "REVIEW_REQUIRED",
-      errorCode:
-        "MODEL_CONTAINS_PROMOTION_DATE_NOISE",
-      databaseAction:
-        "DO_NOT_INSERT_OFFER"
+      errorCode: "MODEL_CONTAINS_PROMOTION_DATE_NOISE",
+      databaseAction: "DO_NOT_INSERT_OFFER"
     };
   }
 
@@ -528,16 +662,12 @@ function parsePromotionProductHeading(rawValue) {
       ram,
       capacity,
       parsingStatus: "REVIEW_REQUIRED",
-      errorCode:
-        "MODEL_CONTAINS_PROMOTION_CONDITION_NOISE",
-      databaseAction:
-        "DO_NOT_INSERT_OFFER"
+      errorCode: "MODEL_CONTAINS_PROMOTION_CONDITION_NOISE",
+      databaseAction: "DO_NOT_INSERT_OFFER"
     };
   }
 
-  const modelFamily =
-    normalizeSamsungModelFamily(model);
-
+  const modelFamily = normalizeSamsungModelFamily(model);
   if (!modelFamily) {
     return {
       originalText,
@@ -546,17 +676,15 @@ function parsePromotionProductHeading(rawValue) {
       memory,
       ram,
       capacity,
-      paymentCondition:
-        paymentResult.paymentCondition,
-      saleMode:
-        paymentResult.saleMode,
-      promotionType:
-        paymentResult.promotionType,
+      paymentCondition: paymentResult.paymentCondition,
+      saleMode: paymentResult.saleMode,
+      promotionType: paymentResult.promotionType,
+      storeScope: storeResult.storeScope,
+      downPaymentType: downPaymentResult.downPaymentType,
+      downPaymentPercent: downPaymentResult.downPaymentPercent,
       parsingStatus: "REVIEW_REQUIRED",
-      errorCode:
-        "UNKNOWN_MODEL_FAMILY",
-      databaseAction:
-        "DO_NOT_INSERT_OFFER"
+      errorCode: "UNKNOWN_MODEL_FAMILY",
+      databaseAction: "DO_NOT_INSERT_OFFER"
     };
   }
 
@@ -567,40 +695,41 @@ function parsePromotionProductHeading(rawValue) {
     memory,
     ram,
     capacity,
-    paymentCondition:
-      paymentResult.paymentCondition,
-    saleMode:
-      paymentResult.saleMode,
-    promotionType:
-      paymentResult.promotionType,
-    conditionText:
-      paymentResult.conditionText,
-    additionalConditions:
-      conditionResult.conditions,
-    promotionDateText:
-      dateResult?.text || null,
-    promotionDateType:
-      dateResult?.type || null,
+    paymentCondition: paymentResult.paymentCondition,
+    saleMode: paymentResult.saleMode,
+    promotionType: paymentResult.promotionType,
+    storeScope: storeResult.storeScope,
+    downPaymentType: downPaymentResult.downPaymentType,
+    downPaymentPercent: downPaymentResult.downPaymentPercent,
+    conditionText: paymentResult.conditionText,
+    additionalConditions: conditionResult.conditions,
+    sourceConditions: {
+      paymentConditionText: paymentResult.conditionText,
+      storeScopeText: storeResult.scopeText,
+      downPaymentText: downPaymentResult.conditionText
+    },
+    promotionDateText: dateResult?.text || null,
+    promotionDateType: dateResult?.type || null,
     parsingStatus: "PARSED",
     errorCode: null,
-    databaseAction:
-      "ALLOW_CANDIDATE_RESOLUTION"
+    databaseAction: "ALLOW_CANDIDATE_RESOLUTION"
   };
 }
 
 const exported = {
   parsePromotionProductHeading,
   parsePaymentCondition,
+  extractStoreScope,
+  extractDownPayment,
+  validateTradeUpPaymentCode,
   normalizeSamsungModelFamily,
   normalizeMemoryMatch,
   findPromotionDate,
+  cleanupEmptyBrackets,
   containsUnparsedConditionNoise
 };
 
-if (
-  typeof module !== "undefined" &&
-  module.exports
-) {
+if (typeof module !== "undefined" && module.exports) {
   module.exports = exported;
 }
 
