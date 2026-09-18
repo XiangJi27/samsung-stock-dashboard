@@ -427,9 +427,16 @@
             modelRaw = currentModel;
           }
 
-          // Robust Heading Parser: Strip promotion date range noise, separate RAM/capacity and conditions
-          if (modelRaw && window.PromotionCalculator && typeof window.PromotionCalculator.parsePromotionProductHeading === 'function') {
-            const parsedHeading = window.PromotionCalculator.parsePromotionProductHeading(modelRaw);
+          // Robust Heading Parser: Strip promotion date range noise, separate RAM/capacity and SF+ conditions
+          let parsedHeading = null;
+          const headingParser = (window.PromotionHeadingParser && typeof window.PromotionHeadingParser.parsePromotionProductHeading === 'function')
+            ? window.PromotionHeadingParser.parsePromotionProductHeading
+            : (window.PromotionCalculator && typeof window.PromotionCalculator.parsePromotionProductHeading === 'function')
+              ? window.PromotionCalculator.parsePromotionProductHeading
+              : null;
+
+          if (modelRaw && headingParser) {
+            parsedHeading = headingParser(modelRaw);
             if (parsedHeading && parsedHeading.parsingStatus === 'PARSED') {
               if (parsedHeading.model) modelRaw = parsedHeading.model;
               if (!capacityRaw && (parsedHeading.capacity || parsedHeading.memory)) {
@@ -440,6 +447,8 @@
               }
               if (parsedHeading.conditions && parsedHeading.conditions.length > 0) {
                 promotionConditions = parsedHeading.conditions;
+              } else if (parsedHeading.additionalConditions && parsedHeading.additionalConditions.length > 0) {
+                promotionConditions = parsedHeading.additionalConditions.map(c => c.text || c.code);
               }
             }
           }
@@ -783,9 +792,15 @@
           } else {
             // Case B: No Trade Up discount -> Single Variant
             let saleMode = 'STANDARD_PAYMENT';
-            if (isAddonSheet) saleMode = 'ADD_ON_PURCHASE';
-            else if (couponRaw.includes('04')) saleMode = 'SF_PLUS';
-            else if (couponRaw.toUpperCase().includes('STUDENT')) saleMode = 'STUDENT';
+            if (parsedHeading && parsedHeading.saleMode && parsedHeading.saleMode !== 'STANDARD_PAYMENT') {
+              saleMode = parsedHeading.saleMode;
+            } else if (isAddonSheet) {
+              saleMode = 'ADD_ON_PURCHASE';
+            } else if (couponRaw.includes('04')) {
+              saleMode = 'SF_PLUS';
+            } else if (couponRaw.toUpperCase().includes('STUDENT')) {
+              saleMode = 'STUDENT';
+            }
 
             const activeDiscount = isAddonSheet ? (addOnDisc || 0) : (stdDiscount || 0);
             const expectedNet = rrp !== null ? (rrp - activeDiscount) : null;
@@ -811,7 +826,11 @@
             const flags = [];
             let reason = '';
 
-            if (hasFormulaError) {
+            if (parsedHeading && parsedHeading.parsingStatus === 'REVIEW_REQUIRED') {
+              status = 'REVIEW_REQUIRED';
+              flags.push('PARSING_REVIEW_REQUIRED', parsedHeading.errorCode || 'PARSING_ERROR');
+              reason = `พบข้อผิดพลาดในการแยกข้อมูลหัวข้อสินค้า: ${parsedHeading.errorCode || 'REVIEW_REQUIRED'}`;
+            } else if (hasFormulaError) {
               status = 'BLOCKED_INVALID';
               flags.push('SOURCE_FORMULA_ERROR');
               reason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail}) ที่เซลล์ ${sheetName}!${errorCellRef}`;
@@ -863,7 +882,9 @@
               netPrice: resolvedNet,
               netPriceOrigin: netOrigin,
               coupon: normalizedCoupon,
+              paymentCondition: parsedHeading?.paymentCondition || 'ANY',
               saleMode,
+              promotionType: parsedHeading?.promotionType || (saleMode === 'SF_PLUS' ? 'SF_PLUS_FINANCING' : (saleMode === 'NON_SF_PLUS' ? 'NON_SF_PLUS_DISCOUNT' : 'STANDARD_DISCOUNT')),
               promotionSourceType: 'EXCEL_CONFIRMED',
               validationStatus: status,
               validationFlags: flags,

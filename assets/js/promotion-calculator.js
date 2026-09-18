@@ -423,12 +423,33 @@
     };
   }
 
+  let headingParserModule = null;
+  if (typeof require === 'function') {
+    try {
+      headingParserModule = require('./promotion-heading-parser.js');
+    } catch (_) {}
+  }
+
+  function getHeadingParser() {
+    if (headingParserModule) return headingParserModule;
+    if (typeof window !== 'undefined' && window.PromotionHeadingParser) {
+      return window.PromotionHeadingParser;
+    }
+    return null;
+  }
+
   /**
-   * Robust Heading Parser: Strips Promotion Dates, RAM/Storage, Conditions
+   * Robust Heading Parser: Strips Promotion Dates, RAM/Storage, SF+ Conditions
    */
   function parsePromotionProductHeading(rawValue) {
+    const parser = getHeadingParser();
+    if (parser && typeof parser.parsePromotionProductHeading === 'function') {
+      return parser.parsePromotionProductHeading(rawValue);
+    }
+
     const originalText = String(rawValue || '')
-      .normalize('NFKC')
+      .normalize('NFC')
+      .replace(/\u0e4d\u0e32/g, '\u0e33')
       .replace(/\u00a0/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
@@ -544,6 +565,11 @@
       [/\bA57\s*5G\b/, 'A57_5G'],
       [/\bA57\b/, 'A57_5G'],
 
+      // Decouple A37 5G / LTE / BASE strictly
+      [/\bA37\s*5G\b/, 'A37_5G'],
+      [/\bA37\s*(?:LTE|4G)\b/, 'A37_LTE'],
+      [/\bA37\b/, 'A37_BASE'],
+
       // Separate A07 LTE / 4G from A07 5G strictly
       [/\bA07\s*(?:LTE|4G)\b/, 'A07_LTE'],
       [/\bA07\s*5G\b/, 'A07_5G'],
@@ -558,13 +584,13 @@
       [/\bA56\s*5G\b/, 'A56_5G'],
       [/\bA56\b/, 'A56_5G'],
 
-      [/\bZ?\s*FOLD8\s*ULTRA\b/, 'FOLD8_ULTRA'],
-      [/\bZ?\s*FOLD8\b/, 'FOLD8'],
-      [/\bZ?\s*FLIP8\b/, 'FLIP8'],
-      [/\bZ?\s*FOLD7\b/, 'FOLD7'],
-      [/\bZ?\s*FLIP7\b/, 'FLIP7'],
-      [/\bZ?\s*FOLD6\b/, 'FOLD6'],
-      [/\bZ?\s*FLIP6\b/, 'FLIP6']
+      [/\bZ?\s*FOLD\s*8\s*ULTRA\b/, 'FOLD8_ULTRA'],
+      [/\bZ?\s*FOLD\s*8\b/, 'FOLD8'],
+      [/\bZ?\s*FLIP\s*8\b/, 'FLIP8'],
+      [/\bZ?\s*FOLD\s*7\b/, 'FOLD7'],
+      [/\bZ?\s*FLIP\s*7\b/, 'FLIP7'],
+      [/\bZ?\s*FOLD\s*6\b/, 'FOLD6'],
+      [/\bZ?\s*FLIP\s*6\b/, 'FLIP6'],
     ];
 
     for (const [pattern, family] of rules) {

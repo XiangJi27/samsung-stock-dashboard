@@ -2,25 +2,25 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "118d810",
+  "packageBuiltFromCommit": "7bee4ab",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-18T12:58:23.359387+07:00",
+  "builtAt": "2026-09-18T14:02:17.238235+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
   "primaryUseCase": "STOCK_LOOKUP",
-  "totalFiles": 54,
+  "totalFiles": 55,
   "summary": {
-    "totalFiles": 54,
-    "totalSizeBytes": 10004642,
-    "totalSizeMB": 9.54
+    "totalFiles": 55,
+    "totalSizeBytes": 10019189,
+    "totalSizeMB": 9.56
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 68676,
-      "sha256": "3594b467607e73e8b195b9555e1370dde4ef51f72f50489190dc334136d0684b",
+      "sizeBytes": 67598,
+      "sha256": "a0a813d2817e48bc91ddc700b73f34dbc5834676c3c526616c9611099afca5d0",
       "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
@@ -146,8 +146,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 163343,
-      "sha256": "04c90360f110149603a70d0178b456c19bdbfa569463a3e3bc56d06e08e76eca",
+      "sizeBytes": 164807,
+      "sha256": "ed15d98e919c75a8592c95fd7c552dbaa38e3778d2ac5ef41db0b58779c1a514",
       "status": "BASELINE_CORE"
     },
     {
@@ -158,8 +158,8 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 68676,
-      "sha256": "3594b467607e73e8b195b9555e1370dde4ef51f72f50489190dc334136d0684b",
+      "sizeBytes": 67598,
+      "sha256": "a0a813d2817e48bc91ddc700b73f34dbc5834676c3c526616c9611099afca5d0",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -313,6 +313,12 @@
       "status": "PILOT_RUNTIME"
     },
     {
+      "file": "assets/js/promotion-heading-parser.js",
+      "sizeBytes": 14355,
+      "sha256": "78fc286f924c4de7bfbf4ee92f89873ee57d45270a054e3a2c26ad1f983e0b80",
+      "status": "PILOT_RUNTIME"
+    },
+    {
       "file": "assets/js/promotion-knowledge-base.js",
       "sizeBytes": 16972,
       "sha256": "da5fcbf0b3873d6bdc014cc24374d01b4dbc6f11ca573fe8819776b6746bf90d",
@@ -320,14 +326,14 @@
     },
     {
       "file": "assets/js/promotion-calculator.js",
-      "sizeBytes": 33638,
-      "sha256": "c2aaea7511e4c1d825692b5b38905c2c1fbcb0822caef9a354102aa3bbbaba45",
+      "sizeBytes": 34458,
+      "sha256": "e90fd0542e8a5e2d5b11996df21e007ebfc1b5d9f47eb17d01abdb438d0ae79e",
       "status": "PILOT_RUNTIME"
     },
     {
       "file": "promotion_review_dashboard.html",
-      "sizeBytes": 112711,
-      "sha256": "b426ad90ea59bf3cf39700387d4333b1b685c63bb70e49e598e8b8ea753971d3",
+      "sizeBytes": 112775,
+      "sha256": "70818f5a86470365c582945ffc7deb1b4b0bac4a7f944eb87e912aba0193f9ec",
       "status": "PILOT_RUNTIME"
     },
     {

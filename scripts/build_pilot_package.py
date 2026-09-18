@@ -66,6 +66,7 @@ def build_pilot_package():
         "api/promotion-campaigns.js",
         "api/promotion-errors.js",
         "api/promotions/active.js",
+        "assets/js/promotion-heading-parser.js",
         "assets/js/promotion-knowledge-base.js",
         "assets/js/promotion-calculator.js",
         "promotion_review_dashboard.html",
