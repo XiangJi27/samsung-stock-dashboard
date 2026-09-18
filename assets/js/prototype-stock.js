@@ -1621,8 +1621,10 @@
       let matched = promoVariants.filter(v => v.pn && item.pn && v.pn.trim().toUpperCase() === item.pn.trim().toUpperCase());
       let isModelScope = false;
 
-      // Fallback: match by Model + Capacity
-      if (matched.length === 0 && item.model) {
+      // Fallback: match by Model + Capacity ONLY for Smartphone & Tablet devices (Never for Accessories, Buds, Watch, SIM, Other)
+      const canonicalCat = (typeof resolveCanonicalCategory === "function") ? resolveCanonicalCategory(item) : "OTHER";
+      const isDevice = (canonicalCat === "SMARTPHONE" || canonicalCat === "TABLET");
+      if (matched.length === 0 && item.model && isDevice) {
         const cleanM = item.model.toLowerCase();
         matched = promoVariants.filter(v => v.model && cleanM.includes(v.model.toLowerCase()));
         if (matched.length > 0) isModelScope = true;
@@ -3181,8 +3183,19 @@
           }
         }
 
-        const sfNet = rrp - sfDisc;
-        const nonSfNet = rrp - nonSfDisc;
+        const sfCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: sfDisc })
+          : { valid: rrp > 0 && sfDisc >= 0 && sfDisc <= rrp, netPrice: rrp - sfDisc };
+        const nonSfCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: nonSfDisc })
+          : { valid: rrp > 0 && nonSfDisc >= 0 && nonSfDisc <= rrp, netPrice: rrp - nonSfDisc };
+
+        if (!sfCalc.valid || !nonSfCalc.valid) {
+          return renderPriceDataWarning("ส่วนลดเกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
+        }
+
+        const sfNet = sfCalc.netPrice;
+        const nonSfNet = nonSfCalc.netPrice;
 
         return `
           <!-- Card 1: ร่วม Samsung Finance+ -->
@@ -3312,7 +3325,16 @@
         const discountAmount = studentMatch
           ? Number(studentMatch.discountValue || studentMatch.studentDiscount || Math.round(rrp * 0.15))
           : Math.round(rrp * 0.15);
-        const netPrice = rrp - discountAmount;
+
+        const studentCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: discountAmount })
+          : { valid: rrp > 0 && discountAmount >= 0 && discountAmount <= rrp, netPrice: rrp - discountAmount };
+
+        if (!studentCalc.valid) {
+          return renderPriceDataWarning("ส่วนลดนักศึกษาเกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
+        }
+
+        const netPrice = studentCalc.netPrice;
 
         return `
           <section class="promotion-price-card" style="border-color: rgba(168, 85, 247, 0.4); background: linear-gradient(145deg, rgba(168, 85, 247, 0.08), rgba(15, 23, 42, 0.9));">
@@ -3374,8 +3396,6 @@
           else if (isS26Ultra) stdDiscount = 5000;
         }
 
-        const standardNetPrice = rrp - stdDiscount;
-
         let tradeUpBonus = 0;
         const tuMatch = variants.find(v => v.saleMode === "TRADE_UP" && v.tradeUpEligible !== false);
         if (isS25Fe || isA57) {
@@ -3406,7 +3426,16 @@
           `;
         }
 
-        const previewBeforeAppraisal = standardNetPrice - tradeUpBonus;
+        const tuCalc = (typeof calculatePromotionPrices === "function")
+          ? calculatePromotionPrices({ regularPrice: rrp, standardDiscount: stdDiscount, tradeUpDiscount: tradeUpBonus })
+          : { valid: rrp > 0 && stdDiscount >= 0 && stdDiscount <= rrp && (rrp - stdDiscount - tradeUpBonus >= 0), standardNetPrice: rrp - stdDiscount, tradeUpNetPrice: rrp - stdDiscount - tradeUpBonus };
+
+        if (!tuCalc.valid || tuCalc.standardNetPrice === null || tuCalc.tradeUpNetPrice === null) {
+          return renderPriceDataWarning("ส่วนลด Trade Up เกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
+        }
+
+        const standardNetPrice = tuCalc.standardNetPrice;
+        const previewBeforeAppraisal = tuCalc.tradeUpNetPrice;
 
         return `
           <section class="promotion-price-card" style="border-color: rgba(16, 185, 129, 0.4);">
