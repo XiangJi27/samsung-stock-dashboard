@@ -46,6 +46,7 @@ async function verifyPromotionDatabase() {
 
   const EXPECTED_RPCS = [
     'create_promotion_draft_batch',
+    'reject_promotion_campaign',
     'activate_promotion_campaign',
     'rollback_promotion_campaign'
   ];

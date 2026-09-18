@@ -416,12 +416,32 @@
 
           const pnRaw = colMap['pn'] !== undefined ? String(row[colMap['pn']] || '').trim() : '';
           let modelRaw = colMap['model'] !== undefined ? String(row[colMap['model']] || '').trim() : '';
-          const capacityRaw = colMap['capacity'] !== undefined ? String(row[colMap['capacity']] || '').trim() : '';
+          let capacityRaw = colMap['capacity'] !== undefined ? String(row[colMap['capacity']] || '').trim() : '';
+
+          let promotionDateText = null;
+          let promotionConditions = [];
 
           if (modelRaw) {
             currentModel = modelRaw;
           } else if (currentModel && (capacityRaw || (colMap['rrp'] !== undefined && row[colMap['rrp']] !== undefined && row[colMap['rrp']] !== null && row[colMap['rrp']] !== ''))) {
             modelRaw = currentModel;
+          }
+
+          // Robust Heading Parser: Strip promotion date range noise, separate RAM/capacity and conditions
+          if (modelRaw && window.PromotionCalculator && typeof window.PromotionCalculator.parsePromotionProductHeading === 'function') {
+            const parsedHeading = window.PromotionCalculator.parsePromotionProductHeading(modelRaw);
+            if (parsedHeading && parsedHeading.parsingStatus === 'PARSED') {
+              if (parsedHeading.model) modelRaw = parsedHeading.model;
+              if (!capacityRaw && (parsedHeading.capacity || parsedHeading.memory)) {
+                capacityRaw = parsedHeading.capacity || parsedHeading.memory;
+              }
+              if (parsedHeading.promotionDateText) {
+                promotionDateText = parsedHeading.promotionDateText;
+              }
+              if (parsedHeading.conditions && parsedHeading.conditions.length > 0) {
+                promotionConditions = parsedHeading.conditions;
+              }
+            }
           }
 
           if (!pnRaw && !modelRaw && !hasFormulaError) continue;
@@ -539,39 +559,28 @@
               }
 
               const sm = (s.model || '').toLowerCase();
-              const smNoSpace = sm.replace(/\s+/g, '');
               const scolor = (s.color || '').toLowerCase();
 
-              // 3. Model Family Hierarchy Matching
-              // Distinguish Ultra vs +/Plus vs Standard Base
-              if (cleanM.includes('ultra') && !sm.includes('ultra')) return;
-              if ((cleanM.includes('+') || cleanM.includes('plus')) && (!sm.includes('+') && !sm.includes('plus'))) return;
-              if (!cleanM.includes('ultra') && !cleanM.includes('+') && !cleanM.includes('plus')) {
-                if (sm.includes('ultra') || sm.includes('+') || sm.includes('plus')) return;
+              // 3 & 4. 4-Tier Semantic Gate Verification (Canonical Model Family & Exact Capacity)
+              if (window.PromotionCalculator && typeof window.PromotionCalculator.validatePromotionTarget === 'function') {
+                const semCheck = window.PromotionCalculator.validatePromotionTarget(
+                  { model: modelRaw, capacity: capacityRaw },
+                  { category: s.category || s.canonicalCategory || s.category1, description: s.model || s.description, capacity: s.capacity }
+                );
+                if (!semCheck.allowed) {
+                  return; // Fail-closed: Never pick candidate if model family or capacity mismatches!
+                }
+              } else {
+                // Fallback basic checks
+                if (cleanM.includes('ultra') && !sm.includes('ultra')) return;
+                if ((cleanM.includes('+') || cleanM.includes('plus')) && (!sm.includes('+') && !sm.includes('plus'))) return;
+                if (!cleanM.includes('ultra') && !cleanM.includes('+') && !cleanM.includes('plus')) {
+                  if (sm.includes('ultra') || sm.includes('+') || sm.includes('plus')) return;
+                }
+                const mBase = cleanM.replace(/ultra|\+|\s+|plus/g, '');
+                const smBase = sm.replace(/ultra|\+|\s+|plus/g, '');
+                if (mBase && !smBase.includes(mBase)) return;
               }
-
-              // Base model number matching (e.g. s26, s25, fold8, flip7)
-              const mBase = cleanM.replace(/ultra|\+|\s+|plus/g, '');
-              const smBase = sm.replace(/ultra|\+|\s+|plus/g, '');
-              if (mBase && !smBase.includes(mBase)) return;
-
-              // 4. Strict Capacity Matching (NEVER match substring 'tb' inside 'lightblue'!)
-              let capMatches = false;
-              if (capLower.includes('1tb') || capLower.includes('1 tb')) {
-                capMatches = /(?:^|\D)(?:12\/|16\/)?1\s*tb(?:\b|\D|$)/i.test(sm);
-              } else if (capLower.includes('512')) {
-                capMatches = /(?:^|\D)(?:12\/|16\/)?512\s*gb(?:\b|\D|$)/i.test(sm);
-              } else if (capLower.includes('256')) {
-                capMatches = /(?:^|\D)(?:8\/|12\/)?256\s*gb(?:\b|\D|$)/i.test(sm);
-              } else if (capLower.includes('128')) {
-                capMatches = /(?:^|\D)(?:4\/|6\/|8\/)?128\s*gb(?:\b|\D|$)/i.test(sm);
-              } else if (capLower.includes('64')) {
-                capMatches = /(?:^|\D)(?:3\/|4\/)?64\s*gb(?:\b|\D|$)/i.test(sm);
-              } else if (!capLower || capLower === '-') {
-                capMatches = true;
-              }
-
-              if (!capMatches) return;
 
               // 5. Explicit Color Filter (if specified in promotion row)
               if (explicitColorFilter && !scolor.includes(explicitColorFilter)) {
@@ -2992,8 +3001,91 @@
     }
   }
 
+  function normalizeColorToken(value) {
+    return String(value || "")
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g, "_");
+  }
+
+  function detectPromotionColorScope({
+    sourceColor,
+    sourceText
+  }) {
+    const explicitColor = String(sourceColor || "").trim();
+
+    if (explicitColor) {
+      return {
+        colorScope: "SPECIFIC_COLOR",
+        sourceColor: normalizeColorToken(explicitColor),
+        confidence: 100,
+        reason: "สีถูกระบุในช่องสีของไฟล์ต้นทาง"
+      };
+    }
+
+    const text = String(sourceText || "")
+      .trim()
+      .toUpperCase();
+
+    const allColorsPatterns = [
+      /ทุกสี/,
+      /ALL\s*COLORS?/,
+      /ANY\s*COLOR/
+    ];
+
+    if (
+      allColorsPatterns.some((pattern) =>
+        pattern.test(text)
+      )
+    ) {
+      return {
+        colorScope: "ALL_COLORS",
+        sourceColor: null,
+        confidence: 100,
+        reason: "ไฟล์ระบุว่าโปรโมชั่นใช้ได้ทุกสี"
+      };
+    }
+
+    const ambiguousPatterns = [
+      /สีที่ร่วมรายการ/,
+      /เฉพาะสีที่กำหนด/,
+      /บางสีเท่านั้น/,
+      /ยกเว้นบางสี/,
+      /สีที่กำหนด/
+    ];
+
+    if (
+      ambiguousPatterns.some((pattern) =>
+        pattern.test(text)
+      )
+    ) {
+      return {
+        colorScope: "REVIEW_REQUIRED",
+        sourceColor: null,
+        confidence: 60,
+        reason: "ไฟล์ระบุข้อจำกัดด้านสี แต่ไม่พบชื่อสีที่ชัดเจน"
+      };
+    }
+
+    /*
+     * ถ้าแถวต้นทางไม่มีคอลัมน์สีและไม่มีข้อความจำกัดสี
+     * ให้ถือว่าโปรโมชั่นระดับรุ่น/ความจุใช้กับทุกสี
+     */
+    return {
+      colorScope: "ALL_COLORS",
+      sourceColor: null,
+      confidence: 95,
+      reason:
+        "ไฟล์ไม่ได้ระบุสี จึงใช้กับทุกสีของรุ่นและความจุเดียวกัน"
+    };
+  }
+
+  window.normalizeColorToken = normalizeColorToken;
+  window.detectPromotionColorScope = detectPromotionColorScope;
   window.PromotionImportController = new PromotionImportController();
   window.PromoStorageAdapter = PromoStorageAdapter;
+  window.PromoStorageAdapter.normalizeColorToken = normalizeColorToken;
+  window.PromoStorageAdapter.detectPromotionColorScope = detectPromotionColorScope;
 
   document.addEventListener('DOMContentLoaded', () => {
     window.PromotionImportController.init();

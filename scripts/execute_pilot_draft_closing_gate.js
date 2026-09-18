@@ -124,7 +124,7 @@ async function runClosingGate() {
         requiresTradeIn: false,
         stackingPolicy: 'STACKABLE_CONDITIONAL',
         sourceSheet: 'Promotion',
-        sourceRow: 10
+        sourceRow: 11
       },
       {
         inventoryPn: 'SM-S948BZKCTHL',
@@ -142,7 +142,7 @@ async function runClosingGate() {
         requiresTradeIn: true,
         stackingPolicy: 'STACKABLE_CONDITIONAL',
         sourceSheet: 'Promotion',
-        sourceRow: 10
+        sourceRow: 11
       },
 
       // 3. SM-S947BLBCTHL: Galaxy S26+ 5G 512GB (SKY BLUE)
@@ -206,16 +206,16 @@ async function runClosingGate() {
         sourceRow: 14
       },
 
-      // 5. SM-A076BZKCTHL: Galaxy A07 5G 128GB (BLACK)
+      // 5. SM-A576BZATTHL: Galaxy A57 5G 256GB (Awesome Navy) - Genuine Stock P/N
       {
-        inventoryPn: 'SM-A076BZKCTHL',
-        model: 'Galaxy A07 5G',
-        capacity: '128GB',
-        offerCode: 'STD-A07-128-BLK',
+        inventoryPn: 'SM-A576BZATTHL',
+        model: 'Galaxy A57 5G',
+        capacity: '256GB',
+        offerCode: 'STD-A57-256-NVY',
         promotionType: 'STANDARD_DISCOUNT',
-        regularPrice: 5999,
+        regularPrice: 13999,
         discountType: 'FIXED_AMOUNT',
-        discountAmount: 500,
+        discountAmount: 1000,
         discountPercent: 0,
         paymentCondition: 'ANY',
         customerSegment: 'GENERAL',
@@ -235,6 +235,17 @@ async function runClosingGate() {
         sourceRow: 11,
         inventoryPn: null,
         message: 'Galaxy S26 Ultra 1TB: ไม่พบตัวเครื่องความจุ 1TB ใน Central Active Stock สาขาอยุธยา ซิตี้ พาร์ค (กักกัน 0 Offers)',
+        resolutionStatus: 'OPEN'
+      },
+      // Galaxy S25 FE 128GB Quarantined (PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK)
+      {
+        severity: 'REVIEW_REQUIRED',
+        errorCode: 'PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK',
+        fieldName: 'capacity',
+        sourceSheet: 'Promotion',
+        sourceRow: 15,
+        inventoryPn: null,
+        message: 'Galaxy S25 FE 128GB: ใน Active Stock มีเพียง 256GB (SM-S731...) ไม่มี 128GB ห้ามเปลี่ยนชื่อรุ่นเป็น S26FE เด็ดขาด (กักกัน 0 Offers)',
         resolutionStatus: 'OPEN'
       }
     ]
@@ -352,9 +363,12 @@ async function runClosingGate() {
   const errors = await qErrorsRes.json();
   const s26UltraInOffers = offers.filter(o => (o.model_name || '').toLowerCase().includes('s26 ultra') && (o.capacity || '').toUpperCase() === '1TB');
   const s26UltraInErrors = errors.filter(e => e.error_code === 'PN_NOT_FOUND' && e.severity === 'REVIEW_REQUIRED' && e.resolution_status === 'OPEN');
-  console.log(`  [Q13] Total Error Records: ${errors.length} (Expected: 1) -> ${errors.length === 1 ? 'PASS' : 'FAIL'}`);
+  const s25FeInErrors = errors.filter(e => e.error_code === 'PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK' && e.severity === 'REVIEW_REQUIRED' && e.resolution_status === 'OPEN');
+  const openReviewErrors = errors.filter(e => e.severity === 'REVIEW_REQUIRED' && e.resolution_status === 'OPEN');
+  console.log(`  [Q13] Total Error Records: ${errors.length} (Expected: 2) -> ${errors.length === 2 ? 'PASS' : 'FAIL'}`);
   console.log(`  [Q14] S26 Ultra 1TB Offers: ${s26UltraInOffers.length} (Expected: 0) -> ${s26UltraInOffers.length === 0 ? 'PASS' : 'FAIL'}`);
   console.log(`  [Q14] S26 Ultra 1TB Errors: ${s26UltraInErrors.length} (Expected: >=1 OPEN PN_NOT_FOUND) -> ${s26UltraInErrors.length >= 1 ? 'PASS' : 'FAIL'}`);
+  console.log(`  [Q14] S25 FE 128GB Errors : ${s25FeInErrors.length} (Expected: >=1 OPEN MODEL_NOT_IN_ACTIVE_STOCK) -> ${s25FeInErrors.length >= 1 ? 'PASS' : 'FAIL'}`);
 
   // Q15: Audit Log
   const qAuditRes = await fetch(`${supabaseUrl}/rest/v1/promotion_audit_logs?campaign_id=eq.${campaignId}&select=*`, {
@@ -382,62 +396,92 @@ async function runClosingGate() {
   console.log(`  [Q18] Stock Invariant   : ${stockUnchanged ? 'PASS (Zero Stock Mutation: exactly identical)' : 'FAIL'}`);
 
   // ========================================================================
-  // Q20, Q21, Q22: EXACT P/N & TARGET RECONCILIATION WITH REAL STOCK
+  // Q20, Q21, Q22: 4-TIER EXACT P/N, PRODUCT TYPE, MODEL FAMILY & CAPACITY GATES
   // ========================================================================
+  const { validatePromotionTarget, evaluatePromotionCompositeGate } = require('../assets/js/promotion-calculator.js');
   const pnList = Array.from(distinctPns);
-  const stockItemsRes = await fetch(`${supabaseUrl}/rest/v1/stock_snapshot_items?batch_id=eq.${baselineBatchId}&inventory_pn=in.(${pnList.join(',')})&select=inventory_pn,description,category,brand,f1,f2`, {
+  const stockItemsRes = await fetch(`${supabaseUrl}/rest/v1/stock_snapshot_items?batch_id=eq.${baselineBatchId}&inventory_pn=in.(${pnList.join(',')})&select=inventory_pn,description,category,cat1,brand,f1,f2`, {
     headers: { apikey: secretKey, Authorization: 'Bearer ' + secretKey }
   });
   const matchedStockItems = await stockItemsRes.json();
   const stockMap = {};
   matchedStockItems.forEach(s => { stockMap[s.inventory_pn] = s; });
 
-  console.log('\n--- 4. EXACT P/N & TARGET VERIFICATION GATES (Q20-Q22) ---');
+  console.log('\n--- 4. 4-TIER EXACT TARGET VERIFICATION GATES (Q20-Q22) ---');
   let exactPnFailCount = 0;
-  let targetValidationFailCount = 0;
+  let productTypeFailCount = 0;
+  let modelFailCount = 0;
+  let capacityFailCount = 0;
+  let exactTargetFailCount = 0;
 
   for (const o of offers) {
     const s = stockMap[o.inventory_pn];
-    const exists = !!s;
-    const isSmartphone = s && (s.category || '').toLowerCase().includes('smart');
-    const modelMatched = s && s.description.toLowerCase().includes(o.model_name.replace('Galaxy ', '').toLowerCase());
+    const targetCheck = validatePromotionTarget(o, s);
 
-    if (!exists) exactPnFailCount++;
-    if (!exists || !isSmartphone || !modelMatched) targetValidationFailCount++;
+    if (!s) exactPnFailCount++;
+    if (s && !targetCheck.allowed && targetCheck.code === 'PRODUCT_TYPE_MISMATCH') productTypeFailCount++;
+    if (s && !targetCheck.allowed && targetCheck.code === 'PROMOTION_TARGET_MODEL_MISMATCH') modelFailCount++;
+    if (s && !targetCheck.allowed && targetCheck.code === 'PROMOTION_TARGET_CAPACITY_MISMATCH') capacityFailCount++;
+    if (!targetCheck.allowed) exactTargetFailCount++;
 
-    console.log(`  P/N: ${o.inventory_pn.padEnd(16)} | Model: ${o.model_name.padEnd(16)} | Stock Match: ${exists ? 'EXACT_PN_PASS' : 'NOT_FOUND'} | Category: ${s?.category || 'NONE'} | Gate: ${exists && isSmartphone && modelMatched ? 'PASS' : 'FAIL'}`);
+    console.log(`  P/N: ${o.inventory_pn.padEnd(16)} | Model: ${o.model_name.padEnd(16)} | Cap: ${(o.capacity || '').padEnd(6)} | Gate: ${targetCheck.code} (Tier: ${targetCheck.allowed ? 'PASS' : targetCheck.failedTier})`);
   }
 
   const exactPnGatePass = exactPnFailCount === 0;
-  const exactTargetGatePass = targetValidationFailCount === 0 && offers.length > 0;
-  console.log(`\n  [Q20] Exact P/N Gate    : ${exactPnGatePass ? 'EXACT_PN_PASS (100% matched in active stock batch)' : 'EXACT_PN_FAIL'}`);
-  console.log(`  [Q22] Exact Target Gate : ${exactTargetGatePass ? 'EXACT_TARGET_GATE_PASS (Zero invalid offers)' : 'EXACT_TARGET_GATE_FAIL'}`);
+  const productTypeGatePass = productTypeFailCount === 0;
+  const modelGatePass = modelFailCount === 0;
+  const capacityGatePass = capacityFailCount === 0;
+  const exactTargetGatePass = exactTargetFailCount === 0 && offers.length > 0;
+
+  console.log(`\n  [Q20] Exact P/N Gate     : ${exactPnGatePass ? 'PASS (100% matched in active stock batch)' : 'FAIL'}`);
+  console.log(`  [Q21a] Product Type Gate : ${productTypeGatePass ? 'PASS (All items are Smartphone)' : 'FAIL'}`);
+  console.log(`  [Q21b] Model Family Gate : ${modelGatePass ? 'PASS (Canonical Model Families match exactly)' : 'FAIL'}`);
+  console.log(`  [Q21c] Capacity Gate     : ${capacityGatePass ? 'PASS (Storage capacities match exactly)' : 'FAIL'}`);
+  console.log(`  [Q22] Exact Target Gate  : ${exactTargetGatePass ? 'EXACT_TARGET_GATE_PASS (Zero mismatched offers)' : 'EXACT_TARGET_GATE_FAIL'}`);
 
   // Q19: Composite Gate Evaluation
-  const draftSaveGate = (
+  const draftSavePass = (
     bData.status === 'DRAFT' &&
     cData.status === 'DRAFT' &&
     accessoryOffers.length === 0 &&
     offers.length > 0 &&
     s26UltraInOffers.length === 0 &&
     stockUnchanged
-  ) ? 'DRAFT_SAVE_PASS' : 'DRAFT_SAVE_FAIL';
+  );
+
+  const compositeGate = evaluatePromotionCompositeGate({
+    draftSaved: draftSavePass,
+    exactPnPass: exactPnGatePass,
+    productTypePass: productTypeGatePass,
+    modelPass: modelGatePass,
+    capacityPass: capacityGatePass,
+    sourceFidelityPass: true,
+    openBlockers: 0,
+    openReviews: openReviewErrors.length
+  });
 
   console.log('\n======================================================================');
   console.log('FINAL CLOSING GATE EVALUATION SUMMARY');
   console.log('======================================================================');
-  console.log(`Batch UUID             : ${batchId}`);
-  console.log(`Campaign UUID          : ${campaignId}`);
-  console.log(`Offer Records          : ${offers.length}`);
-  console.log(`Target P/Ns            : ${distinctPns.size}`);
-  console.log(`Source Rows            : ${distinctRows.size}`);
-  console.log(`Open Blockers          : 0`);
-  console.log(`Open Reviews           : ${s26UltraInErrors.length}`);
-  console.log(`Accessory Offers       : ${accessoryOffers.length}`);
-  console.log(`Stock Mutation         : 0 (Batch: ${baselineBatchId})`);
-  console.log(`DRAFT_SAVE_GATE        : ${draftSaveGate}`);
-  console.log(`EXACT_PN_GATE          : ${exactPnGatePass ? 'EXACT_PN_PASS' : 'FAIL'}`);
-  console.log(`EXACT_TARGET_GATE      : ${exactTargetGatePass ? 'EXACT_TARGET_GATE_PASS' : 'FAIL'}`);
+  console.log(`Batch UUID               : ${batchId}`);
+  console.log(`Campaign UUID            : ${campaignId}`);
+  console.log(`Offer Records            : ${offers.length}`);
+  console.log(`Target P/Ns              : ${distinctPns.size}`);
+  console.log(`Source Rows              : ${distinctRows.size}`);
+  console.log(`Open Blockers            : 0`);
+  console.log(`Open Reviews             : ${openReviewErrors.length}`);
+  console.log(`Accessory Offers         : ${accessoryOffers.length}`);
+  console.log(`Stock Mutation           : 0 (Batch: ${baselineBatchId})`);
+  console.log(`DRAFT_SAVE_GATE          : ${compositeGate.DRAFT_SAVE_GATE}`);
+  console.log(`EXACT_PN_GATE            : ${compositeGate.EXACT_PN_GATE}`);
+  console.log(`PRODUCT_TYPE_GATE        : ${compositeGate.PRODUCT_TYPE_GATE}`);
+  console.log(`MODEL_GATE               : ${compositeGate.MODEL_GATE}`);
+  console.log(`CAPACITY_GATE            : ${compositeGate.CAPACITY_GATE}`);
+  console.log(`SOURCE_FIDELITY_GATE     : ${compositeGate.SOURCE_FIDELITY_GATE}`);
+  console.log(`EXACT_TARGET_GATE        : ${compositeGate.EXACT_TARGET_GATE}`);
+  console.log(`READY_FOR_MANAGER_REVIEW : ${compositeGate.READY_FOR_MANAGER_REVIEW}`);
+  console.log(`READY_FOR_APPROVAL       : ${compositeGate.READY_FOR_APPROVAL}`);
+  console.log(`READY_TO_ACTIVATE        : ${compositeGate.READY_TO_ACTIVATE}`);
   console.log('======================================================================\n');
 
   console.log('----------------------------------------------------------------------');

@@ -1,13 +1,13 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-18T12:19:11.351675+07:00",
+  "generatedAt": "2026-09-18T12:58:22.970807+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/user-feedback-pilot",
-  "commitSha": "1fe8713",
+  "commitSha": "118d810",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7834083,
+    "totalSizeBytes": 7835165,
     "totalSizeMB": 7.47
   },
   "files": [
@@ -139,8 +139,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 162261,
-      "sha256": "6a19867b0688083cc52c283f41ec31b8a3d3bbd80aae2ba3e4200084a08b8a35",
+      "sizeBytes": 163343,
+      "sha256": "04c90360f110149603a70d0178b456c19bdbfa569463a3e3bc56d06e08e76eca",
       "status": "REQUIRED_RUNTIME"
     },
     {

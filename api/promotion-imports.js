@@ -15,7 +15,7 @@
  */
 
 const PromotionKnowledgeBase = require('../assets/js/promotion-knowledge-base.js');
-const { validatePromotionOption } = require('../assets/js/promotion-calculator.js');
+const { validatePromotionOption, validatePromotionTarget, validateSourceFidelity } = require('../assets/js/promotion-calculator.js');
 
 module.exports = async function handler(req, res) {
   const requestId = `req_prm_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
@@ -94,8 +94,8 @@ module.exports = async function handler(req, res) {
     if (token === 'PILOT_STORE_LEADER_DEV_TOKEN' || token.startsWith('mock-') || token.startsWith('pilot-')) {
       caller = {
         id: '00000000-0000-0000-0000-000000000001',
-        email: 'store_leader@ayutthaya.samsung.com',
-        app_metadata: { role: 'STORE_LEADER' }
+        email: 'system_technical_test_actor@ayutthaya.samsung.com',
+        app_metadata: { role: 'STORE_LEADER', actor: 'SYSTEM_TECHNICAL_TEST_ACTOR' }
       };
       return true;
     }
@@ -261,11 +261,69 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'EMPTY_ITEMS', message: 'No promotion items or errors provided' });
     }
 
-    // 1. Sanitize offers payload according to database check constraints
-    const sanitizedOffers = incomingItems.map((item, idx) => {
+    // 1. Query Central Active Stock Snapshot for 4-Tier Semantic Verification
+    const activeBatchRes = await queryPostgrest(`active_stock_snapshot?branch_code=eq.${encodeURIComponent(branchCode)}&select=active_batch_id`);
+    const activeStockMap = new Map();
+    if (activeBatchRes.ok) {
+      const snaps = await activeBatchRes.json();
+      if (snaps.length > 0 && snaps[0].active_batch_id) {
+        const activeBatchId = snaps[0].active_batch_id;
+        const allPns = [...new Set(incomingItems.map(i => i.inventoryPn || i.pn).filter(Boolean))];
+        if (allPns.length > 0) {
+          const itemsRes = await queryPostgrest(`stock_snapshot_items?batch_id=eq.${encodeURIComponent(activeBatchId)}&inventory_pn=in.(${allPns.map(p => `"${encodeURIComponent(p)}"`).join(',')})&select=inventory_pn,description,category,cat1`);
+          if (itemsRes.ok) {
+            const stockRows = await itemsRes.json();
+            for (const sr of stockRows) {
+              activeStockMap.set(sr.inventory_pn, sr);
+            }
+          }
+        }
+      }
+    }
+
+    // 2. 4-Tier Verification Gate: Split incoming items into valid offers vs quarantined errors
+    const sanitizedOffers = [];
+    const quarantinedErrors = [...incomingErrors];
+
+    for (let idx = 0; idx < incomingItems.length; idx++) {
+      const item = incomingItems[idx];
       const pn = item.inventoryPn || item.pn;
-      const model = item.model || item.modelName || 'Samsung Device';
-      const capacity = item.capacity || '';
+      const stockItem = activeStockMap.get(pn);
+
+      // 1. Perform 4-Tier Semantic Gate Check against Active Stock
+      const targetCheck = validatePromotionTarget(item, stockItem);
+      if (!targetCheck.allowed) {
+        // QUARANTINE: Do NOT create offer record! Divert to validation errors for audit evidence.
+        quarantinedErrors.push({
+          sourceSheet: item.sourceSheet || 'Promotion',
+          sourceRow: item.sourceRow || idx + 1,
+          inventoryPn: pn || null,
+          severity: 'REVIEW_REQUIRED',
+          errorCode: targetCheck.code,
+          message: targetCheck.message || `Semantic validation failed: ${targetCheck.code}`
+        });
+        continue;
+      }
+
+      // 2. Perform Source Fidelity Gate Check (Excel Source Model == Offer Model == Stock Canonical Model)
+      const fidelityCheck = validateSourceFidelity(item, item, stockItem);
+      if (!fidelityCheck.allowed) {
+        quarantinedErrors.push({
+          sourceSheet: item.sourceSheet || 'Promotion',
+          sourceRow: item.sourceRow || idx + 1,
+          inventoryPn: pn || null,
+          severity: 'REVIEW_REQUIRED',
+          errorCode: fidelityCheck.code,
+          message: fidelityCheck.message || `Source fidelity validation failed: ${fidelityCheck.code}`
+        });
+        continue;
+      }
+
+      // Passed all tiers & source fidelity: Sanitize offer payload according to database check constraints
+      const sourceModelName = item.sourceModelName || item.model || item.modelName || 'Samsung Device';
+      const sourceCapacity = item.sourceCapacity || item.capacity || '';
+      const sourceText = item.sourceText || `Row ${item.sourceRow || idx + 1}: ${sourceModelName} (${sourceCapacity})`;
+
       let promoType = item.promotionType || (item.saleMode === 'TRADE_UP' ? 'TRADE_UP_CONDITIONAL' : 'STANDARD_DISCOUNT');
       let coupon = item.couponCode || item.coupon || null;
       let regPrice = Number(item.regularPrice || item.rrp || 1);
@@ -319,11 +377,17 @@ module.exports = async function handler(req, res) {
       if (promoType === 'SF_PLUS_FINANCING') payCond = 'SF_PLUS';
       if (promoType === 'NON_SF_PLUS_DISCOUNT') payCond = 'NON_SF_PLUS';
 
-      return {
+      sanitizedOffers.push({
         inventoryPn: pn,
-        model,
-        capacity,
-        offerCode: item.offerCode || `${promoType.slice(0, 3)}_${idx + 1}`,
+        model: sourceModelName,
+        capacity: sourceCapacity,
+        colorScope: item.colorScope || 'REVIEW_REQUIRED',
+        sourceColor: item.sourceColor ? String(item.sourceColor).trim() : null,
+        sourceModelName: item.sourceModelName || sourceModelName,
+        sourceCapacity: item.sourceCapacity || sourceCapacity,
+        sourceEvidenceHash: item.sourceEvidenceHash || null,
+        sourceEvidenceOrigin: item.sourceEvidenceOrigin || 'PARSER_CAPTURED',
+        offerCode: item.offerCode || `${promoType.slice(0, 3)}_${sanitizedOffers.length + 1}`,
         promotionType: promoType,
         couponCode: coupon,
         regularPrice: regPrice,
@@ -340,9 +404,11 @@ module.exports = async function handler(req, res) {
         blocksAllOtherPromotions: blocksAll,
         status: 'DRAFT',
         sourceSheet: item.sourceSheet || 'Promotion',
-        sourceRow: item.sourceRow || idx + 1
-      };
-    });
+        sourceRow: item.sourceRow || idx + 1,
+        sourceCellRange: item.sourceCellRange || null,
+        sourceText: sourceText
+      });
+    }
 
     const campaignObj = {
       campaignCode: body.campaign?.campaignCode || body.campaignCode || `SEP2026-RETAIL-MOBILE-${Date.now().toString(36).toUpperCase()}`,
@@ -351,7 +417,7 @@ module.exports = async function handler(req, res) {
       endAt: body.campaign?.endAt || body.endAt || new Date(Date.now() + 30 * 86400000).toISOString()
     };
 
-    // 2. Attempt Atomic Transaction via PostgreSQL RPC: create_promotion_draft_batch
+    // 3. Attempt Atomic Transaction via PostgreSQL RPC: create_promotion_draft_batch
     let rpcErrorDetail = null;
     try {
       const rpcRes = await queryPostgrest('rpc/create_promotion_draft_batch', {
@@ -364,7 +430,7 @@ module.exports = async function handler(req, res) {
             campaign: campaignObj,
             summary: body.summary || {},
             offers: sanitizedOffers,
-            validationErrors: incomingErrors
+            validationErrors: quarantinedErrors
           },
           p_user_id: caller?.id || null
         })

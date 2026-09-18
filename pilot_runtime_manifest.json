@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "1fe8713",
+  "packageBuiltFromCommit": "118d810",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-18T12:19:14.642879+07:00",
+  "builtAt": "2026-09-18T12:58:23.359387+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,8 +13,8 @@
   "totalFiles": 54,
   "summary": {
     "totalFiles": 54,
-    "totalSizeBytes": 9997846,
-    "totalSizeMB": 9.53
+    "totalSizeBytes": 10004642,
+    "totalSizeMB": 9.54
   },
   "files": [
     {
@@ -49,8 +49,8 @@
     },
     {
       "file": "vercel.json",
-      "sizeBytes": 527,
-      "sha256": "fc24bb677f9361d9178b566bebafa3dca6132d37a1f0f8815e67749061624b22",
+      "sizeBytes": 990,
+      "sha256": "15f1d0554da2bb834e7a5d1335f687a3b9625cd16f95f4504f96e082e52a38ce",
       "status": "PILOT_ROUTING_CONFIG",
       "note": "Root redirect to /pilot.html configured for Vercel Preview"
     },
@@ -146,8 +146,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 162261,
-      "sha256": "6a19867b0688083cc52c283f41ec31b8a3d3bbd80aae2ba3e4200084a08b8a35",
+      "sizeBytes": 163343,
+      "sha256": "04c90360f110149603a70d0178b456c19bdbfa569463a3e3bc56d06e08e76eca",
       "status": "BASELINE_CORE"
     },
     {
@@ -320,8 +320,8 @@
     },
     {
       "file": "assets/js/promotion-calculator.js",
-      "sizeBytes": 28387,
-      "sha256": "f26cabe1c0bb946206416884f2fb60acdbe6177c482f71a838431e17a43fef19",
+      "sizeBytes": 33638,
+      "sha256": "c2aaea7511e4c1d825692b5b38905c2c1fbcb0822caef9a354102aa3bbbaba45",
       "status": "PILOT_RUNTIME"
     },
     {

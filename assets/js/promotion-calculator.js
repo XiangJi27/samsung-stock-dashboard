@@ -348,6 +348,582 @@
     };
   }
 
+  const THAI_MONTH_PATTERN =
+    'มกราคม|กุมภาพันธ์|มีนาคม|เมษายน|พฤษภาคม|มิถุนายน|' +
+    'กรกฎาคม|สิงหาคม|กันยายน|ตุลาคม|พฤศจิกายน|ธันวาคม';
+
+  const CROSS_MONTH_DATE_RANGE_REGEX = new RegExp(
+    String.raw`(?:วันที่|ตั้งแต่วันที่|ระหว่างวันที่)?\s*` +
+    String.raw`(\d{1,2})\s*` +
+    String.raw`(${THAI_MONTH_PATTERN})\s*` +
+    String.raw`(?:-|–|—|ถึง)\s*` +
+    String.raw`(\d{1,2})\s*` +
+    String.raw`(${THAI_MONTH_PATTERN})` +
+    String.raw`(?:\s*(?:25\d{2}|20\d{2}))?`,
+    'iu'
+  );
+
+  const SAME_MONTH_DATE_RANGE_REGEX = new RegExp(
+    String.raw`(?:วันที่|ตั้งแต่วันที่|ระหว่างวันที่)?\s*` +
+    String.raw`(\d{1,2})\s*` +
+    String.raw`(?:-|–|—|ถึง)\s*` +
+    String.raw`(\d{1,2})\s*` +
+    String.raw`(${THAI_MONTH_PATTERN})` +
+    String.raw`(?:\s*(?:25\d{2}|20\d{2}))?`,
+    'iu'
+  );
+
+  const SINGLE_DATE_REGEX = new RegExp(
+    String.raw`(?:วันที่\s*)?` +
+    String.raw`(\d{1,2})\s*` +
+    String.raw`(${THAI_MONTH_PATTERN})` +
+    String.raw`(?:\s*(?:25\d{2}|20\d{2}))?`,
+    'iu'
+  );
+
+  const MEMORY_PATTERN =
+    /\(?\s*(\d{1,2})\s*[\/+]\s*(32|64|128|256|512|1)\s*(GB|TB)\s*\)?/iu;
+
+  const CAPACITY_ONLY_PATTERN =
+    /\b(?:32|64|128|256|512)\s*GB\b|\b(?:1|2)\s*TB\b/iu;
+
+  const PROMOTION_CONDITION_PATTERN =
+    /\b(?:Trade\s*Up\s*Only|Trade\s*Up|Studentcrd|SF\+|Non-SF\+)\b/giu;
+
+  function findPromotionDate(text) {
+    const crossMonth = text.match(CROSS_MONTH_DATE_RANGE_REGEX);
+    if (crossMonth) return { type: 'CROSS_MONTH_RANGE', match: crossMonth };
+
+    const sameMonth = text.match(SAME_MONTH_DATE_RANGE_REGEX);
+    if (sameMonth) return { type: 'SAME_MONTH_RANGE', match: sameMonth };
+
+    const singleDate = text.match(SINGLE_DATE_REGEX);
+    if (singleDate) return { type: 'SINGLE_DATE', match: singleDate };
+
+    return null;
+  }
+
+  function normalizeMemoryMatch(match) {
+    if (!match) return null;
+    const ram = Number(match[1]);
+    const storage = Number(match[2]);
+    const unit = match[3].toUpperCase();
+
+    if (unit === 'GB' && storage === 1) {
+      return { valid: false, code: 'INVALID_STORAGE_UNIT_VALUE' };
+    }
+    if (unit === 'TB' && storage !== 1) {
+      return { valid: false, code: 'UNSUPPORTED_TB_CAPACITY' };
+    }
+    return {
+      valid: true,
+      ram: `${ram}GB`,
+      capacity: `${storage}${unit}`,
+      memory: `${ram}/${storage}${unit}`
+    };
+  }
+
+  /**
+   * Robust Heading Parser: Strips Promotion Dates, RAM/Storage, Conditions
+   */
+  function parsePromotionProductHeading(rawValue) {
+    const originalText = String(rawValue || '')
+      .normalize('NFKC')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    let workingText = originalText;
+
+    const dateResult = findPromotionDate(workingText);
+    if (dateResult) {
+      workingText = workingText.replace(dateResult.match[0], ' ');
+    }
+
+    const memoryMatch = workingText.match(MEMORY_PATTERN);
+    let memory = null;
+    let ram = null;
+    let capacity = null;
+
+    if (memoryMatch) {
+      const normalized = normalizeMemoryMatch(memoryMatch);
+      if (normalized && normalized.valid) {
+        memory = normalized.memory;
+        ram = normalized.ram;
+        capacity = normalized.capacity;
+        workingText = workingText.replace(memoryMatch[0], ' ');
+      }
+    } else {
+      const capacityMatch = workingText.match(CAPACITY_ONLY_PATTERN);
+      if (capacityMatch) {
+        capacity = capacityMatch[0].replace(/\s+/g, '').toUpperCase();
+        workingText = workingText.replace(capacityMatch[0], ' ');
+      }
+    }
+
+    const conditions = [...workingText.matchAll(PROMOTION_CONDITION_PATTERN)].map(m => m[0]);
+    workingText = workingText.replace(PROMOTION_CONDITION_PATTERN, ' ');
+
+    let model = workingText
+      .replace(/\b(?:โปรโมชั่น|โปรโมชัน|promotion|promo)\b/giu, ' ')
+      .replace(/[()[\]]/g, ' ')
+      .replace(/^[\s|:,-]+/, '')
+      .replace(/[\s|:,-]+$/, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!model) {
+      return {
+        originalText,
+        model: null,
+        memory,
+        ram,
+        capacity,
+        conditions,
+        parsingStatus: 'REVIEW_REQUIRED',
+        errorCode: 'MODEL_NAME_NOT_FOUND'
+      };
+    }
+
+    if (findPromotionDate(model)) {
+      return {
+        originalText,
+        model,
+        memory,
+        ram,
+        capacity,
+        conditions,
+        parsingStatus: 'REVIEW_REQUIRED',
+        errorCode: 'MODEL_CONTAINS_PROMOTION_DATE_NOISE'
+      };
+    }
+
+    return {
+      originalText,
+      model,
+      memory,
+      ram,
+      capacity,
+      conditions,
+      promotionDateText: dateResult?.match?.[0]?.trim() || null,
+      promotionDateType: dateResult?.type || null,
+      parsingStatus: 'PARSED',
+      errorCode: null
+    };
+  }
+
+  /**
+   * Canonical Model Family Normalizer
+   * Evaluates rules in strict order: Ultra -> Plus -> FE -> Base
+   */
+  function normalizeSamsungModelFamily(value) {
+    const text = String(value || '')
+      .toUpperCase()
+      .replace(/\(TSE\)/g, ' ')
+      .replace(/SAMSUNG/g, ' ')
+      .replace(/GALAXY/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    const rules = [
+      [/\bS26\s*ULTRA\b/, 'S26_ULTRA'],
+      [/\bS26\s*(?:\+|\bPLUS\b)/, 'S26_PLUS'],
+      [/\bS26\s*FE\b|\bS26FE\b/, 'S26_FE'],
+      [/\bS26\b/, 'S26_BASE'],
+
+      [/\bS25\s*FE\b|\bS25FE\b/, 'S25_FE'],
+      [/\bS25\s*ULTRA\b/, 'S25_ULTRA'],
+      [/\bS25\s*(?:\+|\bPLUS\b)/, 'S25_PLUS'],
+      [/\bS25\b/, 'S25_BASE'],
+
+      [/\bS24\s*ULTRA\b/, 'S24_ULTRA'],
+      [/\bS24\s*(?:\+|\bPLUS\b)/, 'S24_PLUS'],
+      [/\bS24\s*FE\b|\bS24FE\b/, 'S24_FE'],
+      [/\bS24\b/, 'S24_BASE'],
+
+      [/\bA57\s*5G\b/, 'A57_5G'],
+      [/\bA57\b/, 'A57_5G'],
+
+      // Separate A07 LTE / 4G from A07 5G strictly
+      [/\bA07\s*(?:LTE|4G)\b/, 'A07_LTE'],
+      [/\bA07\s*5G\b/, 'A07_5G'],
+      [/\bA07\b/, 'A07_BASE'],
+
+      [/\bA17\s*5G\b/, 'A17_5G'],
+      [/\bA17\b/, 'A17_5G'],
+      [/\bA26\s*5G\b/, 'A26_5G'],
+      [/\bA26\b/, 'A26_5G'],
+      [/\bA36\s*5G\b/, 'A36_5G'],
+      [/\bA36\b/, 'A36_5G'],
+      [/\bA56\s*5G\b/, 'A56_5G'],
+      [/\bA56\b/, 'A56_5G'],
+
+      [/\bZ?\s*FOLD8\s*ULTRA\b/, 'FOLD8_ULTRA'],
+      [/\bZ?\s*FOLD8\b/, 'FOLD8'],
+      [/\bZ?\s*FLIP8\b/, 'FLIP8'],
+      [/\bZ?\s*FOLD7\b/, 'FOLD7'],
+      [/\bZ?\s*FLIP7\b/, 'FLIP7'],
+      [/\bZ?\s*FOLD6\b/, 'FOLD6'],
+      [/\bZ?\s*FLIP6\b/, 'FLIP6']
+    ];
+
+    for (const [pattern, family] of rules) {
+      if (pattern.test(text)) {
+        return family;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Capacity Normalizer
+   * Extracts canonical storage (32GB, 64GB, 128GB, 256GB, 512GB, 1TB, 2TB)
+   */
+  function normalizeCapacity(value) {
+    const text = String(value || '')
+      .toUpperCase()
+      .replace(/\s+/g, '');
+
+    const match = text.match(/(?:\d+\/)?(32GB|64GB|128GB|256GB|512GB|1TB|2TB)\b/);
+    return match ? match[1] : null;
+  }
+
+  /**
+   * 4-Tier Semantic Gate: Validate Promotion Target against Active Stock Item
+   * Tier 1: EXACT_PN_EXISTS
+   * Tier 2: PRODUCT_TYPE_MATCH
+   * Tier 3: MODEL_FAMILY_MATCH
+   * Tier 4: CAPACITY_MATCH
+   */
+  function validatePromotionTarget(promotion, stockItem) {
+    if (!stockItem) {
+      return {
+        allowed: false,
+        code: 'EXACT_PN_NOT_FOUND',
+        message: 'ไม่พบ P/N นี้ในสต็อก Active ปัจจุบัน',
+        gatePassed: false,
+        failedTier: 1
+      };
+    }
+
+    const stockCategory = String(
+      stockItem.category ||
+      stockItem.cat1 ||
+      stockItem.category1 ||
+      ''
+    ).toUpperCase();
+
+    if (!stockCategory.includes('SMART')) {
+      return {
+        allowed: false,
+        code: 'PRODUCT_TYPE_MISMATCH',
+        message: 'สินค้าในสต็อกไม่ใช่ประเภท Smartphone',
+        gatePassed: false,
+        failedTier: 2
+      };
+    }
+
+    const promotionModel = normalizeSamsungModelFamily(promotion.model || promotion.modelName || promotion.model_name);
+    const stockModel = normalizeSamsungModelFamily(stockItem.description || stockItem.model);
+
+    if (!promotionModel || !stockModel || promotionModel !== stockModel) {
+      return {
+        allowed: false,
+        code: 'PROMOTION_TARGET_MODEL_MISMATCH',
+        expectedModel: promotionModel,
+        actualModel: stockModel,
+        message: `รุ่นสินค้าไม่ตรงกัน: โปรโมชั่นคือ ${promotionModel || 'UNKNOWN'} แต่สต็อกคือ ${stockModel || 'UNKNOWN'}`,
+        gatePassed: false,
+        failedTier: 3
+      };
+    }
+
+    const promotionCapacity = normalizeCapacity(promotion.capacity);
+    const stockCapacity = normalizeCapacity(stockItem.description || stockItem.capacity);
+
+    if (!promotionCapacity || !stockCapacity || promotionCapacity !== stockCapacity) {
+      return {
+        allowed: false,
+        code: 'PROMOTION_TARGET_CAPACITY_MISMATCH',
+        expectedCapacity: promotionCapacity,
+        actualCapacity: stockCapacity,
+        message: `ความจุไม่ตรงกัน: โปรโมชั่นระบุ ${promotionCapacity || 'UNKNOWN'} แต่สต็อกคือ ${stockCapacity || 'UNKNOWN'}`,
+        gatePassed: false,
+        failedTier: 4
+      };
+    }
+
+    return {
+      allowed: true,
+      code: 'EXACT_TARGET_PASS',
+      modelFamily: promotionModel,
+      capacity: promotionCapacity,
+      gatePassed: true
+    };
+  }
+
+  /**
+   * Source Fidelity Gate: Verifies that Offer strictly matches Excel Source without synthetic renaming
+   * Excel Source Model == Offer Model == Stock Canonical Model Family
+   * Excel Source Capacity == Offer Capacity == Stock Canonical Capacity
+   */
+  function validateSourceFidelity(excelSource, offerItem, stockItem) {
+    const srcModel = String(excelSource?.model || excelSource?.sourceModelName || offerItem?.sourceModelName || offerItem?.model || '').trim();
+    const offerModel = String(offerItem?.model || offerItem?.modelName || '').trim();
+    const srcCap = normalizeCapacity(excelSource?.capacity || excelSource?.sourceCapacity || offerItem?.sourceCapacity || offerItem?.capacity);
+    const offerCap = normalizeCapacity(offerItem?.capacity);
+
+    const srcFamily = normalizeSamsungModelFamily(srcModel);
+    const offerFamily = normalizeSamsungModelFamily(offerModel);
+    const stockFamily = stockItem ? normalizeSamsungModelFamily(stockItem.description || stockItem.model) : null;
+    const stockCap = stockItem ? normalizeCapacity(stockItem.description || stockItem.capacity) : null;
+
+    if (!srcFamily || !offerFamily || srcFamily !== offerFamily) {
+      return {
+        allowed: false,
+        code: 'SOURCE_MODEL_MUTATION_DETECTED',
+        sourceModel: srcModel,
+        offerModel: offerModel,
+        message: `รุ่นในข้อเสนอไม่ตรงกับไฟล์ Excel ต้นทาง: Excel ระบุ [${srcModel}] แต่ข้อเสนอระบุ [${offerModel}] (ห้ามเปลี่ยนชื่อรุ่นอัตโนมัติ)`
+      };
+    }
+
+    if (!srcCap || !offerCap || srcCap !== offerCap) {
+      return {
+        allowed: false,
+        code: 'SOURCE_CAPACITY_MUTATION_DETECTED',
+        sourceCapacity: srcCap,
+        offerCapacity: offerCap,
+        message: `ความจุในข้อเสนอไม่ตรงกับไฟล์ Excel ต้นทาง: Excel ระบุ [${srcCap}] แต่ข้อเสนอระบุ [${offerCap}]`
+      };
+    }
+
+    if (!stockFamily || srcFamily !== stockFamily) {
+      return {
+        allowed: false,
+        code: 'PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK',
+        sourceModel: srcModel,
+        actualStockModel: stockFamily || 'NOT_FOUND',
+        message: `รุ่นสินค้า [${srcModel}] ไม่มีอยู่ใน Active Stock ของสาขา (ไม่อนุญาตให้สร้าง Offer เด็ดขาด)`
+      };
+    }
+
+    if (!stockCap || srcCap !== stockCap) {
+      return {
+        allowed: false,
+        code: 'PROMOTION_TARGET_CAPACITY_NOT_IN_ACTIVE_STOCK',
+        sourceCapacity: srcCap,
+        actualStockCapacity: stockCap || 'NOT_FOUND',
+        message: `ความจุ [${srcCap}] ของรุ่น [${srcModel}] ไม่มีอยู่ใน Active Stock ของสาขา`
+      };
+    }
+
+    return {
+      allowed: true,
+      code: 'SOURCE_FIDELITY_PASS',
+      canonicalFamily: srcFamily,
+      canonicalCapacity: srcCap
+    };
+  }
+
+  /**
+   * Normalize color string for tokenization (e.g. "Awesome Navy" -> "AWESOME_NAVY")
+   */
+  function normalizeColorToken(value) {
+    return String(value || "")
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g, "_");
+  }
+
+  /**
+   * Normalize color string for fuzzy substring matching (e.g. "Sky-Blue " -> "SKYBLUE")
+   */
+  function normalizeColor(value) {
+    return String(value || "")
+      .trim()
+      .toUpperCase()
+      .replace(/[\s_-]+/g, "");
+  }
+
+  /**
+   * Detect Promotion Color Scope from source row data
+   * - SPECIFIC_COLOR: Explicit color given in source file
+   * - ALL_COLORS: File states all colors, or no color column/restriction is specified
+   * - REVIEW_REQUIRED: Ambiguous text regarding colors without specific color name
+   */
+  function detectPromotionColorScope({ sourceColor, sourceText }) {
+    const explicitColor = String(sourceColor || "").trim();
+
+    if (explicitColor) {
+      return {
+        colorScope: "SPECIFIC_COLOR",
+        sourceColor: normalizeColorToken(explicitColor),
+        confidence: 100,
+        reason: "สีถูกระบุในช่องสีของไฟล์ต้นทาง"
+      };
+    }
+
+    const text = String(sourceText || "").trim().toUpperCase();
+
+    const allColorsPatterns = [
+      /ทุกสี/,
+      /ALL\s*COLORS?/,
+      /ANY\s*COLOR/
+    ];
+
+    if (allColorsPatterns.some((pattern) => pattern.test(text))) {
+      return {
+        colorScope: "ALL_COLORS",
+        sourceColor: null,
+        confidence: 100,
+        reason: "ไฟล์ระบุว่าโปรโมชั่นใช้ได้ทุกสี"
+      };
+    }
+
+    const ambiguousPatterns = [
+      /สีที่ร่วมรายการ/,
+      /เฉพาะสีที่กำหนด/,
+      /บางสีเท่านั้น/,
+      /ยกเว้นบางสี/,
+      /สีที่กำหนด/
+    ];
+
+    if (ambiguousPatterns.some((pattern) => pattern.test(text))) {
+      return {
+        colorScope: "REVIEW_REQUIRED",
+        sourceColor: null,
+        confidence: 60,
+        reason: "ไฟล์ระบุข้อจำกัดด้านสี แต่ไม่พบชื่อสีที่ชัดเจน"
+      };
+    }
+
+    /*
+     * ถ้าแถวต้นทางไม่มีคอลัมน์สีและไม่มีข้อความจำกัดสี
+     * ให้ถือว่าโปรโมชั่นระดับรุ่น/ความจุใช้กับทุกสี
+     */
+    return {
+      colorScope: "ALL_COLORS",
+      sourceColor: null,
+      confidence: 95,
+      reason: "ไฟล์ไม่ได้ระบุสี จึงใช้กับทุกสีของรุ่นและความจุเดียวกัน"
+    };
+  }
+
+  /**
+   * Tier 5: Validate Promotion Color Scope
+   * Standard 3 Scopes:
+   * - ALL_COLORS: Any color candidate matching model & capacity is allowed
+   * - SPECIFIC_COLOR: Candidate stockItem color/description must match sourceColor
+   * - REVIEW_REQUIRED: Ambiguous scope, candidate quarantined
+   */
+  function validateColorScope(promotion, stockItem) {
+    if (!stockItem) {
+      return {
+        allowed: false,
+        code: 'STOCK_ITEM_MISSING'
+      };
+    }
+
+    const scope = String(
+      promotion?.colorScope || "REVIEW_REQUIRED"
+    ).toUpperCase();
+
+    if (scope === "ALL_COLORS") {
+      return {
+        allowed: true,
+        code: "COLOR_SCOPE_ALL_COLORS",
+        expectedColor: null,
+        actualColor: stockItem?.color || null
+      };
+    }
+
+    if (scope === "SPECIFIC_COLOR") {
+      const expectedColor = normalizeColor(
+        promotion?.sourceColor
+      );
+
+      const actualColor = normalizeColor(
+        stockItem?.color ||
+        stockItem?.description
+      );
+
+      if (!expectedColor) {
+        return {
+          allowed: false,
+          code: "SOURCE_COLOR_REQUIRED"
+        };
+      }
+
+      if (!actualColor.includes(expectedColor)) {
+        return {
+          allowed: false,
+          code: "COLOR_MISMATCH",
+          expectedColor: promotion?.sourceColor,
+          actualColor: stockItem?.color || null
+        };
+      }
+
+      return {
+        allowed: true,
+        code: "SPECIFIC_COLOR_MATCH"
+      };
+    }
+
+    return {
+      allowed: false,
+      code: "COLOR_SCOPE_REVIEW_REQUIRED"
+    };
+  }
+
+  /**
+   * Evaluate Composite Promotion Verification Gate
+   * Decouples:
+   * 1. READY_FOR_MANAGER_REVIEW: Draft is saved and ready for human inspection
+   * 2. READY_FOR_APPROVAL: All 5 tiers + source fidelity + parser evidence pass AND openBlockers === 0 AND openReviews === 0
+   * 3. READY_TO_ACTIVATE: Approved by manager and expectedPreviousCampaignId matches
+   */
+  function evaluatePromotionCompositeGate({
+    draftSaved = false,
+    hasSourceEvidence = true,
+    sourceEvidenceFromParser = false,
+    exactPnPass = false,
+    productTypePass = false,
+    modelPass = false,
+    capacityPass = false,
+    colorScopePass = true,
+    sourceFidelityPass = false,
+    openBlockers = 0,
+    openReviews = 0,
+    campaignStatus = 'DRAFT',
+    expectedPreviousMatched = true
+  }) {
+    const exactTargetPass = exactPnPass && productTypePass && modelPass && capacityPass && colorScopePass;
+    const sourceEvidencePass = hasSourceEvidence && sourceEvidenceFromParser;
+    const readyForManagerReview = draftSaved && hasSourceEvidence;
+    const readyForApproval = draftSaved && exactTargetPass && sourceFidelityPass && sourceEvidencePass && openBlockers === 0 && openReviews === 0;
+    const readyToActivate = readyForApproval && campaignStatus === 'APPROVED' && expectedPreviousMatched;
+
+    return {
+      DRAFT_SAVE_GATE: draftSaved ? 'PASS' : 'FAIL',
+      EXACT_PN_GATE: exactPnPass ? 'PASS' : 'FAIL',
+      PRODUCT_TYPE_GATE: productTypePass ? 'PASS' : 'FAIL',
+      MODEL_GATE: modelPass ? 'PASS' : 'FAIL',
+      CAPACITY_GATE: capacityPass ? 'PASS' : 'FAIL',
+      COLOR_SCOPE_GATE: colorScopePass ? 'PASS' : 'FAIL',
+      SOURCE_FIDELITY_GATE: sourceFidelityPass ? 'PASS' : 'FAIL',
+      SOURCE_EVIDENCE_GATE: sourceEvidencePass ? 'PARSER_VERIFIED' : (hasSourceEvidence ? 'MANUALLY_BACKFILLED' : 'MISSING'),
+      EXACT_TARGET_GATE: exactTargetPass ? 'EXACT_TARGET_GATE_PASS' : 'EXACT_TARGET_GATE_FAIL',
+      OPEN_BLOCKERS: openBlockers,
+      OPEN_REVIEWS: openReviews,
+      READY_FOR_MANAGER_REVIEW: readyForManagerReview ? 'YES' : 'NO',
+      READY_FOR_APPROVAL: readyForApproval ? 'YES' : 'NO',
+      READY_TO_ACTIVATE: readyToActivate ? 'YES' : 'NO',
+      databaseAction: exactTargetPass && sourceFidelityPass ? 'PERMIT' : 'QUARANTINE'
+    };
+  }
+
   // Export for browser & node
   const api = {
     calculatePromotionPrices,
@@ -355,7 +931,17 @@
     calculateA57Promotion,
     calculateStudentPromotion,
     validatePromotionGates,
-    validatePromotionOption
+    validatePromotionOption,
+    normalizeSamsungModelFamily,
+    normalizeCapacity,
+    normalizeColorToken,
+    normalizeColor,
+    detectPromotionColorScope,
+    parsePromotionProductHeading,
+    validatePromotionTarget,
+    validateSourceFidelity,
+    validateColorScope,
+    evaluatePromotionCompositeGate
   };
 
   if (typeof module !== 'undefined' && module.exports) {
