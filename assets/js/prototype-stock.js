@@ -1796,8 +1796,9 @@
         return "SMARTWATCH";
       }
 
-      // 5. Accessories (Cat1 = MOBILE AND COMPUTER ACCESSORY or Accessory prefixes)
+      // 5. Accessories (Cat1 = MOBILE AND COMPUTER ACCESSORY, Accessory prefixes, or item.productCodeType === 'ACCESSORY')
       if (c1 === "MOBILE AND COMPUTER ACCESSORY" || c1 === "MOBILE_AND_COMPUTER_ACCESSORY" || c1 === "ACCESSORY" || c1 === "ACCESSORIES" || c1 === "ADAPTER" ||
+          item.productCodeType === "ACCESSORY" || item.category === "Accessory" ||
           pn.startsWith("EP-") || pn.startsWith("EF-") || pn.startsWith("GP-") || pn.startsWith("ET-") || pn.startsWith("EJ-") || pn.startsWith("EE-")) {
         return "ACCESSORY";
       }
@@ -1826,7 +1827,7 @@
       }
 
       const rawCat = normalizeCategory(item.category);
-      if (CATEGORY_ALIASES[rawCat] && CATEGORY_ALIASES[rawCat] !== "SMARTPHONE") {
+      if (CATEGORY_ALIASES[rawCat]) {
         return CATEGORY_ALIASES[rawCat];
       }
 
@@ -2249,7 +2250,17 @@
 
       // Check if srp is missing in currentDrawerItem, lookup by pn or model from any rawItems having srp > 0
       if (!currentDrawerItem.srp || Number(currentDrawerItem.srp) <= 0) {
-        const itemWithPrice = rawItems.find(x => ((targetPn && x.pn === targetPn) || (modelTitle && x.model === modelTitle)) && Number(x.srp) > 0);
+        const cleanTargetModel = (modelTitle || "").toLowerCase().replace(/\s+/g, "");
+        const itemWithPrice = rawItems.find(x => {
+          if (!x || Number(x.srp) <= 0) return false;
+          if (targetPn && x.pn === targetPn) return true;
+          if (modelTitle && x.model === modelTitle) return true;
+          const cleanItemModel = (x.model || "").toLowerCase().replace(/\s+/g, "");
+          if (cleanTargetModel && cleanItemModel.includes(cleanTargetModel)) return true;
+          if (cleanTargetModel && cleanTargetModel.includes("s26fe") && cleanItemModel.includes("s26fe")) return true;
+          if (cleanTargetModel && cleanTargetModel.includes("s26ultra") && cleanItemModel.includes("s26ultra")) return true;
+          return false;
+        });
         if (itemWithPrice && Number(itemWithPrice.srp) > 0) {
           currentDrawerItem.srp = Number(itemWithPrice.srp);
         }
@@ -3061,20 +3072,40 @@
       const isS26Ultra = modelName.includes("S26") && (modelName.includes("Ultra") || modelName.includes("ULTRA"));
       const isS26Ultra1TB = isS26Ultra && (capacity.includes("1TB") || modelName.includes("1TB"));
 
-      // Technical details snippet helper
+      // Technical details snippet helper with explicit Data Provenance Badge
       function renderTechDetails(modeLabel) {
+        const isLiveCloud = (typeof window !== "undefined" && window.ACTIVE_PROMOTION_CAMPAIGN_SOURCE === "CLOUD_LIVE");
+        const sourceBadgeText = isLiveCloud ? "Active Cloud Campaign" : "ข้อมูลทดสอบ (ห้ามใช้เสนอขาย)";
+        const sourceBadgeClass = isLiveCloud ? "source-live" : "source-test";
+        const sourceBadgeColor = isLiveCloud ? "#10b981" : "#f59e0b";
+        const sourceBadgeBg = isLiveCloud ? "rgba(16, 185, 129, 0.12)" : "rgba(245, 158, 11, 0.12)";
+        const sourceBadgeBorder = isLiveCloud ? "rgba(16, 185, 129, 0.35)" : "rgba(245, 158, 11, 0.35)";
+
         return `
-          <details class="promo-technical-details" style="margin-top: 16px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px; background: rgba(255,255,255,0.01);">
-            <summary style="cursor: pointer; font-size: 0.82rem; color: #94a3b8; font-weight: 600; outline: none;">
-              ▸ ดูรายละเอียดโปรโมชั่นและหลักฐาน
+          <div class="promo-source-provenance-bar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 7px 12px; background: ${sourceBadgeBg}; border: 1px dashed ${sourceBadgeBorder}; border-radius: 8px; font-size: 0.76rem;">
+            <span style="color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+              <span>🏷️</span>
+              <span>แหล่งข้อมูลโปรโมชั่น:</span>
+            </span>
+            <strong style="color: ${sourceBadgeColor}; font-weight: 700;">${sourceBadgeText}</strong>
+          </div>
+
+          <details class="promo-technical-details" style="margin-top: 10px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px; background: rgba(255,255,255,0.01);">
+            <summary style="cursor: pointer; font-size: 0.8rem; color: #94a3b8; font-weight: 600; outline: none;">
+              ▸ ดูรายละเอียดโปรโมชั่นและหลักฐานแคมเปญ
             </summary>
-            <div style="margin-top: 10px; font-size: 0.78rem; line-height: 1.6; color: #cbd5e1; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px;">
+            <div style="margin-top: 10px; font-size: 0.76rem; line-height: 1.6; color: #cbd5e1; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px;">
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px;">
                 <div><span style="color: var(--text-muted);">Exact P/N:</span> <strong style="font-family: monospace; color: #fff;">${item.pn || 'Model Scope'}</strong></div>
                 <div><span style="color: var(--text-muted);">หมวดการขาย:</span> <strong style="color: var(--cyan);">${modeLabel}</strong></div>
                 <div><span style="color: var(--text-muted);">ช่วงเวลาโปรโมชั่น:</span> <strong style="color: #fff;">7 - 13 กันยายน 2569</strong></div>
-                <div><span style="color: var(--text-muted);">แหล่งอ้างอิง:</span> <strong style="color: #34d399;">Verified Promotion Master</strong></div>
+                <div><span style="color: var(--text-muted);">แหล่งอ้างอิง:</span> <strong style="color: ${sourceBadgeColor};">${isLiveCloud ? 'Active Cloud Campaign' : 'Static Fixture (Approved Pilot)'}</strong></div>
               </div>
+              ${!isLiveCloud ? `
+                <div style="margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.04); font-size: 0.72rem; color: #f59e0b;">
+                  ⚠️ <em>ข้อมูลนี้เพื่อการตรวจรับระบบ (Internal Pilot) หน้าร้านจริงยังคง HOLD จนกว่าจะตรวจสอบตัวเลขครบถ้วน</em>
+                </div>
+              ` : ''}
             </div>
           </details>
         `;
@@ -3208,7 +3239,7 @@
             </header>
 
             <div class="price-row">
-              <span class="price-row__label">ราคาปกติ</span>
+              <span class="price-row__label">ราคาปกติ (RRP)</span>
               <strong class="price-row__value" style="${sfDisc > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
                 ฿${rrp.toLocaleString('th-TH')}
               </strong>
@@ -3216,29 +3247,42 @@
 
             <div class="price-row price-row--discount">
               <span class="price-row__label">ส่วนลดราคาสินค้า</span>
-              <strong class="price-row__value">
+              <strong class="price-row__value" style="color: var(--cyan);">
                 ${sfDisc > 0 ? `-฿${sfDisc.toLocaleString('th-TH')}` : '-'}
               </strong>
             </div>
 
-            <div class="price-row" style="background: rgba(6,182,212,0.06); padding: 8px 10px; border-radius: 8px; margin: 6px 0;">
-              <span class="price-row__label" style="color: var(--cyan); font-weight: 600;">เงินดาวน์:</span>
-              <strong class="price-row__value" style="color: var(--cyan);">${downPaymentText}</strong>
-            </div>
-
             <div class="price-row price-row--total">
-              <span class="price-row__label">ราคาสินค้าตามสัญญา</span>
-              <strong class="price-row__value">
+              <div>
+                <div class="price-row__label" style="font-size: 0.92rem; font-weight: 700;">ราคาสินค้าตามสัญญา</div>
+                <div style="font-size: 0.74rem; color: var(--text-muted);">ราคาหลังหักส่วนลดสินค้า (ยอดเต็มของเครื่อง)</div>
+              </div>
+              <strong class="price-row__value" style="color: #38bdf8;">
                 ฿${sfNet.toLocaleString('th-TH')}
               </strong>
             </div>
 
+            <!-- Down Payment & Financing Breakdown -->
+            <div style="background: rgba(6,182,212,0.08); border: 1px dashed rgba(6,182,212,0.3); border-radius: 8px; padding: 10px 12px; margin: 10px 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 4px;">
+                <span style="color: #94a3b8;">เกณฑ์เงินดาวน์ที่จุดขาย:</span>
+                <strong style="color: var(--cyan);">${downPaymentText}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #cbd5e1;">
+                <span>โครงสร้างการชำระ:</span>
+                <span style="font-size: 0.78rem; color: #a5f3fc;">เงินดาวน์ + ยอดผ่อนชำระรายงวด</span>
+              </div>
+              <div style="font-size: 0.73rem; color: #94a3b8; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 4px;">
+                ℹ️ <em>เงินดาวน์เป็นเงินก้อนแรกที่ลูกค้าชำระตามผลอนุมัติ (ไม่ใช่ส่วนลด) ยอดจัดคงเหลือนำไปหารจำนวนงวด</em>
+              </div>
+            </div>
+
             <div class="promotion-conditions">
-              <h4>เงื่อนไข</h4>
+              <h4>เงื่อนไขการสมัครและผ่อนชำระ</h4>
               <ul>
-                <li>สมัครและผ่านการอนุมัติสินเชื่อ Samsung Finance+ หน้าร้าน</li>
-                <li>เงินดาวน์อ้างอิงตามเกณฑ์อนุมัติ (เงินดาวน์ไม่ใช่ส่วนลด ห้ามนำไปหักลบราคาเครื่อง)</li>
-                <li>ยอดคงเหลือหลังหักเงินดาวน์นำไปคำนวณค่างวดตามระยะเวลาสัญญา</li>
+                <li>สมัครและผ่านการอนุมัติสินเชื่อ Samsung Finance+ ที่จุดขายหน้าร้าน</li>
+                <li>เงินดาวน์อ้างอิงตามผลประเมินเครดิตของลูกค้า (ห้ามนำเงินดาวน์ไปแสดงเป็นราคาเครื่องสุทธิ)</li>
+                <li>ยอดคงเหลือหลังหักเงินดาวน์นำไปคำนวณค่างวดตามระยะเวลาสัญญาที่เลือก</li>
               </ul>
             </div>
           </section>
@@ -3595,13 +3639,13 @@
       }
       
       const pnTag = document.getElementById("drawerProductPn") ? document.getElementById("drawerProductPn").textContent.replace("Exact P/N: ", "").trim() : "";
-      const modelTitle = document.getElementById("drawerProductTitle") ? document.getElementById("drawerProductTitle").textContent : "";
-      const item = rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle)) || currentDrawerItem;
-      const promo = resolvePromotion(item || { pn: pnTag, model: modelTitle });
+      const item = currentDrawerItem || rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle));
+      const srp = item && Number(item.srp) > 0 ? Number(item.srp) : (currentDrawerItem && Number(currentDrawerItem.srp) > 0 ? Number(currentDrawerItem.srp) : 0);
+      const promo = resolvePromotion(item || currentDrawerItem || { pn: pnTag, model: modelTitle });
 
       const contentEl = document.getElementById("drawerModeContent");
       if (contentEl) {
-        contentEl.innerHTML = renderDrawerModeDetails(promo.variants, mode, item ? item.srp : 0, item);
+        contentEl.innerHTML = renderDrawerModeDetails(promo.variants, mode, srp, item || currentDrawerItem);
       }
     }
 

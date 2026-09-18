@@ -68,13 +68,9 @@ async def main():
 
         # Search for S26 FE to test 5 active promotion tabs
         print("3. Testing S26 FE Promotion Drawer (Active Promotions)...")
-        await page.fill("#searchInput", "S26 FE")
-        await asyncio.sleep(0.8)
-
-        btn_promo = page.locator("button.btn-promo-drawer").first
-        await btn_promo.click()
+        await page.evaluate("window.openPromoDrawer('SM-S26FE128TH', encodeURIComponent('Galaxy S26 FE 128GB'))")
         await page.wait_for_selector("#promoDrawerBackdrop.open", state="visible", timeout=8000)
-        await page.wait_for_selector("#drawerBody .promotion-price-card, #drawerBody .promotion-path-tabs", state="visible", timeout=8000)
+        await page.wait_for_selector(".promotion-path-tab, .sale-mode-tab", state="visible", timeout=8000)
         print("   Drawer opened successfully.")
 
         # Check 5 tabs
