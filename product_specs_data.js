@@ -1261,7 +1261,7 @@ window.PRODUCT_SPECS_PROFILES = {
       }
     },
     "connectivityAndBuild": {
-      "network": "5G (รุ่น 5G) หรือ Wi-Fi Only (รุ่น Wifi)",
+      "network": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "simType": "Nano-SIM + eSIM (รุ่น 5G)",
       "wifi": "Wi-Fi 6E / Wi-Fi 7",
       "bluetooth": "Bluetooth 5.3",
@@ -1321,7 +1321,7 @@ window.PRODUCT_SPECS_PROFILES = {
       }
     },
     "connectivityAndBuild": {
-      "network": "5G (รุ่น 5G) หรือ Wi-Fi Only",
+      "network": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "simType": "Nano-SIM + eSIM (รุ่น 5G)",
       "wifi": "Wi-Fi 6",
       "bluetooth": "Bluetooth 5.3",
@@ -1381,7 +1381,7 @@ window.PRODUCT_SPECS_PROFILES = {
       }
     },
     "connectivityAndBuild": {
-      "network": "5G (P/N: SM-X406 / F-X406) หรือ Wi-Fi (P/N: SM-X400 / F-X400)",
+      "network": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "simType": "Nano-SIM (รุ่น 5G)",
       "wifi": "Wi-Fi 6",
       "bluetooth": "Bluetooth 5.3",
@@ -1438,7 +1438,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "Tablet",
     "display": {
-      "screenSize": "11.0 นิ้ว (A11+) หรือ 8.7 นิ้ว (A11)",
+      "screenSize": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "panelType": "TFT LCD",
       "resolution": "WUXGA (1920 x 1200 พิกเซล)",
       "refreshRate": "90Hz",
@@ -1446,7 +1446,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "glassProtection": "Metal Back Finish"
     },
     "performance": {
-      "processor": "Qualcomm Snapdragon 695 5G (6nm) หรือ Helio G99",
+      "processor": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "cpuCores": "Octa-core",
       "gpu": "Adreno 619",
       "aiEngine": "Samsung Kids & Multi-Active Window"
@@ -1462,7 +1462,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "videoRecording": "1080p @ 30fps"
     },
     "battery": {
-      "capacity": "7,040 mAh (รุ่น 11 นิ้ว) หรือ 5,100 mAh (รุ่น 8.7 นิ้ว)",
+      "capacity": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "chargingSpeed": "15W Fast Charging",
       "wirelessCharging": "ไม่รองรับ",
       "reverseCharging": "ไม่รองรับ",
@@ -1578,7 +1578,7 @@ window.PRODUCT_SPECS_PROFILES = {
       }
     },
     "connectivityAndBuild": {
-      "network": "LTE (รุ่น LTE eSIM) หรือ Bluetooth (รุ่น BT)",
+      "network": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "wifi": "Wi-Fi 2.4/5GHz",
       "bluetooth": "Bluetooth 5.3",
       "waterResistance": "5ATM + IP68 กันน้ำ 50 เมตร",
@@ -1599,7 +1599,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "Watch",
     "display": {
-      "screenSize": "1.3 นิ้ว (40mm) หรือ 1.5 นิ้ว (44mm)",
+      "screenSize": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "panelType": "Super AMOLED",
       "resolution": "432x432 (40mm) / 480x480 (44mm)",
       "glassProtection": "Sapphire Crystal"
@@ -1809,7 +1809,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "category": "Accessory",
     "subCategory": "หัวชาร์จ / อะแดปเตอร์",
     "chargerSpecs": {
-      "maxOutput": "30 วัตต์ หรือ 45 วัตต์ ตามรุ่น",
+      "maxOutput": "ยังไม่มีข้อมูลที่ยืนยันสำหรับรุ่นนี้",
       "outputPorts": "Multi-Port: USB-C PD + USB-A",
       "supportedProtocols": "Power Delivery 3.0, Quick Charge 3.0, PPS",
       "safetyProtection": "Overvoltage, Overcurrent, Short-circuit protection",
