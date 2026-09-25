@@ -2075,7 +2075,6 @@
           const colorHex = getColorHex(resolvedColor);
           const f1 = Number(item.f1 || 0);
           const f2 = Number(item.f2 || 0);
-          const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
           const promo = resolvePromotion(item);
           const pnText = item.pn || "ไม่มีรหัส P/N";
           const displayModelName = item.model || item.description || item.name || item.productName || "-";
@@ -2096,7 +2095,6 @@
                   ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
                   ${specs.ram || specs.storage ? `<span class="badge-spec-pill">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</span>` : ''}
                   ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
-                  ${item.srp ? `<span style="color: var(--text-muted);">RRP: ฿${Number(item.srp).toLocaleString('th-TH')}</span>` : ''}
                 </div>
               </div>
             </td>
@@ -2115,8 +2113,14 @@
             <td style="text-align: center;">
               <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}">${f2}</span>
             </td>
-            <td style="text-align: center;">
-              <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}">${total}</strong>
+            <td style="text-align: right;">
+              <span style="font-weight: 600; color: #f8fafc;">
+               ${
+                Number.isFinite(Number(item.srp)) && Number(item.srp) > 0
+                  ? `฿${Number(item.srp).toLocaleString('th-TH')}`
+                  : 'ยังไม่มีราคา'
+                }
+              </span>
             </td>
             <td>
               <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
@@ -2163,22 +2167,31 @@
             <div class="card-stock-row">
               <div class="card-stock-col">
                 <div class="card-stock-label">ช1 ร้านเรา</div>
-                <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f1}</span>
+                <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">
+                  ${f1}
+                </span>
               </div>
+
               <div class="card-stock-col">
                 <div class="card-stock-label">ช2 สาขา</div>
-                <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f2}</span>
+                <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">
+                  ${f2}
+                </span>
               </div>
+
               <div class="card-stock-col">
-                <div class="card-stock-label">รวมทั้งหมด</div>
-                <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${total}</strong>
+                <div class="card-stock-label">ราคาปกติ (RRP)</div>
+                <strong style="margin-top: 4px; color: #f8fafc; font-weight: 700;">
+                  ${
+                    Number.isFinite(Number(item.srp)) && Number(item.srp) > 0
+                      ? `฿${Number(item.srp).toLocaleString('th-TH')}`
+                      : 'ยังไม่มีราคา'
+                  }
+                </strong>
               </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; pt-2; gap: 8px;">
-              <div style="font-size: 0.82rem; color: var(--text-muted);">
-                ราคาปกติ: <strong style="color: #cbd5e1;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
-              </div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; padding-top: 8px; gap: 8px;">
               <div class="action-button-group">
                 <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้า">
                   <span>📋 สเปก</span>
