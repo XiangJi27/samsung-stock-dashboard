@@ -2472,17 +2472,17 @@
           </div>
       `;
 
-      if (!spec) {
-        // FAIL CLOSED: SPEC_NOT_VERIFIED Banner (No guess, no fallback to Galaxy A07)
+      if (!spec || (spec._matchLevel !== "EXACT_PN" && spec._matchLevel !== "EXACT_ACCESSORY_PN")) {
+        // FAIL CLOSED: SPEC_NOT_VERIFIED Banner for non-Exact P/N matches
         return erpHtml + `
           <div class="empty-promo-state" style="padding: 24px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
               <span style="font-size: 1.4rem;">⚠️</span>
-              <strong style="font-size: 0.95rem; color: #fbbf24;">ยังไม่มีข้อมูลสเปกที่ตรวจสอบแล้วสำหรับสินค้านี้ (SPEC_NOT_VERIFIED)</strong>
+              <strong style="font-size: 0.95rem; color: #fbbf24;">ยังไม่มีข้อมูลที่ยืนยันสำหรับ P/N นี้</strong>
             </div>
             <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
-              ระบบใช้มาตรฐาน <strong>Deterministic Product Identity Gate</strong> เพื่อป้องกันการแสดงข้อมูลผิดพลาดข้ามแบรนด์หรือข้ามหมวดหมู่<br>
-              สินค้าคงคลัง ข้อมูลสี และจำนวนสต๊อกหน้าร้าน (ชั้น 1 / ชั้น 2) ยังคงใช้งานและตรวจสอบยอดขายได้ตามปกติ 100%
+              ระบบจะไม่แสดงสเปกระดับ Series เพื่อป้องกันข้อมูลข้ามรุ่น<br>
+              ข้อมูลสินค้า ราคา RRP และจำนวนสต๊อกหน้าร้านชั้น 1 / ชั้น 2 ยังคงใช้งานได้ตามปกติ
             </p>
           </div>
         </div>`;

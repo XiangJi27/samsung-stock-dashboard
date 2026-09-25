@@ -16929,16 +16929,19 @@ window.getDisplayableSpecifications = getDisplayableSpecifications;
 
 
 window.resolveProductSpecs = function(item) {
-  if (!item) return null;
+  if (!item) return { _matchLevel: "NO_MATCH" };
   const m = (item.model || "").toUpperCase();
   const pn = (item.pn || "").trim().toUpperCase();
+
+  let candidate = null;
+  let matchLevel = "NO_MATCH";
 
   // 0. PRODUCT ACCESSORY MASTER EXACT IDENTITY RESOLUTION (HIGHEST PRIORITY)
   if (window.PRODUCT_ACCESSORY_MASTER) {
     const accessoryMatch = findAccessoryMasterRecord(item, window.PRODUCT_ACCESSORY_MASTER);
     if (accessoryMatch.status === "BLOCKED_CONFLICT") {
       console.warn(`[AccessoryMaster] BLOCKED_CONFLICT for ${item.pn}:`, accessoryMatch.errors);
-      return null;
+      return { _matchLevel: "NO_MATCH" };
     }
     if (accessoryMatch.record && (accessoryMatch.status === "VERIFIED" || accessoryMatch.status === "PARTIALLY_VERIFIED")) {
       const rec = accessoryMatch.record;
@@ -16954,7 +16957,7 @@ window.resolveProductSpecs = function(item) {
         tws: rec.specifications.tws?.displayValue || "รองรับ TWS"
       } : null;
 
-      return {
+      candidate = {
         isAccessoryMaster: true,
         masterRecord: rec,
         displayableSpecs: getDisplayableSpecifications(rec),
@@ -16970,99 +16973,100 @@ window.resolveProductSpecs = function(item) {
         speakerSpecs,
         fieldVerification: rec.specifications
       };
+      matchLevel = "EXACT_ACCESSORY_PN";
     }
   }
 
   const cat = item.category || "";
   const stockBrand = normalizeBrand(item.brand || (m.includes("SOUNDCORE") ? "SOUNDCORE" : ""));
 
-  let candidate = null;
-
   // 1. EXACT PART NUMBER MATCH FIRST (100% Precision for All Brands)
-  if (pn) {
+  if (!candidate && pn) {
     const pnKey = "PN_" + pn.replace(/-/g, "_");
     if (window.PRODUCT_SPECS_PROFILES[pnKey]) {
       candidate = window.PRODUCT_SPECS_PROFILES[pnKey];
+      matchLevel = "EXACT_PN";
     } else if (pn === "194644055783" || pn === "194644200176") {
       candidate = window.PRODUCT_SPECS_PROFILES.SOUNDCORE_SELECT_4_GO;
-    } else if (pn === "EF-DX920UBEGTH") candidate = window.PRODUCT_SPECS_PROFILES.EF_DX920_TAB_S10_ULTRA_KEYBOARD_SLIM;
-    else if (pn === "EF-DX820UBEGTH") candidate = window.PRODUCT_SPECS_PROFILES.EF_DX820_TAB_S10_PLUS_KEYBOARD_SLIM;
-    else if (pn === "EF-BX810PBEGWW" || pn === "EF-BX810PLEGWW") candidate = window.PRODUCT_SPECS_PROFILES.EF_BX810_TAB_S9_S10_PLUS_SMART_COVER;
-    else if (pn === "GP-FCX828NNABH") candidate = window.PRODUCT_SPECS_PROFILES.GP_FCX828_TAB_S10_PLUS_NEOS_POGO;
-    else if (pn === "EF-DX620UBEGTH") candidate = window.PRODUCT_SPECS_PROFILES.EF_DX620_TAB_S10_FE_PLUS_KEYBOARD_SLIM;
-    else if (pn === "GP-FCX626NNCBH") candidate = window.PRODUCT_SPECS_PROFILES.GP_FCX626_TAB_S10_FE_PLUS_NEOS_BT;
-    else if (pn === "EF-BX620PBEGWW") candidate = window.PRODUCT_SPECS_PROFILES.EF_BX620_TAB_S10_FE_PLUS_SMART_COVER;
-    else if (pn === "EF-DX720UBEGTH" || pn === "EF-DX710UBEGTH") candidate = window.PRODUCT_SPECS_PROFILES.EF_DX720_TAB_S9_KEYBOARD_AI;
-    else if (pn === "EF-BX710PBEGWW") candidate = window.PRODUCT_SPECS_PROFILES.EF_BX710_TAB_S9_SMART_COVER;
-    else if (pn === "GP-FCX526NNBBH") candidate = window.PRODUCT_SPECS_PROFILES.GP_FCX526_TAB_S10_FE_NEOS_KEYBOARD;
-    else if (pn === "6941876238958") candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_UNO_RG_65W;
-    else if (pn === "6941876265732") candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_WALL_30W;
-    else if (pn === "6941876265749") candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_WALL_45W;
-    else if (pn === "SM-X135GZAETHL" || pn === "SM_X135GZAETHL") candidate = window.PRODUCT_SPECS_PROFILES.PN_SM_X135GZAETHL;
-    else if (pn.includes("T2510")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_25W_EP_T2510;
-    else if (pn.includes("T4511")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_45W_EP_T4511;
-    else if (pn.includes("T6010") || pn.includes("T6530")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_60W_EP_T6010;
-    else if (pn.includes("T5600")) candidate = window.PRODUCT_SPECS_PROFILES.SMARTTAG2;
+      matchLevel = "EXACT_PN";
+    } else if (pn === "EF-DX920UBEGTH") { candidate = window.PRODUCT_SPECS_PROFILES.EF_DX920_TAB_S10_ULTRA_KEYBOARD_SLIM; matchLevel = "EXACT_PN"; }
+    else if (pn === "EF-DX820UBEGTH") { candidate = window.PRODUCT_SPECS_PROFILES.EF_DX820_TAB_S10_PLUS_KEYBOARD_SLIM; matchLevel = "EXACT_PN"; }
+    else if (pn === "EF-BX810PBEGWW" || pn === "EF-BX810PLEGWW") { candidate = window.PRODUCT_SPECS_PROFILES.EF_BX810_TAB_S9_S10_PLUS_SMART_COVER; matchLevel = "EXACT_PN"; }
+    else if (pn === "GP-FCX828NNABH") { candidate = window.PRODUCT_SPECS_PROFILES.GP_FCX828_TAB_S10_PLUS_NEOS_POGO; matchLevel = "EXACT_PN"; }
+    else if (pn === "EF-DX620UBEGTH") { candidate = window.PRODUCT_SPECS_PROFILES.EF_DX620_TAB_S10_FE_PLUS_KEYBOARD_SLIM; matchLevel = "EXACT_PN"; }
+    else if (pn === "GP-FCX626NNCBH") { candidate = window.PRODUCT_SPECS_PROFILES.GP_FCX626_TAB_S10_FE_PLUS_NEOS_BT; matchLevel = "EXACT_PN"; }
+    else if (pn === "EF-BX620PBEGWW") { candidate = window.PRODUCT_SPECS_PROFILES.EF_BX620_TAB_S10_FE_PLUS_SMART_COVER; matchLevel = "EXACT_PN"; }
+    else if (pn === "EF-DX720UBEGTH" || pn === "EF-DX710UBEGTH") { candidate = window.PRODUCT_SPECS_PROFILES.EF_DX720_TAB_S9_KEYBOARD_AI; matchLevel = "EXACT_PN"; }
+    else if (pn === "EF-BX710PBEGWW") { candidate = window.PRODUCT_SPECS_PROFILES.EF_BX710_TAB_S9_SMART_COVER; matchLevel = "EXACT_PN"; }
+    else if (pn === "GP-FCX526NNBBH") { candidate = window.PRODUCT_SPECS_PROFILES.GP_FCX526_TAB_S10_FE_NEOS_KEYBOARD; matchLevel = "EXACT_PN"; }
+    else if (pn === "6941876238958") { candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_UNO_RG_65W; matchLevel = "EXACT_PN"; }
+    else if (pn === "6941876265732") { candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_WALL_30W; matchLevel = "EXACT_PN"; }
+    else if (pn === "6941876265749") { candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_WALL_45W; matchLevel = "EXACT_PN"; }
+    else if (pn === "SM-X135GZAETHL" || pn === "SM_X135GZAETHL") { candidate = window.PRODUCT_SPECS_PROFILES.PN_SM_X135GZAETHL; matchLevel = "EXACT_PN"; }
+    else if (pn.includes("T2510")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_25W_EP_T2510; matchLevel = "KEYWORD_FALLBACK"; }
+    else if (pn.includes("T4511")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_45W_EP_T4511; matchLevel = "KEYWORD_FALLBACK"; }
+    else if (pn.includes("T6010") || pn.includes("T6530")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_60W_EP_T6010; matchLevel = "KEYWORD_FALLBACK"; }
+    else if (pn.includes("T5600")) { candidate = window.PRODUCT_SPECS_PROFILES.SMARTTAG2; matchLevel = "KEYWORD_FALLBACK"; }
   }
 
   // 2. THIRD-PARTY BRAND SPECIFIC RESOLUTION (SOUNDCORE / ANKER)
   if (!candidate && (stockBrand === "SOUNDCORE" || m.includes("SOUNDCORE") || m.includes("SELECT 4 GO"))) {
     if (m.includes("SELECT 4 GO")) {
       candidate = window.PRODUCT_SPECS_PROFILES.SOUNDCORE_SELECT_4_GO;
+      matchLevel = "EXACT_MODEL";
     }
   }
 
   // 3. SAMSUNG ECOSYSTEM MODEL RESOLUTION (STRICT BRAND GUARD)
-  // Only proceed to Samsung model matcher if brand is not explicitly a third-party non-Samsung brand
   const isDefinitelyNonSamsung = stockBrand && stockBrand !== "SAMSUNG";
 
   if (!candidate && !isDefinitelyNonSamsung) {
     if (cat === "SmartPhone") {
-      if (m.includes("S26 ULTRA")) candidate = window.PRODUCT_SPECS_PROFILES.S26_ULTRA;
-      else if (m.includes("S26+") || m.includes("S26 PLUS")) candidate = window.PRODUCT_SPECS_PROFILES.S26_PLUS;
-      else if (m.includes("S26FE") || m.includes("S26 FE")) candidate = window.PRODUCT_SPECS_PROFILES.S26_FE;
-      else if (m.includes("S26")) candidate = window.PRODUCT_SPECS_PROFILES.S26_STANDARD;
-      else if (m.includes("S25 ULTRA")) candidate = window.PRODUCT_SPECS_PROFILES.S25_ULTRA;
-      else if (m.includes("S25 FE") || m.includes("S25FE")) candidate = window.PRODUCT_SPECS_PROFILES.S25_FE;
-      else if (m.includes("FOLD 8 ULTRA") || m.includes("FOLD8 ULTRA")) candidate = window.PRODUCT_SPECS_PROFILES.Z_FOLD8_ULTRA;
-      else if (m.includes("FOLD 8") || m.includes("FOLD8")) candidate = window.PRODUCT_SPECS_PROFILES.Z_FOLD8;
-      else if (m.includes("FOLD7") || m.includes("FOLD 7")) candidate = window.PRODUCT_SPECS_PROFILES.Z_FOLD7;
-      else if (m.includes("FLIP 8") || m.includes("FLIP8")) candidate = window.PRODUCT_SPECS_PROFILES.Z_FLIP8;
-      else if (m.includes("FLIP7") || m.includes("FLIP 7")) candidate = window.PRODUCT_SPECS_PROFILES.Z_FLIP7;
-      else if (m.includes("A57")) candidate = window.PRODUCT_SPECS_PROFILES.A57_5G;
-      else if (m.includes("A37")) candidate = window.PRODUCT_SPECS_PROFILES.A37_5G;
-      else if (m.includes("A27")) candidate = window.PRODUCT_SPECS_PROFILES.A27_5G;
-      else if (m.includes("A17")) candidate = (m.includes("5G") || pn.includes("SM-A176") || pn.includes("F-A175G")) ? window.PRODUCT_SPECS_PROFILES.A17_5G : window.PRODUCT_SPECS_PROFILES.A17_LTE;
-      else if (m.includes("A07")) candidate = (m.includes("5G") || pn.includes("SM-A076")) ? window.PRODUCT_SPECS_PROFILES.A07_5G : window.PRODUCT_SPECS_PROFILES.A07_4G;
+      if (m.includes("S26 ULTRA")) { candidate = window.PRODUCT_SPECS_PROFILES.S26_ULTRA; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("S26+") || m.includes("S26 PLUS")) { candidate = window.PRODUCT_SPECS_PROFILES.S26_PLUS; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("S26FE") || m.includes("S26 FE")) { candidate = window.PRODUCT_SPECS_PROFILES.S26_FE; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("S26")) { candidate = window.PRODUCT_SPECS_PROFILES.S26_STANDARD; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("S25 ULTRA")) { candidate = window.PRODUCT_SPECS_PROFILES.S25_ULTRA; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("S25 FE") || m.includes("S25FE")) { candidate = window.PRODUCT_SPECS_PROFILES.S25_FE; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("FOLD 8 ULTRA") || m.includes("FOLD8 ULTRA")) { candidate = window.PRODUCT_SPECS_PROFILES.Z_FOLD8_ULTRA; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("FOLD 8") || m.includes("FOLD8")) { candidate = window.PRODUCT_SPECS_PROFILES.Z_FOLD8; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("FOLD7") || m.includes("FOLD 7")) { candidate = window.PRODUCT_SPECS_PROFILES.Z_FOLD7; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("FLIP 8") || m.includes("FLIP8")) { candidate = window.PRODUCT_SPECS_PROFILES.Z_FLIP8; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("FLIP7") || m.includes("FLIP 7")) { candidate = window.PRODUCT_SPECS_PROFILES.Z_FLIP7; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("A57")) { candidate = window.PRODUCT_SPECS_PROFILES.A57_5G; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("A37")) { candidate = window.PRODUCT_SPECS_PROFILES.A37_5G; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("A27")) { candidate = window.PRODUCT_SPECS_PROFILES.A27_5G; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("A17")) { candidate = (m.includes("5G") || pn.includes("SM-A176") || pn.includes("F-A175G")) ? window.PRODUCT_SPECS_PROFILES.A17_5G : window.PRODUCT_SPECS_PROFILES.A17_LTE; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("A07")) { candidate = (m.includes("5G") || pn.includes("SM-A076")) ? window.PRODUCT_SPECS_PROFILES.A07_5G : window.PRODUCT_SPECS_PROFILES.A07_4G; matchLevel = "SERIES_FALLBACK"; }
     } else if (cat === "Tablet") {
-      if (m.includes("S11 ULTRA")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_S11_ULTRA;
-      else if (m.includes("S10+") || m.includes("S10PLUS")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_PLUS;
-      else if (m.includes("S10FE+") || m.includes("S10FE PLUS")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_FE_PLUS;
-      else if (m.includes("S10 LITE")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_LITE;
-      else if (m.includes("S10 FE")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_FE_PLUS;
-      else if (m.includes("S11")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_PLUS;
-      else if (m.includes("A11") || m.includes("A9")) candidate = window.PRODUCT_SPECS_PROFILES.TAB_A11;
+      if (m.includes("S11 ULTRA")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_S11_ULTRA; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("S10+") || m.includes("S10PLUS")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_PLUS; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("S10FE+") || m.includes("S10FE PLUS")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_FE_PLUS; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("S10 LITE")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_LITE; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("S10 FE")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_FE_PLUS; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("S11")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_S10_PLUS; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("A11") || m.includes("A9")) { candidate = window.PRODUCT_SPECS_PROFILES.TAB_A11; matchLevel = "SERIES_FALLBACK"; }
     } else if (cat === "Watch") {
-      if (m.includes("ULTRA") || pn.includes("L705") || pn.includes("L715")) candidate = window.PRODUCT_SPECS_PROFILES.WATCH_ULTRA;
-      else if (m.includes("CLASSIC")) candidate = window.PRODUCT_SPECS_PROFILES.WATCH8_CLASSIC;
-      else if (m.includes("FIT3") || pn.includes("R390")) candidate = window.PRODUCT_SPECS_PROFILES.FIT3;
-      else if (m.includes("WATCH")) candidate = window.PRODUCT_SPECS_PROFILES.WATCH_STANDARD;
+      if (m.includes("ULTRA") || pn.includes("L705") || pn.includes("L715")) { candidate = window.PRODUCT_SPECS_PROFILES.WATCH_ULTRA; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("CLASSIC")) { candidate = window.PRODUCT_SPECS_PROFILES.WATCH8_CLASSIC; matchLevel = "SERIES_FALLBACK"; }
+      else if (m.includes("FIT3") || pn.includes("R390")) { candidate = window.PRODUCT_SPECS_PROFILES.FIT3; matchLevel = "EXACT_MODEL"; }
+      else if (m.includes("WATCH")) { candidate = window.PRODUCT_SPECS_PROFILES.WATCH_STANDARD; matchLevel = "SERIES_FALLBACK"; }
     } else if (cat === "Buds") {
-      if (m.includes("PRO")) candidate = window.PRODUCT_SPECS_PROFILES.BUDS4_PRO;
-      else candidate = window.PRODUCT_SPECS_PROFILES.BUDS_STANDARD;
+      if (m.includes("PRO")) { candidate = window.PRODUCT_SPECS_PROFILES.BUDS4_PRO; matchLevel = "SERIES_FALLBACK"; }
+      else { candidate = window.PRODUCT_SPECS_PROFILES.BUDS_STANDARD; matchLevel = "SERIES_FALLBACK"; }
     } else if (cat === "Accessory" || cat === "Adapter") {
-      if (m.includes("CASE S25 ULTRA")) candidate = window.PRODUCT_SPECS_PROFILES.CASE_S25_ULTRA;
-      else if (m.includes("CASE S25") || m.includes("CASE S25PLUS")) candidate = window.PRODUCT_SPECS_PROFILES.CASE_S25_S25_PLUS;
-      else if (m.includes("CASE S25FE")) candidate = window.PRODUCT_SPECS_PROFILES.CASE_S25_FE;
-      else if (m.includes("CASE FLIP7") || m.includes("CASE FOLD7")) candidate = window.PRODUCT_SPECS_PROFILES.CASE_FLIP7_FOLD7;
-      else if (m.includes("CASE A57") || m.includes("CASE A37")) candidate = window.PRODUCT_SPECS_PROFILES.CASE_A57_A37;
-      else if (m.includes("ADAPTER 25W")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_25W_EP_T2510;
-      else if (m.includes("ADAPTER 45W")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_45W_EP_T4511;
-      else if (m.includes("ADAPTER 60W")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_60W_EP_T6010;
-      else if (m.includes("SMARTTAG")) candidate = window.PRODUCT_SPECS_PROFILES.SMARTTAG2;
-      else if (m.includes("FOCUS")) candidate = window.PRODUCT_SPECS_PROFILES.FOCUS_TEMPERED_GLASS;
-      else if (m.includes("HISHIELD")) candidate = window.PRODUCT_SPECS_PROFILES.HISHIELD_TEMPERED_GLASS;
-      else if (m.includes("FILM") || m.includes("PROTECTOR")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_OFFICIAL_FILM;
+      if (m.includes("CASE S25 ULTRA")) { candidate = window.PRODUCT_SPECS_PROFILES.CASE_S25_ULTRA; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("CASE S25") || m.includes("CASE S25PLUS")) { candidate = window.PRODUCT_SPECS_PROFILES.CASE_S25_S25_PLUS; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("CASE S25FE")) { candidate = window.PRODUCT_SPECS_PROFILES.CASE_S25_FE; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("CASE FLIP7") || m.includes("CASE FOLD7")) { candidate = window.PRODUCT_SPECS_PROFILES.CASE_FLIP7_FOLD7; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("CASE A57") || m.includes("CASE A37")) { candidate = window.PRODUCT_SPECS_PROFILES.CASE_A57_A37; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("ADAPTER 25W")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_25W_EP_T2510; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("ADAPTER 45W")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_45W_EP_T4511; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("ADAPTER 60W")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_60W_EP_T6010; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("SMARTTAG")) { candidate = window.PRODUCT_SPECS_PROFILES.SMARTTAG2; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("FOCUS")) { candidate = window.PRODUCT_SPECS_PROFILES.FOCUS_TEMPERED_GLASS; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("HISHIELD")) { candidate = window.PRODUCT_SPECS_PROFILES.HISHIELD_TEMPERED_GLASS; matchLevel = "KEYWORD_FALLBACK"; }
+      else if (m.includes("FILM") || m.includes("PROTECTOR")) { candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_OFFICIAL_FILM; matchLevel = "KEYWORD_FALLBACK"; }
     }
   }
 
@@ -17071,14 +17075,21 @@ window.resolveProductSpecs = function(item) {
     const validation = validateSpecMatch(item, candidate);
     if (!validation.passed) {
       console.warn(`[SpecGuard] Rejected spec match for ${item.pn || item.model}:`, validation.errors);
-      return null; // Block spec display
+      return { _matchLevel: "NO_MATCH" };
     }
-    return candidate;
+
+    if (candidate.isAccessoryMaster) {
+      matchLevel = "EXACT_ACCESSORY_PN";
+    }
+
+    return {
+      ...candidate,
+      _matchLevel: matchLevel
+    };
   }
 
-  // 5. FAIL CLOSED POLICY: NEVER FALLBACK TO A DEFAULT GALAXY PRODUCT
-  // No Match !== Galaxy A07. No Match === SPEC_NOT_VERIFIED (returns null)
-  return null;
+  // 5. FAIL CLOSED POLICY
+  return { _matchLevel: "NO_MATCH" };
 };
 
 // Aliases for console inspectability and system compatibility
