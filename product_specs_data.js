@@ -16959,8 +16959,14 @@ window.resolveProductSpecs = function(item) {
   let candidate = null;
   let matchLevel = "NO_MATCH";
 
+  const soundcoreExactProfileFirstPns = new Set([
+    "194644055783",
+    "194644200176"
+  ]);
+  const shouldSkipAccessoryMaster = soundcoreExactProfileFirstPns.has(pn);
+
   // 0. PRODUCT ACCESSORY MASTER EXACT IDENTITY RESOLUTION (HIGHEST PRIORITY)
-  if (window.PRODUCT_ACCESSORY_MASTER) {
+  if (!shouldSkipAccessoryMaster && window.PRODUCT_ACCESSORY_MASTER) {
     const accessoryMatch = findAccessoryMasterRecord(item, window.PRODUCT_ACCESSORY_MASTER);
     if (accessoryMatch.status === "BLOCKED_CONFLICT") {
       console.warn(`[AccessoryMaster] BLOCKED_CONFLICT for ${item.pn}:`, accessoryMatch.errors);
