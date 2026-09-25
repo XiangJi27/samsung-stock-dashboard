@@ -1398,6 +1398,39 @@ window.PRODUCT_SPECS_PROFILES = {
       "chargingNote": "รองรับ 25W Fast Charging"
     }
   },
+  "PN_SM_X135GZAETHL": {
+    "modelGroup": "Galaxy Tab A11 (8.7\") 4G LTE",
+    "officialName": "Samsung Galaxy Tab A11 (8.7\") 8GB/128GB Gray",
+    "source": "Samsung Thailand Official (samsung.com/th)",
+    "marketRegion": "Thailand (THL)",
+    "category": "Tablet",
+    "display": {
+      "screenSize": "8.7 นิ้ว",
+      "panelType": "TFT LCD",
+      "resolution": "1340 x 800 พิกเซล",
+      "refreshRate": "90Hz"
+    },
+    "performance": {
+      "processor": "Octa-core, ความเร็ว 2.2GHz และ 2.0GHz"
+    },
+    "memory": {
+      "ram": "8GB",
+      "storage": "128GB",
+      "expandableStorage": "รองรับ MicroSD สูงสุด 2TB"
+    },
+    "camera": {
+      "rearCamera": "8MP",
+      "frontCamera": "5MP"
+    },
+    "battery": {
+      "capacity": "5,100 mAh"
+    },
+    "connectivityAndBuild": {
+      "network": "4G LTE",
+      "color": "Gray",
+      "weight": "337 กรัม"
+    }
+  },
   "TAB_A11": {
     "modelGroup": "Galaxy Tab A11 / A11+",
     "officialName": "Samsung Galaxy Tab A11 Series (เครื่องศูนย์ไทย)",
@@ -16965,6 +16998,7 @@ window.resolveProductSpecs = function(item) {
     else if (pn === "6941876238958") candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_UNO_RG_65W;
     else if (pn === "6941876265732") candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_WALL_30W;
     else if (pn === "6941876265749") candidate = window.PRODUCT_SPECS_PROFILES.UGREEN_WALL_45W;
+    else if (pn === "SM-X135GZAETHL" || pn === "SM_X135GZAETHL") candidate = window.PRODUCT_SPECS_PROFILES.PN_SM_X135GZAETHL;
     else if (pn.includes("T2510")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_25W_EP_T2510;
     else if (pn.includes("T4511")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_45W_EP_T4511;
     else if (pn.includes("T6010") || pn.includes("T6530")) candidate = window.PRODUCT_SPECS_PROFILES.SAMSUNG_ADAPTER_60W_EP_T6010;
