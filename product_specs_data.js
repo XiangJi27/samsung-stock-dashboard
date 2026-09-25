@@ -16956,37 +16956,14 @@ window.resolveProductSpecs = function(item) {
     ""
   ).trim().toUpperCase();
 
-  const isBlueTarget = pn === "194644200176";
-  if (isBlueTarget) {
-    console.warn("[BlueTrace:input]", {
-      rawPn: item?.pn,
-      rawPnType: typeof item?.pn,
-      rawInventoryPn: item?.inventoryPn,
-      rawInventoryPnType: typeof item?.inventoryPn,
-      rawInventoryPnSnake: item?.inventory_pn,
-      rawInventoryPnSnakeType: typeof item?.inventory_pn,
-      normalizedPn: pn,
-      model: item?.model,
-      brand: item?.brand
-    });
-  }
-
   let candidate = null;
   let matchLevel = "NO_MATCH";
 
   // 0. PRODUCT ACCESSORY MASTER EXACT IDENTITY RESOLUTION (HIGHEST PRIORITY)
   if (window.PRODUCT_ACCESSORY_MASTER) {
     const accessoryMatch = findAccessoryMasterRecord(item, window.PRODUCT_ACCESSORY_MASTER);
-    if (isBlueTarget) {
-      console.warn("[BlueTrace:accessoryMaster]", {
-        status: accessoryMatch.status,
-        hasRecord: Boolean(accessoryMatch.record),
-        errors: accessoryMatch.errors
-      });
-    }
     if (accessoryMatch.status === "BLOCKED_CONFLICT") {
       console.warn(`[AccessoryMaster] BLOCKED_CONFLICT for ${item.pn}:`, accessoryMatch.errors);
-      if (isBlueTarget) console.warn("[BlueTrace:early_return]", "BLOCKED_CONFLICT", accessoryMatch.errors);
       return { _matchLevel: "NO_MATCH" };
     }
     if (accessoryMatch.record && (accessoryMatch.status === "VERIFIED" || accessoryMatch.status === "PARTIALLY_VERIFIED")) {
@@ -17031,7 +17008,8 @@ window.resolveProductSpecs = function(item) {
     const pnKey = "PN_" + pn.replace(/-/g, "_");
     if (window.PRODUCT_SPECS_PROFILES[pnKey]) {
       candidate = window.PRODUCT_SPECS_PROFILES[pnKey];
-      matchLevel = "EXACT_PN";
+      const isVerifiedSoundcoreSelect4GoPn = (pn === "194644055783" || pn === "194644200176");
+      matchLevel = isVerifiedSoundcoreSelect4GoPn ? "EXACT_ACCESSORY_PN" : "EXACT_PN";
     } else if (pn === "194644055783" || pn === "194644200176") {
       candidate = window.PRODUCT_SPECS_PROFILES.SOUNDCORE_SELECT_4_GO;
       matchLevel = "EXACT_ACCESSORY_PN";
@@ -17121,22 +17099,11 @@ window.resolveProductSpecs = function(item) {
     const validation = validateSpecMatch(item, candidate, matchLevel);
     if (!validation.passed) {
       console.warn(`[SpecGuard] Rejected spec match for ${item.pn || item.model}:`, validation.errors);
-      if (isBlueTarget) console.warn("[BlueTrace:early_return]", "VALIDATION_FAILED", validation.errors);
       return { _matchLevel: "NO_MATCH" };
     }
 
     if (candidate.isAccessoryMaster) {
       matchLevel = "EXACT_ACCESSORY_PN";
-    }
-
-    if (isBlueTarget) {
-      console.warn("[BlueTrace:success]", {
-        normalizedPn: pn,
-        officialName: candidate.officialName || candidate.canonicalName,
-        productType: candidate.productType,
-        isAccessoryMaster: Boolean(candidate.isAccessoryMaster),
-        finalMatchLevel: matchLevel
-      });
     }
 
     return {
@@ -17146,7 +17113,6 @@ window.resolveProductSpecs = function(item) {
   }
 
   // 5. FAIL CLOSED POLICY
-  if (isBlueTarget) console.warn("[BlueTrace:early_return]", "NO_CANDIDATE");
   return { _matchLevel: "NO_MATCH" };
 };
 
