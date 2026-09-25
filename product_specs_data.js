@@ -17011,7 +17011,7 @@ window.resolveProductSpecs = function(item) {
       matchLevel = "EXACT_PN";
     } else if (pn === "194644055783" || pn === "194644200176") {
       candidate = window.PRODUCT_SPECS_PROFILES.SOUNDCORE_SELECT_4_GO;
-      matchLevel = "EXACT_PN";
+      matchLevel = "EXACT_ACCESSORY_PN";
     } else if (pn === "EF-DX920UBEGTH") { candidate = window.PRODUCT_SPECS_PROFILES.EF_DX920_TAB_S10_ULTRA_KEYBOARD_SLIM; matchLevel = "EXACT_PN"; }
     else if (pn === "EF-DX820UBEGTH") { candidate = window.PRODUCT_SPECS_PROFILES.EF_DX820_TAB_S10_PLUS_KEYBOARD_SLIM; matchLevel = "EXACT_PN"; }
     else if (pn === "EF-BX810PBEGWW" || pn === "EF-BX810PLEGWW") { candidate = window.PRODUCT_SPECS_PROFILES.EF_BX810_TAB_S9_S10_PLUS_SMART_COVER; matchLevel = "EXACT_PN"; }
