@@ -16931,7 +16931,12 @@ window.getDisplayableSpecifications = getDisplayableSpecifications;
 window.resolveProductSpecs = function(item) {
   if (!item) return { _matchLevel: "NO_MATCH" };
   const m = (item.model || "").toUpperCase();
-  const pn = (item.pn || "").trim().toUpperCase();
+  const pn = String(
+    item?.pn ??
+    item?.inventoryPn ??
+    item?.inventory_pn ??
+    ""
+  ).trim().toUpperCase();
 
   let candidate = null;
   let matchLevel = "NO_MATCH";
