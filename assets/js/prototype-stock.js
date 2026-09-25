@@ -2437,6 +2437,25 @@
     function renderDrawerSpecDetails(item) {
       const spec = (typeof window !== "undefined" && window.resolveProductSpecs) ? window.resolveProductSpecs(item) : null;
 
+      // ==== TEMP DEBUG TRACE — remove before promote ====
+      if (item && (item.pn === "194644055783" || item.pn === "194644200176" || (item.model && item.model.includes("Soundcore")))) {
+        console.log('[SpecTrace]', {
+          itemPn: item?.pn ?? item?.inventoryPn ?? item?.inventory_pn ?? null,
+          specOfficialName: spec?.officialName ?? null,
+          specModelGroup: spec?.modelGroup ?? null,
+          specInventoryPartNumber: spec?.inventoryPartNumber ?? null,
+          specManufacturerModel: spec?.manufacturerModel ?? null,
+          matchLevel: spec?._matchLevel ?? null,
+          hasDisplayableSpecs: !!spec?.displayableSpecs,
+          hasSpeakerSpecs: !!spec?.speakerSpecs,
+          hasBattery: !!spec?.battery,
+          hasBatteryHours: !!spec?.batteryHours,
+          hasConnectivityAndBuild: !!spec?.connectivityAndBuild,
+          allKeys: spec ? Object.keys(spec) : []
+        });
+      }
+      // ==== END TEMP DEBUG TRACE ====
+
       // Level 1: Basic ERP Stock Metadata Box (100% Display Coverage)
       const catHierarchy = [item.category1, item.category2, item.category3].filter(Boolean).join(" &rarr; ");
       const erpHtml = `
