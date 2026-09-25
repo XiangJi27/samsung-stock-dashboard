@@ -16941,6 +16941,21 @@ window.resolveProductSpecs = function(item) {
   let candidate = null;
   let matchLevel = "NO_MATCH";
 
+  const isSoundcoreTarget = pn === "194644055783" || m.includes("SELECT 4 GO");
+  if (isSoundcoreTarget) {
+    console.debug("[TechSpecsResolver:input]", {
+      rawPn: item?.pn,
+      rawPnType: typeof item?.pn,
+      rawInventoryPn: item?.inventoryPn,
+      rawInventoryPnType: typeof item?.inventoryPn,
+      rawInventoryPnSnake: item?.inventory_pn,
+      rawInventoryPnSnakeType: typeof item?.inventory_pn,
+      normalizedPn: pn,
+      normalizedModel: m,
+      rawBrand: item?.brand
+    });
+  }
+
   // 0. PRODUCT ACCESSORY MASTER EXACT IDENTITY RESOLUTION (HIGHEST PRIORITY)
   if (window.PRODUCT_ACCESSORY_MASTER) {
     const accessoryMatch = findAccessoryMasterRecord(item, window.PRODUCT_ACCESSORY_MASTER);
@@ -17080,11 +17095,33 @@ window.resolveProductSpecs = function(item) {
     const validation = validateSpecMatch(item, candidate);
     if (!validation.passed) {
       console.warn(`[SpecGuard] Rejected spec match for ${item.pn || item.model}:`, validation.errors);
+      if (isSoundcoreTarget) {
+        console.warn("[TechSpecsResolver:early_return]", {
+          reason: "VALIDATION_FAILED",
+          normalizedPn: pn,
+          candidateFound: Boolean(candidate),
+          candidateModelGroup: candidate?.modelGroup,
+          candidateOfficialName: candidate?.officialName,
+          matchLevel,
+          validationErrors: validation.errors
+        });
+      }
       return { _matchLevel: "NO_MATCH" };
     }
 
     if (candidate.isAccessoryMaster) {
       matchLevel = "EXACT_ACCESSORY_PN";
+    }
+
+    if (isSoundcoreTarget) {
+      console.debug("[TechSpecsResolver:result]", {
+        normalizedPn: pn,
+        candidateFound: Boolean(candidate),
+        candidateModelGroup: candidate?.modelGroup,
+        candidateOfficialName: candidate?.officialName,
+        candidateIsAccessoryMaster: candidate?.isAccessoryMaster,
+        finalMatchLevel: matchLevel
+      });
     }
 
     return {
@@ -17094,6 +17131,14 @@ window.resolveProductSpecs = function(item) {
   }
 
   // 5. FAIL CLOSED POLICY
+  if (isSoundcoreTarget) {
+    console.warn("[TechSpecsResolver:early_return]", {
+      reason: "NO_CANDIDATE",
+      normalizedPn: pn,
+      candidateFound: false,
+      finalMatchLevel: "NO_MATCH"
+    });
+  }
   return { _matchLevel: "NO_MATCH" };
 };
 
