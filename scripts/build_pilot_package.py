@@ -3,6 +3,13 @@
 Build Dedicated Feedback Pilot Package (samsung_stock_dashboard_feedback_pilot.zip)
 Scope: 4-User Store Pilot (Ayutthaya City Park)
 Safety Guarantee: NEVER modifies or overwrites samsung_stock_dashboard_runtime.zip.
+
+New in Phase 1.5-C2:
+  --output-package <path>     Write zip to <path> instead of the default pilot zip
+  --output-manifest <path>    Write manifest JSON to <path> instead of pilot_runtime_manifest.json
+  --runtime-manifest <path>   Read runtime manifest from <path> instead of runtime_manifest.json
+  PILOT_PACKAGE_OUTPUT / PILOT_MANIFEST_OUTPUT / PILOT_RUNTIME_MANIFEST env vars also supported.
+  In isolated mode, the original zip and manifest files are NOT written.
 """
 
 import os
@@ -20,9 +27,24 @@ PILOT_ZIP = os.path.join(ROOT_DIR, "samsung_stock_dashboard_feedback_pilot.zip")
 MANIFEST_PATH = os.path.join(ROOT_DIR, "runtime_manifest.json")
 PILOT_MANIFEST_PATH = os.path.join(ROOT_DIR, "pilot_runtime_manifest.json")
 
-def build_pilot_package():
+def build_pilot_package(
+    output_zip=None,
+    output_manifest=None,
+    runtime_manifest=None,
+):
+    # Resolve output paths
+    _isolated = bool(output_zip or output_manifest or runtime_manifest)
+    dest_zip = output_zip or PILOT_ZIP
+    dest_manifest = output_manifest or PILOT_MANIFEST_PATH
+    src_manifest = runtime_manifest or MANIFEST_PATH
+
     print("================================================================")
     print("SAMSUNG FEEDBACK PILOT - DEDICATED RUNTIME PACKAGE BUILDER")
+    if _isolated:
+        print("[ISOLATED MODE] Output paths overridden:")
+        print(f"  Package  -> {dest_zip}")
+        print(f"  Manifest -> {dest_manifest}")
+        print(f"  Source   <- {src_manifest}")
     print("Scope: 4-User Store Model (Ayutthaya City Park)")
     print("================================================================\n")
 
@@ -32,8 +54,8 @@ def build_pilot_package():
 
     baseline_stat_before = os.stat(BASELINE_ZIP).st_mtime_ns
 
-    # Read baseline manifest
-    with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
+    # Read baseline manifest (source manifest may be overridden in isolated mode)
+    with open(src_manifest, "r", encoding="utf-8") as f:
         base_manifest = json.load(f)
 
     baseline_files = [item["file"] for item in base_manifest.get("files", [])]
@@ -80,9 +102,10 @@ def build_pilot_package():
     pilot_manifest_items = []
     total_bytes = 0
 
-    print(f"Packaging {len(all_pilot_files)} runtime files into {os.path.basename(PILOT_ZIP)}...")
+    print(f"Packaging {len(all_pilot_files)} runtime files into {os.path.basename(dest_zip)}...")
 
-    with zipfile.ZipFile(PILOT_ZIP, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
+    os.makedirs(os.path.dirname(os.path.abspath(dest_zip)), exist_ok=True)
+    with zipfile.ZipFile(dest_zip, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
         for rel_path in all_pilot_files:
             abs_path = os.path.join(ROOT_DIR, rel_path)
             if not os.path.exists(abs_path):
@@ -211,9 +234,12 @@ def build_pilot_package():
         manifest_str = json.dumps(manifest_data, indent=2, ensure_ascii=False)
         zf.writestr("pilot_runtime_manifest.json", manifest_str.encode("utf-8"))
 
-    # Also save pilot_runtime_manifest.json to disk
-    with open(PILOT_MANIFEST_PATH, "w", encoding="utf-8") as f:
+    # Save pilot manifest to dest_manifest (isolated or default)
+    os.makedirs(os.path.dirname(os.path.abspath(dest_manifest)), exist_ok=True)
+    with open(dest_manifest, "w", encoding="utf-8") as f:
         f.write(manifest_str)
+    if _isolated:
+        print(f"[ISOLATED] Manifest written to: {dest_manifest} (default pilot_runtime_manifest.json NOT written)")
 
     # 3. Post-build Baseline Integrity Verification
     baseline_stat_after = os.stat(BASELINE_ZIP).st_mtime_ns
@@ -223,11 +249,31 @@ def build_pilot_package():
     print("\n----------------------------------------------------------------")
     print("BUILD VERIFICATION:")
     print(f"Baseline Zip Unchanged: YES (mtime match)")
-    print(f"Pilot Package Created: {PILOT_ZIP}")
-    print(f"Pilot Package Size: {os.path.getsize(PILOT_ZIP)} bytes")
+    print(f"Pilot Package Created: {dest_zip}")
+    print(f"Pilot Package Size: {os.path.getsize(dest_zip)} bytes")
     print(f"Total Files in Pilot: {len(pilot_manifest_items) + 1}")
-    print("✅ Feedback Pilot Package Build Complete & Verified!")
+    if _isolated:
+        print("[ISOLATED MODE] Default samsung_stock_dashboard_feedback_pilot.zip NOT written")
+    print("\u2705 Feedback Pilot Package Build Complete & Verified!")
     print("================================================================\n")
 
 if __name__ == "__main__":
-    build_pilot_package()
+    _pkg = os.environ.get("PILOT_PACKAGE_OUTPUT", "")
+    _mfst = os.environ.get("PILOT_MANIFEST_OUTPUT", "")
+    _rmfst = os.environ.get("PILOT_RUNTIME_MANIFEST", "")
+    _args = sys.argv[1:]
+    _i = 0
+    while _i < len(_args):
+        if _args[_i] == "--output-package" and _i + 1 < len(_args):
+            _pkg = _args[_i + 1]; _i += 2
+        elif _args[_i] == "--output-manifest" and _i + 1 < len(_args):
+            _mfst = _args[_i + 1]; _i += 2
+        elif _args[_i] == "--runtime-manifest" and _i + 1 < len(_args):
+            _rmfst = _args[_i + 1]; _i += 2
+        else:
+            _i += 1
+    build_pilot_package(
+        output_zip=_pkg or None,
+        output_manifest=_mfst or None,
+        runtime_manifest=_rmfst or None,
+    )

@@ -1,20 +1,20 @@
 {
   "manifestVersion": "1.0.0",
-  "generatedAt": "2026-09-18T18:35:25.031591+07:00",
+  "generatedAt": "2026-09-23T12:39:20.207454+07:00",
   "project": "Samsung Branch Operations System",
   "environment": "PROTECTED_PREVIEW_CANDIDATE",
   "gitBranch": "feature/user-feedback-pilot",
-  "commitSha": "7ec2481",
+  "commitSha": "afc2db0",
   "summary": {
     "totalFiles": 23,
-    "totalSizeBytes": 7835719,
-    "totalSizeMB": 7.47
+    "totalSizeBytes": 7842809,
+    "totalSizeMB": 7.48
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 66286,
-      "sha256": "29d2db8a535d965fa360960c2eb02b75c98e506a52b7859102bba9ab8871ef63",
+      "sizeBytes": 66285,
+      "sha256": "4e1918d47746705b6f1cf4f91b74ea11db8fdeba135f71c2e9947b62e57d438c",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -103,8 +103,8 @@
     },
     {
       "file": "assets/js/router.js",
-      "sizeBytes": 7105,
-      "sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
+      "sizeBytes": 7190,
+      "sha256": "73cdb7ab485977eab8f0c75b42436e9edcb725a19b2dec7708f982dd66bf1292",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -121,8 +121,8 @@
     },
     {
       "file": "assets/js/modules.js",
-      "sizeBytes": 17915,
-      "sha256": "3725be64dd7d77c283072f07039dfbe6f0f0c3d37535807c5fdd91e2146221e9",
+      "sizeBytes": 22499,
+      "sha256": "79d9eea2472b9c49b7e3671afa995f7aa2a4dde4fb282512393b58fc9be40271",
       "status": "REQUIRED_RUNTIME"
     },
     {
@@ -139,8 +139,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 163832,
-      "sha256": "3c6374e3544bd5628c8d2ffde711d24acbfa2bb3e2de94e61b32d2aa1926d10d",
+      "sizeBytes": 166254,
+      "sha256": "a7c48ee74b1492d4fcbd70d9b7d5136c6ebc423483f1f6a5888a02ec31bebfe6",
       "status": "REQUIRED_RUNTIME"
     },
     {

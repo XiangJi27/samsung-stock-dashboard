@@ -6,6 +6,22 @@
 
 (function (global) {
   'use strict';
+  const pricingEngine = (typeof module !== 'undefined' && module.exports)
+    ? require('./promotion-pricing-engine.js')
+    : global.PromotionPricingEngine;
+  const pricingRuntime = (typeof module !== 'undefined' && module.exports)
+    ? require('./promotion-pricing-runtime.js')
+    : global.PromotionPricingRuntime;
+
+  // V2 is intentionally additive during the migration period; legacy APIs remain intact.
+  function calculatePricingV2(input) {
+    const decision = pricingRuntime && pricingRuntime.evaluatePricingRuntime
+      ? pricingRuntime.evaluatePricingRuntime(global.RUNTIME_CONFIG, { engine: pricingEngine, adapter: global.PromotionPricingAdapter })
+      : { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', status: 'BLOCKED', databaseAction: 'DO_NOT_INSERT_OFFER' };
+    if (!decision.valid || decision.engine !== 'V2') return decision;
+    const calculation = pricingEngine.calculatePromotionPricing(input);
+    return calculation.valid ? { ...calculation, engineVersion: pricingEngine.ENGINE_VERSION, schemaVersion: 'promotion-pricing-v2' } : calculation;
+  }
 
   /**
    * Safe Promotion Price Calculator & Validation Guard
@@ -82,6 +98,275 @@
       tradeUpDiscount: tradeUpBonus,
       tradeUpNetPrice: Math.max(0, tradeUpNetPrice),
       tradeUpEligible: tradeUpBonus > 0
+    };
+  }
+
+  /**
+   * Standardized Net Price Calculator
+   * Enforces: discount >= 0, discount <= rrp, netPrice = rrp - discount
+   */
+  function calculateNet(regularPrice, discountAmount) {
+    const rrp = Number(regularPrice);
+    const discount = Number(discountAmount || 0);
+
+    if (!Number.isFinite(rrp) || rrp <= 0) {
+      return {
+        valid: false,
+        code: "REGULAR_PRICE_NOT_AVAILABLE"
+      };
+    }
+
+    if (!Number.isFinite(discount) || discount < 0 || discount > rrp) {
+      return {
+        valid: false,
+        code: "INVALID_DISCOUNT_AMOUNT"
+      };
+    }
+
+    return {
+      valid: true,
+      regularPrice: rrp,
+      discountAmount: discount,
+      netPrice: rrp - discount
+    };
+  }
+
+  /**
+   * Standardized Sale Mode Pricing Calculator
+   * Pure single-responsibility pricing rules per Sale Mode.
+   */
+  function calculateSaleModePrice({
+    saleMode,
+    regularPrice,
+    standardDiscount = 0,
+    financeDiscount = 0,
+    nonSfPlusDiscount = 0,
+    studentDiscountAmount = 0,
+    studentDiscountPercent = 0,
+    tradeUpBonus = 0,
+    tradeInAppraisedValue = 0,
+    downPaymentPercent = 0
+  }) {
+    const rrp = Number(regularPrice);
+
+    if (!Number.isFinite(rrp) || rrp <= 0) {
+      return {
+        valid: false,
+        code: "REGULAR_PRICE_NOT_AVAILABLE"
+      };
+    }
+
+    switch (saleMode) {
+      case "STANDARD_PAYMENT": {
+        return calculateNet(rrp, standardDiscount);
+      }
+
+      case "SF_PLUS": {
+        const fDiscount = Number(financeDiscount || 0);
+        const contractPrice = rrp - fDiscount;
+
+        if (contractPrice < 0 || fDiscount < 0 || fDiscount > rrp) {
+          return {
+            valid: false,
+            code: "INVALID_FINANCE_DISCOUNT"
+          };
+        }
+
+        const pct = Number(downPaymentPercent || 0);
+        if (pct < 0 || pct > 100) {
+          return {
+            valid: false,
+            code: "INVALID_DOWN_PAYMENT_PERCENT"
+          };
+        }
+
+        const downPayment = (contractPrice * pct) / 100;
+
+        return {
+          valid: true,
+          contractPrice,
+          downPayment,
+          financePrincipal: contractPrice - downPayment
+        };
+      }
+
+      case "NON_SF_PLUS": {
+        return calculateNet(rrp, nonSfPlusDiscount);
+      }
+
+      case "STUDENT_EXCLUSIVE": {
+        const studentDiscount =
+          Number(studentDiscountAmount) > 0
+            ? Number(studentDiscountAmount)
+            : (rrp * Number(studentDiscountPercent || 0)) / 100;
+
+        return calculateNet(rrp, studentDiscount);
+      }
+
+      case "TRADE_UP": {
+        const stdDisc = Number(standardDiscount || 0);
+        const tuBonus = Number(tradeUpBonus || 0);
+        const appraisedVal = Number(tradeInAppraisedValue || 0);
+
+        if (stdDisc < 0 || tuBonus < 0 || appraisedVal < 0) {
+          return {
+            valid: false,
+            code: "INVALID_DISCOUNT_AMOUNT"
+          };
+        }
+
+        const priceBeforeAppraisal = rrp - stdDisc - tuBonus;
+        const finalCheckoutAmount = priceBeforeAppraisal - appraisedVal;
+
+        if (priceBeforeAppraisal < 0 || finalCheckoutAmount < 0) {
+          return {
+            valid: false,
+            code: "INVALID_TRADE_UP_CALCULATION"
+          };
+        }
+
+        return {
+          valid: true,
+          priceBeforeAppraisal,
+          tradeInAppraisedValue: appraisedVal,
+          tradeUpBonus: tuBonus,
+          totalTradeBenefit: appraisedVal + tuBonus,
+          finalCheckoutAmount
+        };
+      }
+
+      default:
+        return {
+          valid: false,
+          code: "UNSUPPORTED_SALE_MODE"
+        };
+    }
+  }
+
+  /**
+   * Unified Point-of-Sale Checkout Calculator
+   * Multi-item bundle and fail-closed checkout verification.
+   */
+  function calculateCheckout({
+    saleMode,
+    regularPrice,
+    standardDiscount = 0,
+    financeDiscount = 0,
+    nonSfPlusDiscount = 0,
+    studentDiscount = 0,
+    tradeUpBonus = 0,
+    tradeInAppraisedValue = 0,
+    bundleItems = [],
+    downPayment = 0,
+    upfrontFees = 0
+  }) {
+    const rrp = Number(regularPrice);
+
+    if (!Number.isFinite(rrp) || rrp <= 0) {
+      return {
+        valid: false,
+        code: "REGULAR_PRICE_NOT_AVAILABLE"
+      };
+    }
+
+    let bundleItemsNet = 0;
+    try {
+      bundleItemsNet = (bundleItems || []).reduce((total, item) => {
+        const itemRrp = Number(item.regularPrice !== undefined ? item.regularPrice : item.rrp);
+        const itemDiscount = Number(item.bundleDiscount || item.discount || 0);
+
+        if (
+          !Number.isFinite(itemRrp) ||
+          itemRrp <= 0 ||
+          itemDiscount < 0 ||
+          itemDiscount > itemRrp
+        ) {
+          throw new Error("INVALID_BUNDLE_ITEM_PRICE");
+        }
+
+        return total + itemRrp - itemDiscount;
+      }, 0);
+    } catch (e) {
+      return {
+        valid: false,
+        code: "INVALID_BUNDLE_ITEM_PRICE"
+      };
+    }
+
+    if (saleMode === "STANDARD_PAYMENT") {
+      const primaryNet = rrp - Number(standardDiscount || 0);
+      const fees = Number(upfrontFees || 0);
+
+      return {
+        valid: primaryNet >= 0 && Number(standardDiscount || 0) >= 0 && Number(standardDiscount || 0) <= rrp,
+        primaryNet,
+        bundleItemsNet,
+        finalCheckoutAmount: primaryNet + bundleItemsNet + fees
+      };
+    }
+
+    if (saleMode === "SF_PLUS") {
+      const contractPrice = rrp - Number(financeDiscount || 0);
+      const dp = Number(downPayment || 0);
+      const financePrincipal = contractPrice - dp;
+      const fees = Number(upfrontFees || 0);
+
+      return {
+        valid:
+          contractPrice >= 0 &&
+          financePrincipal >= 0 &&
+          Number(financeDiscount || 0) >= 0 &&
+          dp >= 0 &&
+          dp <= contractPrice,
+        contractPrice,
+        downPayment: dp,
+        financePrincipal,
+        bundleItemsNet,
+        checkoutPaymentToday: dp + bundleItemsNet + fees
+      };
+    }
+
+    if (saleMode === "TRADE_UP") {
+      const stdDisc = Number(standardDiscount || 0);
+      const tuBonus = Number(tradeUpBonus || 0);
+      const appraisedVal = Number(tradeInAppraisedValue || 0);
+      const fees = Number(upfrontFees || 0);
+
+      const priceBeforeAppraisal = rrp - stdDisc - tuBonus;
+      const finalCheckoutAmount =
+        priceBeforeAppraisal - appraisedVal + bundleItemsNet + fees;
+
+      return {
+        valid:
+          priceBeforeAppraisal >= 0 &&
+          finalCheckoutAmount >= 0 &&
+          stdDisc >= 0 &&
+          tuBonus > 0 &&
+          appraisedVal >= 0,
+        priceBeforeAppraisal,
+        tradeUpBonus: tuBonus,
+        tradeInAppraisedValue: appraisedVal,
+        totalTradeBenefit: tuBonus + appraisedVal,
+        bundleItemsNet,
+        finalCheckoutAmount
+      };
+    }
+
+    if (saleMode === "STUDENT_EXCLUSIVE") {
+      const primaryNet = rrp - Number(studentDiscount || 0);
+      const fees = Number(upfrontFees || 0);
+
+      return {
+        valid: primaryNet >= 0 && Number(studentDiscount || 0) >= 0 && Number(studentDiscount || 0) <= rrp,
+        primaryNet,
+        bundleItemsNet,
+        finalCheckoutAmount: primaryNet + bundleItemsNet + fees
+      };
+    }
+
+    return {
+      valid: false,
+      code: "UNSUPPORTED_SALE_MODE"
     };
   }
 
@@ -1039,6 +1324,10 @@
 
   // Export for browser & node
   const api = {
+    calculatePricingV2,
+    calculateNet,
+    calculateSaleModePrice,
+    calculateCheckout,
     calculatePromotionPrice,
     calculatePromotionPrices,
     calculateS25FePromotion,
@@ -1065,6 +1354,8 @@
   }
   if (typeof window !== 'undefined') {
     window.PromotionCalculator = api;
+    window.calculateNet = calculateNet;
+    window.calculateSaleModePrice = calculateSaleModePrice;
+    window.calculateCheckout = calculateCheckout;
   }
 })(typeof window !== 'undefined' ? window : global);
-

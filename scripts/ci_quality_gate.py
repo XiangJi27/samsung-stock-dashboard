@@ -31,6 +31,15 @@ print("=" * 80)
 print("SAMSUNG BRANCH OPERATIONS - COMPREHENSIVE CI/CD QUALITY GATE")
 print("=" * 80)
 
+# --output <path> / CI_REPORT_OUTPUT env var – isolated output support
+_output_path = os.environ.get("CI_REPORT_OUTPUT", "")
+if "--output" in sys.argv:
+    _oi = sys.argv.index("--output")
+    if _oi + 1 < len(sys.argv):
+        _output_path = sys.argv[_oi + 1]
+CI_REPORT_OUTPUT_PATH = _output_path or "reports/ci_quality_gate_results.json"
+CI_ISOLATED_MODE = bool(_output_path)  # True only when caller explicitly overrides
+
 # Get current git commit SHA
 if len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
     commit_sha = sys.argv[1]
@@ -1136,8 +1145,14 @@ summary_report = {
     "gates": gate_results
 }
 
-with open("reports/ci_quality_gate_results.json", "w", encoding="utf-8") as f:
+# Write summary – respect isolated output path
+os.makedirs(os.path.dirname(os.path.abspath(CI_REPORT_OUTPUT_PATH)), exist_ok=True)
+with open(CI_REPORT_OUTPUT_PATH, "w", encoding="utf-8") as f:
     json.dump(summary_report, f, indent=2, ensure_ascii=False)
+if CI_ISOLATED_MODE:
+    print(f"[ISOLATED] Summary written to: {CI_REPORT_OUTPUT_PATH} (default path NOT written)")
+else:
+    print(f"[OUTPUT] Summary written to: {CI_REPORT_OUTPUT_PATH}")
 
 # Write comprehensive CI Gate Inventory
 gate_metadata_map = {

@@ -349,6 +349,104 @@ it('Gate 8: Blocks device appraisal value mixed with campaign discount', () => {
   assert(res.errors.includes('GATE_8_APPRAISAL_VALUE_MIXED_WITH_CAMPAIGN'));
 });
 
+// -------------------------------------------------------------
+// 7. STANDARDIZED SALE MODE & CHECKOUT CALCULATOR TESTS
+// -------------------------------------------------------------
+console.log('\n📌 Test Suite 7: Standardized Sale Mode Pricing & Checkout');
+
+const { calculateNet, calculateSaleModePrice, calculateCheckout } = require('../assets/js/promotion-calculator.js');
+
+it('calculateNet: 54,900 - 5,000 = 49,900', () => {
+  const res = calculateNet(54900, 5000);
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.netPrice, 49900);
+});
+
+it('calculateSaleModePrice: STANDARD_PAYMENT 54,900 - 5,000 = 49,900', () => {
+  const res = calculateSaleModePrice({
+    saleMode: 'STANDARD_PAYMENT',
+    regularPrice: 54900,
+    standardDiscount: 5000
+  });
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.netPrice, 49900);
+});
+
+it('calculateSaleModePrice: SF_PLUS 28,900 - 12,000 = 16,900 contract price, 10% down = 1,690, principal = 15,210', () => {
+  const res = calculateSaleModePrice({
+    saleMode: 'SF_PLUS',
+    regularPrice: 28900,
+    financeDiscount: 12000,
+    downPaymentPercent: 10
+  });
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.contractPrice, 16900);
+  assert.strictEqual(res.downPayment, 1690);
+  assert.strictEqual(res.financePrincipal, 15210);
+});
+
+it('calculateSaleModePrice: NON_SF_PLUS 17,999 - 2,000 = 15,999', () => {
+  const res = calculateSaleModePrice({
+    saleMode: 'NON_SF_PLUS',
+    regularPrice: 17999,
+    nonSfPlusDiscount: 2000
+  });
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.netPrice, 15999);
+});
+
+it('calculateSaleModePrice: STUDENT_EXCLUSIVE 54,900 with 15% discount = 46,665', () => {
+  const res = calculateSaleModePrice({
+    saleMode: 'STUDENT_EXCLUSIVE',
+    regularPrice: 54900,
+    studentDiscountPercent: 15
+  });
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.netPrice, 46665);
+});
+
+it('calculateSaleModePrice: TRADE_UP 54,900 - 5,000 (std) - 5,000 (bonus) = 44,900 before appraisal, checkout with 1,000 trade-in = 43,900', () => {
+  const res = calculateSaleModePrice({
+    saleMode: 'TRADE_UP',
+    regularPrice: 54900,
+    standardDiscount: 5000,
+    tradeUpBonus: 5000,
+    tradeInAppraisedValue: 1000
+  });
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.priceBeforeAppraisal, 44900);
+  assert.strictEqual(res.tradeInAppraisedValue, 1000);
+  assert.strictEqual(res.tradeUpBonus, 5000);
+  assert.strictEqual(res.totalTradeBenefit, 6000);
+  assert.strictEqual(res.finalCheckoutAmount, 43900);
+});
+
+it('calculateCheckout: BUNDLE_PURCHASE (49,900 - 4,000) + (5,990 - 3,000) = 48,890', () => {
+  const res = calculateCheckout({
+    saleMode: 'STANDARD_PAYMENT',
+    regularPrice: 49900,
+    standardDiscount: 4000,
+    bundleItems: [
+      { regularPrice: 5990, bundleDiscount: 3000 }
+    ]
+  });
+  assert.strictEqual(res.valid, true);
+  assert.strictEqual(res.primaryNet, 45900);
+  assert.strictEqual(res.bundleItemsNet, 2990);
+  assert.strictEqual(res.finalCheckoutAmount, 48890);
+});
+
+it('calculateSaleModePrice Fail-Closed: negative price or excessive discount returns valid: false', () => {
+  const res1 = calculateSaleModePrice({ saleMode: 'STANDARD_PAYMENT', regularPrice: -100 });
+  assert.strictEqual(res1.valid, false);
+
+  const res2 = calculateSaleModePrice({ saleMode: 'STANDARD_PAYMENT', regularPrice: 5000, standardDiscount: 6000 });
+  assert.strictEqual(res2.valid, false);
+
+  const res3 = calculateSaleModePrice({ saleMode: 'TRADE_UP', regularPrice: 54900, standardDiscount: 5000, tradeUpBonus: 60000 });
+  assert.strictEqual(res3.valid, false);
+});
+
 console.log(`\n🏁 Test Results: ${passed}/${total} passed (${Math.round((passed / total) * 100)}%)\n`);
 
 if (passed !== total) {

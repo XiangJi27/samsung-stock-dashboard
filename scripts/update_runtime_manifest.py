@@ -3,6 +3,11 @@
 Generates and binds runtime_manifest.json with exact file SHA-256 hashes,
 proper environment label (PROTECTED_PREVIEW_CANDIDATE), current timestamp, and Git commit provenance.
 Zero stale timestamps • Zero unverified hashes
+
+New in Phase 1.5-C2:
+  --output <path>            Write manifest to <path> instead of the default runtime_manifest.json
+  RUNTIME_MANIFEST_OUTPUT    Equivalent environment variable
+  If an override path is specified, the default file is NOT written (isolated mode).
 """
 
 import os
@@ -57,7 +62,7 @@ RUNTIME_FILES_ORDER = [
     "assets/js/sheet-sync.js"
 ]
 
-def update_manifest(commit_override=None, env_label="PROTECTED_PREVIEW_CANDIDATE"):
+def update_manifest(commit_override=None, env_label="PROTECTED_PREVIEW_CANDIDATE", output_path=None):
     commit_sha = commit_override or get_git_commit()
     branch = get_git_branch()
     
@@ -101,11 +106,18 @@ def update_manifest(commit_override=None, env_label="PROTECTED_PREVIEW_CANDIDATE
         "files": files_manifest
     }
 
-    with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
+    # Resolve output destination
+    _isolated = bool(output_path)
+    dest = output_path if output_path else MANIFEST_FILE
+    os.makedirs(os.path.dirname(os.path.abspath(dest)), exist_ok=True)
+    with open(dest, "w", encoding="utf-8") as f:
         json.dump(manifest_data, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
-    print(f"✅ runtime_manifest.json updated successfully:")
+    if _isolated:
+        print(f"[ISOLATED] Manifest written to: {dest} (default runtime_manifest.json NOT written)")
+    else:
+        print(f"\u2705 runtime_manifest.json updated successfully:")
     print(f"   - Environment: {env_label}")
     print(f"   - GeneratedAt: {now_iso}")
     print(f"   - CommitSha: {commit_sha}")
@@ -113,5 +125,17 @@ def update_manifest(commit_override=None, env_label="PROTECTED_PREVIEW_CANDIDATE
     return manifest_data
 
 if __name__ == "__main__":
-    c_sha = sys.argv[1] if len(sys.argv) > 1 else None
-    update_manifest(commit_override=c_sha)
+    # --output <path> or RUNTIME_MANIFEST_OUTPUT env var for isolated mode
+    _out = os.environ.get("RUNTIME_MANIFEST_OUTPUT", "")
+    if "--output" in sys.argv:
+        _oi = sys.argv.index("--output")
+        if _oi + 1 < len(sys.argv):
+            _out = sys.argv[_oi + 1]
+    c_sha = None
+    if "--commit-sha" in sys.argv:
+        _ci = sys.argv.index("--commit-sha")
+        if _ci + 1 < len(sys.argv):
+            c_sha = sys.argv[_ci + 1]
+    elif len(sys.argv) > 1 and not sys.argv[1].startswith("--"):
+        c_sha = sys.argv[1]
+    update_manifest(commit_override=c_sha, output_path=_out or None)

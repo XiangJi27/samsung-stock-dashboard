@@ -103,8 +103,9 @@ function renderPromotionsView() {
                 <th>P/N &amp; ชื่อรุ่น</th>
                 <th>ประเภทโค้ด</th>
                 <th>ราคาป้าย (RRP)</th>
-                <th>ส่วนลดโปรโมชั่น</th>
-                <th>ราคาสุทธิ (Net Price)</th>
+                <th>ส่วนลดซื้อปกติ</th>
+                <th>โบนัส Trade Up</th>
+                <th>ราคาก่อนประเมิน / ชำระจริง</th>
                 <th>คูปอง</th>
                 <th>Sale Mode</th>
                 <th>สถานะการรับรอง</th>
@@ -146,7 +147,7 @@ function renderPromotionsView() {
     }
 
     if (list.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 28px;">ไม่พบรายการโปรโมชั่นที่ตรงกับเงื่อนไข</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #94a3b8; padding: 28px;">ไม่พบรายการโปรโมชั่นที่ตรงกับเงื่อนไข</td></tr>`;
       return;
     }
 
@@ -163,6 +164,89 @@ function renderPromotionsView() {
         statusBadge = `<span class="status-badge-gate" style="color: #94a3b8; background: rgba(148, 163, 184, 0.1); border: 1px solid #64748b;">⚪ EXPIRED</span>`;
       }
 
+      const isTradeUp = item.saleMode === 'TRADE_UP';
+      const isSfPlus = item.saleMode === 'SF_PLUS';
+      const isStudent = item.saleMode === 'STUDENT' || item.saleMode === 'STUDENT_EXCLUSIVE';
+
+      let stdDiscount = 0;
+      let tuBonus = 0;
+
+      if (isTradeUp) {
+        stdDiscount = Number(item.standardDiscount || 0);
+        tuBonus = Number(item.tradeUpBonusAmount || item.tradeUpDiscount || 0);
+        if (stdDiscount === 0 && tuBonus === 0 && (item.discountValue || item.discount) > 0) {
+          tuBonus = Number(item.tradeUpDiscount || (item.discountValue || item.discount) / 2);
+          stdDiscount = (item.discountValue || item.discount) - tuBonus;
+        } else if (stdDiscount === 0 && tuBonus > 0 && (item.discountValue || item.discount) > tuBonus) {
+          stdDiscount = (item.discountValue || item.discount) - tuBonus;
+        }
+      } else if (isSfPlus) {
+        stdDiscount = Number(item.sfPlusDiscount || item.discountValue || item.discount || 0);
+      } else if (isStudent) {
+        stdDiscount = Number(item.studentDiscount || item.discountValue || item.discount || 0);
+      } else {
+        stdDiscount = Number(item.standardDiscount || item.discountValue || item.discount || 0);
+      }
+
+      // Discount columns
+      const stdDiscountHtml = stdDiscount > 0
+        ? `<span class="text-coral">-฿${stdDiscount.toLocaleString()}</span>`
+        : '<span style="color: #94a3b8;">-</span>';
+
+      const tuBonusHtml = (isTradeUp && tuBonus > 0)
+        ? `<strong style="color: #34d399;">-฿${tuBonus.toLocaleString()}</strong>`
+        : '<span style="color: #94a3b8;">-</span>';
+
+      // Price column
+      let priceCellHtml = '';
+      if (isTradeUp) {
+        const priceBeforeAppraisal = (item.rrp && (stdDiscount > 0 || tuBonus > 0))
+          ? (item.rrp - stdDiscount - tuBonus)
+          : (item.netPrice || item.tradeUpNetPrice || 0);
+        priceCellHtml = `
+          <strong style="color: #34d399; font-size: 0.95rem;">฿${priceBeforeAppraisal.toLocaleString()}</strong>
+          <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">ราคาก่อนหักมูลค่าเครื่องเก่า</div>
+          <div style="font-size: 0.65rem; color: #6ee7b7; margin-top: 1px;">* ยังไม่หักมูลค่าเครื่องเก่าที่ประเมินในหน้าชำระเงิน</div>
+        `;
+      } else if (isSfPlus) {
+        priceCellHtml = `
+          <strong style="color: var(--neon-cyan); font-size: 0.95rem;">฿${(item.netPrice || 0).toLocaleString()}</strong>
+          <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">ราคาสินค้าตามสัญญา</div>
+          <div style="font-size: 0.65rem; color: #fbbf24; margin-top: 1px;">เงินดาวน์คิดแยกตามผลอนุมัติ</div>
+        `;
+      } else if (isStudent) {
+        priceCellHtml = `
+          <strong style="color: var(--neon-cyan); font-size: 0.95rem;">฿${(item.netPrice || 0).toLocaleString()}</strong>
+          <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">ราคาที่ลูกค้าชำระ</div>
+          <div style="font-size: 0.65rem; color: #cbd5e1; margin-top: 1px;">(สิทธิ์เฉพาะนักศึกษา)</div>
+        `;
+      } else {
+        priceCellHtml = `
+          <strong style="color: var(--neon-cyan); font-size: 0.95rem;">฿${(item.netPrice || 0).toLocaleString()}</strong>
+          <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">ราคาที่ลูกค้าชำระ</div>
+        `;
+      }
+
+      // Coupon column
+      let couponHtml = '';
+      if (isTradeUp) {
+        if (item.coupon && item.coupon !== '-') {
+          couponHtml = `
+            <span class="type-pill" title="คูปองสำหรับส่วนลดซื้อปกติ">${item.coupon} (เฉพาะซื้อปกติ)</span>
+            <div style="font-size: 0.65rem; color: #94a3b8; margin-top: 2px;">Trade Up ไม่ใช้คูปอง</div>
+          `;
+        } else {
+          couponHtml = `
+            <span class="type-pill">-</span>
+            <div style="font-size: 0.65rem; color: #94a3b8; margin-top: 2px;">Trade Up ไม่ใช้คูปอง</div>
+          `;
+        }
+      } else if (isStudent) {
+        couponHtml = `<span class="type-pill" style="color: var(--shell-neon-cyan); background: rgba(0,240,255,0.1);">${item.coupon || 'Studentcrd'}</span>`;
+      } else {
+        couponHtml = `<span class="type-pill">${item.coupon || '-'}</span>`;
+      }
+
       return `
         <tr>
           <td>
@@ -173,10 +257,11 @@ function renderPromotionsView() {
           </td>
           <td><span class="type-pill ${item.productCodeType === 'STANDARD_SM' ? 'active' : ''}">${item.productCodeType || 'STANDARD_SM'}</span></td>
           <td>${item.rrp > 0 ? `฿${item.rrp.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
-          <td class="text-coral">${(item.discountValue || item.discount) > 0 ? `-฿${(item.discountValue || item.discount).toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
-          <td style="font-weight: 700; color: var(--neon-cyan);">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
-          <td><span class="type-pill">${item.coupon || '-'}</span></td>
-          <td><span class="type-pill" style="font-size: 0.72rem;">${item.saleMode || 'STANDARD'}</span></td>
+          <td>${stdDiscountHtml}</td>
+          <td>${tuBonusHtml}</td>
+          <td>${priceCellHtml}</td>
+          <td>${couponHtml}</td>
+          <td><span class="type-pill" style="font-size: 0.72rem; ${isTradeUp ? 'color: #34d399; border-color: rgba(52, 211, 153, 0.4);' : ''}">${item.saleMode || 'STANDARD'}</span></td>
           <td>${statusBadge}</td>
         </tr>
       `;

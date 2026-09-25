@@ -112,9 +112,11 @@ class AppRouter {
     const views = document.querySelectorAll(".app-view");
     views.forEach(view => {
       if (view.id === activeViewId) {
+        view.removeAttribute("hidden");
         view.classList.remove("hidden-view");
         view.classList.add("active-view");
       } else {
+        view.setAttribute("hidden", "true");
         view.classList.remove("active-view");
         view.classList.add("hidden-view");
       }

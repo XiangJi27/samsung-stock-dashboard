@@ -2,10 +2,10 @@
   "manifestVersion": "1.1.0-pilot",
   "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
   "applicationSourceCommit": "4dba2fe",
-  "packageBuiltFromCommit": "0c46cb2",
+  "packageBuiltFromCommit": "afc2db0",
   "baselineCommit": "a7c3390",
   "databaseSchemaCommit": "4dba2fe",
-  "builtAt": "2026-09-18T18:52:38.039462+07:00",
+  "builtAt": "2026-09-23T12:39:42.343005+07:00",
   "project": "Samsung Branch Operations System - Feedback Pilot",
   "pilotBranch": "AYUTTHAYA_CITY_PARK",
   "usersCount": 4,
@@ -13,14 +13,14 @@
   "totalFiles": 55,
   "summary": {
     "totalFiles": 55,
-    "totalSizeBytes": 10059408,
-    "totalSizeMB": 9.59
+    "totalSizeBytes": 10075378,
+    "totalSizeMB": 9.61
   },
   "files": [
     {
       "file": "index.html",
-      "sizeBytes": 67598,
-      "sha256": "a0a813d2817e48bc91ddc700b73f34dbc5834676c3c526616c9611099afca5d0",
+      "sizeBytes": 67791,
+      "sha256": "76351776febbe8ad81338cd81ff012219868a7816b6cf24b6d2817d41635fd05",
       "status": "PILOT_ENTRYPOINT_MIRROR"
     },
     {
@@ -110,8 +110,8 @@
     },
     {
       "file": "assets/js/router.js",
-      "sizeBytes": 7105,
-      "sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
+      "sizeBytes": 7190,
+      "sha256": "73cdb7ab485977eab8f0c75b42436e9edcb725a19b2dec7708f982dd66bf1292",
       "status": "BASELINE_CORE"
     },
     {
@@ -128,8 +128,8 @@
     },
     {
       "file": "assets/js/modules.js",
-      "sizeBytes": 17915,
-      "sha256": "3725be64dd7d77c283072f07039dfbe6f0f0c3d37535807c5fdd91e2146221e9",
+      "sizeBytes": 22499,
+      "sha256": "79d9eea2472b9c49b7e3671afa995f7aa2a4dde4fb282512393b58fc9be40271",
       "status": "BASELINE_CORE"
     },
     {
@@ -146,8 +146,8 @@
     },
     {
       "file": "assets/js/promotion-importer.js",
-      "sizeBytes": 163832,
-      "sha256": "3c6374e3544bd5628c8d2ffde711d24acbfa2bb3e2de94e61b32d2aa1926d10d",
+      "sizeBytes": 166254,
+      "sha256": "a7c48ee74b1492d4fcbd70d9b7d5136c6ebc423483f1f6a5888a02ec31bebfe6",
       "status": "BASELINE_CORE"
     },
     {
@@ -158,8 +158,8 @@
     },
     {
       "file": "pilot.html",
-      "sizeBytes": 67598,
-      "sha256": "a0a813d2817e48bc91ddc700b73f34dbc5834676c3c526616c9611099afca5d0",
+      "sizeBytes": 67791,
+      "sha256": "76351776febbe8ad81338cd81ff012219868a7816b6cf24b6d2817d41635fd05",
       "status": "PILOT_RUNTIME"
     },
     {
@@ -326,8 +326,8 @@
     },
     {
       "file": "assets/js/promotion-calculator.js",
-      "sizeBytes": 38024,
-      "sha256": "5866e4d8d2514ff0a7655e8df6612e4b440a2335457c7b278e5d584b22a94a72",
+      "sizeBytes": 46517,
+      "sha256": "013679768d05e2e11b19dc9b090346190bf3e5799767db4de67237a2fe441463",
       "status": "PILOT_RUNTIME"
     },
     {

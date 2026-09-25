@@ -634,7 +634,23 @@
           // Case A: Row contains Trade Up discount -> Split into STANDARD_PAYMENT and TRADE_UP
           if (tradeUpDiscount !== null && tradeUpDiscount > 0) {
             // 1. STANDARD_PAYMENT Variant
-            const stdExpectedNet = rrp !== null ? (rrp - (stdDiscount || 0)) : null;
+            const pricingRuntime = (typeof window !== 'undefined' && window.PromotionPricingRuntime)
+              ? window.PromotionPricingRuntime.getRuntimeStatus()
+              : { valid: false, status: 'BLOCKED', code: 'PRICING_ENGINE_UNAVAILABLE' };
+
+            let stdPreview = null;
+            if (pricingRuntime.valid && pricingRuntime.status === 'READY') {
+              stdPreview = (typeof window !== 'undefined' && window.PromotionPricingEngine)
+                ? window.PromotionPricingEngine.calculatePromotionPricing({
+                  saleMode: 'STANDARD_PAYMENT', regularPrice: rrp, standardDiscount: stdDiscount || 0,
+                  calculationStage: 'PREVIEW', sourceFields: { rrp: 'import', standardDiscount: 'import' }
+                })
+                : null;
+            }
+
+            const stdExpectedNet = stdPreview
+              ? (stdPreview.valid ? stdPreview.calculatedAmounts.primaryNet : null)
+              : (pricingRuntime.warningCode === 'LEGACY_PRICING_ENGINE_ACTIVE' && rrp !== null ? (rrp - (stdDiscount || 0)) : null);
             const stdNet = standardNetPrice !== null ? standardNetPrice : stdExpectedNet;
             const stdOrigin = standardNetPrice !== null ? 'SOURCE_CELL' : 'DERIVED_FROM_SOURCE_COMPONENTS';
 
@@ -642,10 +658,18 @@
             const stdFlags = [];
             let stdReason = '';
 
-            if (hasFormulaError) {
+            if (pricingRuntime.status !== 'READY' && pricingRuntime.warningCode !== 'LEGACY_PRICING_ENGINE_ACTIVE') {
+              stdStatus = 'BLOCKED_INVALID';
+              stdFlags.push('PRICING_ENGINE_UNAVAILABLE');
+              stdReason = 'ระบบคำนวณราคา V2 ไม่พร้อมใช้งาน (PRICING_ENGINE_UNAVAILABLE)';
+            } else if (hasFormulaError) {
               stdStatus = 'BLOCKED_INVALID';
               stdFlags.push('SOURCE_FORMULA_ERROR');
               stdReason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail})`;
+            } else if (stdPreview && !stdPreview.valid) {
+              stdStatus = 'BLOCKED_INVALID';
+              stdFlags.push(stdPreview.code || 'PRICING_CALCULATION_INVALID');
+              stdReason = stdPreview.message || 'การคำนวณราคา Standard Payment ไม่ผ่านเกณฑ์ความปลอดภัย V2';
             } else if (stdNet === null) {
               stdStatus = 'BLOCKED_INVALID';
               stdFlags.push('NET_PRICE_NOT_EXTRACTED');
@@ -688,6 +712,10 @@
               netPriceOrigin: stdOrigin,
               coupon: normalizedCoupon,
               saleMode: 'STANDARD_PAYMENT',
+              pricingResult: stdPreview,
+              pricingEngineVersion: stdPreview?.engineVersion || null,
+              pricingSchemaVersion: stdPreview?.schemaVersion || null,
+              guards: stdPreview?.guards || null,
               promotionSourceType: 'EXCEL_CONFIRMED',
               validationStatus: stdStatus,
               validationFlags: stdFlags,
@@ -708,7 +736,19 @@
             });
 
             // 2. TRADE_UP Variant
-            const tupExpectedNet = rrp !== null ? (rrp - (stdDiscount || 0) - tradeUpDiscount) : null;
+            let tupPreview = null;
+            if (pricingRuntime.valid && pricingRuntime.status === 'READY') {
+              tupPreview = (typeof window !== 'undefined' && window.PromotionPricingEngine)
+                ? window.PromotionPricingEngine.calculatePromotionPricing({
+                  saleMode: 'TRADE_UP', regularPrice: rrp, standardDiscount: stdDiscount,
+                  tradeUpBonus: tradeUpDiscount, hasEligibleTradeInDevice: true,
+                  calculationStage: 'PREVIEW', sourceFields: { rrp: 'import', standardDiscount: 'import', tradeUpBonus: 'import' }
+                })
+                : null;
+            }
+            const tupExpectedNet = tupPreview
+              ? (tupPreview.valid ? tupPreview.calculatedAmounts.priceBeforeTradeInAppraisal : null)
+              : (pricingRuntime.warningCode === 'LEGACY_PRICING_ENGINE_ACTIVE' && rrp !== null ? (rrp - (stdDiscount || 0) - tradeUpDiscount) : null);
             const tupNet = tradeUpNetPrice !== null ? tradeUpNetPrice : tupExpectedNet;
             const tupOrigin = tradeUpNetPrice !== null ? 'SOURCE_CELL' : 'DERIVED_FROM_SOURCE_COMPONENTS';
 
@@ -716,10 +756,18 @@
             const tupFlags = [];
             let tupReason = '';
 
-            if (hasFormulaError) {
+            if (pricingRuntime.status !== 'READY' && pricingRuntime.warningCode !== 'LEGACY_PRICING_ENGINE_ACTIVE') {
+              tupStatus = 'BLOCKED_INVALID';
+              tupFlags.push('PRICING_ENGINE_UNAVAILABLE');
+              tupReason = 'ระบบคำนวณราคา V2 ไม่พร้อมใช้งาน (PRICING_ENGINE_UNAVAILABLE)';
+            } else if (hasFormulaError) {
               tupStatus = 'BLOCKED_INVALID';
               tupFlags.push('SOURCE_FORMULA_ERROR');
               tupReason = `พบข้อผิดพลาดสูตรใน Excel (${formulaErrorDetail})`;
+            } else if (tupPreview && !tupPreview.valid) {
+              tupStatus = 'BLOCKED_INVALID';
+              tupFlags.push(tupPreview.code || 'PRICING_CALCULATION_INVALID');
+              tupReason = tupPreview.message || 'การคำนวณราคา Trade Up ไม่ผ่านเกณฑ์ความปลอดภัย V2';
             } else if (tupNet === null) {
               tupStatus = 'BLOCKED_INVALID';
               tupFlags.push('NET_PRICE_NOT_EXTRACTED');
@@ -760,13 +808,19 @@
               requiresTradeIn: true,
               standardNetPrice: stdExpectedNet,
               tradeUpNetPrice: tupNet,
-              tradeUpPaymentCode: tradeUpPaymentCode || null,
+              tradeUpPaymentCode: null, // As specified: Trade Up has no payment code
+              tradeUpCouponCode: null,  // As specified: Trade Up has no coupon code
+              standardCouponCode: normalizedCoupon || null,
               netPrice: tupNet,
               netPriceOrigin: tupOrigin,
-              coupon: normalizedCoupon,
+              coupon: normalizedCoupon || '-',
               paymentCondition: parsedHeading?.paymentCondition || 'ANY',
               saleMode: 'TRADE_UP',
               promotionType: 'TRADE_UP_BONUS',
+              pricingResult: tupPreview,
+              pricingEngineVersion: tupPreview?.engineVersion || null,
+              pricingSchemaVersion: tupPreview?.schemaVersion || null,
+              guards: tupPreview?.guards || null,
               promotionSourceType: 'EXCEL_CONFIRMED',
               validationStatus: tupStatus,
               validationFlags: tupFlags,
@@ -803,7 +857,23 @@
             }
 
             const activeDiscount = isAddonSheet ? (addOnDisc || 0) : (stdDiscount || 0);
-            const expectedNet = rrp !== null ? (rrp - activeDiscount) : null;
+            const previewMode = saleMode === 'STUDENT' ? 'STUDENT_EXCLUSIVE' : (saleMode === 'ADD_ON_PURCHASE' ? 'BUNDLE_PURCHASE' : saleMode);
+            let previewResult = null;
+            if (pricingRuntime.valid && pricingRuntime.status === 'READY') {
+              previewResult = (typeof window !== 'undefined' && window.PromotionPricingEngine)
+                ? window.PromotionPricingEngine.calculatePromotionPricing({
+                  saleMode: previewMode, regularPrice: rrp,
+                  standardDiscount: previewMode === 'STANDARD_PAYMENT' ? activeDiscount : 0,
+                  financeDiscount: previewMode === 'SF_PLUS' ? activeDiscount : 0,
+                  nonSfPlusDiscount: previewMode === 'NON_SF_PLUS' ? activeDiscount : 0,
+                  studentDiscountAmount: previewMode === 'STUDENT_EXCLUSIVE' ? activeDiscount : 0,
+                  calculationStage: 'PREVIEW', sourceFields: { rrp: 'import', discount: 'import' }
+                })
+                : null;
+            }
+            const expectedNet = previewResult
+              ? (previewResult.valid ? (previewResult.calculatedAmounts.primaryNet ?? previewResult.calculatedAmounts.financeContractPrice) : null)
+              : (pricingRuntime.warningCode === 'LEGACY_PRICING_ENGINE_ACTIVE' && rrp !== null ? (rrp - activeDiscount) : null);
 
             let resolvedNet = null;
             let netOrigin = 'DERIVED_FROM_SOURCE_COMPONENTS';
@@ -826,7 +896,19 @@
             const flags = [];
             let reason = '';
 
-            if (parsedHeading && parsedHeading.parsingStatus === 'REVIEW_REQUIRED') {
+            if (pricingRuntime.status !== 'READY' && pricingRuntime.warningCode !== 'LEGACY_PRICING_ENGINE_ACTIVE') {
+              status = 'BLOCKED_INVALID';
+              flags.push('PRICING_ENGINE_UNAVAILABLE');
+              reason = 'ระบบคำนวณราคา V2 ไม่พร้อมใช้งาน (PRICING_ENGINE_UNAVAILABLE)';
+            } else if (previewResult && previewResult.code === 'DOWN_PAYMENT_SELECTION_REQUIRED') {
+              status = 'REVIEW_REQUIRED';
+              flags.push('DOWN_PAYMENT_SELECTION_REQUIRED');
+              reason = 'กรุณาเลือกเงินดาวน์ก่อน จึงจะสามารถสร้าง Cloud Draft ได้ (DOWN_PAYMENT_SELECTION_REQUIRED)';
+            } else if (previewResult && !previewResult.valid) {
+              status = 'BLOCKED_INVALID';
+              flags.push(previewResult.code || 'PRICING_CALCULATION_INVALID');
+              reason = previewResult.message || 'การคำนวณราคาไม่ผ่านเกณฑ์ความปลอดภัย V2';
+            } else if (parsedHeading && parsedHeading.parsingStatus === 'REVIEW_REQUIRED') {
               status = 'REVIEW_REQUIRED';
               flags.push('PARSING_REVIEW_REQUIRED', parsedHeading.errorCode || 'PARSING_ERROR');
               reason = `พบข้อผิดพลาดในการแยกข้อมูลหัวข้อสินค้า: ${parsedHeading.errorCode || 'REVIEW_REQUIRED'}`;
@@ -885,6 +967,11 @@
               paymentCondition: parsedHeading?.paymentCondition || 'ANY',
               saleMode,
               promotionType: parsedHeading?.promotionType || (saleMode === 'SF_PLUS' ? 'SF_PLUS_FINANCING' : (saleMode === 'NON_SF_PLUS' ? 'NON_SF_PLUS_DISCOUNT' : 'STANDARD_DISCOUNT')),
+              pricingResult: previewResult,
+              pricingEngineVersion: previewResult?.engineVersion || null,
+              pricingSchemaVersion: previewResult?.schemaVersion || null,
+              guards: previewResult?.guards || null,
+              downPaymentSelectionRequired: previewResult?.code === 'DOWN_PAYMENT_SELECTION_REQUIRED',
               promotionSourceType: 'EXCEL_CONFIRMED',
               validationStatus: status,
               validationFlags: flags,
@@ -1318,6 +1405,7 @@
     }
 
     ensureUiElements() {
+      if (typeof document === 'undefined') return;
       // 1. Ensure storage banner has IDs
       const banner = document.querySelector('#view-promotion-import .local-store-banner');
       if (banner) {
@@ -1408,40 +1496,88 @@
         document.getElementById('btnClosePromoDbPreviewFooter')?.addEventListener('click', () => this.closeDatabasePreview());
         document.getElementById('btnConfirmDbSaveFromModal')?.addEventListener('click', () => this.savePromotionDraftToDatabase());
       }
+      this.updatePricingEngineUiState();
     }
 
-    showDatabasePreview() {
+    updatePricingEngineUiState(runtimeDecision) {
+      const getRt = () => {
+        if (typeof PromotionPricingRuntime !== 'undefined' && typeof PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof window !== 'undefined' && window.PromotionPricingRuntime && typeof window.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return window.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof globalThis !== 'undefined' && globalThis.PromotionPricingRuntime && typeof globalThis.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return globalThis.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        return { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', businessUseAllowed: false, cloudDraftAllowed: false };
+      };
+
+      const decision = runtimeDecision || getRt();
       const b = this.currentStagedBatch;
-      if (!b) {
-        alert('ไม่พบข้อมูลแบบร่างสำหรับแสดงผล');
-        return;
+      const hasDownPaymentIssue = (b?.variants || []).some(v => v.downPaymentSelectionRequired || v.pricingResult?.code === 'DOWN_PAYMENT_SELECTION_REQUIRED');
+
+      let state = 'READY';
+      let message = 'ระบบคำนวณราคา V2 พร้อมใช้งาน';
+
+      if (!decision.valid || decision.code === 'PRICING_ENGINE_UNAVAILABLE') {
+        state = 'PRICING_ENGINE_UNAVAILABLE';
+        message = decision.message || 'ระบบคำนวณราคา V2 ไม่พร้อมใช้งาน (PRICING_ENGINE_UNAVAILABLE)';
+      } else if (decision.engine === 'LEGACY' || decision.warningCode === 'LEGACY_PRICING_ENGINE_ACTIVE') {
+        state = 'LEGACY_PRICING_ENGINE_ACTIVE';
+        message = decision.message || 'ระบบคำนวณราคาแบบดั้งเดิม (Legacy Engine Active) ใช้ได้เฉพาะ Development Mode เท่านั้น';
+      } else if (hasDownPaymentIssue) {
+        state = 'DOWN_PAYMENT_SELECTION_REQUIRED';
+        message = 'ต้องระบุทางเลือกเงินดาวน์ให้ครบถ้วนก่อนบันทึกแบบร่าง (DOWN_PAYMENT_SELECTION_REQUIRED)';
       }
 
-      this.ensureUiElements();
-      const modal = document.getElementById('promoDatabasePreviewModal');
+      if (typeof document !== 'undefined') {
+        const btnSave = document.getElementById('btnSavePromoDraftDatabase');
+        const btnModalSave = document.getElementById('btnConfirmDbSaveFromModal');
+        const warningBadge = document.getElementById('pricingEngineWarningBadge');
+
+        const isBlocked = (state !== 'READY') || !decision.businessUseAllowed || !decision.cloudDraftAllowed;
+
+        if (btnSave) {
+          if (isBlocked) {
+            btnSave.disabled = true;
+            btnSave.title = message;
+            btnSave.style.opacity = '0.5';
+            btnSave.style.cursor = 'not-allowed';
+          } else {
+            btnSave.disabled = false;
+            btnSave.title = '';
+            btnSave.style.opacity = '1';
+            btnSave.style.cursor = 'pointer';
+          }
+        }
+        if (btnModalSave) {
+          if (isBlocked) {
+            btnModalSave.disabled = true;
+            btnModalSave.title = message;
+            btnModalSave.style.opacity = '0.5';
+            btnModalSave.style.cursor = 'not-allowed';
+          } else {
+            btnModalSave.disabled = false;
+            btnModalSave.title = '';
+            btnModalSave.style.opacity = '1';
+            btnModalSave.style.cursor = 'pointer';
+          }
+        }
+        if (warningBadge) {
+          warningBadge.textContent = state;
+          warningBadge.title = message;
+          warningBadge.className = `status-badge ${state.toLowerCase()}`;
+        }
+      }
+
+      return { state, message, decision };
+    }
+
+    _renderDatabasePreviewModalContent(b, passedItems, reviewItems, blockedItems, plannedOfferRecords, distinctTargetPns) {
+      if (typeof document === 'undefined') return;
       const content = document.getElementById('promoDbPreviewContent');
-      if (!modal || !content) return;
-
-      const passedItems = (b.variants || []).filter(v => v.validationStatus === 'PASSED_VALIDATION');
-      const reviewItems = (b.variants || []).filter(v => v.validationStatus === 'REVIEW_REQUIRED');
-      const blockedItems = (b.variants || []).filter(v => v.validationStatus && v.validationStatus.startsWith('BLOCKED'));
-
-      // Calculate distinct Target P/Ns and actual planned Offer records from the real payload construction
-      const distinctTargetPns = new Set();
-      const plannedOfferRecords = [];
-      passedItems.forEach((item, idx) => {
-        const targetPns = (item.confirmedPns && item.confirmedPns.length > 0) ? item.confirmedPns : (item.pn ? [item.pn] : []);
-        targetPns.forEach((pn, pIdx) => {
-          distinctTargetPns.add(pn);
-          plannedOfferRecords.push({
-            inventoryPn: pn,
-            model: item.model,
-            capacity: item.capacity,
-            promotionType: item.saleMode === 'TRADE_UP' ? 'TRADE_UP_CONDITIONAL' : (item.coupon === 'Studentcrd' ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
-            sourceRow: item.sourceTrace?.row || idx + 1
-          });
-        });
-      });
+      if (!content) return;
 
       const campaignCode = `SEP2026-RETAIL-MOBILE`;
       const campaignName = `โปรโมชั่นมือถือ เดือนกันยายน 2026 (Retail Shop)`;
@@ -1572,32 +1708,194 @@
           </div>
         </div>
       `;
+    }
 
-      modal.classList.remove('hidden');
-      modal.style.display = 'flex';
+    showDatabasePreview(options = {}) {
+      const b = this.currentStagedBatch;
+      if (!b) {
+        if (typeof alert === 'function') alert('ไม่พบข้อมูลแบบร่างสำหรับแสดงผล');
+        return { allowed: false, error: 'NO_STAGED_BATCH' };
+      }
+
+      this.ensureUiElements();
+      const modal = typeof document !== 'undefined' ? document.getElementById('promoDatabasePreviewModal') : null;
+      const content = typeof document !== 'undefined' ? document.getElementById('promoDbPreviewContent') : null;
+
+      const passedItems = (b.variants || []).filter(v => v.validationStatus === 'PASSED_VALIDATION');
+      const reviewItems = (b.variants || []).filter(v => v.validationStatus === 'REVIEW_REQUIRED');
+      const blockedItems = (b.variants || []).filter(v => v.validationStatus && v.validationStatus.startsWith('BLOCKED'));
+
+      // Calculate distinct Target P/Ns and actual planned Offer records from the real payload construction
+      const distinctTargetPns = new Set();
+      const plannedOfferRecords = [];
+      passedItems.forEach((item, idx) => {
+        const targetPns = (item.confirmedPns && item.confirmedPns.length > 0) ? item.confirmedPns : (item.pn ? [item.pn] : []);
+        targetPns.forEach((pn) => {
+          distinctTargetPns.add(pn);
+          plannedOfferRecords.push({
+            inventoryPn: pn,
+            model: item.model,
+            capacity: item.capacity,
+            promotionType: item.saleMode === 'TRADE_UP' ? 'TRADE_UP_CONDITIONAL' : (item.coupon === 'Studentcrd' ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
+            sourceRow: item.sourceTrace?.row || idx + 1
+          });
+        });
+      });
+
+      const getRt = () => {
+        if (typeof PromotionPricingRuntime !== 'undefined' && typeof PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof window !== 'undefined' && window.PromotionPricingRuntime && typeof window.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return window.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof globalThis !== 'undefined' && globalThis.PromotionPricingRuntime && typeof globalThis.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return globalThis.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        return { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', businessUseAllowed: false };
+      };
+
+      const runtimeDecision = options.runtimeDecision || getRt();
+      const calculationResults = options.calculationResults || passedItems.map(v => v.pricingResult).filter(Boolean);
+
+      const previewClient = options.previewClient || (() => {
+        if (modal && content) {
+          this._renderDatabasePreviewModalContent(b, passedItems, reviewItems, blockedItems, plannedOfferRecords, distinctTargetPns);
+          modal.classList.remove('hidden');
+          modal.style.display = 'flex';
+        }
+        return { allowed: true, previewRendered: true };
+      });
+
+      const runtime = (typeof PromotionPricingRuntime !== 'undefined' ? PromotionPricingRuntime : (typeof window !== 'undefined' ? window.PromotionPricingRuntime : (typeof globalThis !== 'undefined' ? globalThis.PromotionPricingRuntime : null)));
+
+      if (runtime && typeof runtime.guardDatabasePreview === 'function') {
+        const decision = runtime.guardDatabasePreview({ runtimeDecision, calculationResults, previewClient });
+        if (!decision.allowed) {
+          console.warn('[Database Preview Guard] Blocked by Runtime Guard:', decision);
+          if (typeof alert === 'function') {
+            alert(`ระงับการเปิด Database Preview (Fail-Closed Policy):\nระบบคำนวณราคา V2 ไม่อนุญาต (${decision.code || 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT'})\nDatabase Action: DO_NOT_INSERT_OFFER`);
+          }
+          return decision;
+        }
+        return decision;
+      }
+
+      // Fail-closed fallback
+      return { allowed: false, code: 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT', databaseAction: 'DO_NOT_INSERT_OFFER' };
     }
 
     closeDatabasePreview() {
-      const modal = document.getElementById('promoDatabasePreviewModal');
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.style.display = 'none';
+      if (typeof document !== 'undefined') {
+        const modal = document.getElementById('promoDatabasePreviewModal');
+        if (modal) {
+          modal.classList.add('hidden');
+          modal.style.display = 'none';
+        }
       }
     }
 
-    async savePromotionDraftToDatabase() {
+    _buildRawOffersPayload(passedItems) {
+      const offersPayload = [];
+      (passedItems || []).forEach((item, idx) => {
+        const targetPns = (item.confirmedPns && item.confirmedPns.length > 0) ? item.confirmedPns : (item.pn ? [item.pn] : []);
+        targetPns.forEach((pn, pIdx) => {
+          const isStudent = item.coupon === 'Studentcrd' || item.promotionType === 'STUDENT_EXCLUSIVE';
+          const isTradeUp = item.saleMode === 'TRADE_UP' || item.promotionType === 'TRADE_UP_CONDITIONAL' || item.promotionType === 'TRADE_UP_ONLY';
+          const rawDiscount = Number(item.standardDiscount || item.discount || item.tradeUpDiscount || 0);
+          const discAmount = isStudent ? 0 : rawDiscount;
+          const discType = isStudent ? 'PERCENT' : (discAmount > 0 ? 'FIXED_AMOUNT' : 'NONE');
+
+          offersPayload.push({
+            inventoryPn: pn,
+            model: item.model,
+            capacity: item.capacity,
+            offerCode: `${isTradeUp ? 'TUP' : 'STD'}-${(item.model || '').replace(/\s+/g, '')}-${item.capacity || 'STD'}-${pIdx + 1}`,
+            promotionType: isTradeUp ? 'TRADE_UP_CONDITIONAL' : (isStudent ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
+            couponCode: item.coupon || null,
+            regularPrice: item.rrp,
+            discountType: discType,
+            discountAmount: discAmount,
+            discountPercent: isStudent ? 15 : (item.discountPercent || 0),
+            netPrice: item.netPrice,
+            paymentCondition: item.saleMode === 'SF_PLUS' ? 'SF_PLUS' : 'ANY',
+            customerSegment: isStudent ? 'STUDENT' : 'GENERAL',
+            requiresTradeIn: isTradeUp,
+            downPaymentMaxPercent: item.downPaymentMaxPercent || (item.saleMode === 'SF_PLUS' ? 5 : null),
+            estimatedDownPayment: item.estimatedDownPayment || null,
+            stackingPolicy: isStudent ? 'EXCLUSIVE' : 'STACKABLE_CONDITIONAL',
+            exclusiveGroup: isStudent ? 'STUDENT_GROUP' : (item.saleMode === 'SF_PLUS' ? 'PAYMENT_EXCLUSIVE' : null),
+            blocksAllOtherPromotions: isStudent,
+            status: 'DRAFT',
+            sourceSheet: item.sourceTrace?.sheet || 'Promotion',
+            sourceRow: item.sourceTrace?.row || idx + 1,
+            pricingMetadata: item.pricingResult ? {
+              engineVersion: item.pricingEngineVersion || item.pricingResult.engineVersion,
+              schemaVersion: item.pricingSchemaVersion || item.pricingResult.schemaVersion,
+              guards: item.guards || item.pricingResult.guards
+            } : null
+          });
+        });
+      });
+      return offersPayload;
+    }
+
+    createOffersPayload(passedItems, batch, options = {}) {
+      const items = passedItems || (batch?.variants || []).filter(v => v.validationStatus === 'PASSED_VALIDATION');
+      const getRt = () => {
+        if (typeof PromotionPricingRuntime !== 'undefined' && typeof PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof window !== 'undefined' && window.PromotionPricingRuntime && typeof window.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return window.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof globalThis !== 'undefined' && globalThis.PromotionPricingRuntime && typeof globalThis.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return globalThis.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        return { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', businessUseAllowed: false };
+      };
+
+      const runtimeDecision = options.runtimeDecision || getRt();
+      const calculationResults = options.calculationResults || items.map(v => v.pricingResult).filter(Boolean);
+      const payloadBuilder = options.payloadBuilder || this._buildRawOffersPayload.bind(this);
+
+      const runtime = (typeof PromotionPricingRuntime !== 'undefined' ? PromotionPricingRuntime : (typeof window !== 'undefined' ? window.PromotionPricingRuntime : (typeof globalThis !== 'undefined' ? globalThis.PromotionPricingRuntime : null)));
+
+      if (runtime && typeof runtime.guardOfferPayloadCreation === 'function') {
+        const result = runtime.guardOfferPayloadCreation({
+          runtimeDecision,
+          calculationResults,
+          payloadBuilder,
+          items
+        });
+        return result.allowed ? result.offers : [];
+      }
+
+      return [];
+    }
+
+    async savePromotionDraftToDatabase(options = {}) {
+      if (this.isSubmitting) {
+        console.warn('[Save Guard] Simultaneous submit prevented by double-submit guard');
+        return { allowed: false, reason: 'ALREADY_SUBMITTING', databaseAction: 'DO_NOT_INSERT_OFFER' };
+      }
+      this.isSubmitting = true;
+
       const b = this.currentStagedBatch;
       if (!b) {
-        alert('ไม่พบข้อมูลแบบร่างโปรโมชั่นสำหรับบันทึก');
-        return;
+        this.isSubmitting = false;
+        if (typeof alert === 'function') alert('ไม่พบข้อมูลแบบร่างโปรโมชั่นสำหรับบันทึก');
+        return { allowed: false, error: 'NO_STAGED_BATCH' };
       }
 
       // Check central stock source
-      if (this.stockSource !== 'CENTRAL_ACTIVE_STOCK' && !window.BYPASS_OFFLINE_DEV) {
+      const isBypass = typeof window !== 'undefined' && window.BYPASS_OFFLINE_DEV;
+      if (this.stockSource !== 'CENTRAL_ACTIVE_STOCK' && !isBypass) {
         await this.ensureCentralActiveStockLoaded();
-        if (this.stockSource !== 'CENTRAL_ACTIVE_STOCK' && !window.BYPASS_OFFLINE_DEV) {
-          alert('⚠️ CENTRAL_STOCK_REQUIRED: การบันทึกโปรโมชั่นลงฐานข้อมูลต้องเชื่อมต่อกับ Central Active Stock จากเซิร์ฟเวอร์เท่านั้น เพื่อป้องกันความคลาดเคลื่อนของรหัสสินค้า');
-          return;
+        if (this.stockSource !== 'CENTRAL_ACTIVE_STOCK' && !isBypass) {
+          this.isSubmitting = false;
+          if (typeof alert === 'function') alert('⚠️ CENTRAL_STOCK_REQUIRED: การบันทึกโปรโมชั่นลงฐานข้อมูลต้องเชื่อมต่อกับ Central Active Stock จากเซิร์ฟเวอร์เท่านั้น เพื่อป้องกันความคลาดเคลื่อนของรหัสสินค้า');
+          return { allowed: false, error: 'CENTRAL_STOCK_REQUIRED' };
         }
       }
 
@@ -1606,12 +1904,47 @@
       const blockedItems = (b.variants || []).filter(v => v.validationStatus && v.validationStatus.startsWith('BLOCKED'));
 
       if (passedItems.length === 0) {
-        alert('ไม่มีรายการโปรโมชั่นที่ผ่านการตรวจสอบ Exact P/N พร้อมบันทึก');
-        return;
+        this.isSubmitting = false;
+        if (typeof alert === 'function') alert('ไม่มีรายการโปรโมชั่นที่ผ่านการตรวจสอบ Exact P/N พร้อมบันทึก');
+        return { allowed: false, error: 'NO_PASSED_ITEMS' };
       }
 
-      const btnSave = document.getElementById('btnSavePromoDraftDatabase');
-      const btnModalSave = document.getElementById('btnConfirmDbSaveFromModal');
+      const getRt = () => {
+        if (typeof PromotionPricingRuntime !== 'undefined' && typeof PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof window !== 'undefined' && window.PromotionPricingRuntime && typeof window.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return window.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        if (typeof globalThis !== 'undefined' && globalThis.PromotionPricingRuntime && typeof globalThis.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+          return globalThis.PromotionPricingRuntime.getRuntimeStatus();
+        }
+        return { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', businessUseAllowed: false };
+      };
+
+      const runtimeDecision = options.runtimeDecision || getRt();
+      const calculationResults = options.calculationResults || passedItems.map(v => v.pricingResult).filter(Boolean);
+
+      const runtime = (typeof PromotionPricingRuntime !== 'undefined' ? PromotionPricingRuntime : (typeof window !== 'undefined' ? window.PromotionPricingRuntime : (typeof globalThis !== 'undefined' ? globalThis.PromotionPricingRuntime : null)));
+
+      // FAIL-CLOSED PRE-FLIGHT ENFORCEMENT
+      if (!runtime || typeof runtime.assertPricingReadyForCloudDraft !== 'function') {
+        this.isSubmitting = false;
+        return { allowed: false, code: 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT', databaseAction: 'DO_NOT_INSERT_OFFER' };
+      }
+
+      const preflight = runtime.assertPricingReadyForCloudDraft({ runtimeDecision, calculationResults });
+      if (!preflight.valid || !preflight.allowed) {
+        this.isSubmitting = false;
+        console.warn('[Save Guard] Cloud Draft Save blocked by preflight gate:', preflight);
+        if (typeof alert === 'function') {
+          alert(`ระงับการบันทึกแบบร่าง (Fail-Closed Policy):\nระบบคำนวณราคา V2 ไม่อนุญาตให้บันทึก Cloud Draft (${preflight.code || 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT'})\nDatabase Action: DO_NOT_INSERT_OFFER`);
+        }
+        return { allowed: false, code: preflight.code || 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT', databaseAction: 'DO_NOT_INSERT_OFFER' };
+      }
+
+      const btnSave = typeof document !== 'undefined' ? document.getElementById('btnSavePromoDraftDatabase') : null;
+      const btnModalSave = typeof document !== 'undefined' ? document.getElementById('btnConfirmDbSaveFromModal') : null;
       if (btnSave) {
         btnSave.disabled = true;
         btnSave.innerHTML = '<span>⏳ กำลังบันทึก Draft ลงฐานข้อมูล...</span>';
@@ -1625,52 +1958,18 @@
 
       try {
         let token = '';
-        if (window.AuthService && typeof window.AuthService.getSession === 'function') {
-          token = window.AuthService.getSession()?.access_token || '';
+        const auth = typeof window !== 'undefined' ? window.AuthService : null;
+        if (auth && typeof auth.getSession === 'function') {
+          token = auth.getSession()?.access_token || '';
         }
-        if (!token && window.AuthService && window.AuthService.currentUser) {
-          token = window.AuthService.currentUser.token || window.AuthService.currentUser.access_token || '';
+        if (!token && auth && auth.currentUser) {
+          token = auth.currentUser.token || auth.currentUser.access_token || '';
         }
         if (!token) {
           token = 'PILOT_STORE_LEADER_DEV_TOKEN';
         }
 
-        const offersPayload = [];
-        passedItems.forEach((item, idx) => {
-          const targetPns = item.confirmedPns || [item.pn];
-          targetPns.forEach((pn, pIdx) => {
-            const isStudent = item.coupon === 'Studentcrd' || item.promotionType === 'STUDENT_EXCLUSIVE';
-            const isTradeUp = item.saleMode === 'TRADE_UP' || item.promotionType === 'TRADE_UP_CONDITIONAL' || item.promotionType === 'TRADE_UP_ONLY';
-            const rawDiscount = Number(item.standardDiscount || item.discount || item.tradeUpDiscount || 0);
-            const discAmount = isStudent ? 0 : rawDiscount;
-            const discType = isStudent ? 'PERCENT' : (discAmount > 0 ? 'FIXED_AMOUNT' : 'NONE');
-
-            offersPayload.push({
-              inventoryPn: pn,
-              model: item.model,
-              capacity: item.capacity,
-              offerCode: `${isTradeUp ? 'TUP' : 'STD'}-${item.model.replace(/\s+/g, '')}-${item.capacity || 'STD'}-${pIdx + 1}`,
-              promotionType: isTradeUp ? 'TRADE_UP_CONDITIONAL' : (isStudent ? 'STUDENT_EXCLUSIVE' : 'STANDARD_DISCOUNT'),
-              couponCode: item.coupon || null,
-              regularPrice: item.rrp,
-              discountType: discType,
-              discountAmount: discAmount,
-              discountPercent: isStudent ? 15 : (item.discountPercent || 0),
-              netPrice: item.netPrice,
-              paymentCondition: item.saleMode === 'SF_PLUS' ? 'SF_PLUS' : 'ANY',
-              customerSegment: isStudent ? 'STUDENT' : 'GENERAL',
-              requiresTradeIn: isTradeUp,
-              downPaymentMaxPercent: item.downPaymentMaxPercent || (item.saleMode === 'SF_PLUS' ? 5 : null),
-              estimatedDownPayment: item.estimatedDownPayment || null,
-              stackingPolicy: isStudent ? 'EXCLUSIVE' : 'STACKABLE_CONDITIONAL',
-              exclusiveGroup: isStudent ? 'STUDENT_GROUP' : (item.saleMode === 'SF_PLUS' ? 'PAYMENT_EXCLUSIVE' : null),
-              blocksAllOtherPromotions: isStudent,
-              status: 'DRAFT',
-              sourceSheet: item.sourceTrace?.sheet || 'Promotion',
-              sourceRow: item.sourceTrace?.row || idx + 1
-            });
-          });
-        });
+        const offersPayload = this.createOffersPayload(passedItems, b, { runtimeDecision, calculationResults });
 
         const heldErrors = reviewItems.map((item, idx) => ({
           severity: 'REVIEW_REQUIRED',
@@ -1692,7 +1991,7 @@
             endAt: '2026-09-30T23:59:59+07:00'
           },
           summary: {
-            totalRows: b.stats.totalVariants,
+            totalRows: b.stats?.totalVariants || passedItems.length + reviewItems.length + blockedItems.length,
             passedRows: passedItems.length,
             warningRows: reviewItems.length,
             blockedRows: blockedItems.length,
@@ -1703,23 +2002,39 @@
           validationErrors: heldErrors
         };
 
-        let result;
-        if (typeof window.mockPromoImportHandler === 'function') {
-          result = await window.mockPromoImportHandler(payload);
-        } else {
+        const defaultSaveClient = async (p) => {
+          if (typeof window !== 'undefined' && typeof window.mockPromoImportHandler === 'function') {
+            return await window.mockPromoImportHandler(p);
+          }
           const response = await fetch('/api/promotion-imports', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(p)
           });
-          result = await response.json();
+          const jsonRes = await response.json();
           if (!response.ok) {
-            throw new Error(result.message || result.error || 'บันทึกลงฐานข้อมูลไม่สำเร็จ');
+            throw new Error(jsonRes.message || jsonRes.error || 'บันทึกลงฐานข้อมูลไม่สำเร็จ');
           }
+          return jsonRes;
+        };
+
+        const saveClient = options.saveClient || defaultSaveClient;
+
+        const gateResult = await runtime.guardBatchDraftSave({
+          payload,
+          runtimeDecision,
+          calculationResults,
+          saveClient
+        });
+
+        if (!gateResult || (gateResult.allowed === false && !gateResult.batchId)) {
+          throw new Error(gateResult?.message || gateResult?.code || 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT');
         }
+
+        const result = gateResult.batchId ? gateResult : (gateResult.result || gateResult);
 
         b.databaseBatchId = result.batchId;
         b.databaseCampaignId = result.campaignId;
@@ -1737,20 +2052,28 @@
           btnSave.style.color = '#38bdf8';
         }
 
-        alert(`💾 บันทึกแบบร่างโปรโมชั่นลงฐานข้อมูลกลางสำเร็จ!\n\n` +
-          `• Batch ID: ${result.batchId}\n` +
-          `• Campaign ID: ${result.campaignId}\n` +
-          `• Transaction: ${result.transactionType || 'ATOMIC_DATABASE_RPC'}\n` +
-          `• สถานะแคมเปญ: DRAFT (ยังไม่ถูก Activate สู่หน้าร้าน)\n` +
-          `• จำนวน Offers ที่บันทึก: ${result.offerCount} รายการ\n` +
-          `• จำนวน Blockers: 0 รายการ\n` +
-          `• รายการที่ระงับตรวจ (เช่น S26 Ultra 1TB): ${result.reviewRequiredCount} รายการ\n\n` +
-          `ขั้นตอนต่อไป: ส่งให้ Store Leader ตรวจสอบและอนุมัติในหน้า Review Dashboard`);
+        if (typeof alert === 'function') {
+          alert(`💾 บันทึกแบบร่างโปรโมชั่นลงฐานข้อมูลกลางสำเร็จ!\n\n` +
+            `• Batch ID: ${result.batchId}\n` +
+            `• Campaign ID: ${result.campaignId}\n` +
+            `• Transaction: ${result.transactionType || 'ATOMIC_DATABASE_RPC'}\n` +
+            `• สถานะแคมเปญ: DRAFT (ยังไม่ถูก Activate สู่หน้าร้าน)\n` +
+            `• จำนวน Offers ที่บันทึก: ${result.offerCount} รายการ\n` +
+            `• จำนวน Blockers: 0 รายการ\n` +
+            `• รายการที่ระงับตรวจ (เช่น S26 Ultra 1TB): ${result.reviewRequiredCount} รายการ\n\n` +
+            `ขั้นตอนต่อไป: ส่งให้ Store Leader ตรวจสอบและอนุมัติในหน้า Review Dashboard`);
+        }
+
+        return result;
       } catch (err) {
         console.error('[Save Database Draft Error]', err);
         this.updateStorageBanner('LOCAL_BROWSER_ONLY', 'SAVE_FAILED', { error: err.message });
-        alert(`เกิดข้อผิดพลาดในการบันทึกแบบร่างลงฐานข้อมูล (PROMOTION_DRAFT_SAVE_FAILED):\n${err.message}\n\nสถานะ: LOCAL_BROWSER_ONLY (ไม่มีการสร้างแบบร่างตกค้างในฐานข้อมูล)`);
+        if (typeof alert === 'function') {
+          alert(`เกิดข้อผิดพลาดในการบันทึกแบบร่างลงฐานข้อมูล (PROMOTION_DRAFT_SAVE_FAILED):\n${err.message}\n\nสถานะ: LOCAL_BROWSER_ONLY (ไม่มีการสร้างแบบร่างตกค้างในฐานข้อมูล)`);
+        }
+        return { allowed: false, error: err.message, databaseAction: 'DO_NOT_INSERT_OFFER' };
       } finally {
+        this.isSubmitting = false;
         if (btnSave && (!b.databaseBatchId)) {
           btnSave.disabled = false;
           btnSave.innerHTML = '<span>💾 บันทึก Draft ลงฐานข้อมูล</span>';
@@ -1762,7 +2085,114 @@
       }
     }
 
+    async saveSingleOfferDraft(item, options = {}) {
+      if (this.isSubmitting) {
+        return { allowed: false, reason: 'ALREADY_SUBMITTING', databaseAction: 'DO_NOT_INSERT_OFFER' };
+      }
+      this.isSubmitting = true;
+      try {
+        const getRt = () => {
+          if (typeof PromotionPricingRuntime !== 'undefined' && typeof PromotionPricingRuntime.getRuntimeStatus === 'function') {
+            return PromotionPricingRuntime.getRuntimeStatus();
+          }
+          if (typeof window !== 'undefined' && window.PromotionPricingRuntime && typeof window.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+            return window.PromotionPricingRuntime.getRuntimeStatus();
+          }
+          if (typeof globalThis !== 'undefined' && globalThis.PromotionPricingRuntime && typeof globalThis.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+            return globalThis.PromotionPricingRuntime.getRuntimeStatus();
+          }
+          return { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', businessUseAllowed: false };
+        };
+
+        const runtimeDecision = options.runtimeDecision || getRt();
+        const calculationResult = options.calculationResult || item?.pricingResult;
+        const runtime = (typeof PromotionPricingRuntime !== 'undefined' ? PromotionPricingRuntime : (typeof window !== 'undefined' ? window.PromotionPricingRuntime : (typeof globalThis !== 'undefined' ? globalThis.PromotionPricingRuntime : null)));
+
+        if (!runtime || typeof runtime.guardSingleDraftSave !== 'function') {
+          return { allowed: false, code: 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT', databaseAction: 'DO_NOT_INSERT_OFFER' };
+        }
+
+        const defaultSaveClient = async (p) => {
+          if (typeof window !== 'undefined' && typeof window.mockSinglePromoSaveHandler === 'function') {
+            return await window.mockSinglePromoSaveHandler(p);
+          }
+          const response = await fetch('/api/promotion-offers/draft', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          return await response.json();
+        };
+
+        const saveClient = options.saveClient || defaultSaveClient;
+        const payload = options.payload || item;
+
+        return await runtime.guardSingleDraftSave({
+          payload,
+          runtimeDecision,
+          calculationResult,
+          saveClient
+        });
+      } finally {
+        this.isSubmitting = false;
+      }
+    }
+
+    async retryPromotionDraftSave(batchId, options = {}) {
+      if (this.isSubmitting) {
+        return { allowed: false, reason: 'ALREADY_SUBMITTING', databaseAction: 'DO_NOT_INSERT_OFFER' };
+      }
+      this.isSubmitting = true;
+      try {
+        const getRt = () => {
+          if (typeof PromotionPricingRuntime !== 'undefined' && typeof PromotionPricingRuntime.getRuntimeStatus === 'function') {
+            return PromotionPricingRuntime.getRuntimeStatus();
+          }
+          if (typeof window !== 'undefined' && window.PromotionPricingRuntime && typeof window.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+            return window.PromotionPricingRuntime.getRuntimeStatus();
+          }
+          if (typeof globalThis !== 'undefined' && globalThis.PromotionPricingRuntime && typeof globalThis.PromotionPricingRuntime.getRuntimeStatus === 'function') {
+            return globalThis.PromotionPricingRuntime.getRuntimeStatus();
+          }
+          return { valid: false, code: 'PRICING_ENGINE_UNAVAILABLE', businessUseAllowed: false };
+        };
+
+        const runtimeDecision = options.runtimeDecision || getRt();
+        const calculationResults = options.calculationResults || (this.currentStagedBatch?.variants || []).filter(v => v.validationStatus === 'PASSED_VALIDATION').map(v => v.pricingResult).filter(Boolean);
+        const runtime = (typeof PromotionPricingRuntime !== 'undefined' ? PromotionPricingRuntime : (typeof window !== 'undefined' ? window.PromotionPricingRuntime : (typeof globalThis !== 'undefined' ? globalThis.PromotionPricingRuntime : null)));
+
+        if (!runtime || typeof runtime.guardRetryDraftSave !== 'function') {
+          return { allowed: false, code: 'PRICING_ENGINE_REQUIRED_FOR_CLOUD_DRAFT', databaseAction: 'DO_NOT_INSERT_OFFER' };
+        }
+
+        const defaultRetryClient = async (p) => {
+          if (typeof window !== 'undefined' && typeof window.mockRetryPromoDraftHandler === 'function') {
+            return await window.mockRetryPromoDraftHandler(p);
+          }
+          const response = await fetch(`/api/promotion-imports/${p.batchId}/retry`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(p)
+          });
+          return await response.json();
+        };
+
+        const retryClient = options.retryClient || defaultRetryClient;
+        const payload = options.payload || { batchId };
+
+        return await runtime.guardRetryDraftSave({
+          payload,
+          runtimeDecision,
+          calculationResults,
+          retryClient
+        });
+      } finally {
+        this.isSubmitting = false;
+      }
+    }
+
     updateStorageBanner(scope, status, details) {
+      if (typeof document === 'undefined') return;
       this.ensureUiElements();
       const banner = document.getElementById('promoStorageBanner');
       const icon = document.getElementById('promoStorageBannerIcon');
@@ -2405,26 +2835,32 @@
             <td>${item.rrp > 0 ? `฿${item.rrp.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</td>
             <td class="text-coral" style="min-width: 170px;">
               ${item.saleMode === 'TRADE_UP' ? `
-                <div style="font-weight: 700; color: #60a5fa; font-size: 0.88rem;">-฿${item.discount.toLocaleString()}</div>
-                <div style="font-size: 0.67rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 5px 7px; border-radius: 6px; border: 1px solid rgba(96, 165, 250, 0.25);">
-                  <div style="white-space: nowrap;">ส่วนลดมาตรฐาน: <strong style="color: #cbd5e1;">฿${(item.standardDiscount || 0).toLocaleString()}</strong></div>
-                  <div style="white-space: nowrap;">โบนัส Trade Up: <strong style="color: #60a5fa;">-฿${(item.tradeUpDiscount || 0).toLocaleString()}</strong></div>
-                  <div style="color: #93c5fd; font-weight: 600; margin-top: 2px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 2px; white-space: nowrap;">ส่วนลดที่มีผล: Trade Up -฿${item.discount.toLocaleString()}</div>
+                <div style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 5px 7px; border-radius: 6px; border: 1px solid rgba(96, 165, 250, 0.25);">
+                  <div style="white-space: nowrap;">ส่วนลดซื้อปกติ: <strong style="color: #cbd5e1;">-฿${(item.standardDiscount || 0).toLocaleString()}</strong></div>
+                  <div style="white-space: nowrap; margin-top: 2px;">โบนัส Trade Up: <strong style="color: #34d399;">-฿${(item.tradeUpDiscount || 0).toLocaleString()}</strong></div>
+                  <div style="color: #93c5fd; font-weight: 600; margin-top: 3px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 3px; white-space: nowrap;">รวมสิทธิ์: -฿${item.discount.toLocaleString()}</div>
                 </div>
               ` : (item.discount > 0 ? `-฿${item.discount.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>')}
             </td>
             <td style="font-weight: 700; color: var(--neon-cyan); min-width: 135px;">
-              <div style="font-size: 0.95rem;">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</div>
+              <div style="font-size: 0.95rem; color: ${item.saleMode === 'TRADE_UP' ? '#34d399' : 'var(--neon-cyan)'};">${item.netPrice > 0 ? `฿${item.netPrice.toLocaleString()}` : '<span style="color: #94a3b8;">-</span>'}</div>
               ${item.saleMode === 'TRADE_UP' ? `
-                <div style="font-size: 0.64rem; color: #94a3b8; font-weight: 400; margin-top: 3px; line-height: 1.25;">
-                  <span style="color: #60a5fa; font-weight: 600;">*เมื่อนำเครื่องเก่ามาเทริน</span><br/>
-                  (ไม่มีเครื่องแลก: ฿${(item.standardNetPrice || (item.rrp - (item.standardDiscount || 0))).toLocaleString()})
+                <div style="font-size: 0.65rem; color: #94a3b8; font-weight: 400; margin-top: 3px; line-height: 1.3;">
+                  <span style="color: #34d399; font-weight: 600;">(ราคาก่อนหักมูลค่าเครื่องเก่า)</span><br/>
+                  <span style="color: #6ee7b7;">* ยังไม่หักมูลค่าเครื่องเก่าที่ประเมินในหน้าชำระเงิน</span>
                 </div>
               ` : ''}
             </td>
             <td>
-              <span class="type-pill">${item.coupon || '-'}</span>
-              ${item.saleMode === 'TRADE_UP' ? `<div style="font-size: 0.68rem; color: #93c5fd; margin-top: 2px;">Trade Up Bonus</div>` : ''}
+              ${item.saleMode === 'TRADE_UP' ? `
+                ${item.coupon && item.coupon !== '-' ? `
+                  <span class="type-pill" title="คูปองสำหรับส่วนลดซื้อปกติ">${item.coupon} (เฉพาะซื้อปกติ)</span>
+                  <div style="font-size: 0.65rem; color: #94a3b8; margin-top: 2px;">Trade Up ไม่ใช้คูปอง</div>
+                ` : `
+                  <span class="type-pill">-</span>
+                  <div style="font-size: 0.65rem; color: #94a3b8; margin-top: 2px;">Trade Up ไม่ใช้คูปอง</div>
+                `}
+              ` : `<span class="type-pill">${item.coupon || '-'}</span>`}
             </td>
             <td>
               <span class="type-pill" style="font-size: 0.72rem;">${item.saleMode}</span>
@@ -3088,14 +3524,30 @@
     };
   }
 
-  window.normalizeColorToken = normalizeColorToken;
-  window.detectPromotionColorScope = detectPromotionColorScope;
-  window.PromotionImportController = new PromotionImportController();
-  window.PromoStorageAdapter = PromoStorageAdapter;
-  window.PromoStorageAdapter.normalizeColorToken = normalizeColorToken;
-  window.PromoStorageAdapter.detectPromotionColorScope = detectPromotionColorScope;
+  const rootObj = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : {});
+  rootObj.normalizeColorToken = normalizeColorToken;
+  rootObj.detectPromotionColorScope = detectPromotionColorScope;
+  rootObj.PromotionImportController = new PromotionImportController();
+  rootObj.PromoStorageAdapter = PromoStorageAdapter;
+  if (rootObj.PromoStorageAdapter) {
+    rootObj.PromoStorageAdapter.normalizeColorToken = normalizeColorToken;
+    rootObj.PromoStorageAdapter.detectPromotionColorScope = detectPromotionColorScope;
+  }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    window.PromotionImportController.init();
-  });
+  if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (rootObj.PromotionImportController && typeof rootObj.PromotionImportController.init === 'function') {
+        rootObj.PromotionImportController.init();
+      }
+    });
+  }
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+      PromotionImportController,
+      PromoStorageAdapter,
+      normalizeColorToken,
+      detectPromotionColorScope
+    };
+  }
 })();

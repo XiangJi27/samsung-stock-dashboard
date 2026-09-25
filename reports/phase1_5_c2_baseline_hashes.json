@@ -1,0 +1,46 @@
+{
+  "baselineHashes": [
+    {
+      "path": "runtime_manifest.json",
+      "sha256": "412254f3f1e57ffd140a222f8ef55f45607a26631eabb08a0408a60502df69fb",
+      "sizeBytes": 5012,
+      "capturedAt": "2026-09-23T08:19:38.581055+00:00",
+      "exists": true
+    },
+    {
+      "path": "pilot_runtime_manifest.json",
+      "sha256": "1a259b9cf06f097ccbe0fa5d779ff441c36c019e4f47697dd6dd04e55e8b53b9",
+      "sizeBytes": 11866,
+      "capturedAt": "2026-09-23T08:19:38.581055+00:00",
+      "exists": true
+    },
+    {
+      "path": "samsung_stock_dashboard_feedback_pilot.zip",
+      "sha256": "6f37568a8fa86bc92a251d9e392f98205705a56daeb833501baa279c317b8dc1",
+      "sizeBytes": 601483,
+      "capturedAt": "2026-09-23T08:19:38.581055+00:00",
+      "exists": true
+    },
+    {
+      "path": "reports/ci_quality_gate_results.json",
+      "sha256": "8a0a1d627cea239727074a95aaab25c281d92572da27f2c4a92e3014865b2950",
+      "sizeBytes": 15451,
+      "capturedAt": "2026-09-23T08:19:38.581055+00:00",
+      "exists": true
+    },
+    {
+      "path": "index.html",
+      "sha256": "4e1918d47746705b6f1cf4f91b74ea11db8fdeba135f71c2e9947b62e57d438c",
+      "sizeBytes": 66285,
+      "capturedAt": "2026-09-23T08:19:38.581055+00:00",
+      "exists": true
+    },
+    {
+      "path": "assets/js/pilot-stock-snapshot.js",
+      "sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
+      "sizeBytes": 235179,
+      "capturedAt": "2026-09-23T08:19:38.581055+00:00",
+      "exists": true
+    }
+  ]
+}

@@ -6,6 +6,11 @@ Verifies:
 - All packaged files against pilot_runtime_manifest.json
 - Manifest environment: FEEDBACK_PILOT_PREVIEW_CANDIDATE
 - Application commit, baseline commit, database schema commit
+
+New in Phase 1.5-C2:
+  --package <path>    Verify the specified zip instead of the default feedback pilot zip
+  --manifest <path>   Read the manifest JSON from this path (skip embedded manifest lookup)
+  PILOT_PACKAGE_PATH / PILOT_MANIFEST_PATH env vars also supported.
 """
 
 import os
@@ -18,7 +23,22 @@ import tempfile
 sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-zip_path = os.path.join(ROOT_DIR, "samsung_stock_dashboard_feedback_pilot.zip")
+
+# ------ Argument resolution ------
+_zip_override = os.environ.get("PILOT_PACKAGE_PATH", "")
+_manifest_override = os.environ.get("PILOT_MANIFEST_PATH", "")
+_args = sys.argv[1:]
+_i = 0
+while _i < len(_args):
+    if _args[_i] == "--package" and _i + 1 < len(_args):
+        _zip_override = _args[_i + 1]; _i += 2
+    elif _args[_i] == "--manifest" and _i + 1 < len(_args):
+        _manifest_override = _args[_i + 1]; _i += 2
+    else:
+        _i += 1
+
+zip_path = _zip_override or os.path.join(ROOT_DIR, "samsung_stock_dashboard_feedback_pilot.zip")
+_isolated = bool(_zip_override or _manifest_override)
 
 if not os.path.exists(zip_path):
     print(f"❌ Pilot zip file not found: {zip_path}")
