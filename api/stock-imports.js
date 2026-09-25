@@ -417,14 +417,58 @@ module.exports = async function handler(req, res) {
     const newBatch = createdBatches[0];
     const newBatchId = newBatch.id;
 
+    // 3.5 Fail-Closed Historical Price Lookup for Exact P/N
+    const priceMap = new Map();
+    try {
+      const histRes = await queryPostgrest(
+        `stock_snapshot_items?branch_code=eq.${encodeURIComponent(branchCode)}&erp_rrp=gt.0&select=inventory_pn,erp_rrp,created_at&order=created_at.desc,id.desc&limit=5000`
+      );
+
+      if (!histRes.ok) {
+        throw new Error(
+          `Historical price lookup failed with status ${histRes.status}`
+        );
+      }
+
+      const histItems = await histRes.json();
+
+      for (const h of histItems) {
+        const cleanPn = String(h.inventory_pn || '')
+          .trim()
+          .toUpperCase();
+
+        const numericPrice = Number(h.erp_rrp);
+
+        if (
+          cleanPn &&
+          !priceMap.has(cleanPn) &&
+          Number.isFinite(numericPrice) &&
+          numericPrice > 0
+        ) {
+          priceMap.set(cleanPn, numericPrice);
+        }
+      }
+    } catch (error) {
+      return res.status(502).json({
+        error: 'HISTORICAL_PRICE_LOOKUP_FAILED',
+        requestId,
+        message:
+          'ไม่สามารถตรวจสอบราคาปกติเดิมได้ จึงยกเลิกการนำเข้าเพื่อป้องกันราคาสินค้าหาย'
+      });
+    }
+
     // 4. Insert Items in Chunks of 100 to avoid payload size limits
     const CHUNK_SIZE = 100;
     const formattedItems = items.map(it => {
       const desc = String(it.description ?? it.productName ?? it.model ?? it.name ?? '').trim();
+      const cleanPn = String(it.inventoryPn || it.pn).trim().toUpperCase();
+      const rawPrice = it.erpRrp != null ? Number(it.erpRrp) : (it.price != null ? Number(it.price) : null);
+      const finalPrice = (Number.isFinite(rawPrice) && rawPrice > 0) ? rawPrice : (priceMap.get(cleanPn) || null);
+
       return {
         batch_id: newBatchId,
         branch_code: branchCode,
-        inventory_pn: String(it.inventoryPn || it.pn).trim().toUpperCase(),
+        inventory_pn: cleanPn,
         barcode: it.barcode ? String(it.barcode).trim() : null,
         description: desc,
         brand: it.brand ? String(it.brand).trim() : null,
@@ -433,7 +477,7 @@ module.exports = async function handler(req, res) {
         cat2: it.cat2 ? String(it.cat2).trim() : null,
         cat3: it.cat3 ? String(it.cat3).trim() : null,
         color: it.color ? String(it.color).trim() : null,
-        erp_rrp: it.erpRrp != null ? Number(it.erpRrp) : (it.price != null ? Number(it.price) : null),
+        erp_rrp: finalPrice,
         f1: Math.max(0, parseInt(it.f1, 10) || 0),
         f2: Math.max(0, parseInt(it.f2, 10) || 0),
         source_rows: it.sourceRows || {}

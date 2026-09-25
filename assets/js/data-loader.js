@@ -52,6 +52,13 @@
       cat2: rawItem.cat2 || rawItem.category2 || "",
       cat3: rawItem.cat3 || rawItem.category3 || "",
       color: rawItem.color || "",
+      srp: Number(
+        rawItem.srp ??
+        rawItem.erpRrp ??
+        rawItem.rrp ??
+        rawItem.price ??
+        0
+      ),
       price: rawItem.price !== undefined ? rawItem.price : (rawItem.erpRrp !== undefined ? rawItem.erpRrp : null),
       erpRrp: rawItem.erpRrp !== undefined ? rawItem.erpRrp : (rawItem.price !== undefined ? rawItem.price : null),
       f1,
