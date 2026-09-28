@@ -32,30 +32,41 @@ def run_matrix():
         else:
             print(f"❌ [FAIL] {name} {details}")
 
-    # TEST 1: Health Check for Active Stock (Unauthenticated plain URL)
-    print("\n--- 1. Active Stock Health Check ---")
+    # TEST 1: Active Stock must be FAIL-CLOSED for unauthenticated callers -> 401
+    print("\n--- 1. Active Stock Fail-Closed Guard (anonymous) ---")
+    active_stock_url = f"{BASE_URL}/api/stock/active?branch_code={BRANCH_CODE}"
     try:
-        url = f"{BASE_URL}/api/stock/active?branch_code={BRANCH_CODE}"
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        req = urllib.request.Request(active_stock_url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as resp:
             data = json.loads(resp.read().decode('utf-8'))
-        
-        status_ok = resp.status == 200
-        batch_present = bool(data.get('batchId'))
-        summary = data.get('summary', {})
-        total_rows_399 = summary.get('totalRows') == 399
-        f1_1701 = summary.get('f1Total') == 1701
-        f2_1635 = summary.get('f2Total') == 1635
-        total_3336 = summary.get('totalQuantity') == 3336
+        assert_test("Anonymous Active Stock Blocked (Expected 401)", False,
+                    f"Got {resp.status} and batchId={data.get('batchId')}")
+    except urllib.error.HTTPError as e:
+        assert_test("Anonymous Active Stock Blocked (401)", e.code == 401, f"(HTTP {e.code})")
+        body = e.read().decode('utf-8')
+        assert_test("Anonymous response carries AUTHENTICATION_REQUIRED",
+                    'AUTHENTICATION_REQUIRED' in body, f"({body[:80]})")
+        assert_test("Anonymous response leaks no batchId", 'batchId' not in body)
 
-        assert_test("Health Check Status == 200", status_ok)
-        assert_test("Active Batch UUID Present", batch_present, f"(ID: {data.get('batchId')})")
-        assert_test("Total Rows == 399 P/N", total_rows_399)
-        assert_test("F1 Total == 1,701", f1_1701)
-        assert_test("F2 Total == 1,635", f2_1635)
-        assert_test("Reconciliation Grand Total == 3,336", total_3336)
-    except Exception as e:
-        assert_test("Health Check", False, str(e))
+    # TEST 1b: Former C1 bypass credentials must also be rejected by C2 -> 401
+    print("\n--- 1b. Active Stock Bypass-Credential Guard ---")
+    bypass_tokens = [
+        ("mock-store-leader-token", "mock- prefixed token"),
+        ("pilot-store-leader-token", "pilot- prefixed token"),
+        ("PILOT_STORE_LEADER_DEV_TOKEN", "literal dev bypass token"),
+    ]
+    for token, label in bypass_tokens:
+        try:
+            req = urllib.request.Request(
+                active_stock_url,
+                headers={'Authorization': f'Bearer {token}'}
+            )
+            with urllib.request.urlopen(req) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+            assert_test(f"Bypass credential blocked ({label})", False,
+                        f"Got {resp.status} and batchId={data.get('batchId')}")
+        except urllib.error.HTTPError as e:
+            assert_test(f"Bypass credential blocked ({label})", e.code == 401, f"(HTTP {e.code})")
 
     # TEST 2: Unauthenticated Write Mutation (POST /api/stock-imports) -> 401
     print("\n--- 2. Unauthenticated Mutation Guard ---")

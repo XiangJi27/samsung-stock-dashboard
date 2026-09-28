@@ -2,13 +2,19 @@
  * Regression Test: Active Stock Contract & Fail-Closed Guard
  * 
  * Verifies:
- * 1. GET /api/stock/active returns full canonical description and UI compatibility fields:
+ * 0. Fail-closed guard: GET /api/stock/active WITHOUT a Bearer token is rejected
+ *    with 401 AUTHENTICATION_REQUIRED and leaks no stock items.
+ * 1. GET /api/stock/active (authenticated) returns full canonical description and
+ *    UI compatibility fields:
  *    - inventoryPn, pn
  *    - description, model, name, productName (all non-empty and identical)
  *    - total = f1 + f2
  * 2. P/N 194644055783 has non-empty product name matching database description.
  * 3. Zero items across the active batch have missing/blank product names.
  * 4. Fail-closed guard: POST /api/stock-imports with missing product names is rejected with 422.
+ *
+ * Requires a real caller session: authentication is mandatory and all reads are
+ * performed with the caller token under Row Level Security.
  */
 
 const assert = require('assert');
@@ -22,31 +28,76 @@ if (!sEnv) {
 Object.assign(process.env, sEnv);
 
 async function runTests() {
-  console.log('=== TEST 1: Verify Active Stock API Handler Contract ===');
+  const { loadLocalEnv } = require('./lib/load-local-env.js');
+  const cEnv = loadLocalEnv();
+
+  // Sign in to obtain a REAL caller token. GET /api/stock/active is now fail-closed:
+  // every downstream read runs with the caller token under Row Level Security.
+  const authRes = await fetch(`${sEnv.SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+    method: 'POST',
+    headers: {
+      'apikey': cEnv.SUPABASE_PUBLISHABLE_KEY,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email: cEnv.TEST_ADMIN_EMAIL,
+      password: cEnv.TEST_ADMIN_PASSWORD
+    })
+  });
+  const authData = await authRes.json();
+  assert.ok(authData.access_token, `Failed to authenticate as test admin: ${JSON.stringify(authData)}`);
+  const adminToken = authData.access_token;
+
   const activeStockHandler = require('../api/stock/active.js');
 
+  function makeRes() {
+    const state = { statusCode: null, body: null };
+    return {
+      state,
+      res: {
+        setHeader() {},
+        status(code) {
+          state.statusCode = code;
+          return this;
+        },
+        json(data) {
+          state.body = data;
+          return this;
+        }
+      }
+    };
+  }
+
+  console.log('=== TEST 1a: Fail-Closed Guard - anonymous access must be rejected ===');
+  {
+    const { res, state } = makeRes();
+    await activeStockHandler(
+      { method: 'GET', query: { branch_code: 'AYUTTHAYA_CITY_PARK' }, headers: {} },
+      res
+    );
+    assert.strictEqual(state.statusCode, 401, `Expected HTTP 401 for anonymous access, got ${state.statusCode}`);
+    assert.strictEqual(state.body.code, 'AUTHENTICATION_REQUIRED');
+    assert.ok(!state.body.items, 'Anonymous response must not contain stock items');
+    console.log('✓ Anonymous GET /api/stock/active rejected with 401 AUTHENTICATION_REQUIRED');
+  }
+
+  console.log('\n=== TEST 1: Verify Active Stock API Handler Contract ===');
   let statusCode = null;
   let responseData = null;
 
-  const mockReq = {
-    method: 'GET',
-    query: { branch_code: 'AYUTTHAYA_CITY_PARK' },
-    headers: {}
-  };
-
-  const mockRes = {
-    setHeader() {},
-    status(code) {
-      statusCode = code;
-      return this;
-    },
-    json(data) {
-      responseData = data;
-      return this;
-    }
-  };
-
-  await activeStockHandler(mockReq, mockRes);
+  {
+    const { res, state } = makeRes();
+    await activeStockHandler(
+      {
+        method: 'GET',
+        query: { branch_code: 'AYUTTHAYA_CITY_PARK' },
+        headers: { authorization: `Bearer ${adminToken}` }
+      },
+      res
+    );
+    statusCode = state.statusCode;
+    responseData = state.body;
+  }
 
   assert.strictEqual(statusCode, 200, `Expected HTTP 200 from active stock API, got ${statusCode}`);
   assert.ok(responseData && Array.isArray(responseData.items), 'Expected items array');
@@ -82,25 +133,6 @@ async function runTests() {
   console.log(`✓ Verified sample P/N 194644055783 product name: "${sample.model}"`);
 
   console.log('\n=== TEST 2: Verify Fail-Closed Guard in stock-imports.js ===');
-  const { loadLocalEnv } = require('./lib/load-local-env.js');
-  const cEnv = loadLocalEnv();
-
-  // Sign in to get admin user token
-  const authRes = await fetch(`${sEnv.SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-    method: 'POST',
-    headers: {
-      'apikey': cEnv.SUPABASE_PUBLISHABLE_KEY,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email: cEnv.TEST_ADMIN_EMAIL,
-      password: cEnv.TEST_ADMIN_PASSWORD
-    })
-  });
-  const authData = await authRes.json();
-  assert.ok(authData.access_token, `Failed to authenticate as test admin: ${JSON.stringify(authData)}`);
-  const adminToken = authData.access_token;
-
   const stockImportsHandler = require('../api/stock-imports.js');
 
   let importStatusCode = null;

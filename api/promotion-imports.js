@@ -90,17 +90,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-    // Allow pilot/dev token for authorized testing in non-production
-    if (token === 'PILOT_STORE_LEADER_DEV_TOKEN' || token.startsWith('mock-') || token.startsWith('pilot-')) {
-      caller = {
-        id: '00000000-0000-0000-0000-000000000001',
-        email: 'system_technical_test_actor@ayutthaya.samsung.com',
-        app_metadata: { role: 'STORE_LEADER', actor: 'SYSTEM_TECHNICAL_TEST_ACTOR' }
-      };
-      return true;
-    }
-
-    if (!caller) {
+    if (!caller || !caller.id) {
       res.status(401).json({
         error: 'UNAUTHORIZED',
         code: 'UNAUTHORIZED',
@@ -128,10 +118,6 @@ module.exports = async function handler(req, res) {
       }
     } catch (e) {
       console.warn('[PromotionImportAPI] Error querying user_roles:', e.message);
-    }
-
-    if (caller.app_metadata?.role === 'STORE_LEADER' || caller.app_metadata?.role === 'SYSTEM_ADMIN' || caller.app_metadata?.role === 'ADMIN') {
-      return true;
     }
 
     res.status(403).json({
