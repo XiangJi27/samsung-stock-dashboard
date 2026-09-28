@@ -233,7 +233,7 @@ function runRuntimeTests() {
       { id: 'c2', is_internal: true, comment_text: 'Line1\nLine2\nสวัสดี & <b>x</b>',
         created_at: new Date().toISOString(), profiles: { display_name: 'ผู้ใช้' } },
     ];
-    const ctx2 = loadIssueListView({ getComments: async () => msgs });
+    const ctx2 = loadIssueListView({ getIssueComments: async () => msgs });
     const container = ctx2.document.getElementById('pilot-comments-list');
     await ctx2.view.loadComments('abc-123');
     const html = container.innerHTML;
@@ -257,7 +257,7 @@ function runRuntimeTests() {
   tasks.push(makeTest('LONG comment text renders fully escaped', async () => {
     const long = '<script>alert(1)</script>'.repeat(2000);
     const ctx3 = loadIssueListView({
-      getComments: async () => [
+      getIssueComments: async () => [
         { id: 'cL', is_internal: false, comment_text: long,
           created_at: new Date().toISOString(), profiles: { display_name: 'ผู้ใช้' } },
       ],

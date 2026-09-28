@@ -123,6 +123,64 @@
       if (error) throw error;
       return data;
     }
+
+    /**
+     * Update the status of an existing issue (H1 / Gate 4).
+     *
+     * Security contract:
+     *  - Relies on the database RLS UPDATE policy "Store leaders support and
+     *    admins update issues" (schema: 20260913_feedback_pilot_schema.sql).
+     *    MEMBER has NO UPDATE policy, so a member update is filtered by RLS
+     *    (returns zero rows) and surfaces as a clean "no permission" error.
+     *  - STORE_LEADER is authorized for their own branch, SYSTEM_ADMIN globally,
+     *    SUPPORT for issues assigned to them. The validate_issue_write trigger
+     *    still enforces the status state machine + role guardrails server-side.
+     *  - This method NEVER bypasses RLS (no SECURITY DEFINER / service role).
+     *
+     * @param {string} issueId    Valid UUID of the target issue.
+     * @param {string} newStatus  One of the explicit allowed statuses.
+     * @returns {Promise<object>} The updated issue row.
+     */
+    async updateStatus(issueId, newStatus) {
+      const client = this.getClient();
+
+      // Validate issue ID (deterministic, sanitized).
+      if (typeof issueId !== 'string' || !/^[0-9a-f-]{36}$/i.test(issueId)) {
+        throw new Error('รหัสปัญหาไม่ถูกต้อง (invalid issue id)');
+      }
+
+      // Explicit status allowlist (mirrors the DB CHECK constraint).
+      const ALLOWED_STATUSES = [
+        'NEW', 'TRIAGED', 'VERIFIED', 'IN_PROGRESS', 'FIX_READY',
+        'READY_FOR_RETEST', 'RESOLVED', 'CLOSED', 'NEEDS_MORE_INFO',
+        'DUPLICATE', 'CANNOT_REPRODUCE', 'WONT_FIX', 'SECURITY_REVIEW'
+      ];
+      if (typeof newStatus !== 'string' || ALLOWED_STATUSES.indexOf(newStatus) === -1) {
+        throw new Error('สถานะที่ไม่รองรับ (unsupported status)');
+      }
+
+      const { data, error } = await client
+        .from('issues')
+        .update({ status: newStatus })
+        .eq('id', issueId)
+        .select()
+        .single();
+
+      if (error) {
+        // Server rejected the transition / RLS / invalid value.
+        console.error('[IssueService] Update status error:', error);
+        throw new Error(error.message || 'ไม่สามารถปรับสถานะปัญหาได้');
+      }
+
+      // RLS-filters rows away when the caller is not authorized (e.g. MEMBER)
+      // or the issue id does not resolve; treat as explicit denial, never a
+      // silent success.
+      if (!data) {
+        throw new Error('คุณไม่มีสิทธิ์ปรับสถานะปัญหานี้ หรือไม่พบปัญหา');
+      }
+
+      return data;
+    }
   }
 
   window.IssueService = new IssueService();

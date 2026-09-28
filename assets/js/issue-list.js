@@ -289,12 +289,18 @@
       // Event handlers for manager status & AI
       if (isLeader) {
         document.getElementById('p-detail-status-select')?.addEventListener('change', async (e) => {
-          const newStatus = e.target.value;
+          const select = e.target;
+          const newStatus = select.value;
+          const previousStatus = issue.status; // restore point on failure
           try {
+            // Persist FIRST; UI reflects the new value only after the
+            // persistent operation succeeds (Gate 4 / H1).
             await window.IssueService?.updateStatus(issue.id, newStatus);
             issue.status = newStatus;
             this.loadIssues();
           } catch (err) {
+            // Restore the previously displayed state on failure.
+            if (select) select.value = previousStatus;
             alert(`ไม่สามารถเปลี่ยนสถานะได้: ${err.message}`);
           }
         });
@@ -329,7 +335,7 @@
       if (!container) return;
 
       try {
-        this.comments = await window.IssueService?.getComments(issueId) || [];
+        this.comments = await window.IssueService?.getIssueComments(issueId) || [];
         if (this.comments.length === 0) {
           container.innerHTML = '<div style="color:#848e9c; font-size:12px;">ยังไม่มีข้อความตอบกลับ</div>';
           return;
