@@ -9,6 +9,23 @@
 (function(window) {
   'use strict';
 
+  // Safe-text utility (Gate 3 / C4 stored-XSS remediation).
+  // Always treats rendered values as DATA, never markup.
+  const escapeHtml = (value) => {
+    return String(value == null ? '' : value).replace(
+      /[&<>"']/g,
+      (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])
+    );
+  };
+
+  // Gate 3 (C4): normalize identifier tokens used in data-* attributes.
+  // Legit UUIDs / enum keys are already [A-Za-z0-9_-] and pass through unchanged;
+  // any unexpected character is stripped so a tainted id can never break out of
+  // a quoted attribute. Callers that need the raw value still use the object.
+  const safeIdToken = (value) => {
+    return String(value == null ? '' : value).replace(/[^A-Za-z0-9_-]/g, '');
+  };
+
   const STATUS_LABELS = {
     NEW: { text: 'กำลังตรวจสอบ', color: '#2962ff' },
     IN_PROGRESS: { text: 'กำลังแก้ไข', color: '#ff9800' },
@@ -164,29 +181,29 @@
 
       } catch (err) {
         loadingEl.style.display = 'none';
-        cardsEl.innerHTML = `<div style="color:#ef5350; font-size:12px; padding:10px;">เกิดข้อผิดพลาด: ${err.message}</div>`;
+        cardsEl.innerHTML = `<div style="color:#ef5350; font-size:12px; padding:10px;">เกิดข้อผิดพลาด: ${escapeHtml(err.message)}</div>`;
       }
     }
 
     renderCard(issue) {
-      const statusInfo = STATUS_LABELS[issue.status] || { text: issue.status, color: '#78909c' };
-      const sevInfo = SEVERITY_LABELS[issue.severity] || { text: issue.severity, color: '#90a4ae' };
+      const statusInfo = STATUS_LABELS[issue.status] || { text: 'ไม่ระบุ', color: '#78909c' };
+      const sevInfo = SEVERITY_LABELS[issue.severity] || { text: 'ไม่ระบุ', color: '#90a4ae' };
 
       return `
-        <div class="pilot-issue-card" data-id="${issue.id}" style="background:#131722; border:1px solid #2a2e39; border-radius:8px; padding:12px; margin-bottom:10px; cursor:pointer; transition:border-color 0.2s;">
+        <div class="pilot-issue-card" data-id="${safeIdToken(issue.id)}" style="background:#131722; border:1px solid #2a2e39; border-radius:8px; padding:12px; margin-bottom:10px; cursor:pointer; transition:border-color 0.2s;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
             <span style="font-family:monospace; font-size:11px; color:#2962ff; font-weight:700; background:rgba(41,98,255,0.12); padding:2px 6px; border-radius:4px;">
-              ${issue.issue_number}
+              ${escapeHtml(issue.issue_number)}
             </span>
             <span style="background:${statusInfo.color}; color:#fff; font-size:10px; font-weight:600; padding:2px 6px; border-radius:4px;">
-              ${statusInfo.text}
+              ${escapeHtml(statusInfo.text)}
             </span>
           </div>
           <div style="font-size:13px; font-weight:600; color:#fff; margin-bottom:6px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-            ${issue.title}
+            ${escapeHtml(issue.title)}
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#848e9c;">
-            <span style="color:${sevInfo.color};">${sevInfo.text}</span>
+            <span style="color:${sevInfo.color};">${escapeHtml(sevInfo.text)}</span>
             <span>${new Date(issue.created_at).toLocaleDateString('th-TH')}</span>
           </div>
         </div>
@@ -202,7 +219,7 @@
       placeholder.style.display = 'none';
       content.style.display = 'flex';
 
-      const statusInfo = STATUS_LABELS[issue.status] || { text: issue.status, color: '#78909c' };
+      const statusInfo = STATUS_LABELS[issue.status] || { text: 'ไม่ระบุ', color: '#78909c' };
       const isLeader = window.PermissionService?.isStoreLeader() || window.PermissionService?.isSystemAdmin();
 
       // Status selector for manager
@@ -234,15 +251,15 @@
         <div style="border-bottom:1px solid #363c4e; padding-bottom:14px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span style="font-family:monospace; font-size:14px; color:#2962ff; font-weight:700;">
-              ${issue.issue_number}
+              ${escapeHtml(issue.issue_number)}
             </span>
             <span style="background:${statusInfo.color}; color:#fff; font-size:11px; font-weight:600; padding:3px 8px; border-radius:4px;">
-              ${statusInfo.text}
+              ${escapeHtml(statusInfo.text)}
             </span>
           </div>
-          <h2 style="margin:0 0 8px 0; font-size:18px; font-weight:600; color:#fff;">${issue.title}</h2>
+          <h2 style="margin:0 0 8px 0; font-size:18px; font-weight:600; color:#fff;">${escapeHtml(issue.title)}</h2>
           <div style="font-size:13px; color:#b2b5be; line-height:1.6; white-space:pre-wrap; background:#131722; border-radius:6px; padding:12px; border:1px solid #2a2e39;">
-            ${issue.description}
+            ${escapeHtml(issue.description)}
           </div>
           ${managerControlsHtml}
         </div>
@@ -325,10 +342,10 @@
           return `
             <div style="background:${bg}; border:1px solid ${border}; border-radius:6px; padding:8px 10px; font-size:12px;">
               <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:11px; color:#848e9c;">
-                <span>${c.profiles?.display_name || 'ผู้ใช้'} ${isInternal ? '<span style="color:#ffb74d; font-weight:700;">[บันทึกภายใน]</span>' : ''}</span>
+                <span>${escapeHtml(c.profiles?.display_name || 'ผู้ใช้')} ${isInternal ? '<span style="color:#ffb74d; font-weight:700;">[บันทึกภายใน]</span>' : ''}</span>
                 <span>${new Date(c.created_at).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })}</span>
               </div>
-              <div style="color:#e0e3eb;">${c.comment_text}</div>
+              <div style="color:#e0e3eb; white-space:pre-wrap;">${escapeHtml(c.comment_text)}</div>
             </div>
           `;
         }).join('');
