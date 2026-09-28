@@ -591,6 +591,20 @@ async function runSourceGuards() {
     assert.ok(src.includes('if (!caller || !caller.id) {'), 'caller.id guard missing');
   });
 
+  await test('promotion-campaigns.js: app_metadata is not an authorization authority (Gate 1)', async () => {
+    const src = fs.readFileSync(path.join(REPO_ROOT, 'api', 'promotion-campaigns.js'), 'utf8');
+    const executable = src
+      .split('\n')
+      .filter((l) => !l.trim().startsWith('//') && !l.trim().startsWith('*'))
+      .join('\n');
+    assert.ok(!executable.includes('app_metadata'), 'campaigns: executable app_metadata authority still present');
+    assert.ok(
+      /callerRoles\.some/.test(executable) && /isSystemAdmin\s*=\s*callerRoles\.some/.test(executable),
+      'campaigns: isSystemAdmin must derive from callerRoles (user_roles) only'
+    );
+    assert.ok(src.includes('if (!caller || !caller.id) {'), 'campaigns: caller.id guard missing');
+  });
+
   await test('api/stock/active.js never widens reads with the service key', async () => {
     const src = fs.readFileSync(path.join(REPO_ROOT, 'api', 'stock', 'active.js'), 'utf8');
     assert.ok(src.includes('const queryKey = publishableKey;'), 'queryKey must be the publishable key');

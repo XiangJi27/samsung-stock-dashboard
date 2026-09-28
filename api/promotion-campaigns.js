@@ -116,8 +116,11 @@ module.exports = async function handler(req, res) {
 
     const allowedRoles = new Set(['STORE_LEADER', 'STORE_MANAGER', 'SYSTEM_ADMIN', 'ADMIN']);
     const callerRoles = Array.isArray(roles) ? roles.filter(r => allowedRoles.has(String(r.role || '').toUpperCase())) : [];
-    const isSystemAdmin = callerRoles.some(r => ['SYSTEM_ADMIN', 'ADMIN'].includes(String(r.role || '').toUpperCase())) ||
-      ['SYSTEM_ADMIN', 'ADMIN'].includes(String(caller.app_metadata?.role || '').toUpperCase());
+    // Authorization derives SOLELY from the trusted user_roles table (server-side authority).
+    // caller.app_metadata is never used as an authorization authority (Gate 1 hardening:
+    // PROMOTION_CAMPAIGNS_APP_METADATA_AUTHORIZATION). app_metadata may carry contextual
+    // data, but a role claim there cannot grant elevated privilege without a user_roles row.
+    const isSystemAdmin = callerRoles.some(r => ['SYSTEM_ADMIN', 'ADMIN'].includes(String(r.role || '').toUpperCase()));
 
     if (callerRoles.length === 0 && !isSystemAdmin) {
       res.status(403).json({
