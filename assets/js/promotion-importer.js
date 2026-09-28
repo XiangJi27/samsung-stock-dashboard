@@ -1035,12 +1035,24 @@
 
       const proxyUrl = (window.APP_CONFIG && window.APP_CONFIG.VISION_PROXY_URL) || '/api/vision-proxy';
 
+      // Gate 2 (C3): the vision proxy now requires a valid authenticated session.
+      // Attach the caller's Bearer token from AuthService (same source used by the
+      // other first-party APIs). If no session token is available, do not proceed.
+      let visionToken = '';
+      if (window.AuthService && typeof window.AuthService.getSession === 'function') {
+        visionToken = window.AuthService.getSession()?.access_token || '';
+      }
+      if (!visionToken && window.AuthService && window.AuthService.currentUser) {
+        visionToken = window.AuthService.currentUser.token || window.AuthService.currentUser.access_token || '';
+      }
+
       let responseText = '';
       try {
         const response = await fetch(proxyUrl, {
           method: 'POST',
           headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${visionToken}`
           },
           body: JSON.stringify({
             imageBase64: base64Data,
