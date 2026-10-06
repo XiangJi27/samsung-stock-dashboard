@@ -2127,7 +2127,7 @@
             </td>
             <td style="text-align: right;">
               <div class="action-button-group">
-                <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${modelDrawerParam}')" title="ดูข้อมูลสเปกสินค้าอย่างละเอียด">
+                <button class="btn-spec-drawer" onclick="openProductSpecsModal('${item.pn || ''}')" title="ดูข้อมูลสเปกสินค้า 41 ฟิลด์อย่างละเอียด">
                   <span>📋 สเปก</span>
                 </button>
                 <button class="btn-promo-drawer" onclick="openPromoDrawer('${item.pn || ''}', '${modelDrawerParam}')" title="ดูโปรโมชั่นและราคา">
@@ -2437,6 +2437,19 @@
     function renderDrawerSpecDetails(item) {
       const spec = (typeof window !== "undefined" && window.resolveProductSpecs) ? window.resolveProductSpecs(item) : null;
 
+      // Single authority for "may this value be displayed as a Technical Spec".
+      // Loaded before this file in index.html; null-safe so the ERP-only drawer still renders.
+      const uiVerificationMap = (typeof window !== "undefined" && window.MobileUiVerificationMap) ? window.MobileUiVerificationMap : null;
+      const specMatchLevel = (spec && spec._matchLevel) || "NO_MATCH";
+      const isExactPnMatch = specMatchLevel === "EXACT_PN" || specMatchLevel === "EXACT_ACCESSORY_PN";
+      // Deterministic plan for this drawer: drives the fail-closed banner and the status badge.
+      const specRenderPlan = (uiVerificationMap && spec) ? uiVerificationMap.buildProfileRenderPlan({
+        profile: spec,
+        matchLevel: specMatchLevel,
+        officialName: spec.officialName || item.model,
+        erpProductName: item.model || ""
+      }) : null;
+
       // Level 1: Basic ERP Stock Metadata Box (100% Display Coverage)
       const catHierarchy = [item.category1, item.category2, item.category3].filter(Boolean).join(" &rarr; ");
       const erpHtml = `
@@ -2472,7 +2485,7 @@
           </div>
       `;
 
-      if (!spec || (spec._matchLevel !== "EXACT_PN" && spec._matchLevel !== "EXACT_ACCESSORY_PN")) {
+      if (!spec || (spec._matchLevel !== "EXACT_PN" && spec._matchLevel !== "EXACT_ACCESSORY_PN" && spec._matchLevel !== "PM_PROMOTION_ALIAS_EXACT_MAPPING")) {
         // FAIL CLOSED: SPEC_NOT_VERIFIED Banner for non-Exact P/N matches
         return erpHtml + `
           <div class="empty-promo-state" style="padding: 24px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
@@ -2490,10 +2503,16 @@
 
       // Level 2: Verified Technical Specs with Evidence Status Header
       const isPartiallyVerified = spec.verificationStatus === "PARTIALLY_VERIFIED";
-      const statusBadgeClass = isPartiallyVerified ? "warn" : "pass";
-      const statusBadgeText = isPartiallyVerified ? "PARTIALLY_VERIFIED" : (spec.verificationStatus || "VERIFIED");
-      const statusBadgeStyle = isPartiallyVerified 
-        ? "background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);" 
+      // The verification-map plan is authoritative for the badge (NULL_SAFE: falls back to the
+      // profile's own status when the map is unavailable, so behaviour never changes silently).
+      const planBadge = specRenderPlan ? specRenderPlan.verificationBadge : null;
+      const badgeIsWarn = planBadge
+        ? (planBadge !== "VERIFIED")
+        : isPartiallyVerified;
+      const statusBadgeClass = badgeIsWarn ? "warn" : "pass";
+      const statusBadgeText = planBadge || (isPartiallyVerified ? "PARTIALLY_VERIFIED" : (spec.verificationStatus || "VERIFIED"));
+      const statusBadgeStyle = badgeIsWarn
+        ? "background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);"
         : "";
 
       let html = erpHtml + `
@@ -2532,8 +2551,56 @@
           </div>
       `;
 
+      // Fail-closed banner for an exact P/N whose profile has no verified row at all.
+      // Without this the drawer would silently look "empty" instead of explaining why.
+      if (specRenderPlan && specRenderPlan.bannerRequired &&
+          specRenderPlan.planClass === "EXACT_PROFILE_UI_INCOMPLETE") {
+        html += `
+          <div class="empty-promo-state" style="margin-top: 12px; padding: 20px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <span style="font-size: 1.4rem;">⚠️</span>
+              <strong style="font-size: 0.95rem; color: #fbbf24;">${specRenderPlan.bannerText}</strong>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+              พบโปรไฟล์สเปกของ P/N นี้แล้ว แต่ยังไม่มีฟิลด์ใดที่ผ่านการยืนยันหลักฐาน<br>
+              ระบบจึงปิดการแสดงสเปกทางเทคนิคทั้งหมด (Fail-Closed) เพื่อไม่ให้ข้อมูลที่ยังไม่ยืนยันถูกนำเสนอ<br>
+              ข้อมูลสินค้า ราคา RRP และจำนวนสต็อกยังคงใช้งานได้ตามปกติ
+            </p>
+          </div>
+        `;
+      }
+
+
+      // MOBILE UI SAFETY CONTRACT
+      //   The verification-map layer (assets/js/mobile-ui-verification-map.js) is the single
+      //   authority for whether a rendered value carries verified evidence. Only rows classified
+      //   VERIFIED / VERIFIED_NOT_SUPPORTED may be displayed as a technical value; PENDING,
+      //   UNMAPPED and STATUS_CONFLICT rows fail closed (withheld, never promoted).
+      // (uiVerificationMap is hoisted at the top of this function.)
+
+      /** One compact badge for the whole group (kept out of the value so values stay data-only). */
+      function renderSpecGroupFooter(rows) {
+        const pendingBadge = "รอระบุข้อมูลที่ยืนยันแล้ว";
+        const withBadges = rows.filter(([, v]) => typeof v === "string" && v.indexOf("[[") >= 0);
+        if (withBadges.length === 0) return "";
+        return `
+          <div class="spec-item-row" style="opacity: 0.85;">
+            <span class="spec-label" style="color: #fbbf24;">สถานะการยืนยัน</span>
+            <span class="spec-val">
+              <span class="spec-pending-badge" style="color: #fbbf24; font-size: 0.72rem;">${withBadges.length} รายการ ${pendingBadge}</span>
+            </span>
+          </div>
+        `;
+      }
+
       function renderSpecGroup(icon, title, fields) {
-        const validRows = Object.entries(fields).filter(([k, v]) => v !== undefined && v !== null && v !== "");
+        const allRows = Object.entries(fields);
+        const validRows = allRows.filter(([k, v]) => {
+          if (v === undefined || v === null || v === "") return false;
+          // A placeholder sentinel is not a specification value.
+          if (uiVerificationMap && uiVerificationMap.isPlaceholderValue(v)) return false;
+          return true;
+        });
         if (validRows.length === 0) return "";
         return `
           <div class="spec-group-box">
@@ -2547,6 +2614,54 @@
                 <span class="spec-val">${val}</span>
               </div>
             `).join("")}
+            ${renderSpecGroupFooter(allRows)}
+          </div>
+        `;
+      }
+
+      /**
+       * Render a profile-bound technical group through the verification-map layer.
+       * Only rows classified VERIFIED / VERIFIED_NOT_SUPPORTED are displayed.
+       * PENDING, UNMAPPED and STATUS_CONFLICT rows fail closed (withheld).
+       * RAM / storage markers already present in the ERP product name stay ERP header metadata.
+       */
+      function renderVerifiedSpecGroup(icon, title, groupKeys) {
+        if (!uiVerificationMap) return "";
+        const profilePlan = uiVerificationMap.buildProfileRenderPlan({
+          profile: spec,
+          matchLevel: spec._matchLevel || "NO_MATCH",
+          officialName: spec.officialName || item.model,
+          erpProductName: item.model || ""
+        });
+        const wanted = groupKeys.slice().sort().join("|");
+        const rowsForGroup = profilePlan.rows.filter((r) => groupKeys.indexOf(r.canonicalKey) >= 0);
+        const displayable = rowsForGroup.filter((r) => r.displayed && !r.erpMetadataHeaderOnly);
+        if (displayable.length === 0) return "";
+        const withheld = rowsForGroup.filter((r) => !r.displayed).length;
+        const badgeCount = profilePlan.pendingBadgeCount;
+        const badgeRow = (badgeCount > 0 || withheld > 0)
+          ? `<div class="spec-item-row" style="opacity: 0.85;">
+               <span class="spec-label" style="color: #fbbf24;">สถานะการยืนยัน</span>
+               <span class="spec-val">
+                 ${badgeCount > 0 ? `<span class="spec-pending-badge" style="color: #fbbf24; font-size: 0.72rem;">รอระบุข้อมูลที่ยืนยันแล้ว</span>` : ""}
+                 ${withheld > 0 ? `<span style="color: var(--text-muted); font-size: 0.72rem;">⏳ ปิดการแสดง ${withheld} ฟิลด์ที่ยังไม่ยืนยัน (Fail-Closed)</span>` : ""}
+               </span>
+             </div>`
+          : "";
+        const ordered = rowsForGroup.slice().sort((a, b) => groupKeys.indexOf(a.canonicalKey) - groupKeys.indexOf(b.canonicalKey));
+        return `
+          <div class="spec-group-box">
+            <div class="spec-group-title">
+              <span>${icon}</span>
+              <span>${title}</span>
+            </div>
+            ${ordered.filter((r) => r.displayed && !r.erpMetadataHeaderOnly).map((r) => `
+              <div class="spec-item-row">
+                <span class="spec-label">${r.label}</span>
+                <span class="spec-val">${uiVerificationMap.formatRowValue(r)}</span>
+              </div>
+            `).join("")}
+            ${badgeRow}
           </div>
         `;
       }
@@ -2650,54 +2765,41 @@
         html += renderSpecGroup("⚙️", title, specMap);
       }
 
-      // 1. Display
+      // 1. Display (verified-only rows through the verification map)
       if (spec.display) {
-        html += renderSpecGroup("📱", "หน้าจอแสดงผล (Display)", {
-          "ขนาดหน้าจอ": spec.display.screenSize,
-          "ชนิดหน้าจอ": spec.display.panelType,
-          "ความละเอียด": spec.display.resolution,
-          "อัตรารีเฟรช": spec.display.refreshRate,
-          "ความสว่างสูงสุด": spec.display.peakBrightness,
-          "กระจกกันรอย": spec.display.glassProtection
-        });
+        html += renderVerifiedSpecGroup("📱", "หน้าจอแสดงผล (Display)", [
+          "display.screenSize", "display.panelType", "display.resolution",
+          "display.refreshRate", "display.peakBrightness", "display.glassProtection"
+        ]);
       }
 
-      // 2. Performance & AI
+      // 2. Performance & AI (verified-only rows through the verification map)
       if (spec.performance) {
-        html += renderSpecGroup("⚡", "ประสิทธิภาพ & Galaxy AI (Performance)", {
-          "ชิปเซ็ตประมวลผล": spec.performance.processor,
-          "แกนประมวลผล (CPU)": spec.performance.cpuCores,
-          "ชิปกราฟิก (GPU)": spec.performance.gpu,
-          "ระบบปัญญาประดิษฐ์": spec.performance.aiEngine
-        });
+        html += renderVerifiedSpecGroup("⚡", "ประสิทธิภาพ & Galaxy AI (Performance)", [
+          "performance.processor", "performance.cpuCores", "performance.gpu", "performance.aiEngine"
+        ]);
       }
 
       // 3. Memory & Storage
       if (spec.memory) {
-        html += renderSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", {
-          "หน่วยความจำ (RAM)": spec.memory.ram,
-          "พื้นที่จัดเก็บ (ROM)": spec.memory.storage,
-          "ช่องใส่ MicroSD": spec.memory.expandableStorage
-        });
+        html += renderVerifiedSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", [
+          "memory.ram", "memory.storage", "memory.expandableStorage"
+        ]);
       }
 
       // 4. Camera
       if (spec.camera) {
-        html += renderSpecGroup("📷", "กล้องถ่ายภาพ (Camera System)", {
-          "กล้องหลัง (Rear)": spec.camera.rearCamera,
-          "กล้องหน้า (Selfie)": spec.camera.frontCamera,
-          "ความละเอียดวิดีโอ": spec.camera.videoRecording
-        });
+        html += renderVerifiedSpecGroup("📷", "กล้องถ่ายภาพ (Camera System)", [
+          "camera.rearCamera", "camera.frontCamera", "camera.videoRecording"
+        ]);
       }
 
       // 5. Battery & Power
       if (spec.battery) {
-        html += renderSpecGroup("🔋", "แบตเตอรี่ & ระบบชาร์จ (Battery & Charging)", {
-          "ความจุแบตเตอรี่": spec.battery.capacity,
-          "การชาร์จไวมีสาย": spec.battery.chargingSpeed,
-          "การชาร์จไร้สาย": spec.battery.wirelessCharging,
-          "แชร์พลังงานไร้สาย": spec.battery.reverseCharging
-        });
+        html += renderVerifiedSpecGroup("🔋", "แบตเตอรี่ & ระบบชาร์จ (Battery & Charging)", [
+          "battery.capacity", "battery.chargingSpeed", "battery.wirelessCharging",
+          "battery.reverseCharging"
+        ]);
       }
 
       // 5.1 Battery Usage Hours & Endurance (ระยะเวลาการใช้งานแบตเตอรี่อย่างละเอียด พร้อมแหล่งอ้างอิงทางการ)
@@ -2777,17 +2879,11 @@
 
       // 6. Connectivity & Build
       if (spec.connectivityAndBuild) {
-        html += renderSpecGroup("📶", "การเชื่อมต่อ & ตัวเครื่อง (Connectivity & Build)", {
-          "เครือข่ายสัญญาณ": spec.connectivityAndBuild.network,
-          "ช่องใส่ซิม (SIM)": spec.connectivityAndBuild.simType,
-          "Wi-Fi": spec.connectivityAndBuild.wifi,
-          "Bluetooth": spec.connectivityAndBuild.bluetooth,
-          "มาตรฐานกันน้ำกันฝุ่น": spec.connectivityAndBuild.waterResistance,
-          "รองรับปากกา S Pen": spec.connectivityAndBuild.spenSupport,
-          "วัสดุตัวเครื่อง": spec.connectivityAndBuild.frameMaterial,
-          "ขนาดตัวเครื่อง": spec.connectivityAndBuild.dimensions,
-          "น้ำหนัก": spec.connectivityAndBuild.weight
-        });
+        html += renderVerifiedSpecGroup("📶", "การเชื่อมต่อ & ตัวเครื่อง (Connectivity & Build)", [
+          "connectivityAndBuild.network", "connectivityAndBuild.simType", "connectivityAndBuild.wifi",
+          "connectivityAndBuild.bluetooth", "connectivityAndBuild.waterResistance", "connectivityAndBuild.spenSupport",
+          "connectivityAndBuild.frameMaterial", "connectivityAndBuild.dimensions", "connectivityAndBuild.weight"
+        ]);
       }
 
       // 7. Audio (Buds)
