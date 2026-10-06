@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAMSUNG Stock & Promotion Dashboard [FEEDBACK PILOT] - Ayutthaya City Park</title>
+  <meta name="description" content="ระบบจัดการสต็อกและโปรโมชั่น Samsung แบบเรียลไทม์ โทนดาร์กสไตล์พรีเมียม สำหรับหน้าร้านสาขา">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Phase A & B Application Shell Stylesheets -->
+  <link rel="stylesheet" href="assets/css/prototype-stock.css?v=20260913-proto">
+  <link rel="stylesheet" href="assets/css/shell.css?v=20260907-b2">
+  <link rel="stylesheet" href="assets/css/login.css?v=20260907-b2">
+  <link rel="stylesheet" href="assets/css/navigation.css?v=20260907-b2">
+  <link rel="stylesheet" href="assets/css/home.css?v=20260907-b2">
+  <link rel="stylesheet" href="assets/css/responsive.css?v=20260907-b2">
+  <link rel="stylesheet" href="assets/css/importer.css?v=20260911-c1">
+  <link rel="stylesheet" href="assets/css/product-specs-modal.css?v=20261006-specs">
+  <link rel="stylesheet" href="style.css?v=20260907-b2">
+  <style>
+    /* Strict Route Isolation & Accessibility Guard */
+    [hidden] {
+      display: none !important;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>window.PILOT_MODE = true;</script>
+</head>
+<body>
+    <div id="a11y-route-announcer" class="sr-only" aria-live="polite"></div>
+  <div class="glow-bg"></div>
+
+  <div class="app-shell-wrapper">
+    <!-- Desktop Sidebar Navigation -->
+    <aside id="appSidebar" class="app-sidebar" aria-label="แถบเมนูหลัก">
+      <div class="sidebar-header">
+        <div class="brand-icon-box">S</div>
+        <div class="brand-text-group">
+          <span class="brand-system-title">SAMSUNG</span>
+          <span class="brand-system-sub">Branch Operations</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav-section" aria-label="Main Navigation">
+        <span class="nav-group-label">เมนูระบบสาขา</span>
+        <ul class="nav-menu-list">
+          <li>
+            <a href="#/home" class="nav-item-link" id="navLinkHome">
+              <span class="nav-icon">📊</span>
+              <span class="nav-label">ภาพรวมสาขา</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/stock" class="nav-item-link" id="navLinkStock">
+              <span class="nav-icon">📦</span>
+              <span class="nav-label">สต็อกสาขา</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/stock-import" class="nav-item-link" id="navLinkStockImport">
+              <span class="nav-icon">📥</span>
+              <span class="nav-label">นำเข้าสต็อกจาก Excel</span>
+              <span class="nav-badge-pill badge-live-count">2 Sheets</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/stock-import-history" class="nav-item-link" id="navLinkStockHistory">
+              <span class="nav-icon">🕒</span>
+              <span class="nav-label">ประวัติการนำเข้าสต็อก</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/promotions" class="nav-item-link" id="navLinkPromotions">
+              <span class="nav-icon">🏷️</span>
+              <span class="nav-label">โปรโมชั่น</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/promotion-import" class="nav-item-link" id="navLinkPromotionImport">
+              <span class="nav-icon">⚡</span>
+              <span class="nav-label">นำเข้าราคาและโปรโมชั่น</span>
+              <span class="nav-badge-pill badge-live-count" style="background: rgba(0, 243, 255, 0.15); color: #00f3ff;">5 ด่าน</span>
+            </a>
+          </li>
+          <li id="navItemMemberAdmin" style="display: none;">
+            <a href="#/admin/members" class="nav-item-link" id="navLinkMemberAdmin">
+              <span class="nav-icon">👥</span>
+              <span class="nav-label">จัดการสมาชิก</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/reports" class="nav-item-link" id="navLinkReports">
+              <span class="nav-icon">📑</span>
+              <span class="nav-label">รายงาน</span>
+              <span class="nav-badge-pill badge-coming-soon">Coming Soon</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/knowledge" class="nav-item-link" id="navLinkKnowledge">
+              <span class="nav-icon">🧠</span>
+              <span class="nav-label">คลังความรู้</span>
+              <span class="nav-badge-pill badge-coming-soon">NotebookLM</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/settings" class="nav-item-link" id="navLinkSettings">
+              <span class="nav-icon">⚙️</span>
+              <span class="nav-label">ตั้งค่าระบบ</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="user-avatar-circle">👤</div>
+            <div class="user-text-info">
+              <span class="current-user-display">Staff</span>
+              <span class="current-user-role">STORE_LEADER</span>
+            </div>
+          </div>
+          <button class="btn-header-action btn-header-logout btn-action-logout" title="ออกจากระบบ" aria-label="ออกจากระบบ">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Layout Container -->
+    <main class="app-layout-main">
+      <!-- Top Application Header -->
+      <header id="appTopHeader" class="app-top-header">
+        <div class="header-left-group">
+          <button id="btnMobileMenuToggle" class="btn-header-action btn-mobile-menu-toggle" style="display: none;" aria-label="เปิดเมนู">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="header-breadcrumb">
+            <span class="breadcrumb-root">Samsung Branch</span>
+            <span class="breadcrumb-sep">/</span>
+            <span id="headerBreadcrumbCurrent" class="breadcrumb-active">ภาพรวมสาขา</span>
+          </div>
+        </div>
+
+        <div class="header-right-group">
+          <div class="user-profile-badge">
+            <div class="user-avatar-circle">👤</div>
+            <div class="user-text-info">
+              <span class="current-user-display">Staff</span>
+              <span class="current-user-role">STORE_LEADER</span>
+            </div>
+          </div>
+          <button class="btn-header-action btn-header-logout btn-action-logout" title="ออกจากระบบ">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>ออกจากระบบ</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Views Container -->
+      <div id="viewsContainer" class="views-wrapper">
+        <!-- VIEW 1: LOGIN -->
+        <section id="view-login" class="app-view" data-pilot-route="/login" hidden>
+          <div class="login-page-container">
+            <div class="login-card">
+              <div class="login-brand-header">
+                <div class="login-brand-badge">
+                  <span class="status-pulse-dot"></span>
+                  <span>COPPERWIRED POS • SAMSUNG BRANCH OPERATIONS</span>
+                </div>
+                <h1 class="login-title"><span class="text-samsung">SAMSUNG</span> BRANCH</h1>
+                <p class="login-subtitle">ระบบบริหารข้อมูลสต็อก โปรโมชั่น และการดำเนินงานสาขา</p>
+              </div>
+
+              <!-- Development Auth Notice -->
+              <div class="dev-auth-notice">
+                <span class="dev-auth-icon">🛡️</span>
+                <div class="dev-auth-text">
+                  <strong class="dev-auth-tag">DEVELOPMENT AUTHENTICATION</strong><br>
+                  ระบบเข้าสู่ระบบนี้ใช้สำหรับการพัฒนาเท่านั้น ยังไม่เชื่อมต่อบัญชีบริษัทหรือ Authentication Provider จริง (เซสชันจะหมดอายุเมื่อปิดแท็บบราวเซอร์)
+                </div>
+              </div>
+
+              <!-- Login Form -->
+              <form id="loginForm" autocomplete="off" novalidate>
+                <div class="login-form-group">
+                  <label for="loginEmployeeId" class="login-label">รหัสพนักงาน (Employee ID)</label>
+                  <div class="login-input-wrapper">
+                    <input type="text" id="loginEmployeeId" class="login-input" placeholder="เช่น 100456 หรือ admin" required autofocus>
+                  </div>
+                </div>
+
+                <div class="login-form-group">
+                  <label for="loginPassword" class="login-label">รหัสผ่าน (Password)</label>
+                  <div class="login-input-wrapper">
+                    <input type="password" id="loginPassword" class="login-input" placeholder="กรอกรหัสผ่านสำหรับการพัฒนา" required>
+                    <button type="button" id="btnTogglePassword" class="btn-toggle-password" aria-label="แสดงหรือซ่อนรหัสผ่าน">👁️</button>
+                  </div>
+                </div>
+
+                <div id="loginErrorAlert" class="login-error-alert" role="alert" aria-live="assertive">
+                  <span id="loginErrorText"></span>
+                </div>
+
+                <button type="submit" id="btnLoginSubmit" class="btn-login-submit">
+                  <span>เข้าสู่ระบบ &rarr;</span>
+                </button>
+              </form>
+
+              <div class="login-card-footer">
+                <p class="internal-use-notice">🔒 ระบบสำหรับใช้งานภายในสาขา Samsung Ayutthaya City Park เท่านั้น</p>
+                <span class="system-version-tag">Version 2026.09-v1 (Phase A Shell)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: HOME -->
+        <section id="view-home" class="app-view" data-pilot-route="/home" hidden>
+          <div id="homeDashboardContent" class="home-view-container"></div>
+        </section>
+
+        <!-- VIEW 3: STOCK (Wraps entire existing stock & promo dashboard) -->
+        <section id="view-stock" class="app-view" data-pilot-route="/stock" hidden>
+          <div class="prototype-stock-root">
+<div class="ambient-glow"></div>
+
+  <div class="app-container">
+    <!-- Prototype Mode Banner -->
+    <div class="prototype-banner">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span class="prototype-badge">🚀 Interactive Prototype</span>
+        <span class="prototype-notice">
+          <strong>Samsung Branch Operations:</strong> ออกแบบหน้าจอสต็อกและโปรโมชั่นใหม่ (แยกหมวดหมู่, แสดงสีชัดเจน, Side Panel โปรโมชั่น)
+        </span>
+      </div>
+      <div>
+        <span style="font-size: 0.76rem; color: #cbd5e1; background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 6px;">
+          🔒 Code Freeze Safe • Isolated Review
+        </span>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="dashboard-header">
+      <div class="header-title-group">
+        <h1><span>SAMSUNG</span> สต็อกสาขาและโปรโมชั่น</h1>
+        <p class="header-subtitle">ระบบบริหารสต็อกรายเครื่อง สเปก สี และตรวจสอบโปรโมชั่นหน้าร้าน</p>
+      </div>
+      <div class="branch-pill">
+        <span class="branch-status-dot"></span>
+        <span>Samsung Ayutthaya City Park</span>
+        <span style="color: var(--text-muted);">|</span>
+        <span style="color: var(--cyan); font-weight: 600;" id="currentDateDisplay">13 ก.ย. 2026</span>
+      </div>
+    </header>
+
+    <!-- Pilot Stock Metadata & Provenance Bar -->
+    <div id="prototypeStockProvenanceBar"></div>
+
+    <!-- 1. Category Summary Cards (Quick Click Filters) -->
+    <section class="category-grid" id="categoryGrid">
+      <div class="category-card cat-all active" data-cat="ALL">
+        <div class="category-top">
+          <span class="category-icon">📦</span>
+          <span class="category-models-count" id="countCatAllModels">333 รายการ</span>
+        </div>
+        <div class="category-name">สต๊อกทั้งหมด ชั้น 1</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatAllStock">1,701</span>
+          <span class="category-unit">ชิ้น/เครื่อง (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-phone" data-cat="SmartPhone">
+        <div class="category-top">
+          <span class="category-icon">📱</span>
+          <span class="category-models-count" id="countCatPhoneModels">62 รุ่น</span>
+        </div>
+        <div class="category-name">Smartphone</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatPhoneStock">230</span>
+          <span class="category-unit">เครื่อง (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-tab" data-cat="Tablet">
+        <div class="category-top">
+          <span class="category-icon">💻</span>
+          <span class="category-models-count" id="countCatTabModels">12 รุ่น</span>
+        </div>
+        <div class="category-name">Tablet</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatTabStock">34</span>
+          <span class="category-unit">เครื่อง (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-watch" data-cat="Watch">
+        <div class="category-top">
+          <span class="category-icon">⌚</span>
+          <span class="category-models-count" id="countCatWatchModels">17 รุ่น</span>
+        </div>
+        <div class="category-name">Galaxy Watch</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatWatchStock">61</span>
+          <span class="category-unit">เรือน (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-buds" data-cat="Buds">
+        <div class="category-top">
+          <span class="category-icon">🎧</span>
+          <span class="category-models-count" id="countCatBudsModels">9 รุ่น</span>
+        </div>
+        <div class="category-name">Galaxy Buds</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatBudsStock">49</span>
+          <span class="category-unit">เครื่อง (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-acc" data-cat="Accessory">
+        <div class="category-top">
+          <span class="category-icon">🛍️</span>
+          <span class="category-models-count" id="countCatAccModels">189 รายการ</span>
+        </div>
+        <div class="category-name">อุปกรณ์เสริม</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatAccStock">972</span>
+          <span class="category-unit">ชิ้น (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-premium" id="catCardPremium" data-cat="Premium" style="display: flex;">
+        <div class="category-top">
+          <span class="category-icon">🎁</span>
+          <span class="category-models-count" id="countCatPremModels">24 รายการ</span>
+        </div>
+        <div class="category-name">ของแถม / Premium</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatPremStock">282</span>
+          <span class="category-unit">ชิ้น (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-sim" id="catCardSIM" data-cat="SIM" style="display: none !important;">
+        <div class="category-top">
+          <span class="category-icon">📶</span>
+          <span class="category-models-count" id="countCatSimModels">11 รายการ</span>
+        </div>
+        <div class="category-name">ซิมการ์ด (SIM)</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatSimStock">58</span>
+          <span class="category-unit">ใบ (ชั้น 1)</span>
+        </div>
+      </div>
+
+      <div class="category-card cat-other" id="catCardOther" data-cat="Other" style="display: none !important;">
+        <div class="category-top">
+          <span class="category-icon">🏷️</span>
+          <span class="category-models-count" id="countCatOtherModels">9 รายการ</span>
+        </div>
+        <div class="category-name">สินค้าอื่น ๆ</div>
+        <div class="category-stats">
+          <span class="category-stock" id="countCatOtherStock">15</span>
+          <span class="category-unit">ชิ้น (ชั้น 1)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Control Bar: Search + Filter Chips + View Switcher -->
+    <section class="control-bar">
+      <div class="search-box-wrapper">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="ค้นหา: รุ่น (S26, A07), P/N, สี (Violet), ความจุ, 4G, 5G, Wi-Fi..." autocomplete="off">
+        <button id="btnClearSearch" class="search-clear">&times;</button>
+      </div>
+
+      <div class="filter-chips" id="filterChipsContainer">
+        <!-- Dynamically rendered based on selected category -->
+      </div>
+
+      <div class="view-switch-group">
+        <button class="btn-view-switch active" id="btnViewTable" title="มุมมองตารางข้อมูลละเอียด">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+          <span>ตาราง</span>
+        </button>
+        <button class="btn-view-switch" id="btnViewCards" title="มุมมองการ์ดสินค้า">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>การ์ด</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Results Count Bar -->
+    <div class="results-info-bar">
+      <div class="results-count">
+        แสดง <strong id="visibleCountDisplay">290</strong> รายการ จากสต็อกสาขาทั้งหมด <span id="totalCountDisplay">290</span> รายการ
+      </div>
+      <div id="filterActiveNotice" style="font-size: 0.78rem; color: var(--text-muted);">
+        เรียงลำดับตาม: ความพร้อมของสต็อก (มากไปน้อย)
+      </div>
+    </div>
+
+    <!-- Container 1: Modern Table View (Desktop) -->
+    <div class="stock-table-card" id="tableViewContainer">
+      <div class="table-responsive">
+        <table class="modern-table" id="stockTable">
+          <thead>
+            <tr>
+              <th>สินค้า / สเปก / รหัส P/N</th>
+              <th>สีตัวเครื่อง</th>
+              <th>หมวดหมู่</th>
+              <th style="text-align: center;">ร้านเรา (ชั้น 1)</th>
+              <th style="text-align: center;">สาขา (ชั้น 2)</th>
+              <th style="text-align: right;">ราคาปกติ (RRP)</th>
+              <th>สถานะโปรโมชั่น</th>
+              <th style="text-align: right;">การดำเนินการ</th>
+            </tr>
+          </thead>
+          <tbody id="stockTableBody">
+            <!-- Dynamically Rendered -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Container 2: Card Grid View (Responsive / Mobile / Tablet) -->
+    <div class="stock-cards-grid" id="cardViewContainer" style="display: none;">
+      <!-- Dynamically Rendered -->
+    </div>
+  </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: PROMOTIONS -->
+        <section id="view-promotions" class="app-view" data-pilot-route="/promotions" hidden>
+          <div id="promotionsViewContent" class="home-view-container"></div>
+        </section>
+
+        <!-- VIEW: PROMOTION IMPORT CENTER -->
+        <section id="view-promotion-import" class="app-view" data-pilot-route="/promotion-import" hidden>
+          <div class="importer-container">
+            <!-- Local Storage Banner -->
+            <div class="local-store-banner">
+              <div class="local-store-banner-left">
+                <span class="local-store-icon">🛡️</span>
+                <div>
+                  <strong class="local-store-tag">PROMOTION QUALITY GATE</strong>
+                  <span class="local-store-desc">รองรับ .xlsx, รูปภาพ (OCR Draft) และ .txt (Rule Draft) • ห้ามเขียนทับข้อมูลโดยไม่ผ่านการตรวจสอบและกดยืนยัน</span>
+                </div>
+              </div>
+              <span class="local-store-badge">Storage: LOCAL_BROWSER_ONLY</span>
+            </div>
+
+            <!-- Importer Header Card -->
+            <div class="importer-header-card">
+              <div class="importer-title-group">
+                <h2><span>⚡ นำเข้าราคาและโปรโมชั่น (Promotion Import Center)</span></h2>
+                <p>ระบบนำเข้าโปรโมชั่น 5 ขั้นตอน (Upload ➔ Extract ➔ Preview ➔ Validate ➔ Confirm &amp; Publish) พร้อมด่านคัดกรองอัตโนมัติ</p>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-cancel-import" id="btnExportPromoSync" title="ส่งออกไฟล์ JSON โปรโมชั่นสำหรับนำไปซิงค์ยังอุปกรณ์อื่น">
+                  <span>📤 ส่งออกไฟล์ซิงค์ (Export JSON)</span>
+                </button>
+                <button class="btn-cancel-import" id="btnImportPromoSync" title="นำเข้าไฟล์ JSON โปรโมชั่นที่ส่งออกจากเครื่องอื่น">
+                  <span>📥 นำเข้าไฟล์ซิงค์ (Import JSON)</span>
+                </button>
+                <input type="file" id="promoSyncFileInput" accept=".json" style="display: none;">
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/promotions')">
+                  <span>🏷️ กลับไปดูโปรโมชั่น &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 5-Step Staging Stepper -->
+            <div class="staging-stepper" id="promoStepper">
+              <div class="step-item active">
+                <span class="step-circle">1</span>
+                <span class="step-label">1. อัปโหลด</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">2</span>
+                <span class="step-label">2. สกัดข้อมูล (Extract)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">3</span>
+                <span class="step-label">3. ดูตัวอย่าง (Preview Diff)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">4</span>
+                <span class="step-label">4. ตรวจสอบกฎ (Validate)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">5</span>
+                <span class="step-label">5. เผยแพร่ (Publish)</span>
+              </div>
+            </div>
+
+            <!-- AI Vision Security & Serverless Proxy Banner -->
+            <div id="aiVisionConfigCard" style="margin-bottom: 20px; padding: 16px 20px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                <div>
+                  <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                    <span>🛡️ AI Vision: เชื่อมต่อผ่าน Serverless Proxy ปลอดภัย</span>
+                    <span id="aiVisionStatusBadge" style="font-size: 0.75rem; padding: 2px 10px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);">🔒 API Key ปลอดภัยบน Server</span>
+                  </div>
+                  <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: #94a3b8; line-height: 1.4;">
+                    สแกนรูปภาพผ่าน Vercel Serverless Function (/api/vision-proxy) ส่งต่อไปยัง Claude 3.5 Sonnet Vision • ฝั่ง Browser ไม่เห็น API Key • ปิด Auto-Publish ทุกกรณี ต้องตรวจ Diff Preview ก่อนเสมอ
+                  </p>
+                </div>
+                <div>
+                  <span style="font-size: 0.8rem; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                    🌐 Endpoint: <code>/api/vision-proxy</code>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upload Dropzone Card -->
+            <div class="upload-dropzone-card" id="promoUploadDropzone">
+              <div class="dropzone-icon">📥</div>
+              <h3 class="dropzone-title">เลือกไฟล์โปรโมชั่น (.xlsx, .png, .jpg, .webp, .txt)</h3>
+              <p class="dropzone-sub">
+                Excel จะผ่าน Header-Guided Parser อัตโนมัติ • รูปภาพจะสกัดผ่าน Claude Vision บน Serverless Proxy และเข้าสถานะ PROVISIONAL • ห้าม Auto-Publish อัตโนมัติเด็ดขาด
+              </p>
+              <div class="dropzone-types-pill">
+                <span class="type-pill active">📊 Excel .xlsx</span>
+                <span class="type-pill" style="color: #fde68a; border-color: rgba(251, 191, 36, 0.4);">🖼️ Images .png/.jpg (Claude Vision • No Auto-Publish)</span>
+                <span class="type-pill">📝 Text .txt (Rule Draft)</span>
+                <span class="type-pill">🔒 ตรวจสอบ Magic Bytes &amp; Macro</span>
+              </div>
+              <input type="file" id="promoCenterFileInput" accept=".xlsx,.png,.jpg,.jpeg,.webp,.txt" style="display: none;">
+              <div id="promoUploadStatus" style="margin-top: 14px; font-size: 0.86rem; font-weight: 600;"></div>
+            </div>
+
+            <!-- Preview & Diff Section (Initially Hidden) -->
+            <div id="promoPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Validation Warning Box (Human-friendly) -->
+              <div id="promoValidationWarningBanner" class="hidden" style="padding: 14px 18px; border-radius: 10px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.4); color: #fde68a;"></div>
+
+              <div class="diff-kpi-grid">
+                <div class="diff-kpi-box cyan">
+                  <span class="diff-kpi-label">รายการโปรโมชั่นที่อ่านได้</span>
+                  <strong class="diff-kpi-val" id="promoKpiTotal">0</strong>
+                  <span class="diff-kpi-sub">Total Variants Read</span>
+                </div>
+                <div class="diff-kpi-box emerald">
+                  <span class="diff-kpi-label">🟢 ผ่านการตรวจสอบ (Passed)</span>
+                  <strong class="diff-kpi-val text-emerald" id="promoKpiPassed">0</strong>
+                  <span class="diff-kpi-sub">พร้อม Publish สู่ระบบ</span>
+                </div>
+                <div class="diff-kpi-box amber">
+                  <span class="diff-kpi-label">🟡 ต้องตรวจทาน (Review Required)</span>
+                  <strong class="diff-kpi-val text-amber" id="promoKpiReview">0</strong>
+                  <span class="diff-kpi-sub">Image OCR / TXT Draft</span>
+                </div>
+                <div class="diff-kpi-box coral">
+                  <span class="diff-kpi-label">🔴 ถูกกักกัน (Blocked)</span>
+                  <strong class="diff-kpi-val text-coral" id="promoKpiBlocked">0</strong>
+                  <span class="diff-kpi-sub">สูตรผิด / สมการไม่ลงตัว</span>
+                </div>
+              </div>
+
+              <!-- Diff Table Container -->
+              <div class="diff-table-container">
+                <div class="diff-table-header">
+                  <h4 class="diff-table-title">รายการโปรโมชั่นและผลการตรวจสอบ (Promotion Diff &amp; Quality Gate)</h4>
+                  <div class="table-filter-tabs">
+                    <button class="tab-filter-btn active promo-tab-filter" data-filter="ALL">ทั้งหมด</button>
+                    <button class="tab-filter-btn promo-tab-filter" data-filter="PASSED">เฉพาะที่ผ่าน</button>
+                    <button class="tab-filter-btn promo-tab-filter" data-filter="REVIEW">ต้องตรวจทาน</button>
+                    <button class="tab-filter-btn promo-tab-filter" data-filter="BLOCKED">ถูกกักกัน</button>
+                  </div>
+                </div>
+
+                <!-- Batch Exact P/N Confirmation Action Bar -->
+                <div id="promoBatchPnActionBar" class="batch-pn-action-bar hidden">
+                  <div class="batch-pn-info">
+                    <span class="batch-pn-icon">🔍</span>
+                    <div>
+                      <strong style="color: #93c5fd;">เวิร์กโฟลว์จับคู่และยืนยัน Exact P/N:</strong>
+                      <span style="color: #cbd5e1; font-size: 0.8rem;">เลือก Candidate P/N จากสต็อกจริง (ระบุสี, ประเภท SM-/F-, สต็อก ช1/ช2) แล้วกดยืนยันเพื่อเปลี่ยนเป็นสถานะผ่านเกณฑ์</span>
+                    </div>
+                  </div>
+                  <div class="batch-pn-buttons">
+                    <button type="button" id="btnSelectAllCandidates" class="tab-filter-btn">
+                      ☑ เลือก Candidate ทั้งหมด (ทุกสีในสต็อก)
+                    </button>
+                    <button type="button" id="btnBatchConfirmPns" class="tab-filter-btn batch-confirm-btn">
+                      ✓ ยืนยัน P/N ที่เลือกทั้งหมด (Batch Confirm)
+                    </button>
+                    <button type="button" id="btnResetPnSelections" class="tab-filter-btn" style="color: #94a3b8;">
+                      ↺ ล้างการเลือก
+                    </button>
+                  </div>
+                </div>
+
+                <div style="overflow-x: auto; max-height: 520px;">
+                  <table class="diff-table">
+                    <thead>
+                      <tr>
+                        <th style="min-width: 240px;">P/N &amp; ชื่อรุ่น / Candidate P/N</th>
+                        <th>ประเภทโค้ด</th>
+                        <th>ราคาปกติ (RRP)</th>
+                        <th>ส่วนลด</th>
+                        <th>ราคาสุทธิ (Net Price)</th>
+                        <th>คูปอง / ชำระ</th>
+                        <th>Sale Mode</th>
+                        <th>ผลการตรวจสอบ</th>
+                        <th style="min-width: 260px;">การจัดการ Exact P/N &amp; หลักฐาน</th>
+                      </tr>
+                    </thead>
+                    <tbody id="promoDiffTableBody">
+                      <!-- Rendered by promotion-importer.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Confirmation Actions -->
+              <div class="importer-footer-actions">
+                <button class="btn-cancel-import" id="btnCancelPromoImport">
+                  <span>ยกเลิก</span>
+                </button>
+                <button class="btn-confirm-import" id="btnConfirmPromoPublish">
+                  <span>⚡ ยืนยันการเผยแพร่ (Confirm &amp; Publish)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW: STOCK IMPORT -->
+        <section id="view-stock-import" class="app-view" data-pilot-route="/stock-import" hidden>
+          <div class="importer-container">
+            <!-- Local Storage Banner -->
+            <!-- Dynamic Storage Banner -->
+            <div id="stockImportStorageBanner" class="local-store-banner central-db-banner" style="border-color: rgba(56, 189, 248, 0.25); background: rgba(15, 23, 42, 0.75);">
+              <div class="local-store-banner-left">
+                <span class="local-store-icon" id="stockStorageBannerIcon">⏳</span>
+                <div>
+                  <strong class="local-store-tag" id="stockStorageBannerTag" style="color: #38bdf8;">กำลังตรวจสอบสถานะฐานข้อมูล...</strong>
+                  <span class="local-store-desc" id="stockStorageBannerDesc">ระบบกำลังตรวจสอบการเชื่อมต่อกับ Supabase PostgreSQL</span>
+                </div>
+              </div>
+              <span class="local-store-badge" id="stockStorageBannerBadge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">Status: CONNECTING</span>
+            </div>
+
+            <!-- Importer Header Card -->
+            <div class="importer-header-card">
+              <div class="importer-title-group">
+                <h2><span>📥 นำเข้าสต็อกจาก Excel (Stock Snapshot Import)</span></h2>
+                <p>รองรับไฟล์ Stock.xlsx (Sheet1 = ร้านเรา ชั้น 1 [f1], Sheet2 = สาขา ชั้น 2 [f2]) • เชื่อมโยง Exact P/N อัตโนมัติ</p>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn-cancel-import" id="btnExportStockSync" title="ส่งออกไฟล์ JSON สำหรับนำไปซิงค์ยังอุปกรณ์อื่น">
+                  <span>📤 ส่งออกไฟล์ซิงค์ (Export JSON)</span>
+                </button>
+                <button class="btn-cancel-import" id="btnImportStockSync" title="นำเข้าไฟล์ JSON ที่ส่งออกจากเครื่องอื่น">
+                  <span>📥 นำเข้าไฟล์ซิงค์ (Import JSON)</span>
+                </button>
+                <input type="file" id="stockSyncFileInput" accept=".json" style="display: none;">
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock-import-history')">
+                  <span>🕒 ดูประวัติการนำเข้า</span>
+                </button>
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock')">
+                  <span>📦 กลับไปดูสต็อก &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3-Step Staging Stepper -->
+            <div class="staging-stepper" id="stockStepper">
+              <div class="step-item active">
+                <span class="step-circle">1</span>
+                <span class="step-label">1. อัปโหลดไฟล์ (.xlsx)</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">2</span>
+                <span class="step-label">2. ตรวจสอบข้อมูล &amp; Diff</span>
+              </div>
+              <div class="step-sep"></div>
+              <div class="step-item">
+                <span class="step-circle">3</span>
+                <span class="step-label">3. ยืนยัน Snapshot</span>
+              </div>
+            </div>
+
+            <!-- Mode Switcher Tabs (Mode A vs Mode B) -->
+            <div class="stock-mode-selector-card" style="display: flex; gap: 12px; margin-bottom: 20px;">
+              <button type="button" class="btn-cancel-import stock-mode-tab-btn active" id="btnStockModeA" style="flex: 1; padding: 14px 18px; font-weight: 700; border-color: var(--shell-neon-cyan, #00ffff); background: rgba(0, 255, 255, 0.08); color: #fff;">
+                <span>📁 โหมด A: อัปโหลดไฟล์ Excel (.xlsx)</span>
+              </button>
+              <button type="button" class="btn-cancel-import stock-mode-tab-btn" id="btnStockModeB" style="flex: 1; padding: 14px 18px; font-weight: 700; border-color: rgba(255, 255, 255, 0.15); color: #94a3b8;">
+                <span>🌐 โหมด B: ซิงค์จาก Google Sheet (CSV Web Link)</span>
+              </button>
+            </div>
+
+            <!-- Mode A Panel: File Upload Dropzone -->
+            <div id="stockModeAPanel">
+              <div class="upload-dropzone-card" id="stockUploadDropzone">
+                <div class="dropzone-icon">📊</div>
+                <h3 class="dropzone-title">ลากไฟล์ Stock.xlsx มาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์</h3>
+                <p class="dropzone-sub">ระบบจะตรวจ Header, จับคู่ Exact P/N, ดึงเฉพาะยอด On Hand และทำ Full Outer Join ระหว่าง Sheet1 และ Sheet2 โดยไม่แตะต้องราคาโปรโมชั่น</p>
+                <div class="dropzone-types-pill">
+                  <span class="type-pill active">รองรับเฉพาะ .xlsx</span>
+                  <span class="type-pill">ต้องมี Sheet1 &amp; Sheet2</span>
+                  <span class="type-pill">ใช้คอลัมน์ On Hand</span>
+                  <span class="type-pill">แยก Price 99 เป็นราคาอ้างอิง</span>
+                </div>
+                <input type="file" id="stockFileInput" accept=".xlsx" style="display: none;">
+                <div id="stockUploadStatus" style="margin-top: 14px; font-size: 0.86rem; font-weight: 600;"></div>
+              </div>
+            </div>
+
+            <!-- Mode B Panel: Google Sheet Auto-Sync -->
+            <div id="stockModeBPanel" class="hidden">
+              <div class="action-center-card" style="padding: 24px 28px; border: 1px solid rgba(0, 255, 255, 0.2); background: rgba(15, 23, 42, 0.7); border-radius: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; flex-wrap: wrap;">
+                  <div>
+                    <h3 style="color: #fff; font-size: 1.15rem; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;">
+                      <span>🌐 ซิงค์สต็อกสดจาก Google Sheet (CSV Web Sync)</span>
+                    </h3>
+                    <p style="color: #94a3b8; font-size: 0.86rem; margin: 0; line-height: 1.5;">
+                      ดึงข้อมูลสต็อกล่าสุดจากลิงก์ Google Sheet 'Publish to web' (CSV) โดยตรงผ่านเบราว์เซอร์ • ข้อมูลจะเข้า Diff Preview ให้ตรวจสอบก่อนยืนยันเสมอ
+                    </p>
+                  </div>
+                  <div id="stockGSheetLastSyncBadge" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; color: #38bdf8; font-weight: 600;">
+                    ซิงค์ล่าสุด: ยังไม่ได้ซิงค์
+                  </div>
+                </div>
+
+                <!-- URL Configuration Row -->
+                <div style="margin-bottom: 18px;">
+                  <label for="stockGSheetUrlInput" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px;">
+                    ลิงก์ Google Sheet Published CSV (ตั้งค่าครั้งเดียว ระบบจำในเบราว์เซอร์นี้):
+                  </label>
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="url" id="stockGSheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv" style="flex: 1; min-width: 280px; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: #fff; font-family: monospace; font-size: 0.85rem;">
+                    <button type="button" class="btn-cancel-import" id="btnSaveGSheetUrl" style="padding: 10px 18px; font-weight: 600;">
+                      <span>💾 บันทึก URL</span>
+                    </button>
+                    <button type="button" class="btn-confirm-import" id="btnRefreshStockGSheet" style="padding: 10px 20px; font-weight: 700;">
+                      <span>🔄 รีเฟรชข้อมูลตอนนี้</span>
+                    </button>
+                  </div>
+                  <div style="margin-top: 8px; font-size: 0.76rem; color: #64748b;">
+                    💡 วิธีทำลิงก์: ใน Google Sheet ไปที่ เมนู <strong>File &rarr; Share &rarr; Publish to web</strong> &rarr; เลือก Sheet สต็อก &rarr; เปลี่ยน 'Web page' เป็น <strong>Comma-separated values (.csv)</strong> &rarr; กด Publish แล้วคัดลอกลิงก์มาวาง
+                  </div>
+                </div>
+
+                <!-- Opt-in Auto-Publish setting -->
+                <div style="display: flex; align-items: center; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 14px;">
+                  <input type="checkbox" id="chkStockGSheetAutoPublish" style="cursor: pointer; width: 16px; height: 16px;">
+                  <label for="chkStockGSheetAutoPublish" style="font-size: 0.82rem; color: #94a3b8; cursor: pointer;">
+                    (Opt-in) ยืนยัน Snapshot ทันทีหลังดึงข้อมูลสำเร็จ โดยไม่ต้องกด Confirm ใน Diff Preview (ค่าเริ่มต้น: ปิดไว้ เพื่อความปลอดภัย)
+                  </label>
+                </div>
+
+                <!-- Live Status & Error Container -->
+                <div id="stockGSheetStatus" style="font-size: 0.88rem; font-weight: 600; min-height: 24px;"></div>
+
+                <!-- Fallback Banner -->
+                <div id="stockGSheetFallbackBanner" class="hidden" style="margin-top: 12px; padding: 12px 16px; border-radius: 8px; background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.4); color: #fda4af; font-size: 0.84rem;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Preview & Diff Section (Initially Hidden) -->
+            <div id="stockPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Validation Warning Box (Human-friendly) -->
+              <div id="stockValidationWarningBanner" class="hidden" style="padding: 14px 18px; border-radius: 10px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.4); color: #fde68a;"></div>
+
+              <!-- KPI Summary Grid -->
+              <div class="diff-kpi-grid">
+                <div class="diff-kpi-box cyan">
+                  <span class="diff-kpi-label">จำนวนสินค้าทั้งหมด</span>
+                  <strong class="diff-kpi-val" id="stkKpiUnique">0</strong>
+                  <span class="diff-kpi-sub">Unique Exact P/N</span>
+                </div>
+                <div class="diff-kpi-box cyan">
+                  <span class="diff-kpi-label">ยอดร้านเรา (ช1 / f1)</span>
+                  <strong class="diff-kpi-val text-cyan" id="stkKpiF1">0</strong>
+                  <span class="diff-kpi-sub">Sheet1 On Hand</span>
+                </div>
+                <div class="diff-kpi-box amber">
+                  <span class="diff-kpi-label">ยอดสาขา (ช2 / f2)</span>
+                  <strong class="diff-kpi-val text-amber" id="stkKpiF2">0</strong>
+                  <span class="diff-kpi-sub">Sheet2 On Hand</span>
+                </div>
+                <div class="diff-kpi-box emerald">
+                  <span class="diff-kpi-label">ยอดรวมสองชั้น</span>
+                  <strong class="diff-kpi-val text-emerald" id="stkKpiTotal">0</strong>
+                  <span class="diff-kpi-sub">f1 + f2</span>
+                </div>
+                <div class="diff-kpi-box coral">
+                  <span class="diff-kpi-label">สต็อกที่มีการเปลี่ยนแปลง</span>
+                  <strong class="diff-kpi-val text-coral" id="stkKpiChanged">0</strong>
+                  <span class="diff-kpi-sub">เทียบกับ Snapshot ปัจจุบัน</span>
+                </div>
+                <div class="diff-kpi-box">
+                  <span class="diff-kpi-label">สินค้าใหม่</span>
+                  <strong class="diff-kpi-val" id="stkKpiNew" style="color: #a78bfa;">0</strong>
+                  <span class="diff-kpi-sub">ไม่พบใน Snapshot เดิม</span>
+                </div>
+              </div>
+
+              <!-- Diff Table Container -->
+              <div class="diff-table-container">
+                <div class="diff-table-header">
+                  <h4 class="diff-table-title">ตารางเปรียบเทียบยอดสต็อก (Stock Diff Preview)</h4>
+                  <div class="table-filter-tabs">
+                    <button class="tab-filter-btn active stock-tab-filter" data-filter="ALL">ทั้งหมด</button>
+                    <button class="tab-filter-btn stock-tab-filter" data-filter="CHANGED">เฉพาะที่เปลี่ยน</button>
+                    <button class="tab-filter-btn stock-tab-filter" data-filter="NEW">สินค้าใหม่</button>
+                    <button class="tab-filter-btn stock-tab-filter" data-filter="CORE">เครื่องหลัก Core</button>
+                  </div>
+                </div>
+                <div style="overflow-x: auto; max-height: 480px;">
+                  <table class="diff-table">
+                    <thead>
+                      <tr>
+                        <th>P/N &amp; ชื่อรุ่น (Description)</th>
+                        <th>หมวดหมู่</th>
+                        <th>ร้านเรา (ช1)</th>
+                        <th>สาขา (ช2)</th>
+                        <th>รวม (f1+f2)</th>
+                        <th>Price 99 (อ้างอิง)</th>
+                        <th>สถานะการเปลี่ยน</th>
+                      </tr>
+                    </thead>
+                    <tbody id="stockDiffTableBody">
+                      <!-- Rendered by stock-importer.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Confirmation Actions -->
+              <div class="importer-footer-actions">
+                <button class="btn-cancel-import" id="btnCancelStockImport">
+                  <span>ยกเลิก</span>
+                </button>
+                <button class="btn-confirm-import" id="btnConfirmStockImport">
+                  <span>✓ ยืนยันการนำเข้า (Confirm Import)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW: STOCK IMPORT HISTORY -->
+        <section id="view-stock-import-history" class="app-view" data-pilot-route="/stock-import-history" hidden>
+          <div class="importer-container">
+            <div class="importer-header-card">
+              <div class="importer-title-group">
+                <h2><span>🕒 ประวัติการนำเข้า Stock Snapshot (Batch History &amp; Rollback)</span></h2>
+                <p>บันทึกประวัติการนำเข้าทุกรอบ พร้อมฟังก์ชันย้อนกลับไปยัง Snapshot ก่อนหน้า (One-Click Rollback)</p>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn-confirm-import" onclick="window.AppRouter.navigate('/stock-import')">
+                  <span>➕ นำเข้าสต็อกรอบใหม่</span>
+                </button>
+                <button class="btn-cancel-import" onclick="window.AppRouter.navigate('/stock')">
+                  <span>📦 กลับไปดูสต็อก &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="stockHistoryContent">
+              <!-- Rendered by stock-importer.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: REPORTS -->
+        <section id="view-reports" class="app-view" data-pilot-route="/reports" hidden>
+          <div class="home-view-container">
+            <div class="home-section">
+              <div class="section-title-bar">
+                <h3 class="section-title">📑 รายงานสาขา (Branch Reports)</h3>
+                <span class="badge-status-not-connected">STATUS: COMING SOON</span>
+              </div>
+              <div class="action-center-card" style="text-align: center; padding: 48px 24px;">
+                <div style="font-size: 3rem; margin-bottom: 12px;">📊</div>
+                <h4 style="color: #fff; font-size: 1.2rem; margin-bottom: 8px;">โมดูลรายงานสรุปยอดและการขายอยู่ในแผนพัฒนาระยะถัดไป</h4>
+                <p style="color: #94a3b8; font-size: 0.88rem; max-width: 500px; margin: 0 auto 20px;">รองรับรายงานยอดขายประจำวัน รายงานสรุปการใช้คูปอง และการตรวจนับสต็อกกระทบยอด (Reconciliation)</p>
+                <button class="btn-action-view" onclick="window.AppRouter.navigate('/home')">กลับสู่หน้าหลัก &larr;</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: KNOWLEDGE -->
+        <section id="view-knowledge" class="app-view" data-pilot-route="/knowledge" hidden>
+          <div class="home-view-container">
+            <div class="home-section">
+              <div class="section-title-bar">
+                <h3 class="section-title">🧠 คลังความรู้และคู่มือสาขา (Branch Knowledge Base)</h3>
+                <span class="badge-status-ready">NOTEBOOKLM PLANNED INTEGRATION</span>
+              </div>
+              <div class="action-center-card" style="padding: 32px 28px;">
+                <div style="display: flex; align-items: flex-start; gap: 18px; margin-bottom: 24px;">
+                  <div style="font-size: 2.5rem; line-height: 1;">💡</div>
+                  <div>
+                    <h4 style="color: #fff; font-size: 1.15rem; margin: 0 0 6px 0;">Google NotebookLM Read-Only Knowledge Base</h4>
+                    <p style="color: #cbd5e1; font-size: 0.86rem; line-height: 1.5; margin: 0;">ฐานความรู้โปรโมชั่นและคู่มือพนักงานสำหรับตอบคำถามเงื่อนไขโปรโมชั่นที่ซับซ้อน โดยเชื่อมโยงเอกสารแม่บท <code style="color: var(--shell-neon-cyan);">branch_confirmed_rules.md</code> และข้อมูลโปรโมชั่นรายแถวแบบ Read-only</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                  <a href="https://notebooklm.google.com/" target="_blank" rel="noopener noreferrer" class="btn-action-view" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+                    <span>เปิด Google NotebookLM ↗</span>
+                  </a>
+                  <button class="btn-action-view" onclick="window.AppRouter.navigate('/promotions')">
+                    <span>ดูคำแนะนำโปรโมชั่นหน้าร้าน &rarr;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 7: SETTINGS -->
+        <section id="view-settings" class="app-view" data-pilot-route="/settings" hidden>
+          <div id="settingsViewContent" class="home-view-container"></div>
+        </section>
+
+        <!-- VIEW 8: ADMIN MEMBERS -->
+        <section id="view-admin-members" class="app-view" data-pilot-route="/admin/members" hidden>
+          <div id="adminMembersViewContent"></div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav id="mobileBottomNav" class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <a href="#/home" class="mobile-nav-item" id="mobNavHome">
+        <span class="mobile-icon">📊</span>
+        <span>ภาพรวม</span>
+      </a>
+      <a href="#/stock" class="mobile-nav-item" id="mobNavStock">
+        <span class="mobile-icon">📦</span>
+        <span>สต็อก</span>
+      </a>
+      <a href="#/promotions" class="mobile-nav-item" id="mobNavPromo">
+        <span class="mobile-icon">🏷️</span>
+        <span>โปร</span>
+      </a>
+      <a href="#/settings" class="mobile-nav-item" id="mobNavSettings">
+        <span class="mobile-icon">⚙️</span>
+        <span>ตั้งค่า</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ==========================================================================
+       Promotion & Tech Specs Slide-Out Side Panel (Dual-Tab Drawer)
+       Positioned directly under body for true fixed viewport positioning
+       ========================================================================== -->
+  <div class="drawer-backdrop" id="promoDrawerBackdrop">
+    <div class="drawer-panel" id="promoDrawerPanel">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h3 id="drawerProductTitle">Galaxy S26 Ultra (12/256GB)</h3>
+          <div class="drawer-pn-tag" id="drawerProductPn">P/N: SM-S928BZTQTHL</div>
+        </div>
+        <button class="btn-close-drawer" id="btnCloseDrawer">&times;</button>
+      </div>
+
+      <!-- Main Navigation Tabs: Promo vs Specs -->
+      <div class="drawer-nav-tabs" id="drawerMainTabs">
+        <button class="drawer-nav-btn active" id="tabBtnPromo" onclick="switchDrawerMainTab('PROMO')">
+          <span>✨ โปรโมชั่นหน้าร้าน</span>
+        </button>
+        <button class="drawer-nav-btn specs-tab" id="tabBtnSpecs" onclick="switchDrawerMainTab('SPECS')">
+          <span>📋 ข้อมูลสเปกสินค้า (Tech Specs)</span>
+        </button>
+      </div>
+
+      <div class="drawer-body" id="drawerBody">
+        <!-- Injected Dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase A & B Architecture Scripts Loading Sequence -->
+  <script src="assets/js/config.js?v=20260911-d1"></script>
+  <script src="assets/js/auth.js?v=20260911-d1"></script>
+  <script src="assets/js/sheet-sync.js?v=20260912-e1"></script>
+  <script src="assets/js/stock-importer.js?v=20260911-d1"></script>
+  <script src="assets/js/promotion-pricing-engine.js"></script>
+  <script src="assets/js/promotion-pricing-adapter.js"></script>
+  <script src="assets/js/promotion-pricing-runtime.js"></script>
+  <script src="assets/js/promotion-importer.js?v=20260911-d1"></script>
+  <script src="assets/js/data-loader.js?v=20260911-d1"></script>
+  <script src="assets/js/data-service.js?v=20260911-d1"></script>
+  <script src="assets/js/home.js?v=20260911-d1"></script>
+  <script src="assets/js/modules.js?v=20260911-d1"></script>
+  <script src="assets/js/navigation.js?v=20260911-d1"></script>
+  <script src="assets/js/router.js?v=20260911-d1"></script>
+
+  <!-- Official Supabase JS SDK CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- User Feedback Pilot Modular Components (Ayutthaya City Park - 4-User Store Model) -->
+  <script src="assets/js/pilot-runtime-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/auth-service.js"></script>
+  <script src="assets/js/permission-service.js"></script>
+  <script src="assets/js/session-guard.js"></script>
+  <script src="assets/js/issue-service.js"></script>
+  <script src="assets/js/auth-modal.js"></script>
+  <script src="assets/js/user-status-bar.js"></script>
+  <script src="assets/js/issue-report-modal.js"></script>
+  <script src="assets/js/issue-list.js"></script>
+  <script src="assets/js/pilot-navigation.js"></script>
+  <script src="assets/js/pilot-dashboard-widgets.js"></script>
+  <script src="assets/js/member-admin-service.js"></script>
+  <script src="assets/js/pilot-bootstrap.js"></script>
+
+  <script>
+    if (window.AppRouter && window.AppRouter.routes) {
+      window.AppRouter.routes["/admin/members"] = {
+        title: "จัดการสมาชิกสาขา • Samsung Branch Operations",
+        isProtected: true,
+        viewId: "view-admin-members"
+      };
+    }
+  </script>
+
+  <!-- Official Supabase JS SDK CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- User Feedback Pilot Modular Components (Ayutthaya City Park - 4-User Store Model) -->
+  <script>
+    window.__ENV_SUPABASE_URL = "https://anhxzffcmrihymrptsgd.supabase.co";
+    window.__ENV_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9eXmP6Cgb14AWbk8CrBv3A_l0Clj00v";
+  </script>
+  <script src="assets/js/pilot-runtime-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/auth-service.js"></script>
+  <script src="assets/js/permission-service.js"></script>
+  <script src="assets/js/session-guard.js"></script>
+  <script src="assets/js/issue-service.js"></script>
+  <script src="assets/js/auth-modal.js"></script>
+  <script src="assets/js/user-status-bar.js"></script>
+  <script src="assets/js/issue-report-modal.js"></script>
+  <script src="assets/js/issue-list.js"></script>
+  <script src="assets/js/pilot-navigation.js"></script>
+  <script src="assets/js/pilot-dashboard-widgets.js"></script>
+  <script src="assets/js/member-admin-service.js"></script>
+  <script src="assets/js/pilot-bootstrap.js"></script>
+  <script src="stock_data.js"></script>
+  <script src="assets/js/pilot-stock-snapshot.js"></script>
+  <script src="promotion_variants.js"></script>
+  <script src="product_specs_data.js"></script>
+  <script src="assets/js/promotion-heading-parser.js"></script>
+  <script src="assets/js/promotion-calculator.js"></script>
+  <script src="assets/js/prototype-stock.js"></script>
+  <script src="assets/js/product-specs-modal.js"></script>
+
+
+
+  <!-- Login Form Submission Binding -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginForm = document.getElementById("loginForm");
+      const empInput = document.getElementById("loginEmployeeId");
+      const pwInput = document.getElementById("loginPassword");
+      const btnToggle = document.getElementById("btnTogglePassword");
+      const errAlert = document.getElementById("loginErrorAlert");
+      const errText = document.getElementById("loginErrorText");
+      const btnSubmit = document.getElementById("btnLoginSubmit");
+
+      // Password visibility toggle
+      if (btnToggle && pwInput) {
+        btnToggle.addEventListener("click", () => {
+          const isPw = pwInput.type === "password";
+          pwInput.type = isPw ? "text" : "password";
+          btnToggle.textContent = isPw ? "🙈" : "👁️";
+        });
+      }
+
+      // Login form submit handler
+      if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          errAlert.classList.remove("visible");
+          btnSubmit.disabled = true;
+          btnSubmit.innerHTML = '<span>กำลังเข้าสู่ระบบ...</span>';
+
+          try {
+            const userSession = await window.AuthService.signIn(empInput.value, pwInput.value);
+            if (userSession) {
+              pwInput.value = ""; // Clear password field immediately
+              // Load datasets on demand after successful authentication
+              if (window.DataLoader) {
+                await window.DataLoader.loadAuthenticatedDatasets();
+              }
+              (window.PrototypeStock?.refresh || window.initPrototypeStock)?.();
+              window.AppRouter.navigate("/home");
+            } else {
+              errText.textContent = "เกิดข้อผิดพลาดในการเข้าสู่ระบบ";
+              errAlert.classList.add("visible");
+            }
+          } catch (err) {
+            errText.textContent = err.message || "รหัสพนักงานหรือรหัสผ่านไม่ถูกต้อง";
+            errAlert.classList.add("visible");
+          } finally {
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = '<span>เข้าสู่ระบบ &rarr;</span>';
+          }
+        });
+      }
+
+      window.addEventListener("hashchange", () => {
+        if (window.location.hash.includes("/stock") && !window.location.hash.includes("/stock-import")) {
+          (window.PrototypeStock?.refresh || window.initPrototypeStock)?.();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
