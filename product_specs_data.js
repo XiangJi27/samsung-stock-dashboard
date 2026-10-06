@@ -28,7 +28,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB / 16GB LPDDR5X",
       "storage": "256GB / 512GB / 1TB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "4 เลนส์: 200MP (Main f/1.7, OIS, Super Quad Pixel) + 50MP (Periscope Telephoto 5x, OIS) + 10MP (Telephoto 3x, OIS) + 50MP (Ultra-Wide 120°, Dual Pixel AF)",
@@ -54,8 +54,8 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM 2 ช่อง + รองรับ eSIM)",
       "wifi": "Wi-Fi 7 (802.11be, Tri-band)",
       "bluetooth": "Bluetooth 5.4 (LE Audio)",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
-      "spenSupport": "มีปากกา S Pen ในตัวเครื่อง (ความหน่วงต่ำ 2.8ms)",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
+      "spenSupport": "รองรับ S Pen ในตัวเครื่อง (มีช่องเก็บปากกา Built-in และ Bluetooth Air Actions)",
       "frameMaterial": "กรอบไทเทเนียมเกรดอากาศยาน (Titanium Frame)",
       "dimensions": "162.8 x 77.6 x 8.2 มม.",
       "weight": "228 กรัม"
@@ -92,7 +92,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB LPDDR5X",
       "storage": "256GB / 512GB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, Dual Pixel AF, OIS) + 12MP (Ultra-Wide 120°) + 10MP (Telephoto 3x, OIS)",
@@ -118,7 +118,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 7 / Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.4",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
       "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Enhanced Armor Aluminum",
       "dimensions": "158.5 x 75.9 x 7.3 มม.",
@@ -156,7 +156,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB LPDDR5X",
       "storage": "256GB / 512GB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 10MP (Telephoto 3x, OIS)",
@@ -182,8 +182,8 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 7 / Wi-Fi 6E",
       "bluetooth": "Bluetooth 5.4",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Armor Aluminum",
       "dimensions": "147.0 x 70.6 x 7.4 มม.",
       "weight": "167 กรัม"
@@ -220,7 +220,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB / 16GB LPDDR5X",
       "storage": "256GB / 512GB / 1TB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "4 เลนส์: 200MP (Main f/1.7, OIS) + 50MP (Periscope Telephoto 5x, OIS) + 10MP (Telephoto 3x, OIS) + 50MP (Ultra-Wide 120°, Dual Pixel AF)",
@@ -246,8 +246,8 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM 2 ช่อง + รองรับ eSIM)",
       "wifi": "Wi-Fi 7 (802.11be)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
-      "spenSupport": "มีปากกา S Pen ในตัวเครื่อง",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
+      "spenSupport": "รองรับ S Pen ในตัวเครื่อง (มีช่องเก็บปากกา Built-in และ Bluetooth Air Actions)",
       "frameMaterial": "กรอบไทเทเนียม (Titanium Frame)",
       "dimensions": "162.8 x 77.6 x 8.2 มม.",
       "weight": "219 กรัม"
@@ -284,7 +284,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB LPDDR5X",
       "storage": "128GB / 256GB / 512GB",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 8MP (Telephoto 3x, OIS)",
@@ -310,7 +310,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
       "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Armor Aluminum",
       "dimensions": "162.0 x 77.3 x 7.9 มม.",
@@ -348,7 +348,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB / 12GB LPDDR5X",
       "storage": "128GB / 256GB",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 8MP (Telephoto 3x, OIS)",
@@ -374,8 +374,8 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Armor Aluminum",
       "dimensions": "162.0 x 77.3 x 7.9 มม.",
       "weight": "210 กรัม"
@@ -412,7 +412,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB / 16GB LPDDR5X",
       "storage": "256GB / 512GB / 1TB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์ระดับโปร: 200MP (Main f/1.7, OIS) + 50MP (Telephoto 5x, OIS) + 12MP (Ultra-Wide 120°)",
@@ -438,8 +438,8 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 7",
       "bluetooth": "Bluetooth 5.4",
-      "waterResistance": "IP48 กันน้ำและฝุ่น",
-      "spenSupport": "รองรับ S Pen Fold Edition",
+      "waterResistance": "IP48 (กันน้ำลึก 1.5 เมตร และกันฝุ่นอนุภาค > 1 มม.)",
+      "spenSupport": "รองรับ S Pen Fold Edition (ไม่มีช่องเก็บปากกาในตัวเครื่อง ต้องใช้เคสเก็บ)",
       "frameMaterial": "Enhanced Armor Aluminum & Titanium Hinge",
       "dimensions": "พับ: 153.5 x 68.1 x 10.2 มม. / กาง: 153.5 x 132.6 x 4.8 มม.",
       "weight": "218 กรัม (บางและเบาเป็นพิเศษ)"
@@ -476,7 +476,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB / 16GB LPDDR5X",
       "storage": "256GB / 512GB / 1TB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 10MP (Telephoto 3x, OIS) + 12MP (Ultra-Wide)",
@@ -499,11 +499,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Dual SIM + eSIM",
+      "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 7 / Wi-Fi 6E",
       "bluetooth": "Bluetooth 5.4",
-      "waterResistance": "IP48 กันน้ำ",
-      "spenSupport": "รองรับ S Pen Fold Edition",
+      "waterResistance": "IP48 (กันน้ำลึก 1.5 เมตร และกันฝุ่น)",
+      "spenSupport": "รองรับ S Pen Fold Edition (ไม่มีช่องเก็บปากกาในตัวเครื่อง ต้องใช้เคสเก็บ)",
       "frameMaterial": "Enhanced Armor Aluminum",
       "dimensions": "พับ: 153.5 x 68.1 x 11.2 มม. / กาง: 153.5 x 132.6 x 5.2 มม.",
       "weight": "201 กรัม (เบาลงชัดเจน)"
@@ -540,7 +540,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB / 16GB",
       "storage": "256GB / 512GB / 1TB",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 10MP (Telephoto 3x, OIS) + 12MP (Ultra-Wide)",
@@ -563,11 +563,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Dual SIM + eSIM",
+      "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP48 กันน้ำ",
-      "spenSupport": "รองรับ S Pen Fold Edition",
+      "waterResistance": "IP48 (กันน้ำลึก 1.5 เมตร)",
+      "spenSupport": "รองรับ S Pen Fold Edition (ไม่มีช่องเก็บปากกาในตัวเครื่อง ต้องใช้เคสเก็บ)",
       "frameMaterial": "Armor Aluminum",
       "dimensions": "พับ: 153.5 x 68.1 x 11.8 มม. / กาง: 153.5 x 132.6 x 5.4 มม.",
       "weight": "235 กรัม"
@@ -604,7 +604,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB LPDDR5X",
       "storage": "256GB / 512GB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "คู่: 50MP (Main f/1.8, OIS, 2x Optical Quality Zoom) + 12MP (Ultra-Wide 123°)",
@@ -630,8 +630,8 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "1 Nano-SIM + รองรับ eSIM",
       "wifi": "Wi-Fi 7 / Wi-Fi 6E",
       "bluetooth": "Bluetooth 5.4",
-      "waterResistance": "IP48 กันน้ำ",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP48 (กันน้ำลึก 1.5 เมตร)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Armor Aluminum & รอยพับเนียนบางลง",
       "dimensions": "พับ: 85.1 x 71.9 x 14.2 มม. / กาง: 165.1 x 71.9 x 6.6 มม.",
       "weight": "184 กรัม (บางและเบาที่สุด)"
@@ -668,7 +668,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB LPDDR5X",
       "storage": "256GB / 512GB",
-      "expandableStorage": "ไม่รองรับ MicroSD"
+      "expandableStorage": "ไม่รองรับ MicroSD (ไม่มีช่องใส่การ์ดความจำภายนอก)"
     },
     "camera": {
       "rearCamera": "คู่: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide)",
@@ -691,11 +691,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Nano-SIM + eSIM",
+      "simType": "1 Nano-SIM + รองรับ eSIM",
       "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP48 กันน้ำ",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP48 (กันน้ำลึก 1.5 เมตร)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Armor Aluminum",
       "dimensions": "พับ: 85.1 x 71.9 x 14.9 มม. / กาง: 165.1 x 71.9 x 6.9 มม.",
       "weight": "187 กรัม"
@@ -732,7 +732,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB / 12GB LPDDR5",
       "storage": "256GB / 512GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "ไม่รองรับ MicroSD (ซัมซุงยกเลิกช่องใส่ MicroSD ในรุ่น Galaxy A56/A57)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS, Big Pixel) + 12MP (Ultra-Wide f/2.2) + 5MP (Macro f/2.4)",
@@ -755,11 +755,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G SA/NSA, 4G LTE",
-      "simType": "Dual SIM (Nano-SIM + MicroSD หรือ Hybrid Slot)",
+      "simType": "Dual SIM (Nano-SIM 2 ช่อง หรือ Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 6 (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "กรอบโลหะ Metal Frame พรีเมียม และกระจกหลัง",
       "dimensions": "161.1 x 77.4 x 7.9 มม.",
       "weight": "209 กรัม"
@@ -796,7 +796,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB",
       "storage": "256GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "ไม่รองรับ MicroSD (ซัมซุงยกเลิกช่องใส่ MicroSD ในรุ่น Galaxy A36/A37)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 8MP (Ultra-Wide f/2.2) + 5MP (Macro f/2.4)",
@@ -819,11 +819,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Dual SIM (Hybrid)",
+      "simType": "Dual SIM (Nano-SIM 2 ช่อง หรือ Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 6 (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP67 กันน้ำลึก 1 เมตร นาน 30 นาที",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP67 (กันน้ำลึก 1 เมตร นาน 30 นาที)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Polycarbonate Frame",
       "dimensions": "161.7 x 77.8 x 7.9 มม.",
       "weight": "205 กรัม"
@@ -860,7 +860,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB",
       "storage": "128GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB (ใช้ช่องร่วม Hybrid Slot: ต้องเลือกระหว่าง SIM 2 หรือ MicroSD)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 8MP (Ultra-Wide f/2.2) + 2MP (Macro f/2.4)",
@@ -883,11 +883,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G Sub6 / SA / NSA, 4G LTE",
-      "simType": "Dual SIM (Nano-SIM + eSIM หรือ Hybrid)",
+      "simType": "Hybrid Dual SIM (Nano-SIM + eSIM หรือสลับใส่ MicroSD Card)",
       "wifi": "Wi-Fi 6 (802.11ax)",
       "bluetooth": "Bluetooth 5.4",
-      "waterResistance": "IP67 กันน้ำลึก 1 เมตร นาน 30 นาที",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP67 (กันน้ำลึก 1 เมตร นาน 30 นาที)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Polycarbonate Frame",
       "dimensions": "164.2 x 77.5 x 7.9 มม.",
       "weight": "199 กรัม"
@@ -924,7 +924,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB",
       "storage": "128GB / 256GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB (ใช้ช่องร่วม Hybrid Slot: ต้องเลือกระหว่าง SIM 2 หรือ MicroSD)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8) + 5MP (Ultra-Wide) + 2MP (Macro)",
@@ -947,11 +947,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Dual SIM (Hybrid Slot)",
+      "simType": "Hybrid Dual SIM (Nano-SIM + Nano-SIM หรือสลับใส่ MicroSD Card)",
       "wifi": "Wi-Fi 5",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP54 ป้องกันละอองน้ำและฝุ่น",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP54 (ป้องกันละอองน้ำและฝุ่นรอบทิศทาง)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Polycarbonate",
       "dimensions": "164.4 x 77.9 x 7.9 มม.",
       "weight": "200 กรัม"
@@ -988,7 +988,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB",
       "storage": "128GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB (ใช้ช่องร่วม Hybrid Slot)"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8) + 5MP (Ultra-Wide) + 2MP (Macro)",
@@ -1011,11 +1011,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "4G LTE, 3G, 2G",
-      "simType": "Dual SIM (Nano-SIM)",
+      "simType": "Hybrid Dual SIM (Nano-SIM + Nano-SIM หรือสลับใส่ MicroSD Card)",
       "wifi": "Wi-Fi 5",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP54 ป้องกันละอองน้ำและฝุ่น",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP54 (ป้องกันละอองน้ำและฝุ่นรอบทิศทาง)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Polycarbonate",
       "dimensions": "164.4 x 77.9 x 7.9 มม.",
       "weight": "200 กรัม"
@@ -1052,7 +1052,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "6GB",
       "storage": "128GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB (ใช้ช่องร่วม Hybrid Slot)"
     },
     "camera": {
       "rearCamera": "คู่: 50MP (Main f/1.8) + 2MP (Depth)",
@@ -1075,11 +1075,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Dual SIM (Hybrid)",
+      "simType": "Hybrid Dual SIM (Nano-SIM + Nano-SIM หรือสลับใส่ MicroSD Card)",
       "wifi": "Wi-Fi 5",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "ป้องกันละอองน้ำทั่วไป",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP54 (ป้องกันละอองน้ำและฝุ่น)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Polycarbonate",
       "dimensions": "167.3 x 77.3 x 8.0 มม.",
       "weight": "195 กรัม"
@@ -1116,7 +1116,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "4GB / 6GB (พร้อม RAM Plus)",
       "storage": "64GB / 128GB (eMMC 5.1)",
-      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB (ช่องใส่แยกอิสระ Dedicated Triple Slot: ใส่ได้ 2 SIM + 1 MicroSD พร้อมกัน)"
     },
     "camera": {
       "rearCamera": "กล้องคู่: 50MP (Main f/1.8, ออโต้โฟกัส) + 2MP (Depth f/2.4 ถ่ายภาพหน้าชัดหลังเบลอ)",
@@ -1139,11 +1139,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "4G LTE, 3G, 2G (รองรับทุกเครือข่าย AIS, TRUE, DTAC)",
-      "simType": "Triple Slot: 2 Nano-SIM + 1 MicroSD (ไม่ต้องสลับซิม)",
+      "simType": "Triple Slot: ถาดใส่ 3 ช่องแยกอิสระ (2 Nano-SIM + 1 MicroSD ใช้งานได้พร้อมกัน ไม่ต้องสลับซิม)",
       "wifi": "Wi-Fi 5 (802.11 a/b/g/n/ac 2.4G+5GHz)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "มาตรฐานทั่วไป",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "ป้องกันละอองน้ำทั่วไป (Splash Resistant)",
+      "spenSupport": "ไม่รองรับ S Pen",
       "headphoneJack": "มีช่องเสียบหูฟัง 3.5 มม.",
       "frameMaterial": "ตัวเครื่องเพรียวบาง 8.0 มม. ดีไซน์ลวดลายมินิมอล",
       "dimensions": "167.3 x 77.3 x 8.0 มม.",
@@ -1181,7 +1181,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB",
       "storage": "256GB (UFS 4.0)",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1.5TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1.5TB"
     },
     "camera": {
       "rearCamera": "คู่: 13MP (Main) + 8MP (Ultra-Wide)",
@@ -1202,11 +1202,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "1 Nano-SIM + รองรับ eSIM",
+      "simType": "1 Nano-SIM + รองรับ eSIM (สำหรับรุ่น 5G) / Wi-Fi Only (สำหรับรุ่น Wi-Fi)",
       "wifi": "Wi-Fi 7",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำกันฝุ่น ทั้งตัวแท็บเล็ตและปากกา S Pen",
-      "spenSupport": "มีปากกา S Pen รองรับในกล่อง (แถมฟรีไม่ต้องซื้อเพิ่ม)",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที ทั้งตัวเครื่องและปากกา S Pen)",
+      "spenSupport": "รองรับ S Pen (มีปากกา S Pen แถมมาในกล่อง แปะชาร์จแม่เหล็กด้านหลัง)",
       "speakers": "ลำโพง 4 ตัวปรับจูนโดย AKG พร้อม Dolby Atmos",
       "dimensions": "326.4 x 208.6 x 5.4 มม. (บางเฉียบเพียง 5.4 มม.)",
       "weight": "723 กรัม"
@@ -1241,7 +1241,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "12GB",
       "storage": "256GB / 512GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1.5TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1.5TB"
     },
     "camera": {
       "rearCamera": "13MP + 8MP (Ultra-Wide)",
@@ -1262,11 +1262,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G (รุ่น 5G) หรือ Wi-Fi Only (รุ่น Wifi)",
-      "simType": "Nano-SIM + eSIM (รุ่น 5G)",
+      "simType": "Nano-SIM + eSIM (สำหรับรุ่น 5G) / ไม่รองรับซิม (สำหรับรุ่น Wi-Fi)",
       "wifi": "Wi-Fi 6E / Wi-Fi 7",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำทั้งตัวเครื่องและ S Pen",
-      "spenSupport": "มีปากกา S Pen แถมในกล่อง",
+      "waterResistance": "IP68 (กันน้ำลึก 1.5 เมตร นาน 30 นาที ทั้งเครื่องและปากกา)",
+      "spenSupport": "รองรับ S Pen (มีปากกา S Pen แถมมาในกล่อง)",
       "speakers": "ลำโพง 4 ตัว AKG Dolby Atmos",
       "dimensions": "285.4 x 185.4 x 5.6 มม.",
       "weight": "571 กรัม"
@@ -1301,7 +1301,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "8GB / 12GB",
       "storage": "128GB / 256GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB"
     },
     "camera": {
       "rearCamera": "คู่: 8MP + 8MP (Ultra-Wide)",
@@ -1322,11 +1322,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G (รุ่น 5G) หรือ Wi-Fi Only",
-      "simType": "Nano-SIM + eSIM (รุ่น 5G)",
+      "simType": "Nano-SIM + eSIM (รุ่น 5G) / Wi-Fi Only",
       "wifi": "Wi-Fi 6",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร",
-      "spenSupport": "มีปากกา S Pen แถมในกล่อง",
+      "waterResistance": "IP68 (กันน้ำและฝุ่น)",
+      "spenSupport": "รองรับ S Pen (มีปากกา S Pen แถมมาในกล่อง)",
       "speakers": "ลำโพงคู่ Dual Speakers AKG",
       "dimensions": "285.4 x 185.4 x 6.5 มม.",
       "weight": "628 กรัม"
@@ -1361,7 +1361,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "6GB",
       "storage": "128GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB"
     },
     "camera": {
       "rearCamera": "8MP",
@@ -1382,11 +1382,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G (P/N: SM-X406 / F-X406) หรือ Wi-Fi (P/N: SM-X400 / F-X400)",
-      "simType": "Nano-SIM (รุ่น 5G)",
+      "simType": "Nano-SIM (รุ่น LTE) / Wi-Fi Only",
       "wifi": "Wi-Fi 6",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำ",
-      "spenSupport": "รองรับปากกา S Pen",
+      "waterResistance": "ไม่ระบุมาตรฐานกันน้ำ",
+      "spenSupport": "รองรับ S Pen",
       "speakers": "ลำโพงคู่ AKG Dolby Atmos",
       "dimensions": "254.3 x 165.8 x 6.5 มม.",
       "weight": "524 กรัม"
@@ -1421,7 +1421,7 @@ window.PRODUCT_SPECS_PROFILES = {
     "memory": {
       "ram": "4GB / 6GB / 8GB",
       "storage": "64GB / 128GB",
-      "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
+      "expandableStorage": "รองรับ MicroSD Card สูงสุด 1TB (ช่องใส่แยกอิสระ Dedicated Slot)"
     },
     "camera": {
       "rearCamera": "8MP (Autofocus)",
@@ -1442,11 +1442,11 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G (รุ่น 5G), 4G LTE (รุ่น LTE), Wi-Fi Only",
-      "simType": "Nano-SIM (รุ่น Cell)",
+      "simType": "Nano-SIM (สำหรับรุ่น 4G/Cellular) / Wi-Fi Only",
       "wifi": "Wi-Fi 5 (802.11ac)",
       "bluetooth": "Bluetooth 5.1",
-      "waterResistance": "มาตรฐานทั่วไป",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "ไม่ระบุมาตรฐานกันน้ำ",
+      "spenSupport": "ไม่รองรับ S Pen",
       "speakers": "ลำโพง 4 ตัว Quad Speakers Dolby Atmos",
       "dimensions": "257.1 x 168.7 x 6.9 มม.",
       "weight": "480 กรัม"
