@@ -2180,7 +2180,7 @@
               </div>
 
               <div class="card-stock-col">
-                <div class="card-stock-label">ราคาปกติ (RRP)</div>
+                <div class="card-stock-label">ราคาปกติของสินค้า</div>
                 <strong style="margin-top: 4px; color: #f8fafc; font-weight: 700;">
                   ${
                     Number.isFinite(Number(item.srp)) && Number(item.srp) > 0
