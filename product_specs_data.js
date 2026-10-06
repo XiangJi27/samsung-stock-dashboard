@@ -12,26 +12,26 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "6.8 นิ้ว",
-      "panelType": "Dynamic AMOLED 2X",
-      "resolution": "QHD+ (3120 x 1440 พิกเซล, 505 ppi)",
+      "screenSize": "6.9 นิ้ว",
+      "panelType": "Dynamic LTPO AMOLED 2X",
+      "resolution": "QHD+ (3120 x 1440 พิกเซล, ~500 ppi)",
       "refreshRate": "1-120Hz Adaptive Refresh Rate",
-      "peakBrightness": "2,600 nits (Vision Booster)",
-      "glassProtection": "Corning Gorilla Armor (ลดแสงสะท้อน 75%)"
+      "peakBrightness": "2,600 nits (Vision Booster พร้อม Privacy Display ในตัว)",
+      "glassProtection": "Corning Gorilla Armor 2 (ลดแสงสะท้อนและกันรอยขีดข่วนขั้นสูงสุด)"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
-      "cpuCores": "Octa-core (Up to 3.39GHz)",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI เต็มรูปแบบ (Circle to Search, Live Translate, Note Assist, Photo Assist)"
+      "processor": "Qualcomm Snapdragon 8 Elite Gen 5 for Galaxy (3nm)",
+      "cpuCores": "Octa-core (2x Oryon 4.74GHz + 6x Oryon 3.62GHz)",
+      "gpu": "Adreno 840 (1.3GHz)",
+      "aiEngine": "Galaxy AI เต็มรูปแบบบน One UI 9 / Android 17 (Now Nudge, Circle to Search, Live Translate, Photo Assist)"
     },
     "memory": {
-      "ram": "12GB LPDDR5X",
+      "ram": "12GB / 16GB LPDDR5X",
       "storage": "256GB / 512GB / 1TB (UFS 4.0)",
       "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "4 เลนส์: 200MP (Main f/1.7, OIS, Super Quad Pixel) + 50MP (Periscope Telephoto 5x, OIS) + 10MP (Telephoto 3x, OIS) + 12MP (Ultra-Wide 120°, Dual Pixel AF)",
+      "rearCamera": "4 เลนส์: 200MP (Main f/1.7, OIS, Super Quad Pixel) + 50MP (Periscope Telephoto 5x, OIS) + 10MP (Telephoto 3x, OIS) + 50MP (Ultra-Wide 120°, Dual Pixel AF)",
       "frontCamera": "12MP (f/2.2, Dual Pixel AF)",
       "videoRecording": "8K @ 30fps, 4K @ 120fps, Super Steady, HDR10+"
     },
@@ -41,10 +41,10 @@ window.PRODUCT_SPECS_PROFILES = {
       "wirelessCharging": "Fast Wireless Charging 2.0 (15W)",
       "reverseCharging": "Wireless PowerShare 4.5W",
       "usageHours": {
-        "videoPlayback": "สูงสุด 30 ชั่วโมง (ดูวิดีโอต่อเนื่อง)",
-        "audioPlayback": "สูงสุด 95 ชั่วโมง (ฟังเพลงต่อเนื่อง)",
-        "internetUsage": "สูงสุด 25 ชั่วโมง (Wi-Fi / LTE)",
-        "talkTime": "สูงสุด 40 ชั่วโมง (สนทนาสาย 4G)",
+        "videoPlayback": "สูงสุด 31 ชั่วโมง (ดูวิดีโอต่อเนื่อง)",
+        "audioPlayback": "สูงสุด 98 ชั่วโมง (ฟังเพลงต่อเนื่อง)",
+        "internetUsage": "สูงสุด 26 ชั่วโมง (Wi-Fi / LTE)",
+        "talkTime": "สูงสุด 42 ชั่วโมง (สนทนาสาย 4G)",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th) เล่นวิดีโอ 1080p ที่ระดับเสียงและแสงปกติ",
         "chargingNote": "ชาร์จไว 45W (SFC 2.0) ได้แบตเตอรี่ 65% ภายในเวลาเพียง 30 นาที"
       }
@@ -53,18 +53,18 @@ window.PRODUCT_SPECS_PROFILES = {
       "network": "5G Sub6 / SA / NSA, 4G LTE Cat.20",
       "simType": "Dual SIM (Nano-SIM 2 ช่อง + รองรับ eSIM)",
       "wifi": "Wi-Fi 7 (802.11be, Tri-band)",
-      "bluetooth": "Bluetooth 5.3 (LE Audio)",
+      "bluetooth": "Bluetooth 5.4 (LE Audio)",
       "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
       "spenSupport": "มีปากกา S Pen ในตัวเครื่อง (ความหน่วงต่ำ 2.8ms)",
       "frameMaterial": "กรอบไทเทเนียมเกรดอากาศยาน (Titanium Frame)",
-      "dimensions": "162.3 x 79.0 x 8.6 มม.",
-      "weight": "232 กรัม"
+      "dimensions": "162.8 x 77.6 x 8.2 มม.",
+      "weight": "228 กรัม"
     },
     "batteryHours": {
-      "videoPlayback": "สูงสุด 30 ชั่วโมง (ดูวิดีโอต่อเนื่อง)",
-      "audioPlayback": "สูงสุด 95 ชั่วโมง (ฟังเพลงต่อเนื่อง)",
-      "internetUsage": "สูงสุด 25 ชั่วโมง (Wi-Fi / LTE)",
-      "talkTime": "สูงสุด 40 ชั่วโมง (สนทนาสาย 4G)",
+      "videoPlayback": "สูงสุด 31 ชั่วโมง (ดูวิดีโอต่อเนื่อง)",
+      "audioPlayback": "สูงสุด 98 ชั่วโมง (ฟังเพลงต่อเนื่อง)",
+      "internetUsage": "สูงสุด 26 ชั่วโมง (Wi-Fi / LTE)",
+      "talkTime": "สูงสุด 42 ชั่วโมง (สนทนาสาย 4G)",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th) เล่นวิดีโอ 1080p ที่ระดับเสียงและแสงปกติ",
       "chargingNote": "ชาร์จไว 45W (SFC 2.0) ได้แบตเตอรี่ 65% ภายในเวลาเพียง 30 นาที"
     }
@@ -78,16 +78,16 @@ window.PRODUCT_SPECS_PROFILES = {
     "display": {
       "screenSize": "6.7 นิ้ว",
       "panelType": "Dynamic AMOLED 2X",
-      "resolution": "QHD+ (3120 x 1440 พิกเซล)",
+      "resolution": "QHD+ (3120 x 1440 พิกเซล, 516 ppi)",
       "refreshRate": "1-120Hz Adaptive Refresh Rate",
-      "peakBrightness": "2,600 nits",
+      "peakBrightness": "2,600 nits (Vision Booster)",
       "glassProtection": "Corning Gorilla Glass Victus 2"
     },
     "performance": {
-      "processor": "Exynos 2400 / Snapdragon 8 Gen 3 for Galaxy (4nm)",
-      "cpuCores": "Deca-core (Up to 3.2GHz)",
-      "gpu": "Xclipse 940",
-      "aiEngine": "Galaxy AI (Circle to Search, Live Translate, Interpreter)"
+      "processor": "Samsung Exynos 2600 (2nm) / Snapdragon 8 Elite Gen 5 (3nm)",
+      "cpuCores": "Deca-core / Octa-core",
+      "gpu": "Xclipse 960 / Adreno 840",
+      "aiEngine": "Galaxy AI เต็มรูปแบบบน One UI 9 (Circle to Search, Live Translate, Interpreter, Note Assist)"
     },
     "memory": {
       "ram": "12GB LPDDR5X",
@@ -101,7 +101,7 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "battery": {
       "capacity": "4,900 mAh",
-      "chargingSpeed": "45W Fast Charging",
+      "chargingSpeed": "45W Fast Charging (ชาร์จ 65% ใน 30 นาที)",
       "wirelessCharging": "Fast Wireless Charging (15W)",
       "reverseCharging": "Wireless PowerShare 4.5W",
       "usageHours": {
@@ -116,12 +116,12 @@ window.PRODUCT_SPECS_PROFILES = {
     "connectivityAndBuild": {
       "network": "5G Sub6 / SA / NSA, 4G LTE",
       "simType": "Dual SIM (Nano-SIM + eSIM)",
-      "wifi": "Wi-Fi 6E (802.11ax)",
-      "bluetooth": "Bluetooth 5.3",
+      "wifi": "Wi-Fi 7 / Wi-Fi 6E (802.11ax)",
+      "bluetooth": "Bluetooth 5.4",
       "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
       "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Enhanced Armor Aluminum",
-      "dimensions": "158.5 x 75.9 x 7.7 มม.",
+      "dimensions": "158.5 x 75.9 x 7.3 มม.",
       "weight": "196 กรัม"
     },
     "batteryHours": {
@@ -140,18 +140,18 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "6.2 นิ้ว กะทัดรัดพกพาง่าย",
+      "screenSize": "6.3 นิ้ว กะทัดรัดพกพาง่าย",
       "panelType": "Dynamic AMOLED 2X",
       "resolution": "FHD+ (2340 x 1080 พิกเซล)",
       "refreshRate": "1-120Hz Adaptive",
-      "peakBrightness": "2,600 nits",
+      "peakBrightness": "2,600 nits (Vision Booster)",
       "glassProtection": "Corning Gorilla Glass Victus 2"
     },
     "performance": {
-      "processor": "Exynos 2400 (4nm)",
-      "cpuCores": "Deca-core (Up to 3.2GHz)",
-      "gpu": "Xclipse 940",
-      "aiEngine": "Galaxy AI (ระบบแปลภาษา, สรุปโน้ต, แต่งภาพอัตโนมัติ)"
+      "processor": "Samsung Exynos 2600 (2nm) / Snapdragon 8 Elite Gen 5 (3nm)",
+      "cpuCores": "Deca-core / Octa-core",
+      "gpu": "Xclipse 960 / Adreno 840",
+      "aiEngine": "Galaxy AI (ระบบแปลภาษา, สรุปโน้ต, แต่งภาพอัตโนมัติบน One UI 9)"
     },
     "memory": {
       "ram": "12GB LPDDR5X",
@@ -159,12 +159,12 @@ window.PRODUCT_SPECS_PROFILES = {
       "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 10MP (Tele 3x, OIS)",
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 10MP (Telephoto 3x, OIS)",
       "frontCamera": "12MP (f/2.2, Dual Pixel AF)",
       "videoRecording": "8K @ 30fps, 4K @ 60fps"
     },
     "battery": {
-      "capacity": "4,000 mAh",
+      "capacity": "4,000 mAh (พร้อม Vapor Chamber ระบายความร้อนดีขึ้น 29%)",
       "chargingSpeed": "25W Fast Charging",
       "wirelessCharging": "Fast Wireless Charging (15W)",
       "reverseCharging": "Wireless PowerShare",
@@ -180,12 +180,12 @@ window.PRODUCT_SPECS_PROFILES = {
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "Dual SIM (Nano-SIM + eSIM)",
-      "wifi": "Wi-Fi 6E",
-      "bluetooth": "Bluetooth 5.3",
+      "wifi": "Wi-Fi 7 / Wi-Fi 6E",
+      "bluetooth": "Bluetooth 5.4",
       "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร",
       "spenSupport": "ไม่รองรับ",
       "frameMaterial": "Armor Aluminum",
-      "dimensions": "147.0 x 70.6 x 7.6 มม.",
+      "dimensions": "147.0 x 70.6 x 7.4 มม.",
       "weight": "167 กรัม"
     },
     "batteryHours": {
@@ -204,34 +204,34 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "6.8 นิ้ว",
-      "panelType": "Dynamic AMOLED 2X",
-      "resolution": "QHD+ (3088 x 1440 พิกเซล)",
-      "refreshRate": "1-120Hz Adaptive",
-      "peakBrightness": "2,600 nits",
-      "glassProtection": "Corning Gorilla Armor"
+      "screenSize": "6.9 นิ้ว (วัดมุมฉาก) / 6.8 นิ้ว (วัดมุมโค้ง)",
+      "panelType": "Dynamic LTPO AMOLED 2X",
+      "resolution": "QHD+ (3120 x 1440 พิกเซล, ~500 ppi)",
+      "refreshRate": "1-120Hz Adaptive Refresh Rate",
+      "peakBrightness": "2,600 nits (Vision Booster)",
+      "glassProtection": "Corning Gorilla Armor 2 (ด้านหน้าลดแสงสะท้อน) + Gorilla Glass Victus 2 (ด้านหลัง)"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
-      "cpuCores": "Octa-core (3.39GHz)",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI"
+      "processor": "Qualcomm Snapdragon 8 Elite for Galaxy (3nm)",
+      "cpuCores": "Octa-core (2x Oryon 4.47GHz + 6x Oryon 3.53GHz)",
+      "gpu": "Adreno 830",
+      "aiEngine": "Galaxy AI เต็มรูปแบบ (Circle to Search, Live Translate, Note Assist, Photo Assist)"
     },
     "memory": {
-      "ram": "12GB",
-      "storage": "256GB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ"
+      "ram": "12GB / 16GB LPDDR5X",
+      "storage": "256GB / 512GB / 1TB (UFS 4.0)",
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "200MP + 50MP + 10MP + 12MP (Quad Tele System)",
-      "frontCamera": "12MP",
-      "videoRecording": "8K @ 30fps, 4K @ 120fps"
+      "rearCamera": "4 เลนส์: 200MP (Main f/1.7, OIS) + 50MP (Periscope Telephoto 5x, OIS) + 10MP (Telephoto 3x, OIS) + 50MP (Ultra-Wide 120°, Dual Pixel AF)",
+      "frontCamera": "12MP (f/2.2, Dual Pixel AF)",
+      "videoRecording": "8K @ 30fps, 4K @ 120fps, HDR10+"
     },
     "battery": {
       "capacity": "5,000 mAh",
-      "chargingSpeed": "45W Fast Charging",
-      "wirelessCharging": "15W",
-      "reverseCharging": "4.5W PowerShare",
+      "chargingSpeed": "45W Fast Charging (ชาร์จ 65% ใน 30 นาที)",
+      "wirelessCharging": "Fast Wireless Charging 2.0 (15W)",
+      "reverseCharging": "Wireless PowerShare 4.5W",
       "usageHours": {
         "videoPlayback": "สูงสุด 30 ชั่วโมง (ดูวิดีโอต่อเนื่อง)",
         "audioPlayback": "สูงสุด 95 ชั่วโมง",
@@ -243,14 +243,14 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G SA/NSA, 4G LTE",
-      "simType": "Dual SIM + eSIM",
-      "wifi": "Wi-Fi 7",
+      "simType": "Dual SIM (Nano-SIM 2 ช่อง + รองรับ eSIM)",
+      "wifi": "Wi-Fi 7 (802.11be)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68",
-      "spenSupport": "มีปากกา S Pen ในตัว",
-      "frameMaterial": "Titanium Frame",
-      "dimensions": "162.3 x 79.0 x 8.6 มม.",
-      "weight": "232 กรัม"
+      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
+      "spenSupport": "มีปากกา S Pen ในตัวเครื่อง",
+      "frameMaterial": "กรอบไทเทเนียม (Titanium Frame)",
+      "dimensions": "162.8 x 77.6 x 8.2 มม.",
+      "weight": "219 กรัม"
     },
     "batteryHours": {
       "videoPlayback": "สูงสุด 30 ชั่วโมง (ดูวิดีโอต่อเนื่อง)",
@@ -272,19 +272,19 @@ window.PRODUCT_SPECS_PROFILES = {
       "panelType": "Dynamic AMOLED 2X",
       "resolution": "FHD+ (2340 x 1080 พิกเซล)",
       "refreshRate": "120Hz Adaptive",
-      "peakBrightness": "1,900 nits",
+      "peakBrightness": "1,900 nits (Vision Booster)",
       "glassProtection": "Corning Gorilla Glass Victus+"
     },
     "performance": {
-      "processor": "Exynos 2400e (4nm)",
+      "processor": "Samsung Exynos 2400 / Exynos 2400e (4nm)",
       "cpuCores": "Deca-core (Up to 3.1GHz)",
       "gpu": "Xclipse 940",
-      "aiEngine": "Galaxy AI เต็มรูปแบบ (รองรับ Generative Edit, Live Translate)"
+      "aiEngine": "Galaxy AI เต็มรูปแบบ (รองรับ Generative Edit, Live Translate, Circle to Search)"
     },
     "memory": {
       "ram": "8GB LPDDR5X",
-      "storage": "128GB / 256GB",
-      "expandableStorage": "ไม่รองรับ"
+      "storage": "128GB / 256GB / 512GB",
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
       "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 8MP (Telephoto 3x, OIS)",
@@ -292,15 +292,15 @@ window.PRODUCT_SPECS_PROFILES = {
       "videoRecording": "8K @ 30fps, 4K @ 60fps"
     },
     "battery": {
-      "capacity": "4,700 mAh",
+      "capacity": "4,900 mAh (อัปเกรดความจุใช้งานได้นานขึ้น)",
       "chargingSpeed": "25W Super Fast Charging",
       "wirelessCharging": "15W Fast Wireless Charging",
       "reverseCharging": "Wireless PowerShare",
       "usageHours": {
-        "videoPlayback": "สูงสุด 28 ชั่วโมง",
-        "audioPlayback": "สูงสุด 81 ชั่วโมง",
-        "internetUsage": "สูงสุด 21 ชั่วโมง",
-        "talkTime": "สูงสุด 36 ชั่วโมง",
+        "videoPlayback": "สูงสุด 29 ชั่วโมง",
+        "audioPlayback": "สูงสุด 84 ชั่วโมง",
+        "internetUsage": "สูงสุด 22 ชั่วโมง",
+        "talkTime": "สูงสุด 37 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
         "chargingNote": "รองรับ 25W Fast Charging ชาร์จ 50% ใน 30 นาที"
       }
@@ -308,19 +308,19 @@ window.PRODUCT_SPECS_PROFILES = {
     "connectivityAndBuild": {
       "network": "5G Sub6, 4G LTE",
       "simType": "Dual SIM (Nano-SIM + eSIM)",
-      "wifi": "Wi-Fi 6E",
+      "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร",
-      "spenSupport": "ไม่รองรับ",
+      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
+      "spenSupport": "ไม่รองรับ S Pen",
       "frameMaterial": "Armor Aluminum",
-      "dimensions": "162.0 x 77.3 x 8.0 มม.",
-      "weight": "213 กรัม"
+      "dimensions": "162.0 x 77.3 x 7.9 มม.",
+      "weight": "210 กรัม"
     },
     "batteryHours": {
-      "videoPlayback": "สูงสุด 28 ชั่วโมง",
-      "audioPlayback": "สูงสุด 81 ชั่วโมง",
-      "internetUsage": "สูงสุด 21 ชั่วโมง",
-      "talkTime": "สูงสุด 36 ชั่วโมง",
+      "videoPlayback": "สูงสุด 29 ชั่วโมง",
+      "audioPlayback": "สูงสุด 84 ชั่วโมง",
+      "internetUsage": "สูงสุด 22 ชั่วโมง",
+      "talkTime": "สูงสุด 37 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
       "chargingNote": "รองรับ 25W Fast Charging ชาร์จ 50% ใน 30 นาที"
     }
@@ -334,59 +334,59 @@ window.PRODUCT_SPECS_PROFILES = {
     "display": {
       "screenSize": "6.7 นิ้ว",
       "panelType": "Dynamic AMOLED 2X",
-      "resolution": "FHD+",
-      "refreshRate": "120Hz",
-      "peakBrightness": "1,900 nits",
+      "resolution": "FHD+ (2340 x 1080 พิกเซล)",
+      "refreshRate": "120Hz Adaptive",
+      "peakBrightness": "1,900 nits (Vision Booster)",
       "glassProtection": "Corning Gorilla Glass Victus+"
     },
     "performance": {
-      "processor": "Exynos 2400e (4nm High-Efficiency)",
+      "processor": "Samsung Exynos 2500 / Exynos 2400e (4nm)",
       "cpuCores": "Deca-core",
       "gpu": "Xclipse 940",
-      "aiEngine": "Galaxy AI"
+      "aiEngine": "Galaxy AI เต็มรูปแบบบน One UI 9 (Circle to Search, Live Translate, Photo Assist)"
     },
     "memory": {
-      "ram": "8GB",
+      "ram": "8GB / 12GB LPDDR5X",
       "storage": "128GB / 256GB",
-      "expandableStorage": "ไม่รองรับ"
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "50MP (OIS) + 12MP (Ultra-Wide) + 8MP (Tele 3x, OIS)",
-      "frontCamera": "10MP",
-      "videoRecording": "8K @ 30fps"
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide) + 8MP (Telephoto 3x, OIS)",
+      "frontCamera": "10MP (f/2.2)",
+      "videoRecording": "8K @ 30fps, 4K @ 60fps"
     },
     "battery": {
-      "capacity": "4,700 mAh",
-      "chargingSpeed": "25W",
-      "wirelessCharging": "15W",
+      "capacity": "4,900 mAh",
+      "chargingSpeed": "25W / 45W Fast Charging",
+      "wirelessCharging": "15W Fast Wireless Charging",
       "reverseCharging": "Wireless PowerShare",
       "usageHours": {
-        "videoPlayback": "สูงสุด 28 ชั่วโมง",
-        "audioPlayback": "สูงสุด 81 ชั่วโมง",
-        "internetUsage": "สูงสุด 21 ชั่วโมง",
-        "talkTime": "สูงสุด 36 ชั่วโมง",
+        "videoPlayback": "สูงสุด 29 ชั่วโมง",
+        "audioPlayback": "สูงสุด 84 ชั่วโมง",
+        "internetUsage": "สูงสุด 22 ชั่วโมง",
+        "talkTime": "สูงสุด 37 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
-        "chargingNote": "รองรับ 25W Fast Charging"
+        "chargingNote": "รองรับ 25W / 45W Fast Charging"
       }
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "Dual SIM (Nano-SIM + eSIM)",
-      "wifi": "Wi-Fi 6E",
+      "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP68",
+      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
       "spenSupport": "ไม่รองรับ",
       "frameMaterial": "Armor Aluminum",
-      "dimensions": "162.0 x 77.3 x 8.0 มม.",
-      "weight": "213 กรัม"
+      "dimensions": "162.0 x 77.3 x 7.9 มม.",
+      "weight": "210 กรัม"
     },
     "batteryHours": {
-      "videoPlayback": "สูงสุด 28 ชั่วโมง",
-      "audioPlayback": "สูงสุด 81 ชั่วโมง",
-      "internetUsage": "สูงสุด 21 ชั่วโมง",
-      "talkTime": "สูงสุด 36 ชั่วโมง",
+      "videoPlayback": "สูงสุด 29 ชั่วโมง",
+      "audioPlayback": "สูงสุด 84 ชั่วโมง",
+      "internetUsage": "สูงสุด 22 ชั่วโมง",
+      "talkTime": "สูงสุด 37 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
-      "chargingNote": "รองรับ 25W Fast Charging"
+      "chargingNote": "รองรับ 25W / 45W Fast Charging"
     }
   },
   "Z_FOLD8_ULTRA": {
@@ -400,35 +400,35 @@ window.PRODUCT_SPECS_PROFILES = {
       "panelType": "Dynamic AMOLED 2X ทั้ง 2 หน้าจอ",
       "resolution": "QXGA+ (จอหลัก) / FHD+ (จอนอก)",
       "refreshRate": "1-120Hz Adaptive Refresh Rate ทั้ง 2 จอ",
-      "peakBrightness": "2,600 nits",
-      "glassProtection": "Ultra Thin Glass (UTG) + Gorilla Glass Armor"
+      "peakBrightness": "2,600 nits (Vision Booster)",
+      "glassProtection": "Ultra Thin Glass (UTG) + Gorilla Glass Armor 2"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
-      "cpuCores": "Octa-core (3.39GHz)",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI Optimized for Foldable (Dual-Screen Interpreter, Sketch to Image)"
+      "processor": "Qualcomm Snapdragon 8 Elite Gen 5 for Galaxy (3nm)",
+      "cpuCores": "Octa-core (Up to 4.74GHz)",
+      "gpu": "Adreno 840",
+      "aiEngine": "Galaxy AI สำหรับหน้าจอพับระดับโปร (Dual-Screen Interpreter, Sketch to Image, Now Nudge)"
     },
     "memory": {
       "ram": "12GB / 16GB LPDDR5X",
       "storage": "256GB / 512GB / 1TB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ"
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "200MP (Main OIS) + 50MP (Telephoto 5x) + 12MP (Ultra-Wide)",
+      "rearCamera": "3 เลนส์ระดับโปร: 200MP (Main f/1.7, OIS) + 50MP (Telephoto 5x, OIS) + 12MP (Ultra-Wide 120°)",
       "frontCamera": "จอนอก 10MP / ใต้จอหลัก 4MP UDC",
       "videoRecording": "8K @ 30fps, 4K @ 60fps"
     },
     "battery": {
-      "capacity": "4,600 mAh Dual-Cell",
+      "capacity": "4,800 mAh Dual-Cell",
       "chargingSpeed": "45W Fast Charging",
       "wirelessCharging": "15W",
       "reverseCharging": "Wireless PowerShare",
       "usageHours": {
-        "videoPlayback": "สูงสุด 24 ชั่วโมง",
-        "audioPlayback": "สูงสุด 80 ชั่วโมง",
-        "internetUsage": "สูงสุด 20 ชั่วโมง",
-        "talkTime": "สูงสุด 38 ชั่วโมง",
+        "videoPlayback": "สูงสุด 25 ชั่วโมง",
+        "audioPlayback": "สูงสุด 82 ชั่วโมง",
+        "internetUsage": "สูงสุด 21 ชั่วโมง",
+        "talkTime": "สูงสุด 39 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
         "chargingNote": "รองรับ 45W Fast Charging"
       }
@@ -437,18 +437,18 @@ window.PRODUCT_SPECS_PROFILES = {
       "network": "5G SA/NSA, 4G LTE",
       "simType": "Dual SIM (Nano-SIM + eSIM)",
       "wifi": "Wi-Fi 7",
-      "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP48 กันน้ำและฝุ่นขนาดใหญ่",
+      "bluetooth": "Bluetooth 5.4",
+      "waterResistance": "IP48 กันน้ำและฝุ่น",
       "spenSupport": "รองรับ S Pen Fold Edition",
       "frameMaterial": "Enhanced Armor Aluminum & Titanium Hinge",
-      "dimensions": "พับ: 153.5 x 68.1 x 10.6 มม. / กาง: 153.5 x 132.6 x 4.9 มม.",
-      "weight": "226 กรัม (บางและเบาที่สุดในตระกูล Fold)"
+      "dimensions": "พับ: 153.5 x 68.1 x 10.2 มม. / กาง: 153.5 x 132.6 x 4.8 มม.",
+      "weight": "218 กรัม (บางและเบาเป็นพิเศษ)"
     },
     "batteryHours": {
-      "videoPlayback": "สูงสุด 24 ชั่วโมง",
-      "audioPlayback": "สูงสุด 80 ชั่วโมง",
-      "internetUsage": "สูงสุด 20 ชั่วโมง",
-      "talkTime": "สูงสุด 38 ชั่วโมง",
+      "videoPlayback": "สูงสุด 25 ชั่วโมง",
+      "audioPlayback": "สูงสุด 82 ชั่วโมง",
+      "internetUsage": "สูงสุด 21 ชั่วโมง",
+      "talkTime": "สูงสุด 39 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
       "chargingNote": "รองรับ 45W Fast Charging"
     }
@@ -460,61 +460,61 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "จอหลัก 7.6 นิ้ว / จอนอก 6.3 นิ้ว",
-      "panelType": "Dynamic AMOLED 2X",
-      "resolution": "QXGA+ / HD+",
-      "refreshRate": "1-120Hz Adaptive",
-      "peakBrightness": "2,600 nits",
-      "glassProtection": "Corning Gorilla Glass Victus 2"
+      "screenSize": "จอหลัก 7.6 นิ้ว (อัตราส่วน 4:3) / จอนอก 5.5 นิ้ว (16:10)",
+      "panelType": "Dynamic AMOLED 2X ทั้ง 2 หน้าจอ",
+      "resolution": "QXGA+ (จอหลัก) / HD+ (จอนอก)",
+      "refreshRate": "1-120Hz Adaptive Refresh Rate ทั้ง 2 จอ",
+      "peakBrightness": "2,600 nits (Vision Booster)",
+      "glassProtection": "Armor FlexHinge + Corning Gorilla Glass Victus 2"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
+      "processor": "Qualcomm Snapdragon 8 Elite Gen 5 for Galaxy (3nm)",
       "cpuCores": "Octa-core",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI (Note Assist, Live Translate, Interpreter)"
+      "gpu": "Adreno 840",
+      "aiEngine": "Galaxy AI (Note Assist, Live Translate, Interpreter บน One UI 9)"
     },
     "memory": {
-      "ram": "12GB / 16GB",
-      "storage": "256GB / 512GB / 1TB",
-      "expandableStorage": "ไม่รองรับ"
+      "ram": "12GB / 16GB LPDDR5X",
+      "storage": "256GB / 512GB / 1TB (UFS 4.0)",
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "50MP (OIS) + 10MP (Tele 3x, OIS) + 12MP (Ultra-Wide)",
-      "frontCamera": "10MP (จอนอก) / 4MP UDC (จอหลัก)",
-      "videoRecording": "8K @ 30fps"
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 10MP (Telephoto 3x, OIS) + 12MP (Ultra-Wide)",
+      "frontCamera": "10MP (จอนอก) / 4MP UDC (ใต้จอหลัก)",
+      "videoRecording": "8K @ 30fps, 4K @ 60fps"
     },
     "battery": {
-      "capacity": "4,400 mAh",
-      "chargingSpeed": "25W Fast Charging",
+      "capacity": "4,800 mAh Dual-Cell",
+      "chargingSpeed": "45W Fast Charging",
       "wirelessCharging": "15W",
-      "reverseCharging": "PowerShare",
+      "reverseCharging": "Wireless PowerShare",
       "usageHours": {
-        "videoPlayback": "สูงสุด 23 ชั่วโมง",
-        "audioPlayback": "สูงสุด 77 ชั่วโมง",
-        "internetUsage": "สูงสุด 19 ชั่วโมง (จอด้านใน)",
-        "talkTime": "สูงสุด 37 ชั่วโมง",
+        "videoPlayback": "สูงสุด 25 ชั่วโมง",
+        "audioPlayback": "สูงสุด 80 ชั่วโมง",
+        "internetUsage": "สูงสุด 20 ชั่วโมง (จอด้านใน)",
+        "talkTime": "สูงสุด 38 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
-        "chargingNote": "รองรับ 25W Fast Charging ชาร์จ 50% ใน 30 นาที"
+        "chargingNote": "รองรับ 45W Fast Charging"
       }
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "Dual SIM + eSIM",
-      "wifi": "Wi-Fi 6E",
-      "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP48",
+      "wifi": "Wi-Fi 7 / Wi-Fi 6E",
+      "bluetooth": "Bluetooth 5.4",
+      "waterResistance": "IP48 กันน้ำ",
       "spenSupport": "รองรับ S Pen Fold Edition",
-      "frameMaterial": "Armor Aluminum",
-      "dimensions": "พับ: 153.5 x 68.1 x 12.1 มม. / กาง: 153.5 x 132.6 x 5.6 มม.",
-      "weight": "239 กรัม"
+      "frameMaterial": "Enhanced Armor Aluminum",
+      "dimensions": "พับ: 153.5 x 68.1 x 11.2 มม. / กาง: 153.5 x 132.6 x 5.2 มม.",
+      "weight": "201 กรัม (เบาลงชัดเจน)"
     },
     "batteryHours": {
-      "videoPlayback": "สูงสุด 23 ชั่วโมง",
-      "audioPlayback": "สูงสุด 77 ชั่วโมง",
-      "internetUsage": "สูงสุด 19 ชั่วโมง (จอด้านใน)",
-      "talkTime": "สูงสุด 37 ชั่วโมง",
+      "videoPlayback": "สูงสุด 25 ชั่วโมง",
+      "audioPlayback": "สูงสุด 80 ชั่วโมง",
+      "internetUsage": "สูงสุด 20 ชั่วโมง (จอด้านใน)",
+      "talkTime": "สูงสุด 38 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
-      "chargingNote": "รองรับ 25W Fast Charging ชาร์จ 50% ใน 30 นาที"
+      "chargingNote": "รองรับ 45W Fast Charging"
     }
   },
   "Z_FOLD7": {
@@ -524,32 +524,32 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "จอหลัก 7.6 นิ้ว / จอนอก 6.3 นิ้ว",
-      "panelType": "Dynamic AMOLED 2X",
-      "resolution": "QXGA+",
-      "refreshRate": "120Hz Adaptive",
-      "peakBrightness": "2,600 nits",
-      "glassProtection": "Corning Gorilla Glass Victus 2"
+      "screenSize": "จอหลัก 8.0 นิ้ว Infinity Flex / จอนอก 6.5 นิ้ว",
+      "panelType": "Dynamic AMOLED 2X ทั้ง 2 หน้าจอ",
+      "resolution": "QXGA+ (จอหลัก) / FHD+ (จอนอก)",
+      "refreshRate": "1-120Hz Adaptive Refresh Rate ทั้ง 2 จอ",
+      "peakBrightness": "2,600 nits (Vision Booster)",
+      "glassProtection": "Ultra Thin Glass (UTG) + Gorilla Glass Victus 2"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
+      "processor": "Qualcomm Snapdragon 8 Elite for Galaxy (3nm)",
       "cpuCores": "Octa-core",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI"
+      "gpu": "Adreno 830",
+      "aiEngine": "Galaxy AI เต็มรูปแบบบน One UI 8 / Android 16"
     },
     "memory": {
       "ram": "12GB / 16GB",
       "storage": "256GB / 512GB / 1TB",
-      "expandableStorage": "ไม่รองรับ"
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "50MP (Main OIS) + 10MP (Tele 3x) + 12MP (Ultra-Wide)",
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 10MP (Telephoto 3x, OIS) + 12MP (Ultra-Wide)",
       "frontCamera": "10MP + 4MP UDC",
       "videoRecording": "8K @ 30fps"
     },
     "battery": {
       "capacity": "4,400 mAh",
-      "chargingSpeed": "25W",
+      "chargingSpeed": "25W Fast Charging",
       "wirelessCharging": "15W",
       "reverseCharging": "PowerShare",
       "usageHours": {
@@ -564,13 +564,13 @@ window.PRODUCT_SPECS_PROFILES = {
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "Dual SIM + eSIM",
-      "wifi": "Wi-Fi 6E",
+      "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP48",
+      "waterResistance": "IP48 กันน้ำ",
       "spenSupport": "รองรับ S Pen Fold Edition",
       "frameMaterial": "Armor Aluminum",
-      "dimensions": "153.5 x 68.1 x 12.1 มม.",
-      "weight": "239 กรัม"
+      "dimensions": "พับ: 153.5 x 68.1 x 11.8 มม. / กาง: 153.5 x 132.6 x 5.4 มม.",
+      "weight": "235 กรัม"
     },
     "batteryHours": {
       "videoPlayback": "สูงสุด 23 ชั่วโมง",
@@ -588,23 +588,23 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "จอหลัก 6.7 นิ้ว (พับตลับแป้ง) / จอนอก FlexWindow 3.4 นิ้ว",
+      "screenSize": "จอหลัก 6.9 นิ้ว (พับตลับแป้ง) / จอนอก FlexWindow 3.9 นิ้ว",
       "panelType": "Dynamic AMOLED 2X (จอหลัก) / Super AMOLED (จอนอก)",
-      "resolution": "FHD+ (2640 x 1080 พิกเซล)",
-      "refreshRate": "1-120Hz Adaptive (จอหลัก) / 60Hz (จอนอก)",
-      "peakBrightness": "2,600 nits",
+      "resolution": "FHD+ (2640 x 1080 พิกเซล, จอหลัก) / 720 x 748 พิกเซล (จอนอก)",
+      "refreshRate": "1-120Hz Adaptive (จอหลัก) / 120Hz (จอนอก)",
+      "peakBrightness": "2,600 nits (Vision Booster)",
       "glassProtection": "Corning Gorilla Glass Victus 2"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
-      "cpuCores": "Octa-core (3.39GHz)",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI (FlexCam Auto Zoom, Photo Ambient Wallpaper, Quick Reply)"
+      "processor": "Qualcomm Snapdragon 8 Elite Gen 5 (3nm)",
+      "cpuCores": "Octa-core",
+      "gpu": "Adreno 840",
+      "aiEngine": "Galaxy AI (FlexCam Auto Zoom, Now Nudge, Quick Reply บน One UI 9)"
     },
     "memory": {
-      "ram": "12GB LPDDR5X (อัปเกรดจากรุ่นก่อน)",
+      "ram": "12GB LPDDR5X",
       "storage": "256GB / 512GB (UFS 4.0)",
-      "expandableStorage": "ไม่รองรับ"
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
       "rearCamera": "คู่: 50MP (Main f/1.8, OIS, 2x Optical Quality Zoom) + 12MP (Ultra-Wide 123°)",
@@ -612,15 +612,15 @@ window.PRODUCT_SPECS_PROFILES = {
       "videoRecording": "4K @ 60fps, 10-bit HDR"
     },
     "battery": {
-      "capacity": "4,000 mAh (เพิ่มขึ้นจากเดิม)",
+      "capacity": "4,300 mAh (เพิ่มขึ้นจากเดิม ใช้งานได้ทั้งวัน)",
       "chargingSpeed": "25W Super Fast Charging",
       "wirelessCharging": "15W",
       "reverseCharging": "Wireless PowerShare",
       "usageHours": {
-        "videoPlayback": "สูงสุด 24 ชั่วโมง",
-        "audioPlayback": "สูงสุด 68 ชั่วโมง",
-        "internetUsage": "สูงสุด 19 ชั่วโมง",
-        "talkTime": "สูงสุด 35 ชั่วโมง",
+        "videoPlayback": "สูงสุด 26 ชั่วโมง",
+        "audioPlayback": "สูงสุด 72 ชั่วโมง",
+        "internetUsage": "สูงสุด 20 ชั่วโมง",
+        "talkTime": "สูงสุด 37 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
         "chargingNote": "รองรับ 25W Fast Charging ชาร์จ 50% ใน 30 นาที"
       }
@@ -628,19 +628,19 @@ window.PRODUCT_SPECS_PROFILES = {
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "1 Nano-SIM + รองรับ eSIM",
-      "wifi": "Wi-Fi 6E",
-      "bluetooth": "Bluetooth 5.3",
+      "wifi": "Wi-Fi 7 / Wi-Fi 6E",
+      "bluetooth": "Bluetooth 5.4",
       "waterResistance": "IP48 กันน้ำ",
       "spenSupport": "ไม่รองรับ",
-      "frameMaterial": "Armor Aluminum",
-      "dimensions": "พับ: 85.1 x 71.9 x 14.9 มม. / กาง: 165.1 x 71.9 x 6.9 มม.",
-      "weight": "187 กรัม"
+      "frameMaterial": "Armor Aluminum & รอยพับเนียนบางลง",
+      "dimensions": "พับ: 85.1 x 71.9 x 14.2 มม. / กาง: 165.1 x 71.9 x 6.6 มม.",
+      "weight": "184 กรัม (บางและเบาที่สุด)"
     },
     "batteryHours": {
-      "videoPlayback": "สูงสุด 24 ชั่วโมง",
-      "audioPlayback": "สูงสุด 68 ชั่วโมง",
-      "internetUsage": "สูงสุด 19 ชั่วโมง",
-      "talkTime": "สูงสุด 35 ชั่วโมง",
+      "videoPlayback": "สูงสุด 26 ชั่วโมง",
+      "audioPlayback": "สูงสุด 72 ชั่วโมง",
+      "internetUsage": "สูงสุด 20 ชั่วโมง",
+      "talkTime": "สูงสุด 37 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
       "chargingNote": "รองรับ 25W Fast Charging ชาร์จ 50% ใน 30 นาที"
     }
@@ -652,32 +652,32 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "จอหลัก 6.7 นิ้ว / จอนอก 3.4 นิ้ว",
-      "panelType": "Dynamic AMOLED 2X",
-      "resolution": "FHD+",
-      "refreshRate": "1-120Hz",
-      "peakBrightness": "2,600 nits",
-      "glassProtection": "Gorilla Glass Victus 2"
+      "screenSize": "จอหลัก 6.9 นิ้ว 2X AMOLED / จอนอก FlexWindow 3.9 นิ้ว",
+      "panelType": "Dynamic AMOLED 2X (จอหลัก) / Super AMOLED (จอนอก)",
+      "resolution": "FHD+ (จอหลัก) / 720 x 748 พิกเซล (จอนอก)",
+      "refreshRate": "1-120Hz Adaptive",
+      "peakBrightness": "2,600 nits (Vision Booster)",
+      "glassProtection": "Corning Gorilla Glass Victus 2"
     },
     "performance": {
-      "processor": "Snapdragon 8 Gen 3 for Galaxy (4nm)",
-      "cpuCores": "Octa-core",
-      "gpu": "Adreno 750",
-      "aiEngine": "Galaxy AI"
+      "processor": "Samsung Exynos 2500 (3nm)",
+      "cpuCores": "Deca-core (Up to 3.2GHz)",
+      "gpu": "Xclipse 950",
+      "aiEngine": "Galaxy AI สำหรับตลับแป้ง (FlexCam AI, Auto Zoom, Photo Ambient)"
     },
     "memory": {
-      "ram": "12GB",
+      "ram": "12GB LPDDR5X",
       "storage": "256GB / 512GB",
-      "expandableStorage": "ไม่รองรับ"
+      "expandableStorage": "ไม่รองรับ MicroSD"
     },
     "camera": {
-      "rearCamera": "50MP (Main OIS) + 12MP (Ultra-Wide)",
-      "frontCamera": "10MP",
+      "rearCamera": "คู่: 50MP (Main f/1.8, OIS) + 12MP (Ultra-Wide)",
+      "frontCamera": "10MP (f/2.2)",
       "videoRecording": "4K @ 60fps"
     },
     "battery": {
       "capacity": "4,000 mAh",
-      "chargingSpeed": "25W",
+      "chargingSpeed": "25W Fast Charging",
       "wirelessCharging": "15W",
       "reverseCharging": "PowerShare",
       "usageHours": {
@@ -692,12 +692,12 @@ window.PRODUCT_SPECS_PROFILES = {
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "Nano-SIM + eSIM",
-      "wifi": "Wi-Fi 6E",
+      "wifi": "Wi-Fi 6E (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP48",
+      "waterResistance": "IP48 กันน้ำ",
       "spenSupport": "ไม่รองรับ",
       "frameMaterial": "Armor Aluminum",
-      "dimensions": "165.1 x 71.9 x 6.9 มม.",
+      "dimensions": "พับ: 85.1 x 71.9 x 14.9 มม. / กาง: 165.1 x 71.9 x 6.9 มม.",
       "weight": "187 กรัม"
     },
     "batteryHours": {
@@ -716,18 +716,18 @@ window.PRODUCT_SPECS_PROFILES = {
     "marketRegion": "Thailand (THL)",
     "category": "SmartPhone",
     "display": {
-      "screenSize": "6.6 นิ้ว",
+      "screenSize": "6.7 นิ้ว",
       "panelType": "Super AMOLED",
-      "resolution": "FHD+ (2340 x 1080 พิกเซล)",
+      "resolution": "FHD+ (2340 x 1080 พิกเซล, 385 ppi)",
       "refreshRate": "120Hz",
-      "peakBrightness": "1,000 nits (Vision Booster)",
+      "peakBrightness": "1,200 nits HBM (สูงสุด 1,900 nits Vision Booster)",
       "glassProtection": "Corning Gorilla Glass Victus+"
     },
     "performance": {
-      "processor": "Exynos 1480 (4nm) พร้อม AMD Xclipse 530 GPU",
-      "cpuCores": "Octa-core (Up to 2.75GHz)",
-      "gpu": "Xclipse 530 (RDNA Architecture)",
-      "aiEngine": "Awesome Intelligence & Knox Vault"
+      "processor": "Samsung Exynos 1680 (4nm) / Exynos 1580 (4nm)",
+      "cpuCores": "Octa-core (Prime Cortex-A720 2.9GHz + 3x A720 2.6GHz + 4x A520 1.95GHz)",
+      "gpu": "AMD Xclipse 540 (RDNA 3 Architecture)",
+      "aiEngine": "Galaxy AI (Circle to Search, Object Eraser, Best Face, 14.7 TOPS NPU)"
     },
     "memory": {
       "ram": "8GB / 12GB LPDDR5",
@@ -735,13 +735,13 @@ window.PRODUCT_SPECS_PROFILES = {
       "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
     },
     "camera": {
-      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS, Big Pixel) + 12MP (Ultra-Wide) + 5MP (Macro)",
-      "frontCamera": "32MP (f/2.2) ถ่ายเซลฟี่คมชัด",
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS, Big Pixel) + 12MP (Ultra-Wide f/2.2) + 5MP (Macro f/2.4)",
+      "frontCamera": "12MP (f/2.2) ถ่ายเซลฟี่คมชัด Super HDR",
       "videoRecording": "4K @ 30fps พร้อม Super OIS และ VDIS"
     },
     "battery": {
       "capacity": "5,000 mAh ใช้งานได้ยาวนาน 2 วัน",
-      "chargingSpeed": "25W Fast Charging",
+      "chargingSpeed": "45W Super Fast Charging",
       "wirelessCharging": "ไม่รองรับ",
       "reverseCharging": "ไม่รองรับ",
       "usageHours": {
@@ -750,7 +750,7 @@ window.PRODUCT_SPECS_PROFILES = {
         "internetUsage": "สูงสุด 23 ชั่วโมง (Wi-Fi / 5G)",
         "talkTime": "สูงสุด 40 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th) บนแบตเตอรี่ 5,000 mAh",
-        "chargingNote": "รองรับ 25W Super Fast Charging"
+        "chargingNote": "รองรับ 45W Super Fast Charging"
       }
     },
     "connectivityAndBuild": {
@@ -758,11 +758,11 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM + MicroSD หรือ Hybrid Slot)",
       "wifi": "Wi-Fi 6 (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP67 กันน้ำลึก 1 เมตร นาน 30 นาที",
+      "waterResistance": "IP68 กันน้ำลึก 1.5 เมตร นาน 30 นาที",
       "spenSupport": "ไม่รองรับ",
       "frameMaterial": "กรอบโลหะ Metal Frame พรีเมียม และกระจกหลัง",
-      "dimensions": "161.1 x 77.4 x 8.2 มม.",
-      "weight": "213 กรัม"
+      "dimensions": "161.1 x 77.4 x 7.9 มม.",
+      "weight": "209 กรัม"
     },
     "batteryHours": {
       "videoPlayback": "สูงสุด 28 ชั่วโมง",
@@ -770,7 +770,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "internetUsage": "สูงสุด 23 ชั่วโมง (Wi-Fi / 5G)",
       "talkTime": "สูงสุด 40 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th) บนแบตเตอรี่ 5,000 mAh",
-      "chargingNote": "รองรับ 25W Super Fast Charging"
+      "chargingNote": "รองรับ 45W Super Fast Charging"
     }
   },
   "A37_5G": {
@@ -782,16 +782,16 @@ window.PRODUCT_SPECS_PROFILES = {
     "display": {
       "screenSize": "6.7 นิ้ว",
       "panelType": "Super AMOLED",
-      "resolution": "FHD+",
+      "resolution": "FHD+ (1080 x 2340 พิกเซล, 19.5:9)",
       "refreshRate": "120Hz",
-      "peakBrightness": "1,000 nits",
+      "peakBrightness": "1,200 nits HBM (สูงสุด 1,900 nits Peak)",
       "glassProtection": "Corning Gorilla Glass Victus+"
     },
     "performance": {
-      "processor": "Exynos 1380 (5nm)",
-      "cpuCores": "Octa-core (Up to 2.4GHz)",
-      "gpu": "Mali-G68 MP5",
-      "aiEngine": "Samsung Knox Vault"
+      "processor": "Samsung Exynos 1480 (4nm)",
+      "cpuCores": "Octa-core (4x Cortex-A78 2.75GHz & 4x Cortex-A55 2.0GHz)",
+      "gpu": "AMD Xclipse 530 (RDNA Architecture)",
+      "aiEngine": "Galaxy AI (Circle to Search, Live Translate, AI Photo Assist)"
     },
     "memory": {
       "ram": "8GB",
@@ -799,13 +799,13 @@ window.PRODUCT_SPECS_PROFILES = {
       "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
     },
     "camera": {
-      "rearCamera": "50MP (Main OIS) + 8MP (Ultra-Wide) + 5MP (Macro)",
-      "frontCamera": "13MP",
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8, OIS) + 8MP (Ultra-Wide f/2.2) + 5MP (Macro f/2.4)",
+      "frontCamera": "13MP (f/2.2)",
       "videoRecording": "4K @ 30fps"
     },
     "battery": {
       "capacity": "5,000 mAh",
-      "chargingSpeed": "25W Fast Charging",
+      "chargingSpeed": "25W / 45W Fast Charging",
       "wirelessCharging": "ไม่รองรับ",
       "reverseCharging": "ไม่รองรับ",
       "usageHours": {
@@ -814,19 +814,19 @@ window.PRODUCT_SPECS_PROFILES = {
         "internetUsage": "สูงสุด 22 ชั่วโมง",
         "talkTime": "สูงสุด 38 ชั่วโมง",
         "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
-        "chargingNote": "รองรับ 25W Super Fast Charging"
+        "chargingNote": "รองรับ 25W / 45W Fast Charging"
       }
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
       "simType": "Dual SIM (Hybrid)",
-      "wifi": "Wi-Fi 6",
+      "wifi": "Wi-Fi 6 (802.11ax)",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP67 กันน้ำ",
+      "waterResistance": "IP67 กันน้ำลึก 1 เมตร นาน 30 นาที",
       "spenSupport": "ไม่รองรับ",
       "frameMaterial": "Polycarbonate Frame",
-      "dimensions": "161.7 x 78.0 x 8.2 มม.",
-      "weight": "209 กรัม"
+      "dimensions": "161.7 x 77.8 x 7.9 มม.",
+      "weight": "205 กรัม"
     },
     "batteryHours": {
       "videoPlayback": "สูงสุด 27 ชั่วโมง",
@@ -834,7 +834,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "internetUsage": "สูงสุด 22 ชั่วโมง",
       "talkTime": "สูงสุด 38 ชั่วโมง",
       "testCondition": "ผลทดสอบทางการ Samsung Thailand Official Lab (samsung.com/th)",
-      "chargingNote": "รองรับ 25W Super Fast Charging"
+      "chargingNote": "รองรับ 25W / 45W Fast Charging"
     }
   },
   "A27_5G": {
@@ -910,9 +910,9 @@ window.PRODUCT_SPECS_PROFILES = {
     "display": {
       "screenSize": "6.7 นิ้ว จอใหญ่เต็มตา",
       "panelType": "Super AMOLED",
-      "resolution": "FHD+ (1080 x 2340 พิกเซล)",
+      "resolution": "FHD+ (1080 x 2340 พิกเซล, 385 ppi)",
       "refreshRate": "90Hz",
-      "peakBrightness": "800 nits",
+      "peakBrightness": "800 nits (Vision Booster)",
       "glassProtection": "Corning Gorilla Glass"
     },
     "performance": {
@@ -974,10 +974,10 @@ window.PRODUCT_SPECS_PROFILES = {
     "display": {
       "screenSize": "6.7 นิ้ว",
       "panelType": "Super AMOLED",
-      "resolution": "FHD+",
+      "resolution": "FHD+ (1080 x 2340 พิกเซล)",
       "refreshRate": "90Hz",
       "peakBrightness": "800 nits",
-      "glassProtection": "Gorilla Glass"
+      "glassProtection": "Corning Gorilla Glass"
     },
     "performance": {
       "processor": "MediaTek Helio G99 (6nm)",
@@ -991,13 +991,13 @@ window.PRODUCT_SPECS_PROFILES = {
       "expandableStorage": "รองรับ MicroSD สูงสุด 1TB"
     },
     "camera": {
-      "rearCamera": "50MP (Main) + 5MP (Ultra-Wide) + 2MP (Macro)",
-      "frontCamera": "13MP",
+      "rearCamera": "3 เลนส์: 50MP (Main f/1.8) + 5MP (Ultra-Wide) + 2MP (Macro)",
+      "frontCamera": "13MP (f/2.0)",
       "videoRecording": "1080p @ 30fps"
     },
     "battery": {
       "capacity": "5,000 mAh",
-      "chargingSpeed": "25W",
+      "chargingSpeed": "25W Fast Charging",
       "wirelessCharging": "ไม่รองรับ",
       "reverseCharging": "ไม่รองรับ",
       "usageHours": {
@@ -1014,7 +1014,7 @@ window.PRODUCT_SPECS_PROFILES = {
       "simType": "Dual SIM (Nano-SIM)",
       "wifi": "Wi-Fi 5",
       "bluetooth": "Bluetooth 5.3",
-      "waterResistance": "IP54",
+      "waterResistance": "IP54 ป้องกันละอองน้ำและฝุ่น",
       "spenSupport": "ไม่รองรับ",
       "frameMaterial": "Polycarbonate",
       "dimensions": "164.4 x 77.9 x 7.9 มม.",
@@ -1056,7 +1056,7 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "camera": {
       "rearCamera": "คู่: 50MP (Main f/1.8) + 2MP (Depth)",
-      "frontCamera": "8MP",
+      "frontCamera": "8MP (f/2.0)",
       "videoRecording": "1080p @ 30fps"
     },
     "battery": {
@@ -1075,7 +1075,7 @@ window.PRODUCT_SPECS_PROFILES = {
     },
     "connectivityAndBuild": {
       "network": "5G, 4G LTE",
-      "simType": "Dual SIM",
+      "simType": "Dual SIM (Hybrid)",
       "wifi": "Wi-Fi 5",
       "bluetooth": "Bluetooth 5.3",
       "waterResistance": "ป้องกันละอองน้ำทั่วไป",
