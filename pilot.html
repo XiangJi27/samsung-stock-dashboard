@@ -293,7 +293,7 @@
         </div>
         <div class="category-name">Smartphone</div>
         <div class="category-stats">
-          <span class="category-stock" id="countCatPhoneStock">230</span>
+          <span class="category-stock" id="countCatPhoneStock">222</span>
           <span class="category-unit">เครื่อง (ชั้น 1)</span>
         </div>
       </div>
@@ -756,11 +756,21 @@
 
                 <!-- URL Configuration Row -->
                 <div style="margin-bottom: 18px;">
-                  <label for="stockGSheetUrlInput" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px;">
-                    ลิงก์ Google Sheet Published CSV (ตั้งค่าครั้งเดียว ระบบจำในเบราว์เซอร์นี้):
-                  </label>
+                  <div style="margin-bottom: 10px;">
+                    <label for="stockGSheetUrlInput" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">
+                      📍 ลิงก์ Google Sheet สำหรับ Stock1 (หรือวางลิงก์หลัก Google Sheet ที่มีแท็บ Stock1 &amp; Stock2):
+                    </label>
+                    <input type="url" id="stockGSheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/.../edit หรือลิงก์ Published CSV ของแท็บ Stock1" style="width: 100%; box-sizing: border-box; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: #fff; font-family: monospace; font-size: 0.85rem;">
+                  </div>
+
+                  <div style="margin-bottom: 12px;">
+                    <label for="stockGSheetUrl2Input" style="display: block; font-size: 0.84rem; font-weight: 600; color: #cbd5e1; margin-bottom: 6px;">
+                      📍 ลิงก์ Google Sheet สำหรับ Stock2 (ตัวเลือกเสริมสำหรับแยก Published CSV 2 ลิงก์):
+                    </label>
+                    <input type="url" id="stockGSheetUrl2Input" placeholder="ลิงก์ Published CSV ของแท็บ Stock2 (หากวางลิงก์หลัก Google Sheet ในช่องแรกแล้ว สามารถเว้นว่างช่องนี้ได้)" style="width: 100%; box-sizing: border-box; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: #fff; font-family: monospace; font-size: 0.85rem;">
+                  </div>
+
                   <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <input type="url" id="stockGSheetUrlInput" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv" style="flex: 1; min-width: 280px; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: #fff; font-family: monospace; font-size: 0.85rem;">
                     <button type="button" class="btn-cancel-import" id="btnSaveGSheetUrl" style="padding: 10px 18px; font-weight: 600;">
                       <span>💾 บันทึก URL</span>
                     </button>
@@ -768,8 +778,8 @@
                       <span>🔄 รีเฟรชข้อมูลตอนนี้</span>
                     </button>
                   </div>
-                  <div style="margin-top: 8px; font-size: 0.76rem; color: #64748b;">
-                    💡 วิธีทำลิงก์: ใน Google Sheet ไปที่ เมนู <strong>File &rarr; Share &rarr; Publish to web</strong> &rarr; เลือก Sheet สต็อก &rarr; เปลี่ยน 'Web page' เป็น <strong>Comma-separated values (.csv)</strong> &rarr; กด Publish แล้วคัดลอกลิงก์มาวาง
+                  <div style="margin-top: 10px; font-size: 0.78rem; color: #94a3b8; line-height: 1.5;">
+                    💡 <strong>สะดวกที่สุด:</strong> วางลิงก์ Google Sheet ในช่องแรกช่องเดียว ระบบจะดึงแท็บ <strong>Stock1 (ชั้น 1)</strong> และ <strong>Stock2 (ชั้น 2)</strong> จากชีตต้นฉบับ Copperwired มาประกบกันให้อัตโนมัติทันที โดยอ่านคอลัมน์ Cat1, Brand, Price 99, P/N, On Hand ตรงตามข้อมูลจริง ไม่ต้องใส่สูตรใดๆ เพิ่มเติม
                   </div>
                 </div>
 
@@ -1010,8 +1020,8 @@
   <!-- Phase A & B Architecture Scripts Loading Sequence -->
   <script src="assets/js/config.js?v=20260911-d1"></script>
   <script src="assets/js/auth.js?v=20260911-d1"></script>
-  <script src="assets/js/sheet-sync.js?v=20260912-e1"></script>
-  <script src="assets/js/stock-importer.js?v=20260911-d1"></script>
+  <script src="assets/js/sheet-sync.js?v=20261007-sheetv6"></script>
+  <script src="assets/js/stock-importer.js?v=20261007-sheetv6"></script>
   <script src="assets/js/promotion-pricing-engine.js"></script>
   <script src="assets/js/promotion-pricing-adapter.js"></script>
   <script src="assets/js/promotion-pricing-runtime.js"></script>
@@ -1081,7 +1091,7 @@
   <script src="assets/js/promotion-heading-parser.js"></script>
   <script src="assets/js/promotion-calculator.js"></script>
   <script src="assets/js/stock-price99-map.js"></script>
-  <script src="assets/js/prototype-stock.js"></script>
+  <script src="assets/js/prototype-stock.js?v=20261007-sheetv6"></script>
   <script src="assets/js/product-specs-modal.js"></script>
 
 

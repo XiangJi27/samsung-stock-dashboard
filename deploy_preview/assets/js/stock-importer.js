@@ -581,43 +581,47 @@
 
         const ref = r1 || r2;
 
-        // Classify inventory scope
         let scope = 'OTHER';
-        const brandUpper = (ref.brand || '').toUpperCase();
-        const cat1Upper = (ref.category1 || '').toUpperCase();
-        const cat2Upper = (ref.category2 || '').toUpperCase();
-        const descUpper = (ref.description || '').toUpperCase();
-
-        if (cat1Upper.includes('PREMIUM') || cat1Upper.includes('GIFT') || cat2Upper.includes('PREMIUM') || descUpper.includes('PREMIUM')) {
-          scope = 'PREMIUM_GIFT';
-        } else if (cat1Upper.includes('SIM') || cat2Upper.includes('SIM') || descUpper.includes('SIM')) {
-          scope = 'SIM_SERVICE';
-        } else if (brandUpper.includes('SAMSUNG')) {
-          if (cat1Upper.includes('PHONE') || cat1Upper.includes('TABLET') || cat1Upper.includes('WATCH') || cat1Upper.includes('DEVICE') || pn.startsWith('SM-') || pn.startsWith('F-')) {
-            if (pn.startsWith('EP-') || pn.startsWith('EF-') || pn.startsWith('GP-') || pn.startsWith('ET-') || pn.startsWith('EJ-') || pn.startsWith('EE-')) {
-              scope = 'SAMSUNG_ACCESSORY';
-            } else {
-              scope = 'CORE_DEVICE';
-            }
-          } else {
-            scope = 'SAMSUNG_ACCESSORY';
-          }
-        } else if (cat1Upper.includes('ACC') || cat2Upper.includes('ACC') || cat1Upper.includes('CASE') || cat1Upper.includes('FILM') || cat1Upper.includes('CHARGER') || cat1Upper.includes('AUDIO')) {
-          scope = 'THIRD_PARTY_ACCESSORY';
-        } else {
-          scope = 'OTHER';
-        }
-
-        const isCore = (scope === 'CORE_DEVICE');
         let categoryLabel = 'Accessory';
-        if (isCore) {
-          if (cat1Upper.includes('TABLET') || descUpper.includes('TAB')) categoryLabel = 'Tablet';
-          else if (cat1Upper.includes('WATCH') || descUpper.includes('WATCH')) categoryLabel = 'Watch';
-          else categoryLabel = 'SmartPhone';
-        } else if (scope === 'SIM_SERVICE') {
-          categoryLabel = 'SIM';
-        } else if (scope === 'PREMIUM_GIFT') {
-          categoryLabel = 'Premium';
+        let isCore = false;
+
+        if (typeof window !== 'undefined' && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.classifyDevice === 'function') {
+          const res = window.GoogleSheetStockSync.classifyDevice(pn, ref.category1, ref.brand, ref.description);
+          categoryLabel = res.category;
+          scope = res.scope;
+          isCore = res.isCore;
+        } else {
+          const brandUpper = (ref.brand || '').toUpperCase();
+          const cat1Upper = (ref.category1 || '').toUpperCase();
+          const descUpper = (ref.description || '').toUpperCase();
+          const pnu = pn.toUpperCase();
+
+          if (cat1Upper.includes('PREMIUM') || cat1Upper.includes('GIFT') || descUpper.includes('PREMIUM') || pnu.startsWith('PM')) {
+            scope = 'PREMIUM_GIFT';
+            categoryLabel = 'Premium';
+          } else if (cat1Upper.includes('SIM') || descUpper.includes('SIM') || pnu.startsWith('SIM-') || pnu.startsWith('3IN1')) {
+            scope = 'SIM_SERVICE';
+            categoryLabel = 'SIM';
+          } else if (pnu.startsWith('SM-R4') || pnu.startsWith('SM-R5') || pnu.startsWith('SM-R6') || ((cat1Upper === 'AUDIO' || descUpper.includes('BUDS')) && brandUpper.includes('SAMSUNG') && !descUpper.includes('CASE'))) {
+            scope = 'CORE_DEVICE';
+            categoryLabel = 'Buds';
+            isCore = true;
+          } else if (pnu.startsWith('SM-L') || pnu.startsWith('SM-R8') || pnu.startsWith('SM-R9') || pnu.startsWith('SM-R3') || cat1Upper === 'SMART WATCH' || ((descUpper.includes('WATCH') || descUpper.includes('FIT')) && !descUpper.includes('BAND') && !descUpper.includes('CASE'))) {
+            scope = 'CORE_DEVICE';
+            categoryLabel = 'Watch';
+            isCore = true;
+          } else if (pnu.startsWith('SM-X') || pnu.startsWith('F-X') || cat1Upper === 'COMPUTER AND TABLET' || (cat1Upper.includes('TABLET') && !descUpper.includes('CASE') && !descUpper.includes('COVER'))) {
+            scope = 'CORE_DEVICE';
+            categoryLabel = 'Tablet';
+            isCore = true;
+          } else if (cat1Upper === 'SMART PHONES' || pnu.startsWith('SM-S') || pnu.startsWith('SM-A') || pnu.startsWith('SM-F') || pnu.startsWith('F-A') || pnu.startsWith('F-N') || pnu.startsWith('F-S')) {
+            scope = 'CORE_DEVICE';
+            categoryLabel = 'SmartPhone';
+            isCore = true;
+          } else {
+            scope = brandUpper.includes('SAMSUNG') ? 'SAMSUNG_ACCESSORY' : 'THIRD_PARTY_ACCESSORY';
+            categoryLabel = 'Accessory';
+          }
         }
 
         merged.push({
@@ -773,10 +777,14 @@
       this.switchMode(savedMode, false);
       this.updateGSheetSyncBadge();
 
-      // Pre-fill Google Sheet URL input
+      // Pre-fill Google Sheet URL inputs
       const urlInput = document.getElementById('stockGSheetUrlInput');
+      const url2Input = document.getElementById('stockGSheetUrl2Input');
       if (urlInput && window.GoogleSheetStockSync) {
         urlInput.value = window.GoogleSheetStockSync.getStoredSheetUrl();
+      }
+      if (url2Input && window.GoogleSheetStockSync) {
+        url2Input.value = window.GoogleSheetStockSync.getStoredSheetUrl2();
       }
     }
 
@@ -827,18 +835,22 @@
 
     saveGSheetUrl() {
       const urlInput = document.getElementById('stockGSheetUrlInput');
+      const url2Input = document.getElementById('stockGSheetUrl2Input');
       const statusEl = document.getElementById('stockGSheetStatus');
       if (!urlInput || !window.GoogleSheetStockSync) return;
 
       const url = urlInput.value.trim();
+      const url2 = url2Input ? url2Input.value.trim() : '';
       if (!url) {
-        alert('กรุณากรอก URL ลิงก์ Google Sheet Published CSV');
+        alert('กรุณากรอก URL ลิงก์ Google Sheet สำหรับ Stock1 หรือลิงก์หลัก Google Sheet');
         return;
       }
 
       window.GoogleSheetStockSync.setStoredSheetUrl(url);
+      window.GoogleSheetStockSync.setStoredSheetUrl2(url2);
+
       if (statusEl) {
-        statusEl.innerHTML = `<span class="text-emerald">💾 บันทึก URL Google Sheet เรียบร้อยแล้ว พร้อมกดรีเฟรชข้อมูล</span>`;
+        statusEl.innerHTML = `<span class="text-emerald">💾 บันทึก URL Google Sheet สำหรับ Stock1${url2 ? ' และ Stock2' : ''} เรียบร้อยแล้ว พร้อมกดรีเฟรชข้อมูล</span>`;
       }
       alert('✓ บันทึก URL Google Sheet สำหรับสาขาเรียบร้อยแล้ว');
     }
@@ -864,8 +876,11 @@
       }
 
       const urlInput = document.getElementById('stockGSheetUrlInput');
+      const url2Input = document.getElementById('stockGSheetUrl2Input');
       const storedUrl = window.GoogleSheetStockSync.getStoredSheetUrl();
+      const storedUrl2 = window.GoogleSheetStockSync.getStoredSheetUrl2();
       const currentUrl = (urlInput && urlInput.value.trim()) ? urlInput.value.trim() : storedUrl;
+      const currentUrl2 = (url2Input && url2Input.value.trim()) ? url2Input.value.trim() : storedUrl2;
 
       const statusEl = document.getElementById('stockGSheetStatus');
       const fallbackBanner = document.getElementById('stockGSheetFallbackBanner');
@@ -873,7 +888,7 @@
 
       if (!currentUrl) {
         if (!isAuto) {
-          alert('ยังไม่ได้ระบุลิงก์ Google Sheet CSV กรุณากรอกในช่องลิงก์ด้านบน');
+          alert('ยังไม่ได้ระบุลิงก์ Google Sheet กรุณากรอกในช่องลิงก์ด้านบน');
         }
         if (statusEl) {
           statusEl.innerHTML = `<span style="color: #fbbf24;">⚠️ ยังไม่ได้ตั้งค่า URL ลิงก์ Google Sheet สำหรับสต็อก</span>`;
@@ -881,17 +896,21 @@
         return;
       }
 
-      // Sync the input value with stored URL
+      // Sync the input values with stored URLs
       window.GoogleSheetStockSync.setStoredSheetUrl(currentUrl);
+      window.GoogleSheetStockSync.setStoredSheetUrl2(currentUrl2);
 
       if (refreshBtn) refreshBtn.disabled = true;
       if (statusEl) {
-        statusEl.innerHTML = `<span class="text-cyan">⏳ กำลังเชื่อมต่อและดึงข้อมูลจาก Google Sheet (CSV)...</span>`;
+        statusEl.innerHTML = `<span class="text-cyan">⏳ กำลังเชื่อมต่อและดึงข้อมูลสต็อก (Stock1 / Stock2)...</span>`;
       }
       if (fallbackBanner) fallbackBanner.classList.add('hidden');
 
       try {
-        const syncResult = await window.GoogleSheetStockSync.fetchGoogleSheetCsv(currentUrl);
+        const syncResult = await window.GoogleSheetStockSync.fetchGoogleSheetCsv({
+          url1: currentUrl,
+          url2: currentUrl2
+        });
 
         // Stage the batch through diff preview
         const currentStockList = window.STOCK_DATA || [];
@@ -981,12 +1000,15 @@
         const dataBuffer = await file.arrayBuffer();
         const workbook = XLSX.read(dataBuffer, { type: 'array' });
 
-        if (!workbook.SheetNames.includes('Sheet1') || !workbook.SheetNames.includes('Sheet2')) {
-          throw new Error('ไฟล์ Stock.xlsx ต้องมีทั้ง Sheet1 (ร้านเรา ชั้น 1) และ Sheet2 (สาขา ชั้น 2)');
+        const s1Name = workbook.SheetNames.find(n => /^(sheet1|stock1|ช1|ชั้น 1)$/i.test(n.trim()));
+        const s2Name = workbook.SheetNames.find(n => /^(sheet2|stock2|ช2|ชั้น 2)$/i.test(n.trim()));
+
+        if (!s1Name || !s2Name) {
+          throw new Error('ไฟล์ Stock ต้องมีทั้งแท็บ Stock1/Sheet1 (ร้านเรา ชั้น 1) และ Stock2/Sheet2 (สาขา ชั้น 2)');
         }
 
-        const s1Parsed = StockExcelParser.parseSheet(workbook.Sheets['Sheet1'], 'Sheet1');
-        const s2Parsed = StockExcelParser.parseSheet(workbook.Sheets['Sheet2'], 'Sheet2');
+        const s1Parsed = StockExcelParser.parseSheet(workbook.Sheets[s1Name], s1Name);
+        const s2Parsed = StockExcelParser.parseSheet(workbook.Sheets[s2Name], s2Name);
 
         const mergedResult = StockExcelParser.mergeSheets(s1Parsed, s2Parsed);
 

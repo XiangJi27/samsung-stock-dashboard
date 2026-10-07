@@ -2222,6 +2222,15 @@
     function resolveCanonicalCategory(item) {
       if (!item) return "OTHER";
 
+      if (item.canonicalCategory) {
+        const norm = normalizeCategory(item.canonicalCategory);
+        if (CATEGORY_ALIASES[norm]) return CATEGORY_ALIASES[norm];
+      }
+      if (item.category && item.category !== 'Other' && item.category !== 'OTHER') {
+        const norm = normalizeCategory(item.category);
+        if (CATEGORY_ALIASES[norm]) return CATEGORY_ALIASES[norm];
+      }
+
       const c1 = String(item.cat1 || item.category1 || item.category || "").trim().toUpperCase();
       const c2 = String(item.cat2 || item.category2 || "").trim().toUpperCase();
       const c3 = String(item.cat3 || item.category3 || "").trim().toUpperCase();
@@ -2237,49 +2246,48 @@
       }
 
       // 2. Smartphone (Cat1 = SMART PHONES, never Buds/Watch/Tablet/Accessory)
-      if (c1 === "SMART PHONES" || c1 === "SMARTPHONES" || c1 === "SMART PHONE" || c1 === "SMART_PHONES" || c1 === "SMART_PHONE") {
+      if (c1 === "SMART PHONES" || c1 === "SMARTPHONES" || c1 === "SMART PHONE" || c1 === "SMART_PHONES" || c1 === "SMART_PHONE" || c1 === "SMARTPHONE") {
         if (!pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X") && !pn.startsWith("EP-") && !pn.startsWith("EF-")) {
           return "SMARTPHONE";
         }
       }
 
-      // 3. Tablet (Cat1 = COMPUTER AND TABLET or SM-X or TAB)
-      if (c1 === "COMPUTER AND TABLET" || c1 === "COMPUTER_AND_TABLET" || c1 === "TABLET" || c1 === "TABLETS" || c1 === "TAB" || pn.startsWith("SM-X")) {
+      // 3. Tablet (Cat1 = COMPUTER AND TABLET or SM-X or F-X or TAB)
+      if (c1 === "COMPUTER AND TABLET" || c1 === "COMPUTER_AND_TABLET" || c1 === "TABLET" || c1 === "TABLETS" || c1 === "TAB" || pn.startsWith("SM-X") || pn.startsWith("F-X")) {
         return "TABLET";
       }
 
-      // 4. Smart Watch (Cat1 = SMART WATCH or Watch P/Ns)
+      // 4. Smart Watch (Cat1 = SMART WATCH or Watch P/Ns or Fit P/Ns)
       if (c1 === "SMART WATCH" || c1 === "SMART_WATCH" || c1 === "SMARTWATCH" || c1 === "WATCH" ||
-          (brand.includes("SAMSUNG") && (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L3") || pn.startsWith("SM-L7")))) {
+          (brand.includes("SAMSUNG") && (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L") || pn.startsWith("SM-R3")))) {
         return "SMARTWATCH";
       }
 
       // 5. Accessories (Cat1 = MOBILE AND COMPUTER ACCESSORY, Accessory prefixes, or item.productCodeType === 'ACCESSORY')
       if (c1 === "MOBILE AND COMPUTER ACCESSORY" || c1 === "MOBILE_AND_COMPUTER_ACCESSORY" || c1 === "ACCESSORY" || c1 === "ACCESSORIES" || c1 === "ADAPTER" ||
           item.productCodeType === "ACCESSORY" || item.category === "Accessory" ||
-          pn.startsWith("EP-") || pn.startsWith("EF-") || pn.startsWith("GP-") || pn.startsWith("ET-") || pn.startsWith("EJ-") || pn.startsWith("EE-")) {
+          pn.startsWith("EP-") || pn.startsWith("EF-") || pn.startsWith("GP-") || pn.startsWith("ET-") || pn.startsWith("EJ-") || pn.startsWith("EE-") || pn.startsWith("SSG-")) {
         return "ACCESSORY";
       }
 
       // 6. Premium (Gifts, promotions, premium sets)
-      if (c1.includes("PREMIUM") || c2.includes("PREMIUM") || c2.includes("FREE GIFT") || model.includes("PREMIUM") || model.includes("FREE GIFT") || c1.includes("GIFT") || model.includes("GAABOR") || model.includes("STAINLESS STEEL")) {
+      if (c1.includes("PREMIUM") || c2.includes("PREMIUM") || c2.includes("FREE GIFT") || model.includes("PREMIUM") || model.includes("FREE GIFT") || c1.includes("GIFT") || model.includes("GAABOR") || model.includes("STAINLESS STEEL") || pn.startsWith("PM") || pn.startsWith("PREMIUM") || pn.startsWith("Z-")) {
         return "PREMIUM";
       }
 
       // 7. SIM (Service, carrier packs, insurance)
-      if (c1.includes("SERVICE, INSURANCE AND WARRANTY") || c1.includes("SERVICE,_INSURANCE_AND_WARRANTY") || c1.includes("SIM") || c2.includes("SIM") || c2.includes("CARRIER MOBILE PACKAGE") || model.includes("SIM") || model.startsWith("(AIS)")) {
+      if (c1.includes("SERVICE, INSURANCE AND WARRANTY") || c1.includes("SERVICE,_INSURANCE_AND_WARRANTY") || c1.includes("SIM") || c2.includes("SIM") || c2.includes("CARRIER MOBILE PACKAGE") || model.includes("SIM") || model.startsWith("(AIS)") || pn.startsWith("SIM-") || pn.startsWith("3IN1") || pn.startsWith("PRE2POST") || pn.startsWith("SI87")) {
         return "SIM";
       }
 
       // Fallback identification by model & P/N conventions
       if (pn.startsWith("SM-R4") || pn.startsWith("SM-R5") || pn.startsWith("SM-R6") || model.includes("BUDS")) return "BUDS";
-      if (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L3") || pn.startsWith("SM-L7") || model.includes("WATCH")) return "SMARTWATCH";
-      if (pn.startsWith("SM-X") || model.includes("TAB ") || model.includes("GALAXY TAB")) return "TABLET";
-      if ((pn.startsWith("SM-") || pn.startsWith("F-")) && !pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X")) {
+      if (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L") || pn.startsWith("SM-R3") || model.includes("WATCH") || model.includes("FIT3")) return "SMARTWATCH";
+      if (pn.startsWith("SM-X") || pn.startsWith("F-X")) return "TABLET";
+      if ((pn.startsWith("SM-") || pn.startsWith("F-A") || pn.startsWith("F-N") || pn.startsWith("F-S")) && !pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X") && !pn.startsWith("EP-") && !pn.startsWith("EF-")) {
         return "SMARTPHONE";
       }
 
-      // If category1 exists from Excel, any item reaching here is definitively OTHER
       if (item.category1 || item.cat1) {
         return "OTHER";
       }
@@ -2915,101 +2923,27 @@
       }
     }
 
-    // Spec Details Renderer with Deterministic Product Identity Gate & 100% ERP Coverage
+    // Spec Details Renderer with Official Thai Sources
     function renderDrawerSpecDetails(item) {
-      const spec = (typeof window !== "undefined" && window.resolveProductSpecs) ? window.resolveProductSpecs(item) : null;
-
-      // Single authority for "may this value be displayed as a Technical Spec".
-      // Loaded before this file in index.html; null-safe so the ERP-only drawer still renders.
-      const uiVerificationMap = (typeof window !== "undefined" && window.MobileUiVerificationMap) ? window.MobileUiVerificationMap : null;
-      const specMatchLevel = (spec && spec._matchLevel) || "NO_MATCH";
-      const isExactPnMatch = specMatchLevel === "EXACT_PN" || specMatchLevel === "EXACT_ACCESSORY_PN";
-      // Deterministic plan for this drawer: drives the fail-closed banner and the status badge.
-      const specRenderPlan = (uiVerificationMap && spec) ? uiVerificationMap.buildProfileRenderPlan({
-        profile: spec,
-        matchLevel: specMatchLevel,
-        officialName: spec.officialName || item.model,
-        erpProductName: item.model || ""
-      }) : null;
-
-      // Level 1: Basic ERP Stock Metadata Box (100% Display Coverage)
-      const catHierarchy = [item.category1, item.category2, item.category3].filter(Boolean).join(" &rarr; ");
-      const erpHtml = `
-        <div class="spec-card-container">
-          <div class="spec-group-box" style="margin-bottom: 12px; border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.02);">
-            <div class="spec-group-title" style="color: #94a3b8;">
-              <span>📦</span>
-              <span>ข้อมูลสินค้าจากระบบสต๊อก (ERP Stock Master)</span>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; font-size: 0.82rem;">
-              <div>
-                <span class="spec-label">รหัสสินค้า (ERP P/N):</span>
-                <strong style="color: #fff; font-family: monospace;">${item.pn || 'ไม่ระบุ'}</strong>
-              </div>
-              <div>
-                <span class="spec-label">แบรนด์สินค้า:</span>
-                <strong style="color: var(--cyan);">${item.brand || (spec && spec.brand) || 'ไม่ระบุ'}</strong>
-              </div>
-              <div>
-                <span class="spec-label">หมวดหมู่สต๊อก:</span>
-                <strong style="color: #cbd5e1;">${item.category || item.canonicalCategory || 'Other'}</strong>
-              </div>
-              <div>
-                <span class="spec-label">ราคามาตรฐาน (SRP):</span>
-                <strong style="color: #38bdf8;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
-              </div>
-            </div>
-            ${catHierarchy ? `
-              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.06); font-size: 0.76rem; color: var(--text-muted);">
-                ลำดับหมวดหมู่ ERP: <span style="color: #cbd5e1;">${catHierarchy}</span>
-              </div>
-            ` : ''}
-          </div>
-      `;
-
-      if (!spec || (spec._matchLevel && spec._matchLevel !== "EXACT_PN" && spec._matchLevel !== "EXACT_ACCESSORY_PN" && spec._matchLevel !== "PM_PROMOTION_ALIAS_EXACT_MAPPING")) {
-        // FAIL CLOSED: SPEC_NOT_VERIFIED Banner for non-Exact P/N matches
-        return erpHtml + `
-          <div class="empty-promo-state" style="padding: 24px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <span style="font-size: 1.4rem;">⚠️</span>
-              <strong style="font-size: 0.95rem; color: #fbbf24;">ยังไม่มีข้อมูลสเปกที่ตรวจสอบแล้วสำหรับสินค้านี้ (SPEC_NOT_VERIFIED)</strong>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
-              ระบบจะไม่แสดงสเปกระดับ Series เพื่อป้องกันข้อมูลข้ามรุ่น<br>
-              ข้อมูลสินค้า ราคา RRP และจำนวนสต๊อกหน้าร้านชั้น 1 / ชั้น 2 ยังคงใช้งานได้ตามปกติ
-            </p>
-          </div>
-        </div>`;
+      if (!window.resolveProductSpecs) {
+        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่พบฐานข้อมูลสเปกสินค้าในระบบ</div>`;
+      }
+      const spec = window.resolveProductSpecs(item);
+      if (!spec) {
+        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่มีข้อมูลสเปกสำหรับสินค้านี้</div>`;
       }
 
-      // Level 2: Verified Technical Specs with Evidence Status Header
-      const isPartiallyVerified = spec.verificationStatus === "PARTIALLY_VERIFIED";
-      // The verification-map plan is authoritative for the badge (NULL_SAFE: falls back to the
-      // profile's own status when the map is unavailable, so behaviour never changes silently).
-      const planBadge = specRenderPlan ? specRenderPlan.verificationBadge : null;
-      const badgeIsWarn = planBadge
-        ? (planBadge !== "VERIFIED")
-        : isPartiallyVerified;
-      const statusBadgeClass = badgeIsWarn ? "warn" : "pass";
-      const statusBadgeText = planBadge || (isPartiallyVerified ? "PARTIALLY_VERIFIED" : (spec.verificationStatus || "VERIFIED"));
-      const statusBadgeStyle = badgeIsWarn
-        ? "background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);"
-        : "";
-
-      let html = erpHtml + `
-          <div class="spec-source-box" style="border-color: ${isPartiallyVerified ? 'rgba(245, 158, 11, 0.4)' : 'rgba(16, 185, 129, 0.4)'}; background: ${isPartiallyVerified ? 'rgba(245, 158, 11, 0.05)' : 'rgba(16, 185, 129, 0.05)'};">
-            <span style="font-size: 1.4rem;">${isPartiallyVerified ? '⚠️' : '🛡️'}</span>
+      let html = `
+        <div class="spec-card-container">
+          <div class="spec-source-box">
+            <span style="font-size: 1.4rem;">🛡️</span>
             <div style="flex: 1;">
-              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</span>
-                <span class="status-badge-gate ${statusBadgeClass}" style="font-size: 0.7rem; padding: 2px 6px; ${statusBadgeStyle}">${statusBadgeText}</span>
-              </div>
-              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 4px;">
+              <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</div>
+              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 3px;">
                 แบรนด์: <strong>${spec.brand || item.brand || 'Samsung'}</strong> • รุ่นผู้ผลิต: <strong>${spec.manufacturerModel || spec.modelGroup || '-'}</strong> • ประเภท: <strong>${spec.productType || item.category || '-'}</strong>
               </div>
               <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
-                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Official Certified Brand Specifications'}</strong>
+                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Samsung Thailand Official (samsung.com/th)'}</strong>
               </div>
               ${spec.sourceUrl ? `
                 <div style="font-size: 0.72rem; margin-top: 2px;">
@@ -3018,70 +2952,12 @@
                   </a>
                 </div>
               ` : ''}
-              ${isPartiallyVerified ? `
-                <div style="margin-top: 6px; padding: 6px 10px; background: rgba(245, 158, 11, 0.08); border-radius: 6px; font-size: 0.73rem; border-left: 2px solid #fbbf24;">
-                  <div style="color: #fbbf24; font-weight: 600;">⚠️ สถานะการตรวจสอบระดับฟิลด์ (Field-Level Verification):</div>
-                  <div style="color: #e2e8f0; margin-top: 2px;">
-                    <span style="color: #34d399;">✓ ข้อมูลที่ยืนยันแล้ว:</span> ${(spec.verifiedFields || []).join(', ') || '5W, IP67, 20h, TWS, สายคล้องในตัว'}
-                  </div>
-                  <div style="color: #cbd5e1; margin-top: 2px;">
-                    <span style="color: #fbbf24;">⏳ ข้อมูลที่ยังไม่ได้ยืนยัน:</span> ${(spec.pendingFields || []).join(', ') || 'Bluetooth Version, การรับประกันในไทย'}
-                  </div>
-                </div>
-              ` : ''}
             </div>
           </div>
       `;
 
-      // Fail-closed banner for an exact P/N whose profile has no verified row at all.
-      // Without this the drawer would silently look "empty" instead of explaining why.
-      if (specRenderPlan && specRenderPlan.bannerRequired &&
-          specRenderPlan.planClass === "EXACT_PROFILE_UI_INCOMPLETE") {
-        html += `
-          <div class="empty-promo-state" style="margin-top: 12px; padding: 20px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <span style="font-size: 1.4rem;">⚠️</span>
-              <strong style="font-size: 0.95rem; color: #fbbf24;">${specRenderPlan.bannerText}</strong>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
-              พบโปรไฟล์สเปกของ P/N นี้แล้ว แต่ยังไม่มีฟิลด์ใดที่ผ่านการยืนยันหลักฐาน<br>
-              ระบบจึงปิดการแสดงสเปกทางเทคนิคทั้งหมด (Fail-Closed) เพื่อไม่ให้ข้อมูลที่ยังไม่ยืนยันถูกนำเสนอ<br>
-              ข้อมูลสินค้า ราคา RRP และจำนวนสต็อกยังคงใช้งานได้ตามปกติ
-            </p>
-          </div>
-        `;
-      }
-
-      // MOBILE UI SAFETY CONTRACT
-      //   The verification-map layer (assets/js/mobile-ui-verification-map.js) is the single
-      //   authority for whether a rendered value carries verified evidence. Only rows classified
-      //   VERIFIED / VERIFIED_NOT_SUPPORTED may be displayed as a technical value; PENDING,
-      //   UNMAPPED and STATUS_CONFLICT rows fail closed (withheld, never promoted).
-      // (uiVerificationMap is hoisted at the top of this function.)
-
-      /** One compact badge for the whole group (kept out of the value so values stay data-only). */
-      function renderSpecGroupFooter(rows) {
-        const pendingBadge = "รอระบุข้อมูลที่ยืนยันแล้ว";
-        const withBadges = rows.filter(([, v]) => typeof v === "string" && v.indexOf("[[") >= 0);
-        if (withBadges.length === 0) return "";
-        return `
-          <div class="spec-item-row" style="opacity: 0.85;">
-            <span class="spec-label" style="color: #fbbf24;">สถานะการยืนยัน</span>
-            <span class="spec-val">
-              <span class="spec-pending-badge" style="color: #fbbf24; font-size: 0.72rem;">${withBadges.length} รายการ ${pendingBadge}</span>
-            </span>
-          </div>
-        `;
-      }
-
       function renderSpecGroup(icon, title, fields, catId = "") {
-        const allRows = Object.entries(fields);
-        const validRows = allRows.filter(([k, v]) => {
-          if (v === undefined || v === null || v === "") return false;
-          // A placeholder sentinel is not a specification value.
-          if (uiVerificationMap && uiVerificationMap.isPlaceholderValue(v)) return false;
-          return true;
-        });
+        const validRows = Object.entries(fields).filter(([k, v]) => v !== undefined && v !== null && v !== "");
         if (validRows.length === 0) return "";
         return `
           <div class="spec-group-box"${catId ? ` data-spec-cat="${catId}"` : ''}>
@@ -3095,219 +2971,60 @@
                 <span class="spec-val">${val}</span>
               </div>
             `).join("")}
-            ${renderSpecGroupFooter(allRows)}
           </div>
         `;
       }
 
-      /**
-       * Render a profile-bound technical group through the verification-map layer.
-       * Only rows classified VERIFIED / VERIFIED_NOT_SUPPORTED are displayed.
-       * PENDING, UNMAPPED and STATUS_CONFLICT rows fail closed (withheld).
-       * RAM / storage markers already present in the ERP product name stay ERP header metadata.
-       */
-      function renderVerifiedSpecGroup(icon, title, groupKeys, catId = "") {
-        if (!uiVerificationMap) return "";
-        const profilePlan = uiVerificationMap.buildProfileRenderPlan({
-          profile: spec,
-          matchLevel: spec._matchLevel || "NO_MATCH",
-          officialName: spec.officialName || item.model,
-          erpProductName: item.model || ""
-        });
-        const wanted = groupKeys.slice().sort().join("|");
-        const rowsForGroup = profilePlan.rows.filter((r) => groupKeys.indexOf(r.canonicalKey) >= 0);
-        const displayable = rowsForGroup.filter((r) => r.displayed && !r.erpMetadataHeaderOnly);
-        if (displayable.length === 0) return "";
-        const withheld = rowsForGroup.filter((r) => !r.displayed).length;
-        const badgeCount = profilePlan.pendingBadgeCount;
-        const badgeRow = (badgeCount > 0 || withheld > 0)
-          ? `<div class="spec-item-row" style="opacity: 0.85;">
-               <span class="spec-label" style="color: #fbbf24;">สถานะการยืนยัน</span>
-               <span class="spec-val">
-                 ${badgeCount > 0 ? `<span class="spec-pending-badge" style="color: #fbbf24; font-size: 0.72rem;">รอระบุข้อมูลที่ยืนยันแล้ว</span>` : ""}
-                 ${withheld > 0 ? `<span style="color: var(--text-muted); font-size: 0.72rem;">⏳ ปิดการแสดง ${withheld} ฟิลด์ที่ยังไม่ยืนยัน (Fail-Closed)</span>` : ""}
-               </span>
-             </div>`
-          : "";
-        const ordered = rowsForGroup.slice().sort((a, b) => groupKeys.indexOf(a.canonicalKey) - groupKeys.indexOf(b.canonicalKey));
-        return `
-          <div class="spec-group-box"${catId ? ` data-spec-cat="${catId}"` : ''}>
-            <div class="spec-group-title">
-              <span>${icon}</span>
-              <span>${title}</span>
-            </div>
-            ${ordered.filter((r) => r.displayed && !r.erpMetadataHeaderOnly).map((r) => `
-              <div class="spec-item-row">
-                <span class="spec-label">${r.label}</span>
-                <span class="spec-val">${uiVerificationMap.formatRowValue(r)}</span>
-              </div>
-            `).join("")}
-            ${badgeRow}
-          </div>
-        `;
-      }
 
-      // Category Navigation Fast Filter Pills (6 Categories)
-      const availableCategories = [];
-      if (spec.display) availableCategories.push({ id: 'display', icon: '📱', label: 'จอแสดงผล' });
-      if (spec.performance) availableCategories.push({ id: 'performance', icon: '⚡', label: 'ประสิทธิภาพ' });
-      if (spec.memory) availableCategories.push({ id: 'memory', icon: '💾', label: 'ความจำ' });
-      if (spec.camera) availableCategories.push({ id: 'camera', icon: '📷', label: 'กล้อง' });
-      if (spec.battery || (spec.batteryHours || (spec.battery && spec.battery.usageHours))) availableCategories.push({ id: 'battery', icon: '🔋', label: 'แบตเตอรี่' });
-      if (spec.connectivityAndBuild) availableCategories.push({ id: 'connectivity', icon: '📶', label: 'การเชื่อมต่อ' });
-      if (spec.isAccessoryMaster || spec.powerSpecs || spec.caseSpecs || spec.audioSpecs || spec.sensorSpecs) {
-        availableCategories.push({ id: 'accessory', icon: '⚙️', label: 'อุปกรณ์เสริม' });
-      }
 
-      if (availableCategories.length > 1) {
-        html += `
-          <div class="drawer-spec-category-pills" id="drawerSpecCategoryPills">
-            <button type="button" class="spec-pill-btn active" data-cat="all" onclick="window.filterDrawerSpecCategory('all')">
-              <span>🌟 ทั้งหมด</span>
-            </button>
-            ${availableCategories.map(c => `
-              <button type="button" class="spec-pill-btn" data-cat="${c.id}" onclick="window.filterDrawerSpecCategory('${c.id}')">
-                <span>${c.icon} ${c.label}</span>
-              </button>
-            `).join('')}
-          </div>
-        `;
-      }
-
-      // 0. Dedicated Product Type Template (for Product Accessory Master)
-      if (spec.isAccessoryMaster && spec.displayableSpecs && spec.displayableSpecs.length > 0) {
-        const typeLabels = {
-          BLUETOOTH_SPEAKER: "ลำโพงบลูทูธ (Bluetooth Speaker Specifications)",
-          WALL_CHARGER: "อะแดปเตอร์ชาร์จเร็ว (Wall Charger Specifications)",
-          DATA_CABLE: "สายชาร์จและรับส่งข้อมูล (Data & Charging Cable)",
-          PHONE_CASE: "เคสสมาร์ตโฟน (Phone Case Specifications)",
-          SCREEN_PROTECTOR: "ฟิล์มและกระจกกันรอย (Screen Protector Specifications)",
-          WATCH_BAND: "สายนาฬิกา (Watch Band Specifications)",
-          POWER_BANK: "แบตเตอรี่สำรอง (Power Bank Specifications)",
-          PREMIUM_GIFT: "ของแถมพรีเมียม (Premium Gift Specifications)",
-          HOME_APPLIANCE: "เครื่องใช้ไฟฟ้า (Home Appliance Specifications)",
-          SOUNDBAR: "เครื่องเสียงและซาวด์บาร์ (Soundbar Specifications)"
-        };
-
-        const fieldLabels = {
-          applianceType: "ประเภทเครื่องใช้ไฟฟ้า",
-          capacity: "ความจุ / ขนาดบรรจุ",
-          audioChannels: "ระบบเสียง / แชนแนล (Audio Channels)",
-          outputPower: "กำลังขับเสียง (Output Power)",
-          bluetoothSupport: "การเชื่อมต่อ Bluetooth",
-          bluetoothVersion: "เวอร์ชัน Bluetooth",
-          playTime: "ระยะเวลาใช้งานแบตเตอรี่ (Playtime)",
-          ipRating: "มาตรฐานป้องกันน้ำและฝุ่น (IP Rating)",
-          floating: "การลอยน้ำ",
-          tws: "รองรับ True Wireless Stereo (TWS)",
-          builtInStrap: "สายคล้องในตัว",
-          chargingPort: "พอร์ตสำหรับชาร์จไฟ",
-          dimensions: "ขนาดมิติ",
-          weight: "น้ำหนัก",
-          maximumOutputPower: "กำลังไฟสูงสุด (Max Output Power)",
-          chargerType: "ประเภทหัวชาร์จ (Charger Type)",
-          cableIncluded: "สายชาร์จในกล่อง",
-          outputPorts: "ช่องจ่ายไฟ (Output Ports)",
-          usbPowerDelivery: "มาตรฐาน USB-PD",
-          pps: "มาตรฐาน Programmable Power Supply (PPS)",
-          inputVoltage: "แรงดันไฟขาเข้า (Input Voltage)",
-          outputProfiles: "โพรไฟล์การจ่ายไฟ",
-          connectorA: "หัวเชื่อมต่อด้านที่ 1 (Connector A)",
-          connectorB: "หัวเชื่อมต่อด้านที่ 2 (Connector B)",
-          cableType: "ประเภทสาย (Cable Type)",
-          maximumPower: "กำลังไฟสูงสุดที่รองรับ (Max Wattage)",
-          maximumCurrent: "กระแสไฟสูงสุด (Max Current)",
-          dataTransferSpeed: "ความเร็วรับส่งข้อมูล (Transfer Speed)",
-          length: "ความยาวสาย (Cable Length)",
-          packageQuantity: "จำนวนเส้นต่อแพ็ก",
-          material: "วัสดุที่ใช้ผลิต",
-          eMarkerChip: "ชิป E-Marker ควบคุมกระแสไฟ",
-          videoOutput: "รองรับการส่งสัญญาณภาพ (DisplayPort Alt Mode)",
-          compatibleDevices: "อุปกรณ์ที่รองรับการใช้งาน",
-          compatibleModels: "รุ่นสมาร์ตโฟนที่รองรับ",
-          compatibleSeries: "ซีรีส์ที่รองรับ",
-          caseType: "ประเภทของเคส",
-          wirelessChargingCompatible: "รองรับการชาร์จไร้สาย",
-          magneticCompatible: "รองรับอุปกรณ์แม่เหล็ก / Magnetic",
-          standIncluded: "ขาตั้งในตัว",
-          protectorType: "ประเภทของกระจก/ฟิล์ม",
-          hardness: "ระดับความแข็ง (Hardness Rating)",
-          thickness: "ความหนา",
-          antiFingerprint: "การเคลือบสารลดรอยนิ้วมือ",
-          antiReflection: "การลดแสงสะท้อน",
-          privacyProtection: "ระบบป้องกันการมองเห็นด้านข้าง (Privacy)",
-          installationKitIncluded: "มีชุดช่วยติดตั้งในกล่อง",
-          bandStyle: "สไตล์ของสาย",
-          caseSizeCompatibility: "ขนาดตัวเรือนที่รองรับ",
-          wristSize: "ขนาดข้อมือที่รองรับ",
-          claspType: "ประเภทตัวล็อก",
-          waterResistance: "คุณสมบัติกันน้ำ",
-          accessoryType: "ประเภทของชำร่วย/อุปกรณ์",
-          color: "สี",
-          batteryCapacity: "ความจุแบตเตอรี่",
-          inputPower: "กำลังไฟขาเข้า",
-          ports: "พอร์ตเชื่อมต่อ",
-          wirelessCharging: "การชาร์จไร้สาย",
-          magneticCharging: "การชาร์จแบบแม่เหล็ก",
-          promotionConditions: "เงื่อนไขการรับของแถม"
-        };
-
-        const title = typeLabels[spec.productType] || "คุณสมบัติสินค้าตามประเภท (Product Specifications)";
-        const specMap = {};
-        spec.displayableSpecs.forEach(f => {
-          const label = fieldLabels[f.fieldKey] || f.fieldKey;
-          const val = f.displayValue || (f.value !== null ? String(f.value) : "ยังไม่ได้ยืนยัน");
-          let statusTag = `<span style="color: #fbbf24; font-size: 0.72rem; margin-left: 6px;">[ยังไม่ยืนยัน]</span>`;
-          if (f.status === "VERIFIED") {
-            statusTag = `<span style="color: #34d399; font-size: 0.72rem; margin-left: 6px;">[ผู้ผลิตยืนยัน]</span>`;
-          } else if (f.status === "VERIFIED_FROM_ERP") {
-            statusTag = `<span style="color: #38bdf8; font-size: 0.72rem; margin-left: 6px;">[ERP ระบุ]</span>`;
-          } else if (f.status === "SUPPORTED_BY_OFFICIAL_MARKETPLACE") {
-            statusTag = `<span style="color: #60a5fa; font-size: 0.72rem; margin-left: 6px;">[ร้านทางการ Shopee Mall]</span>`;
-          } else if (f.status === "MARKETPLACE_SUGGESTED_REVIEW_REQUIRED") {
-            statusTag = `<span style="color: #f59e0b; font-size: 0.72rem; margin-left: 6px;">[รอตรวจ Marketplace]</span>`;
-          }
-          specMap[label] = `${val} ${statusTag}`;
-        });
-
-        html += renderSpecGroup("⚙️", title, specMap, "accessory");
-      }
-
-      // 1. Display (verified-only rows through the verification map)
+      // 1. Display
       if (spec.display) {
-        html += renderVerifiedSpecGroup("📱", "หน้าจอแสดงผล (Display)", [
-          "display.screenSize", "display.panelType", "display.resolution",
-          "display.refreshRate", "display.peakBrightness", "display.glassProtection"
-        ], "display");
+        html += renderSpecGroup("📱", "หน้าจอแสดงผล (Display)", {
+          "ขนาดหน้าจอ": spec.display.screenSize,
+          "ชนิดหน้าจอ": spec.display.panelType,
+          "ความละเอียด": spec.display.resolution,
+          "อัตรารีเฟรช": spec.display.refreshRate,
+          "ความสว่างสูงสุด": spec.display.peakBrightness,
+          "กระจกกันรอย": spec.display.glassProtection
+        }, "display");
       }
 
-      // 2. Performance & AI (verified-only rows through the verification map)
+      // 2. Performance & AI
       if (spec.performance) {
-        html += renderVerifiedSpecGroup("⚡", "ประสิทธิภาพ & Galaxy AI (Performance)", [
-          "performance.processor", "performance.cpuCores", "performance.gpu", "performance.aiEngine"
-        ], "performance");
+        html += renderSpecGroup("⚡", "ประสิทธิภาพ & Galaxy AI (Performance)", {
+          "ชิปเซ็ตประมวลผล": spec.performance.processor,
+          "แกนประมวลผล (CPU)": spec.performance.cpuCores,
+          "ชิปกราฟิก (GPU)": spec.performance.gpu,
+          "ระบบปัญญาประดิษฐ์": spec.performance.aiEngine
+        }, "performance");
       }
 
       // 3. Memory & Storage
       if (spec.memory) {
-        html += renderVerifiedSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", [
-          "memory.ram", "memory.storage", "memory.expandableStorage"
-        ], "memory");
+        html += renderSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", {
+          "หน่วยความจำ (RAM)": spec.memory.ram,
+          "พื้นที่จัดเก็บ (ROM)": spec.memory.storage,
+          "ช่องใส่ MicroSD": spec.memory.expandableStorage
+        }, "memory");
       }
 
       // 4. Camera
       if (spec.camera) {
-        html += renderVerifiedSpecGroup("📷", "กล้องถ่ายภาพ (Camera System)", [
-          "camera.rearCamera", "camera.frontCamera", "camera.videoRecording"
-        ], "camera");
+        html += renderSpecGroup("📷", "กล้องถ่ายภาพ (Camera System)", {
+          "กล้องหลัง (Rear)": spec.camera.rearCamera,
+          "กล้องหน้า (Selfie)": spec.camera.frontCamera,
+          "ความละเอียดวิดีโอ": spec.camera.videoRecording
+        }, "camera");
       }
 
       // 5. Battery & Power
       if (spec.battery) {
-        html += renderVerifiedSpecGroup("🔋", "แบตเตอรี่ & ระบบชาร์จ (Battery & Charging)", [
-          "battery.capacity", "battery.chargingSpeed", "battery.wirelessCharging",
-          "battery.reverseCharging"
-        ], "battery");
+        html += renderSpecGroup("🔋", "แบตเตอรี่ & ระบบชาร์จ (Battery & Charging)", {
+          "ความจุแบตเตอรี่": spec.battery.capacity,
+          "การชาร์จไวมีสาย": spec.battery.chargingSpeed,
+          "การชาร์จไร้สาย": spec.battery.wirelessCharging,
+          "แชร์พลังงานไร้สาย": spec.battery.reverseCharging
+        }, "battery");
       }
 
       // 5.1 Battery Usage Hours & Endurance (ระยะเวลาการใช้งานแบตเตอรี่อย่างละเอียด พร้อมแหล่งอ้างอิงทางการ)
@@ -3387,11 +3104,17 @@
 
       // 6. Connectivity & Build
       if (spec.connectivityAndBuild) {
-        html += renderVerifiedSpecGroup("📶", "การเชื่อมต่อ & ตัวเครื่อง (Connectivity & Build)", [
-          "connectivityAndBuild.network", "connectivityAndBuild.simType", "connectivityAndBuild.wifi",
-          "connectivityAndBuild.bluetooth", "connectivityAndBuild.waterResistance", "connectivityAndBuild.spenSupport",
-          "connectivityAndBuild.frameMaterial", "connectivityAndBuild.dimensions", "connectivityAndBuild.weight"
-        ], "connectivity");
+        html += renderSpecGroup("📶", "การเชื่อมต่อ & ตัวเครื่อง (Connectivity & Build)", {
+          "เครือข่ายสัญญาณ": spec.connectivityAndBuild.network,
+          "ช่องใส่ซิม (SIM)": spec.connectivityAndBuild.simType,
+          "Wi-Fi": spec.connectivityAndBuild.wifi,
+          "Bluetooth": spec.connectivityAndBuild.bluetooth,
+          "มาตรฐานกันน้ำกันฝุ่น": spec.connectivityAndBuild.waterResistance,
+          "รองรับปากกา S Pen": spec.connectivityAndBuild.spenSupport,
+          "วัสดุตัวเครื่อง": spec.connectivityAndBuild.frameMaterial,
+          "ขนาดตัวเครื่อง": spec.connectivityAndBuild.dimensions,
+          "น้ำหนัก": spec.connectivityAndBuild.weight
+        }, "connectivity");
       }
 
       // 7. Audio (Buds)
@@ -3633,6 +3356,7 @@
 
       return html;
     }
+    window.renderDrawerSpecDetails = renderDrawerSpecDetails;
 
     let currentDrawerScenario = "NORMAL";
     let currentDrawerMode = "NORMAL";

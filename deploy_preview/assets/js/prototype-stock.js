@@ -2072,22 +2072,37 @@
     // Promotion Resolver for P/N
     function resolvePromotion(item) {
       if (!promoVariants || promoVariants.length === 0) {
-        return { status: "NORMAL", variants: [], badgeText: "ราคาปกติ (RRP)", badgeClass: "promo-status-normal" };
+        return { status: "NORMAL", variants: [], badgeText: "ไม่มีโปรที่ใช้งาน", badgeClass: "promo-status-normal" };
       }
 
       // Match by Exact P/N first
       let matched = promoVariants.filter(v => v.pn && item.pn && v.pn.trim().toUpperCase() === item.pn.trim().toUpperCase());
       let isModelScope = false;
 
-      // Fallback: match by Model + Capacity
-      if (matched.length === 0 && item.model) {
+      // Fallback: match by Model + Capacity ONLY for Smartphone & Tablet devices (Never for Accessories, Buds, Watch, SIM, Other)
+      const canonicalCat = (typeof resolveCanonicalCategory === "function") ? resolveCanonicalCategory(item) : "OTHER";
+      const isDevice = (canonicalCat === "SMARTPHONE" || canonicalCat === "TABLET");
+      if (matched.length === 0 && item.model && isDevice) {
         const cleanM = item.model.toLowerCase();
         matched = promoVariants.filter(v => v.model && cleanM.includes(v.model.toLowerCase()));
         if (matched.length > 0) isModelScope = true;
       }
 
       if (matched.length === 0) {
-        return { status: "NORMAL", isModelScope: false, variants: [], badgeText: "ราคาปกติ (ไม่มีโปร)", badgeClass: "promo-status-normal" };
+        return { status: "NORMAL", isModelScope: false, variants: [], badgeText: "ไม่มีโปรที่ใช้งาน", badgeClass: "promo-status-normal" };
+      }
+
+      // Check for missing or invalid RRP when promotions exist
+      const srpVal = Number(item.srp || 0);
+      if (!Number.isFinite(srpVal) || srpVal <= 0) {
+        return {
+          status: "PRICE_ERROR",
+          isModelScope,
+          variants: matched,
+          badgeText: "ข้อมูลราคาไม่สมบูรณ์",
+          badgeClass: "promo-status-danger",
+          hasPriceError: true
+        };
       }
 
       // Check for active vs expired vs review
@@ -2097,19 +2112,32 @@
       const expiredVariants = matched.filter(v => v.endDate < todayISO);
 
       if (activeVariants.length > 0) {
+        const distinctModes = new Set();
+        activeVariants.forEach(v => {
+          if (v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0) distinctModes.add("NORMAL");
+          if (v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS") distinctModes.add("SF_PLUS");
+          if (v.saleMode === "STUDENT") distinctModes.add("STUDENT");
+          if (v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0) distinctModes.add("TRADE_UP");
+          if (v.saleMode === "BUNDLE" || v.bundleEligible) distinctModes.add("BUNDLE");
+        });
+        if (distinctModes.size === 0) distinctModes.add("NORMAL");
+        const formCount = distinctModes.size;
+        const badgeText = formCount > 1 ? `มีโปร ${formCount} รูปแบบ` : "มีโปรโมชั่น";
+
         return {
           status: "ACTIVE",
           isModelScope,
           variants: activeVariants,
-          badgeText: `มีโปรโมชั่น (${activeVariants.length})`,
-          badgeClass: "promo-status-active"
+          badgeText,
+          badgeClass: "promo-status-active",
+          activeModesCount: formCount
         };
       } else if (reviewVariants.length > 0) {
         return {
           status: "REVIEW",
           isModelScope,
           variants: reviewVariants,
-          badgeText: "ต้องตรวจสอบโปรโมชั่น",
+          badgeText: reviewVariants.length === 1 ? "รอตรวจ 1 รายการ" : "รอตรวจโปรโมชั่น",
           badgeClass: "promo-status-review"
         };
       } else if (expiredVariants.length > 0) {
@@ -2122,8 +2150,9 @@
         };
       }
 
-      return { status: "NORMAL", isModelScope, variants: matched, badgeText: "ราคาปกติ", badgeClass: "promo-status-normal" };
+      return { status: "NORMAL", isModelScope, variants: matched, badgeText: "ไม่มีโปรที่ใช้งาน", badgeClass: "promo-status-normal" };
     }
+
 
     // ==========================================================================
     // RENDER FUNCTIONS
@@ -2193,6 +2222,15 @@
     function resolveCanonicalCategory(item) {
       if (!item) return "OTHER";
 
+      if (item.canonicalCategory) {
+        const norm = normalizeCategory(item.canonicalCategory);
+        if (CATEGORY_ALIASES[norm]) return CATEGORY_ALIASES[norm];
+      }
+      if (item.category && item.category !== 'Other' && item.category !== 'OTHER') {
+        const norm = normalizeCategory(item.category);
+        if (CATEGORY_ALIASES[norm]) return CATEGORY_ALIASES[norm];
+      }
+
       const c1 = String(item.cat1 || item.category1 || item.category || "").trim().toUpperCase();
       const c2 = String(item.cat2 || item.category2 || "").trim().toUpperCase();
       const c3 = String(item.cat3 || item.category3 || "").trim().toUpperCase();
@@ -2208,54 +2246,54 @@
       }
 
       // 2. Smartphone (Cat1 = SMART PHONES, never Buds/Watch/Tablet/Accessory)
-      if (c1 === "SMART PHONES" || c1 === "SMARTPHONES" || c1 === "SMART PHONE" || c1 === "SMART_PHONES" || c1 === "SMART_PHONE") {
+      if (c1 === "SMART PHONES" || c1 === "SMARTPHONES" || c1 === "SMART PHONE" || c1 === "SMART_PHONES" || c1 === "SMART_PHONE" || c1 === "SMARTPHONE") {
         if (!pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X") && !pn.startsWith("EP-") && !pn.startsWith("EF-")) {
           return "SMARTPHONE";
         }
       }
 
-      // 3. Tablet (Cat1 = COMPUTER AND TABLET or SM-X or TAB)
-      if (c1 === "COMPUTER AND TABLET" || c1 === "COMPUTER_AND_TABLET" || c1 === "TABLET" || c1 === "TABLETS" || c1 === "TAB" || pn.startsWith("SM-X")) {
+      // 3. Tablet (Cat1 = COMPUTER AND TABLET or SM-X or F-X or TAB)
+      if (c1 === "COMPUTER AND TABLET" || c1 === "COMPUTER_AND_TABLET" || c1 === "TABLET" || c1 === "TABLETS" || c1 === "TAB" || pn.startsWith("SM-X") || pn.startsWith("F-X")) {
         return "TABLET";
       }
 
-      // 4. Smart Watch (Cat1 = SMART WATCH or Watch P/Ns)
+      // 4. Smart Watch (Cat1 = SMART WATCH or Watch P/Ns or Fit P/Ns)
       if (c1 === "SMART WATCH" || c1 === "SMART_WATCH" || c1 === "SMARTWATCH" || c1 === "WATCH" ||
-          (brand.includes("SAMSUNG") && (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L3") || pn.startsWith("SM-L7")))) {
+          (brand.includes("SAMSUNG") && (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L") || pn.startsWith("SM-R3")))) {
         return "SMARTWATCH";
       }
 
-      // 5. Accessories (Cat1 = MOBILE AND COMPUTER ACCESSORY or Accessory prefixes)
+      // 5. Accessories (Cat1 = MOBILE AND COMPUTER ACCESSORY, Accessory prefixes, or item.productCodeType === 'ACCESSORY')
       if (c1 === "MOBILE AND COMPUTER ACCESSORY" || c1 === "MOBILE_AND_COMPUTER_ACCESSORY" || c1 === "ACCESSORY" || c1 === "ACCESSORIES" || c1 === "ADAPTER" ||
-          pn.startsWith("EP-") || pn.startsWith("EF-") || pn.startsWith("GP-") || pn.startsWith("ET-") || pn.startsWith("EJ-") || pn.startsWith("EE-")) {
+          item.productCodeType === "ACCESSORY" || item.category === "Accessory" ||
+          pn.startsWith("EP-") || pn.startsWith("EF-") || pn.startsWith("GP-") || pn.startsWith("ET-") || pn.startsWith("EJ-") || pn.startsWith("EE-") || pn.startsWith("SSG-")) {
         return "ACCESSORY";
       }
 
       // 6. Premium (Gifts, promotions, premium sets)
-      if (c1.includes("PREMIUM") || c2.includes("PREMIUM") || c2.includes("FREE GIFT") || model.includes("PREMIUM") || model.includes("FREE GIFT") || c1.includes("GIFT") || model.includes("GAABOR") || model.includes("STAINLESS STEEL")) {
+      if (c1.includes("PREMIUM") || c2.includes("PREMIUM") || c2.includes("FREE GIFT") || model.includes("PREMIUM") || model.includes("FREE GIFT") || c1.includes("GIFT") || model.includes("GAABOR") || model.includes("STAINLESS STEEL") || pn.startsWith("PM") || pn.startsWith("PREMIUM") || pn.startsWith("Z-")) {
         return "PREMIUM";
       }
 
       // 7. SIM (Service, carrier packs, insurance)
-      if (c1.includes("SERVICE, INSURANCE AND WARRANTY") || c1.includes("SERVICE,_INSURANCE_AND_WARRANTY") || c1.includes("SIM") || c2.includes("SIM") || c2.includes("CARRIER MOBILE PACKAGE") || model.includes("SIM") || model.startsWith("(AIS)")) {
+      if (c1.includes("SERVICE, INSURANCE AND WARRANTY") || c1.includes("SERVICE,_INSURANCE_AND_WARRANTY") || c1.includes("SIM") || c2.includes("SIM") || c2.includes("CARRIER MOBILE PACKAGE") || model.includes("SIM") || model.startsWith("(AIS)") || pn.startsWith("SIM-") || pn.startsWith("3IN1") || pn.startsWith("PRE2POST") || pn.startsWith("SI87")) {
         return "SIM";
       }
 
       // Fallback identification by model & P/N conventions
       if (pn.startsWith("SM-R4") || pn.startsWith("SM-R5") || pn.startsWith("SM-R6") || model.includes("BUDS")) return "BUDS";
-      if (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L3") || pn.startsWith("SM-L7") || model.includes("WATCH")) return "SMARTWATCH";
-      if (pn.startsWith("SM-X") || model.includes("TAB ") || model.includes("GALAXY TAB")) return "TABLET";
-      if ((pn.startsWith("SM-") || pn.startsWith("F-")) && !pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X")) {
+      if (pn.startsWith("SM-R8") || pn.startsWith("SM-R9") || pn.startsWith("SM-L") || pn.startsWith("SM-R3") || model.includes("WATCH") || model.includes("FIT3")) return "SMARTWATCH";
+      if (pn.startsWith("SM-X") || pn.startsWith("F-X")) return "TABLET";
+      if ((pn.startsWith("SM-") || pn.startsWith("F-A") || pn.startsWith("F-N") || pn.startsWith("F-S")) && !pn.startsWith("SM-R") && !pn.startsWith("SM-L") && !pn.startsWith("SM-X") && !pn.startsWith("EP-") && !pn.startsWith("EF-")) {
         return "SMARTPHONE";
       }
 
-      // If category1 exists from Excel, any item reaching here is definitively OTHER
       if (item.category1 || item.cat1) {
         return "OTHER";
       }
 
       const rawCat = normalizeCategory(item.category);
-      if (CATEGORY_ALIASES[rawCat] && CATEGORY_ALIASES[rawCat] !== "SMARTPHONE") {
+      if (CATEGORY_ALIASES[rawCat]) {
         return CATEGORY_ALIASES[rawCat];
       }
 
@@ -2507,7 +2545,6 @@
             ? `฿${itemPrice.toLocaleString('th-TH')}`
             : 'ยังไม่มีราคา';
           const f2 = Number(item.f2 || 0);
-          const total = Number(item.total !== undefined ? item.total : (item.stock_total || 0));
           const promo = resolvePromotion(item);
           const pnText = item.pn || "ไม่มีรหัส P/N";
           const displayModelName = item.model || item.description || item.name || item.productName || "-";
@@ -2528,7 +2565,6 @@
                   ${item.subCategory ? `<span class="badge-tag-conn tag-subcat">${item.subCategory}</span>` : ''}
                   ${specs.ram || specs.storage ? `<span class="badge-spec-pill">${specs.ram ? specs.ram + ' / ' : ''}${specs.storage}</span>` : ''}
                   ${specs.net ? `<span class="badge-tag-conn ${getConnBadgeClass(specs.net)}">${specs.net}</span>` : ''}
-                  ${item.srp ? `<span style="color: var(--text-muted);">RRP: ฿${Number(item.srp).toLocaleString('th-TH')}</span>` : ''}
                 </div>
               </div>
             </td>
@@ -2549,11 +2585,7 @@
             </td>
             <td style="text-align: right;">
               <span style="font-weight: 600; color: #f8fafc;" data-testid="product-price">
-               ${
-                Number.isFinite(Number(item.price99 || item.srp)) && Number(item.price99 || item.srp) > 0
-                  ? `฿${Number(item.price99 || item.srp).toLocaleString('th-TH')}`
-                  : 'ยังไม่มีราคา'
-                }
+                ${formattedPrice}
               </span>
             </td>
             <td>
@@ -2601,22 +2633,27 @@
             <div class="card-stock-row">
               <div class="card-stock-col">
                 <div class="card-stock-label">ช1 ร้านเรา</div>
-                <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f1}</span>
+                <span class="stock-qty-pill stock-f1 ${f1 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">
+                  ${f1}
+                </span>
               </div>
+
               <div class="card-stock-col">
                 <div class="card-stock-label">ช2 สาขา</div>
-                <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${f2}</span>
+                <span class="stock-qty-pill stock-f2 ${f2 === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">
+                  ${f2}
+                </span>
               </div>
+
               <div class="card-stock-col">
-                <div class="card-stock-label">รวมทั้งหมด</div>
-                <strong class="stock-qty-pill stock-total-badge ${total === 0 ? 'stock-zero' : ''}" style="margin-top: 4px;">${total}</strong>
+                <div class="card-stock-label">ราคาปกติของสินค้า</div>
+                <strong style="margin-top: 4px; color: #f8fafc; font-weight: 700;" data-testid="product-price-card">
+                  ${formattedPrice}
+                </strong>
               </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; pt-2; gap: 8px;">
-              <div style="font-size: 0.82rem; color: var(--text-muted);">
-                ราคาปกติ: <strong style="color: #cbd5e1;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
-              </div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; padding-top: 8px; gap: 8px;">
               <div class="action-button-group">
                 <button class="btn-spec-drawer" onclick="openProductSpecsDrawer('${item.pn || ''}', '${encodeURIComponent(item.model || '')}')" title="ดูข้อมูลสเปกสินค้า">
                   <span>📋 สเปก</span>
@@ -2676,11 +2713,60 @@
       renderCurrentDrawerBody();
     }
 
+    function filterDrawerSpecCategory(cat) {
+      const container = document.getElementById("drawerBody");
+      if (!container) return;
+      const pills = container.querySelectorAll(".spec-pill-btn");
+      pills.forEach(p => {
+        if (p.getAttribute("data-cat") === cat) {
+          p.classList.add("active");
+        } else {
+          p.classList.remove("active");
+        }
+      });
+      const boxes = container.querySelectorAll(".spec-group-box[data-spec-cat]");
+      boxes.forEach(box => {
+        if (cat === "all" || box.getAttribute("data-spec-cat") === cat) {
+          box.style.display = "";
+        } else {
+          box.style.display = "none";
+        }
+      });
+    }
+
     function openDualTabDrawer(targetPn, encodedModel) {
-      const modelTitle = decodeURIComponent(encodedModel);
+      const modelTitle = decodeURIComponent(encodedModel || "");
       currentDrawerItem = rawItems.find(x => (x.pn && targetPn && x.pn === targetPn) || (x.model === modelTitle));
       if (!currentDrawerItem) {
-        currentDrawerItem = { pn: targetPn, model: modelTitle, srp: 0, color: "", f1: 0, f2: 0, total: 0 };
+        const alt = (typeof window !== "undefined" && (window.masterStockData || window.STOCK_DATA))
+          ? (window.masterStockData || window.STOCK_DATA).find(x => (x.pn && targetPn && x.pn === targetPn) || (x.model === modelTitle))
+          : null;
+        let inferredCat = "";
+        const uModel = (modelTitle || "").toUpperCase();
+        if (uModel.includes("GALAXY") || uModel.includes("S2") || uModel.includes("A0") || uModel.includes("A1") || uModel.includes("A2") || uModel.includes("A3") || uModel.includes("A5") || uModel.includes("FOLD") || uModel.includes("FLIP")) {
+          if (!uModel.includes("CASE") && !uModel.includes("COVER") && !uModel.includes("GLASS") && !uModel.includes("FILM") && !uModel.includes("STRAP")) {
+            inferredCat = "SmartPhone";
+          }
+        }
+        currentDrawerItem = alt || { pn: targetPn, model: modelTitle, category: inferredCat, srp: null, color: "", f1: 0, f2: 0, total: 0 };
+      }
+
+      // Check if srp is missing in currentDrawerItem, lookup by pn or model from any rawItems having srp > 0
+      if (!currentDrawerItem.srp || Number(currentDrawerItem.srp) <= 0) {
+        const cleanTargetModel = (modelTitle || "").toLowerCase().replace(/\s+/g, "");
+        const itemWithPrice = rawItems.find(x => {
+          if (!x || Number(x.srp) <= 0) return false;
+          if (targetPn && x.pn === targetPn) return true;
+          if (modelTitle && x.model === modelTitle) return true;
+          const cleanItemModel = (x.model || "").toLowerCase().replace(/\s+/g, "");
+          if (cleanTargetModel && cleanItemModel.includes(cleanTargetModel)) return true;
+          if (cleanTargetModel && cleanTargetModel.includes("s26fe") && cleanItemModel.includes("s26fe")) return true;
+          if (cleanTargetModel && cleanTargetModel.includes("s26ultra") && cleanItemModel.includes("s26ultra")) return true;
+          return false;
+        });
+        if (itemWithPrice && Number(itemWithPrice.srp) > 0) {
+          currentDrawerItem.srp = Number(itemWithPrice.srp);
+        }
       }
 
       const item = currentDrawerItem;
@@ -2709,26 +2795,39 @@
       if (!item || !drawerBody) return;
 
       let f1 = Number(item.f1 || 0);
-      let f2 = Number(item.f2 || 0);
-      let total = Number(item.total || 0);
-      let srp = Number(item.srp || 0);
+      let srp = (item.srp !== null && item.srp !== undefined && Number(item.srp) > 0) ? Number(item.srp) : null;
+      const specs = parseSpecs(item);
+      const resolvedColor = resolveProductColor(item);
+      const colorName = formatColorDisplay(resolvedColor);
+      const colorHex = getColorHex(resolvedColor);
+      const promo = resolvePromotion(item);
 
-      // Summary Strip always on top
+      const displayModelName = item.model || item.description || item.name || "ไม่ระบุรุ่น";
+      const specLine = [specs.ram ? specs.ram : null, specs.storage ? specs.storage : null].filter(Boolean).join(" / ");
+      const specAndColor = [specLine, colorName].filter(Boolean).join(" • ");
+
+      // Summary Strip always on top - focused on F1 stock and Promotion Status
       const commonHeader = `
-        <div class="drawer-summary-strip">
-          <div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">สีของเครื่อง</div>
-            <div class="color-display-cell" style="margin-top: 4px;">
-              <span class="color-swatch-dot" style="background-color: ${getColorHex(item.color)};"></span>
-              <strong>${item.color || 'ไม่ระบุ'}</strong>
+        <div class="drawer-summary-strip" style="flex-direction: column; gap: 8px; align-items: stretch; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+            <div>
+              <h3 style="margin: 0; font-size: 1.15rem; color: #fff; font-weight: 750;">${displayModelName}</h3>
+              <div style="font-size: 0.82rem; color: var(--cyan); margin-top: 3px;">
+                ${specAndColor ? `<span>${specAndColor}</span> • ` : ''}
+                <span class="color-swatch-dot" style="background-color: ${colorHex}; width: 10px; height: 10px; display: inline-block; vertical-align: middle; margin: 0 2px;"></span>
+                <span style="font-family: monospace; color: #94a3b8;">${item.pn ? `Exact P/N: ${item.pn}` : 'รหัส: ไม่ระบุ P/N'}</span>
+              </div>
             </div>
           </div>
-          <div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">สถานะสต็อก</div>
-            <div style="margin-top: 4px; font-size: 0.88rem;">
-              ช1: <strong class="${f1 === 0 ? 'text-coral' : 'text-cyan'}">${f1}</strong> • 
-              ช2: <strong class="${f2 === 0 ? 'text-coral' : 'text-amber'}">${f2}</strong> • 
-              รวม: <strong class="text-emerald">${total}</strong>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.08); font-size: 0.84rem;">
+            <div>
+              <span style="color: var(--text-muted);">สต๊อกร้านเรา ชั้น 1:</span>
+              <strong class="${f1 === 0 ? 'text-coral' : 'text-emerald'}" style="margin-left: 4px; font-size: 0.95rem;">
+                ${f1 > 0 ? `${f1} เครื่อง` : '0 เครื่อง (หมด)'}
+              </strong>
+            </div>
+            <div>
+              <span class="promo-status-badge ${promo.badgeClass}">${promo.badgeText}</span>
             </div>
           </div>
         </div>
@@ -2738,7 +2837,6 @@
         drawerBody.innerHTML = commonHeader + renderDrawerSpecDetails(item);
       } else {
         // PROMO TAB
-        const promo = resolvePromotion(item);
         let promoHtml = commonHeader;
 
         if (promo.isModelScope) {
@@ -2757,38 +2855,64 @@
           promoHtml += `
             <div class="empty-promo-state">
               <div class="empty-promo-icon">🏷️</div>
-              <h4 class="empty-promo-title">ยังไม่มีโปรโมชั่นที่ผ่านการตรวจสอบ</h4>
+              <h4 class="empty-promo-title">ไม่มีโปรโมชั่นที่ใช้งานสำหรับสินค้ารายการนี้</h4>
               <p class="empty-promo-desc">
-                ระบบตรวจสอบความเสี่ยง 95/5 Risk Guard ไม่พบโปรโมชั่นที่ผ่านเกณฑ์หรือแคมเปญอาจสิ้นสุดลงแล้ว สามารถจำหน่ายได้ในราคาปกติ
+                ระบบไม่พบโปรโมชั่นที่ผ่านเกณฑ์หรือแคมเปญอาจสิ้นสุดลงแล้ว สามารถจำหน่ายได้ในราคาปกติ RRP
               </p>
-              <div class="promo-price-card" style="border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
-                <div class="price-row-item">
-                  <span style="color: var(--text-muted);">ราคามาตรฐาน (RRP)</span>
-                  <strong style="font-size: 1.2rem; color: #fff;">฿${srp.toLocaleString('th-TH')}</strong>
+              ${srp ? `
+                <div class="promotion-price-card" style="border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                  <div class="price-row">
+                    <span class="price-row__label">ราคามาตรฐาน (RRP)</span>
+                    <strong class="price-row__value" style="font-size: 1.2rem; color: #fff;">฿${srp.toLocaleString('th-TH')}</strong>
+                  </div>
+                  <div class="price-row price-row--total">
+                    <span class="price-row__label">ราคาสุทธิ (Net Price)</span>
+                    <strong class="price-row__value" style="color: #38bdf8;">฿${srp.toLocaleString('th-TH')}</strong>
+                  </div>
                 </div>
-                <div class="price-row-item net">
-                  <span>ราคาสุทธิ (Net Price)</span>
-                  <span class="net-price-display" style="color: #38bdf8;">฿${srp.toLocaleString('th-TH')}</span>
+              ` : `
+                <div class="price-data-warning">
+                  <strong>ข้อมูลราคาไม่สมบูรณ์</strong>
+                  <p style="margin: 4px 0 0 0; font-size: 0.82rem;">ไม่พบราคามาตรฐาน RRP ของสินค้ารายการนี้ กรุณาตรวจสอบกับผู้จัดการสาขา</p>
                 </div>
-              </div>
+              `}
             </div>
           `;
         } else {
           const modes = [
             { key: "NORMAL", label: "ซื้อปกติ" },
             { key: "SF_PLUS", label: "Samsung Finance+" },
-            { key: "STUDENT", label: "โปร นศ." },
+            { key: "STUDENT", label: "โปรนักศึกษา" },
             { key: "TRADE_UP", label: "Trade Up" },
             { key: "BUNDLE", label: "ซื้อพ่วง" }
           ];
 
+          function hasPromoForMode(modeKey) {
+            if (!promo.variants || promo.variants.length === 0) return false;
+            if (modeKey === "NORMAL") return promo.variants.some(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
+            if (modeKey === "SF_PLUS") return promo.variants.some(v => v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS");
+            if (modeKey === "STUDENT") return promo.variants.some(v => v.saleMode === "STUDENT");
+            if (modeKey === "TRADE_UP") return promo.variants.some(v => v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0);
+            if (modeKey === "BUNDLE") return promo.variants.some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
+            return false;
+          }
+
           promoHtml += `
-            <div class="sale-mode-tabs" id="drawerTabs">
-              ${modes.map((m, idx) => `
-                <button class="sale-mode-tab ${idx === 0 ? 'active' : ''}" onclick="switchDrawerMode('${m.key}', this)">
-                  ${m.label}
-                </button>
-              `).join("")}
+            <div class="sale-mode-tabs promotion-path-tabs" id="drawerTabs" role="tablist" aria-label="รูปแบบโปรโมชั่น">
+              ${modes.map((m, idx) => {
+                const hasP = hasPromoForMode(m.key);
+                return `
+                  <button type="button"
+                          class="sale-mode-tab promotion-path-tab ${idx === 0 ? 'active is-active' : ''} ${!hasP ? 'is-empty' : ''}" 
+                          onclick="switchDrawerMode('${m.key}', this)"
+                          data-mode="${m.key}"
+                          role="tab"
+                          aria-selected="${idx === 0 ? 'true' : 'false'}">
+                    <span class="promotion-path-tab__title">${m.label}</span>
+                    <small class="promotion-path-tab__status">${hasP ? 'มีโปรโมชั่น' : 'ไม่มีโปร'}</small>
+                  </button>
+                `;
+              }).join("")}
             </div>
             <div id="drawerModeContent">
               ${renderDrawerModeDetails(promo.variants, "NORMAL", srp, item)}
@@ -2799,82 +2923,27 @@
       }
     }
 
-    // Spec Details Renderer with Deterministic Product Identity Gate & 100% ERP Coverage
+    // Spec Details Renderer with Official Thai Sources
     function renderDrawerSpecDetails(item) {
-      const spec = (typeof window !== "undefined" && window.resolveProductSpecs) ? window.resolveProductSpecs(item) : null;
-
-      // Level 1: Basic ERP Stock Metadata Box (100% Display Coverage)
-      const catHierarchy = [item.category1, item.category2, item.category3].filter(Boolean).join(" &rarr; ");
-      const erpHtml = `
-        <div class="spec-card-container">
-          <div class="spec-group-box" style="margin-bottom: 12px; border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.02);">
-            <div class="spec-group-title" style="color: #94a3b8;">
-              <span>📦</span>
-              <span>ข้อมูลสินค้าจากระบบสต๊อก (ERP Stock Master)</span>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; font-size: 0.82rem;">
-              <div>
-                <span class="spec-label">รหัสสินค้า (ERP P/N):</span>
-                <strong style="color: #fff; font-family: monospace;">${item.pn || 'ไม่ระบุ'}</strong>
-              </div>
-              <div>
-                <span class="spec-label">แบรนด์สินค้า:</span>
-                <strong style="color: var(--cyan);">${item.brand || (spec && spec.brand) || 'ไม่ระบุ'}</strong>
-              </div>
-              <div>
-                <span class="spec-label">หมวดหมู่สต๊อก:</span>
-                <strong style="color: #cbd5e1;">${item.category || item.canonicalCategory || 'Other'}</strong>
-              </div>
-              <div>
-                <span class="spec-label">ราคามาตรฐาน (SRP):</span>
-                <strong style="color: #38bdf8;">฿${Number(item.srp || 0).toLocaleString('th-TH')}</strong>
-              </div>
-            </div>
-            ${catHierarchy ? `
-              <div style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.06); font-size: 0.76rem; color: var(--text-muted);">
-                ลำดับหมวดหมู่ ERP: <span style="color: #cbd5e1;">${catHierarchy}</span>
-              </div>
-            ` : ''}
-          </div>
-      `;
-
+      if (!window.resolveProductSpecs) {
+        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่พบฐานข้อมูลสเปกสินค้าในระบบ</div>`;
+      }
+      const spec = window.resolveProductSpecs(item);
       if (!spec) {
-        // FAIL CLOSED: SPEC_NOT_VERIFIED Banner (No guess, no fallback to Galaxy A07)
-        return erpHtml + `
-          <div class="empty-promo-state" style="padding: 24px 16px; border: 1px dashed rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.04); border-radius: 12px; text-align: left;">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <span style="font-size: 1.4rem;">⚠️</span>
-              <strong style="font-size: 0.95rem; color: #fbbf24;">ยังไม่มีข้อมูลสเปกที่ตรวจสอบแล้วสำหรับสินค้านี้ (SPEC_NOT_VERIFIED)</strong>
-            </div>
-            <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">
-              ระบบใช้มาตรฐาน <strong>Deterministic Product Identity Gate</strong> เพื่อป้องกันการแสดงข้อมูลผิดพลาดข้ามแบรนด์หรือข้ามหมวดหมู่<br>
-              สินค้าคงคลัง ข้อมูลสี และจำนวนสต๊อกหน้าร้าน (ชั้น 1 / ชั้น 2) ยังคงใช้งานและตรวจสอบยอดขายได้ตามปกติ 100%
-            </p>
-          </div>
-        </div>`;
+        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่มีข้อมูลสเปกสำหรับสินค้านี้</div>`;
       }
 
-      // Level 2: Verified Technical Specs with Evidence Status Header
-      const isPartiallyVerified = spec.verificationStatus === "PARTIALLY_VERIFIED";
-      const statusBadgeClass = isPartiallyVerified ? "warn" : "pass";
-      const statusBadgeText = isPartiallyVerified ? "PARTIALLY_VERIFIED" : (spec.verificationStatus || "VERIFIED");
-      const statusBadgeStyle = isPartiallyVerified 
-        ? "background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4);" 
-        : "";
-
-      let html = erpHtml + `
-          <div class="spec-source-box" style="border-color: ${isPartiallyVerified ? 'rgba(245, 158, 11, 0.4)' : 'rgba(16, 185, 129, 0.4)'}; background: ${isPartiallyVerified ? 'rgba(245, 158, 11, 0.05)' : 'rgba(16, 185, 129, 0.05)'};">
-            <span style="font-size: 1.4rem;">${isPartiallyVerified ? '⚠️' : '🛡️'}</span>
+      let html = `
+        <div class="spec-card-container">
+          <div class="spec-source-box">
+            <span style="font-size: 1.4rem;">🛡️</span>
             <div style="flex: 1;">
-              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</span>
-                <span class="status-badge-gate ${statusBadgeClass}" style="font-size: 0.7rem; padding: 2px 6px; ${statusBadgeStyle}">${statusBadgeText}</span>
-              </div>
-              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 4px;">
+              <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</div>
+              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 3px;">
                 แบรนด์: <strong>${spec.brand || item.brand || 'Samsung'}</strong> • รุ่นผู้ผลิต: <strong>${spec.manufacturerModel || spec.modelGroup || '-'}</strong> • ประเภท: <strong>${spec.productType || item.category || '-'}</strong>
               </div>
               <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
-                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Official Certified Brand Specifications'}</strong>
+                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Samsung Thailand Official (samsung.com/th)'}</strong>
               </div>
               ${spec.sourceUrl ? `
                 <div style="font-size: 0.72rem; margin-top: 2px;">
@@ -2883,26 +2952,15 @@
                   </a>
                 </div>
               ` : ''}
-              ${isPartiallyVerified ? `
-                <div style="margin-top: 6px; padding: 6px 10px; background: rgba(245, 158, 11, 0.08); border-radius: 6px; font-size: 0.73rem; border-left: 2px solid #fbbf24;">
-                  <div style="color: #fbbf24; font-weight: 600;">⚠️ สถานะการตรวจสอบระดับฟิลด์ (Field-Level Verification):</div>
-                  <div style="color: #e2e8f0; margin-top: 2px;">
-                    <span style="color: #34d399;">✓ ข้อมูลที่ยืนยันแล้ว:</span> ${(spec.verifiedFields || []).join(', ') || '5W, IP67, 20h, TWS, สายคล้องในตัว'}
-                  </div>
-                  <div style="color: #cbd5e1; margin-top: 2px;">
-                    <span style="color: #fbbf24;">⏳ ข้อมูลที่ยังไม่ได้ยืนยัน:</span> ${(spec.pendingFields || []).join(', ') || 'Bluetooth Version, การรับประกันในไทย'}
-                  </div>
-                </div>
-              ` : ''}
             </div>
           </div>
       `;
 
-      function renderSpecGroup(icon, title, fields) {
+      function renderSpecGroup(icon, title, fields, catId = "") {
         const validRows = Object.entries(fields).filter(([k, v]) => v !== undefined && v !== null && v !== "");
         if (validRows.length === 0) return "";
         return `
-          <div class="spec-group-box">
+          <div class="spec-group-box"${catId ? ` data-spec-cat="${catId}"` : ''}>
             <div class="spec-group-title">
               <span>${icon}</span>
               <span>${title}</span>
@@ -2917,104 +2975,7 @@
         `;
       }
 
-      // 0. Dedicated Product Type Template (for Product Accessory Master)
-      if (spec.isAccessoryMaster && spec.displayableSpecs && spec.displayableSpecs.length > 0) {
-        const typeLabels = {
-          BLUETOOTH_SPEAKER: "ลำโพงบลูทูธ (Bluetooth Speaker Specifications)",
-          WALL_CHARGER: "อะแดปเตอร์ชาร์จเร็ว (Wall Charger Specifications)",
-          DATA_CABLE: "สายชาร์จและรับส่งข้อมูล (Data & Charging Cable)",
-          PHONE_CASE: "เคสสมาร์ตโฟน (Phone Case Specifications)",
-          SCREEN_PROTECTOR: "ฟิล์มและกระจกกันรอย (Screen Protector Specifications)",
-          WATCH_BAND: "สายนาฬิกา (Watch Band Specifications)",
-          POWER_BANK: "แบตเตอรี่สำรอง (Power Bank Specifications)",
-          PREMIUM_GIFT: "ของแถมพรีเมียม (Premium Gift Specifications)",
-          HOME_APPLIANCE: "เครื่องใช้ไฟฟ้า (Home Appliance Specifications)",
-          SOUNDBAR: "เครื่องเสียงและซาวด์บาร์ (Soundbar Specifications)"
-        };
 
-        const fieldLabels = {
-          applianceType: "ประเภทเครื่องใช้ไฟฟ้า",
-          capacity: "ความจุ / ขนาดบรรจุ",
-          audioChannels: "ระบบเสียง / แชนแนล (Audio Channels)",
-          outputPower: "กำลังขับเสียง (Output Power)",
-          bluetoothSupport: "การเชื่อมต่อ Bluetooth",
-          bluetoothVersion: "เวอร์ชัน Bluetooth",
-          playTime: "ระยะเวลาใช้งานแบตเตอรี่ (Playtime)",
-          ipRating: "มาตรฐานป้องกันน้ำและฝุ่น (IP Rating)",
-          floating: "การลอยน้ำ",
-          tws: "รองรับ True Wireless Stereo (TWS)",
-          builtInStrap: "สายคล้องในตัว",
-          chargingPort: "พอร์ตสำหรับชาร์จไฟ",
-          dimensions: "ขนาดมิติ",
-          weight: "น้ำหนัก",
-          maximumOutputPower: "กำลังไฟสูงสุด (Max Output Power)",
-          chargerType: "ประเภทหัวชาร์จ (Charger Type)",
-          cableIncluded: "สายชาร์จในกล่อง",
-          outputPorts: "ช่องจ่ายไฟ (Output Ports)",
-          usbPowerDelivery: "มาตรฐาน USB-PD",
-          pps: "มาตรฐาน Programmable Power Supply (PPS)",
-          inputVoltage: "แรงดันไฟขาเข้า (Input Voltage)",
-          outputProfiles: "โพรไฟล์การจ่ายไฟ",
-          connectorA: "หัวเชื่อมต่อด้านที่ 1 (Connector A)",
-          connectorB: "หัวเชื่อมต่อด้านที่ 2 (Connector B)",
-          cableType: "ประเภทสาย (Cable Type)",
-          maximumPower: "กำลังไฟสูงสุดที่รองรับ (Max Wattage)",
-          maximumCurrent: "กระแสไฟสูงสุด (Max Current)",
-          dataTransferSpeed: "ความเร็วรับส่งข้อมูล (Transfer Speed)",
-          length: "ความยาวสาย (Cable Length)",
-          packageQuantity: "จำนวนเส้นต่อแพ็ก",
-          material: "วัสดุที่ใช้ผลิต",
-          eMarkerChip: "ชิป E-Marker ควบคุมกระแสไฟ",
-          videoOutput: "รองรับการส่งสัญญาณภาพ (DisplayPort Alt Mode)",
-          compatibleDevices: "อุปกรณ์ที่รองรับการใช้งาน",
-          compatibleModels: "รุ่นสมาร์ตโฟนที่รองรับ",
-          compatibleSeries: "ซีรีส์ที่รองรับ",
-          caseType: "ประเภทของเคส",
-          wirelessChargingCompatible: "รองรับการชาร์จไร้สาย",
-          magneticCompatible: "รองรับอุปกรณ์แม่เหล็ก / Magnetic",
-          standIncluded: "ขาตั้งในตัว",
-          protectorType: "ประเภทของกระจก/ฟิล์ม",
-          hardness: "ระดับความแข็ง (Hardness Rating)",
-          thickness: "ความหนา",
-          antiFingerprint: "การเคลือบสารลดรอยนิ้วมือ",
-          antiReflection: "การลดแสงสะท้อน",
-          privacyProtection: "ระบบป้องกันการมองเห็นด้านข้าง (Privacy)",
-          installationKitIncluded: "มีชุดช่วยติดตั้งในกล่อง",
-          bandStyle: "สไตล์ของสาย",
-          caseSizeCompatibility: "ขนาดตัวเรือนที่รองรับ",
-          wristSize: "ขนาดข้อมือที่รองรับ",
-          claspType: "ประเภทตัวล็อก",
-          waterResistance: "คุณสมบัติกันน้ำ",
-          accessoryType: "ประเภทของชำร่วย/อุปกรณ์",
-          color: "สี",
-          batteryCapacity: "ความจุแบตเตอรี่",
-          inputPower: "กำลังไฟขาเข้า",
-          ports: "พอร์ตเชื่อมต่อ",
-          wirelessCharging: "การชาร์จไร้สาย",
-          magneticCharging: "การชาร์จแบบแม่เหล็ก",
-          promotionConditions: "เงื่อนไขการรับของแถม"
-        };
-
-        const title = typeLabels[spec.productType] || "คุณสมบัติสินค้าตามประเภท (Product Specifications)";
-        const specMap = {};
-        spec.displayableSpecs.forEach(f => {
-          const label = fieldLabels[f.fieldKey] || f.fieldKey;
-          const val = f.displayValue || (f.value !== null ? String(f.value) : "ยังไม่ได้ยืนยัน");
-          let statusTag = `<span style="color: #fbbf24; font-size: 0.72rem; margin-left: 6px;">[ยังไม่ยืนยัน]</span>`;
-          if (f.status === "VERIFIED") {
-            statusTag = `<span style="color: #34d399; font-size: 0.72rem; margin-left: 6px;">[ผู้ผลิตยืนยัน]</span>`;
-          } else if (f.status === "VERIFIED_FROM_ERP") {
-            statusTag = `<span style="color: #38bdf8; font-size: 0.72rem; margin-left: 6px;">[ERP ระบุ]</span>`;
-          } else if (f.status === "SUPPORTED_BY_OFFICIAL_MARKETPLACE") {
-            statusTag = `<span style="color: #60a5fa; font-size: 0.72rem; margin-left: 6px;">[ร้านทางการ Shopee Mall]</span>`;
-          } else if (f.status === "MARKETPLACE_SUGGESTED_REVIEW_REQUIRED") {
-            statusTag = `<span style="color: #f59e0b; font-size: 0.72rem; margin-left: 6px;">[รอตรวจ Marketplace]</span>`;
-          }
-          specMap[label] = `${val} ${statusTag}`;
-        });
-
-        html += renderSpecGroup("⚙️", title, specMap);
-      }
 
       // 1. Display
       if (spec.display) {
@@ -3025,7 +2986,7 @@
           "อัตรารีเฟรช": spec.display.refreshRate,
           "ความสว่างสูงสุด": spec.display.peakBrightness,
           "กระจกกันรอย": spec.display.glassProtection
-        });
+        }, "display");
       }
 
       // 2. Performance & AI
@@ -3035,7 +2996,7 @@
           "แกนประมวลผล (CPU)": spec.performance.cpuCores,
           "ชิปกราฟิก (GPU)": spec.performance.gpu,
           "ระบบปัญญาประดิษฐ์": spec.performance.aiEngine
-        });
+        }, "performance");
       }
 
       // 3. Memory & Storage
@@ -3044,7 +3005,7 @@
           "หน่วยความจำ (RAM)": spec.memory.ram,
           "พื้นที่จัดเก็บ (ROM)": spec.memory.storage,
           "ช่องใส่ MicroSD": spec.memory.expandableStorage
-        });
+        }, "memory");
       }
 
       // 4. Camera
@@ -3053,7 +3014,7 @@
           "กล้องหลัง (Rear)": spec.camera.rearCamera,
           "กล้องหน้า (Selfie)": spec.camera.frontCamera,
           "ความละเอียดวิดีโอ": spec.camera.videoRecording
-        });
+        }, "camera");
       }
 
       // 5. Battery & Power
@@ -3063,14 +3024,14 @@
           "การชาร์จไวมีสาย": spec.battery.chargingSpeed,
           "การชาร์จไร้สาย": spec.battery.wirelessCharging,
           "แชร์พลังงานไร้สาย": spec.battery.reverseCharging
-        });
+        }, "battery");
       }
 
       // 5.1 Battery Usage Hours & Endurance (ระยะเวลาการใช้งานแบตเตอรี่อย่างละเอียด พร้อมแหล่งอ้างอิงทางการ)
       const bh = spec.batteryHours || (spec.battery && spec.battery.usageHours);
       if (bh) {
         html += `
-          <div class="spec-group-box" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+          <div class="spec-group-box" data-spec-cat="battery" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
             <div class="spec-group-title" style="color: #34d399;">
               <span>⏱️</span>
               <span>ระยะเวลาการใช้งานแบตเตอรี่ (Battery Usage Hours)</span>
@@ -3153,7 +3114,7 @@
           "วัสดุตัวเครื่อง": spec.connectivityAndBuild.frameMaterial,
           "ขนาดตัวเครื่อง": spec.connectivityAndBuild.dimensions,
           "น้ำหนัก": spec.connectivityAndBuild.weight
-        });
+        }, "connectivity");
       }
 
       // 7. Audio (Buds)
@@ -3165,7 +3126,7 @@
           "คุณภาพเสียง": spec.audioSpecs.hiResAudio,
           "อายุการใช้งานแบตเตอรี่": spec.audioSpecs.batteryLife,
           "มาตรฐานกันน้ำ": spec.audioSpecs.waterResistance
-        });
+        }, "accessory");
       }
 
       // 8. Sensors (Watch)
@@ -3174,13 +3135,13 @@
           "เซนเซอร์สุขภาพ": spec.sensorSpecs.sensors,
           "ระบบระบุตำแหน่ง GPS": spec.sensorSpecs.gps,
           "ความทนทานทางทหาร": spec.sensorSpecs.militaryStd
-        });
+        }, "accessory");
       }
 
       // 9. Chargers / Adapters (ข้อมูลหัวชาร์จ & การจ่ายไฟละเอียด)
       if (spec.powerSpecs) {
         html += `
-          <div class="spec-group-box" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05);">
+          <div class="spec-group-box" data-spec-cat="accessory" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05);">
             <div class="spec-group-title" style="color: #fbbf24;">
               <span>🔌</span>
               <span>ระบบจ่ายไฟ & กำลังวัตต์สูงสุด (Power Output Specs)</span>
@@ -3231,7 +3192,7 @@
         const batteryIcon = isNoBattery ? "⚡" : "🔋";
 
         html += `
-          <div class="spec-group-box" style="border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.04);">
+          <div class="spec-group-box" data-spec-cat="accessory" style="border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.04);">
             <div class="spec-group-title" style="color: #38bdf8;">
               <span>📱</span>
               <span>รุ่นที่รองรับ (Compatibility) & สถานะแบตเตอรี่</span>
@@ -3272,13 +3233,13 @@
           "การป้องกันตัวเครื่อง": spec.caseSpecs.protection,
           "ฟีเจอร์พิเศษ": spec.caseSpecs.specialFeatures,
           "วัสดุที่ใช้ผลิต": spec.caseSpecs.material
-        });
+        }, "accessory");
       }
 
       // 11. Films & Screen Protectors
       if (spec.filmSpecs) {
         html += `
-          <div class="spec-group-box" style="border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.04);">
+          <div class="spec-group-box" data-spec-cat="accessory" style="border-color: rgba(168, 85, 247, 0.35); background: rgba(168, 85, 247, 0.04);">
             <div class="spec-group-title" style="color: #c084fc;">
               <span>🛡️</span>
               <span>รุ่นอุปกรณ์ที่รองรับ & คุณสมบัติฟิล์ม</span>
@@ -3301,7 +3262,7 @@
           "ความคมชัดและการแสดงผล": spec.filmSpecs.clarity,
           "การตัดขอบกระจก": spec.filmSpecs.edgeDesign,
           "การรับประกันฟิล์ม": spec.filmSpecs.warranty
-        });
+        }, "accessory");
       }
 
       // 12. SmartTag
@@ -3314,13 +3275,13 @@
           "มาตรฐานกันน้ำกันฝุ่น": spec.tagSpecs.waterResistance,
           "ลำโพงส่งเสียง": spec.tagSpecs.speaker,
           "โหมดสูญหาย NFC": spec.tagSpecs.lostMode
-        });
+        }, "accessory");
       }
 
       // 13. Bluetooth Speakers (Soundcore / Anker, etc.)
       if (spec.speakerSpecs) {
         html += `
-          <div class="spec-group-box" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);">
+          <div class="spec-group-box" data-spec-cat="accessory" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);">
             <div class="spec-group-title" style="color: #38bdf8;">
               <span>🔊</span>
               <span>คุณสมบัติลำโพง & พลังเสียง (Portable Speaker Specs)</span>
@@ -3395,8 +3356,9 @@
 
       return html;
     }
+    window.renderDrawerSpecDetails = renderDrawerSpecDetails;
 
-    let currentDrawerScenario = "NORMAL"; // "NORMAL" or "TRADE_UP"
+    let currentDrawerScenario = "NORMAL";
     let currentDrawerMode = "NORMAL";
 
     function setDrawerScenario(scenario) {
@@ -3417,7 +3379,34 @@
       const item = currentItem || currentDrawerItem || {};
       const modelName = String(item.model || "").trim();
       const capacity = String(item.capacity || "").trim();
-      const rrp = Number(item.srp || srp || 0);
+      const rrp = (item.srp !== null && item.srp !== undefined && Number(item.srp) > 0)
+        ? Number(item.srp)
+        : (srp && Number(srp) > 0 ? Number(srp) : null);
+
+      // Helper for price warning (Fail-closed price guard)
+      function renderPriceDataWarning(details) {
+        return `
+          <div class="price-data-warning">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="font-size: 1.4rem;">⚠️</span>
+              <strong style="font-size: 1rem; color: #fbbf24;">ข้อมูลราคาไม่สมบูรณ์</strong>
+            </div>
+            <div style="font-size: 0.86rem; line-height: 1.6; color: #fef08a; margin: 8px 0;">
+              <div>ราคาปกติ (RRP): <strong style="color: #f87171;">ไม่พบข้อมูลราคา</strong></div>
+              <div>ราคาที่ลูกค้าชำระ: <strong style="color: #f87171;">คำนวณไม่ได้</strong></div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">${details || 'ไม่พบราคา RRP ที่ถูกต้องในระบบสต็อกหรือไฟล์โปรโมชั่น'}</div>
+            </div>
+            <div style="font-size: 0.8rem; color: #fca5a5; background: rgba(239, 68, 68, 0.15); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ef4444;">
+              ⛔ <strong>ไม่อนุญาตให้นำราคานี้ไปเสนอขาย:</strong> กรุณาตรวจสอบราคาปกติกับผู้จัดการสาขาก่อนเปิดบิล
+            </div>
+          </div>
+        `;
+      }
+
+      // If RRP is missing or <= 0, fail closed
+      if (!Number.isFinite(rrp) || rrp <= 0) {
+        return renderPriceDataWarning("สินค้ารายการนี้ยังไม่มีราคาขายมาตรฐาน (RRP)");
+      }
 
       // Model-specific specialization detectors
       const isS25Fe = modelName.includes("S25 FE") || modelName.includes("S25FE");
@@ -3425,358 +3414,606 @@
       const isS26Ultra = modelName.includes("S26") && (modelName.includes("Ultra") || modelName.includes("ULTRA"));
       const isS26Ultra1TB = isS26Ultra && (capacity.includes("1TB") || modelName.includes("1TB"));
 
-      // -------------------------------------------------------------
-      // 1. STUDENT PROMOTION MODE
-      // -------------------------------------------------------------
+      // Technical details snippet helper with explicit Data Provenance Badge
+      function renderTechDetails(modeLabel) {
+        const isLiveCloud = (typeof window !== "undefined" && window.ACTIVE_PROMOTION_CAMPAIGN_SOURCE === "CLOUD_LIVE");
+        const sourceBadgeText = isLiveCloud ? "Active Cloud Campaign" : "ข้อมูลทดสอบ (ห้ามใช้เสนอขาย)";
+        const sourceBadgeClass = isLiveCloud ? "source-live" : "source-test";
+        const sourceBadgeColor = isLiveCloud ? "#10b981" : "#f59e0b";
+        const sourceBadgeBg = isLiveCloud ? "rgba(16, 185, 129, 0.12)" : "rgba(245, 158, 11, 0.12)";
+        const sourceBadgeBorder = isLiveCloud ? "rgba(16, 185, 129, 0.35)" : "rgba(245, 158, 11, 0.35)";
+
+        return `
+          <div class="promo-source-provenance-bar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 7px 12px; background: ${sourceBadgeBg}; border: 1px dashed ${sourceBadgeBorder}; border-radius: 8px; font-size: 0.76rem;">
+            <span style="color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+              <span>🏷️</span>
+              <span>แหล่งข้อมูลโปรโมชั่น:</span>
+            </span>
+            <strong style="color: ${sourceBadgeColor}; font-weight: 700;">${sourceBadgeText}</strong>
+          </div>
+
+          <details class="promo-technical-details" style="margin-top: 10px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px; background: rgba(255,255,255,0.01);">
+            <summary style="cursor: pointer; font-size: 0.8rem; color: #94a3b8; font-weight: 600; outline: none;">
+              ▸ ดูรายละเอียดโปรโมชั่นและหลักฐานแคมเปญ
+            </summary>
+            <div style="margin-top: 10px; font-size: 0.76rem; line-height: 1.6; color: #cbd5e1; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 8px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px;">
+                <div><span style="color: var(--text-muted);">Exact P/N:</span> <strong style="font-family: monospace; color: #fff;">${item.pn || 'Model Scope'}</strong></div>
+                <div><span style="color: var(--text-muted);">หมวดการขาย:</span> <strong style="color: var(--cyan);">${modeLabel}</strong></div>
+                <div><span style="color: var(--text-muted);">ช่วงเวลาโปรโมชั่น:</span> <strong style="color: #fff;">7 - 13 กันยายน 2569</strong></div>
+                <div><span style="color: var(--text-muted);">แหล่งอ้างอิง:</span> <strong style="color: ${sourceBadgeColor};">${isLiveCloud ? 'Active Cloud Campaign' : 'Static Fixture (Approved Pilot)'}</strong></div>
+              </div>
+              ${!isLiveCloud ? `
+                <div style="margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.04); font-size: 0.72rem; color: #f59e0b;">
+                  ⚠️ <em>ข้อมูลนี้เพื่อการตรวจรับระบบ (Internal Pilot) หน้าร้านจริงยังคง HOLD จนกว่าจะตรวจสอบตัวเลขครบถ้วน</em>
+                </div>
+              ` : ''}
+            </div>
+          </details>
+        `;
+      }
+
+      // =============================================================
+      // 1. ซื้อปกติ (NORMAL)
+      // =============================================================
+      if (selectedMode === "NORMAL") {
+        let stdDiscount = 0;
+        let stdCoupon = "คูปอง 01";
+
+        if (isS25Fe) {
+          stdCoupon = "คูปอง 02";
+          stdDiscount = (capacity.includes("256") || modelName.includes("256")) ? 6000 : 5000;
+        } else if (isA57) {
+          stdCoupon = "คูปอง 01";
+          stdDiscount = 2000;
+        } else {
+          const stdMatch = variants.find(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
+          if (stdMatch) {
+            stdDiscount = Number(stdMatch.standardDiscount || stdMatch.discountValue || stdMatch.discount || 0);
+            if (stdMatch.couponCode) stdCoupon = stdMatch.couponCode;
+          } else if (isS26Ultra) {
+            stdDiscount = 5000;
+            stdCoupon = "คูปอง 01";
+          }
+        }
+
+        const netPrice = rrp - stdDiscount;
+        if (netPrice < 0) return renderPriceDataWarning("ส่วนลดมากกว่าราคาปกติ");
+
+        return `
+          <section class="promotion-price-card">
+            <header class="promotion-card-header">
+              <div>
+                <span class="price-tier-badge tier-badge-std">ซื้อปกติ</span>
+              </div>
+              ${stdDiscount > 0 ? `<span class="badge-pn-pill">${stdCoupon}</span>` : ''}
+            </header>
+
+            <div class="price-row">
+              <span class="price-row__label">ราคาปกติ</span>
+              <strong class="price-row__value" style="${stdDiscount > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+                ฿${rrp.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--discount">
+              <span class="price-row__label">${stdDiscount > 0 ? `ส่วนลด ${stdCoupon}` : 'ส่วนลด'}</span>
+              <strong class="price-row__value" style="color: var(--cyan);">
+                ${stdDiscount > 0 ? `-฿${stdDiscount.toLocaleString('th-TH')}` : '-'}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--total">
+              <span class="price-row__label">ราคาที่ลูกค้าชำระ</span>
+              <strong class="price-row__value">
+                ฿${netPrice.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="promotion-conditions">
+              <h4>เงื่อนไข</h4>
+              <ul>
+                <li>ซื้อเครื่องใหม่รุ่นที่ร่วมรายการ</li>
+                <li>ใช้สิทธิ์ภายในช่วงโปรโมชั่น</li>
+                <li>ชำระตามช่องทางที่กำหนด (เงินสด, โอนชำระ, รูดบัตรเครดิตเต็มจำนวน)</li>
+              </ul>
+            </div>
+
+            ${renderTechDetails("ซื้อปกติ")}
+          </section>
+        `;
+      }
+
+      // =============================================================
+      // 2. SAMSUNG FINANCE+ (SF_PLUS) - MUTUALLY EXCLUSIVE 2 CARDS
+      // =============================================================
+      if (selectedMode === "SF_PLUS") {
+        let downPaymentText = "ไม่เกิน 10%";
+        let sfDisc = 0;
+        let nonSfDisc = 0;
+        let nonSfCoupon = "คูปอง 01";
+
+        if (isS25Fe) {
+          downPaymentText = "ไม่เกิน 10%";
+          sfDisc = 3000;
+          nonSfCoupon = "คูปอง 02";
+          nonSfDisc = (capacity.includes("256") || modelName.includes("256")) ? 6000 : 5000;
+        } else if (isA57) {
+          downPaymentText = "ไม่เกิน 5%";
+          sfDisc = 0; // zero product discount on SF+
+          nonSfCoupon = "คูปอง 01";
+          nonSfDisc = 2000;
+        } else {
+          const sfMatch = variants.find(v => v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS");
+          if (sfMatch) {
+            sfDisc = Number(sfMatch.discountValue || sfMatch.discount || 0);
+            if (sfMatch.downPaymentPercent) downPaymentText = `ไม่เกิน ${sfMatch.downPaymentPercent}%`;
+          }
+          const nonSfMatch = variants.find(v => v.saleMode === "NON_SF_PLUS" || v.paymentCondition === "NON_SF_PLUS" || v.saleMode === "NORMAL");
+          if (nonSfMatch) {
+            nonSfDisc = Number(nonSfMatch.standardDiscount || nonSfMatch.discountValue || nonSfMatch.discount || 0);
+            if (nonSfMatch.couponCode) nonSfCoupon = nonSfMatch.couponCode;
+          }
+        }
+
+        const sfCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: sfDisc })
+          : { valid: rrp > 0 && sfDisc >= 0 && sfDisc <= rrp, netPrice: rrp - sfDisc };
+        const nonSfCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: nonSfDisc })
+          : { valid: rrp > 0 && nonSfDisc >= 0 && nonSfDisc <= rrp, netPrice: rrp - nonSfDisc };
+
+        if (!sfCalc.valid || !nonSfCalc.valid) {
+          return renderPriceDataWarning("ส่วนลดเกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
+        }
+
+        const sfNet = sfCalc.netPrice;
+        const nonSfNet = nonSfCalc.netPrice;
+
+        return `
+          <!-- Card 1: ร่วม Samsung Finance+ -->
+          <section class="promotion-price-card" style="border-color: rgba(6, 182, 212, 0.4); margin-bottom: 14px;">
+            <header class="promotion-card-header">
+              <div>
+                <span class="price-tier-badge tier-badge-std">💳 ร่วม Samsung Finance+</span>
+              </div>
+              <span class="badge-pn-pill" style="color: var(--cyan); border-color: rgba(6,182,212,0.4);">ผ่อนสินเชื่อ</span>
+            </header>
+
+            <div class="price-row">
+              <span class="price-row__label">ราคาปกติ (RRP)</span>
+              <strong class="price-row__value" style="${sfDisc > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+                ฿${rrp.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--discount">
+              <span class="price-row__label">ส่วนลดราคาสินค้า</span>
+              <strong class="price-row__value" style="color: var(--cyan);">
+                ${sfDisc > 0 ? `-฿${sfDisc.toLocaleString('th-TH')}` : '-'}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--total">
+              <div>
+                <div class="price-row__label" style="font-size: 0.92rem; font-weight: 700;">ราคาสินค้าตามสัญญา</div>
+                <div style="font-size: 0.74rem; color: var(--text-muted);">ราคาหลังหักส่วนลดสินค้า (ยอดเต็มของเครื่อง)</div>
+              </div>
+              <strong class="price-row__value" style="color: #38bdf8;">
+                ฿${sfNet.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <!-- Down Payment & Financing Breakdown -->
+            <div style="background: rgba(6,182,212,0.08); border: 1px dashed rgba(6,182,212,0.3); border-radius: 8px; padding: 10px 12px; margin: 10px 0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 4px;">
+                <span style="color: #94a3b8;">เกณฑ์เงินดาวน์ที่จุดขาย:</span>
+                <strong style="color: var(--cyan);">${downPaymentText}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #cbd5e1;">
+                <span>โครงสร้างการชำระ:</span>
+                <span style="font-size: 0.78rem; color: #a5f3fc;">เงินดาวน์ + ยอดผ่อนชำระรายงวด</span>
+              </div>
+              <div style="font-size: 0.73rem; color: #94a3b8; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 4px;">
+                ℹ️ <em>เงินดาวน์เป็นเงินก้อนแรกที่ลูกค้าชำระตามผลอนุมัติ (ไม่ใช่ส่วนลด) ยอดจัดคงเหลือนำไปหารจำนวนงวด</em>
+              </div>
+            </div>
+
+            <div class="promotion-conditions">
+              <h4>เงื่อนไขการสมัครและผ่อนชำระ</h4>
+              <ul>
+                <li>สมัครและผ่านการอนุมัติสินเชื่อ Samsung Finance+ ที่จุดขายหน้าร้าน</li>
+                <li>เงินดาวน์อ้างอิงตามผลประเมินเครดิตของลูกค้า (ห้ามนำเงินดาวน์ไปแสดงเป็นราคาเครื่องสุทธิ)</li>
+                <li>ยอดคงเหลือหลังหักเงินดาวน์นำไปคำนวณค่างวดตามระยะเวลาสัญญาที่เลือก</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Card 2: ไม่ร่วม Samsung Finance+ -->
+          <section class="promotion-price-card" style="border-color: rgba(148, 163, 184, 0.3); margin-bottom: 14px;">
+            <header class="promotion-card-header">
+              <div>
+                <span class="price-tier-badge" style="background: rgba(148,163,184,0.15); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.3);">
+                  🛒 ไม่ร่วม Samsung Finance+
+                </span>
+              </div>
+              ${nonSfDisc > 0 ? `<span class="badge-pn-pill">${nonSfCoupon}</span>` : ''}
+            </header>
+
+            <div class="price-row">
+              <span class="price-row__label">ราคาปกติ</span>
+              <strong class="price-row__value" style="${nonSfDisc > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+                ฿${rrp.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--discount">
+              <span class="price-row__label">ส่วนลด ${nonSfCoupon}</span>
+              <strong class="price-row__value">
+                ${nonSfDisc > 0 ? `-฿${nonSfDisc.toLocaleString('th-TH')}` : '-'}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--total">
+              <span class="price-row__label">ราคาที่ลูกค้าชำระ</span>
+              <strong class="price-row__value" style="color: #fff;">
+                ฿${nonSfNet.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="promotion-conditions">
+              <h4>เงื่อนไข</h4>
+              <ul>
+                <li>ไม่ได้ชำระผ่านช่องทาง Samsung Finance+ (ชำระด้วยเงินสด, โอน, หรือบัตรเครดิต)</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Mutually Exclusive Warning -->
+          <div class="promo-info-callout promo-info-warning" style="margin-top: 10px;">
+            <div>⚠️ <strong>เงื่อนไขสำคัญ (MUTUALLY EXCLUSIVE):</strong></div>
+            <div style="margin-top: 4px; font-size: 0.8rem; line-height: 1.5;">
+              เลือกได้เพียงหนึ่งเส้นทาง ไม่สามารถใช้ “ร่วม Finance+” และ “ไม่ร่วม Finance+” พร้อมกันในบิลเดียว
+            </div>
+          </div>
+
+          ${renderTechDetails("Samsung Finance+")}
+        `;
+      }
+
+      // =============================================================
+      // 3. โปรนักศึกษา (STUDENT)
+      // =============================================================
       if (selectedMode === "STUDENT") {
         if (isS26Ultra1TB) {
           return `
-            <div class="promo-price-card" style="border-color: rgba(245, 158, 11, 0.35);">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <section class="promotion-price-card" style="border-color: rgba(245, 158, 11, 0.35);">
+              <header class="promotion-card-header">
                 <span class="price-tier-badge tier-badge-exclusive">🎓 สิทธิ์นักเรียน/นักศึกษา</span>
                 <span class="badge-pn-pill" style="border-color: rgba(245,158,11,0.5); color: #fbbf24;">ไม่ร่วมรายการ</span>
+              </header>
+              <div class="price-row">
+                <span class="price-row__label">ราคาปกติ (RRP)</span>
+                <strong class="price-row__value">฿${rrp.toLocaleString('th-TH')}</strong>
               </div>
-              <div class="price-row-item">
-                <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
-                <strong style="color: #fff;">฿${rrp.toLocaleString('th-TH')}</strong>
+              <div class="price-row price-row--total">
+                <span class="price-row__label">ราคาสุทธิ</span>
+                <strong class="price-row__value" style="color: #fff;">฿${rrp.toLocaleString('th-TH')}</strong>
               </div>
-              <div class="price-row-item net">
-                <span>ราคาสุทธิ</span>
-                <span class="net-price-display" style="color: #fff;">฿${rrp.toLocaleString('th-TH')}</span>
+              <div class="promo-info-callout promo-info-warning" style="margin-top: 14px;">
+                ⚠️ <strong>ไม่เข้าร่วมโปรโมชั่นนักเรียน/นักศึกษา:</strong> Galaxy S26 Ultra 1TB ไม่ร่วมโปรโมชั่นส่วนลดนักเรียน/นักศึกษาตามตารางแคมเปญทางการ กรุณาเลือกเส้นทางโปรโมชั่นปกติหรือ Trade Up
               </div>
-            </div>
-            <div class="promo-info-callout promo-info-warning">
-              ⚠️ <strong>ไม่เข้าร่วมโปรโมชั่นนักเรียน/นักศึกษา:</strong> Galaxy S26 Ultra 1TB ไม่ร่วมโปรโมชั่นส่วนลดนักเรียน/นักศึกษาตามตารางแคมเปญทางการ กรุณาเลือกเส้นทางโปรโมชั่นปกติหรือ Trade Up
-            </div>
+            </section>
           `;
         }
 
         const studentMatch = variants.find(v => v.saleMode === "STUDENT");
-        const discountAmount = studentMatch ? Number(studentMatch.discountValue || studentMatch.studentDiscount || Math.round(rrp * 0.15)) : Math.round(rrp * 0.15);
-        const netPrice = rrp - discountAmount;
+        const discountAmount = studentMatch
+          ? Number(studentMatch.discountValue || studentMatch.studentDiscount || Math.round(rrp * 0.15))
+          : Math.round(rrp * 0.15);
+
+        const studentCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: discountAmount })
+          : { valid: rrp > 0 && discountAmount >= 0 && discountAmount <= rrp, netPrice: rrp - discountAmount };
+
+        if (!studentCalc.valid) {
+          return renderPriceDataWarning("ส่วนลดนักศึกษาเกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
+        }
+
+        const netPrice = studentCalc.netPrice;
 
         return `
-          <div class="promo-price-card" style="border-color: rgba(168, 85, 247, 0.4); background: linear-gradient(145deg, rgba(168, 85, 247, 0.08), rgba(15, 23, 42, 0.9));">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-              <span class="price-tier-badge tier-badge-exclusive">🎓 โปรโมชั่นนักเรียน/นักศึกษา</span>
-              <span class="badge-pn-pill" style="font-size: 0.82rem; color: #c084fc; border-color: rgba(168, 85, 247, 0.5);">Studentcrd</span>
-            </div>
-
-            <div class="price-row-item">
-              <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
-              <span style="text-decoration: line-through; color: var(--text-muted);">฿${rrp.toLocaleString('th-TH')}</span>
-            </div>
-            <div class="price-row-item">
-              <span style="color: #c084fc;">ส่วนลดนักเรียน/นักศึกษา 15%</span>
-              <strong style="color: #c084fc; font-size: 1.05rem;">-฿${discountAmount.toLocaleString('th-TH')}</strong>
-            </div>
-            <div class="price-row-item net">
-              <span>ราคาสุทธิ (Student Net)</span>
-              <span class="net-price-display" style="color: #c084fc;">฿${netPrice.toLocaleString('th-TH')}</span>
-            </div>
-          </div>
-
-          <div class="promo-info-callout promo-info-notice" style="border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.05); color: #e9d5ff;">
-            <div>🔒 <strong>นโยบายสิทธิพิเศษเฉพาะตัว (Stacking Policy: EXCLUSIVE):</strong></div>
-            <div style="margin-top: 4px; font-size: 0.8rem; line-height: 1.5;">
-              • ต้องแสดงบัตรนักเรียน/นักศึกษาหรือเอกสารยืนยันสิทธิ์ตามเกณฑ์<br>
-              • <strong>ห้ามใช้ร่วมกับคูปอง 01</strong> หรือส่วนลดโปรโมชั่นปกติ ฿5,000 ต่อที่ 1<br>
-              • <strong>ห้ามใช้ร่วมกับส่วนลด Trade Up</strong><br>
-              • ห้ามใช้ร่วมกับโปรโมชั่นอื่นทุกประเภท
-            </div>
-          </div>
-        `;
-      }
-
-      // -------------------------------------------------------------
-      // 2. SAMSUNG FINANCE+ (SF+) MODE
-      // -------------------------------------------------------------
-      if (selectedMode === "SF_PLUS") {
-        if (isS25Fe) {
-          const discount = 3000;
-          const net = rrp - discount;
-          return `
-            <div class="promo-price-card" style="border-color: rgba(0, 240, 255, 0.35);">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span class="price-tier-badge tier-badge-std">💳 ผ่อนสินเชื่อ SF+ (ดาวน์ ≤ 10%)</span>
-                <span class="badge-pn-pill">คูปอง 01</span>
+          <section class="promotion-price-card" style="border-color: rgba(168, 85, 247, 0.4); background: linear-gradient(145deg, rgba(168, 85, 247, 0.08), rgba(15, 23, 42, 0.9));">
+            <header class="promotion-card-header">
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="price-tier-badge tier-badge-exclusive">🎓 โปรนักศึกษา</span>
+                <span class="price-tier-badge" style="background: rgba(168,85,247,0.2); color: #e9d5ff; border: 1px solid rgba(168,85,247,0.4);">
+                  ใช้ร่วมกับโปรอื่นไม่ได้
+                </span>
               </div>
-              <div class="price-row-item">
-                <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
-                <span style="text-decoration: line-through; color: var(--text-muted);">฿${rrp.toLocaleString('th-TH')}</span>
-              </div>
-              <div class="price-row-item">
-                <span style="color: var(--emerald);">ส่วนลดคูปอง 01 (SF+)</span>
-                <strong style="color: var(--emerald); font-size: 1.05rem;">-฿${discount.toLocaleString('th-TH')}</strong>
-              </div>
-              <div class="price-row-item net">
-                <span>ราคาสุทธิ (SF+ Net Price)</span>
-                <span class="net-price-display">฿${net.toLocaleString('th-TH')}</span>
-              </div>
-            </div>
+              <span class="badge-pn-pill" style="color: #c084fc; border-color: rgba(168, 85, 247, 0.5);">Studentcrd</span>
+            </header>
 
-            <div class="promo-info-callout promo-info-success">
-              <div>✓ <strong>เงื่อนไขสัญญาสินเชื่อ Samsung Finance+ (SF+):</strong></div>
-              <div style="margin-top: 4px; font-size: 0.8rem; line-height: 1.5;">
-                • ดาวน์ไม่เกิน 10% ตามเกณฑ์อนุมัติของระบบ SF+<br>
-                • <strong>ทางเลือกใช้ร่วมกันไม่ได้:</strong> ไม่สามารถใช้ร่วมกับคูปอง 02 หรือส่วนลดเงินสดทั่วไปได้<br>
-                • ไม่มีส่วนลด Trade Up เพิ่มเติมในรุ่นนี้
-              </div>
-            </div>
-          `;
-        }
-
-        if (isA57) {
-          const estDown = Math.round((rrp * 0.05) / 10) * 10;
-          return `
-            <div class="promo-price-card" style="border-color: rgba(0, 240, 255, 0.35);">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <span class="price-tier-badge tier-badge-std">💳 ผ่อนสินเชื่อ SF+ (ดาวน์ ≤ 5%)</span>
-                <span class="badge-pn-pill" style="color: var(--cyan);">สิทธิ์ผ่อนชำระ</span>
-              </div>
-              <div class="price-row-item">
-                <span style="color: var(--text-muted);">ราคาสินค้า (RRP)</span>
-                <strong style="color: #fff;">฿${rrp.toLocaleString('th-TH')}</strong>
-              </div>
-              <div class="price-row-item">
-                <span style="color: var(--text-muted);">ส่วนลดราคาสินค้า</span>
-                <span style="color: var(--text-muted);">-฿0 (ไม่มีส่วนลดเงินสด)</span>
-              </div>
-              <div class="price-row-item">
-                <span style="color: var(--cyan);">เงินดาวน์ประมาณ (≤ 5%)</span>
-                <strong style="color: var(--cyan);">ประมาณ ฿${estDown.toLocaleString('th-TH')}</strong>
-              </div>
-              <div class="price-row-item net">
-                <span>ราคาสินค้าตามสัญญา</span>
-                <span class="net-price-display">฿${rrp.toLocaleString('th-TH')}</span>
-              </div>
-            </div>
-
-            <div class="promo-info-callout promo-info-warning">
-              <div>⚠️ <strong>ข้อควรระวังสำหรับพนักงานขาย:</strong></div>
-              <div style="margin-top: 4px; font-size: 0.8rem; line-height: 1.5;">
-                • เงินดาวน์ประมาณ 5% (฿${estDown.toLocaleString('th-TH')}) <strong>ไม่ใช่ส่วนลด</strong> ห้ามนำไปหักลบราคาเครื่อง<br>
-                • สิทธิ์ผ่อน SF+ นี้ <strong>ไม่ร่วมส่วนลดคูปอง 01 (฿2,000)</strong><br>
-                • ยอดคงเหลือหลังหักเงินดาวน์จะนำไปคำนวณค่างวดตามระยะเวลาสัญญา SF+
-              </div>
-            </div>
-          `;
-        }
-
-        // Generic SF+
-        const sfMatch = variants.find(v => v.saleMode === "SF_PLUS");
-        const disc = sfMatch ? Number(sfMatch.discountValue || sfMatch.discount || 0) : 0;
-        const net = rrp - disc;
-        return `
-          <div class="promo-price-card" style="border-color: rgba(0, 240, 255, 0.35);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span class="price-tier-badge tier-badge-std">💳 ผ่อนสินเชื่อ SF+</span>
-              ${sfMatch && sfMatch.couponCode ? `<span class="badge-pn-pill">${sfMatch.couponCode}</span>` : ''}
-            </div>
-            <div class="price-row-item">
-              <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
-              <span style="${disc > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">฿${rrp.toLocaleString('th-TH')}</span>
-            </div>
-            ${disc > 0 ? `
-              <div class="price-row-item">
-                <span style="color: var(--emerald);">ส่วนลดตามแคมเปญ SF+</span>
-                <strong style="color: var(--emerald); font-size: 1.05rem;">-฿${disc.toLocaleString('th-TH')}</strong>
-              </div>
-            ` : ''}
-            <div class="price-row-item net">
-              <span>ราคาสุทธิ (SF+ Net)</span>
-              <span class="net-price-display">฿${net.toLocaleString('th-TH')}</span>
-            </div>
-          </div>
-          <div class="promo-info-callout promo-info-notice">
-            <div>💳 <strong>เงื่อนไขสินเชื่อ Samsung Finance+:</strong> ตรวจสอบสิทธิ์และวงเงินอนุมัติผ่านบัตรประชาชนหน้าร้าน</div>
-          </div>
-        `;
-      }
-
-      // -------------------------------------------------------------
-      // 3. NORMAL & TRADE_UP MODES (Interactive Tier 1 vs Tier 2)
-      // -------------------------------------------------------------
-      
-      // Determine Standard Tier 1 Discount
-      let stdDiscount = 0;
-      let stdCoupon = "คูปอง 01";
-      
-      if (isS25Fe) {
-        stdCoupon = "คูปอง 02";
-        stdDiscount = (capacity.includes("256") || modelName.includes("256")) ? 6000 : 5000;
-      } else if (isA57) {
-        stdCoupon = "คูปอง 01";
-        stdDiscount = 2000;
-      } else {
-        const stdMatch = variants.find(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.saleMode === "TRADE_UP");
-        if (stdMatch) {
-          stdDiscount = Number(stdMatch.standardDiscount || stdMatch.discountValue || 0);
-          if (stdMatch.couponCode) stdCoupon = stdMatch.couponCode;
-        } else if (isS26Ultra) {
-          stdDiscount = 5000;
-          stdCoupon = "คูปอง 01";
-        }
-      }
-
-      // Determine Trade Up Tier 2 Discount
-      let tradeUpDiscount = 0;
-      let isTradeUpEligible = false;
-      const tuMatch = variants.find(v => v.saleMode === "TRADE_UP" && v.tradeUpEligible !== false);
-
-      if (isS25Fe || isA57) {
-        // Explicit permanent rule: S25 FE and A57 have ZERO Trade Up in these payment alternatives
-        tradeUpDiscount = 0;
-        isTradeUpEligible = false;
-      } else if (tuMatch && tuMatch.tradeUpDiscount > 0) {
-        tradeUpDiscount = Number(tuMatch.tradeUpDiscount);
-        isTradeUpEligible = true;
-      } else if (isS26Ultra) {
-        // Fallback exact matrix for S26 Ultra
-        if (capacity.includes("1TB") || modelName.includes("1TB")) {
-          tradeUpDiscount = 5000;
-          isTradeUpEligible = true;
-        } else if (capacity.includes("512") || modelName.includes("512")) {
-          tradeUpDiscount = 5000;
-          isTradeUpEligible = true;
-        } else if (capacity.includes("256") || modelName.includes("256")) {
-          tradeUpDiscount = 2000;
-          isTradeUpEligible = true;
-        }
-      }
-
-      // Calculate Net Prices using pure equations
-      const standardNetPrice = rrp - stdDiscount;
-      const tradeUpNetPrice = standardNetPrice - (isTradeUpEligible ? tradeUpDiscount : 0);
-
-      // Selected Scenario determines active calculation
-      const isTradeUpScenario = (selectedMode === "TRADE_UP") || (currentDrawerScenario === "TRADE_UP" && isTradeUpEligible);
-      const activeNetPrice = isTradeUpScenario ? tradeUpNetPrice : standardNetPrice;
-
-      return `
-        <!-- Interactive Purchase Scenario Switcher -->
-        <div class="promo-scenario-selector">
-          <button type="button" class="scenario-toggle-btn ${!isTradeUpScenario ? 'active' : ''}" onclick="setDrawerScenario('NORMAL')">
-            <span>🛒 ซื้อปกติ (ไม่ Trade Up)</span>
-          </button>
-          <button type="button" class="scenario-toggle-btn ${isTradeUpScenario ? 'active' : ''}" onclick="setDrawerScenario('TRADE_UP')">
-            <span>🔄 ซื้อพร้อม Trade Up (เก่าแลกใหม่)</span>
-          </button>
-        </div>
-
-        <!-- Tier 1 & Tier 2 Breakdown Card -->
-        <div class="promo-price-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <span class="price-tier-badge tier-badge-std">ต่อที่ 1: ส่วนลดปกติ</span>
-              ${isTradeUpEligible ? `<span class="price-tier-badge tier-badge-tradeup">ต่อที่ 2: Trade Up</span>` : ''}
-            </div>
-            ${stdCoupon ? `<span class="badge-pn-pill" style="font-size: 0.8rem;">${stdCoupon}</span>` : ''}
-          </div>
-
-          <!-- RRP Row -->
-          <div class="price-row-item">
-            <span style="color: var(--text-muted);">ราคาปกติ (RRP)</span>
-            <span style="text-decoration: line-through; color: var(--text-muted); font-size: 0.95rem;">฿${rrp.toLocaleString('th-TH')}</span>
-          </div>
-
-          <!-- Tier 1 Row -->
-          <div class="price-row-item" style="padding: 4px 0;">
-            <span style="color: var(--cyan); display: flex; align-items: center; gap: 6px;">
-              <span>🏷️ ส่วนลดโปรโมชั่นปกติ (ต่อที่ 1)</span>
-            </span>
-            <strong style="color: var(--cyan); font-size: 1.05rem;">-฿${stdDiscount.toLocaleString('th-TH')}</strong>
-          </div>
-
-          <!-- Standard Net Row -->
-          <div class="price-row-item" style="background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; margin: 6px 0;">
-            <span style="color: #cbd5e1; font-weight: 600;">ราคาหลังส่วนลดปกติ:</span>
-            <strong style="color: #fff; font-size: 1.08rem;">฿${standardNetPrice.toLocaleString('th-TH')}</strong>
-          </div>
-
-          <!-- Tier 2 Row -->
-          ${isTradeUpEligible ? `
-            <div class="price-row-item" style="padding: 4px 0; margin-top: 8px; border-top: 1px dashed rgba(255,255,255,0.06); padding-top: 8px;">
-              <span style="color: var(--emerald); display: flex; align-items: center; gap: 6px;">
-                <span>🔄 ส่วนลดเพิ่มเติม Trade Up (ต่อที่ 2)</span>
-              </span>
-              <strong style="color: var(--emerald); font-size: 1.05rem;">
-                ${isTradeUpScenario ? `-฿${tradeUpDiscount.toLocaleString('th-TH')}` : `<span style="color: var(--text-muted); font-size: 0.9rem;">(ลดเพิ่ม ฿${tradeUpDiscount.toLocaleString('th-TH')} เมื่อแลกเครื่อง)</span>`}
+            <div class="price-row">
+              <span class="price-row__label">ราคาปกติ</span>
+              <strong class="price-row__value" style="text-decoration: line-through; color: var(--text-muted);">
+                ฿${rrp.toLocaleString('th-TH')}
               </strong>
             </div>
-          ` : `
-            <div class="price-row-item" style="padding: 6px 0; color: var(--text-muted); font-size: 0.82rem; border-top: 1px dashed rgba(255,255,255,0.06);">
-              <span>🔄 สิทธิ์ Trade Up ต่อที่ 2:</span>
-              <span style="color: var(--text-muted); font-style: italic;">ไม่มีส่วนลด Trade Up เพิ่มเติม สำหรับรุ่นนี้</span>
-            </div>
-          `}
 
-          <!-- Final Net Price Row -->
-          <div class="price-row-item net">
-            <div>
-              <div style="font-weight: 700; color: #fff; font-size: 0.92rem;">
-                ${isTradeUpScenario ? 'ราคาหลังลดและ Trade Up' : 'ราคาสุทธิ (ไม่ Trade Up)'}
+            <div class="price-row price-row--discount">
+              <span class="price-row__label" style="color: #c084fc;">ส่วนลดนักศึกษา 15%</span>
+              <strong class="price-row__value" style="color: #c084fc;">
+                -฿${discountAmount.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--total">
+              <span class="price-row__label">ราคาที่ลูกค้าชำระ</span>
+              <strong class="price-row__value" style="color: #c084fc;">
+                ฿${netPrice.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="promotion-conditions">
+              <h4>เงื่อนไข</h4>
+              <ul>
+                <li>ต้องแสดงบัตรนักเรียน/นักศึกษาหรือเอกสารยืนยันสิทธิ์ตามเกณฑ์</li>
+                <li>ใช้รหัสสิทธิ์ <strong>Studentcrd</strong></li>
+                <li><strong>ไม่สามารถใช้ร่วมกับโปรโมชั่นอื่น</strong> หรือคูปอง 01 หรือส่วนลด Trade Up ได้</li>
+              </ul>
+            </div>
+
+            ${renderTechDetails("โปรนักศึกษา")}
+          </section>
+        `;
+      }
+
+      // =============================================================
+      // 4. TRADE UP (TRADE_UP)
+      // =============================================================
+      if (selectedMode === "TRADE_UP") {
+        let stdDiscount = 0;
+        if (isS25Fe || isA57) {
+          stdDiscount = 0;
+        } else {
+          const stdMatch = variants.find(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
+          if (stdMatch) stdDiscount = Number(stdMatch.standardDiscount || stdMatch.discountValue || 0);
+          else if (isS26Ultra) stdDiscount = 5000;
+        }
+
+        let tradeUpBonus = 0;
+        const tuMatch = variants.find(v => v.saleMode === "TRADE_UP" && v.tradeUpEligible !== false);
+        if (isS25Fe || isA57) {
+          tradeUpBonus = 0;
+        } else if (tuMatch && (tuMatch.tradeUpDiscount > 0 || tuMatch.tradeUpBonusAmount > 0)) {
+          tradeUpBonus = Number(tuMatch.tradeUpBonusAmount || tuMatch.tradeUpDiscount);
+        } else if (isS26Ultra) {
+          if (capacity.includes("1TB") || modelName.includes("1TB")) tradeUpBonus = 5000;
+          else if (capacity.includes("512") || modelName.includes("512")) tradeUpBonus = 5000;
+          else if (capacity.includes("256") || modelName.includes("256")) tradeUpBonus = 2000;
+        } else if (modelName.includes("Fold8") || modelName.includes("FOLD8")) {
+          tradeUpBonus = 5000;
+        }
+
+        if (tradeUpBonus === 0) {
+          return `
+            <section class="promotion-price-card">
+              <header class="promotion-card-header">
+                <span class="price-tier-badge tier-badge-tradeup">🔄 Trade Up</span>
+                <span class="badge-pn-pill" style="color: var(--text-muted);">ไม่มีโบนัส Trade Up</span>
+              </header>
+              <div class="empty-promo-state" style="padding: 16px 0; text-align: left;">
+                <p style="color: #94a3b8; font-size: 0.86rem; line-height: 1.5; margin: 0;">
+                  สินค้ารุ่นนี้ไม่มีโบนัส Trade Up Top-Up เพิ่มเติมจากไฟล์โปรโมชั่น ลูกค้าสามารถนำเครื่องเก่ามาประเมินราคาเพื่อใช้เป็นส่วนลดเงินสดตามราคาประเมินจริง หรือซื้อในราคาโปรโมชั่นปกติ
+                </p>
               </div>
-              <div style="font-size: 0.74rem; color: var(--text-muted);">
-                ${isTradeUpScenario ? 'หักส่วนลดต่อที่ 1 + ส่วนลด Trade Up ต่อที่ 2' : 'หักเฉพาะส่วนลดโปรโมชั่นปกติ'}
+            </section>
+          `;
+        }
+
+        const tuCalc = (typeof calculatePromotionPrices === "function")
+          ? calculatePromotionPrices({ regularPrice: rrp, standardDiscount: stdDiscount, tradeUpDiscount: tradeUpBonus })
+          : { valid: rrp > 0 && stdDiscount >= 0 && stdDiscount <= rrp && (rrp - stdDiscount - tradeUpBonus >= 0), standardNetPrice: rrp - stdDiscount, tradeUpNetPrice: rrp - stdDiscount - tradeUpBonus };
+
+        if (!tuCalc.valid || tuCalc.standardNetPrice === null || tuCalc.tradeUpNetPrice === null) {
+          return renderPriceDataWarning("ส่วนลด Trade Up เกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
+        }
+
+        const standardNetPrice = tuCalc.standardNetPrice;
+        const previewBeforeAppraisal = tuCalc.tradeUpNetPrice;
+
+        return `
+          <section class="promotion-price-card" style="border-color: rgba(16, 185, 129, 0.4);">
+            <header class="promotion-card-header">
+              <div>
+                <span class="price-tier-badge tier-badge-tradeup">🔄 Trade Up</span>
+                <div style="font-size: 0.76rem; color: #6ee7b7; margin-top: 3px;">
+                  ต้องนำเครื่องเก่ารุ่นที่ร่วมรายการมาเทริน
+                </div>
+              </div>
+            </header>
+
+            <div class="price-row">
+              <span class="price-row__label">ราคาปกติ</span>
+              <strong class="price-row__value" style="${stdDiscount > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+                ฿${rrp.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="price-row price-row--discount">
+              <span class="price-row__label">ส่วนลดซื้อปกติ (ต่อที่ 1)</span>
+              <strong class="price-row__value" style="color: var(--cyan);">
+                ${stdDiscount > 0 ? `-฿${stdDiscount.toLocaleString('th-TH')}` : '-'}
+              </strong>
+            </div>
+
+            <div class="price-row" style="background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; margin: 6px 0;">
+              <span class="price-row__label" style="color: #cbd5e1; font-weight: 600;">ราคาหลังส่วนลดปกติ:</span>
+              <strong class="price-row__value" style="color: #fff;">฿${standardNetPrice.toLocaleString('th-TH')}</strong>
+            </div>
+
+            <div class="price-row price-row--discount" style="padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.08);">
+              <span class="price-row__label" style="color: #34d399; font-weight: 600;">โบนัส Trade Up เครื่องใหม่</span>
+              <strong class="price-row__value" style="color: #34d399;">
+                -฿${tradeUpBonus.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <div class="price-row">
+              <span class="price-row__label" style="color: var(--text-muted);">มูลค่าเครื่องเก่าที่นำมาเทริน</span>
+              <span class="price-row__value" style="color: #60a5fa; font-weight: normal; font-style: italic;">
+                ประเมินตอนชำระเงิน
+              </span>
+            </div>
+
+            <div class="price-row price-row--total">
+              <div>
+                <div class="price-row__label" style="font-size: 0.92rem; font-weight: 700;">ยอดก่อนหักมูลค่าเครื่องเก่า</div>
+                <div style="font-size: 0.74rem; color: var(--text-muted);">หักส่วนลดต่อที่ 1 + โบนัส Trade Up เครื่องใหม่</div>
+              </div>
+              <strong class="price-row__value" style="color: #34d399;">
+                ฿${previewBeforeAppraisal.toLocaleString('th-TH')}
+              </strong>
+            </div>
+
+            <!-- Trade Up Clarification Callout -->
+            <div class="promo-info-callout promo-info-success" style="margin-top: 14px;">
+              <div>💡 <strong>หลักการ Trade Up:</strong></div>
+              <div style="margin-top: 4px; font-size: 0.8rem; line-height: 1.55;">
+                โบนัส Trade Up (<strong>-฿${tradeUpBonus.toLocaleString('th-TH')}</strong>) เป็นสิทธิ์ของเครื่องใหม่ จะได้รับเมื่อลูกค้านำเครื่องเก่ารุ่นที่ร่วมรายการมาเทริน<br>
+                มูลค่าเครื่องเก่าจริงจะประเมินสภาพที่จุดขาย และนำมารวมเป็นสิทธิ์ส่วนลดตอนปิดบิล
               </div>
             </div>
-            <span class="net-price-display" style="color: ${isTradeUpScenario ? 'var(--emerald)' : 'var(--cyan)'};">
-              ฿${activeNetPrice.toLocaleString('th-TH')}
-            </span>
-          </div>
 
-          <!-- Comparison Grid -->
-          <div class="dual-net-comparison">
-            <div class="dual-net-box ${!isTradeUpScenario ? 'highlight' : ''}">
-              <div class="dual-net-label">ลูกค้าไม่ Trade Up</div>
-              <div class="dual-net-amount ${!isTradeUpScenario ? 'highlight' : ''}">฿${standardNetPrice.toLocaleString('th-TH')}</div>
-            </div>
-            <div class="dual-net-box ${isTradeUpScenario ? 'highlight' : ''}">
-              <div class="dual-net-label">ลูกค้า Trade Up</div>
-              <div class="dual-net-amount ${isTradeUpScenario ? 'highlight' : ''}">
-                ${isTradeUpEligible ? `฿${tradeUpNetPrice.toLocaleString('th-TH')}` : `฿${standardNetPrice.toLocaleString('th-TH')}`}
+            <!-- Example Calculation Box -->
+            <div style="margin-top: 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.82rem; font-weight: 700; color: #a7f3d0; margin-bottom: 6px;">
+                ตัวอย่างการคำนวณสิทธิ์รวม (สมมติเครื่องเก่าประเมินได้ ฿1,000):
+              </div>
+              <div style="font-size: 0.8rem; line-height: 1.6; color: #cbd5e1;">
+                • มูลค่าเครื่องเก่าประเมินได้: ฿1,000<br>
+                • โบนัส Trade Up เครื่องใหม่: ฿${tradeUpBonus.toLocaleString('th-TH')}<br>
+                • <strong style="color: #34d399;">สิทธิ์รวมจากการเทริน: ฿${(1000 + tradeUpBonus).toLocaleString('th-TH')}</strong><br>
+                • <strong>ยอดสุทธิที่ลูกค้าชำระ: ฿${(previewBeforeAppraisal - 1000).toLocaleString('th-TH')}</strong>
+              </div>
+              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">
+                * ตัวอย่างเท่านั้น มูลค่าเครื่องเก่าจริงขึ้นอยู่กับผลการตรวจสภาพ ณ วันที่ทำรายการ
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Trade-in Appraisal Separation Notice -->
-        ${isTradeUpEligible ? `
-          <div class="promo-info-callout promo-info-notice">
-            <div style="font-weight: 700; display: flex; align-items: center; gap: 6px;">
-              <span>📱</span>
-              <span>การแยกส่วนลดแคมเปญ ออกจากราคาประเมินเครื่องเก่า:</span>
-            </div>
-            <div style="margin-top: 6px; font-size: 0.8rem; line-height: 1.55; color: #bae6fd;">
-              • ส่วนลด <strong>-฿${tradeUpDiscount.toLocaleString('th-TH')}</strong> คือส่วนลด Trade Up Campaign Top-Up ของร้าน<br>
-              • <strong>ราคาประเมินเครื่องเก่า (Trade-in Device Value):</strong> จะถูกประเมินสภาพจริงหน้าสาขาผ่านระบบ Remobie / Trade-in และนำมาหักลดยอดชำระเพิ่มต่างหาก ณ จุดขาย<br>
-              • <em>ห้ามนำราคาประเมินเครื่องเก่ามาปะปนในฟิลด์ส่วนลดแคมเปญ</em>
-            </div>
-          </div>
-        ` : ''}
+            ${renderTechDetails("Trade Up")}
+          </section>
+        `;
+      }
 
-        <div style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; margin-top: 14px;">
-          <div>💳 <strong>วิธีชำระเงินที่รองรับ:</strong> เงินสด, โอนชำระ, หรือรูดบัตรเครดิตเต็มจำนวน / ผ่อนตามโปรโมชั่นธนาคาร</div>
-          <div style="margin-top: 4px;">🛡️ <strong>การรับประกัน:</strong> รับประกันศูนย์ไทย Samsung Thailand 1 ปีเต็ม</div>
-        </div>
-      `;
+      // =============================================================
+      // =============================================================
+      // 5. ซื้อพ่วง (BUNDLE)
+      // =============================================================
+      if (selectedMode === "BUNDLE") {
+        const hasBundlePromo = (variants || []).some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
+        if (!hasBundlePromo) {
+          return `
+            <section class="promotion-price-card" style="border-color: #334155;">
+              <header class="promotion-card-header">
+                <span class="price-tier-badge" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid #475569;">
+                  🎁 โปรโมชั่นซื้อพ่วง (Bundle)
+                </span>
+                <span class="badge-pn-pill" style="border-color: #475569; color: #94a3b8;">ไม่มีโปร</span>
+              </header>
+              <div style="padding: 24px 16px; text-align: center; color: var(--text-muted);">
+                <div style="font-size: 1.8rem; margin-bottom: 8px;">📦</div>
+                <div style="font-size: 0.95rem; font-weight: 600; color: #cbd5e1;">ไม่มีโปรโมชั่นซื้อพ่วงสำหรับสินค้านี้</div>
+                <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">สินค้ารายการนี้ไม่มีรายการส่งเสริมการขายแบบซื้อพ่วงในปัจจุบัน</div>
+              </div>
+              ${renderTechDetails("ซื้อพ่วง")}
+            </section>
+          `;
+        }
+
+        return `
+          <section class="promotion-price-card" style="border-color: rgba(56, 189, 248, 0.35);">
+            <header class="promotion-card-header">
+              <span class="price-tier-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3);">
+                🎁 โปรโมชั่นซื้อพ่วง (Bundle)
+              </span>
+            </header>
+
+            <div style="padding: 10px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 12px;">
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase;">สินค้าหลัก</div>
+              <strong style="color: #fff; font-size: 0.95rem;">${modelName || item.model}</strong>
+              <div style="font-size: 0.78rem; font-family: monospace; color: #94a3b8; margin-top: 2px;">
+                P/N สินค้าหลัก: ${item.pn || '-'}
+              </div>
+            </div>
+
+            <div style="padding: 10px 12px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; margin-bottom: 12px;">
+              <div style="font-size: 0.76rem; color: var(--cyan); text-transform: uppercase; font-weight: 600;">สินค้าพ่วงที่ร่วมรายการ</div>
+              <strong style="color: #fff; font-size: 0.95rem;">Galaxy Buds / Watch / อุปกรณ์เสริมที่ร่วมรายการ</strong>
+            </div>
+
+            <div class="price-row">
+              <span class="price-row__label">ราคาปกติสินค้าพ่วง</span>
+              <strong class="price-row__value" style="text-decoration: line-through; color: var(--text-muted);">
+                ฿5,990
+              </strong>
+            </div>
+
+            <div class="price-row price-row--discount">
+              <span class="price-row__label" style="color: var(--cyan);">ส่วนลดเมื่อซื้อพร้อมเครื่อง</span>
+              <strong class="price-row__value" style="color: var(--cyan);">
+                -฿3,000
+              </strong>
+            </div>
+
+            <div class="price-row price-row--total">
+              <span class="price-row__label">ราคาพิเศษสินค้าพ่วง</span>
+              <strong class="price-row__value" style="color: #38bdf8;">
+                ฿2,990
+              </strong>
+            </div>
+
+            <div class="promotion-conditions">
+              <h4>เงื่อนไข</h4>
+              <ul>
+                <li>ต้องซื้อพร้อมสินค้าหลักในบิลเดียวกัน</li>
+                <li>เลือกได้เฉพาะ P/N สินค้าพ่วงที่ร่วมรายการ</li>
+                <li><strong>แยก P/N อย่างเคร่งครัด:</strong> P/N สินค้าพ่วง (เช่น หูฟัง, เคส) ไม่สามารถนำมาเป็น P/N ตัวเครื่องโทรศัพท์ได้</li>
+              </ul>
+            </div>
+
+            ${renderTechDetails("ซื้อพ่วง")}
+          </section>
+        `;
+      }
+
+      return renderPriceDataWarning("ไม่พบโหมดโปรโมชั่นที่ระบุ");
     }
 
     function switchDrawerMode(mode, btnElement) {
-      document.querySelectorAll(".sale-mode-tab").forEach(tab => tab.classList.remove("active"));
-      if (btnElement) btnElement.classList.add("active");
+      document.querySelectorAll(".sale-mode-tab, .promotion-path-tab").forEach(tab => {
+        tab.classList.remove("active");
+        tab.classList.remove("is-active");
+        tab.setAttribute("aria-selected", "false");
+      });
+      if (btnElement) {
+        btnElement.classList.add("active");
+        btnElement.classList.add("is-active");
+        btnElement.setAttribute("aria-selected", "true");
+      }
       
       const pnTag = document.getElementById("drawerProductPn") ? document.getElementById("drawerProductPn").textContent.replace("Exact P/N: ", "").trim() : "";
-      const modelTitle = document.getElementById("drawerProductTitle") ? document.getElementById("drawerProductTitle").textContent : "";
-      const item = rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle)) || currentDrawerItem;
-      const promo = resolvePromotion(item || { pn: pnTag, model: modelTitle });
+      const item = currentDrawerItem || rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle));
+      const srp = item && Number(item.srp) > 0 ? Number(item.srp) : (currentDrawerItem && Number(currentDrawerItem.srp) > 0 ? Number(currentDrawerItem.srp) : 0);
+      const promo = resolvePromotion(item || currentDrawerItem || { pn: pnTag, model: modelTitle });
 
       const contentEl = document.getElementById("drawerModeContent");
       if (contentEl) {
-        contentEl.innerHTML = renderDrawerModeDetails(promo.variants, mode, item ? item.srp : 0, item);
+        contentEl.innerHTML = renderDrawerModeDetails(promo.variants, mode, srp, item || currentDrawerItem);
       }
     }
+
 
     // Drawer Close listeners are registered in setupPrototypeStockControls()
 
@@ -3997,6 +4234,8 @@
     window.refreshPrototypeData = refreshPrototypeData;
     window.openPromoDrawer = openPromoDrawer;
     window.openProductSpecsDrawer = openProductSpecsDrawer;
+    window.openProductSpecsModal = openProductSpecsDrawer;
+    window.filterDrawerSpecCategory = filterDrawerSpecCategory;
     window.switchDrawerMainTab = switchDrawerMainTab;
     window.switchDrawerMode = switchDrawerMode;
     window.setDrawerScenario = setDrawerScenario;
