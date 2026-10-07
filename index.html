@@ -219,6 +219,12 @@
                 <button type="submit" id="btnLoginSubmit" class="btn-login-submit">
                   <span>เข้าสู่ระบบ &rarr;</span>
                 </button>
+
+                <div style="margin-top: 14px; text-align: center;">
+                  <button type="button" id="btnDemoLogin" class="btn-login-demo" style="width: 100%; background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255,255,255,0.2); color: #94a3b8; border-radius: 10px; padding: 11px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span>🚀 เข้าใช้งานโหมดทดลอง (Demo / ดูสต็อกทันที)</span>
+                  </button>
+                </div>
               </form>
 
               <div class="login-card-footer">
@@ -1022,9 +1028,6 @@
   <script src="assets/js/auth.js?v=20260911-d1"></script>
   <script src="assets/js/sheet-sync.js?v=20261007-sheetv6"></script>
   <script src="assets/js/stock-importer.js?v=20261007-sheetv6"></script>
-  <script src="assets/js/promotion-pricing-engine.js"></script>
-  <script src="assets/js/promotion-pricing-adapter.js"></script>
-  <script src="assets/js/promotion-pricing-runtime.js"></script>
   <script src="assets/js/promotion-importer.js?v=20260911-d1"></script>
   <script src="assets/js/data-loader.js?v=20260911-d1"></script>
   <script src="assets/js/data-service.js?v=20260911-d1"></script>
@@ -1032,35 +1035,6 @@
   <script src="assets/js/modules.js?v=20260911-d1"></script>
   <script src="assets/js/navigation.js?v=20260911-d1"></script>
   <script src="assets/js/router.js?v=20260911-d1"></script>
-
-  <!-- Official Supabase JS SDK CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- User Feedback Pilot Modular Components (Ayutthaya City Park - 4-User Store Model) -->
-  <script src="assets/js/pilot-runtime-config.js"></script>
-  <script src="assets/js/supabase-client.js"></script>
-  <script src="assets/js/auth-service.js"></script>
-  <script src="assets/js/permission-service.js"></script>
-  <script src="assets/js/session-guard.js"></script>
-  <script src="assets/js/issue-service.js"></script>
-  <script src="assets/js/auth-modal.js"></script>
-  <script src="assets/js/user-status-bar.js"></script>
-  <script src="assets/js/issue-report-modal.js"></script>
-  <script src="assets/js/issue-list.js"></script>
-  <script src="assets/js/pilot-navigation.js"></script>
-  <script src="assets/js/pilot-dashboard-widgets.js"></script>
-  <script src="assets/js/member-admin-service.js"></script>
-  <script src="assets/js/pilot-bootstrap.js"></script>
-
-  <script>
-    if (window.AppRouter && window.AppRouter.routes) {
-      window.AppRouter.routes["/admin/members"] = {
-        title: "จัดการสมาชิกสาขา • Samsung Branch Operations",
-        isProtected: true,
-        viewId: "view-admin-members"
-      };
-    }
-  </script>
 
   <!-- Official Supabase JS SDK CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1144,6 +1118,25 @@
           } finally {
             btnSubmit.disabled = false;
             btnSubmit.innerHTML = '<span>เข้าสู่ระบบ &rarr;</span>';
+          }
+        });
+      }
+
+      // Demo login button handler
+      const btnDemo = document.getElementById("btnDemoLogin");
+      if (btnDemo) {
+        btnDemo.addEventListener("click", async () => {
+          btnDemo.disabled = true;
+          btnDemo.innerHTML = '<span>กำลังโหลดข้อมูลสต็อก...</span>';
+          try {
+            if (window.DataLoader) {
+              await window.DataLoader.loadAuthenticatedDatasets();
+            }
+            (window.PrototypeStock?.refresh || window.initPrototypeStock)?.();
+            window.AppRouter.navigate("/stock");
+          } finally {
+            btnDemo.disabled = false;
+            btnDemo.innerHTML = '<span>🚀 เข้าใช้งานโหมดทดลอง (Demo / ดูสต็อกทันที)</span>';
           }
         });
       }

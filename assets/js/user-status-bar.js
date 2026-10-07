@@ -14,15 +14,27 @@
     render() {
       let target = document.getElementById('pilot-user-status-container');
       if (!target) {
-        target = document.createElement('div');
-        target.id = 'pilot-user-status-container';
-        target.style.cssText = 'position:fixed; top:12px; right:16px; z-index:9999; display:flex; align-items:center; gap:8px; font-family:inherit;';
-        document.body.appendChild(target);
+        const headerRight = document.querySelector('.header-right-group');
+        if (headerRight) {
+          headerRight.innerHTML = '';
+          target = document.createElement('div');
+          target.id = 'pilot-user-status-container';
+          headerRight.appendChild(target);
+        } else {
+          target = document.createElement('div');
+          target.id = 'pilot-user-status-container';
+          target.style.cssText = 'position:fixed; top:12px; right:16px; z-index:9999; display:flex; align-items:center; gap:8px; font-family:inherit;';
+          document.body.appendChild(target);
+        }
       }
       this.containerEl = target;
       this.updateView();
 
       window.AuthService?.onAuthStateChange(() => {
+        this.updateView();
+      });
+
+      window.addEventListener('hashchange', () => {
         this.updateView();
       });
     }
@@ -35,6 +47,11 @@
       const isAuthenticated = window.AuthService?.isAuthenticated();
 
       if (!isAuthenticated || !profile) {
+        const isLoginPage = window.location.hash.includes('/login');
+        if (isLoginPage) {
+          this.containerEl.innerHTML = '';
+          return;
+        }
         this.containerEl.innerHTML = `
           <button id="pilot-header-login-btn" style="background:#2962ff; color:#fff; border:none; border-radius:6px; padding:6px 14px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 2px 8px rgba(41,98,255,0.3);">
             <span>🔐</span> เข้าสู่ระบบ (พนักงาน)

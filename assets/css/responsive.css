@@ -1,0 +1,129 @@
+/* ==========================================================================
+   SAMSUNG BRANCH OPERATIONS - RESPONSIVE & ACCESSIBILITY CSS
+   Breakpoints: 360px, 768px, 1024px, 1366px, 1920px
+   ========================================================================== */
+
+/* Tablet & Mobile Breakpoint (<= 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --shell-sidebar-width: 0px;
+  }
+
+  .app-sidebar {
+    transform: translateX(-100%);
+    width: 260px;
+  }
+
+  .app-sidebar.sidebar-open {
+    transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .app-layout-main {
+    margin-left: 0 !important;
+    padding-bottom: 70px; /* Space for mobile bottom bar */
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .btn-mobile-menu-toggle {
+    display: flex !important;
+  }
+
+  .home-two-col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet Portrait & Small Screen (<= 768px) */
+@media (max-width: 768px) {
+  .app-top-header {
+    padding: 0 16px;
+  }
+
+  .home-view-container {
+    padding: 16px;
+  }
+
+  .home-welcome-card {
+    padding: 20px 16px;
+  }
+
+  .welcome-header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .welcome-meta-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .welcome-main-title {
+    font-size: 1.25rem;
+  }
+
+  .sales-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stock-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-alert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .user-text-info {
+    display: none;
+  }
+
+  .login-card {
+    padding: 28px 20px;
+  }
+}
+
+/* Very Small Mobile (<= 360px) */
+@media (max-width: 360px) {
+  .welcome-main-title {
+    font-size: 1.1rem;
+  }
+
+  .summary-num {
+    font-size: 1.4rem;
+  }
+
+  .mobile-nav-item span {
+    font-size: 0.6rem;
+  }
+}
+
+/* Large Desktop Displays (>= 1920px) */
+@media (min-width: 1920px) {
+  .home-view-container {
+    max-width: 1680px;
+  }
+
+  .stock-summary-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sales-kpi-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
