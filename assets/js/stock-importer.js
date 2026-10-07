@@ -1431,6 +1431,21 @@
         const incomingPns = new Set(incomingItems.map(it => it.pn));
         let newItemsRegistered = 0;
 
+        // Current active stock DB resolution (in-memory or active IndexedDB snapshot)
+        let currentStockDb = Array.isArray(window.STOCK_DATA) && window.STOCK_DATA.length > 0
+          ? window.STOCK_DATA
+          : (Array.isArray(window.STOCK_DATABASE) ? window.STOCK_DATABASE : []);
+        if (currentStockDb.length === 0 && typeof StockStorageAdapter !== 'undefined' && typeof StockStorageAdapter.getActiveSnapshot === 'function') {
+          try {
+            const activeSnap = await StockStorageAdapter.getActiveSnapshot();
+            if (activeSnap && Array.isArray(activeSnap.data) && activeSnap.data.length > 0) {
+              currentStockDb = activeSnap.data;
+            }
+          } catch (e) {
+            console.warn('[StockImporter] Could not load active snapshot for diffing:', e);
+          }
+        }
+
         // Detect new items not yet in master catalog
         const existingPns = new Set(currentStockDb.map(it => it.pn));
         const diffItemMap = new Map((b.diffItems || []).map(d => [d.pn, d]));
@@ -1454,7 +1469,7 @@
         });
 
         // Combined database: incoming active items + preserve catalog products not in current count (qty = 0)
-        const combinedMaster = [...b.mergedResult.items];
+        const combinedMaster = [...(b.mergedResult?.items || incomingItems)];
         currentStockDb.forEach(oldItem => {
           if (!incomingPns.has(oldItem.pn)) {
             combinedMaster.push({
@@ -1478,31 +1493,31 @@
         window.STOCK_DATABASE = combinedMaster;
         window.STOCK_DATA = combinedMaster;
 
-        const coreItems = b.mergedResult.items.filter(it => it.includedInCoreDeviceKpi);
-        const coreF1 = coreItems.reduce((acc, it) => acc + it.f1, 0);
-        const coreF2 = coreItems.reduce((acc, it) => acc + it.f2, 0);
+        const coreItems = (b.mergedResult?.items || incomingItems).filter(it => it.includedInCoreDeviceKpi);
+        const coreF1 = coreItems.reduce((acc, it) => acc + (it.f1 || 0), 0);
+        const coreF2 = coreItems.reduce((acc, it) => acc + (it.f2 || 0), 0);
 
         window.STOCK_METADATA = {
           stockBatchId: effectiveBatchId,
           importBatchId: effectiveBatchId,
           sourceType: isCentralSaved ? "Nimbus Excel Database Snapshot" : "Manual Excel Snapshot",
-          sourceFile: b.sourceFilename,
-          sourceFilename: b.sourceFilename,
-          sourceFileHash: b.fileHash,
-          importedAt: b.importedAt,
-          recordCount: b.stats.totalProducts,
-          sheet1Rows: (b.s1Summary ? b.s1Summary.totalRows : (b.sheet1 ? b.sheet1.totalRows : 0)),
+          sourceFile: sourceName,
+          sourceFilename: sourceName,
+          sourceFileHash: b.fileHash || b.sourceFileHash || '',
+          importedAt: b.importedAt || new Date().toISOString(),
+          recordCount: stats.totalProducts,
+          sheet1Rows: (b.s1Summary ? b.s1Summary.totalRows : (b.sheet1 ? b.sheet1.totalRows : (b.mergedResult ? b.mergedResult.totalRows : stats.totalProducts))),
           sheet2Rows: (b.s2Summary ? b.s2Summary.totalRows : (b.sheet2 ? b.sheet2.totalRows : 0)),
-          uniquePn: b.stats.totalProducts,
-          f1Total: b.stats.f1Total,
-          f2Total: b.stats.f2Total,
-          grandTotal: b.stats.grandTotal,
+          uniquePn: stats.totalProducts,
+          f1Total: stats.f1Total,
+          f2Total: stats.f2Total,
+          grandTotal: stats.grandTotal,
           coreDevices: {
             floor1: coreF1,
             floor2: coreF2,
             total: coreF1 + coreF2
           },
-          importedInventoryTotal: b.stats.grandTotal,
+          importedInventoryTotal: stats.grandTotal,
           storageScope: storageScope,
           storageMode: storageMode,
           schemaVersion: '2.0.0',
@@ -1512,7 +1527,7 @@
 
         // If DataService exists, update it as well
         if (window.DataService && typeof window.DataService.setStockData === 'function') {
-          window.DataService.setStockData(b.mergedResult.items);
+          window.DataService.setStockData(b.mergedResult?.items || incomingItems);
         }
 
         // Trigger app.js synchronization to re-render table, cards, and metrics
@@ -1520,7 +1535,7 @@
           window.syncMasterStockData();
         }
 
-        const importTimeFormatted = b.importedAt ? b.importedAt.replace('T', ' ').substring(0, 19) : '2026-09-11 13:31:00';
+        const importTimeFormatted = b.importedAt ? b.importedAt.replace('T', ' ').substring(0, 19) : new Date().toISOString().replace('T', ' ').substring(0, 19);
         const lastSyncLabel = document.getElementById('lastSyncTime');
         if (lastSyncLabel) {
           lastSyncLabel.textContent = `Excel Snapshot (${importTimeFormatted})`;
@@ -1535,7 +1550,7 @@
               `• Batch ID: ${effectiveBatchId}\n` +
               `${storageNotice}\n` +
               `• เครื่องหลักรวม (Core Devices): ${(coreF1 + coreF2).toLocaleString()} เครื่อง (ช1: ${coreF1} | ช2: ${coreF2})\n` +
-              `• ยอดคงเหลือรวมทุกหมวด: ${b.stats.grandTotal.toLocaleString()} รายการ (${b.stats.totalProducts} SKUs)`);
+              `• ยอดคงเหลือรวมทุกหมวด: ${stats.grandTotal.toLocaleString()} รายการ (${stats.totalProducts} SKUs)`);
 
         // Navigate to Stock View
         if (window.AppRouter) {
