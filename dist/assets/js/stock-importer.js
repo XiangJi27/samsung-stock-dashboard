@@ -1146,13 +1146,27 @@
       const previewSection = document.getElementById('stockPreviewSection');
       if (previewSection) previewSection.classList.remove('hidden');
 
-      // Update KPI Stat cards
-      document.getElementById('stkKpiUnique').textContent = b.stats.totalProducts.toLocaleString();
-      document.getElementById('stkKpiF1').textContent = b.stats.f1Total.toLocaleString();
-      document.getElementById('stkKpiF2').textContent = b.stats.f2Total.toLocaleString();
-      document.getElementById('stkKpiTotal').textContent = b.stats.grandTotal.toLocaleString();
-      document.getElementById('stkKpiChanged').textContent = b.stats.changedCount.toLocaleString();
-      document.getElementById('stkKpiNew').textContent = b.stats.newCount.toLocaleString();
+      // Update KPI Stat cards (Safe fallback)
+      const stats = b.stats || b.meta?.stats || {
+        totalProducts: b.mergedResult?.totalRows || b.mergedResult?.totalUniqueProducts || b.diffItems?.length || b.items?.length || b.data?.length || 0,
+        f1Total: b.mergedResult?.f1Total || b.meta?.f1Total || 0,
+        f2Total: b.mergedResult?.f2Total || b.meta?.f2Total || 0,
+        grandTotal: b.mergedResult?.grandTotal || b.meta?.grandTotal || 0,
+        changedCount: b.meta?.changedCount || 0,
+        newCount: b.meta?.newCount || 0
+      };
+
+      const setKpiText = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = Number(val || 0).toLocaleString();
+      };
+
+      setKpiText('stkKpiUnique', stats.totalProducts);
+      setKpiText('stkKpiF1', stats.f1Total);
+      setKpiText('stkKpiF2', stats.f2Total);
+      setKpiText('stkKpiTotal', stats.grandTotal);
+      setKpiText('stkKpiChanged', stats.changedCount);
+      setKpiText('stkKpiNew', stats.newCount);
 
       // Render Validation Warnings Banner if any anomalies exist
       const warningBanner = document.getElementById('stockValidationWarningBanner');
@@ -1197,7 +1211,7 @@
       const tbody = document.getElementById('stockDiffTableBody');
       if (!tbody) return;
 
-      let list = b.diffItems;
+      let list = b.diffItems || b.items || [];
       if (filterType === 'CHANGED') {
         list = list.filter(it => it.isChanged || it.isNew);
       } else if (filterType === 'NEW') {
@@ -1251,9 +1265,18 @@
       if (!this.currentStagedBatch || this.isSubmitting) return;
 
       const b = this.currentStagedBatch;
-      const confirmMsg = `ยืนยันการนำเข้า Stock Snapshot ชุดใหม่?\n\n- Batch ID: ${b.batchId}\n- ไฟล์ต้นทาง: ${b.sourceFilename}\n- จำนวนสินค้า: ${b.stats.totalProducts} รายการ\n- ผลรวม F1: ${b.stats.f1Total} | F2: ${b.stats.f2Total} (รวม ${b.stats.grandTotal})\n- สินค้าที่สต็อกเปลี่ยน: ${b.stats.changedCount} รายการ\n- สินค้าใหม่ที่ตรวจพบ: ${b.stats.newCount} รายการ (บันทึกเป็น Draft: PENDING_PRODUCT_REVIEW พร้อม Batch ID กำกับ)\n\nข้อมูลจะถูกบันทึกในเครื่องนี้ (LOCAL_BROWSER_ONLY) และอัปเดตหน้า Dashboard ทันที`;
+      const stats = b.stats || b.meta?.stats || {
+        totalProducts: b.mergedResult?.totalRows || b.mergedResult?.totalUniqueProducts || b.items?.length || b.data?.length || 0,
+        f1Total: b.mergedResult?.f1Total || b.meta?.f1Total || 0,
+        f2Total: b.mergedResult?.f2Total || b.meta?.f2Total || 0,
+        grandTotal: b.mergedResult?.grandTotal || b.meta?.grandTotal || 0,
+        changedCount: b.meta?.changedCount || 0,
+        newCount: b.meta?.newCount || 0
+      };
+      const sourceName = b.sourceFilename || b.meta?.sourceFileName || 'GoogleSheet_Stock_Sync';
+      const confirmMsg = `ยืนยันการนำเข้า Stock Snapshot ชุดใหม่?\n\n- Batch ID: ${b.batchId}\n- ไฟล์ต้นทาง: ${sourceName}\n- จำนวนสินค้า: ${stats.totalProducts} รายการ\n- ผลรวม F1: ${stats.f1Total} | F2: ${stats.f2Total} (รวม ${stats.grandTotal})\n- สินค้าที่สต็อกเปลี่ยน: ${stats.changedCount} รายการ\n- สินค้าใหม่ที่ตรวจพบ: ${stats.newCount} รายการ (บันทึกเป็น Draft: PENDING_PRODUCT_REVIEW พร้อม Batch ID กำกับ)\n\nข้อมูลจะถูกบันทึกในเครื่องนี้ (LOCAL_BROWSER_ONLY) และอัปเดตหน้า Dashboard ทันที`;
 
-      const missingNames = (b.mergedResult?.items || []).filter(it => !String(it.description || it.model || it.name || '').trim());
+      const missingNames = ((b.mergedResult?.items || b.data || b.diffItems || [])).filter(it => !String(it.description || it.model || it.name || '').trim());
       if (missingNames.length > 0) {
         alert(`❌ ไม่สามารถนำเข้าได้: พบสินค้าที่ไม่มีชื่อสินค้า ${missingNames.length} รายการ (ระบบบังคับชื่อสินค้า 100%)\nตัวอย่าง P/N: ${missingNames.slice(0, 5).map(i => i.pn).join(', ')}`);
         return;
@@ -1288,16 +1311,16 @@
 
             const importPayload = {
               branchCode: 'AYUTTHAYA_CITY_PARK',
-              sourceFileName: b.sourceFilename,
-              sourceFileSha256: b.fileHash,
+              sourceFileName: sourceName,
+              sourceFileSha256: b.fileHash || b.sourceFileHash || '',
               expectedPreviousBatchId: expectedPrevId,
               summary: {
-                totalRows: b.stats.totalProducts,
-                f1Total: b.stats.f1Total,
-                f2Total: b.stats.f2Total,
-                totalQuantity: b.stats.grandTotal
+                totalRows: stats.totalProducts,
+                f1Total: stats.f1Total,
+                f2Total: stats.f2Total,
+                totalQuantity: stats.grandTotal
               },
-              items: b.mergedResult.items.map(it => {
+              items: (b.mergedResult?.items || b.data || []).map(it => {
                 const desc = String(it.description || it.model || it.name || '').trim();
                 return {
                   inventoryPn: it.pn,
@@ -1380,39 +1403,39 @@
 
         const batchRecord = {
           batchId: effectiveBatchId,
-          data: b.mergedResult.items,
+          data: b.mergedResult?.items || b.data || [],
           meta: {
             stockBatchId: effectiveBatchId,
             importBatchId: effectiveBatchId,
             batchId: effectiveBatchId,
-            importedAt: b.importedAt,
-            sourceFilename: b.sourceFilename,
-            sourceFileHash: b.fileHash,
-            sheet1Rows: (b.s1Summary ? b.s1Summary.totalRows : (b.sheet1 ? b.sheet1.totalRows : 0)),
+            importedAt: b.importedAt || new Date().toISOString(),
+            sourceFilename: sourceName,
+            sourceFileHash: b.fileHash || b.sourceFileHash || '',
+            sheet1Rows: (b.s1Summary ? b.s1Summary.totalRows : (b.sheet1 ? b.sheet1.totalRows : (b.mergedResult ? b.mergedResult.totalRows : (b.data ? b.data.length : 0)))),
             sheet2Rows: (b.s2Summary ? b.s2Summary.totalRows : (b.sheet2 ? b.sheet2.totalRows : 0)),
-            uniquePn: b.stats.totalProducts,
-            f1Total: b.stats.f1Total,
-            f2Total: b.stats.f2Total,
-            grandTotal: b.stats.grandTotal,
+            uniquePn: stats.totalProducts,
+            f1Total: stats.f1Total,
+            f2Total: stats.f2Total,
+            grandTotal: stats.grandTotal,
             storageScope: storageScope,
             storageMode: storageMode,
             schemaVersion: '2.0.0',
             applicationVersion: '20260907-b2',
-            stats: b.stats,
+            stats: stats,
             status: 'ACTIVE'
           }
         };
 
         // Auto-Register New Products into System Master Database as PENDING_PRODUCT_REVIEW Drafts
-        const currentStockDb = Array.isArray(window.STOCK_DATABASE) ? window.STOCK_DATABASE : (Array.isArray(window.STOCK_DATA) ? window.STOCK_DATA : []);
-        const incomingPns = new Set(b.mergedResult.items.map(it => it.pn));
+        const incomingItems = b.mergedResult?.items || b.data || [];
+        const incomingPns = new Set(incomingItems.map(it => it.pn));
         let newItemsRegistered = 0;
 
         // Detect new items not yet in master catalog
         const existingPns = new Set(currentStockDb.map(it => it.pn));
         const diffItemMap = new Map((b.diffItems || []).map(d => [d.pn, d]));
 
-        b.mergedResult.items.forEach(newItem => {
+        incomingItems.forEach(newItem => {
           if (!existingPns.has(newItem.pn)) {
             newItemsRegistered++;
             const stagedDiff = diffItemMap.get(newItem.pn) || {};

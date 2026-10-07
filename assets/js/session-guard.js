@@ -60,15 +60,18 @@
       if (!isRestricted) return;
 
       const isAuth = window.AuthService?.isAuthenticated();
-      if (false) {
+      if (!isAuth) {
+        if (window.PILOT_MODE) {
+          // Allow store prototype testing
+          return;
+        }
         console.warn('[SessionGuard] Unauthenticated access to restricted route:', currentHash);
-        window.location.hash = '#/';
-        window.AuthModal?.show();
+        window.location.hash = '#/login';
         return;
       }
 
       const isLeader = window.PermissionService?.isStoreLeader() || window.PermissionService?.isSystemAdmin();
-      if (!isLeader) {
+      if (!isLeader && !window.PILOT_MODE) {
         console.warn('[SessionGuard] Unauthorized route access attempted by MEMBER:', currentHash);
         this.showAccessDeniedToast();
         window.location.hash = '#/home';

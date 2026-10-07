@@ -566,32 +566,62 @@
           newCount++;
         }
 
+        const prevF1 = curr ? Number(curr.f1 || curr.floor1 || 0) : 0;
+        const prevF2 = curr ? Number(curr.f2 || curr.floor2 || 0) : 0;
+        const prevTotal = curr ? Number(curr.total || 0) : 0;
+
         return {
           ...newItem,
-          currentF1: curr ? Number(curr.f1 || curr.floor1 || 0) : 0,
-          currentF2: curr ? Number(curr.f2 || curr.floor2 || 0) : 0,
-          currentTotal: curr ? Number(curr.total || 0) : 0,
+          inventoryScope: newItem.inventoryGroup || 'ACCESSORY',
+          prevF1,
+          prevF2,
+          prevTotal,
+          currentF1: prevF1,
+          currentF2: prevF2,
+          currentTotal: prevTotal,
           diffF1,
           diffF2,
           diffTotal,
+          isNew,
+          isChanged,
+          registrationStatus: isNew ? 'PENDING_PRODUCT_REVIEW' : 'VERIFIED_ACTIVE',
+          riskFlags: [],
           diffType: isNew ? 'NEW_SKU' : (isChanged ? 'QUANTITY_CHANGED' : 'IDENTICAL')
         };
       });
 
       const batchId = `GBS-${Date.now().toString().slice(-6)}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+      const sourceFilename = syncResult.sourceUrl2 ? 'GoogleSheet (Stock1 + Stock2)' : 'GoogleSheet (Live)';
+
+      const stats = {
+        totalProducts: syncResult.totalRows,
+        f1Total: syncResult.f1Total,
+        f2Total: syncResult.f2Total,
+        grandTotal: syncResult.grandTotal,
+        changedCount,
+        newCount,
+        unchangedCount
+      };
 
       return {
         batchId,
         sourceMode: 'MODE_B_GOOGLE_SHEET',
+        sourceFilename,
+        fileHash: syncResult.contentHash,
         importedAt: syncResult.fetchedAt,
         sourceFileHash: syncResult.contentHash,
         sourceUrl: syncResult.sourceUrl,
+        diffItems: diffItems,
         items: diffItems,
+        mergedResult: syncResult,
+        warnings: syncResult.warnings || [],
+        stats: stats,
         meta: {
           schemaVersion: '2.0.0',
           batchId,
           importedAt: syncResult.fetchedAt,
-          sourceFileName: syncResult.sourceUrl2 ? 'GoogleSheet (Stock1 + Stock2)' : 'GoogleSheet (Live)',
+          sourceFileName: sourceFilename,
+          sourceFilename: sourceFilename,
           sourceFileHash: syncResult.contentHash,
           sourceMode: 'MODE_B_GOOGLE_SHEET',
           totalSKUs: syncResult.totalRows,
@@ -602,7 +632,8 @@
           newCount,
           unchangedCount,
           warnings: syncResult.warnings || [],
-          status: 'ACTIVE_SNAPSHOT'
+          status: 'ACTIVE_SNAPSHOT',
+          stats: stats
         },
         data: syncResult.items
       };
