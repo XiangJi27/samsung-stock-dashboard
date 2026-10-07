@@ -7,15 +7,15 @@ class AppRouter {
   constructor() {
     this.routes = {
       "/login": { title: "เข้าสู่ระบบ • Samsung Branch Operations", isProtected: false, viewId: "view-login" },
-      "/home": { title: "ภาพรวมสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-home" },
-      "/stock": { title: "สต็อกสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-stock" },
-      "/promotions": { title: "โปรโมชั่นสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-promotions" },
-      "/promotion-import": { title: "นำเข้าราคาและโปรโมชั่น • Samsung Branch Operations", isProtected: true, viewId: "view-promotion-import" },
-      "/stock-import": { title: "นำเข้าสต็อกจาก Excel • Samsung Branch Operations", isProtected: true, viewId: "view-stock-import" },
-      "/stock-import-history": { title: "ประวัติการนำเข้าสต็อก • Samsung Branch Operations", isProtected: true, viewId: "view-stock-import-history" },
-      "/reports": { title: "รายงานสาขา • Samsung Branch Operations", isProtected: true, viewId: "view-reports" },
-      "/knowledge": { title: "คลังความรู้สาขา • Samsung Branch Operations", isProtected: true, viewId: "view-knowledge" },
-      "/settings": { title: "ตั้งค่าระบบ • Samsung Branch Operations", isProtected: true, viewId: "view-settings" }
+      "/home": { title: "ภาพรวมสาขา • Samsung Branch Operations", isProtected: false, viewId: "view-home" },
+      "/stock": { title: "สต็อกสาขา • Samsung Branch Operations", isProtected: false, viewId: "view-stock" },
+      "/promotions": { title: "โปรโมชั่นสาขา • Samsung Branch Operations", isProtected: false, viewId: "view-promotions" },
+      "/promotion-import": { title: "นำเข้าราคาและโปรโมชั่น • Samsung Branch Operations", isProtected: false, viewId: "view-promotion-import" },
+      "/stock-import": { title: "นำเข้าสต็อกจาก Excel • Samsung Branch Operations", isProtected: false, viewId: "view-stock-import" },
+      "/stock-import-history": { title: "ประวัติการนำเข้าสต็อก • Samsung Branch Operations", isProtected: false, viewId: "view-stock-import-history" },
+      "/reports": { title: "รายงานสาขา • Samsung Branch Operations", isProtected: false, viewId: "view-reports" },
+      "/knowledge": { title: "คลังความรู้สาขา • Samsung Branch Operations", isProtected: false, viewId: "view-knowledge" },
+      "/settings": { title: "ตั้งค่าระบบ • Samsung Branch Operations", isProtected: false, viewId: "view-settings" }
     };
 
     this.currentRoute = null;

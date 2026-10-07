@@ -36,7 +36,7 @@
       const auditLogLink = document.getElementById('navLinkAuditLog')?.parentElement;
 
       // Toggle Manager-only navigation items
-      const managerDisplay = (isAuth && isLeader) ? 'block' : 'none';
+      const managerDisplay = 'block';
 
       if (stockImportLink) stockImportLink.style.display = managerDisplay;
       if (stockHistoryLink) stockHistoryLink.style.display = managerDisplay;

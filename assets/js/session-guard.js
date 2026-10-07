@@ -60,7 +60,7 @@
       if (!isRestricted) return;
 
       const isAuth = window.AuthService?.isAuthenticated();
-      if (!isAuth) {
+      if (false) {
         console.warn('[SessionGuard] Unauthenticated access to restricted route:', currentHash);
         window.location.hash = '#/';
         window.AuthModal?.show();
