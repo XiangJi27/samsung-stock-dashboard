@@ -694,10 +694,44 @@
     }
 
     /**
+     * Singleton live sync promise to avoid redundant concurrent network calls.
+     */
+    static _activeSyncPromise = null;
+    static _hasCompletedSync = false;
+
+    /**
+     * Ensures live stock is fetched from Google Sheet before initial UI render (Zero-Flicker Gate).
+     */
+    static async ensureLiveSynced(maxWaitMs = 4000) {
+      if (this._hasCompletedSync) return true;
+      if (!this._activeSyncPromise) {
+        this._activeSyncPromise = this.performLiveSync({ isBackgroundSync: true })
+          .then(res => {
+            this._hasCompletedSync = true;
+            return res;
+          })
+          .catch(err => {
+            console.warn('[GoogleSheetStockSync] ensureLiveSynced encountered error:', err.message);
+            return null;
+          })
+          .finally(() => {
+            this._activeSyncPromise = null;
+          });
+      }
+
+      const timeoutPromise = new Promise(resolve => setTimeout(() => resolve('TIMEOUT'), maxWaitMs));
+      return Promise.race([this._activeSyncPromise, timeoutPromise]);
+    }
+
+    /**
      * Performs direct live sync from Google Sheet and activates it into the system state.
      * Used by background auto-sync across all branch devices.
      */
     static async performLiveSync(options = {}) {
+      if (this._hasCompletedSync && !options.force) {
+        return { success: true, alreadySynced: true };
+      }
+
       const url1 = options.url1 || this.getStoredSheetUrl();
       const url2 = options.url2 || this.getStoredSheetUrl2();
       if (!url1) {
@@ -790,6 +824,7 @@
         this.setLastSyncTime(syncResult.fetchedAt);
       }
 
+      this._hasCompletedSync = true;
       console.info(`[GoogleSheetStockSync] Live sync complete: ${syncResult.totalRows} items, F1: ${syncResult.f1Total}, F2: ${syncResult.f2Total}, Grand Total: ${syncResult.grandTotal}`);
       return {
         success: true,

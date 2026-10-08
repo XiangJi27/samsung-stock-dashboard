@@ -4210,8 +4210,40 @@
       }
     }
 
-    // Dynamic Initialization & Route Lifecycle
-    function initPrototypeStock() {
+    let hasWaitedInitialLiveSync = false;
+
+    // Dynamic Initialization & Route Lifecycle (Zero-Flicker Gate)
+    async function initPrototypeStock() {
+      // Zero-Flicker Gate:
+      // If live Google Sheet stock hasn't loaded yet on a fresh device, show a clean syncing skeleton
+      // and await the Google Sheet fetch before rendering cards and table to prevent double-flicker.
+      const hasLiveSync = window.STOCK_SNAPSHOT_STATUS === 'GOOGLE_SHEET_LIVE_SYNC' || 
+                          (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.meta?.storageScope === 'GOOGLE_SHEET_LIVE_SYNC');
+
+      if (!hasWaitedInitialLiveSync && !hasLiveSync && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.ensureLiveSynced === 'function') {
+        hasWaitedInitialLiveSync = true;
+        const tableBody = document.getElementById('stockTableBody');
+        if (tableBody) {
+          tableBody.innerHTML = `
+            <tr id="rowGoogleSheetSyncLoading">
+              <td colspan="10" style="text-align: center; padding: 56px 24px;">
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+                  <div style="width: 36px; height: 36px; border: 3px solid rgba(56, 189, 248, 0.2); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+                  <div style="font-weight: 600; font-size: 1.05rem; color: #38bdf8;">🔄 กำลังซิงค์สต็อกสดล่าสุดจาก Google Sheet...</div>
+                  <div style="font-size: 0.85rem; color: #94a3b8;">กำลังเชื่อมต่อข้อมูลแท็บ Stock1 &amp; Stock2 สาขาอยุธยา ซิตี้ พาร์ค ตรงตามสต็อกจริง</div>
+                </div>
+              </td>
+            </tr>
+          `;
+        }
+        setupPrototypeStockControls();
+        try {
+          await window.GoogleSheetStockSync.ensureLiveSynced(4000);
+        } catch (e) {
+          console.warn('[Stock Prototype] Initial live sync timeout/error, rendering baseline:', e);
+        }
+      }
+
       console.info("[Stock Prototype] initialization started");
       console.info("[Stock Prototype] data sources", {
         stock: (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE)) ? window.STOCK_DATABASE.length : "FALLBACK",
