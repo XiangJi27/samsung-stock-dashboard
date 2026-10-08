@@ -759,14 +759,21 @@
       if (typeof root !== 'undefined') {
         root.STOCK_DATABASE = syncResult.items;
         root.STOCK_DATA = syncResult.items;
+        root.LATEST_STOCK_SNAPSHOT = syncResult.items;
+        root.CONFIRMED_LOCAL_SNAPSHOT = batchRecord;
         root.STOCK_METADATA = batchRecord.meta;
+        root.PILOT_STOCK_METADATA = batchRecord.meta;
         root.STOCK_SNAPSHOT_STATUS = 'GOOGLE_SHEET_LIVE_SYNC';
 
         if (root.DataService && typeof root.DataService.setStockData === 'function') {
           root.DataService.setStockData(syncResult.items);
         }
 
-        if (typeof root.syncMasterStockData === 'function') {
+        if (root.PrototypeStock && typeof root.PrototypeStock.refresh === 'function') {
+          root.PrototypeStock.refresh();
+        } else if (typeof root.initPrototypeStock === 'function') {
+          root.initPrototypeStock();
+        } else if (typeof root.syncMasterStockData === 'function') {
           root.syncMasterStockData();
         }
 

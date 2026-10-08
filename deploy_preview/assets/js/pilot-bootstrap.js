@@ -388,6 +388,17 @@
       // 7. Route change listener for dynamic Pilot views (Dashboard & Member Admin)
       window.addEventListener('hashchange', () => this.handleRouteChange());
       this.handleRouteChange();
+
+      // 8. Cross-Device Google Sheet Auto-Sync (Live background sync for all branch devices)
+      if (window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.performLiveSync === 'function') {
+        setTimeout(async () => {
+          try {
+            await window.GoogleSheetStockSync.performLiveSync({ isBackgroundSync: true });
+          } catch (e) {
+            console.warn('[PilotBootstrap] Background Google Sheet sync skipped:', e.message);
+          }
+        }, 300);
+      }
     }
 
     hideAllPilotPages() {
