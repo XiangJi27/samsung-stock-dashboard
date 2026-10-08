@@ -3403,7 +3403,6 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     window.renderDrawerSpecDetails = renderDrawerSpecDetails;
 
     let currentDrawerScenario = "NORMAL";
-    let currentDrawerMode = "NORMAL";
 
     function setDrawerScenario(scenario) {
       currentDrawerScenario = scenario;
