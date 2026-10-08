@@ -36,10 +36,13 @@
      * Parse full CSV text into 2D array of rows adhering to RFC-4180 quotes (handles multiline cells).
      */
     static parseCsvToRows(csvText) {
-      if (typeof root !== 'undefined' && root.Papa && typeof root.Papa.parse === 'function') {
-        const parsed = root.Papa.parse(csvText, { skipEmptyLines: true });
+      const papaInstance = (typeof root !== 'undefined' && root.Papa) ? root.Papa : (typeof window !== 'undefined' && window.Papa ? window.Papa : (typeof Papa !== 'undefined' ? Papa : null));
+      if (papaInstance && typeof papaInstance.parse === 'function') {
+        const parsed = papaInstance.parse(csvText, { skipEmptyLines: true });
         if (parsed && Array.isArray(parsed.data)) {
-          return parsed.data.map(row => row.map(cell => (cell !== undefined && cell !== null ? String(cell).trim() : '')));
+          return parsed.data
+            .filter(row => Array.isArray(row))
+            .map(row => row.map(cell => (cell !== undefined && cell !== null ? String(cell).trim() : '')));
         }
       }
       const rows = [];
@@ -293,7 +296,7 @@
 
       for (let r = headerIdx + 1; r < rows.length; r++) {
         const cols = rows[r];
-        if (!cols || cols.length === 0 || cols.every(c => !c || c.trim() === '')) continue;
+        if (!cols || cols.length === 0 || cols.every(c => !c || String(c).trim() === '')) continue;
 
         const rawCat = getCol(cols, catIdx);
         if (rawCat && rawCat.length > 1) {
@@ -361,11 +364,14 @@
           sourceType: 'GOOGLE_SHEET_LIVE_SYNC',
           sourceCategory: categoryKey,
           sourceRow: r,
-          category: currentCategory,
+          category: currentCategory || 'SmartPhone',
           productName: fullModelTitle,
           model: activeModel,
-          capacity: capVal,
+          capacity: capVal || '',
           pn: rawPn || null,
+          candidatePn: [],
+          selectedPns: [],
+          confirmedPns: [],
           productCodeType: productCodeType,
           saleMode: 'NORMAL',
           rrp: rrp,
@@ -388,7 +394,9 @@
           isPromotion: (discount > 0 || tradeUpBonus > 0 || Boolean(rawGift)),
           isActive: true,
           validationStatus: hasFormulaError ? 'BLOCKED' : (rrp > 0 ? 'PASSED_VALIDATION' : 'WARNING'),
-          reasonText: hasFormulaError ? 'พบสูตรผิดพลาด #ERROR! ในเซลล์ข้อมูลต้นทาง' : 'ซิงค์สำเร็จจาก Google Sheet'
+          validationFlags: hasFormulaError ? ['FORMULA_ERROR'] : [],
+          reasonText: hasFormulaError ? 'พบสูตรผิดพลาด #ERROR! ในเซลล์ข้อมูลต้นทาง' : 'ซิงค์สำเร็จจาก Google Sheet',
+          sourceTrace: { sheet: categoryKey, row: r }
         };
 
         variants.push(variant);
@@ -398,6 +406,7 @@
           variants.push({
             ...variant,
             promoId: `${draftRowId}-TU`,
+            draftRowId: `${draftRowId}-TU`,
             saleMode: 'TRADE_UP',
             discount: discount + tradeUpBonus,
             discountValue: discount + tradeUpBonus,
@@ -661,15 +670,24 @@
               // Pass to Diff Preview Staging
               window.PromotionImportController.currentStagedBatch = {
                 batchId: `GSHEET-${catKey}-${Date.now()}`,
+                sourceFilename: `Google Sheet (${catKey})`,
+                fileHash: `GS-${catKey}-${Date.now()}`,
                 format: 'GOOGLE_SHEET_CSV',
+                canAutoPublish: true,
                 variants: res.variants,
-                stats: { totalVariants: res.variantsCount, passedCount: res.variantsCount, reviewCount: 0, blockedCount: 0 }
+                warnings: [],
+                stats: { totalVariants: res.variantsCount, passedCount: res.variantsCount, reviewCount: 0, blockedCount: 0 },
+                importedAt: new Date().toISOString()
               };
-              window.PromotionImportController.updateBatchStats();
-              window.PromotionImportController.filterDiffTable('ALL');
-              window.PromotionImportController.updateStepper(3);
-              const previewSec = document.getElementById('promoPreviewSection');
-              if (previewSec) previewSec.classList.remove('hidden');
+              if (typeof window.PromotionImportController.renderPreview === 'function') {
+                window.PromotionImportController.renderPreview();
+              } else {
+                if (typeof window.PromotionImportController.filterDiffTable === 'function') {
+                  window.PromotionImportController.filterDiffTable('ALL');
+                }
+                const previewSec = document.getElementById('promoPreviewSection');
+                if (previewSec) previewSec.classList.remove('hidden');
+              }
               if (statusEl) {
                 statusEl.innerHTML = `<span style="color: #38bdf8;">✓ ดึงข้อมูลสำเร็จ ${res.variantsCount} รายการ • กรุณาตรวจ Preview Diff ด้านล่างก่อนยืนยัน</span>`;
               }
@@ -751,15 +769,24 @@
               // Pass into Diff Preview staging
               window.PromotionImportController.currentStagedBatch = {
                 batchId: `GSHEET-ALL-${Date.now()}`,
+                sourceFilename: `Google Sheet (All Categories)`,
+                fileHash: `GS-ALL-${Date.now()}`,
                 format: 'GOOGLE_SHEET_CSV',
+                canAutoPublish: true,
                 variants: res.allVariants,
-                stats: { totalVariants: total, passedCount: total, reviewCount: 0, blockedCount: 0 }
+                warnings: [],
+                stats: { totalVariants: total, passedCount: total, reviewCount: 0, blockedCount: 0 },
+                importedAt: new Date().toISOString()
               };
-              window.PromotionImportController.updateBatchStats();
-              window.PromotionImportController.filterDiffTable('ALL');
-              window.PromotionImportController.updateStepper(3);
-              const previewSec = document.getElementById('promoPreviewSection');
-              if (previewSec) previewSec.classList.remove('hidden');
+              if (typeof window.PromotionImportController.renderPreview === 'function') {
+                window.PromotionImportController.renderPreview();
+              } else {
+                if (typeof window.PromotionImportController.filterDiffTable === 'function') {
+                  window.PromotionImportController.filterDiffTable('ALL');
+                }
+                const previewSec = document.getElementById('promoPreviewSection');
+                if (previewSec) previewSec.classList.remove('hidden');
+              }
               if (statusEl) {
                 statusEl.innerHTML = `<span style="color: #38bdf8;">✓ ซิงค์ครบ 3 หมวดหมู่ สำเร็จรวม ${total.toLocaleString()} รายการ • ข้อมูลเข้าสู่ Diff Preview ด้านล่างแล้ว</span>`;
               }
