@@ -2134,8 +2134,13 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       const canonicalCat = (typeof resolveCanonicalCategory === "function") ? resolveCanonicalCategory(item) : "OTHER";
       const isDevice = (canonicalCat === "SMARTPHONE" || canonicalCat === "TABLET");
       if (matched.length === 0 && item.model && isDevice) {
-        const cleanM = item.model.toLowerCase();
-        matched = promoVariants.filter(v => v.model && cleanM.includes(v.model.toLowerCase()));
+        const normItem = item.model.toLowerCase().replace(/[\s\-_/]/g, "");
+        matched = promoVariants.filter(v => {
+          if (!v.model) return false;
+          const baseVModel = v.model.split(/[\n(]/)[0].trim().toLowerCase().replace(/[\s\-_/]/g, "");
+          if (!baseVModel || baseVModel.length < 3) return false;
+          return normItem.includes(baseVModel);
+        });
         if (matched.length > 0) isModelScope = true;
       }
 
@@ -2747,14 +2752,17 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
 
     let currentDrawerItem = null;
     let currentDrawerTab = "PROMO"; // "PROMO" or "SPECS"
+    let currentDrawerMode = "NORMAL";
 
     function openPromoDrawer(targetPn, encodedModel) {
       currentDrawerTab = "PROMO";
+      currentDrawerMode = "NORMAL";
       openDualTabDrawer(targetPn, encodedModel);
     }
 
     function openProductSpecsDrawer(targetPn, encodedModel) {
       currentDrawerTab = "SPECS";
+      currentDrawerMode = "NORMAL";
       openDualTabDrawer(targetPn, encodedModel);
     }
 
@@ -2912,74 +2920,46 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           `;
         }
 
-        if (!promo.variants || promo.variants.length === 0) {
-          promoHtml += `
-            <div class="empty-promo-state">
-              <div class="empty-promo-icon">🏷️</div>
-              <h4 class="empty-promo-title">ไม่มีโปรโมชั่นที่ใช้งานสำหรับสินค้ารายการนี้</h4>
-              <p class="empty-promo-desc">
-                ระบบไม่พบโปรโมชั่นที่ผ่านเกณฑ์หรือแคมเปญอาจสิ้นสุดลงแล้ว สามารถจำหน่ายได้ในราคาปกติ RRP
-              </p>
-              ${srp ? `
-                <div class="promotion-price-card" style="border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
-                  <div class="price-row">
-                    <span class="price-row__label">ราคามาตรฐาน (RRP)</span>
-                    <strong class="price-row__value" style="font-size: 1.2rem; color: #fff;">฿${srp.toLocaleString('th-TH')}</strong>
-                  </div>
-                  <div class="price-row price-row--total">
-                    <span class="price-row__label">ราคาสุทธิ (Net Price)</span>
-                    <strong class="price-row__value" style="color: #38bdf8;">฿${srp.toLocaleString('th-TH')}</strong>
-                  </div>
-                </div>
-              ` : `
-                <div class="price-data-warning">
-                  <strong>ข้อมูลราคาไม่สมบูรณ์</strong>
-                  <p style="margin: 4px 0 0 0; font-size: 0.82rem;">ไม่พบราคามาตรฐาน RRP ของสินค้ารายการนี้ กรุณาตรวจสอบกับผู้จัดการสาขา</p>
-                </div>
-              `}
-            </div>
-          `;
-        } else {
-          const modes = [
-            { key: "NORMAL", label: "ซื้อปกติ" },
-            { key: "SF_PLUS", label: "Samsung Finance+" },
-            { key: "STUDENT", label: "โปรนักศึกษา" },
-            { key: "TRADE_UP", label: "Trade Up" },
-            { key: "BUNDLE", label: "ซื้อพ่วง" }
-          ];
+                const modes = [
+          { key: "NORMAL", label: "ซื้อปกติ" },
+          { key: "SF_PLUS", label: "Samsung Finance+" },
+          { key: "STUDENT", label: "โปรนักศึกษา" },
+          { key: "TRADE_UP", label: "Trade Up" },
+          { key: "BUNDLE", label: "ซื้อพ่วง" }
+        ];
 
-          function hasPromoForMode(modeKey) {
-            if (!promo.variants || promo.variants.length === 0) return false;
-            if (modeKey === "NORMAL") return promo.variants.some(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
-            if (modeKey === "SF_PLUS") return promo.variants.some(v => v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS");
-            if (modeKey === "STUDENT") return promo.variants.some(v => v.saleMode === "STUDENT");
-            if (modeKey === "TRADE_UP") return promo.variants.some(v => v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0);
-            if (modeKey === "BUNDLE") return promo.variants.some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
-            return false;
-          }
-
-          promoHtml += `
-            <div class="sale-mode-tabs promotion-path-tabs" id="drawerTabs" role="tablist" aria-label="รูปแบบโปรโมชั่น">
-              ${modes.map((m, idx) => {
-                const hasP = hasPromoForMode(m.key);
-                return `
-                  <button type="button"
-                          class="sale-mode-tab promotion-path-tab ${idx === 0 ? 'active is-active' : ''} ${!hasP ? 'is-empty' : ''}" 
-                          onclick="switchDrawerMode('${m.key}', this)"
-                          data-mode="${m.key}"
-                          role="tab"
-                          aria-selected="${idx === 0 ? 'true' : 'false'}">
-                    <span class="promotion-path-tab__title">${m.label}</span>
-                    <small class="promotion-path-tab__status">${hasP ? 'มีโปรโมชั่น' : 'ไม่มีโปร'}</small>
-                  </button>
-                `;
-              }).join("")}
-            </div>
-            <div id="drawerModeContent">
-              ${renderDrawerModeDetails(promo.variants, "NORMAL", srp, item)}
-            </div>
-          `;
+        function hasPromoForMode(modeKey) {
+          if (!promo.variants || promo.variants.length === 0) return false;
+          if (modeKey === "NORMAL") return promo.variants.some(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
+          if (modeKey === "SF_PLUS") return promo.variants.some(v => v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS");
+          if (modeKey === "STUDENT") return promo.variants.some(v => v.saleMode === "STUDENT");
+          if (modeKey === "TRADE_UP") return promo.variants.some(v => v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0);
+          if (modeKey === "BUNDLE") return promo.variants.some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
+          return false;
         }
+
+        promoHtml += `
+          <div class="sale-mode-tabs promotion-path-tabs" id="drawerTabs" role="tablist" aria-label="รูปแบบโปรโมชั่น">
+            ${modes.map((m, idx) => {
+              const hasP = hasPromoForMode(m.key);
+              const isActive = (currentDrawerMode ? m.key === currentDrawerMode : idx === 0);
+              return `
+                <button type="button"
+                        class="sale-mode-tab promotion-path-tab ${isActive ? "active is-active" : ""} ${!hasP ? "is-empty" : ""}" 
+                        onclick="switchDrawerMode('${m.key}', this)"
+                        data-mode="${m.key}"
+                        role="tab"
+                        aria-selected="${isActive ? "true" : "false"}">
+                  <span class="promotion-path-tab__title">${m.label}</span>
+                  <small class="promotion-path-tab__status">${hasP ? "มีโปรโมชั่น" : "ไม่มีโปร"}</small>
+                </button>
+              `;
+            }).join("")}
+          </div>
+          <div id="drawerModeContent">
+            ${renderDrawerModeDetails(promo.variants, currentDrawerMode || "NORMAL", srp, item)}
+          </div>
+        `;
         drawerBody.innerHTML = promoHtml;
       }
     }
