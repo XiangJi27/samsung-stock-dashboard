@@ -1,0 +1,352 @@
+{
+  "manifestVersion": "1.1.0-pilot",
+  "environment": "FEEDBACK_PILOT_PREVIEW_CANDIDATE",
+  "applicationSourceCommit": "4dba2fe",
+  "packageBuiltFromCommit": "1c5de04",
+  "baselineCommit": "a7c3390",
+  "databaseSchemaCommit": "4dba2fe",
+  "builtAt": "2026-09-18T14:54:01.708319+07:00",
+  "project": "Samsung Branch Operations System - Feedback Pilot",
+  "pilotBranch": "AYUTTHAYA_CITY_PARK",
+  "usersCount": 4,
+  "primaryUseCase": "STOCK_LOOKUP",
+  "totalFiles": 55,
+  "summary": {
+    "totalFiles": 55,
+    "totalSizeBytes": 10026160,
+    "totalSizeMB": 9.56
+  },
+  "files": [
+    {
+      "file": "index.html",
+      "sizeBytes": 67598,
+      "sha256": "a0a813d2817e48bc91ddc700b73f34dbc5834676c3c526616c9611099afca5d0",
+      "status": "PILOT_ENTRYPOINT_MIRROR"
+    },
+    {
+      "file": "app.js",
+      "sizeBytes": 182511,
+      "sha256": "77eadc07b572832d305339594936f0f5c80747bdc6b5c1635f9f60fa568b2566",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "style.css",
+      "sizeBytes": 97721,
+      "sha256": "1a3822422fe2dacdbfa551c47cb61b18736c7264eb23f6774e4d789211d307e1",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "stock_data.js",
+      "sizeBytes": 5423699,
+      "sha256": "47f7c84cf3451973b908351a50f5c72fe2ec573907cda38216095a0b68cb8d53",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "promotion_variants.js",
+      "sizeBytes": 1673474,
+      "sha256": "251d065e9e5aafc3d63d109ce8f44c66b1e594fcb215a2647027350bf9263287",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "vercel.json",
+      "sizeBytes": 990,
+      "sha256": "15f1d0554da2bb834e7a5d1335f687a3b9625cd16f95f4504f96e082e52a38ce",
+      "status": "PILOT_ROUTING_CONFIG",
+      "note": "Root redirect to /pilot.html configured for Vercel Preview"
+    },
+    {
+      "file": "assets/css/shell.css",
+      "sizeBytes": 5284,
+      "sha256": "c81bf96bb6c1b71efca24ba99988ddac8b2f850bb07981a00a8d52ba25b4b728",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/login.css",
+      "sizeBytes": 4773,
+      "sha256": "319a2a7d7b2fb57e5fe54e4fad70a535a912663427a3cdf15871ac0942fb318c",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/navigation.css",
+      "sizeBytes": 2981,
+      "sha256": "fa5082e31abd37167d618bf0c162e1936149075e1d8e407dbf2c7fde6523b098",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/home.css",
+      "sizeBytes": 9028,
+      "sha256": "eed7d13c89ba9272b8954632b6aa4c425e41bd6aa0138389f523bc18df53faa4",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/responsive.css",
+      "sizeBytes": 2341,
+      "sha256": "68d865fe1720a930d40d75cb41b69444539a489f7d26e0b1530061ff83bbce7d",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/config.js",
+      "sizeBytes": 1427,
+      "sha256": "73b1a6f3bfdc8fd73557da6aecd5ec71e9327684c2944b0d1623d1d20ec55a6e",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/auth.js",
+      "sizeBytes": 3227,
+      "sha256": "a8c7c57be8daac77a99debfa936d88ed3976ba410d32a973a0aa85c3bcd8fdd3",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/data-loader.js",
+      "sizeBytes": 20229,
+      "sha256": "1038ca7507d2a59e7b910c27b112346a2bd89bb65c0fd333ac2f7b12fe08de53",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/data-service.js",
+      "sizeBytes": 17719,
+      "sha256": "5c287d62de867f61044e55188372977a1d9128ce04d0676b618dc3a860f0f0a2",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/router.js",
+      "sizeBytes": 7105,
+      "sha256": "4da3a142b61fe43af2af908da1bb416ead500ae2a0d93e4b6af551a5c391c837",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/navigation.js",
+      "sizeBytes": 2913,
+      "sha256": "0153b5d006d6f728947ad01dc0588dfe1e1356497e241de713d0e8360eb05b15",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/home.js",
+      "sizeBytes": 17231,
+      "sha256": "4e033ff4c49c312e0b3a1694790484d759acf3316db76a73e2be0795528b1d29",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/modules.js",
+      "sizeBytes": 17915,
+      "sha256": "3725be64dd7d77c283072f07039dfbe6f0f0c3d37535807c5fdd91e2146221e9",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/css/importer.css",
+      "sizeBytes": 14879,
+      "sha256": "8a1c422a4c5518873fc31a7001c58c7ea16b7ac8e9c0b098035f07e99235fb30",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/stock-importer.js",
+      "sizeBytes": 79253,
+      "sha256": "bd8c8df156e5d719846e75c8ca3ba2761d46d3f9410dbcbbcb692be4f1ae5242",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/promotion-importer.js",
+      "sizeBytes": 163832,
+      "sha256": "3c6374e3544bd5628c8d2ffde711d24acbfa2bb3e2de94e61b32d2aa1926d10d",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "assets/js/sheet-sync.js",
+      "sizeBytes": 20900,
+      "sha256": "33c34bcaacd3acc190798bc1b34983fd8353425e42f704a91b51085b073abc80",
+      "status": "BASELINE_CORE"
+    },
+    {
+      "file": "pilot.html",
+      "sizeBytes": 67598,
+      "sha256": "a0a813d2817e48bc91ddc700b73f34dbc5834676c3c526616c9611099afca5d0",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/admin/members.js",
+      "sizeBytes": 31473,
+      "sha256": "3087f2f3ce09a5121b76e0e1947acb93b8e11a1b7b02828c9b7b59161f498a7c",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/css/prototype-stock.css",
+      "sizeBytes": 31986,
+      "sha256": "c1103f9fc57ef716ee34a834c7bf566bcf0f77e52774080110e2d4f528e6d0ba",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/prototype-stock.js",
+      "sizeBytes": 170149,
+      "sha256": "cb901989d3e99da401d38624f6c9f5c0f4c9af4036741ffd25549bea1d6e21ea",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "product_specs_data.js",
+      "sizeBytes": 750108,
+      "sha256": "2031c330552807997dc9286dd2b40a734c7aaf4de9cfef99ae1e10cf2d157e93",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-runtime-config.js",
+      "sizeBytes": 1276,
+      "sha256": "ef0833dd6e856a5d2dd8e05c22e4900b73fc615aba43b8a50e18c0e889769a53",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/supabase-client.js",
+      "sizeBytes": 1917,
+      "sha256": "392a08912350690b90641c78c256a3e6eece39f7bea8ac8d1c022de85bcdce69",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/auth-service.js",
+      "sizeBytes": 5484,
+      "sha256": "980c725ad5b6d72c8e7a5f7932eb693b661d01717ad8cbe451a17cba47aba51c",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/permission-service.js",
+      "sizeBytes": 1979,
+      "sha256": "e1c913bc0712d1029014a480c9c0cb19695cd791074de05af54a9714cfb3086d",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/session-guard.js",
+      "sizeBytes": 3560,
+      "sha256": "2478369d3250caf399b148a0518918be4caf125d42c9083de979f66cb78c8f8f",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/issue-service.js",
+      "sizeBytes": 4273,
+      "sha256": "63d9616bbf811b09352aba3081e78cf343cfc02a195f3356c3a3ae1b0380f002",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/auth-modal.js",
+      "sizeBytes": 5037,
+      "sha256": "961605f657f928f3bbea6aaf634e60fb78483a73fda0c19fc9e6d1990e74444f",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/user-status-bar.js",
+      "sizeBytes": 3984,
+      "sha256": "a2efe935f2f39b2d8a6f6ac450f3cef5430b0c737ba4732193656571a2e04b75",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/issue-report-modal.js",
+      "sizeBytes": 12592,
+      "sha256": "4d4a7ad5450310c3fe42538a94d0f28638fe512848ab19c14b938141726caff8",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/issue-list.js",
+      "sizeBytes": 19343,
+      "sha256": "338e309d4311fd75c8cbfa5e5a43c21cf3560972b3949b6df10524d141b88893",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-navigation.js",
+      "sizeBytes": 3608,
+      "sha256": "7791fff071229bea7aa2017c898ff26621628eee72f5d1ba2b7a7338e07f1b5e",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-dashboard-widgets.js",
+      "sizeBytes": 18484,
+      "sha256": "21d545286debf5c3e639c77d9bb351b810d96d379fbff593adb2958413d1a186",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/member-admin-service.js",
+      "sizeBytes": 49881,
+      "sha256": "7ebdb6f2c2400c57b13f4e5787c37ffa160e44f26d729c8c01972b95f26c38dd",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-bootstrap.js",
+      "sizeBytes": 21019,
+      "sha256": "bdfa2b97ce5c19952969027e331d620985498a2b60c2aa990a311b6e626cb167",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/pilot-stock-snapshot.js",
+      "sizeBytes": 235179,
+      "sha256": "4f7c8727bf5d5ac90240806afb814fa98c9ec0a359ea5f24df7640373dd60baa",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/stock-imports.js",
+      "sizeBytes": 18671,
+      "sha256": "5f1ddaaf4f9d91baa2e0b1110da168d1abb0cf2dcba27db32da2dd839a0ea030",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/stock/active.js",
+      "sizeBytes": 9676,
+      "sha256": "b2f19c6fa8425c44f52d962ffa06bd89b1a9ceae18630513d1054716b724ee17",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/promotion-imports.js",
+      "sizeBytes": 28833,
+      "sha256": "ba5c42bbc96bb7b3fd9462f42380415f3e80a6e222106ec244e8cedd6b1dead2",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/promotion-campaigns.js",
+      "sizeBytes": 24815,
+      "sha256": "9aa241cd09bd074db10dea79ce165f19326a205f0042c6d15e0511a44363999a",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/promotion-errors.js",
+      "sizeBytes": 11483,
+      "sha256": "9f8866a7354120a090bac45d0aa5819d5350fa07f9985e0c1d2028b100a758c1",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "api/promotions/active.js",
+      "sizeBytes": 3231,
+      "sha256": "7ec2d1d7a1488a857392f888e0faacf6faf5831aaad5bc6201cf8955596b1b57",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/promotion-heading-parser.js",
+      "sizeBytes": 20872,
+      "sha256": "ec77458803f22afaea3ff10136cf5182c962195981114581d27b95d0840f7e9c",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/promotion-knowledge-base.js",
+      "sizeBytes": 16972,
+      "sha256": "da5fcbf0b3873d6bdc014cc24374d01b4dbc6f11ca573fe8819776b6746bf90d",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "assets/js/promotion-calculator.js",
+      "sizeBytes": 35887,
+      "sha256": "fdde6fb769a71be9e89b7e7e99fd8bc3d0cd8f9d6ddfc85266523e00d0eb4da5",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "promotion_review_dashboard.html",
+      "sizeBytes": 112775,
+      "sha256": "70818f5a86470365c582945ffc7deb1b4b0bac4a7f944eb87e912aba0193f9ec",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "reports/promotion_release_manifest.json",
+      "sizeBytes": 1324,
+      "sha256": "ef14e7f0609303dddba673dd4ad3bd43c5bfa7d5a47befce3da7da2d5ba8dea0",
+      "status": "PILOT_RUNTIME"
+    },
+    {
+      "file": "data/product-accessory-master.json",
+      "sizeBytes": 465661,
+      "sha256": "5b752fb2bdf5b376f6fbbff26315a33ee20a8bfac7362096a2d01e17526a51e0",
+      "status": "PILOT_RUNTIME"
+    }
+  ]
+}

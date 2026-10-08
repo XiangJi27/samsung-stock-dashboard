@@ -1,0 +1,152 @@
+/* ==========================================================================
+   SAMSUNG BRANCH OPERATIONS - NAVIGATION CSS
+   Sidebar items, active indicators, mobile bottom navigation
+   ========================================================================== */
+
+.sidebar-nav-section {
+  flex: 1;
+  padding: 16px 12px;
+  overflow-y: auto;
+}
+
+.nav-group-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  font-weight: 700;
+  padding: 8px 12px 6px;
+  display: block;
+}
+
+.nav-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-item-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+}
+
+.nav-item-link.active {
+  background: linear-gradient(135deg, rgba(0, 119, 255, 0.2), rgba(0, 240, 255, 0.08));
+  color: #fff;
+  border: 1px solid rgba(0, 119, 255, 0.4);
+  box-shadow: 0 0 16px rgba(0, 119, 255, 0.15);
+}
+
+.nav-item-link.active::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: var(--shell-neon-cyan);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px var(--shell-neon-cyan);
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+.nav-badge-pill {
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.badge-coming-soon {
+  background: rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.badge-live-count {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Sidebar Footer User Box */
+.sidebar-footer {
+  padding: 14px 16px;
+  border-top: 1px solid var(--shell-border);
+  background: rgba(3, 7, 18, 0.4);
+}
+
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(11, 15, 25, 0.95);
+  border-top: 1px solid var(--shell-border);
+  backdrop-filter: blur(16px);
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  gap: 3px;
+  flex: 1;
+  height: 100%;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-item.active {
+  color: var(--shell-neon-cyan);
+}
+
+.mobile-nav-item .mobile-icon {
+  font-size: 1.15rem;
+}

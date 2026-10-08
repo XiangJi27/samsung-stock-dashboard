@@ -1,0 +1,42 @@
+{
+  "manifestVersion": "1.0.0",
+  "generatedAt": "2026-09-14T10:27:15.000000+07:00",
+  "releaseStatus": "PREVIEW_CANDIDATE",
+  "gateStatus": "DUAL_SCOPE_CI_PASSED",
+  "scopes": {
+    "activePublished": {
+      "count": 142,
+      "exactPnMatched": 18,
+      "modelScopeMatched": 124,
+      "violations": 0,
+      "status": "PASSED",
+      "description": "Active production promotions evaluated and verified for exact P/N and model scope integrity"
+    },
+    "septemberDraft": {
+      "count": 56,
+      "reviewRequired": 32,
+      "blockedQuarantined": 24,
+      "autoPublishAllowed": 0,
+      "violations": 0,
+      "status": "CONTAINED_IN_REVIEW_AND_QUARANTINE",
+      "description": "September promotions draft ingestion quarantined with zero unproven auto-publish"
+    }
+  },
+  "supersededEvidence": [
+    {
+      "value": 589,
+      "status": "SUPERSEDED",
+      "detail": "Replaced by verified batch and dual-scope CI gate (142 Active Published + 56 September Draft)"
+    },
+    {
+      "value": 904,
+      "status": "REJECTED_FALSE_POSITIVE",
+      "detail": "Artifact from substring search; not a real promotion variant count"
+    },
+    {
+      "batchId": "IMPORT-20260906-002",
+      "status": "HISTORICAL_RAW_IMPORT",
+      "detail": "Raw Excel batch from Sept 6 superseded by dual-scope validation"
+    }
+  ]
+}

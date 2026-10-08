@@ -2404,9 +2404,9 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     window.normalizeColorKey = normalizeColorKey;
 
     function updateCategoryCardCounts() {
-      // Zero-Flicker Guard: Do not display old card counts while fresh Google Sheet sync is in flight
+      // Zero-Flicker Guard: Do not display old card counts while fresh Google Sheet sync is in flight unless baseline data exists
       if (typeof window !== 'undefined' && window.GoogleSheetStockSync && !window.GoogleSheetStockSync._hasCompletedSync && !window.CONFIRMED_LOCAL_SNAPSHOT) {
-        return;
+        if (!rawItems || rawItems.length === 0) return;
       }
 
       const counts = {
@@ -2575,9 +2575,9 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     }
 
     function renderStockList() {
-      // Zero-Flicker Guard: Do not render old rows while fresh Google Sheet sync is in flight
+      // Zero-Flicker Guard: Do not render old rows while fresh Google Sheet sync is in flight unless baseline data exists
       if (typeof window !== 'undefined' && window.GoogleSheetStockSync && !window.GoogleSheetStockSync._hasCompletedSync && !window.CONFIRMED_LOCAL_SNAPSHOT) {
-        return;
+        if (!rawItems || rawItems.length === 0) return;
       }
 
       const items = filterItems();
@@ -4543,26 +4543,43 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
         };
       }
 
-      // View Switcher
+      // View Switcher (Desktop & Mobile Adaptive)
       const btnViewTable = document.getElementById("btnViewTable");
       const btnViewCards = document.getElementById("btnViewCards");
       const tableContainer = document.getElementById("tableViewContainer");
       const cardContainer = document.getElementById("cardViewContainer");
+      const stockSection = document.getElementById("view-stock");
 
       if (btnViewTable && btnViewCards && tableContainer && cardContainer) {
         btnViewTable.onclick = () => {
           btnViewTable.classList.add("active");
           btnViewCards.classList.remove("active");
-          tableContainer.style.display = "block";
-          cardContainer.style.display = "none";
+          if (stockSection) stockSection.classList.add("mobile-table-active");
+          tableContainer.style.setProperty("display", "block", "important");
+          cardContainer.style.setProperty("display", "none", "important");
         };
 
         btnViewCards.onclick = () => {
           btnViewCards.classList.add("active");
           btnViewTable.classList.remove("active");
-          tableContainer.style.display = "none";
-          cardContainer.style.display = "grid";
+          if (stockSection) stockSection.classList.remove("mobile-table-active");
+          tableContainer.style.setProperty("display", "none", "important");
+          cardContainer.style.setProperty("display", "grid", "important");
         };
+
+        // Auto-adapt default view on load (Cards for mobile, Table for desktop)
+        if (window.innerWidth <= 768) {
+          btnViewCards.classList.add("active");
+          btnViewTable.classList.remove("active");
+          if (stockSection) stockSection.classList.remove("mobile-table-active");
+          tableContainer.style.setProperty("display", "none", "important");
+          cardContainer.style.setProperty("display", "grid", "important");
+        } else {
+          btnViewTable.classList.add("active");
+          btnViewCards.classList.remove("active");
+          tableContainer.style.setProperty("display", "block", "important");
+          cardContainer.style.setProperty("display", "none", "important");
+        }
       }
     }
 
@@ -4633,7 +4650,10 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     };
     window.PrototypeStock = {
       refresh() {
-        initPrototypeStock();
+        refreshPrototypeData();
+        updateCategoryCardCounts();
+        renderFilterChips();
+        renderStockList();
       }
     };
     window.renderMetrics = window.renderMetrics || function() {};

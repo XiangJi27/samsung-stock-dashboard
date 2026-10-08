@@ -54,7 +54,7 @@
 
       // 1. Floating Action Button (Vibrant & High Visibility)
       const fabHtml = `
-        <button id="pilot-report-fab" style="position:fixed; bottom:24px; right:24px; z-index:9998; background:linear-gradient(135deg, #2563eb, #7c3aed); color:#fff; border:none; border-radius:30px; padding:12px 22px; font-size:14px; font-weight:600; cursor:pointer; box-shadow:0 8px 24px rgba(37,99,235,0.45); display:flex; align-items:center; gap:8px; font-family:inherit; transition:transform 0.2s, box-shadow 0.2s;">
+        <button id="pilot-report-fab" class="pilot-report-fab" style="position:fixed; bottom:24px; right:24px; z-index:998; background:linear-gradient(135deg, #2563eb, #7c3aed); color:#fff; border:none; border-radius:30px; padding:12px 22px; font-size:14px; font-weight:600; cursor:pointer; box-shadow:0 8px 24px rgba(37,99,235,0.45); display:flex; align-items:center; gap:8px; font-family:inherit; transition:transform 0.2s, box-shadow 0.2s;">
           <span style="font-size:16px;">✨</span> ถาม AI ผู้ช่วย & แจ้งปัญหา
         </button>
       `;

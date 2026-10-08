@@ -41,6 +41,7 @@
           <span class="brand-system-title">SAMSUNG</span>
           <span class="brand-system-sub">Branch Operations</span>
         </div>
+        <button type="button" id="btnSidebarClose" class="btn-sidebar-close" aria-label="ปิดเมนูระบบสาขา">&times;</button>
       </div>
 
       <nav class="sidebar-nav-section" aria-label="Main Navigation">
@@ -132,6 +133,7 @@
         </div>
       </div>
     </aside>
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
 
     <!-- Main Layout Container -->
     <main class="app-layout-main">
@@ -450,7 +452,7 @@
     </div>
 
     <!-- Container 2: Card Grid View (Responsive / Mobile / Tablet) -->
-    <div class="stock-cards-grid" id="cardViewContainer" style="display: none;">
+    <div class="stock-cards-grid" id="cardViewContainer">
       <!-- Dynamically Rendered -->
     </div>
   </div>

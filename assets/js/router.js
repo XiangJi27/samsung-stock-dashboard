@@ -114,9 +114,15 @@ class AppRouter {
       if (view.id === activeViewId) {
         view.classList.remove("hidden-view");
         view.classList.add("active-view");
+        view.hidden = false;
+        view.removeAttribute("hidden");
+        view.setAttribute("aria-hidden", "false");
       } else {
         view.classList.remove("active-view");
         view.classList.add("hidden-view");
+        view.hidden = true;
+        view.setAttribute("hidden", "true");
+        view.setAttribute("aria-hidden", "true");
       }
     });
 

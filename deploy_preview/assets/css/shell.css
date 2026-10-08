@@ -1,0 +1,266 @@
+/* ==========================================================================
+   SAMSUNG BRANCH OPERATIONS - APPLICATION SHELL CSS
+   Dark modern styling, glassmorphism, fluid responsive grid
+   ========================================================================== */
+
+:root {
+  --shell-sidebar-width: 260px;
+  --shell-header-height: 64px;
+  --shell-bg-dark: #07090e;
+  --shell-sidebar-bg: rgba(11, 15, 25, 0.95);
+  --shell-header-bg: rgba(11, 15, 25, 0.85);
+  --shell-card-bg: rgba(17, 24, 39, 0.7);
+  --shell-border: rgba(255, 255, 255, 0.08);
+  --shell-border-highlight: rgba(0, 240, 255, 0.3);
+  --shell-samsung-blue: #0077ff;
+  --shell-neon-cyan: #00f0ff;
+  --shell-neon-amber: #ffb300;
+  --shell-neon-emerald: #10b981;
+  --shell-neon-purple: #a855f7;
+  --shell-coral: #f43f5e;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--shell-bg-dark);
+  color: #f1f5f9;
+  font-family: 'Plus Jakarta Sans', 'Prompt', -apple-system, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Master Layout Wrapper */
+.app-shell-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: var(--shell-sidebar-width);
+  background: var(--shell-sidebar-bg);
+  border-right: 1px solid var(--shell-border);
+  backdrop-filter: blur(16px);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-header {
+  height: var(--shell-header-height);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--shell-border);
+}
+
+.brand-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0077ff, #00f0ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 0 16px rgba(0, 119, 255, 0.4);
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-system-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.brand-system-sub {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+}
+
+/* Main Content Area */
+.app-layout-main {
+  flex: 1;
+  margin-left: var(--shell-sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: margin-left 0.3s ease;
+}
+
+/* Mode without Sidebar (e.g. Login Page) */
+.app-layout-main.auth-mode-layout {
+  margin-left: 0 !important;
+}
+
+/* Top Navigation Bar */
+.app-top-header {
+  height: var(--shell-header-height);
+  background: var(--shell-header-bg);
+  border-bottom: 1px solid var(--shell-border);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+.header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+
+.breadcrumb-root {
+  color: #64748b;
+}
+
+.breadcrumb-sep {
+  color: #475569;
+}
+
+.breadcrumb-active {
+  color: #fff;
+  font-weight: 600;
+}
+
+.header-right-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* User Profile Badge */
+.user-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--shell-border);
+  border-radius: 20px;
+}
+
+.user-avatar-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.user-text-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-user-display {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.current-user-role {
+  font-size: 0.65rem;
+  color: var(--shell-neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Header Action Buttons */
+.btn-header-action {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--shell-border);
+  color: #cbd5e1;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-header-action:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-header-logout {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.btn-header-logout:hover {
+  background: rgba(248, 113, 113, 0.12);
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+/* View Container Visibility Logic */
+.app-view {
+  display: none;
+  animation: viewFadeIn 0.25s ease-out forwards;
+  width: 100%;
+}
+
+.app-view.active-view {
+  display: block;
+}
+
+.hidden-shell {
+  display: none !important;
+}
+
+@keyframes viewFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessible route announcer */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

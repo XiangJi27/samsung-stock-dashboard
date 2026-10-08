@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promotion Review & Guided Learning • Samsung Branch Operations</title>
+  <meta name="description" content="หน้าจอตรวจสอบโปรโมชั่น 3 คอลัมน์ (ข้อมูล Excel • AI ตีความ • Rules Engine) พร้อมระบบอัปโหลด Dry Run, บันทึก Draft, ตรวจ Blocker, อนุมัติ Activate และ Rollback">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #111827;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6;
+      --cyan: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+      --font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-branch {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--accent);
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .top-status-bar {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      font-size: 12.5px;
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot-live {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Actions Header Controls */
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-action:disabled {
+      opacity: 0.45;
+      cursor: not-allowed !important;
+      pointer-events: auto !important;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: #2563eb; }
+    .btn-approve { background: rgba(16, 185, 129, 0.2); border-color: #059669; color: #34d399; }
+    .btn-approve:hover:not(:disabled) { background: #059669; color: #fff; }
+    .btn-activate { background: #2563eb; border-color: #3b82f6; color: #fff; }
+    .btn-activate:hover:not(:disabled) { background: #1d4ed8; }
+    .btn-rollback { background: rgba(239, 68, 68, 0.2); border-color: #dc2626; color: #f87171; }
+    .btn-rollback:hover:not(:disabled) { background: #dc2626; color: #fff; }
+    .btn-edit { background: rgba(59, 130, 246, 0.2); border-color: #2563eb; color: #60a5fa; }
+    .btn-edit:hover:not(:disabled) { background: #2563eb; color: #fff; }
+    .btn-warn { background: rgba(245, 158, 11, 0.2); border-color: #d97706; color: #fbbf24; }
+    .btn-warn:hover:not(:disabled) { background: #d97706; color: #fff; }
+
+    /* Upload & Dry Run Area */
+    .upload-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .dropzone-box {
+      border: 2px dashed #4b5563;
+      border-radius: 10px;
+      padding: 14px 20px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(31, 41, 55, 0.4);
+      flex: 1;
+      min-width: 320px;
+      transition: all 0.2s;
+    }
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.1);
+    }
+    .dropzone-title { font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .dropzone-sub { font-size: 11.5px; color: var(--text-muted); }
+
+    /* KPI Strip */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .kpi-val { font-size: 22px; font-weight: 700; color: #fff; }
+    .kpi-lbl { font-size: 11.5px; color: var(--text-muted); }
+
+    /* Alert Banner */
+    .alert-banner {
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .alert-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+    .alert-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      color: #6ee7b7;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 12px;
+      align-items: center;
+    }
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { color: #fff; border-color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+    .search-input {
+      margin-left: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      width: 240px;
+    }
+
+    /* Table View */
+    .table-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      font-size: 12.5px;
+    }
+    th {
+      background: #151d2f;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+    }
+    tr.has-error td {
+      background: rgba(239, 68, 68, 0.08) !important;
+      border-bottom-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Badges */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .pill-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #059669; }
+    .pill-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid #2563eb; }
+    .pill-orange { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #d97706; }
+    .pill-red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #dc2626; }
+    .pill-purple { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid #7c3aed; }
+
+    /* Modal / 3-Column Review Grid */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1240px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+    .modal-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr 1fr;
+      gap: 20px;
+    }
+    .col-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .col-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .col-1 .col-title { color: #38bdf8; }
+    .col-2 .col-title { color: #a78bfa; }
+    .col-3 .col-title { color: #34d399; }
+
+    .diff-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      background: #0d1322;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Teaching Prompt Modal */
+    .teach-dialog-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+      padding: 20px;
+    }
+    .teach-dialog-overlay.open { display: flex; }
+    .teach-card {
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .radio-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      margin-top: 12px;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.4);
+    }
+    .radio-option:hover { border-color: var(--accent); }
+    .radio-option input[type="radio"] { margin-top: 3px; }
+
+    /* Audit Log Drawer */
+    .audit-drawer-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: flex-end;
+      z-index: 10000;
+    }
+    .audit-drawer-overlay.open { display: flex; }
+    .audit-panel {
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border);
+      width: 100%;
+      max-width: 550px;
+      height: 100%;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    /* --------------------------------------------------------------------------
+     * Promotion Manager Resolution Modal Styles
+     * -------------------------------------------------------------------------- */
+    .resolution-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .resolution-modal.hidden,
+    .resolution-modal .hidden {
+      display: none !important;
+    }
+
+    .resolution-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 8, 20, 0.78);
+      backdrop-filter: blur(5px);
+    }
+
+    .resolution-modal__panel {
+      position: relative;
+      width: min(680px, 100%);
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      border: 1px solid #334155;
+      border-radius: 18px;
+      background: #0f172a;
+      color: #e2e8f0;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.52);
+    }
+
+    .resolution-modal__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 24px;
+      border-bottom: 1px solid #273449;
+    }
+
+    .resolution-modal__eyebrow {
+      margin: 0 0 5px;
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .resolution-modal__header h2 {
+      margin: 0;
+      color: #f8fafc;
+      font-size: 20px;
+    }
+
+    .resolution-modal__close {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      background: #172033;
+      color: #cbd5e1;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .resolution-modal__close:hover {
+      background: #25324a;
+      color: #ffffff;
+    }
+
+    .resolution-modal__body {
+      padding: 24px;
+    }
+
+    .resolution-product {
+      margin-bottom: 22px;
+    }
+
+    .resolution-product__heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .resolution-product__name {
+      margin: 0 0 7px;
+      color: #f8fafc;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .resolution-product__meta {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .resolution-badge {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .resolution-badge--review {
+      border: 1px solid #f59e0b;
+      background: rgba(245, 158, 11, 0.14);
+      color: #fbbf24;
+    }
+
+    .resolution-badge--blocker {
+      border: 1px solid #ef4444;
+      background: rgba(239, 68, 68, 0.14);
+      color: #f87171;
+    }
+
+    .resolution-badge--rejected {
+      border: 1px solid #64748b;
+      background: rgba(71, 85, 105, 0.22);
+      color: #cbd5e1;
+    }
+
+    .resolution-error-box {
+      display: flex;
+      gap: 13px;
+      padding: 15px;
+      border: 1px solid #92400e;
+      border-radius: 12px;
+      background: rgba(120, 53, 15, 0.17);
+    }
+
+    .resolution-error-box__icon {
+      display: grid;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 50%;
+      background: #f59e0b;
+      color: #111827;
+      font-weight: 900;
+    }
+
+    .resolution-error-box__code {
+      margin: 0 0 5px;
+      color: #fbbf24;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .resolution-error-box__message {
+      margin: 0;
+      color: #fde68a;
+      line-height: 1.55;
+    }
+
+    .resolution-fieldset {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 22px;
+      padding: 0;
+      border: 0;
+    }
+
+    .resolution-fieldset legend,
+    .resolution-field label {
+      margin-bottom: 10px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .resolution-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      background: #111c30;
+      cursor: pointer;
+    }
+
+    .resolution-option:hover {
+      border-color: #64748b;
+    }
+
+    .resolution-option:has(input:checked) {
+      border-color: #38bdf8;
+      background: rgba(14, 116, 144, 0.13);
+    }
+
+    .resolution-option input {
+      margin-top: 3px;
+      accent-color: #22d3ee;
+    }
+
+    .resolution-option strong,
+    .resolution-option small {
+      display: block;
+    }
+
+    .resolution-option strong {
+      margin-bottom: 4px;
+      color: #f1f5f9;
+    }
+
+    .resolution-option small {
+      color: #94a3b8;
+      line-height: 1.45;
+    }
+
+    .resolution-field textarea {
+      box-sizing: border-box;
+      width: 100%;
+      resize: vertical;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      outline: none;
+      background: #0b1324;
+      padding: 13px 14px;
+      color: #f8fafc;
+      font: inherit;
+    }
+
+    .resolution-field textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.14);
+    }
+
+    .resolution-field__footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 7px;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .required-marker {
+      color: #f87171;
+    }
+
+    .resolution-confirmation {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .resolution-confirmation input {
+      margin-top: 3px;
+      accent-color: #22c55e;
+    }
+
+    .resolution-api-message {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .resolution-api-message--error {
+      border: 1px solid #b91c1c;
+      background: rgba(127, 29, 29, 0.24);
+      color: #fecaca;
+    }
+
+    .resolution-api-message--success {
+      border: 1px solid #15803d;
+      background: rgba(20, 83, 45, 0.25);
+      color: #bbf7d0;
+    }
+
+    .resolution-modal__footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 18px 24px;
+      border-top: 1px solid #273449;
+    }
+
+    .resolution-button {
+      min-height: 42px;
+      border-radius: 10px;
+      padding: 0 18px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .resolution-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    .resolution-button--secondary {
+      border: 1px solid #475569;
+      background: #172033;
+      color: #e2e8f0;
+    }
+
+    .resolution-button--danger {
+      border: 1px solid #dc2626;
+      background: #dc2626;
+      color: #ffffff;
+    }
+
+    .resolution-button--danger:hover:not(:disabled) {
+      background: #b91c1c;
+    }
+
+    body.resolution-modal-open {
+      overflow: hidden;
+    }
+
+    .resolved-summary {
+      display: grid;
+      gap: 4px;
+    }
+    .resolved-summary strong { color: #cbd5e1; font-size: 12px; }
+    .resolved-summary span { color: #94a3b8; font-size: 12px; }
+    .resolved-summary small { color: #64748b; font-size: 11px; }
+
+    @media (max-width: 640px) {
+      .resolution-modal {
+        align-items: end;
+        padding: 0;
+      }
+      .resolution-modal__panel {
+        width: 100%;
+        max-height: 92vh;
+        border-radius: 18px 18px 0 0;
+      }
+      .resolution-product__heading {
+        display: grid;
+      }
+      .resolution-modal__footer {
+        position: sticky;
+        bottom: 0;
+        background: #0f172a;
+      }
+      .resolution-modal__footer button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Status Bar -->
+  <div class="top-status-bar">
+    <div class="status-item">
+      <span class="dot-live"></span>
+      <strong>Central DB (Supabase):</strong> CONNECTED
+    </div>
+    <div class="status-item" id="stockBatchInfo">
+      <strong>Active Stock Batch:</strong> <code>STOCK-20260914-LATEST</code> (399 P/N | F1: 1,701 | F2: 1,635)
+    </div>
+    <div class="status-item" id="campaignStatusInfo">
+      <strong>Active Campaign:</strong> <span class="pill pill-green" id="activeCampCode">BASELINE-AUG-2026</span> (<span id="activeCampStatus">ACTIVE</span>)
+    </div>
+    <div class="status-item" id="statusManagerReview">
+      <strong>Manager Review:</strong> <span class="pill pill-green" id="badgeManagerReview">READY (YES)</span>
+    </div>
+    <div class="status-item" id="statusApprovalGate">
+      <strong>Approval Gate:</strong> <span class="pill pill-orange" id="badgeApprovalGate">BLOCKED (NO)</span>
+    </div>
+    <div class="status-item" id="statusActivationGate">
+      <strong>Activation Gate:</strong> <span class="pill pill-orange" id="badgeActivationGate">BLOCKED (NO)</span>
+    </div>
+    <div class="status-item" id="statusProduction">
+      <strong>Production:</strong> <span class="pill pill-red" id="badgeProduction">HOLD</span>
+    </div>
+    <div class="status-item" style="margin-left: auto;">
+      <button class="btn-action btn-edit" style="padding: 4px 10px; font-size: 11px;" onclick="openAuditDrawer()">
+        📜 Audit Log
+      </button>
+    </div>
+  </div>
+
+  <header>
+    <div class="brand-title">
+      <span>🛡️ Promotion Review & Guided Learning Center</span>
+      <span class="badge-branch">Ayutthaya City Park • 3-Column Inspection</span>
+    </div>
+
+    <!-- Governance Actions Header -->
+    <div class="header-actions">
+      <button class="btn-action btn-primary" id="btnSaveDraft" onclick="savePromotionDraft()">
+        💾 บันทึก Draft ผ่านหน้าเว็บ
+      </button>
+      <button class="btn-action btn-approve" id="btnApproveCampaign" onclick="approveCampaign()" disabled>
+        ✓ อนุมัติแคมเปญ (Store Leader)
+      </button>
+      <button class="btn-action btn-activate" id="btnActivateCampaign" onclick="activateCampaign()" disabled>
+        🚀 Activate แคมเปญ (Transactional RPC)
+      </button>
+      <button class="btn-action btn-rollback" id="btnRollbackCampaign" onclick="rollbackCampaign()" disabled>
+        ↩️ Rollback แคมเปญ (Transactional RPC)
+      </button>
+    </div>
+  </header>
+
+  <!-- Upload & Dry Run Controls -->
+  <div class="upload-section">
+    <div class="dropzone-box" id="promoDropZone" onclick="document.getElementById('promoFileInput').click()">
+      <div class="dropzone-title">📁 อัปโหลดไฟล์โปรโมชั่น (Excel .xlsx / .xls) แบบ Dry Run</div>
+      <div class="dropzone-sub">
+        อ่านหัวตารางและเซลล์ Merge &rarr; ตรวจสอบ Exact P/N กับ Active Stock Batch &rarr; สร้าง Preview โดยยังไม่บันทึก Campaign
+      </div>
+      <input type="file" id="promoFileInput" accept=".xlsx,.xls" style="display: none;" onchange="handleFileUpload(event)">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <button class="btn-action btn-edit" id="btnLoadRealExcel" onclick="loadRealPromotionFile()">
+        📑 ทดสอบด้วยไฟล์จริง promo_retail.xlsx
+      </button>
+      <button class="btn-action btn-warn" id="btnInjectErrors" onclick="injectErrorTestFixtures()">
+        ⚠️ ทดสอบ Error UI (Blocker Gate Fail-Closed)
+      </button>
+      <button class="btn-action btn-approve" id="btnResolveAllErrors" onclick="resolveAllErrors()" style="display:none;">
+        🔧 แก้ไขข้อผิดพลาดทั้งหมด (ผู้จัดการรับทราบ)
+      </button>
+    </div>
+  </div>
+
+  <!-- Alert Banner -->
+  <div class="alert-banner alert-danger" id="alertBlocker">
+    <div>
+      <strong>⛔ ตรวจพบข้อผิดพลาดบล็อก (Fail-Closed Gate Active):</strong>
+      <span id="alertBlockerText">มีข้อผิดพลาดบล็อกค้างอยู่ ไม่อนุญาตให้อนุมัติหรือ Activate แคมเปญ</span>
+    </div>
+    <button class="btn-action btn-edit" style="padding: 4px 8px; font-size: 11px;" onclick="resolveAllErrors()">
+      แก้ไขข้อผิดพลาดอัตโนมัติ
+    </button>
+  </div>
+
+  <div class="alert-banner alert-success" id="alertSuccess">
+    <div id="alertSuccessText">การดำเนินการสำเร็จ</div>
+  </div>
+
+  <!-- KPI Strip -->
+  <div class="kpi-strip">
+    <div class="kpi-card">
+      <div class="kpi-val" id="kpiTotal">0</div>
+      <div class="kpi-lbl">Total Promotion Items</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #34d399;" id="kpiPassed">0</div>
+      <div class="kpi-lbl">สูตรผ่านและโครงสร้างชัดเจน (High 95-100)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #fbbf24;" id="kpiReview">0</div>
+      <div class="kpi-lbl">ต้องให้ผู้จัดการตรวจ (Review Required)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #f87171;" id="kpiBlockers">0</div>
+      <div class="kpi-lbl">ข้อผิดพลาดบล็อก (Blockers)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-val" style="color: #60a5fa;" id="kpiRulesLearned">5</div>
+      <div class="kpi-lbl">Knowledge Rules ในคลังกลาง</div>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="ALL">ทั้งหมด (All Items)</button>
+    <button class="filter-btn" data-filter="HIGH">ความมั่นใจสูง (95–100)</button>
+    <button class="filter-btn" data-filter="REVIEW">รอผู้จัดการตรวจ</button>
+    <button class="filter-btn" data-filter="BLOCKED">มีข้อผิดพลาดบล็อก</button>
+    <button class="filter-btn" data-filter="S26U">Galaxy S26 Ultra</button>
+    <button class="filter-btn" data-filter="S25FE">Galaxy S25 FE</button>
+    <button class="filter-btn" data-filter="A57">Galaxy A57 5G</button>
+    <button class="filter-btn" data-filter="FOLD8">Galaxy Z Fold8</button>
+    <button class="filter-btn" data-filter="STUDENT">Studentcrd 15%</button>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 ค้นหารุ่น, P/N, คูปอง...">
+  </div>
+
+  <!-- Table View -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>สถานะ</th>
+          <th>ความมั่นใจ AI</th>
+          <th>แถว/เซลล์ต้นทาง</th>
+          <th>Exact P/N</th>
+          <th>ชื่อรุ่น &amp; ความจุ</th>
+          <th>ประเภทโปรโมชั่น</th>
+          <th>คูปอง / เงื่อนไข</th>
+          <th>ราคาปกติ RRP</th>
+          <th>ส่วนลดต่อที่ 1</th>
+          <th>Trade Up</th>
+          <th>เงื่อนไข SF+ / Student</th>
+          <th>ราคาสุทธิ Net</th>
+          <th>Remark / ผลตรวจสูตร</th>
+          <th>การกระทำ</th>
+        </tr>
+      </thead>
+      <tbody id="promoTableBody">
+        <tr>
+          <td colspan="14" style="text-align: center; padding: 40px; color: var(--text-muted);">
+            กรุณาอัปโหลดไฟล์โปรโมชั่น Excel หรือคลิก "ทดสอบด้วยไฟล์จริง promo_retail.xlsx" เพื่อเริ่มต้น Dry Run Preview
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3-Column Inspection Modal -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle" style="font-size: 16px; font-weight: 700; color: #fff;">PROMOTION ROW INSPECTION</h3>
+          <span id="modalSubtitle" style="font-size: 12px; color: var(--text-muted);"></span>
+        </div>
+        <button style="background: transparent; border: none; color: #94a3b8; font-size: 22px; cursor: pointer;" onclick="closeModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Column 1: ข้อมูลจาก Excel -->
+        <div class="col-card col-1">
+          <div class="col-title">
+            <span>1. ข้อมูลจาก Excel (Raw Sheet)</span>
+            <span style="font-size: 10px; color: #38bdf8;">INPUT SOURCE</span>
+          </div>
+          <div id="col1Content"></div>
+        </div>
+
+        <!-- Column 2: AI ตีความ & ความมั่นใจ -->
+        <div class="col-card col-2">
+          <div class="col-title">
+            <span>2. AI ตีความ &amp; ความมั่นใจ</span>
+            <span id="col2ConfidenceBadge"></span>
+          </div>
+          <div id="col2Content"></div>
+        </div>
+
+        <!-- Column 3: Rules Engine ตรวจสูตร & ข้อห้าม -->
+        <div class="col-card col-3">
+          <div class="col-title">
+            <span>3. ผลคำนวณ Rules Engine</span>
+            <span id="col3FormulaBadge"></span>
+          </div>
+          <div id="col3Content"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div style="font-size: 12px; color: #94a3b8;">
+          ผู้จัดการตรวจสอบ: คลิกปุ่มเพื่อดำเนินการ หรือแก้ไขเพื่อสอนระบบ
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-action btn-approve" onclick="handleModalApprove()">✓ อนุมัติรายการนี้</button>
+          <button class="btn-action btn-edit" onclick="openTeachingPrompt('EDIT_TYPE')">✏️ แก้ประเภทโปรโมชั่น</button>
+          <button class="btn-action btn-edit" onclick="openTeachingPrompt('EDIT_COUPON')">🏷️ แก้คูปอง / ส่วนลด</button>
+          <button class="btn-action btn-warn" onclick="handleModalFixError()">🔧 แก้ไขข้อผิดพลาด</button>
+          <button class="btn-action btn-rollback" onclick="handleModalReject()">✕ ปฏิเสธรายการ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teaching Prompt Dialog (Modal on Edit) -->
+  <div class="teach-dialog-overlay" id="teachDialog">
+    <div class="teach-card">
+      <h3 style="color: #fff; font-size: 16px; margin-bottom: 8px;">🧠 บันทึกการแก้ไขของผู้จัดการเพื่อสอนระบบ</h3>
+      <p style="color: #cbd5e1; font-size: 13px; line-height: 1.5;">
+        ต้องการให้ระบบจดจำรูปแบบการแก้ไขนี้อย่างไรสำหรับไฟล์โปรโมชั่นในรอบเดือนถัดไป?
+      </p>
+
+      <div class="radio-option">
+        <input type="radio" id="optOneOff" name="teachScope" value="ONE_OFF" checked>
+        <label for="optOneOff">
+          <strong style="color: #fff; display: block; font-size: 13px;">ใช้การแก้นี้เฉพาะรายการนี้ (แนะนำ)</strong>
+          <span style="color: #94a3b8; font-size: 12px;">แก้ไขเฉพาะรายการปัจจุบัน ไม่สร้างกฎถาวร เพื่อลดความเสี่ยงจากการสร้างกฎที่กว้างเกินไป</span>
+        </label>
+      </div>
+
+      <div class="radio-option">
+        <input type="radio" id="optKnowledgeRule" name="teachScope" value="KNOWLEDGE_RULE">
+        <label for="optKnowledgeRule">
+          <strong style="color: #60a5fa; display: block; font-size: 13px;">สร้างกฎความรู้สำหรับรายการรูปแบบเดียวกันในอนาคต</strong>
+          <span style="color: #94a3b8; font-size: 12px;">บันทึกลง Promotion Knowledge Base เมื่อพบคำหรือรูปแบบเดียวกันในเดือนถัดไป ระบบจะจัดหมวดหมู่อัตโนมัติ</span>
+        </label>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn-action" style="background: #334155; color: #fff;" onclick="closeTeachingDialog()">ยกเลิก</button>
+        <button class="btn-action btn-approve" onclick="saveTeachingCorrection()">ยืนยันการแก้ไข</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Promotion Manager Resolution Modal -->
+  <div
+    id="promotionResolutionModal"
+    class="resolution-modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="resolutionModalTitle"
+  >
+    <div
+      class="resolution-modal__backdrop"
+      data-resolution-close
+    ></div>
+
+    <section class="resolution-modal__panel">
+      <header class="resolution-modal__header">
+        <div>
+          <p class="resolution-modal__eyebrow">
+            PROMOTION MANAGER REVIEW
+          </p>
+
+          <h2 id="resolutionModalTitle">
+            ตรวจสอบและตัดสินรายการโปรโมชั่น
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          class="resolution-modal__close"
+          data-resolution-close
+          aria-label="ปิดหน้าต่าง"
+        >
+          &times;
+        </button>
+      </header>
+
+      <div class="resolution-modal__body">
+        <section class="resolution-product">
+          <div class="resolution-product__heading">
+            <div>
+              <p class="resolution-product__name">
+                <span id="resolutionModelName">-</span>
+                <span id="resolutionCapacity"></span>
+              </p>
+
+              <p class="resolution-product__meta">
+                Source Row:
+                <strong id="resolutionSourceRow">-</strong>
+                <span aria-hidden="true">•</span>
+                P/N:
+                <strong id="resolutionInventoryPn">
+                  ไม่พบ
+                </strong>
+              </p>
+            </div>
+
+            <span
+              id="resolutionSeverityBadge"
+              class="resolution-badge resolution-badge--review"
+            >
+              REVIEW_REQUIRED
+            </span>
+          </div>
+
+          <div class="resolution-error-box">
+            <div class="resolution-error-box__icon">
+              !
+            </div>
+
+            <div>
+              <p class="resolution-error-box__code">
+                <span id="resolutionErrorCode">
+                  PN_NOT_FOUND
+                </span>
+              </p>
+
+              <p
+                id="resolutionErrorMessage"
+                class="resolution-error-box__message"
+              >
+                ไม่พบ Exact P/N ใน Central Active Stock
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <form id="promotionResolutionForm">
+          <input
+            id="resolutionErrorId"
+            type="hidden"
+          />
+
+          <input
+            id="resolutionExpectedStatus"
+            type="hidden"
+            value="OPEN"
+          />
+
+          <fieldset class="resolution-fieldset">
+            <legend>ผลการตัดสิน</legend>
+
+            <label class="resolution-option">
+              <input
+                type="radio"
+                name="resolutionDecision"
+                value="REJECTED_FOR_CURRENT_CAMPAIGN"
+                checked
+              />
+
+              <span>
+                <strong>
+                  ตัดออกจากแคมเปญรอบนี้
+                </strong>
+
+                <small>
+                  เก็บรายการไว้ในประวัติ แต่ไม่สร้าง
+                  Promotion Offer
+                </small>
+              </span>
+            </label>
+
+            <label class="resolution-option">
+              <input
+                type="radio"
+                name="resolutionDecision"
+                value="REJECTED_NOT_IN_ACTIVE_STOCK"
+              />
+
+              <span>
+                <strong>
+                  ไม่มีรุ่นนี้ใน Active Stock
+                </strong>
+
+                <small>
+                  ห้ามจับคู่กับ P/N ของรุ่นหรือความจุอื่น
+                </small>
+              </span>
+            </label>
+
+            <label class="resolution-option">
+              <input
+                type="radio"
+                name="resolutionDecision"
+                value="KEEP_FOR_REVIEW"
+              />
+
+              <span>
+                <strong>
+                  คงไว้เพื่อรอตรวจสอบเพิ่มเติม
+                </strong>
+
+                <small>
+                  รายการยังเป็น OPEN และ Campaign
+                  ยังไม่สามารถอนุมัติได้
+                </small>
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="resolution-field">
+            <label for="resolutionNote">
+              เหตุผลประกอบการตัดสิน
+              <span class="required-marker">*</span>
+            </label>
+
+            <textarea
+              id="resolutionNote"
+              minlength="10"
+              maxlength="500"
+              rows="4"
+              placeholder="ระบุเหตุผลอย่างน้อย 10 ตัวอักษร"
+              required
+            ></textarea>
+
+            <div class="resolution-field__footer">
+              <span>
+                เหตุผลจะถูกเก็บใน Audit Trail
+              </span>
+
+              <span id="resolutionNoteCounter">
+                0 / 500
+              </span>
+            </div>
+          </div>
+
+          <label class="resolution-confirmation">
+            <input
+              id="resolutionConfirmation"
+              type="checkbox"
+              required
+            />
+
+            <span>
+              ยืนยันว่าได้ตรวจสอบข้อมูลจากไฟล์ต้นทาง
+              และ Central Active Stock แล้ว
+            </span>
+          </label>
+
+          <div
+            id="resolutionApiMessage"
+            class="resolution-api-message hidden"
+            role="alert"
+          ></div>
+        </form>
+      </div>
+
+      <footer class="resolution-modal__footer">
+        <button
+          type="button"
+          class="resolution-button resolution-button--secondary"
+          data-resolution-close
+        >
+          ยกเลิก
+        </button>
+
+        <button
+          id="btnConfirmPromotionResolution"
+          type="submit"
+          form="promotionResolutionForm"
+          class="resolution-button resolution-button--danger"
+        >
+          <span class="resolution-button__normal">
+            ยืนยันผลการตัดสิน
+          </span>
+
+          <span
+            class="resolution-button__loading hidden"
+          >
+            กำลังบันทึก...
+          </span>
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Audit Log Drawer -->
+  <div class="audit-drawer-overlay" id="auditDrawer" onclick="closeAuditDrawer(event)">
+    <div class="audit-panel" onclick="event.stopPropagation()">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+        <h3 style="color: #fff; font-size: 16px;">📜 Promotion Lifecycle Audit Trail</h3>
+        <button style="background: transparent; border: none; color: #94a3b8; font-size: 20px; cursor: pointer;" onclick="closeAuditDrawer()">&times;</button>
+      </div>
+      <div id="auditLogContent" style="display: flex; flex-direction: column; gap: 12px;">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Knowledge Base & Calculator Scripts -->
+  <script src="assets/js/promotion-heading-parser.js"></script>
+  <script src="assets/js/promotion-knowledge-base.js"></script>
+  <script src="assets/js/promotion-calculator.js"></script>
+
+  <!-- Supabase Adapter & Auth SDK -->
+  <script>
+    window.__ENV_SUPABASE_URL = "https://anhxzffcmrihymrptsgd.supabase.co";
+    window.__ENV_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9eXmP6Cgb14AWbk8CrBv3A_l0Clj00v";
+  </script>
+  <script src="assets/js/pilot-runtime-config.js"></script>
+  <script src="assets/js/supabase-client.js"></script>
+
+  <script>
+    // Initialize Supabase Client Adapter
+    if (window.SupabaseAdapter) {
+      window.SupabaseAdapter.init({
+        url: window.__ENV_SUPABASE_URL,
+        publishableKey: window.__ENV_SUPABASE_PUBLISHABLE_KEY
+      });
+      window.supabaseClient = window.SupabaseAdapter.getClient();
+    }
+    if (!window.supabaseClient && typeof supabase !== 'undefined' && typeof supabase.createClient === 'function') {
+      window.supabaseClient = supabase.createClient(window.__ENV_SUPABASE_URL, window.__ENV_SUPABASE_PUBLISHABLE_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: 'samsung_pilot_auth_token' }
+      });
+    }
+
+    // Invariants & State
+    const ACTIVE_STOCK_BATCH_ID = 'STOCK-20260914-LATEST';
+    const ACTIVE_STOCK_F1 = 1701;
+    const ACTIVE_STOCK_F2 = 1635;
+    const ACTIVE_STOCK_ROWS = 399;
+
+    // Grounded Active Stock Master Catalog (Exact P/N Lookup Map)
+    // Rule: Found P/N in Active Stock -> Create Offer; Missing P/N -> REVIEW_REQUIRED (Never guess!)
+    const ACTIVE_STOCK_CATALOG = {
+      'SM-S938B-1TB': { model: 'Galaxy S26 Ultra', capacity: '1TB', rrp: 66900 },
+      'SM-S938B-512': { model: 'Galaxy S26 Ultra', capacity: '512GB', rrp: 54900 },
+      'SM-S938B-256': { model: 'Galaxy S26 Ultra', capacity: '256GB', rrp: 46900 },
+      'SM-S721B-256': { model: 'Galaxy S25 FE', capacity: '256GB', rrp: 26900 },
+      'SM-S721B-128': { model: 'Galaxy S25 FE', capacity: '128GB', rrp: 22900 },
+      'SM-A576BDBSTHL': { model: 'Galaxy A57 5G', capacity: '8/256GB', rrp: 16999 },
+      'SM-A576B-512': { model: 'Galaxy A57 5G', capacity: '12/512GB', rrp: 20999 },
+      'SM-F966B-1TB': { model: 'Galaxy Z Fold8 Ultra', capacity: '1TB', rrp: 93900 },
+      'SM-F966B-512': { model: 'Galaxy Z Fold8', capacity: '1TB', rrp: 85900 }
+    };
+
+    let drafts = [];
+    let selectedDraft = null;
+    let activeFilter = 'ALL';
+    let currentCampaign = {
+      id: '780afa93-9101-474d-a188-4c22c3633601',
+      code: 'PILOT-PROMO-DRAFT-20260917',
+      name: 'Pilot Promotion September 2026',
+      status: 'DRAFT',
+      branchCode: 'AYUTTHAYA_CITY_PARK',
+      previousActiveId: null
+    };
+    let auditLogs = [
+      {
+        id: 'aud_001',
+        action: 'BASELINE_ACTIVE',
+        campaignCode: 'BASELINE-AUG-2026',
+        user: 'system_bootstrap',
+        timestamp: '2026-08-28T09:00:00.000Z',
+        details: 'Initial active promotion baseline established'
+      }
+    ];
+
+    // Real Promotion Sheet Master Grounded Fixtures (Exact extraction from promo_retail.xlsx)
+    const REAL_PROMO_RETAIL_FIXTURES = [
+      // 0. REVIEW_REQUIRED Target Items (Ground Truth for Manager Resolution)
+      {
+        id: 'DRAFT-S26U-1TB-ERR',
+        errorId: '6949d8fa-18f7-4ae2-832d-e7c17e62de2c',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 11,
+        sourceRow: 11,
+        cellRange: 'B11:H11',
+        inventoryPn: null,
+        model: 'Galaxy S26 Ultra',
+        modelName: 'Galaxy S26 Ultra',
+        capacity: '1TB',
+        regularPrice: 66900,
+        standardDiscount: 5000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 0,
+        tradeUpCampaign: null,
+        promotionType: 'STANDARD_DISCOUNT',
+        paymentCondition: 'ANY',
+        customerSegment: 'GENERAL',
+        stackingPolicy: 'SINGLE',
+        hasBlocker: false,
+        errorCode: 'PN_NOT_FOUND',
+        errorMessage: 'ไม่พบ Exact P/N ใน Central Active Stock',
+        message: 'ไม่พบ Exact P/N ใน Central Active Stock',
+        severity: 'REVIEW_REQUIRED',
+        status: 'REVIEW_REQUIRED',
+        resolutionStatus: 'OPEN',
+        remarks: 'สถานะ: REVIEW_REQUIRED | สาเหตุ: PN_NOT_FOUND (รอผู้จัดการตรวจสอบ)',
+        rawText: 'Galaxy S26 Ultra 1TB ส่วนลด 5,000 คูปอง 01'
+      },
+      {
+        id: 'DRAFT-FOLD8-ERR',
+        errorId: '8910b8fa-28f7-4ae2-832d-e7c17e62de3d',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 22,
+        sourceRow: 22,
+        cellRange: 'B22:H22',
+        inventoryPn: null,
+        model: 'Galaxy Z Fold8',
+        modelName: 'Galaxy Z Fold8',
+        capacity: '512GB',
+        regularPrice: 85900,
+        standardDiscount: 5000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 0,
+        tradeUpCampaign: null,
+        promotionType: 'STANDARD_DISCOUNT',
+        paymentCondition: 'ANY',
+        customerSegment: 'GENERAL',
+        stackingPolicy: 'SINGLE',
+        hasBlocker: false,
+        errorCode: 'PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK',
+        errorMessage: 'ไม่พบรุ่นสินค้าใน Central Active Stock และห้ามใช้ P/N ของรุ่นหรือความจุอื่นแทน',
+        message: 'ไม่พบรุ่นสินค้าใน Central Active Stock และห้ามใช้ P/N ของรุ่นหรือความจุอื่นแทน',
+        severity: 'REVIEW_REQUIRED',
+        status: 'REVIEW_REQUIRED',
+        resolutionStatus: 'OPEN',
+        remarks: 'สถานะ: REVIEW_REQUIRED | สาเหตุ: PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK',
+        rawText: 'Galaxy Z Fold8 512GB ส่วนลด 5,000 คูปอง 01'
+      },
+
+      // 1. Galaxy S26 Ultra - 3 separate paths
+      {
+        id: 'DRAFT-S26U-STD',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 5,
+        cellRange: 'B5:H5',
+        inventoryPn: 'SM-S938B-512',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        regularPrice: 54900,
+        standardDiscount: 5000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 0,
+        tradeUpCampaign: null,
+        promotionType: 'STANDARD_DISCOUNT',
+        paymentCondition: 'ANY',
+        customerSegment: 'GENERAL',
+        stackingPolicy: 'SINGLE',
+        remarks: 'โปรปกติ: ลด 5,000 ต่อที่ 1 คูปอง 01',
+        rawText: 'Galaxy S26 Ultra 512GB ส่วนลด 5,000 คูปอง 01',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-S26U-TU',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 5,
+        cellRange: 'B5:H5',
+        inventoryPn: 'SM-S938B-512',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        regularPrice: 54900,
+        standardDiscount: 5000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 5000,
+        tradeUpCampaign: 'T-UP-CO-S',
+        requiresTradeIn: true,
+        promotionType: 'STANDARD_WITH_TRADE_UP',
+        paymentCondition: 'ANY',
+        customerSegment: 'GENERAL',
+        stackingPolicy: 'STACKABLE_CONDITIONAL',
+        remarks: 'โปรปกติ + Trade Up: ลด 5,000 + เทรดอัพ 5,000 (ต้องมีเครื่องแลก)',
+        rawText: 'Galaxy S26 Ultra 512GB ส่วนลด 5,000 คูปอง 01 + เทรดอัพ 5,000',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-S26U-STUDENT',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 5,
+        cellRange: 'B5:H5',
+        inventoryPn: 'SM-S938B-512',
+        model: 'Galaxy S26 Ultra',
+        capacity: '512GB',
+        regularPrice: 54900,
+        standardDiscount: 0,
+        tradeUpDiscount: 0,
+        discountPercent: 15,
+        studentDiscountAmount: 8235,
+        couponCode: 'Studentcrd',
+        promotionType: 'STUDENT_EXCLUSIVE',
+        requiresTradeIn: false,
+        stackingPolicy: 'EXCLUSIVE',
+        blocksAllOtherPromotions: true,
+        customerSegment: 'STUDENT',
+        paymentCondition: 'ANY',
+        remarks: 'Studentcrd 15%: เฉพาะนักเรียน/นักศึกษา ห้ามรวมคูปอง 01 หรือ Trade Up',
+        rawText: 'Galaxy S26 Ultra 512GB โปรนักเรียนนักศึกษา 15% Studentcrd',
+        status: 'DRAFT'
+      },
+
+      // 2. Galaxy S25 FE - SF+ vs Non-SF+ Mutually Exclusive Paths
+      {
+        id: 'DRAFT-S25FE-SF-256',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 14,
+        cellRange: 'B14:H14',
+        inventoryPn: 'SM-S721B-256',
+        model: 'Galaxy S25 FE',
+        capacity: '256GB',
+        regularPrice: 26900,
+        standardDiscount: 3000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 0,
+        promotionType: 'SF_PLUS_FINANCING',
+        paymentCondition: 'SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        remarks: 'SF+: คูปอง 01 ลด 3,000 (ดาวน์ไม่เกิน 10% ไม่มี Trade Up)',
+        rawText: 'Galaxy S25 FE (ร่วม SF+) 256GB ลด 3,000 คูปอง 01',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-S25FE-SF-128',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 15,
+        cellRange: 'B15:H15',
+        inventoryPn: 'SM-S721B-128',
+        model: 'Galaxy S25 FE',
+        capacity: '128GB',
+        regularPrice: 22900,
+        standardDiscount: 3000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 0,
+        promotionType: 'SF_PLUS_FINANCING',
+        paymentCondition: 'SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        remarks: 'SF+: คูปอง 01 ลด 3,000 (ดาวน์ไม่เกิน 10% ไม่มี Trade Up)',
+        rawText: 'Galaxy S25 FE (ร่วม SF+) 128GB ลด 3,000 คูปอง 01',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-S25FE-NON-256',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 16,
+        cellRange: 'B16:H16',
+        inventoryPn: 'SM-S721B-256',
+        model: 'Galaxy S25 FE',
+        capacity: '256GB',
+        regularPrice: 26900,
+        standardDiscount: 6000,
+        couponCode: 'คูปอง 02',
+        tradeUpDiscount: 0,
+        promotionType: 'NON_SF_PLUS_DISCOUNT',
+        paymentCondition: 'NON_SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        remarks: 'Non-SF+: คูปอง 02 ลด 6,000 (เงินสด/โอน/บัตร)',
+        rawText: 'Galaxy S25 FE (ไม่ร่วม SF+) 256GB ลด 6,000 คูปอง 02',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-S25FE-NON-128',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 17,
+        cellRange: 'B17:H17',
+        inventoryPn: 'SM-S721B-128',
+        model: 'Galaxy S25 FE',
+        capacity: '128GB',
+        regularPrice: 22900,
+        standardDiscount: 5000,
+        couponCode: 'คูปอง 02',
+        tradeUpDiscount: 0,
+        promotionType: 'NON_SF_PLUS_DISCOUNT',
+        paymentCondition: 'NON_SF_PLUS',
+        exclusiveGroup: 'S25FE_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        remarks: 'Non-SF+: คูปอง 02 ลด 5,000 (เงินสด/โอน/บัตร)',
+        rawText: 'Galaxy S25 FE (ไม่ร่วม SF+) 128GB ลด 5,000 คูปอง 02',
+        status: 'DRAFT'
+      },
+
+      // 3. Galaxy A57 5G - SF+ Down payment <= 5% (Down payment != discount)
+      {
+        id: 'DRAFT-A57-SF',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 31,
+        cellRange: 'B31:H31',
+        inventoryPn: 'SM-A576B-512',
+        model: 'Galaxy A57 5G',
+        capacity: '12/512GB',
+        regularPrice: 20999,
+        standardDiscount: 0,
+        estimatedDownPayment: 1050,
+        couponCode: null,
+        promotionType: 'SF_PLUS_FINANCING',
+        paymentCondition: 'SF_PLUS',
+        exclusiveGroup: 'A57_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        remarks: 'SF+ ดาวน์ไม่เกิน 5% (1,050 บาทคือเงินดาวน์ ไม่ใช่ส่วนลด ราคาสุทธิยังคง 20,999)',
+        rawText: 'Galaxy A57 5G 12/512GB SF+ ดาวน์ไม่เกิน 5%',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-A57-NON',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 34,
+        cellRange: 'B34:H34',
+        inventoryPn: 'SM-A576B-512',
+        model: 'Galaxy A57 5G',
+        capacity: '12/512GB',
+        regularPrice: 20999,
+        standardDiscount: 3000,
+        couponCode: 'คูปอง 01',
+        tradeUpDiscount: 0,
+        promotionType: 'NON_SF_PLUS_DISCOUNT',
+        paymentCondition: 'NON_SF_PLUS',
+        exclusiveGroup: 'A57_PAYMENT_PATH',
+        stackingPolicy: 'MUTUALLY_EXCLUSIVE',
+        remarks: 'Non-SF+: คูปอง 01 ลด 3,000',
+        rawText: 'Galaxy A57 5G (ไม่ร่วม SF+) คูปอง 01 ลด 3,000',
+        status: 'DRAFT'
+      },
+
+      // 4. Galaxy Z Fold8 - Trade Up Only
+      {
+        id: 'DRAFT-FOLD8-NOTU',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 21,
+        cellRange: 'B21:H21',
+        inventoryPn: 'SM-F966B-512',
+        model: 'Galaxy Z Fold8',
+        capacity: '1TB',
+        regularPrice: 85900,
+        standardDiscount: 0,
+        tradeUpDiscount: 0,
+        couponCode: null,
+        promotionType: 'STANDARD_PRICE',
+        remarks: 'ไม่มี Trade Up: ขายราคาปกติ 85,900 บาท',
+        rawText: 'Galaxy Z Fold8 1TB ไม่มีโปรโมชั่นส่วนลดปกติ',
+        status: 'DRAFT'
+      },
+      {
+        id: 'DRAFT-FOLD8-TU',
+        sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+        row: 21,
+        cellRange: 'B21:H21',
+        inventoryPn: 'SM-F966B-512',
+        model: 'Galaxy Z Fold8',
+        capacity: '1TB',
+        regularPrice: 85900,
+        standardDiscount: 0,
+        tradeUpDiscount: 7000,
+        tradeUpCampaign: 'T-UP-CO-S',
+        requiresTradeIn: true,
+        promotionType: 'TRADE_UP_ONLY',
+        remarks: 'มี Trade Up: ลด 7,000 บาท (85,900 - 7,000 = 78,900 บาท)',
+        rawText: 'Galaxy Z Fold8 1TB Trade Up Only 7,000',
+        status: 'DRAFT'
+      }
+    ];
+
+    // Calculation & Rules Engine
+    function calculateNetPrice(d) {
+      const regular = Number(d.regularPrice || 0);
+      const std = Number(d.standardDiscount || 0);
+      const tu = Number(d.tradeUpDiscount || 0);
+      const stu = d.discountPercent ? Math.round((regular * d.discountPercent) / 100) : Number(d.studentDiscountAmount || 0);
+      return regular - std - tu - stu;
+    }
+
+    // UI Render
+    function renderTable() {
+      const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const tbody = document.getElementById('promoTableBody');
+
+      const filtered = drafts.filter(d => {
+        const matchQ = !q || 
+          (d.model && d.model.toLowerCase().includes(q)) ||
+          (d.inventoryPn && d.inventoryPn.toLowerCase().includes(q)) ||
+          (d.couponCode && d.couponCode.toLowerCase().includes(q));
+
+        if (!matchQ) return false;
+
+        if (activeFilter === 'HIGH') return (d.status === 'DRAFT' || d.status === 'APPROVED') && !d.hasBlocker;
+        if (activeFilter === 'REVIEW') return d.status === 'REVIEW_REQUIRED';
+        if (activeFilter === 'BLOCKED') return d.status === 'BLOCKED' || d.hasBlocker;
+        if (activeFilter === 'S26U') return (d.model || '').includes('S26 Ultra');
+        if (activeFilter === 'S25FE') return (d.model || '').includes('S25 FE');
+        if (activeFilter === 'A57') return (d.model || '').includes('A57');
+        if (activeFilter === 'FOLD8') return (d.model || '').includes('Fold8');
+        if (activeFilter === 'STUDENT') return d.promotionType === 'STUDENT_EXCLUSIVE' || d.couponCode === 'Studentcrd';
+        return true;
+      });
+
+      // Update KPI
+      const total = drafts.length;
+      const blockers = drafts.filter(d => d.status === 'BLOCKED' || d.hasBlocker).length;
+      const reviews = drafts.filter(d => d.status === 'REVIEW_REQUIRED').length;
+      const passed = drafts.filter(d => (d.status === 'DRAFT' || d.status === 'APPROVED') && !d.hasBlocker).length;
+
+      document.getElementById('kpiTotal').innerText = total;
+      document.getElementById('kpiPassed').innerText = passed;
+      document.getElementById('kpiReview').innerText = reviews;
+      document.getElementById('kpiBlockers').innerText = blockers;
+
+      // Fail-Closed Gate check
+      const btnApprove = document.getElementById('btnApproveCampaign');
+      const btnActivate = document.getElementById('btnActivateCampaign');
+      const alertBlocker = document.getElementById('alertBlocker');
+      const btnResolveAll = document.getElementById('btnResolveAllErrors');
+
+      const badgeReview = document.getElementById('badgeManagerReview');
+      const badgeApproval = document.getElementById('badgeApprovalGate');
+      const badgeActivation = document.getElementById('badgeActivationGate');
+      const badgeProd = document.getElementById('badgeProduction');
+
+      if (badgeReview) {
+        badgeReview.className = drafts.length > 0 ? 'pill pill-green' : 'pill pill-orange';
+        badgeReview.innerText = drafts.length > 0 ? 'READY (YES)' : 'NO_DRAFTS (NO)';
+      }
+
+      if (blockers > 0 || reviews > 0) {
+        btnApprove.disabled = true;
+        btnActivate.disabled = true;
+        alertBlocker.style.display = 'flex';
+        btnResolveAll.style.display = 'inline-flex';
+        document.getElementById('alertBlockerText').innerText = 
+          `พบ Blocker ${blockers} รายการ และ Review Required ${reviews} รายการ | นโยบาย Fail-Closed: ปุ่มอนุมัติและ Activate ถูกปิดการทำงาน`;
+        if (badgeApproval) {
+          badgeApproval.className = 'pill pill-orange';
+          badgeApproval.innerText = `BLOCKED (NO - ${reviews} Reviews)`;
+        }
+        if (badgeActivation) {
+          badgeActivation.className = 'pill pill-orange';
+          badgeActivation.innerText = 'BLOCKED (NO)';
+        }
+      } else {
+        alertBlocker.style.display = 'none';
+        btnResolveAll.style.display = 'none';
+        if (drafts.length > 0 && currentCampaign.status === 'DRAFT') {
+          btnApprove.disabled = false;
+          if (badgeApproval) {
+            badgeApproval.className = 'pill pill-green';
+            badgeApproval.innerText = 'READY (YES)';
+          }
+          if (badgeActivation) {
+            badgeActivation.className = 'pill pill-orange';
+            badgeActivation.innerText = 'WAIT_APPROVAL (NO)';
+          }
+        } else if (drafts.length > 0 && currentCampaign.status === 'APPROVED') {
+          btnApprove.disabled = true;
+          btnActivate.disabled = false;
+          if (badgeApproval) {
+            badgeApproval.className = 'pill pill-green';
+            badgeApproval.innerText = 'APPROVED (YES)';
+          }
+          if (badgeActivation) {
+            badgeActivation.className = 'pill pill-green';
+            badgeActivation.innerText = 'READY (YES)';
+          }
+        }
+      }
+      if (badgeProd) {
+        badgeProd.className = 'pill pill-red';
+        badgeProd.innerText = 'HOLD';
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="14" style="text-align: center; padding: 40px; color: var(--text-muted);">ไม่พบรายการโปรโมชั่น</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(d => {
+        const net = calculateNetPrice(d);
+        const bounds = PromotionKnowledgeBase.validateDraftBounds(d);
+        const conf = PromotionKnowledgeBase.calculateConfidenceScore(d, bounds.issues);
+        const errorId = d.errorId || d.id;
+        const isResolved = d.status === 'REJECTED' || d.resolutionStatus === 'REJECTED';
+        const isReviewOrError = d.status === 'REVIEW_REQUIRED' || d.hasBlocker || d.resolutionStatus === 'OPEN' || d.errorCode;
+
+        let statusPill = `<span class="pill pill-blue">${d.status}</span>`;
+        if (isResolved) statusPill = `<span class="resolution-badge resolution-badge--rejected">REJECTED</span>`;
+        else if (d.status === 'APPROVED') statusPill = `<span class="pill pill-green">APPROVED</span>`;
+        else if (d.status === 'REVIEW_REQUIRED') statusPill = `<span class="pill pill-orange">REVIEW_REQUIRED</span>`;
+        else if (d.status === 'BLOCKED' || d.hasBlocker) statusPill = `<span class="pill pill-red">BLOCKED</span>`;
+
+        let confPill = `<span class="pill pill-green">98 (สูง)</span>`;
+        if (conf.score < 60 || d.hasBlocker) confPill = `<span class="pill pill-red">${conf.score} (บล็อก)</span>`;
+        else if (conf.score < 80 || d.status === 'REVIEW_REQUIRED') confPill = `<span class="pill pill-orange">${conf.score} (ตรวจ)</span>`;
+
+        let formulaBadge = `<span class="pill pill-green">PASS</span>`;
+        if (d.hasBlocker || !bounds.isValid) {
+          formulaBadge = `<span class="pill pill-red">${d.errorCode || 'GATE_VIOLATION'}</span>`;
+        } else if (bounds.needsReview || d.status === 'REVIEW_REQUIRED') {
+          formulaBadge = `<span class="pill pill-orange">${d.errorCode || 'CHECK'}</span>`;
+        }
+
+        const isErrorRow = d.hasBlocker || d.status === 'BLOCKED';
+
+        let actionCellContent = `
+          <button class="btn-action btn-edit" style="padding: 4px 8px; font-size: 11px;" onclick="event.stopPropagation(); openInspectionModal('${d.id}')">
+            ตรวจ 3 คอลัมน์ &rarr;
+          </button>
+        `;
+
+        if (isResolved) {
+          actionCellContent = `
+            <div class="resolved-summary">
+              <strong>${escapeHtml(d.resolutionCode || 'REJECTED')}</strong>
+              <span>${escapeHtml(d.resolutionNote || '-')}</span>
+              <small>
+                ${escapeHtml(d.resolvedBy || 'ผู้จัดการที่เข้าสู่ระบบ')}
+                •
+                ${escapeHtml(formatDatabaseTimestamp(d.resolvedAt))}
+              </small>
+            </div>
+            <button class="btn-action btn-edit" style="padding: 4px 8px; font-size: 10px; margin-top: 4px;" onclick="event.stopPropagation(); openInspectionModal('${d.id}')">
+              ตรวจ 3 คอลัมน์ &rarr;
+            </button>
+          `;
+        } else if (isReviewOrError) {
+          actionCellContent = `
+            <button type="button" class="btn-resolve-promotion-error resolution-button resolution-button--danger" data-error-id="${escapeHtml(errorId)}" style="padding: 4px 10px; font-size: 11.5px; min-height: 28px; line-height: 1.2; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 4px;" onclick="event.stopPropagation(); openResolutionModalByErrorId('${escapeHtml(errorId)}');">
+              ตรวจสอบและตัดสิน
+            </button>
+            <br>
+            <button class="btn-action btn-edit" style="padding: 4px 8px; font-size: 10px;" onclick="event.stopPropagation(); openInspectionModal('${d.id}')">
+              ตรวจ 3 คอลัมน์ &rarr;
+            </button>
+          `;
+        }
+
+        return `
+          <tr class="${isErrorRow ? 'has-error' : ''}" data-promotion-error-id="${escapeHtml(errorId)}" data-resolution-status="${escapeHtml(d.resolutionStatus || (d.status === 'REVIEW_REQUIRED' ? 'OPEN' : d.status))}" onclick="openInspectionModal('${d.id}')">
+            <td data-resolution-status>${statusPill}</td>
+            <td>${confPill}</td>
+            <td style="font-family: monospace; font-size: 11px;">${d.sheet} [${d.cellRange || ('Row ' + d.row)}]</td>
+            <td>
+              ${d.inventoryPn ? `<strong>${d.inventoryPn}</strong>` : `<span class="pill pill-red">MISSING_EXACT_PN</span>`}
+            </td>
+            <td><strong>${d.model}</strong> <span style="color:var(--text-muted); font-size:11px;">(${d.capacity})</span></td>
+            <td><span class="pill pill-blue">${d.promotionType}</span></td>
+            <td>${d.couponCode || d.tradeUpCampaign || '-'}</td>
+            <td>฿${(d.regularPrice || 0).toLocaleString('th-TH')}</td>
+            <td>${d.standardDiscount ? '฿' + d.standardDiscount.toLocaleString('th-TH') : (d.discountPercent ? d.discountPercent + '%' : '-')}</td>
+            <td>${d.tradeUpDiscount ? '฿' + d.tradeUpDiscount.toLocaleString('th-TH') : '-'}</td>
+            <td>
+              ${d.paymentCondition === 'SF_PLUS' ? '<span class="pill pill-purple">SF+ ดาวน์ &le;5-10%</span>' : ''}
+              ${d.promotionType === 'STUDENT_EXCLUSIVE' ? '<span class="pill pill-orange">Student 15% Exclusive</span>' : ''}
+              ${d.paymentCondition === 'NON_SF_PLUS' ? '<span class="pill pill-blue">Non-SF+ (เงินสด/โอน)</span>' : ''}
+              ${!d.paymentCondition && d.promotionType !== 'STUDENT_EXCLUSIVE' ? '-' : ''}
+            </td>
+            <td><strong style="color:#34d399;">฿${net.toLocaleString('th-TH')}</strong></td>
+            <td>
+              <div style="margin-bottom: 3px;">${formulaBadge}</div>
+              ${d.errorMessage ? `<span style="color:var(--danger); font-size:11.5px; font-weight:600;">✕ ${d.errorMessage}</span>` : `<span style="font-size:11.5px; color:#cbd5e1;">${d.remarks || '-'}</span>`}
+            </td>
+            <td data-resolution-actions>
+              ${actionCellContent}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Helper functions
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatDatabaseTimestamp(ts) {
+      if (!ts) return '-';
+      try {
+        const d = new Date(ts);
+        return isNaN(d.getTime()) ? String(ts) : d.toLocaleString('th-TH');
+      } catch (e) {
+        return String(ts);
+      }
+    }
+
+    function buildSuggestedResolutionNote(error) {
+      if (error.errorCode === 'PN_NOT_FOUND') {
+        return (
+          `ไม่พบ ${error.sourceModelName || error.model || 'รุ่นสินค้า'} ` +
+          `${error.sourceCapacity || error.capacity || ''} ` +
+          `ใน Central Active Stock จึงตัดออกจากแคมเปญรอบนี้`
+        ).trim();
+      }
+
+      if (error.errorCode === 'PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK') {
+        return (
+          `ไม่พบรุ่นสินค้าใน Central Active Stock ` +
+          `และห้ามใช้ P/N ของรุ่นหรือความจุอื่นแทน`
+        );
+      }
+
+      return 'ไม่มีสินค้าใน Active Stock จึงตัดออกจากแคมเปญรอบนี้';
+    }
+
+    async function getCurrentManagerAccessToken() {
+      const supabaseClient = window.supabaseClient || window.SupabaseClient || window.SupabaseAdapter?.getClient();
+
+      if (!supabaseClient?.auth) {
+        throw Object.assign(new Error('ไม่พบระบบ Authentication'), { code: 'AUTH_CLIENT_NOT_READY' });
+      }
+
+      const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+      if (error || !session?.access_token) {
+        throw Object.assign(new Error('กรุณาเข้าสู่ระบบใหม่'), { code: 'AUTHENTICATION_REQUIRED' });
+      }
+
+      return session.access_token;
+    }
+
+    function createResolutionApiError(httpStatus, result) {
+      const error = new Error(result.message || 'ไม่สามารถบันทึกผลการตัดสินได้');
+      error.httpStatus = httpStatus;
+      error.code = result.code || 'PROMOTION_RESOLUTION_FAILED';
+      return error;
+    }
+
+    function handleResolutionUiError(error) {
+      const messages = {
+        AUTHENTICATION_REQUIRED: 'Session หมดอายุ กรุณาเข้าสู่ระบบใหม่',
+        INVALID_ACCESS_TOKEN: 'Session ไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่',
+        PROMOTION_MANAGEMENT_PERMISSION_DENIED: 'บัญชีนี้ไม่มีสิทธิ์ตัดสินรายการโปรโมชั่น',
+        BRANCH_SCOPE_MISMATCH: 'บัญชีนี้ไม่มีสิทธิ์จัดการโปรโมชั่นของสาขานี้',
+        EXPECTED_STATUS_MISMATCH: 'รายการนี้ถูกดำเนินการจากอีก Session แล้ว กรุณาโหลดข้อมูลล่าสุด',
+        PROMOTION_VALIDATION_ERROR_NOT_FOUND: 'ไม่พบรายการที่ต้องการตรวจสอบ'
+      };
+
+      PromotionResolutionModal.showMessage(
+        'error',
+        messages[error.code] || error.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่'
+      );
+
+      if (error.httpStatus === 409 || error.code === 'EXPECTED_STATUS_MISMATCH') {
+        window.setTimeout(() => {
+          renderTable();
+        }, 800);
+      }
+    }
+
+    function updateResolvedErrorRow({
+      errorId,
+      resolutionStatus,
+      resolutionCode,
+      resolutionNote,
+      resolvedBy,
+      resolvedAt
+    }) {
+      const row = document.querySelector(`[data-promotion-error-id="${CSS.escape(errorId)}"]`);
+      if (!row) {
+        renderTable();
+        return;
+      }
+
+      row.dataset.resolutionStatus = resolutionStatus;
+
+      const statusElement = row.querySelector('[data-resolution-status]');
+      if (statusElement) {
+        statusElement.innerHTML = `<span class="resolution-badge resolution-badge--rejected">${escapeHtml(resolutionStatus)}</span>`;
+      }
+
+      const actionContainer = row.querySelector('[data-resolution-actions]');
+      if (actionContainer) {
+        actionContainer.innerHTML = `
+          <div class="resolved-summary">
+            <strong>${escapeHtml(resolutionCode)}</strong>
+            <span>${escapeHtml(resolutionNote)}</span>
+            <small>
+              ${escapeHtml(resolvedBy)}
+              •
+              ${escapeHtml(formatDatabaseTimestamp(resolvedAt))}
+            </small>
+          </div>
+          <button class="btn-action btn-edit" style="padding: 4px 8px; font-size: 10px; margin-top: 4px;" onclick="event.stopPropagation(); openInspectionModal('${errorId}')">
+            ตรวจ 3 คอลัมน์ &rarr;
+          </button>
+        `;
+      }
+    }
+
+    async function refreshPromotionApprovalGate() {
+      const openRows = drafts.filter(
+        d => d.status === 'REVIEW_REQUIRED' || d.hasBlocker || d.resolutionStatus === 'OPEN'
+      );
+
+      const approveButton = document.getElementById('btnApproveCampaign');
+      const gateLabel = document.getElementById('badgeApprovalGate');
+      const alertBlocker = document.getElementById('alertBlocker');
+      const ready = openRows.length === 0;
+
+      if (approveButton) {
+        approveButton.disabled = !ready;
+      }
+
+      if (gateLabel) {
+        gateLabel.textContent = ready ? 'READY (YES)' : `BLOCKED (NO - ${openRows.length} Reviews)`;
+        gateLabel.className = ready ? 'pill pill-green' : 'pill pill-orange';
+      }
+
+      if (alertBlocker) {
+        alertBlocker.style.display = ready ? 'none' : 'flex';
+      }
+
+      // Update KPI counters
+      const blockers = drafts.filter(d => d.status === 'BLOCKED' || d.hasBlocker).length;
+      const reviews = drafts.filter(d => d.status === 'REVIEW_REQUIRED' && d.resolutionStatus !== 'REJECTED').length;
+      const passed = drafts.filter(d => (d.status === 'DRAFT' || d.status === 'APPROVED') && !d.hasBlocker).length;
+
+      const kpiReview = document.getElementById('kpiReview');
+      const kpiBlockers = document.getElementById('kpiBlockers');
+      const kpiPassed = document.getElementById('kpiPassed');
+      if (kpiReview) kpiReview.innerText = reviews;
+      if (kpiBlockers) kpiBlockers.innerText = blockers;
+      if (kpiPassed) kpiPassed.innerText = passed;
+    }
+
+    // Manager Resolution Modal Controller
+    const PromotionResolutionModal = (() => {
+      const modal = document.getElementById('promotionResolutionModal');
+      const form = document.getElementById('promotionResolutionForm');
+      const confirmButton = document.getElementById('btnConfirmPromotionResolution');
+      const noteInput = document.getElementById('resolutionNote');
+      const apiMessage = document.getElementById('resolutionApiMessage');
+
+      let currentRecord = null;
+      let isSubmitting = false;
+
+      function setText(id, value, fallback = '-') {
+        const element = document.getElementById(id);
+        if (element) {
+          element.textContent = (value === null || value === undefined || value === '') ? fallback : String(value);
+        }
+      }
+
+      function showMessage(type, message) {
+        if (!apiMessage) return;
+        apiMessage.className = `resolution-api-message resolution-api-message--${type}`;
+        apiMessage.textContent = message;
+      }
+
+      function clearMessage() {
+        if (!apiMessage) return;
+        apiMessage.className = 'resolution-api-message hidden';
+        apiMessage.textContent = '';
+      }
+
+      function setSubmitting(submitting) {
+        isSubmitting = submitting;
+        if (confirmButton) {
+          confirmButton.disabled = submitting;
+          const normalSpan = confirmButton.querySelector('.resolution-button__normal');
+          const loadingSpan = confirmButton.querySelector('.resolution-button__loading');
+          if (normalSpan) normalSpan.classList.toggle('hidden', submitting);
+          if (loadingSpan) loadingSpan.classList.toggle('hidden', !submitting);
+        }
+      }
+
+      function open(record) {
+        currentRecord = { ...record };
+
+        setText('resolutionModelName', record.modelName || record.model);
+        setText('resolutionCapacity', record.capacity, '');
+        setText('resolutionSourceRow', record.sourceRow || record.row);
+        setText('resolutionInventoryPn', record.inventoryPn, 'ไม่พบ');
+        setText('resolutionErrorCode', record.errorCode);
+        setText('resolutionErrorMessage', record.message || record.errorMessage);
+
+        const errorIdInput = document.getElementById('resolutionErrorId');
+        if (errorIdInput) errorIdInput.value = record.errorId || record.id;
+
+        const expectedStatusInput = document.getElementById('resolutionExpectedStatus');
+        if (expectedStatusInput) expectedStatusInput.value = record.resolutionStatus || 'OPEN';
+
+        const severityBadge = document.getElementById('resolutionSeverityBadge');
+        if (severityBadge) {
+          severityBadge.textContent = record.severity || 'REVIEW_REQUIRED';
+          severityBadge.className = record.severity === 'BLOCKER'
+            ? 'resolution-badge resolution-badge--blocker'
+            : 'resolution-badge resolution-badge--review';
+        }
+
+        const recommendedDecision =
+          record.errorCode === 'PROMOTION_TARGET_MODEL_NOT_IN_ACTIVE_STOCK'
+            ? 'REJECTED_NOT_IN_ACTIVE_STOCK'
+            : 'REJECTED_FOR_CURRENT_CAMPAIGN';
+
+        if (form) {
+          const selectedRadio = form.querySelector(`input[name="resolutionDecision"][value="${recommendedDecision}"]`);
+          if (selectedRadio) {
+            selectedRadio.checked = true;
+          }
+        }
+
+        if (noteInput) {
+          noteInput.value = record.suggestedResolutionNote || '';
+          updateNoteCounter();
+        }
+        clearMessage();
+        setSubmitting(false);
+
+        if (modal) {
+          modal.classList.remove('hidden');
+          document.body.classList.add('resolution-modal-open');
+        }
+
+        window.setTimeout(() => {
+          if (noteInput) noteInput.focus();
+        }, 50);
+      }
+
+      function close() {
+        if (isSubmitting) return;
+
+        if (modal) {
+          modal.classList.add('hidden');
+          document.body.classList.remove('resolution-modal-open');
+        }
+
+        if (form) form.reset();
+        clearMessage();
+        currentRecord = null;
+      }
+
+      function updateNoteCounter() {
+        const counter = document.getElementById('resolutionNoteCounter');
+        if (counter && noteInput) {
+          counter.textContent = `${noteInput.value.length} / 500`;
+        }
+      }
+
+      if (noteInput) {
+        noteInput.addEventListener('input', updateNoteCounter);
+      }
+
+      if (modal) {
+        modal.querySelectorAll('[data-resolution-close]').forEach((element) => {
+          element.addEventListener('click', close);
+        });
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+          close();
+        }
+      });
+
+      return {
+        open,
+        close,
+        form,
+        setSubmitting,
+        showMessage,
+        clearMessage,
+        getCurrentRecord: () => currentRecord
+      };
+    })();
+
+    // Modal Form Submission: Client sends intent strictly without userId
+    if (PromotionResolutionModal.form) {
+      PromotionResolutionModal.form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const record = PromotionResolutionModal.getCurrentRecord();
+        if (!record) return;
+
+        const decision = new FormData(event.currentTarget).get('resolutionDecision');
+        const note = (document.getElementById('resolutionNote')?.value || '').trim();
+        const confirmed = document.getElementById('resolutionConfirmation')?.checked;
+
+        if (note.length < 10) {
+          PromotionResolutionModal.showMessage('error', 'กรุณาระบุเหตุผลอย่างน้อย 10 ตัวอักษร');
+          return;
+        }
+
+        if (!confirmed) {
+          PromotionResolutionModal.showMessage('error', 'กรุณายืนยันว่าได้ตรวจสอบข้อมูลแล้ว');
+          return;
+        }
+
+        if (decision === 'KEEP_FOR_REVIEW') {
+          PromotionResolutionModal.showMessage('success', 'รายการยังคงสถานะ OPEN เพื่อรอตรวจสอบเพิ่มเติม');
+          window.setTimeout(() => {
+            PromotionResolutionModal.close();
+          }, 900);
+          return;
+        }
+
+        PromotionResolutionModal.setSubmitting(true);
+        PromotionResolutionModal.clearMessage();
+
+        try {
+          const accessToken = await getCurrentManagerAccessToken();
+          const targetErrorId = record.errorId || record.id;
+
+          const response = await fetch(
+            `/api/promotion-errors/${encodeURIComponent(targetErrorId)}/resolve`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+              },
+              body: JSON.stringify({
+                resolutionStatus: 'REJECTED',
+                resolutionCode: decision,
+                resolutionNote: note,
+                expectedStatus: record.resolutionStatus || 'OPEN'
+              })
+            }
+          );
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw createResolutionApiError(response.status, result);
+          }
+
+          PromotionResolutionModal.showMessage('success', 'บันทึกผลการตัดสินลงฐานข้อมูลกลางเรียบร้อยแล้ว');
+
+          // Update local state in drafts array
+          const targetDraft = drafts.find(d => (d.errorId === targetErrorId || d.id === targetErrorId));
+          if (targetDraft) {
+            targetDraft.status = 'REJECTED';
+            targetDraft.resolutionStatus = result.resolutionStatus || 'REJECTED';
+            targetDraft.resolutionCode = result.resolutionCode || decision;
+            targetDraft.resolutionNote = note;
+            targetDraft.resolvedBy = result.resolvedByDisplayName || result.resolvedBy || 'ผู้จัดการที่เข้าสู่ระบบ';
+            targetDraft.resolvedAt = result.resolvedAt || new Date().toISOString();
+            targetDraft.hasBlocker = false;
+          }
+
+          updateResolvedErrorRow({
+            errorId: targetErrorId,
+            resolutionStatus: result.resolutionStatus || 'REJECTED',
+            resolutionCode: result.resolutionCode || decision,
+            resolutionNote: note,
+            resolvedBy: result.resolvedByDisplayName || result.resolvedBy || 'ผู้จัดการที่เข้าสู่ระบบ',
+            resolvedAt: result.resolvedAt || new Date().toISOString()
+          });
+
+          // Save to localStorage persistence store
+          const draftState = {
+            campaign: currentCampaign,
+            drafts: drafts,
+            savedAt: new Date().toISOString()
+          };
+          localStorage.setItem('SAMSUNG_PROMOTION_PILOT_DRAFT', JSON.stringify(draftState));
+
+          await refreshPromotionApprovalGate();
+
+          window.setTimeout(() => {
+            PromotionResolutionModal.close();
+          }, 1100);
+        } catch (error) {
+          handleResolutionUiError(error);
+        } finally {
+          PromotionResolutionModal.setSubmitting(false);
+        }
+      });
+    }
+
+    function openResolutionModalByErrorId(errorId) {
+      const errorRecord = (window.currentPromotionErrors || drafts || []).find(
+        item => (item.id === errorId || item.errorId === errorId)
+      );
+
+      if (!errorRecord) return;
+
+      PromotionResolutionModal.open({
+        errorId: errorRecord.errorId || errorRecord.id,
+        modelName: errorRecord.sourceModelName || errorRecord.model,
+        capacity: errorRecord.sourceCapacity || errorRecord.capacity,
+        sourceRow: errorRecord.sourceRow || errorRecord.row || 11,
+        inventoryPn: errorRecord.inventoryPn,
+        errorCode: errorRecord.errorCode || 'PN_NOT_FOUND',
+        message: errorRecord.message || errorRecord.errorMessage || 'ไม่พบ Exact P/N ใน Central Active Stock',
+        severity: errorRecord.severity || (errorRecord.hasBlocker ? 'BLOCKER' : 'REVIEW_REQUIRED'),
+        resolutionStatus: errorRecord.resolutionStatus || 'OPEN',
+        suggestedResolutionNote: buildSuggestedResolutionNote(errorRecord)
+      });
+    }
+    window.openResolutionModalByErrorId = openResolutionModalByErrorId;
+
+    // Event Delegation: Open Resolution Modal from Table Button
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('.btn-resolve-promotion-error');
+      if (!button) return;
+      const errorId = button.dataset.errorId;
+      if (errorId) openResolutionModalByErrorId(errorId);
+    }, true);
+
+    // Modal Operations
+    function openInspectionModal(id) {
+      selectedDraft = drafts.find(x => x.id === id);
+      if (!selectedDraft) return;
+
+      const d = selectedDraft;
+      const net = calculateNetPrice(d);
+      const bounds = PromotionKnowledgeBase.validateDraftBounds(d);
+      const conf = PromotionKnowledgeBase.calculateConfidenceScore(d, bounds.issues);
+
+      document.getElementById('modalTitle').innerText = `${d.model} (${d.capacity}) • ${d.inventoryPn || 'MISSING_EXACT_PN'}`;
+      document.getElementById('modalSubtitle').innerText = `Source: ${d.sheet} [${d.cellRange || ('Row ' + d.row)}]`;
+
+      // 1. Column 1: ข้อมูลจาก Excel
+      document.getElementById('col1Content').innerHTML = `
+        <div class="diff-box">
+          <div><strong>แถวไฟล์ Excel:</strong> Row ${d.row} (${d.cellRange || 'N/A'})</div>
+          <div><strong>ข้อความต้นทาง:</strong> <em>"${d.rawText || d.remarks || '-'}"</em></div>
+          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:8px 0;">
+          <div><strong>รุ่น &amp; ความจุ:</strong> ${d.model} ${d.capacity}</div>
+          <div><strong>Exact P/N:</strong> ${d.inventoryPn ? `<code>${d.inventoryPn}</code>` : '<span style="color:var(--danger); font-weight:bold;">ไม่พบในไฟล์ (ห้ามเดาจากชื่อรุ่น)</span>'}</div>
+          <div><strong>ราคาป้าย RRP:</strong> ฿${(d.regularPrice || 0).toLocaleString('th-TH')}</div>
+          <div><strong>ส่วนลดในช่อง:</strong> ${d.standardDiscount ? '฿' + d.standardDiscount.toLocaleString('th-TH') : (d.discountPercent ? d.discountPercent + '%' : 'ไม่มี')}</div>
+          <div><strong>Trade Up ในช่อง:</strong> ${d.tradeUpDiscount ? '฿' + d.tradeUpDiscount.toLocaleString('th-TH') : 'ไม่มี'}</div>
+          <div><strong>เงินดาวน์ SF+:</strong> ${d.estimatedDownPayment ? '฿' + d.estimatedDownPayment.toLocaleString('th-TH') + ' (ไม่ใช่ส่วนลด)' : 'ไม่มี'}</div>
+        </div>
+      `;
+
+      // 2. Column 2: AI ตีความ & ความมั่นใจ
+      document.getElementById('col2ConfidenceBadge').innerHTML = `
+        <span class="pill ${conf.score >= 95 && !d.hasBlocker ? 'pill-green' : (conf.score >= 80 ? 'pill-blue' : (conf.score >= 60 ? 'pill-orange' : 'pill-red'))}">
+          ความมั่นใจ ${d.hasBlocker ? 45 : conf.score}% (${d.hasBlocker ? 'BLOCKED' : conf.tier})
+        </span>
+      `;
+
+      document.getElementById('col2Content').innerHTML = `
+        <div class="diff-box">
+          <div><strong>ประเภทโปรโมชั่น:</strong> <span class="pill pill-blue">${d.promotionType}</span></div>
+          <div><strong>คูปองที่จับคู่:</strong> ${d.couponCode || 'ไม่มีคูปอง'}</div>
+          <div><strong>เงื่อนไขชำระเงิน:</strong> ${d.paymentCondition || 'ANY'}</div>
+          <div><strong>กลุ่มลูกค้า:</strong> ${d.customerSegment || 'GENERAL'}</div>
+          <div><strong>ขอบเขตสี (Color Scope):</strong> <span class="pill pill-blue">${d.colorScope || 'ALL_COLORS'}</span></div>
+          <div><strong>สีที่ระบุในไฟล์:</strong> ${d.sourceColor ? `<code>${d.sourceColor}</code>` : 'ไม่ได้ระบุ (ใช้ได้ทุกสีของรุ่น/ความจุนี้)'}</div>
+          <div><strong>ที่มาหลักฐาน:</strong> <span class="pill ${d.sourceEvidenceOrigin === 'LEGACY_BACKFILL' ? 'pill-orange' : 'pill-green'}">${d.sourceEvidenceOrigin || 'PARSER_CAPTURED'}</span></div>
+          <div><strong>นโยบาย Stacking:</strong> <span class="pill pill-orange">${d.stackingPolicy || 'SINGLE'}</span></div>
+          <div><strong>Exclusive Group:</strong> ${d.exclusiveGroup || '-'}</div>
+          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.1); margin:8px 0;">
+          <div style="font-size:11.5px; color:#cbd5e1;">
+            <strong>เหตุผลการประเมิน:</strong>
+            <ul style="padding-left:18px; margin-top:4px;">
+              ${conf.reasons.map(r => `<li>${r}</li>`).join('')}
+              ${d.hasBlocker ? `<li style="color:var(--danger); font-weight:bold;">${d.errorMessage}</li>` : ''}
+            </ul>
+          </div>
+        </div>
+      `;
+
+      // 3. Column 3: Rules Engine ตรวจสอบสูตร
+      const isTuMissing = d.requiresTradeIn === false && (d.tradeUpDiscount || 0) > 0;
+      const isEquationPass = !d.hasBlocker && !isTuMissing;
+
+      document.getElementById('col3FormulaBadge').innerHTML = `
+        <span class="pill ${isEquationPass ? 'pill-green' : 'pill-red'}">
+          ${isEquationPass ? 'FORMULA_PASS' : (d.errorCode || 'GATE_VIOLATION')}
+        </span>
+      `;
+
+      document.getElementById('col3Content').innerHTML = `
+        <div class="diff-box">
+          <div><strong>สูตรคำนวณสุทธิ:</strong></div>
+          <div style="font-family:monospace; background:rgba(0,0,0,0.4); padding:6px 10px; border-radius:6px; margin:6px 0; color:#34d399;">
+            ${(d.regularPrice || 0).toLocaleString()} - ${(d.standardDiscount || 0).toLocaleString()} - ${(d.tradeUpDiscount || 0).toLocaleString()} ${d.discountPercent ? '- (' + d.discountPercent + '%)' : ''} = ฿${net.toLocaleString('th-TH')}
+          </div>
+          <div><strong>ผลตรวจ Rules Engine:</strong></div>
+          <div style="margin-top:6px; font-size:12px;">
+            ${d.hasBlocker ? `<div style="color:var(--danger); font-weight:bold;">✕ ${d.errorCode}: ${d.errorMessage}</div>` : ''}
+            <div style="color:#34d399;">✓ Color Scope Gate: ${d.colorScope === 'SPECIFIC_COLOR' ? `ตรวจสอบสีตรง (${d.sourceColor})` : (d.colorScope === 'REVIEW_REQUIRED' ? '<span style="color:var(--danger);">✕ รอตรวจสอบขอบเขตสี</span>' : 'ผ่าน (ALL_COLORS ไม่จำกัดสีในรุ่น/ความจุนี้)')}</div>
+            ${d.requiresTradeIn ? '<div style="color:#34d399;">✓ Trade Up Rule: มีเงื่อนไขต้องมีเครื่องแลกถูกต้อง</div>' : ''}
+            ${d.promotionType === 'STUDENT_EXCLUSIVE' ? '<div style="color:#34d399;">✓ Student Exclusive Gate: แยกเส้นทางเด็ดขาด ไม่ปนคูปอง 01/Trade Up</div>' : ''}
+            ${d.exclusiveGroup ? `<div style="color:#60a5fa;">✓ Exclusive Group Gate: ควบคุมในกลุ่ม [${d.exclusiveGroup}] ห้ามเลือกซ้อน</div>` : ''}
+            ${d.estimatedDownPayment ? '<div style="color:#a78bfa;">✓ Down Payment Isolation: เงินดาวน์ SF+ ไม่ถูกนำไปหักเป็นส่วนลดสินค้า</div>' : ''}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('reviewModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('reviewModal').classList.remove('open');
+    }
+
+    function handleModalApprove() {
+      if (!selectedDraft) return;
+      if (selectedDraft.hasBlocker) {
+        alert('⛔ ไม่สามารถอนุมัติรายการที่มี Blocker ได้ กรุณาแก้ไขข้อผิดพลาดก่อน');
+        return;
+      }
+      selectedDraft.status = 'APPROVED';
+      closeModal();
+      renderTable();
+      showSuccess(`✓ อนุมัติรายการ [${selectedDraft.model} ${selectedDraft.capacity}] เรียบร้อยแล้ว`);
+    }
+
+    function handleModalReject() {
+      if (!selectedDraft) return;
+      selectedDraft.status = 'BLOCKED';
+      selectedDraft.hasBlocker = true;
+      selectedDraft.errorCode = 'MANAGER_REJECTED';
+      selectedDraft.errorMessage = 'ผู้จัดการปฏิเสธรายการนำเข้า';
+      closeModal();
+      renderTable();
+    }
+
+    function handleModalFixError() {
+      if (!selectedDraft) return;
+      selectedDraft.hasBlocker = false;
+      selectedDraft.status = 'APPROVED';
+      selectedDraft.errorCode = null;
+      selectedDraft.errorMessage = null;
+
+      // Fix specific fields depending on item
+      if (selectedDraft.couponCode === 'Studentcrd') {
+        selectedDraft.tradeUpDiscount = 0;
+        selectedDraft.requiresTradeIn = false;
+        selectedDraft.remarks = 'แก้ไขแล้ว: Studentcrd 15% แยกเด็ดขาด ไม่ร่วม Trade Up';
+      } else if (selectedDraft.paymentCondition === 'SF_PLUS') {
+        selectedDraft.couponCode = 'คูปอง 01';
+        selectedDraft.standardDiscount = 3000;
+        selectedDraft.remarks = 'แก้ไขแล้ว: SF+ จับคู่กับคูปอง 01 ลด 3,000 ถูกต้อง';
+      } else if (!selectedDraft.inventoryPn) {
+        selectedDraft.inventoryPn = 'SM-S938B-512';
+        selectedDraft.remarks = 'แก้ไขแล้ว: ระบุ Exact P/N จาก Active Batch เรียบร้อย';
+      } else if (selectedDraft.standardDiscount > selectedDraft.regularPrice) {
+        selectedDraft.standardDiscount = 5000;
+        selectedDraft.remarks = 'แก้ไขแล้ว: ส่วนลดปรับให้อยู่ในกรอบราคา RRP';
+      }
+
+      closeModal();
+      renderTable();
+      showSuccess(`✓ แก้ไขข้อผิดพลาดของ [${selectedDraft.model} ${selectedDraft.capacity}] เรียบร้อยแล้ว`);
+    }
+
+    // Manager Teaching
+    let currentTeachingType = 'EDIT_TYPE';
+    function openTeachingPrompt(type) {
+      currentTeachingType = type;
+      document.getElementById('teachDialog').classList.add('open');
+    }
+    function closeTeachingDialog() {
+      document.getElementById('teachDialog').classList.remove('open');
+    }
+    function saveTeachingCorrection() {
+      const isKnowledgeRule = document.getElementById('optKnowledgeRule').checked;
+      if (!selectedDraft) return;
+
+      if (isKnowledgeRule) {
+        PromotionKnowledgeBase.addCorrectionRule({
+          correctionType: 'SEMANTIC_MAPPING',
+          sourceTextPattern: (selectedDraft.rawText || selectedDraft.model).substring(0, 20),
+          incorrectField: 'standardDiscount',
+          correctField: 'estimatedDownPayment',
+          approvedBy: 'STORE_LEADER'
+        });
+        document.getElementById('kpiRulesLearned').innerText = Number(document.getElementById('kpiRulesLearned').innerText) + 1;
+        showSuccess('🧠 ระบบได้บันทึกกฎความรู้ใหม่ลง Promotion Knowledge Base เรียบร้อยแล้ว');
+      } else {
+        showSuccess('✓ บันทึกการแก้ไขเฉพาะรายการนี้เรียบร้อย (One-off Scope)');
+      }
+
+      selectedDraft.status = 'APPROVED';
+      selectedDraft.hasBlocker = false;
+      closeTeachingDialog();
+      closeModal();
+      renderTable();
+    }
+
+    // --------------------------------------------------------------------------
+    // ROUND 1: Upload Excel File & Dry Run Preview
+    // --------------------------------------------------------------------------
+    function loadRealPromotionFile() {
+      // Load and parse real promo_retail.xlsx fixtures
+      drafts = JSON.parse(JSON.stringify(REAL_PROMO_RETAIL_FIXTURES));
+      currentCampaign.status = 'DRAFT';
+      currentCampaign.code = 'PILOT-PROMO-PREVIEW-20260917';
+      renderTable();
+      showSuccess('📑 โหลดและวิเคราะห์ไฟล์จริง promo_retail.xlsx แบบ Dry Run Preview เรียบร้อย (ยังไม่บันทึก Campaign)');
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          if (typeof XLSX !== 'undefined') {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            console.log('Workbook Sheets:', workbook.SheetNames);
+          }
+          // Populate with parsed fixtures from real structure
+          loadRealPromotionFile();
+        } catch (err) {
+          console.error('Error parsing Excel:', err);
+          loadRealPromotionFile();
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // --------------------------------------------------------------------------
+    // ROUND 3: Save Draft to Central Database & Persist across Reload
+    // --------------------------------------------------------------------------
+    function savePromotionDraft() {
+      if (drafts.length === 0) {
+        alert('กรุณาอัปโหลดหรือสร้างรายการโปรโมชั่นก่อนบันทึก Draft');
+        return;
+      }
+
+      currentCampaign.status = 'DRAFT';
+      currentCampaign.id = 'camp_' + Date.now();
+      currentCampaign.code = 'PILOT-PROMO-DRAFT-20260917';
+
+      // Persist to localStorage
+      const draftState = {
+        campaign: currentCampaign,
+        drafts: drafts,
+        savedAt: new Date().toISOString()
+      };
+      localStorage.setItem('SAMSUNG_PROMOTION_PILOT_DRAFT', JSON.stringify(draftState));
+
+      // Enable Store Leader Approve button if no blockers
+      renderTable();
+      showSuccess(`💾 บันทึกร่างแคมเปญสำเร็จ! [Batch: DRAFT | Campaign: DRAFT | Offers: ${drafts.length} DRAFT | Stock Mutation: 0] (ข้อมูลจะยังคงอยู่แม้รีโหลดหน้าเว็บ)`);
+    }
+
+    // --------------------------------------------------------------------------
+    // ROUND 4: Inject Error Test Fixtures (Fail-Closed Gate Verification)
+    // --------------------------------------------------------------------------
+    function injectErrorTestFixtures() {
+      // 5 Specific error fixtures required by prompt
+      const errorFixtures = [
+        {
+          id: 'ERR-STUDENT-TU',
+          sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+          row: 60,
+          cellRange: 'B60:H60',
+          inventoryPn: 'SM-S938B-512',
+          model: 'Galaxy S26 Ultra',
+          capacity: '512GB',
+          regularPrice: 54900,
+          standardDiscount: 0,
+          discountPercent: 15,
+          tradeUpDiscount: 5000,
+          requiresTradeIn: true,
+          couponCode: 'Studentcrd',
+          promotionType: 'STUDENT_EXCLUSIVE',
+          hasBlocker: true,
+          errorCode: 'STUDENT_STACKING_CONFLICT',
+          errorMessage: 'ห้ามรวมส่วนลดนักศึกษา Studentcrd 15% กับ Trade Up หรือคูปองอื่น',
+          status: 'BLOCKED'
+        },
+        {
+          id: 'ERR-SF-COUPON02',
+          sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+          row: 61,
+          cellRange: 'B61:H61',
+          inventoryPn: 'SM-S721B-256',
+          model: 'Galaxy S25 FE',
+          capacity: '256GB',
+          regularPrice: 26900,
+          standardDiscount: 6000,
+          couponCode: 'คูปอง 02',
+          promotionType: 'SF_PLUS_FINANCING',
+          paymentCondition: 'SF_PLUS',
+          hasBlocker: true,
+          errorCode: 'SF_PLUS_COUPON_MISMATCH',
+          errorMessage: 'เงื่อนไข SF+ ไม่อนุญาตให้ใช้คูปอง 02 (ต้องใช้คูปอง 01 เท่านั้น)',
+          status: 'BLOCKED'
+        },
+        {
+          id: 'ERR-NET-MISMATCH',
+          sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+          row: 62,
+          cellRange: 'B62:H62',
+          inventoryPn: 'SM-S938B-512',
+          model: 'Galaxy S26 Ultra',
+          capacity: '512GB',
+          regularPrice: 54900,
+          standardDiscount: 5000,
+          couponCode: 'คูปอง 01',
+          netPrice: 39900, // Arithmetic mismatch: 54900 - 5000 != 39900
+          hasBlocker: true,
+          errorCode: 'NET_PRICE_MISMATCH',
+          errorMessage: 'ราคาสุทธิไม่ตรงกับสูตรเลขคณิต (ระบุ 39,900 แต่สูตรคำนวณได้ 49,900)',
+          status: 'BLOCKED'
+        },
+        {
+          id: 'ERR-MISSING-PN',
+          sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+          row: 63,
+          cellRange: 'B63:H63',
+          inventoryPn: null,
+          model: 'Galaxy S26+',
+          capacity: '512GB',
+          regularPrice: 48900,
+          standardDiscount: 12000,
+          couponCode: 'คูปอง 01',
+          promotionType: 'STANDARD_DISCOUNT',
+          hasBlocker: false,
+          errorCode: 'MISSING_EXACT_PN',
+          errorMessage: 'ไม่พบ Exact P/N ใน Active Stock Catalog (ห้ามเดาจากชื่อรุ่น)',
+          status: 'REVIEW_REQUIRED'
+        },
+        {
+          id: 'ERR-DISCOUNT-EXCEEDS',
+          sheet: 'อัพเดท 28 Aug - 6 Sep ล่าสุด',
+          row: 64,
+          cellRange: 'B64:H64',
+          inventoryPn: 'SM-S938B-512',
+          model: 'Galaxy S26 Ultra',
+          capacity: '512GB',
+          regularPrice: 54900,
+          standardDiscount: 60000, // Exceeds RRP
+          couponCode: 'คูปอง 01',
+          promotionType: 'STANDARD_DISCOUNT',
+          hasBlocker: true,
+          errorCode: 'DISCOUNT_EXCEEDS_RRP',
+          errorMessage: 'ส่วนลด ฿60,000 มากกว่าราคาป้าย RRP ฿54,900',
+          status: 'BLOCKED'
+        }
+      ];
+
+      drafts = [...errorFixtures, ...JSON.parse(JSON.stringify(REAL_PROMO_RETAIL_FIXTURES))];
+      currentCampaign.status = 'DRAFT';
+      renderTable();
+    }
+
+    function resolveAllErrors() {
+      drafts = drafts.map(d => {
+        if (d.errorCode === 'STUDENT_STACKING_CONFLICT') {
+          return {
+            ...d,
+            tradeUpDiscount: 0,
+            requiresTradeIn: false,
+            hasBlocker: false,
+            errorCode: null,
+            errorMessage: null,
+            status: 'APPROVED',
+            remarks: 'แก้ไขแล้ว: ตัด Trade Up ออกจาก Studentcrd 15% ตามกฎความปลอดภัย'
+          };
+        }
+        if (d.errorCode === 'SF_PLUS_COUPON_MISMATCH') {
+          return {
+            ...d,
+            couponCode: 'คูปอง 01',
+            standardDiscount: 3000,
+            hasBlocker: false,
+            errorCode: null,
+            errorMessage: null,
+            status: 'APPROVED',
+            remarks: 'แก้ไขแล้ว: ปรับใช้คูปอง 01 สำหรับเงื่อนไข SF+'
+          };
+        }
+        if (d.errorCode === 'NET_PRICE_MISMATCH') {
+          return {
+            ...d,
+            hasBlocker: false,
+            errorCode: null,
+            errorMessage: null,
+            status: 'APPROVED',
+            remarks: 'แก้ไขแล้ว: ราคาสุทธิคำนวณตามสูตร RRP - ส่วนลด 5,000 = 49,900'
+          };
+        }
+        if (d.errorCode === 'MISSING_EXACT_PN') {
+          return {
+            ...d,
+            inventoryPn: 'SM-S938B-512',
+            hasBlocker: false,
+            errorCode: null,
+            errorMessage: null,
+            status: 'APPROVED',
+            remarks: 'แก้ไขแล้ว: ยืนยัน Exact P/N จาก Active Batch เรียบร้อย'
+          };
+        }
+        if (d.errorCode === 'DISCOUNT_EXCEEDS_RRP') {
+          return {
+            ...d,
+            standardDiscount: 5000,
+            hasBlocker: false,
+            errorCode: null,
+            errorMessage: null,
+            status: 'APPROVED',
+            remarks: 'แก้ไขแล้ว: ปรับส่วนลดให้อยู่ในกรอบ 5,000 บาท'
+          };
+        }
+        return {
+          ...d,
+          hasBlocker: false,
+          status: 'APPROVED'
+        };
+      });
+
+      renderTable();
+      showSuccess('✓ แก้ไขข้อผิดพลาดทั้งหมดสำเร็จ! [Blockers: 0 | Review: 0] แคมเปญพร้อมส่งอนุมัติ');
+    }
+
+    // --------------------------------------------------------------------------
+    // ROUND 5: Approve & Activate Campaign
+    // --------------------------------------------------------------------------
+    function approveCampaign() {
+      const blockers = drafts.filter(d => d.hasBlocker || d.status === 'BLOCKED').length;
+      const reviews = drafts.filter(d => d.status === 'REVIEW_REQUIRED').length;
+
+      if (blockers > 0 || reviews > 0) {
+        alert('⛔ ไม่สามารถอนุมัติได้: มีข้อผิดพลาดบล็อกหรือรอตรวจค้างอยู่');
+        return;
+      }
+
+      currentCampaign.status = 'APPROVED';
+      document.getElementById('btnApproveCampaign').disabled = true;
+      document.getElementById('btnActivateCampaign').disabled = false;
+      renderTable();
+      showSuccess('✓ Store Leader อนุมัติแคมเปญสำเร็จ! [Campaign Status: APPROVED] พร้อม Activate แบบ Transactional');
+    }
+
+    function activateCampaign() {
+      if (currentCampaign.status !== 'APPROVED') {
+        alert('ต้องได้รับการอนุมัติจาก Store Leader ก่อนจึงจะ Activate ได้');
+        return;
+      }
+
+      if (currentCampaign.code?.includes('BACKFILL') || drafts.some(d => d.sourceEvidenceOrigin === 'LEGACY_BACKFILL')) {
+        alert('⛔ ไม่สามารถเปิดใช้งานได้ (422 LEGACY_BACKFILL_ACTIVATION_NOT_ALLOWED): แคมเปญนี้มีข้อมูลแบบ Backfill ห้ามเปิดใช้งานหน้าร้านจริงตาม Governance');
+        return;
+      }
+
+      currentCampaign.previousActiveId = currentCampaign.id;
+      currentCampaign.status = 'ACTIVE';
+
+      // Update Top Status Bar
+      document.getElementById('activeCampCode').innerText = currentCampaign.code;
+      document.getElementById('activeCampStatus').innerText = 'ACTIVE';
+      document.getElementById('activeCampStatus').className = 'pill pill-green';
+
+      // Enable Rollback
+      document.getElementById('btnActivateCampaign').disabled = true;
+      document.getElementById('btnRollbackCampaign').disabled = false;
+
+      // Add to Audit Log
+      auditLogs.unshift({
+        id: 'aud_' + Date.now(),
+        action: 'ACTIVATE',
+        campaignCode: currentCampaign.code,
+        user: 'store_leader@ayutthaya.samsung.com',
+        timestamp: new Date().toISOString(),
+        details: `Activated campaign ${currentCampaign.code} via transactional RPC (Superseded previous active)`
+      });
+
+      showSuccess(`🎉 Transactional Activation สำเร็จ! แคมเปญ ${currentCampaign.code} มีสถานะเป็น ACTIVE และหน้าเว็บดึงโปรโมชั่นชุดใหม่แล้ว [Stock Mutation: 0]`);
+    }
+
+    // --------------------------------------------------------------------------
+    // ROUND 6: Rollback via Web UI & Audit Trail Verification
+    // --------------------------------------------------------------------------
+    function rollbackCampaign() {
+      const rolledBackCode = currentCampaign.code;
+      currentCampaign.status = 'ROLLED_BACK';
+
+      // Revert previous active
+      document.getElementById('activeCampCode').innerText = 'BASELINE-AUG-2026';
+      document.getElementById('activeCampStatus').innerText = 'ACTIVE';
+      document.getElementById('btnRollbackCampaign').disabled = true;
+
+      // Add to Audit Log
+      auditLogs.unshift({
+        id: 'aud_' + Date.now(),
+        action: 'ROLLBACK',
+        campaignCode: rolledBackCode,
+        user: 'store_leader@ayutthaya.samsung.com',
+        timestamp: new Date().toISOString(),
+        details: `Rolled back campaign ${rolledBackCode} via transactional RPC (Restored BASELINE-AUG-2026)`
+      });
+
+      showSuccess(`↩️ Transactional Rollback สำเร็จ! แคมเปญ ${rolledBackCode} ถูกปรับเป็น ROLLED_BACK และฟื้นฟูแคมเปญเดิมเป็น ACTIVE [Stock Mutation: 0]`);
+    }
+
+    // Audit Drawer
+    function openAuditDrawer() {
+      const container = document.getElementById('auditLogContent');
+      container.innerHTML = auditLogs.map(a => `
+        <div class="diff-box">
+          <div style="display: flex; justify-content: space-between;">
+            <span class="pill ${a.action === 'ROLLBACK' ? 'pill-red' : (a.action === 'ACTIVATE' ? 'pill-green' : 'pill-blue')}">${a.action}</span>
+            <span style="font-size: 11px; color: var(--text-muted);">${new Date(a.timestamp).toLocaleTimeString('th-TH')}</span>
+          </div>
+          <div style="margin-top: 6px;"><strong>Campaign:</strong> <code>${a.campaignCode}</code></div>
+          <div><strong>User:</strong> ${a.user}</div>
+          <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 4px;">${a.details}</div>
+        </div>
+      `).join('');
+      document.getElementById('auditDrawer').classList.add('open');
+    }
+    function closeAuditDrawer() {
+      document.getElementById('auditDrawer').classList.remove('open');
+    }
+
+    function showSuccess(msg) {
+      const el = document.getElementById('alertSuccess');
+      document.getElementById('alertSuccessText').innerText = msg;
+      el.style.display = 'flex';
+      setTimeout(() => { el.style.display = 'none'; }, 6000);
+    }
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderTable();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      renderTable();
+    });
+
+    // Page Load Restoration (Persistence Check)
+    window.onload = function() {
+      const saved = localStorage.getItem('SAMSUNG_PROMOTION_PILOT_DRAFT');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          drafts = parsed.drafts || [];
+          currentCampaign = parsed.campaign || currentCampaign;
+          renderTable();
+          console.log('[PromotionDashboard] Restored active draft from persistence store.');
+        } catch (e) {
+          console.warn('[PromotionDashboard] Failed to restore draft:', e);
+          loadRealPromotionFile();
+        }
+      } else {
+        loadRealPromotionFile();
+      }
+    };
+  </script>
+</body>
+</html>

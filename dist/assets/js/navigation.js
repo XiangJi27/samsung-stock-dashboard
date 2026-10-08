@@ -26,20 +26,71 @@ class AppNavigation {
       });
     });
 
-    // Mobile menu toggle if any
+    // Mobile menu toggle, close button & backdrop
     const mobileMenuBtn = document.getElementById("btnMobileMenuToggle");
+    const sidebarCloseBtn = document.getElementById("btnSidebarClose");
+    const sidebarBackdrop = document.getElementById("sidebarBackdrop");
     const sidebar = document.getElementById("appSidebar");
-    if (mobileMenuBtn && sidebar) {
-      mobileMenuBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("sidebar-open");
+
+    const openSidebar = () => {
+      if (sidebar) sidebar.classList.add("sidebar-open");
+      if (sidebarBackdrop) sidebarBackdrop.classList.add("active");
+      if (mobileMenuBtn) mobileMenuBtn.setAttribute("aria-expanded", "true");
+    };
+
+    const closeSidebar = () => {
+      if (sidebar) sidebar.classList.remove("sidebar-open");
+      if (sidebarBackdrop) sidebarBackdrop.classList.remove("active");
+      if (mobileMenuBtn) mobileMenuBtn.setAttribute("aria-expanded", "false");
+    };
+
+    this.openSidebar = openSidebar;
+    this.closeSidebar = closeSidebar;
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (sidebar && sidebar.classList.contains("sidebar-open")) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
       });
     }
 
-    // Close sidebar on navigation click (mobile)
-    document.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("click", () => {
-        if (sidebar) sidebar.classList.remove("sidebar-open");
+    if (sidebarCloseBtn) {
+      sidebarCloseBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeSidebar();
       });
+    }
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeSidebar();
+      });
+    }
+
+    // Close sidebar on navigation click (both sidebar links and bottom nav items)
+    document.querySelectorAll(".nav-item-link, .mobile-nav-item, .nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        closeSidebar();
+      });
+    });
+
+    // Close sidebar on route hash change
+    window.addEventListener("hashchange", () => {
+      closeSidebar();
+    });
+
+    // Close sidebar on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && sidebar && sidebar.classList.contains("sidebar-open")) {
+        closeSidebar();
+      }
     });
   }
 
