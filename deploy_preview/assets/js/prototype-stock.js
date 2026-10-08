@@ -3056,8 +3056,12 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           </div>
       `;
 
-      function renderSpecGroup(icon, title, fields, catId = "") {
-        const validRows = Object.entries(fields).filter(([k, v]) => v !== undefined && v !== null && v !== "");
+      function renderSpecGroup(icon, title, fields, catId = "", rawObj = null) {
+        let validRows = Object.entries(fields || {}).filter(([k, v]) => v !== undefined && v !== null && v !== "");
+        // If specific mapped fields returned empty, fallback to rendering all non-object entries of rawObj
+        if (validRows.length === 0 && rawObj && typeof rawObj === "object") {
+          validRows = Object.entries(rawObj).filter(([k, v]) => v !== undefined && v !== null && v !== "" && typeof v !== "object");
+        }
         if (validRows.length === 0) return "";
         return `
           <div class="spec-group-box"${catId ? ` data-spec-cat="${catId}"` : ''}>
@@ -3080,23 +3084,23 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       // 1. Display
       if (spec.display) {
         html += renderSpecGroup("📱", "หน้าจอแสดงผล (Display)", {
-          "ขนาดหน้าจอ": spec.display.screenSize,
-          "ชนิดหน้าจอ": spec.display.panelType,
-          "ความละเอียด": spec.display.resolution,
-          "อัตรารีเฟรช": spec.display.refreshRate,
-          "ความสว่างสูงสุด": spec.display.peakBrightness,
-          "กระจกกันรอย": spec.display.glassProtection
-        }, "display");
+          "ขนาดหน้าจอ": spec.display.screenSize || spec.display["ขนาดหน้าจอ"] || spec.display["หน้าจอ"] || spec.display["หน้าจอหลัก (ด้านใน)"],
+          "ชนิดหน้าจอ": spec.display.panelType || spec.display["ชนิดหน้าจอ"],
+          "ความละเอียด": spec.display.resolution || spec.display["ความละเอียด"],
+          "อัตรารีเฟรช": spec.display.refreshRate || spec.display["อัตรารีเฟรช"] || spec.display["อัตราการรีเฟรช"],
+          "ความสว่างสูงสุด": spec.display.peakBrightness || spec.display["ความสว่างสูงสุด"] || spec.display["ความสว่าง"],
+          "กระจกกันรอย": spec.display.glassProtection || spec.display["กระจกกันรอย"] || spec.display["การปกป้อง"]
+        }, "display", spec.display);
       }
 
       // 2. Performance & AI
       if (spec.performance) {
         html += renderSpecGroup("⚡", "ประสิทธิภาพ & Galaxy AI (Performance)", {
-          "ชิปเซ็ตประมวลผล": spec.performance.processor,
-          "แกนประมวลผล (CPU)": spec.performance.cpuCores,
-          "ชิปกราฟิก (GPU)": spec.performance.gpu,
-          "ระบบปัญญาประดิษฐ์": spec.performance.aiEngine
-        }, "performance");
+          "ชิปเซ็ตประมวลผล": spec.performance.processor || spec.performance["ชิปเซ็ตประมวลผล"] || spec.performance["ชิปประมวลผล"],
+          "แกนประมวลผล (CPU)": spec.performance.cpuCores || spec.performance["ซีพียู"] || spec.performance["แกนประมวลผล (CPU)"],
+          "ชิปกราฟิก (GPU)": spec.performance.gpu || spec.performance["จีพียู"] || spec.performance["ชิปกราฟิก (GPU)"],
+          "ระบบปัญญาประดิษฐ์": spec.performance.aiEngine || spec.performance["ระบบ AI"] || spec.performance["ระบบปัญญาประดิษฐ์"]
+        }, "performance", spec.performance);
       }
 
       // 3. Memory & Storage
@@ -3105,29 +3109,29 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           ? window.specializeMemoryForVariant(spec.memory, item)
           : (typeof specializeMemoryForVariant === "function" ? specializeMemoryForVariant(spec.memory, item) : spec.memory);
         html += renderSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", {
-          "หน่วยความจำ (RAM)": mem.ram,
-          "พื้นที่จัดเก็บ (ROM)": mem.storage,
-          "ช่องใส่ MicroSD": mem.expandableStorage
-        }, "memory");
+          "หน่วยความจำ (RAM)": mem.ram || mem["RAM"] || mem["หน่วยความจำ (RAM)"],
+          "พื้นที่จัดเก็บ (ROM)": mem.storage || mem["ความจุ ROM"] || mem["พื้นที่จัดเก็บ (ROM)"],
+          "ช่องใส่ MicroSD": mem.expandableStorage || mem["หน่วยความจำภายนอก"] || mem["ช่องใส่ MicroSD"]
+        }, "memory", mem);
       }
 
       // 4. Camera
       if (spec.camera) {
         html += renderSpecGroup("📷", "กล้องถ่ายภาพ (Camera System)", {
-          "กล้องหลัง (Rear)": spec.camera.rearCamera,
-          "กล้องหน้า (Selfie)": spec.camera.frontCamera,
-          "ความละเอียดวิดีโอ": spec.camera.videoRecording
-        }, "camera");
+          "กล้องหลัง (Rear)": spec.camera.rearCamera || spec.camera["กล้องหลัง"] || spec.camera["กล้องหลัง (Rear)"],
+          "กล้องหน้า (Selfie)": spec.camera.frontCamera || spec.camera["กล้องหน้า"] || spec.camera["กล้องหน้า (Selfie)"],
+          "ความละเอียดวิดีโอ": spec.camera.videoRecording || spec.camera["การบันทึกวิดีโอ"] || spec.camera["ความละเอียดวิดีโอ"]
+        }, "camera", spec.camera);
       }
 
       // 5. Battery & Power
       if (spec.battery) {
         html += renderSpecGroup("🔋", "แบตเตอรี่ & ระบบชาร์จ (Battery & Charging)", {
-          "ความจุแบตเตอรี่": spec.battery.capacity,
-          "การชาร์จไวมีสาย": spec.battery.chargingSpeed,
-          "การชาร์จไร้สาย": spec.battery.wirelessCharging,
-          "แชร์พลังงานไร้สาย": spec.battery.reverseCharging
-        }, "battery");
+          "ความจุแบตเตอรี่": spec.battery.capacity || spec.battery["ความจุแบตเตอรี่"],
+          "การชาร์จไวมีสาย": spec.battery.chargingSpeed || spec.battery["ความเร็วการชาร์จ"] || spec.battery["การชาร์จไวมีสาย"],
+          "การชาร์จไร้สาย": spec.battery.wirelessCharging || spec.battery["การชาร์จไร้สาย"],
+          "แชร์พลังงานไร้สาย": spec.battery.reverseCharging || spec.battery["แชร์พลังงานไร้สาย"]
+        }, "battery", spec.battery);
       }
 
       // 5.1 Battery Usage Hours & Endurance (ระยะเวลาการใช้งานแบตเตอรี่อย่างละเอียด พร้อมแหล่งอ้างอิงทางการ)
@@ -3208,16 +3212,16 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       // 6. Connectivity & Build
       if (spec.connectivityAndBuild) {
         html += renderSpecGroup("📶", "การเชื่อมต่อ & ตัวเครื่อง (Connectivity & Build)", {
-          "เครือข่ายสัญญาณ": spec.connectivityAndBuild.network,
-          "ช่องใส่ซิม (SIM)": spec.connectivityAndBuild.simType,
-          "Wi-Fi": spec.connectivityAndBuild.wifi,
-          "Bluetooth": spec.connectivityAndBuild.bluetooth,
-          "มาตรฐานกันน้ำกันฝุ่น": spec.connectivityAndBuild.waterResistance,
-          "รองรับปากกา S Pen": spec.connectivityAndBuild.spenSupport,
-          "วัสดุตัวเครื่อง": spec.connectivityAndBuild.frameMaterial,
-          "ขนาดตัวเครื่อง": spec.connectivityAndBuild.dimensions,
-          "น้ำหนัก": spec.connectivityAndBuild.weight
-        }, "connectivity");
+          "เครือข่ายสัญญาณ": spec.connectivityAndBuild.network || spec.connectivityAndBuild["เครือข่าย"] || spec.connectivityAndBuild["เครือข่ายสัญญาณ"],
+          "ช่องใส่ซิม (SIM)": spec.connectivityAndBuild.simType || spec.connectivityAndBuild["ซิมการ์ด"] || spec.connectivityAndBuild["ช่องใส่ซิม (SIM)"],
+          "Wi-Fi": spec.connectivityAndBuild.wifi || spec.connectivityAndBuild["Wi-Fi"],
+          "Bluetooth": spec.connectivityAndBuild.bluetooth || spec.connectivityAndBuild["Bluetooth"],
+          "มาตรฐานกันน้ำกันฝุ่น": spec.connectivityAndBuild.waterResistance || spec.connectivityAndBuild["การกันน้ำกันฝุ่น"] || spec.connectivityAndBuild["การกันน้ำ"],
+          "รองรับปากกา S Pen": spec.connectivityAndBuild.spenSupport || spec.connectivityAndBuild["ปากกา S Pen"] || spec.connectivityAndBuild["รองรับปากกา S Pen"],
+          "วัสดุตัวเครื่อง": spec.connectivityAndBuild.frameMaterial || spec.connectivityAndBuild["วัสดุตัวเครื่อง"],
+          "ขนาดตัวเครื่อง": spec.connectivityAndBuild.dimensions || spec.connectivityAndBuild["ขนาดตัวเครื่อง"],
+          "น้ำหนัก": spec.connectivityAndBuild.weight || spec.connectivityAndBuild["น้ำหนัก"]
+        }, "connectivity", spec.connectivityAndBuild);
       }
 
       // 7. Audio (Buds)
