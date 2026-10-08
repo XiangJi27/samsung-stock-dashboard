@@ -2038,6 +2038,57 @@
       return "";
     }
 
+
+function specializeMemoryForVariant(memorySpec, item) {
+  if (!memorySpec) return memorySpec;
+  const modelStr = (item && (item.model || item.name || item.erpDescription || item.description || '')) || '';
+  if (!modelStr) return memorySpec;
+
+  let variantRam = null;
+  let variantRom = null;
+
+  // Pattern 1: e.g. "8/256GB", "12/512 GB", "4/64GB", "12/1TB", "16/1 TB"
+  const m1 = modelStr.match(/(\d{1,2})\s*\/\s*(\d{1,4})\s*(GB|TB)?/i);
+  if (m1) {
+    variantRam = m1[1] + 'GB';
+    let romNum = m1[2];
+    let romUnit = (m1[3] || 'GB').toUpperCase();
+    if (romNum === '1' && !m1[3]) romUnit = 'TB';
+    variantRom = romNum + romUnit;
+  } else {
+    // Pattern 2: e.g. "256GB", "512GB", "1TB", "128GB", "64GB" (ROM only)
+    const m2 = modelStr.match(/(\d{1,4})\s*(GB|TB)/i);
+    if (m2) {
+      variantRom = (m2[1] + m2[2]).toUpperCase();
+    }
+  }
+
+  const specialized = { ...memorySpec };
+
+  // Specialize RAM (e.g., "8GB / 12GB LPDDR5X" -> "8GB LPDDR5X")
+  if (variantRam && specialized.ram) {
+    const origRam = specialized.ram;
+    if (origRam.toUpperCase().includes(variantRam.toUpperCase())) {
+      const suffixMatch = origRam.match(/(?:(?:\d+GB|\d+MB)\s*[\/\s]*)+(.*)$/i);
+      const extra = (suffixMatch && suffixMatch[1]) ? suffixMatch[1].trim() : '';
+      specialized.ram = extra ? (variantRam + ' ' + extra) : variantRam;
+    }
+  }
+
+  // Specialize Storage (ROM) (e.g., "128GB / 256GB" -> "256GB", "256GB / 512GB / 1TB (UFS 4.0)" -> "256GB (UFS 4.0)")
+  if (variantRom && specialized.storage) {
+    const origRom = specialized.storage;
+    if (origRom.toUpperCase().includes(variantRom.toUpperCase())) {
+      const suffixMatch = origRom.match(/(?:(?:\d+GB|\d+TB|\d+MB)\s*[\/\s]*)+(.*)$/i);
+      const extra = (suffixMatch && suffixMatch[1]) ? suffixMatch[1].trim() : '';
+      specialized.storage = extra ? (variantRom + ' ' + extra) : variantRom;
+    }
+  }
+
+  return specialized;
+}
+window.specializeMemoryForVariant = specializeMemoryForVariant;
+
     // Helper: Parse specs from model string & item context
     function parseSpecs(item) {
       const modelStr = (typeof item === 'string') ? item : (item ? (item.model || "") : "");
@@ -3011,10 +3062,13 @@
 
       // 3. Memory & Storage
       if (spec.memory) {
+        const mem = (typeof window.specializeMemoryForVariant === "function")
+          ? window.specializeMemoryForVariant(spec.memory, item)
+          : (typeof specializeMemoryForVariant === "function" ? specializeMemoryForVariant(spec.memory, item) : spec.memory);
         html += renderSpecGroup("💾", "หน่วยความจำ & ความจุ (Memory)", {
-          "หน่วยความจำ (RAM)": spec.memory.ram,
-          "พื้นที่จัดเก็บ (ROM)": spec.memory.storage,
-          "ช่องใส่ MicroSD": spec.memory.expandableStorage
+          "หน่วยความจำ (RAM)": mem.ram,
+          "พื้นที่จัดเก็บ (ROM)": mem.storage,
+          "ช่องใส่ MicroSD": mem.expandableStorage
         }, "memory");
       }
 
