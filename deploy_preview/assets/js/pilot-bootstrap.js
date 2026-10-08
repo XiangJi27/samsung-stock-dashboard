@@ -287,17 +287,17 @@
           window.STOCK_DATABASE = window.LATEST_STOCK_SNAPSHOT;
           window.STOCK_DATA = window.LATEST_STOCK_SNAPSHOT;
           window.STOCK_METADATA = window.PILOT_STOCK_METADATA || {
-            stockBatchId: 'STOCK-20260914-LATEST',
-            importBatchId: 'STOCK-20260914-LATEST',
-            sourceType: 'Imported Excel Snapshot',
-            sourceFilename: 'stock(1).xlsx',
+            stockBatchId: 'STOCK-LIVE-SYNC-BASELINE',
+            importBatchId: 'STOCK-LIVE-SYNC-BASELINE',
+            sourceType: 'Google Sheet Live Sync Baseline',
+            sourceFilename: 'Stock1 + Stock2 (Dual-Sheet Sync)',
             recordCount: window.LATEST_STOCK_SNAPSHOT.length,
             uniquePn: window.LATEST_STOCK_SNAPSHOT.length,
-            f1Total: 1701,
-            f2Total: 1635,
-            grandTotal: 3336,
-            storageScope: 'LOCAL_BROWSER_ONLY',
-            importedAt: '2026-09-14T09:00:00+07:00'
+            f1Total: 1645,
+            f2Total: 1787,
+            grandTotal: 3432,
+            storageScope: 'GOOGLE_SHEET_LIVE_SYNC',
+            importedAt: new Date().toISOString()
           };
         }
         if (window.PrototypeStock && typeof window.PrototypeStock.refresh === 'function') {
