@@ -2604,6 +2604,9 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
 
       console.info("[Stock Prototype] rendering rows:", items.length);
 
+      const tableFrag = document.createDocumentFragment();
+      const cardFrag = document.createDocumentFragment();
+
       let renderedRows = 0;
       items.forEach((item, index) => {
         try {
@@ -2675,7 +2678,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
               </div>
             </td>
           `;
-          tbody.appendChild(tr);
+          tableFrag.appendChild(tr);
 
           // Card Item (Responsive View)
           const card = document.createElement("div");
@@ -2737,7 +2740,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
               </div>
             </div>
           `;
-          cardContainer.appendChild(card);
+          cardFrag.appendChild(card);
           renderedRows++;
         } catch (itemErr) {
           console.error("[Stock Prototype] row render failed:", {
@@ -2748,6 +2751,9 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           });
         }
       });
+
+      tbody.appendChild(tableFrag);
+      cardContainer.appendChild(cardFrag);
 
       console.info("[Stock Prototype] rendered DOM rows:", tbody.querySelectorAll("tr").length);
     }
@@ -4498,7 +4504,11 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     }
     window.closeDrawer = closeDrawer;
 
+    let controlsBound = false;
     function setupPrototypeStockControls() {
+      if (controlsBound) return;
+      controlsBound = true;
+
       // Close Drawer
       const btnCloseDrawer = document.getElementById("btnCloseDrawer");
       const promoDrawerBackdrop = document.getElementById("promoDrawerBackdrop");
@@ -4584,52 +4594,59 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     }
 
     let initialSyncGatePromise = null;
+    let isInitializing = false;
 
     // Dynamic Initialization & Route Lifecycle (Zero-Flicker Gate)
     async function initPrototypeStock() {
-      // Zero-Flicker Gate:
-      // If live Google Sheet stock hasn't loaded yet on a fresh device, show a clean syncing skeleton
-      // and await the Google Sheet fetch before rendering cards and table to prevent double-flicker.
-      const hasLiveSync = window.STOCK_SNAPSHOT_STATUS === 'GOOGLE_SHEET_LIVE_SYNC' || 
-                          (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.meta?.storageScope === 'GOOGLE_SHEET_LIVE_SYNC') ||
-                          (window.GoogleSheetStockSync && window.GoogleSheetStockSync._hasCompletedSync);
+      if (isInitializing) return;
+      isInitializing = true;
+      try {
+        // Zero-Flicker Gate:
+        // If live Google Sheet stock hasn't loaded yet on a fresh device, show a clean syncing skeleton
+        // and await the Google Sheet fetch before rendering cards and table to prevent double-flicker.
+        const hasLiveSync = window.STOCK_SNAPSHOT_STATUS === 'GOOGLE_SHEET_LIVE_SYNC' || 
+                            (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.meta?.storageScope === 'GOOGLE_SHEET_LIVE_SYNC') ||
+                            (window.GoogleSheetStockSync && window.GoogleSheetStockSync._hasCompletedSync);
 
-      if (!hasLiveSync && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.ensureLiveSynced === 'function') {
-        const tableBody = document.getElementById('stockTableBody');
-        if (tableBody && !document.getElementById('rowGoogleSheetSyncLoading')) {
-          tableBody.innerHTML = `
-            <tr id="rowGoogleSheetSyncLoading">
-              <td colspan="10" style="text-align: center; padding: 56px 24px;">
-                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
-                  <div style="width: 36px; height: 36px; border: 3px solid rgba(56, 189, 248, 0.2); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
-                  <div style="font-weight: 600; font-size: 1.05rem; color: #38bdf8;">🔄 กำลังซิงค์สต็อกสดล่าสุดจาก Google Sheet...</div>
-                  <div style="font-size: 0.85rem; color: #94a3b8;">กำลังเชื่อมต่อข้อมูลแท็บ Stock1 &amp; Stock2 สาขาอยุธยา ซิตี้ พาร์ค ตรงตามสต็อกจริง</div>
-                </div>
-              </td>
-            </tr>
-          `;
+        if (!hasLiveSync && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.ensureLiveSynced === 'function') {
+          const tableBody = document.getElementById('stockTableBody');
+          if (tableBody && !document.getElementById('rowGoogleSheetSyncLoading')) {
+            tableBody.innerHTML = `
+              <tr id="rowGoogleSheetSyncLoading">
+                <td colspan="10" style="text-align: center; padding: 56px 24px;">
+                  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+                    <div style="width: 36px; height: 36px; border: 3px solid rgba(56, 189, 248, 0.2); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+                    <div style="font-weight: 600; font-size: 1.05rem; color: #38bdf8;">🔄 กำลังซิงค์สต็อกสดล่าสุดจาก Google Sheet...</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;">กำลังเชื่อมต่อข้อมูลแท็บ Stock1 &amp; Stock2 สาขาอยุธยา ซิตี้ พาร์ค ตรงตามสต็อกจริง</div>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }
+          setupPrototypeStockControls();
+
+          if (!initialSyncGatePromise) {
+            initialSyncGatePromise = window.GoogleSheetStockSync.ensureLiveSynced(4000)
+              .catch(e => console.warn('[Stock Prototype] Initial live sync timeout/error, rendering baseline:', e));
+          }
+          await initialSyncGatePromise;
         }
+
+        console.info("[Stock Prototype] initialization started");
+        console.info("[Stock Prototype] data sources", {
+          stock: (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE)) ? window.STOCK_DATABASE.length : "FALLBACK",
+          specs: (typeof window !== "undefined" && (window.PRODUCT_SPECS_DATABASE || window.PRODUCT_SPECS_PROFILES)) ? Object.keys(window.PRODUCT_SPECS_DATABASE || window.PRODUCT_SPECS_PROFILES).length : "INVALID",
+          promotions: (typeof window !== "undefined" && Array.isArray(window.PROMOTION_VARIANTS)) ? window.PROMOTION_VARIANTS.length : "INVALID"
+        });
+
         setupPrototypeStockControls();
-
-        if (!initialSyncGatePromise) {
-          initialSyncGatePromise = window.GoogleSheetStockSync.ensureLiveSynced(4000)
-            .catch(e => console.warn('[Stock Prototype] Initial live sync timeout/error, rendering baseline:', e));
-        }
-        await initialSyncGatePromise;
+        refreshPrototypeData();
+        updateCategoryCardCounts();
+        renderFilterChips();
+        renderStockList();
+      } finally {
+        isInitializing = false;
       }
-
-      console.info("[Stock Prototype] initialization started");
-      console.info("[Stock Prototype] data sources", {
-        stock: (typeof window !== "undefined" && Array.isArray(window.STOCK_DATABASE)) ? window.STOCK_DATABASE.length : "FALLBACK",
-        specs: (typeof window !== "undefined" && (window.PRODUCT_SPECS_DATABASE || window.PRODUCT_SPECS_PROFILES)) ? Object.keys(window.PRODUCT_SPECS_DATABASE || window.PRODUCT_SPECS_PROFILES).length : "INVALID",
-        promotions: (typeof window !== "undefined" && Array.isArray(window.PROMOTION_VARIANTS)) ? window.PROMOTION_VARIANTS.length : "INVALID"
-      });
-
-      setupPrototypeStockControls();
-      refreshPrototypeData();
-      updateCategoryCardCounts();
-      renderFilterChips();
-      renderStockList();
     }
 
     // Global exports for SPA router & inline onclick triggers
@@ -4664,30 +4681,19 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     // Hash navigation listener
     window.addEventListener("hashchange", () => {
       if (window.location.hash.includes("/stock") && !window.location.hash.includes("/stock-import")) {
-        setTimeout(initPrototypeStock, 50);
+        if (window.PrototypeStock && typeof window.PrototypeStock.refresh === "function") {
+          window.PrototypeStock.refresh();
+        } else {
+          initPrototypeStock();
+        }
       }
     });
 
-    // Observer for view-stock visibility in Single Page App
-    function setupViewObserver() {
-      const stockViewEl = document.getElementById("view-stock");
-      if (stockViewEl && typeof MutationObserver !== "undefined") {
-        const observer = new MutationObserver(() => {
-          if (stockViewEl.classList.contains("active-view") || (stockViewEl.style.display && stockViewEl.style.display !== "none")) {
-            initPrototypeStock();
-          }
-        });
-        observer.observe(stockViewEl, { attributes: true, attributeFilter: ["class", "style"] });
-      }
-    }
-
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () => {
-        setupViewObserver();
         initPrototypeStock();
       });
     } else {
-      setupViewObserver();
       initPrototypeStock();
     }
 
