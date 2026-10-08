@@ -3007,28 +3007,51 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       }
       const spec = window.resolveProductSpecs(item);
       if (!spec) {
-        return `<div style="padding: 24px; text-align: center; color: var(--text-muted);">ไม่มีข้อมูลสเปกสำหรับสินค้านี้</div>`;
+        return `
+          <div class="spec-missing-card" style="padding: 28px 24px; text-align: center; background: rgba(15, 23, 42, 0.75); border: 1px dashed rgba(244, 63, 94, 0.4); border-radius: 14px; margin: 20px;">
+            <div style="font-size: 2.4rem; margin-bottom: 10px;">📋⚠️</div>
+            <h4 style="color: #fff; margin: 0 0 8px 0; font-size: 1.1rem; font-weight: 700;">ยังไม่มีข้อมูลสเปกสำหรับสินค้านี้ในระบบ</h4>
+            <p style="color: #94a3b8; font-size: 0.86rem; margin: 0 0 18px 0; line-height: 1.5;">
+              ชื่อรุ่น: <strong style="color: #38bdf8;">${item.model || '-'}</strong><br>
+              รหัสสินค้า (P/N): <strong style="color: #cbd5e1;">${item.pn || '-'}</strong> • หมวดหมู่: <strong style="color: #cbd5e1;">${item.category || '-'}</strong>
+            </p>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+              <button type="button" class="btn-confirm-import" id="btnFetchMissingSpec" onclick="window.ProductSpecUpdater ? window.ProductSpecUpdater.handleFetchClick('${item.pn || ''}', '${encodeURIComponent(item.model || '')}', this) : null" style="padding: 12px 24px; font-weight: 700; background: linear-gradient(135deg, #00f3ff, #0284c7); color: #000; border: none; border-radius: 10px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 0 16px rgba(0, 243, 255, 0.35);">
+                <span>⚡ ดึงและอัปเดตสเปกเครื่องรุ่นนี้ทันที (1-Click Update)</span>
+              </button>
+            </div>
+            <div id="fetchSpecStatusMsg" style="margin-top: 14px; font-size: 0.86rem; font-weight: 600; min-height: 22px;"></div>
+          </div>
+        `;
       }
 
       let html = `
         <div class="spec-card-container">
-          <div class="spec-source-box">
-            <span style="font-size: 1.4rem;">🛡️</span>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</div>
-              <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 3px;">
-                แบรนด์: <strong>${spec.brand || item.brand || 'Samsung'}</strong> • รุ่นผู้ผลิต: <strong>${spec.manufacturerModel || spec.modelGroup || '-'}</strong> • ประเภท: <strong>${spec.productType || item.category || '-'}</strong>
-              </div>
-              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
-                แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Samsung Thailand Official (samsung.com/th)'}</strong>
-              </div>
-              ${spec.sourceUrl ? `
-                <div style="font-size: 0.72rem; margin-top: 2px;">
-                  <a href="${spec.sourceUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;">
-                    🔗 เปิดหน้าผลิตภัณฑ์ทางการ (${spec.brand || 'ผู้ผลิต'})
-                  </a>
+          <div class="spec-source-box" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap;">
+            <div style="display: flex; gap: 12px; align-items: flex-start; flex: 1; min-width: 260px;">
+              <span style="font-size: 1.4rem;">🛡️</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${spec.officialName || spec.modelGroup || item.model}</div>
+                <div style="font-size: 0.78rem; color: var(--cyan); margin-top: 3px;">
+                  แบรนด์: <strong>${spec.brand || item.brand || 'Samsung'}</strong> • รุ่นผู้ผลิต: <strong>${spec.manufacturerModel || spec.modelGroup || '-'}</strong> • ประเภท: <strong>${spec.productType || item.category || '-'}</strong>
                 </div>
-              ` : ''}
+                <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">
+                  แหล่งข้อมูลอ้างอิง: <strong>${spec.source || 'Samsung Thailand Official (samsung.com/th)'}</strong>
+                </div>
+                ${spec.sourceUrl ? `
+                  <div style="font-size: 0.72rem; margin-top: 2px;">
+                    <a href="${spec.sourceUrl}" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: underline;">
+                      🔗 เปิดหน้าผลิตภัณฑ์ทางการ (${spec.brand || 'ผู้ผลิต'})
+                    </a>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+            <div>
+              <button type="button" class="btn-cancel-import" onclick="window.ProductSpecUpdater ? window.ProductSpecUpdater.handleFetchClick('${item.pn || ''}', '${encodeURIComponent(item.model || '')}', this) : null" style="padding: 6px 12px; font-size: 0.76rem; font-weight: 600; border-color: rgba(56, 189, 248, 0.35); color: #38bdf8; background: rgba(56, 189, 248, 0.08); border-radius: 8px; cursor: pointer; white-space: nowrap;" title="ดึงข้อมูลสเปกทางการใหม่">
+                <span>🔄 อัปเดตสเปกใหม่</span>
+              </button>
+              <div id="fetchSpecStatusMsg" style="font-size: 0.74rem; text-align: right; margin-top: 4px;"></div>
             </div>
           </div>
       `;

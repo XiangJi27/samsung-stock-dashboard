@@ -324,6 +324,30 @@ function renderSettingsView() {
         </div>
       </div>
 
+      <!-- Product Specifications Audit & Update Tool -->
+      <div class="action-center-card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <h4 class="card-heading" style="margin: 0;">📋 ระบบจัดการและอัปเดตสเปกสินค้า (Product Specs Manager)</h4>
+          <span style="font-size: 0.76rem; color: #38bdf8; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 10px; border-radius: 12px;">
+            ฐานข้อมูลสเปกทางการ Samsung Thailand
+          </span>
+        </div>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0 0 16px 0; line-height: 1.5;">
+          สแกนตรวจสอบรายการสินค้าในสต็อกว่ารุ่นใดที่ยังขาดข้อมูลสเปกทางการ และสามารถกดปุ่มดึงสเปกอัตโนมัติ (1-Click Update) ขึ้นระบบได้ทันที
+        </p>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;">
+          <button type="button" class="btn-cancel-import" id="btnScanMissingSpecs" onclick="window.runSpecsScan()" style="padding: 10px 18px; font-weight: 600; border-color: rgba(0, 243, 255, 0.4); color: #fff;">
+            <span>🔍 สแกนหาสินค้าที่ขาดสเปกในสต็อก</span>
+          </button>
+          <button type="button" class="btn-confirm-import" id="btnBatchUpdateSpecs" onclick="window.runSpecsBatchUpdate()" style="padding: 10px 20px; font-weight: 700; background: linear-gradient(135deg, #00f3ff, #0284c7); color: #000; border: none; border-radius: 8px; display: none;">
+            <span>⚡ ดึงสเปกที่ขาดทั้งหมดอัตโนมัติ (Batch Update)</span>
+          </button>
+        </div>
+
+        <div id="specScanResultsContainer" style="font-size: 0.86rem; color: #cbd5e1;"></div>
+      </div>
+
       <div class="action-center-card">
         <h4 class="card-heading">🚩 คุณสมบัติและฟีเจอร์ระบบ (Feature Flags)</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.82rem;">
@@ -339,5 +363,99 @@ function renderSettingsView() {
   `;
 }
 
+// Global Spec Audit & Update handlers for Settings View
+window.runSpecsScan = function() {
+  const container = document.getElementById('specScanResultsContainer');
+  const btnBatch = document.getElementById('btnBatchUpdateSpecs');
+  if (!container || !window.ProductSpecUpdater) return;
+
+  const stockItems = window.masterStockData || window.STOCK_DATA || [];
+  const missing = window.ProductSpecUpdater.scanMissingSpecs(stockItems);
+  window._lastMissingSpecs = missing;
+
+  if (missing.length === 0) {
+    if (btnBatch) btnBatch.style.display = 'none';
+    container.innerHTML = `
+      <div style="padding: 14px 18px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; color: #34d399;">
+        ✓ สินค้าทั้งหมดในสต็อกมีข้อมูลสเปกพร้อมใช้งานครบถ้วน 100%!
+      </div>
+    `;
+    return;
+  }
+
+  if (btnBatch) {
+    btnBatch.style.display = 'inline-flex';
+    btnBatch.innerHTML = `<span>⚡ ดึงสเปกที่ขาดทั้งหมด (${missing.length} รายการ)</span>`;
+  }
+
+  let html = `
+    <div style="margin-bottom: 12px; font-weight: 600; color: #fde68a;">
+      ⚠️ พบสินค้าที่ยังไม่มีข้อมูลสเปกในระบบจำนวน ${missing.length} รายการ:
+    </div>
+    <div style="max-height: 280px; overflow-y: auto; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; color: #94a3b8;">
+            <th style="padding: 8px;">ชื่อรุ่นสินค้า</th>
+            <th style="padding: 8px;">P/N</th>
+            <th style="padding: 8px;">หมวดหมู่</th>
+            <th style="padding: 8px; text-align: right;">การจัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  missing.forEach((item, idx) => {
+    html += `
+      <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+        <td style="padding: 8px; color: #fff; font-weight: 600;">${item.model}</td>
+        <td style="padding: 8px; color: #94a3b8; font-family: monospace;">${item.pn || '-'}</td>
+        <td style="padding: 8px; color: #cbd5e1;">${item.category || '-'}</td>
+        <td style="padding: 8px; text-align: right;">
+          <button type="button" class="btn-cancel-import" onclick="window.ProductSpecUpdater.handleFetchClick('${item.pn || ''}', '${encodeURIComponent(item.model || '')}', this)" style="padding: 4px 10px; font-size: 0.74rem; border-color: rgba(0,243,255,0.3); color: #38bdf8;">
+            <span>⚡ ดึงสเปก</span>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+  container.innerHTML = html;
+};
+
+window.runSpecsBatchUpdate = async function() {
+  const container = document.getElementById('specScanResultsContainer');
+  const btnBatch = document.getElementById('btnBatchUpdateSpecs');
+  const missing = window._lastMissingSpecs || [];
+  if (!container || !btnBatch || missing.length === 0 || !window.ProductSpecUpdater) return;
+
+  btnBatch.disabled = true;
+  const origText = btnBatch.innerHTML;
+
+  try {
+    const updated = await window.ProductSpecUpdater.batchUpdateMissingSpecs(missing, (current, total, model) => {
+      btnBatch.innerHTML = `<span>⏳ กำลังดึงสเปก (${current}/${total}): ${model}...</span>`;
+    });
+
+    container.innerHTML = `
+      <div style="padding: 14px 18px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; color: #34d399;">
+        ✓ ดึงและอัปเดตสเปกสำเร็จครบถ้วน ${updated} รายการเรียบร้อยแล้ว!
+      </div>
+    `;
+    btnBatch.style.display = 'none';
+  } catch (err) {
+    container.innerHTML = `<div style="color: #f43f5e; padding: 10px;">❌ เกิดข้อผิดพลาด: ${err.message}</div>`;
+  } finally {
+    btnBatch.disabled = false;
+    btnBatch.innerHTML = origText;
+  }
+};
+
 window.renderPromotionsView = renderPromotionsView;
 window.renderSettingsView = renderSettingsView;
+
