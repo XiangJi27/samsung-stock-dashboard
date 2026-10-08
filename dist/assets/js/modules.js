@@ -30,8 +30,8 @@ function renderPromotionsView() {
           <span class="badge-status-ready">STATUS: RULE ENGINE CERTIFIED • BATCH ${batchId}</span>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn-action-view" onclick="window.AppRouter.navigate('/promotion-import')" style="background: rgba(6, 182, 212, 0.15); border-color: var(--neon-cyan); color: #fff;">
-            <span>⚡ นำเข้าโปรโมชั่น (Import) &rarr;</span>
+          <button class="btn-action-view" onclick="window.AppRouter.navigate('/promotion-import')" style="background: rgba(0, 243, 255, 0.2); border-color: #00ffff; color: #fff; font-weight: 700;">
+            <span>🌐 อัปเดตโปรโมชั่น (3 ลิงก์ Google Sheets) &rarr;</span>
           </button>
           <a href="promotion_review_dashboard.html" target="_blank" class="btn-action-view" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981; color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
             <span>🛡️ หน้าจอ Review ตรวจโปรโมชั่น (3 คอลัมน์) &rarr;</span>
