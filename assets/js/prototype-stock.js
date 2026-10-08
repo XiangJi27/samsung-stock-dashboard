@@ -4210,7 +4210,7 @@
       }
     }
 
-    let hasWaitedInitialLiveSync = false;
+    let initialSyncGatePromise = null;
 
     // Dynamic Initialization & Route Lifecycle (Zero-Flicker Gate)
     async function initPrototypeStock() {
@@ -4218,12 +4218,12 @@
       // If live Google Sheet stock hasn't loaded yet on a fresh device, show a clean syncing skeleton
       // and await the Google Sheet fetch before rendering cards and table to prevent double-flicker.
       const hasLiveSync = window.STOCK_SNAPSHOT_STATUS === 'GOOGLE_SHEET_LIVE_SYNC' || 
-                          (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.meta?.storageScope === 'GOOGLE_SHEET_LIVE_SYNC');
+                          (window.CONFIRMED_LOCAL_SNAPSHOT && window.CONFIRMED_LOCAL_SNAPSHOT.meta?.storageScope === 'GOOGLE_SHEET_LIVE_SYNC') ||
+                          (window.GoogleSheetStockSync && window.GoogleSheetStockSync._hasCompletedSync);
 
-      if (!hasWaitedInitialLiveSync && !hasLiveSync && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.ensureLiveSynced === 'function') {
-        hasWaitedInitialLiveSync = true;
+      if (!hasLiveSync && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.ensureLiveSynced === 'function') {
         const tableBody = document.getElementById('stockTableBody');
-        if (tableBody) {
+        if (tableBody && !document.getElementById('rowGoogleSheetSyncLoading')) {
           tableBody.innerHTML = `
             <tr id="rowGoogleSheetSyncLoading">
               <td colspan="10" style="text-align: center; padding: 56px 24px;">
@@ -4237,11 +4237,12 @@
           `;
         }
         setupPrototypeStockControls();
-        try {
-          await window.GoogleSheetStockSync.ensureLiveSynced(4000);
-        } catch (e) {
-          console.warn('[Stock Prototype] Initial live sync timeout/error, rendering baseline:', e);
+
+        if (!initialSyncGatePromise) {
+          initialSyncGatePromise = window.GoogleSheetStockSync.ensureLiveSynced(4000)
+            .catch(e => console.warn('[Stock Prototype] Initial live sync timeout/error, rendering baseline:', e));
         }
+        await initialSyncGatePromise;
       }
 
       console.info("[Stock Prototype] initialization started");
