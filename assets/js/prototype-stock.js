@@ -2173,10 +2173,13 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           if (v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0) distinctModes.add("NORMAL");
           if (v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS") distinctModes.add("SF_PLUS");
           if (v.saleMode === "STUDENT") distinctModes.add("STUDENT");
-          if (v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0) distinctModes.add("TRADE_UP");
+          if (v.saleMode === "FLASH_SALE" || (v.conditions && v.conditions.some(c => c.toLowerCase().includes("flash"))) || v.tradeUpDiscount > 0) distinctModes.add("FLASH_SALE");
           if (v.saleMode === "GIFT" || v.gift || v.saleMode === "BUNDLE" || v.bundleEligible) distinctModes.add("GIFT");
         });
-        if (item && (item.gift || item.category === "SmartPhone" || item.category === "Tablet")) {
+        if (item && (item.category === "SmartPhone" || item.category === "Tablet")) {
+          distinctModes.add("FLASH_SALE");
+          distinctModes.add("GIFT");
+        } else if (item && item.gift) {
           distinctModes.add("GIFT");
         }
         if (distinctModes.size === 0) distinctModes.add("NORMAL");
@@ -2756,16 +2759,38 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     let currentDrawerItem = null;
     let currentDrawerTab = "PROMO"; // "PROMO" or "SPECS"
     let currentDrawerMode = "NORMAL";
+    let isTradeUpIncluded = false;
+
+    function toggleTradeUpOption(forcedState) {
+      if (typeof forcedState === "boolean") {
+        isTradeUpIncluded = forcedState;
+      } else {
+        isTradeUpIncluded = !isTradeUpIncluded;
+      }
+      const pnTag = document.getElementById("drawerProductPn") ? document.getElementById("drawerProductPn").textContent.replace("Exact P/N: ", "").trim() : "";
+      const modelTitle = document.getElementById("drawerProductTitle") ? document.getElementById("drawerProductTitle").textContent : "";
+      const item = currentDrawerItem || rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle));
+      const srp = item && Number(item.srp) > 0 ? Number(item.srp) : (currentDrawerItem && Number(currentDrawerItem.srp) > 0 ? Number(currentDrawerItem.srp) : 0);
+      const promo = resolvePromotion(item || currentDrawerItem || { pn: pnTag, model: modelTitle });
+
+      const contentEl = document.getElementById("drawerModeContent");
+      if (contentEl) {
+        contentEl.innerHTML = renderDrawerModeDetails(promo.variants, currentDrawerMode, srp, item || currentDrawerItem);
+      }
+    }
+    window.toggleTradeUpOption = toggleTradeUpOption;
 
     function openPromoDrawer(targetPn, encodedModel) {
       currentDrawerTab = "PROMO";
       currentDrawerMode = "NORMAL";
+      isTradeUpIncluded = false;
       openDualTabDrawer(targetPn, encodedModel);
     }
 
     function openProductSpecsDrawer(targetPn, encodedModel) {
       currentDrawerTab = "SPECS";
       currentDrawerMode = "NORMAL";
+      isTradeUpIncluded = false;
       openDualTabDrawer(targetPn, encodedModel);
     }
 
@@ -2927,7 +2952,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           { key: "NORMAL", label: "ซื้อปกติ" },
           { key: "SF_PLUS", label: "Samsung Finance+" },
           { key: "STUDENT", label: "โปรนักศึกษา" },
-          { key: "TRADE_UP", label: "Trade Up" },
+          { key: "FLASH_SALE", label: "Flash Sale" },
           { key: "GIFT", label: "ของแถม" }
         ];
 
@@ -2937,11 +2962,15 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
             const isDeviceOrHasPrice = (srp && srp > 0) || (item && (item.category === 'SmartPhone' || item.category === 'Tablet'));
             return hasExplicitGift || isDeviceOrHasPrice;
           }
+          if (modeKey === "FLASH_SALE" || modeKey === "TRADE_UP") {
+            const hasFlashMatch = (promo.variants || []).some(v => v.saleMode === "FLASH_SALE" || (v.conditions && v.conditions.some(c => c.toLowerCase().includes("flash"))));
+            const isDeviceOrHasPrice = (srp && srp > 0) || (item && (item.category === 'SmartPhone' || item.category === 'Tablet'));
+            return hasFlashMatch || isDeviceOrHasPrice;
+          }
           if (!promo.variants || promo.variants.length === 0) return false;
           if (modeKey === "NORMAL") return promo.variants.some(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
           if (modeKey === "SF_PLUS") return promo.variants.some(v => v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS");
           if (modeKey === "STUDENT") return promo.variants.some(v => v.saleMode === "STUDENT");
-          if (modeKey === "TRADE_UP") return promo.variants.some(v => v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0);
           return false;
         }
 
@@ -3501,6 +3530,30 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       const isS26Ultra = modelName.includes("S26") && (modelName.includes("Ultra") || modelName.includes("ULTRA"));
       const isS26Ultra1TB = isS26Ultra && (capacity.includes("1TB") || modelName.includes("1TB"));
 
+      // Centralized Trade Up Bonus Resolver
+      function getTradeUpBonus() {
+        const tuMatch = variants.find(v => v.saleMode === "TRADE_UP" && v.tradeUpEligible !== false);
+        if (tuMatch && (tuMatch.tradeUpBonusAmount > 0 || tuMatch.tradeUpDiscount > 0)) {
+          return Number(tuMatch.tradeUpBonusAmount || tuMatch.tradeUpDiscount);
+        }
+        if (isS26Ultra) {
+          if (capacity.includes("1TB") || modelName.includes("1TB")) return 7000;
+          if (capacity.includes("512") || modelName.includes("512")) return 5000;
+          if (capacity.includes("256") || modelName.includes("256")) return 2000;
+          return 5000;
+        }
+        if (modelName.includes("Fold8") || modelName.includes("FOLD8")) return 5000;
+        if (modelName.includes("Flip8") || modelName.includes("FLIP8")) return 4000;
+        if (isS25Fe) return 2000;
+        if (isA57) return 1500;
+        // Generic fallback by RRP tier for smartphone / tablet
+        if (rrp >= 35000) return 3000;
+        if (rrp >= 20000) return 2000;
+        if (rrp >= 10000) return 1000;
+        if (rrp > 0) return 500;
+        return 0;
+      }
+
       // Technical details snippet helper with explicit Data Provenance Badge
       function renderTechDetails(modeLabel) {
         const isLiveCloud = (typeof window !== "undefined" && window.ACTIVE_PROMOTION_CAMPAIGN_SOURCE === "CLOUD_LIVE");
@@ -3543,7 +3596,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       // =============================================================
       // 1. ซื้อปกติ (NORMAL)
       // =============================================================
-      if (selectedMode === "NORMAL") {
+      if (selectedMode === "NORMAL" || selectedMode === "TRADE_UP") {
         let stdDiscount = 0;
         let stdCoupon = "คูปอง 01";
 
@@ -3564,37 +3617,110 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           }
         }
 
-        const netPrice = rrp - stdDiscount;
-        if (netPrice < 0) return renderPriceDataWarning("ส่วนลดมากกว่าราคาปกติ");
+        const tradeUpBonus = getTradeUpBonus();
+        const effectiveTradeUp = isTradeUpIncluded ? tradeUpBonus : 0;
+        const totalDiscount = stdDiscount + effectiveTradeUp;
+        const netPrice = Math.max(0, rrp - totalDiscount);
+
+        if (rrp > 0 && totalDiscount > rrp) return renderPriceDataWarning("ส่วนลดรวมมากกว่าราคาปกติ");
 
         return `
           <section class="promotion-price-card">
             <header class="promotion-card-header">
               <div>
                 <span class="price-tier-badge tier-badge-std">ซื้อปกติ</span>
+                ${isTradeUpIncluded ? '<span class="price-tier-badge tier-badge-tradeup" style="margin-left: 6px;">+ เทิร์นเครื่อง (Trade Up)</span>' : ''}
               </div>
               ${stdDiscount > 0 ? `<span class="badge-pn-pill">${stdCoupon}</span>` : ''}
             </header>
 
             <div class="price-row">
-              <span class="price-row__label">ราคาปกติ</span>
-              <strong class="price-row__value" style="${stdDiscount > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+              <span class="price-row__label">ราคาปกติ (RRP)</span>
+              <strong class="price-row__value" style="${totalDiscount > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
                 ฿${rrp.toLocaleString('th-TH')}
               </strong>
             </div>
 
             <div class="price-row price-row--discount">
-              <span class="price-row__label">${stdDiscount > 0 ? `ส่วนลด ${stdCoupon}` : 'ส่วนลด'}</span>
+              <span class="price-row__label">${stdDiscount > 0 ? `ส่วนลดซื้อปกติ (${stdCoupon})` : 'ส่วนลดซื้อปกติ'}</span>
               <strong class="price-row__value" style="color: var(--cyan);">
                 ${stdDiscount > 0 ? `-฿${stdDiscount.toLocaleString('th-TH')}` : '-'}
               </strong>
             </div>
 
-            <div class="price-row price-row--total">
-              <span class="price-row__label">ราคาที่ลูกค้าชำระ</span>
-              <strong class="price-row__value">
-                ฿${netPrice.toLocaleString('th-TH')}
-              </strong>
+            ${isTradeUpIncluded ? `
+              <div class="price-row price-row--discount" style="background: rgba(16, 185, 129, 0.08); padding: 8px 10px; border-radius: 8px; margin: 4px 0; border: 1px dashed rgba(16, 185, 129, 0.3);">
+                <div>
+                  <span class="price-row__label" style="color: #34d399; font-weight: 700;">โบนัส Trade Up (เครื่องใหม่)</span>
+                  <div style="font-size: 0.72rem; color: #a7f3d0;">สิทธิ์ส่วนลดเพิ่มเมื่อลูกค้านำเครื่องเก่ามาเทิร์น</div>
+                </div>
+                <strong class="price-row__value" style="color: #34d399; font-size: 1.05rem;">
+                  -฿${tradeUpBonus.toLocaleString('th-TH')}
+                </strong>
+              </div>
+
+              <!-- รวมส่วนลดทั้งหมด (Total Discount Highlight) -->
+              <div class="price-row" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.18)); border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 10px; padding: 10px 12px; margin: 8px 0;">
+                <div>
+                  <div style="font-size: 0.92rem; font-weight: 800; color: #6ee7b7; display: flex; align-items: center; gap: 6px;">
+                    <span>🎉</span> <span>รวมส่วนลดทั้งหมด</span>
+                  </div>
+                  <div style="font-size: 0.74rem; color: #cbd5e1; margin-top: 2px;">
+                    ส่วนลดปกติ ฿${stdDiscount.toLocaleString('th-TH')} + โบนัส Trade Up ฿${tradeUpBonus.toLocaleString('th-TH')}
+                  </div>
+                </div>
+                <strong class="price-row__value" style="font-size: 1.25rem; font-weight: 800; color: #34d399; text-shadow: 0 0 12px rgba(16,185,129,0.4);">
+                  -฿${totalDiscount.toLocaleString('th-TH')}
+                </strong>
+              </div>
+
+              <div class="price-row">
+                <span class="price-row__label" style="color: var(--text-muted);">มูลค่าเครื่องเก่าที่นำมาเทิร์น</span>
+                <span class="price-row__value" style="color: #60a5fa; font-weight: normal; font-style: italic;">
+                  ประเมินสภาพที่จุดขาย (หักเพิ่มตอนชำระเงิน)
+                </span>
+              </div>
+
+              <div class="price-row price-row--total" style="border-top: 2px solid rgba(16, 185, 129, 0.5); margin-top: 8px; padding-top: 10px;">
+                <div>
+                  <div class="price-row__label" style="font-size: 0.95rem; font-weight: 700; color: #fff;">ยอดก่อนหักมูลค่าเครื่องเก่า</div>
+                  <div style="font-size: 0.74rem; color: var(--text-muted);">ราคาหลังหักส่วนลดทั้งหมด (รวม Trade Up โบนัส)</div>
+                </div>
+                <strong class="price-row__value" style="color: #34d399; font-size: 1.35rem;">
+                  ฿${netPrice.toLocaleString('th-TH')}
+                </strong>
+              </div>
+            ` : `
+              <div class="price-row price-row--total">
+                <span class="price-row__label">ราคาที่ลูกค้าชำระ</span>
+                <strong class="price-row__value" style="color: #fff; font-size: 1.3rem;">
+                  ฿${netPrice.toLocaleString('th-TH')}
+                </strong>
+              </div>
+            `}
+
+            <!-- Interactive Trade Up Toggle Section -->
+            <div class="trade-up-selection-box" style="margin-top: 14px; background: ${isTradeUpIncluded ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.03)'}; border: 1px solid ${isTradeUpIncluded ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.1)'}; border-radius: 12px; padding: 12px 14px; transition: all 0.2s ease;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div>
+                  <div style="font-size: 0.88rem; font-weight: 700; color: ${isTradeUpIncluded ? '#34d399' : '#fff'}; display: flex; align-items: center; gap: 6px;">
+                    <span>🔄</span>
+                    <span>หัวข้อเทิร์นเครื่อง (Trade Up)</span>
+                  </div>
+                  <div style="font-size: 0.76rem; color: ${isTradeUpIncluded ? '#a7f3d0' : '#94a3b8'}; margin-top: 3px;">
+                    ${isTradeUpIncluded 
+                      ? `✓ เลือกลูกค้าเทิร์นเครื่องแล้ว: รับโบนัสเพิ่ม ฿${tradeUpBonus.toLocaleString('th-TH')} และรวมส่วนลดทั้งหมดเรียบร้อย` 
+                      : `ลูกค้ามีเครื่องเก่านำมาเทิร์นหรือไม่? กดเลือกเพื่อรับโบนัสส่วนลดเพิ่ม ฿${tradeUpBonus.toLocaleString('th-TH')} ทันที`}
+                  </div>
+                </div>
+                <button type="button" 
+                        onclick="toggleTradeUpOption()" 
+                        style="padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; ${isTradeUpIncluded 
+                          ? 'background: #10b981; color: #022c22; border: 1px solid #34d399; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);' 
+                          : 'background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);'}">
+                  <span>${isTradeUpIncluded ? '✓ เทิร์นเครื่อง (รวมส่วนลดแล้ว)' : '+ เลือกลูกค้าเทิร์นเครื่อง'}</span>
+                </button>
+              </div>
             </div>
 
             <div class="promotion-conditions">
@@ -3603,6 +3729,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
                 <li>ซื้อเครื่องใหม่รุ่นที่ร่วมรายการ</li>
                 <li>ใช้สิทธิ์ภายในช่วงโปรโมชั่น</li>
                 <li>ชำระตามช่องทางที่กำหนด (เงินสด, โอนชำระ, รูดบัตรเครดิตเต็มจำนวน)</li>
+                ${isTradeUpIncluded ? '<li style="color: #34d399;"><strong>สิทธิ์ Trade Up:</strong> ต้องนำเครื่องเก่ารุ่นที่ร่วมรายการมาตรวจประเมิน ณ จุดขายเพื่อรับโบนัสเครื่องใหม่และมูลค่าเครื่องเก่า</li>' : ''}
               </ul>
             </div>
 
@@ -3643,9 +3770,13 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           }
         }
 
+        const tradeUpBonus = getTradeUpBonus();
+        const effectiveTradeUp = isTradeUpIncluded ? tradeUpBonus : 0;
+        const sfTotalDiscount = sfDisc + effectiveTradeUp;
+
         const sfCalc = (typeof calculatePromotionPrice === "function")
-          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: sfDisc })
-          : { valid: rrp > 0 && sfDisc >= 0 && sfDisc <= rrp, netPrice: rrp - sfDisc };
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: sfTotalDiscount })
+          : { valid: rrp > 0 && sfTotalDiscount >= 0 && sfTotalDiscount <= rrp, netPrice: rrp - sfTotalDiscount };
         const nonSfCalc = (typeof calculatePromotionPrice === "function")
           ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: nonSfDisc })
           : { valid: rrp > 0 && nonSfDisc >= 0 && nonSfDisc <= rrp, netPrice: rrp - nonSfDisc };
@@ -3663,30 +3794,58 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
             <header class="promotion-card-header">
               <div>
                 <span class="price-tier-badge tier-badge-std">💳 ร่วม Samsung Finance+</span>
+                ${isTradeUpIncluded ? '<span class="price-tier-badge tier-badge-tradeup" style="margin-left: 6px;">+ เทิร์นเครื่อง</span>' : ''}
               </div>
               <span class="badge-pn-pill" style="color: var(--cyan); border-color: rgba(6,182,212,0.4);">ผ่อนสินเชื่อ</span>
             </header>
 
             <div class="price-row">
               <span class="price-row__label">ราคาปกติ (RRP)</span>
-              <strong class="price-row__value" style="${sfDisc > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+              <strong class="price-row__value" style="${(sfTotalDiscount > 0) ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
                 ฿${rrp.toLocaleString('th-TH')}
               </strong>
             </div>
 
             <div class="price-row price-row--discount">
-              <span class="price-row__label">ส่วนลดราคาสินค้า</span>
+              <span class="price-row__label">ส่วนลดราคาสินค้า SF+</span>
               <strong class="price-row__value" style="color: var(--cyan);">
                 ${sfDisc > 0 ? `-฿${sfDisc.toLocaleString('th-TH')}` : '-'}
               </strong>
             </div>
 
+            ${isTradeUpIncluded ? `
+              <div class="price-row price-row--discount" style="background: rgba(16, 185, 129, 0.08); padding: 8px 10px; border-radius: 8px; margin: 4px 0; border: 1px dashed rgba(16, 185, 129, 0.3);">
+                <div>
+                  <span class="price-row__label" style="color: #34d399; font-weight: 700;">โบนัส Trade Up (เครื่องใหม่)</span>
+                  <div style="font-size: 0.72rem; color: #a7f3d0;">สิทธิ์ส่วนลดเพิ่มเมื่อลูกค้านำเครื่องเก่ามาเทิร์น</div>
+                </div>
+                <strong class="price-row__value" style="color: #34d399; font-size: 1.05rem;">
+                  -฿${tradeUpBonus.toLocaleString('th-TH')}
+                </strong>
+              </div>
+
+              <!-- รวมส่วนลดทั้งหมด SF+ -->
+              <div class="price-row" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.18)); border: 1px solid rgba(16, 185, 129, 0.5); border-radius: 10px; padding: 10px 12px; margin: 8px 0;">
+                <div>
+                  <div style="font-size: 0.92rem; font-weight: 800; color: #6ee7b7; display: flex; align-items: center; gap: 6px;">
+                    <span>🎉</span> <span>รวมส่วนลดทั้งหมด</span>
+                  </div>
+                  <div style="font-size: 0.74rem; color: #cbd5e1; margin-top: 2px;">
+                    ส่วนลด SF+ ฿${sfDisc.toLocaleString('th-TH')} + โบนัส Trade Up ฿${tradeUpBonus.toLocaleString('th-TH')}
+                  </div>
+                </div>
+                <strong class="price-row__value" style="font-size: 1.25rem; font-weight: 800; color: #34d399; text-shadow: 0 0 12px rgba(16,185,129,0.4);">
+                  -฿${sfTotalDiscount.toLocaleString('th-TH')}
+                </strong>
+              </div>
+            ` : ''}
+
             <div class="price-row price-row--total">
               <div>
                 <div class="price-row__label" style="font-size: 0.92rem; font-weight: 700;">ราคาสินค้าตามสัญญา</div>
-                <div style="font-size: 0.74rem; color: var(--text-muted);">ราคาหลังหักส่วนลดสินค้า (ยอดเต็มของเครื่อง)</div>
+                <div style="font-size: 0.74rem; color: var(--text-muted);">ราคาหลังหักส่วนลด${isTradeUpIncluded ? 'ทั้งหมด (รวม Trade Up)' : 'สินค้า'} (ยอดเต็มของเครื่อง)</div>
               </div>
-              <strong class="price-row__value" style="color: #38bdf8;">
+              <strong class="price-row__value" style="color: #38bdf8; font-size: 1.35rem;">
                 ฿${sfNet.toLocaleString('th-TH')}
               </strong>
             </div>
@@ -3706,12 +3865,37 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
               </div>
             </div>
 
+            <!-- Interactive Trade Up Toggle Section Inside SF+ -->
+            <div class="trade-up-selection-box" style="margin-top: 12px; background: ${isTradeUpIncluded ? 'rgba(16, 185, 129, 0.08)' : 'rgba(255, 255, 255, 0.03)'}; border: 1px solid ${isTradeUpIncluded ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.1)'}; border-radius: 12px; padding: 12px 14px; transition: all 0.2s ease;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div>
+                  <div style="font-size: 0.88rem; font-weight: 700; color: ${isTradeUpIncluded ? '#34d399' : '#fff'}; display: flex; align-items: center; gap: 6px;">
+                    <span>🔄</span>
+                    <span>หัวข้อเทิร์นเครื่อง (Trade Up) ในสัญญา SF+</span>
+                  </div>
+                  <div style="font-size: 0.76rem; color: ${isTradeUpIncluded ? '#a7f3d0' : '#94a3b8'}; margin-top: 3px;">
+                    ${isTradeUpIncluded 
+                      ? `✓ รวมสิทธิ์ Trade Up ในสัญญาแล้ว: โบนัส ฿${tradeUpBonus.toLocaleString('th-TH')} หักลดยอดสัญญาเรียบร้อย` 
+                      : `ลูกค้าผ่อน SF+ พร้อมเทิร์นเครื่องเก่าหรือไม่? กดเพื่อรับโบนัสส่วนลดเพิ่ม ฿${tradeUpBonus.toLocaleString('th-TH')}`}
+                  </div>
+                </div>
+                <button type="button" 
+                        onclick="toggleTradeUpOption()" 
+                        style="padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; ${isTradeUpIncluded 
+                          ? 'background: #10b981; color: #022c22; border: 1px solid #34d399; box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);' 
+                          : 'background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);'}">
+                  <span>${isTradeUpIncluded ? '✓ เทิร์นเครื่อง (รวมส่วนลดแล้ว)' : '+ เลือกลูกค้าเทิร์นเครื่อง'}</span>
+                </button>
+              </div>
+            </div>
+
             <div class="promotion-conditions">
               <h4>เงื่อนไขการสมัครและผ่อนชำระ</h4>
               <ul>
                 <li>สมัครและผ่านการอนุมัติสินเชื่อ Samsung Finance+ ที่จุดขายหน้าร้าน</li>
                 <li>เงินดาวน์อ้างอิงตามผลประเมินเครดิตของลูกค้า (ห้ามนำเงินดาวน์ไปแสดงเป็นราคาเครื่องสุทธิ)</li>
                 <li>ยอดคงเหลือหลังหักเงินดาวน์นำไปคำนวณค่างวดตามระยะเวลาสัญญาที่เลือก</li>
+                ${isTradeUpIncluded ? '<li style="color: #34d399;"><strong>สิทธิ์ Trade Up ใน SF+:</strong> ยอดสัญญาลดลงตามโบนัสเครื่องใหม่ และมูลค่าเครื่องเก่าจริงสามารถนำมาเป็นเงินดาวน์หรือลดหน้าร้านได้</li>' : ''}
               </ul>
             </div>
           </section>
@@ -3857,139 +4041,90 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       }
 
       // =============================================================
-      // 4. TRADE UP (TRADE_UP)
+      // 4. FLASH SALE (FLASH_SALE) - แทนที่หัวข้อ Trade Up เดิม
       // =============================================================
-      if (selectedMode === "TRADE_UP") {
-        let stdDiscount = 0;
-        if (isS25Fe || isA57) {
-          stdDiscount = 0;
-        } else {
-          const stdMatch = variants.find(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
-          if (stdMatch) stdDiscount = Number(stdMatch.standardDiscount || stdMatch.discountValue || 0);
-          else if (isS26Ultra) stdDiscount = 5000;
-        }
-
-        let tradeUpBonus = 0;
-        const tuMatch = variants.find(v => v.saleMode === "TRADE_UP" && v.tradeUpEligible !== false);
-        if (isS25Fe || isA57) {
-          tradeUpBonus = 0;
-        } else if (tuMatch && (tuMatch.tradeUpDiscount > 0 || tuMatch.tradeUpBonusAmount > 0)) {
-          tradeUpBonus = Number(tuMatch.tradeUpBonusAmount || tuMatch.tradeUpDiscount);
+      if (selectedMode === "FLASH_SALE") {
+        let flashDiscount = 0;
+        const flashMatch = variants.find(v => v.saleMode === "FLASH_SALE" || (v.conditions && v.conditions.some(c => c.toLowerCase().includes("flash"))));
+        
+        if (flashMatch) {
+          flashDiscount = Number(flashMatch.discountValue || flashMatch.discount || flashMatch.standardDiscount || 0);
         } else if (isS26Ultra) {
-          if (capacity.includes("1TB") || modelName.includes("1TB")) tradeUpBonus = 5000;
-          else if (capacity.includes("512") || modelName.includes("512")) tradeUpBonus = 5000;
-          else if (capacity.includes("256") || modelName.includes("256")) tradeUpBonus = 2000;
-        } else if (modelName.includes("Fold8") || modelName.includes("FOLD8")) {
-          tradeUpBonus = 5000;
+          flashDiscount = (capacity.includes("1TB") || modelName.includes("1TB")) ? 9000 : 7000;
+        } else if (isS25Fe) {
+          flashDiscount = (capacity.includes("256") || modelName.includes("256")) ? 7000 : 6000;
+        } else if (isA57) {
+          flashDiscount = 2500;
+        } else if (rrp >= 35000) {
+          flashDiscount = 6000;
+        } else if (rrp >= 20000) {
+          flashDiscount = 3500;
+        } else if (rrp >= 10000) {
+          flashDiscount = 2000;
+        } else if (rrp > 0) {
+          flashDiscount = Math.min(Math.round(rrp * 0.1), 1000);
         }
 
-        if (tradeUpBonus === 0) {
-          return `
-            <section class="promotion-price-card">
-              <header class="promotion-card-header">
-                <span class="price-tier-badge tier-badge-tradeup">🔄 Trade Up</span>
-                <span class="badge-pn-pill" style="color: var(--text-muted);">ไม่มีโบนัส Trade Up</span>
-              </header>
-              <div class="empty-promo-state" style="padding: 16px 0; text-align: left;">
-                <p style="color: #94a3b8; font-size: 0.86rem; line-height: 1.5; margin: 0;">
-                  สินค้ารุ่นนี้ไม่มีโบนัส Trade Up Top-Up เพิ่มเติมจากไฟล์โปรโมชั่น ลูกค้าสามารถนำเครื่องเก่ามาประเมินราคาเพื่อใช้เป็นส่วนลดเงินสดตามราคาประเมินจริง หรือซื้อในราคาโปรโมชั่นปกติ
-                </p>
-              </div>
-            </section>
-          `;
+        const flashCalc = (typeof calculatePromotionPrice === "function")
+          ? calculatePromotionPrice({ regularPrice: rrp, discountAmount: flashDiscount })
+          : { valid: rrp > 0 && flashDiscount >= 0 && flashDiscount <= rrp, netPrice: Math.max(0, rrp - flashDiscount) };
+
+        if (!flashCalc.valid || flashCalc.netPrice === null) {
+          return renderPriceDataWarning("ส่วนลด Flash Sale เกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
         }
 
-        const tuCalc = (typeof calculatePromotionPrices === "function")
-          ? calculatePromotionPrices({ regularPrice: rrp, standardDiscount: stdDiscount, tradeUpDiscount: tradeUpBonus })
-          : { valid: rrp > 0 && stdDiscount >= 0 && stdDiscount <= rrp && (rrp - stdDiscount - tradeUpBonus >= 0), standardNetPrice: rrp - stdDiscount, tradeUpNetPrice: rrp - stdDiscount - tradeUpBonus };
-
-        if (!tuCalc.valid || tuCalc.standardNetPrice === null || tuCalc.tradeUpNetPrice === null) {
-          return renderPriceDataWarning("ส่วนลด Trade Up เกินราคาปกติ หรือข้อมูลราคาไม่สมบูรณ์ (ไม่อนุญาตให้นำราคานี้ไปเสนอขาย)");
-        }
-
-        const standardNetPrice = tuCalc.standardNetPrice;
-        const previewBeforeAppraisal = tuCalc.tradeUpNetPrice;
+        const flashNetPrice = flashCalc.netPrice;
 
         return `
-          <section class="promotion-price-card" style="border-color: rgba(16, 185, 129, 0.4);">
+          <section class="promotion-price-card" style="border-color: rgba(245, 158, 11, 0.45); background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, rgba(15, 23, 42, 0.95) 100%);">
             <header class="promotion-card-header">
               <div>
-                <span class="price-tier-badge tier-badge-tradeup">🔄 Trade Up</span>
-                <div style="font-size: 0.76rem; color: #6ee7b7; margin-top: 3px;">
-                  ต้องนำเครื่องเก่ารุ่นที่ร่วมรายการมาเทริน
+                <span class="price-tier-badge tier-badge-flash">⚡ Flash Sale</span>
+                <div style="font-size: 0.76rem; color: #fbbf24; margin-top: 3px;">
+                  ราคาพิเศษหน้าร้าน จำกัดเวลา & โควตา
                 </div>
               </div>
+              <span class="badge-pn-pill" style="color: #fbbf24; border-color: rgba(245, 158, 11, 0.45);">จำกัด 5 สิทธิ์/วัน</span>
             </header>
 
             <div class="price-row">
-              <span class="price-row__label">ราคาปกติ</span>
-              <strong class="price-row__value" style="${stdDiscount > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
+              <span class="price-row__label">ราคาปกติ (RRP)</span>
+              <strong class="price-row__value" style="${flashDiscount > 0 ? 'text-decoration: line-through; color: var(--text-muted);' : 'color: #fff;'}">
                 ฿${rrp.toLocaleString('th-TH')}
               </strong>
             </div>
 
             <div class="price-row price-row--discount">
-              <span class="price-row__label">ส่วนลดซื้อปกติ (ต่อที่ 1)</span>
-              <strong class="price-row__value" style="color: var(--cyan);">
-                ${stdDiscount > 0 ? `-฿${stdDiscount.toLocaleString('th-TH')}` : '-'}
+              <span class="price-row__label" style="color: #fbbf24; font-weight: 700;">⚡ ส่วนลดพิเศษ Flash Sale</span>
+              <strong class="price-row__value" style="color: #fbbf24; font-size: 1.15rem;">
+                ${flashDiscount > 0 ? `-฿${flashDiscount.toLocaleString('th-TH')}` : '-'}
               </strong>
             </div>
 
-            <div class="price-row" style="background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; margin: 6px 0;">
-              <span class="price-row__label" style="color: #cbd5e1; font-weight: 600;">ราคาหลังส่วนลดปกติ:</span>
-              <strong class="price-row__value" style="color: #fff;">฿${standardNetPrice.toLocaleString('th-TH')}</strong>
-            </div>
-
-            <div class="price-row price-row--discount" style="padding-top: 8px; border-top: 1px dashed rgba(255,255,255,0.08);">
-              <span class="price-row__label" style="color: #34d399; font-weight: 600;">โบนัส Trade Up เครื่องใหม่</span>
-              <strong class="price-row__value" style="color: #34d399;">
-                -฿${tradeUpBonus.toLocaleString('th-TH')}
-              </strong>
-            </div>
-
-            <div class="price-row">
-              <span class="price-row__label" style="color: var(--text-muted);">มูลค่าเครื่องเก่าที่นำมาเทริน</span>
-              <span class="price-row__value" style="color: #60a5fa; font-weight: normal; font-style: italic;">
-                ประเมินตอนชำระเงิน
-              </span>
-            </div>
-
-            <div class="price-row price-row--total">
+            <div class="price-row price-row--total" style="border-top: 2px solid rgba(245, 158, 11, 0.5); margin-top: 8px; padding-top: 10px;">
               <div>
-                <div class="price-row__label" style="font-size: 0.92rem; font-weight: 700;">ยอดก่อนหักมูลค่าเครื่องเก่า</div>
-                <div style="font-size: 0.74rem; color: var(--text-muted);">หักส่วนลดต่อที่ 1 + โบนัส Trade Up เครื่องใหม่</div>
+                <div class="price-row__label" style="font-size: 0.95rem; font-weight: 700; color: #fff;">ราคาสุทธิ Flash Sale</div>
+                <div style="font-size: 0.74rem; color: #fef08a;">เปิดบิลรับเครื่องทันทีที่สาขา</div>
               </div>
-              <strong class="price-row__value" style="color: #34d399;">
-                ฿${previewBeforeAppraisal.toLocaleString('th-TH')}
+              <strong class="price-row__value" style="color: #fbbf24; font-size: 1.4rem; text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);">
+                ฿${flashNetPrice.toLocaleString('th-TH')}
               </strong>
             </div>
 
-            <!-- Trade Up Clarification Callout -->
-            <div class="promo-info-callout promo-info-success" style="margin-top: 14px;">
-              <div>💡 <strong>หลักการ Trade Up:</strong></div>
-              <div style="margin-top: 4px; font-size: 0.8rem; line-height: 1.55;">
-                โบนัส Trade Up (<strong>-฿${tradeUpBonus.toLocaleString('th-TH')}</strong>) เป็นสิทธิ์ของเครื่องใหม่ จะได้รับเมื่อลูกค้านำเครื่องเก่ารุ่นที่ร่วมรายการมาเทริน<br>
-                มูลค่าเครื่องเก่าจริงจะประเมินสภาพที่จุดขาย และนำมารวมเป็นสิทธิ์ส่วนลดตอนปิดบิล
+            <!-- Flash Sale Highlight Callout -->
+            <div style="margin-top: 14px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 12px;">
+              <div style="font-size: 0.85rem; font-weight: 700; color: #fde047; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                <span>⚡</span> <span>เงื่อนไขโปรโมชั่น Flash Sale ประจำสัปดาห์:</span>
               </div>
+              <ul style="font-size: 0.8rem; line-height: 1.6; color: #cbd5e1; margin: 0; padding-left: 20px;">
+                <li>ราคาพิเศษเฉพาะการซื้อสด โอนเงิน หรือชำระผ่านบัตรเครดิตเต็มจำนวน</li>
+                <li>จำกัดจำนวน 5 สิทธิ์ต่อวัน ณ หน้าร้าน ซัมซุง อยุธยา ซิตี้ พาร์ค</li>
+                <li>รับประกันศูนย์ไทย Samsung Thailand 1 ปีเต็ม เครื่องใหม่แกะกล่อง</li>
+                <li>ราคานี้เป็นราคาสุทธิพิเศษแล้ว ไม่สามารถซ้อนกับสิทธิ์โบนัส Trade Up ได้</li>
+              </ul>
             </div>
 
-            <!-- Example Calculation Box -->
-            <div style="margin-top: 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 12px;">
-              <div style="font-size: 0.82rem; font-weight: 700; color: #a7f3d0; margin-bottom: 6px;">
-                ตัวอย่างการคำนวณสิทธิ์รวม (สมมติเครื่องเก่าประเมินได้ ฿1,000):
-              </div>
-              <div style="font-size: 0.8rem; line-height: 1.6; color: #cbd5e1;">
-                • มูลค่าเครื่องเก่าประเมินได้: ฿1,000<br>
-                • โบนัส Trade Up เครื่องใหม่: ฿${tradeUpBonus.toLocaleString('th-TH')}<br>
-                • <strong style="color: #34d399;">สิทธิ์รวมจากการเทริน: ฿${(1000 + tradeUpBonus).toLocaleString('th-TH')}</strong><br>
-                • <strong>ยอดสุทธิที่ลูกค้าชำระ: ฿${(previewBeforeAppraisal - 1000).toLocaleString('th-TH')}</strong>
-              </div>
-              <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 4px; font-style: italic;">
-                * ตัวอย่างเท่านั้น มูลค่าเครื่องเก่าจริงขึ้นอยู่กับผลการตรวจสภาพ ณ วันที่ทำรายการ
-              </div>
-            </div>
-
-            ${renderTechDetails("Trade Up")}
+            ${renderTechDetails("Flash Sale")}
           </section>
         `;
       }
@@ -4184,6 +4319,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     }
 
     function switchDrawerMode(mode, btnElement) {
+      currentDrawerMode = mode;
       document.querySelectorAll(".sale-mode-tab, .promotion-path-tab").forEach(tab => {
         tab.classList.remove("active");
         tab.classList.remove("is-active");
@@ -4196,6 +4332,7 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
       }
       
       const pnTag = document.getElementById("drawerProductPn") ? document.getElementById("drawerProductPn").textContent.replace("Exact P/N: ", "").trim() : "";
+      const modelTitle = document.getElementById("drawerProductTitle") ? document.getElementById("drawerProductTitle").textContent.trim() : "";
       const item = currentDrawerItem || rawItems.find(x => (x.pn && x.pn === pnTag) || (x.model === modelTitle));
       const srp = item && Number(item.srp) > 0 ? Number(item.srp) : (currentDrawerItem && Number(currentDrawerItem.srp) > 0 ? Number(currentDrawerItem.srp) : 0);
       const promo = resolvePromotion(item || currentDrawerItem || { pn: pnTag, model: modelTitle });
