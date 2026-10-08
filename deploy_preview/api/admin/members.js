@@ -869,8 +869,77 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // --------------------------------------------------------------------------
+  // ROUTE 7: DELETE /api/admin/members/:id OR POST /api/admin/members/:id/delete -> Delete member
+  // --------------------------------------------------------------------------
+  if ((req.method === 'DELETE' && targetId) || (req.method === 'POST' && targetId && action === 'delete')) {
+    // SELF-DELETE PREVENTION: Admin cannot delete their own account!
+    if (targetId === caller.id) {
+      return res.status(400).json({
+        error: 'SELF_DELETE_PROHIBITED',
+        requestId,
+        message: 'ไม่สามารถลบบัญชีที่กำลังใช้งานอยู่ได้'
+      });
+    }
+
+    try {
+      // Step A: Delete roles from user_roles
+      try {
+        await queryPostgrest(`user_roles?user_id=eq.${targetId}`, {
+          method: 'DELETE'
+        });
+      } catch (rolesErr) {
+        console.warn('[Admin Members Delete Roles Warning]:', rolesErr.message);
+      }
+
+      // Step B: Delete profile from profiles
+      try {
+        await queryPostgrest(`profiles?id=eq.${targetId}`, {
+          method: 'DELETE'
+        });
+      } catch (profErr) {
+        console.warn('[Admin Members Delete Profile Warning]:', profErr.message);
+      }
+
+      // Step C: Delete user from Supabase Auth Admin API
+      let authDeleteOk = false;
+      try {
+        const authDelRes = await fetch(`${supabaseUrl}/auth/v1/admin/users/${targetId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${secretKey}`,
+            'apikey': secretKey
+          }
+        });
+        authDeleteOk = authDelRes.ok;
+      } catch (authErr) {
+        console.warn('[Admin Members Delete Auth User Warning]:', authErr.message);
+      }
+
+      return res.status(200).json({
+        success: true,
+        requestId,
+        message: 'ลบข้อมูลพนักงานออกจากระบบเรียบร้อยแล้ว',
+        audit: {
+          eventType: 'MEMBER_DELETED',
+          actorId: maskedActor,
+          targetId: maskTarget(targetId),
+          authDeleted: authDeleteOk,
+          createdAt: new Date().toISOString()
+        }
+      });
+    } catch (err) {
+      console.error('[Admin Members Delete Error]:', err.message);
+      return res.status(500).json({
+        error: 'DELETE_MEMBER_FAILED',
+        requestId,
+        message: 'ไม่สามารถลบข้อมูลพนักงานได้ กรุณาลองใหม่อีกครั้ง'
+      });
+    }
+  }
+
   // Fallthrough: 405 Method Not Allowed / 404 Route Not Found
-  res.setHeader('Allow', ['GET', 'POST', 'PATCH']);
+  res.setHeader('Allow', ['GET', 'POST', 'PATCH', 'DELETE']);
   return res.status(405).json({
     error: 'METHOD_OR_ROUTE_NOT_SUPPORTED',
     requestId,

@@ -163,6 +163,17 @@
       });
     }
 
+    async deleteMember(memberId) {
+      const headers = await this.getAuthHeaders();
+      return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers
+        }
+      });
+    }
+
     // ------------------------------------------------------------------------
     // UI RENDERING & VIEW LIFECYCLE
     // ------------------------------------------------------------------------
@@ -493,6 +504,10 @@
                     <span>🚫</span> ระงับ
                   </button>
                 `}
+                <!-- Delete -->
+                <button onclick="window.MemberAdminService.openDeleteModal('${m.id}')" ${isSelf ? 'disabled title="ไม่สามารถลบบัญชีที่กำลังใช้งานอยู่ได้"' : 'title="ลบพนักงานออกจากระบบ"'} style="background: rgba(244,67,54,0.15); border: 1px solid rgba(244,67,54,0.4); color: ${isSelf ? '#555' : '#e57373'}; border-radius: 4px; padding: 5px 9px; font-size: 12px; cursor: ${isSelf ? 'not-allowed' : 'pointer'}; display: flex; align-items: center; gap: 4px; opacity: ${isSelf ? '0.4' : '1'};">
+                  <span>🗑️</span> ลบ
+                </button>
               </div>
             </td>
           </tr>
@@ -838,6 +853,69 @@
         if (btn) {
           btn.disabled = false;
           btn.textContent = 'ยืนยันเปิดใช้งาน';
+        }
+      }
+    }
+
+    openDeleteModal(memberId) {
+      const member = this.members.find(m => m.id === memberId);
+      if (!member) return;
+
+      const currentUserId = window.AuthService?.currentUser?.id;
+      if (currentUserId && member.id === currentUserId) {
+        alert('ไม่สามารถลบบัญชีที่กำลังใช้งานอยู่ได้');
+        return;
+      }
+
+      this.renderModal(`
+        <div style="background: #1e222d; border: 1px solid #ef5350; border-radius: 12px; width: 92%; max-width: 440px; padding: 24px; color: #e0e3eb; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="margin: 0; font-size: 18px; color: #ef5350; display: flex; align-items: center; gap: 8px;">
+              <span>🗑️</span> ลบพนักงานออกจากระบบ
+            </h3>
+            <button onclick="window.MemberAdminService.closeModal()" style="background: none; border: none; color: #848e9c; font-size: 22px; cursor: pointer;">&times;</button>
+          </div>
+
+          <div id="modal-alert-box" style="display: none; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px;"></div>
+
+          <div style="background: rgba(239,83,80,0.1); border: 1px solid rgba(239,83,80,0.3); border-radius: 8px; padding: 14px; font-size: 13px; color: #ffcdd2; margin-bottom: 18px; line-height: 1.6;">
+            <div style="font-weight: 700; color: #ef5350; margin-bottom: 6px; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+              <span>⚠️</span> ยืนยันการลบข้อมูลถาวร
+            </div>
+            คุณแน่ใจหรือไม่ว่าต้องการลบบัญชีพนักงาน <strong>${member.displayName}</strong> (<span style="color: #90caf9;">${member.employeeCode}</span>)?<br>
+            ข้อมูลโปรไฟล์ สิทธิ์การเข้าถึง และบัญชีผู้ใช้นี้จะถูกลบออกจากระบบอย่างถาวรและไม่สามารถกู้คืนได้
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button type="button" onclick="window.MemberAdminService.closeModal()" style="background: #262b3d; border: 1px solid #363c4e; color: #b2b5be; border-radius: 6px; padding: 9px 16px; font-size: 13px; font-weight: 600; cursor: pointer;">
+              ยกเลิก
+            </button>
+            <button type="button" id="btn-submit-delete" onclick="window.MemberAdminService.submitDelete('${member.id}')" style="background: #c62828; color: #fff; border: none; border-radius: 6px; padding: 9px 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              <span>🗑️</span> ยืนยันลบพนักงาน
+            </button>
+          </div>
+        </div>
+      `);
+    }
+
+    async submitDelete(memberId) {
+      const btn = document.getElementById('btn-submit-delete');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'กำลังลบ...';
+      }
+
+      try {
+        await this.deleteMember(memberId);
+        this.closeModal();
+        this.showBanner(`🗑️ ลบข้อมูลพนักงานออกจากระบบเรียบร้อยแล้ว`, 'success');
+        this.refresh();
+      } catch (err) {
+        this.showModalAlert(err.message, 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<span>🗑️</span> ยืนยันลบพนักงาน';
         }
       }
     }
