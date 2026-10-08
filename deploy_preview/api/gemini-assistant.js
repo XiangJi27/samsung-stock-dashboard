@@ -1,6 +1,6 @@
 // Vercel Serverless Function: /api/gemini-assistant
-// Handles Gemini 2.0 / Flash integration with strict store data grounding (Stock, Promo, Specs)
-// for Samsung Branch Operations (Ayutthaya City Park).
+// Handles Gemini 2.0 / Flash / Flash-Lite integration with dynamic ModelService discovery
+// and strict store data grounding (Stock, Promo, Specs) for Samsung Branch Operations (Ayutthaya City Park).
 
 const https = require('https');
 
@@ -42,10 +42,27 @@ module.exports = async (req, res) => {
       });
     }
 
+    // 1. Dynamic Model Discovery from Google ModelService
+    const discovery = await discoverAvailableModels(apiKey);
+    if (!discovery.success) {
+      return res.status(400).json({
+        error: 'INVALID_API_KEY_OR_NETWORK',
+        message: `ไม่สามารถเชื่อมต่อ Google Generative Language API ได้: ${discovery.error || 'กรุณาตรวจสอบ API Key'}`
+      });
+    }
+
+    const availableModels = discovery.models; // Array of model names without 'models/' prefix
+    const chosenModel = resolveBestModel(body.model, availableModels);
+
     // Ping check
     if (body.ping) {
-      const pingResult = await testGeminiConnection(apiKey, body.model || 'gemini-2.0-flash');
-      return res.status(200).json(pingResult);
+      const pingResult = await verifyModelExecution(apiKey, chosenModel);
+      return res.status(200).json({
+        success: true,
+        model: chosenModel,
+        availableModels: availableModels,
+        message: `เชื่อมต่อสำเร็จ! ตรวจพบโมเดลที่ใช้งานได้ ${availableModels.length} รุ่น โดยระบบเลือกใช้ "${chosenModel}" (รองรับ Flash/Flash-Lite สำหรับตอบคำถามหน้าร้าน)`
+      });
     }
 
     const query = (body.query || '').trim();
@@ -53,17 +70,16 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: 'EMPTY_QUERY', message: 'กรุณาระบุคำถามหรือแนบรูปภาพ' });
     }
 
-    // 1. Context Grounding: Fetch Store Data (Stock, Promo, Specs)
+    // 2. Context Grounding: Fetch Store Data (Stock, Promo, Specs)
     const storeContext = await gatherStoreGroundingContext(query);
 
-    // 2. Build Gemini Prompt & History
+    // 3. Build Gemini Prompt & History
     const conversationHistory = Array.isArray(body.messages) ? body.messages : [];
-    const requestedModel = body.model || 'gemini-2.0-flash';
 
-    // 3. Call Google Gemini REST API
+    // 4. Call Google Gemini REST API using the discovered model
     const geminiResponse = await callGeminiAPI({
       apiKey,
-      model: requestedModel,
+      model: chosenModel,
       query,
       history: conversationHistory,
       image: body.image || null,
@@ -73,7 +89,8 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       success: true,
       text: geminiResponse.text,
-      model: geminiResponse.model,
+      model: chosenModel,
+      availableModels: availableModels,
       groundedItemsCount: storeContext.matchedCount,
       timestamp: new Date().toISOString()
     });
@@ -88,38 +105,126 @@ module.exports = async (req, res) => {
 };
 
 /**
- * Test Gemini API connectivity with a simple lightweight request
+ * Discover all available models supporting generateContent for this API Key
  */
-async function testGeminiConnection(apiKey, modelName) {
-  const modelsToTry = [modelName, 'gemini-2.0-flash', 'gemini-1.5-flash'];
+async function discoverAvailableModels(apiKey) {
+  const versions = ['v1beta', 'v1'];
   let lastError = null;
 
-  for (const m of modelsToTry) {
+  for (const v of versions) {
     try {
-      const payload = JSON.stringify({
-        contents: [
-          {
-            role: 'user',
-            parts: [{ text: 'Test connection. Reply with only: OK' }]
-          }
-        ],
-        generationConfig: { maxOutputTokens: 10 }
-      });
+      const url = `https://generativelanguage.googleapis.com/${v}/models?key=${encodeURIComponent(apiKey)}`;
+      const result = await httpGetJson(url);
 
-      const response = await postGemini(apiKey, m, payload);
-      if (response && response.candidates && response.candidates.length > 0) {
-        return {
-          success: true,
-          model: m,
-          message: `เชื่อมต่อสำเร็จ โมเดล ${m} พร้อมใช้งานสำหรับการตอบคำถามหน้าร้าน`
-        };
+      if (result && Array.isArray(result.models)) {
+        const supported = result.models
+          .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes('generateContent'))
+          .map(m => (m.name || '').replace(/^models\//, ''))
+          .filter(name => Boolean(name));
+
+        if (supported.length > 0) {
+          return { success: true, models: supported, version: v };
+        }
       }
     } catch (e) {
       lastError = e;
     }
   }
 
-  throw new Error(`ไม่สามารถเชื่อมต่อ Gemini API ได้: ${lastError ? lastError.message : 'Invalid API key or network error'}`);
+  // If ModelService.ListModels failed or returned 0, return fallback with standard models
+  if (lastError) {
+    const errMsg = lastError.message || '';
+    if (errMsg.includes('API_KEY_INVALID') || errMsg.includes('PERMISSION_DENIED') || errMsg.includes('400') || errMsg.includes('403')) {
+      return { success: false, error: errMsg };
+    }
+  }
+
+  // Default known models fallback
+  return {
+    success: true,
+    models: [
+      'gemini-2.0-flash-lite',
+      'gemini-2.0-flash-lite-preview-02-05',
+      'gemini-2.0-flash',
+      'gemini-1.5-flash-latest',
+      'gemini-1.5-flash',
+      'gemini-1.5-flash-8b',
+      'gemini-1.5-pro'
+    ],
+    version: 'v1beta'
+  };
+}
+
+/**
+ * Smart Model Selection based on user preference and available models
+ */
+function resolveBestModel(preferredModel, availableModels) {
+  const cleanPref = (preferredModel || '').trim().replace(/^models\//, '');
+
+  // 1. If user explicitly provided a model and it exists in available list
+  if (cleanPref && availableModels.includes(cleanPref)) {
+    return cleanPref;
+  }
+
+  // 2. If user requested "flash-lite" or "3.5-flash lite"
+  if (cleanPref && /lite/i.test(cleanPref)) {
+    const liteModel = availableModels.find(m => /flash.*lite/i.test(m) || /lite/i.test(m));
+    if (liteModel) return liteModel;
+  }
+
+  // 3. Priority Order for Samsung Store Assistant:
+  // - First choice: Flash-Lite models (fastest, lightest, ideal for store staff)
+  const flashLite = availableModels.find(m => /gemini-2\.0-flash-lite/i.test(m) || /flash-lite/i.test(m));
+  if (flashLite) return flashLite;
+
+  // - Second choice: Gemini 2.0 Flash
+  const flash2 = availableModels.find(m => /gemini-2\.0-flash/i.test(m) && !/lite/i.test(m));
+  if (flash2) return flash2;
+
+  // - Third choice: Gemini 1.5 Flash (latest or standard)
+  const flash15 = availableModels.find(m => /gemini-1\.5-flash/i.test(m));
+  if (flash15) return flash15;
+
+  // - Fourth choice: Any flash model
+  const anyFlash = availableModels.find(m => /flash/i.test(m));
+  if (anyFlash) return anyFlash;
+
+  // - Fallback: First available model
+  return availableModels[0] || 'gemini-2.0-flash';
+}
+
+/**
+ * Verify model execution with lightweight request
+ */
+async function verifyModelExecution(apiKey, modelName) {
+  const cleanModel = modelName.replace(/^models\//, '');
+  const payload = JSON.stringify({
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: 'Test connection. Reply with only: OK' }]
+      }
+    ],
+    generationConfig: { maxOutputTokens: 10 }
+  });
+
+  // Try v1beta then v1
+  const endpoints = ['v1beta', 'v1'];
+  let lastErr = null;
+
+  for (const v of endpoints) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/${v}/models/${encodeURIComponent(cleanModel)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const response = await postHttps(url, payload);
+      if (response && response.candidates && response.candidates.length > 0) {
+        return { success: true, model: cleanModel, version: v };
+      }
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+
+  throw new Error(`โมเดล ${cleanModel} ขัดข้อง: ${lastErr ? lastErr.message : 'Execution failed'}`);
 }
 
 /**
@@ -146,7 +251,10 @@ async function gatherStoreGroundingContext(query) {
 
     // 1. Search Stock in Ayutthaya City Park
     const stockUrl = `${supabaseUrl}/rest/v1/stock_snapshot_items?description=ilike.*${encodeURIComponent(searchToken)}*&select=inventory_pn,description,f1,f2,erp_rrp,category,color&limit=12`;
-    const stockData = await fetchJsonFromSupabase(stockUrl, supabaseKey);
+    const stockData = await httpGetJson(stockUrl, {
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`
+    });
     if (Array.isArray(stockData)) {
       result.stock = stockData.map(item => ({
         pn: item.inventory_pn,
@@ -161,14 +269,20 @@ async function gatherStoreGroundingContext(query) {
 
     // 2. Search Active Promotions
     const promoUrl = `${supabaseUrl}/rest/v1/promotion_offers?or=(model_name.ilike.*${encodeURIComponent(searchToken)}*,campaign_name.ilike.*${encodeURIComponent(searchToken)}*)&select=model_name,campaign_name,benefit_summary,final_price,conditions&limit=8`;
-    const promoData = await fetchJsonFromSupabase(promoUrl, supabaseKey);
+    const promoData = await httpGetJson(promoUrl, {
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`
+    });
     if (Array.isArray(promoData)) {
       result.promos = promoData;
     }
 
     // 3. Search Product Specs
     const specUrl = `${supabaseUrl}/rest/v1/product_specs?or=(official_name.ilike.*${encodeURIComponent(searchToken)}*,model_group.ilike.*${encodeURIComponent(searchToken)}*)&select=official_name,model_group,specs&limit=3`;
-    const specData = await fetchJsonFromSupabase(specUrl, supabaseKey);
+    const specData = await httpGetJson(specUrl, {
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`
+    });
     if (Array.isArray(specData)) {
       result.specs = specData;
     }
@@ -185,7 +299,8 @@ async function gatherStoreGroundingContext(query) {
  * Call Gemini REST API with Grounded Store Data
  */
 async function callGeminiAPI({ apiKey, model, query, history, image, storeContext }) {
-  // Format Store Context for System Instruction
+  const cleanModel = model.replace(/^models\//, '');
+
   let contextText = `\n--- [ข้อมูลภายในสาขา อยุธยา ซิตี้ พาร์ค (ณ เวลาปัจจุบัน)] ---\n`;
 
   if (storeContext.stock.length > 0) {
@@ -227,7 +342,7 @@ ${contextText}`;
   // Build payload contents
   const contents = [];
 
-  // Add recent history (up to last 10 messages for context)
+  // Add recent history
   const recentHistory = history.slice(-10);
   for (const m of recentHistory) {
     if (m.text) {
@@ -265,22 +380,23 @@ ${contextText}`;
     }
   });
 
-  const modelsToTry = [model, 'gemini-2.0-flash', 'gemini-1.5-flash'];
+  const apiVersions = ['v1beta', 'v1'];
   let lastError = null;
 
-  for (const m of modelsToTry) {
+  for (const v of apiVersions) {
     try {
-      const response = await postGemini(apiKey, m, payload);
+      const url = `https://generativelanguage.googleapis.com/${v}/models/${encodeURIComponent(cleanModel)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const response = await postHttps(url, payload);
       if (response && response.candidates && response.candidates[0]?.content?.parts) {
         const textParts = response.candidates[0].content.parts.map(p => p.text).join('\n');
         return {
           text: textParts,
-          model: m
+          model: cleanModel
         };
       }
     } catch (e) {
       lastError = e;
-      console.warn(`[gemini-assistant] Model ${m} failed, trying next:`, e.message);
+      console.warn(`[gemini-assistant] Call with ${v}/${cleanModel} failed:`, e.message);
     }
   }
 
@@ -288,23 +404,21 @@ ${contextText}`;
 }
 
 /**
- * HTTPS helper to call Google Gemini REST API
+ * HTTPS GET JSON helper
  */
-function postGemini(apiKey, modelName, bodyStr) {
+function httpGetJson(urlStr, headers = {}) {
   return new Promise((resolve, reject) => {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modelName)}:generateContent?key=${encodeURIComponent(apiKey)}`;
-    const parsed = new URL(url);
-
+    const parsed = new URL(urlStr);
     const req = https.request({
       hostname: parsed.hostname,
       port: 443,
       path: parsed.pathname + parsed.search,
-      method: 'POST',
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(bodyStr)
+        'Accept': 'application/json',
+        ...headers
       },
-      timeout: 25000
+      timeout: 15000
     }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
@@ -313,7 +427,55 @@ function postGemini(apiKey, modelName, bodyStr) {
           try {
             resolve(JSON.parse(data));
           } catch (e) {
-            reject(new Error(`Invalid JSON response from Gemini: ${data.substring(0, 200)}`));
+            resolve(null);
+          }
+        } else {
+          try {
+            const errJson = JSON.parse(data);
+            const msg = errJson?.error?.message || `HTTP ${res.statusCode}`;
+            reject(new Error(msg));
+          } catch (e) {
+            reject(new Error(`HTTP ${res.statusCode}: ${data.substring(0, 200)}`));
+          }
+        }
+      });
+    });
+
+    req.on('error', err => reject(err));
+    req.on('timeout', () => {
+      req.destroy();
+      reject(new Error('Request timed out'));
+    });
+    req.end();
+  });
+}
+
+/**
+ * HTTPS POST JSON helper
+ */
+function postHttps(urlStr, bodyStr, headers = {}) {
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(urlStr);
+    const req = https.request({
+      hostname: parsed.hostname,
+      port: 443,
+      path: parsed.pathname + parsed.search,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(bodyStr),
+        ...headers
+      },
+      timeout: 28000
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error(`Invalid JSON response: ${data.substring(0, 200)}`));
           }
         } else {
           try {
@@ -327,56 +489,13 @@ function postGemini(apiKey, modelName, bodyStr) {
       });
     });
 
-    req.on('error', (err) => reject(err));
+    req.on('error', err => reject(err));
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('Gemini API request timed out (25s)'));
+      reject(new Error('Request timed out (28s)'));
     });
 
     req.write(bodyStr);
-    req.end();
-  });
-}
-
-/**
- * Helper to query Supabase REST endpoints
- */
-function fetchJsonFromSupabase(url, key) {
-  return new Promise((resolve) => {
-    const parsed = new URL(url);
-    const req = https.request({
-      hostname: parsed.hostname,
-      port: 443,
-      path: parsed.pathname + parsed.search,
-      method: 'GET',
-      headers: {
-        'apikey': key,
-        'Authorization': `Bearer ${key}`,
-        'Accept': 'application/json'
-      },
-      timeout: 3000
-    }, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          try {
-            resolve(JSON.parse(data));
-          } catch (e) {
-            resolve([]);
-          }
-        } else {
-          resolve([]);
-        }
-      });
-    });
-
-    req.on('error', () => resolve([]));
-    req.on('timeout', () => {
-      req.destroy();
-      resolve([]);
-    });
-
     req.end();
   });
 }

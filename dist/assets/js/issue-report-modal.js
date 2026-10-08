@@ -670,6 +670,7 @@
           body: JSON.stringify({
             query: query,
             apiKey: apiKey,
+            model: localStorage.getItem('samsung_gemini_model') || 'auto',
             messages: this.messages.slice(-10),
             image: imageToSend
           })
@@ -685,6 +686,10 @@
             role: 'model',
             text: replyText
           });
+          if (data.model) {
+            const modelBadge = document.getElementById('gemini-model-badge');
+            if (modelBadge) modelBadge.textContent = `Google ${data.model}`;
+          }
           this.saveActiveMessages();
           this.updateCounter();
         } else {

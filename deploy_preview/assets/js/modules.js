@@ -397,7 +397,21 @@ function renderSettingsView() {
               🔌 ทดสอบเชื่อมต่อ
             </button>
           </div>
-          <div id="geminiTestResult" style="margin-top: 10px; font-size: 0.85rem; display: none;"></div>
+
+          <div style="margin-top: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <label style="font-size: 0.84rem; color: #cbd5e1; font-weight: 500;">
+              ⚡ โมเดลที่เลือกใช้งาน:
+            </label>
+            <select id="geminiModelSelect" onchange="localStorage.setItem('samsung_gemini_model', this.value)" style="background: #0f172a; border: 1px solid #334155; border-radius: 6px; padding: 8px 12px; color: #38bdf8; font-size: 0.85rem; font-weight: 600; outline: none;">
+              <option value="auto" ${(!localStorage.getItem('samsung_gemini_model') || localStorage.getItem('samsung_gemini_model') === 'auto') ? 'selected' : ''}>🤖 Auto (ค้นหาและเลือก Flash/Lite ที่ดีที่สุดให้อัตโนมัติ)</option>
+              <option value="gemini-2.0-flash-lite" ${localStorage.getItem('samsung_gemini_model') === 'gemini-2.0-flash-lite' ? 'selected' : ''}>⚡ Gemini 2.0 Flash Lite (แนะนำ - ไวและประหยัดที่สุด)</option>
+              <option value="gemini-2.0-flash" ${localStorage.getItem('samsung_gemini_model') === 'gemini-2.0-flash' ? 'selected' : ''}>🚀 Gemini 2.0 Flash (มาตรฐาน)</option>
+              <option value="gemini-1.5-flash-latest" ${localStorage.getItem('samsung_gemini_model') === 'gemini-1.5-flash-latest' ? 'selected' : ''}>🌟 Gemini 1.5 Flash Latest</option>
+              <option value="gemini-1.5-flash" ${localStorage.getItem('samsung_gemini_model') === 'gemini-1.5-flash' ? 'selected' : ''}>🔹 Gemini 1.5 Flash</option>
+            </select>
+          </div>
+
+          <div id="geminiTestResult" style="margin-top: 12px; font-size: 0.85rem; display: none;"></div>
           <small style="display: block; color: #64748b; margin-top: 8px; font-size: 0.78rem;">
             * คีย์ API จะถูกเก็บไว้ในเบราว์เซอร์ของสาขาอย่างปลอดภัย และจะส่งต่อไปยังระบบเพื่อยืนยันตัวตนกับ Google AI
           </small>
@@ -553,10 +567,15 @@ window.saveGeminiApiKey = function() {
   }
 
   localStorage.setItem('samsung_gemini_api_key', key);
+  const modelSelect = document.getElementById('geminiModelSelect');
+  if (modelSelect && modelSelect.value) {
+    localStorage.setItem('samsung_gemini_model', modelSelect.value);
+  }
+
   if (resultEl) {
     resultEl.style.display = 'block';
     resultEl.style.color = '#34d399';
-    resultEl.textContent = '💾 บันทึก Google Gemini API Key เรียบร้อยแล้ว!';
+    resultEl.textContent = '💾 บันทึก Google Gemini API Key และค่าโมเดลเรียบร้อยแล้ว!';
   }
   if (badge) {
     badge.textContent = '🔑 ตั้งค่าคีย์แล้ว';
@@ -571,6 +590,7 @@ window.testGeminiApiKey = async function() {
   const resultEl = document.getElementById('geminiTestResult');
   const btn = document.getElementById('btnTestGeminiKey');
   const badge = document.getElementById('geminiConnectionBadge');
+  const modelSelect = document.getElementById('geminiModelSelect');
   if (!input || !resultEl) return;
 
   const key = input.value.trim() || localStorage.getItem('samsung_gemini_api_key') || '';
@@ -581,6 +601,8 @@ window.testGeminiApiKey = async function() {
     return;
   }
 
+  const selectedModel = modelSelect?.value || localStorage.getItem('samsung_gemini_model') || 'auto';
+
   const origText = btn ? btn.innerHTML : '';
   if (btn) {
     btn.disabled = true;
@@ -588,7 +610,7 @@ window.testGeminiApiKey = async function() {
   }
   resultEl.style.display = 'block';
   resultEl.style.color = '#38bdf8';
-  resultEl.textContent = '⏳ กำลังทดสอบเชื่อมต่อไปยัง Google Gemini API...';
+  resultEl.textContent = '⏳ กำลังทดสอบเชื่อมต่อไปยัง Google Gemini API & ค้นหาโมเดลที่รองรับ...';
 
   try {
     const res = await fetch('/api/gemini-assistant', {
@@ -597,15 +619,36 @@ window.testGeminiApiKey = async function() {
         'Content-Type': 'application/json',
         'x-gemini-key': key
       },
-      body: JSON.stringify({ ping: true, apiKey: key })
+      body: JSON.stringify({ ping: true, apiKey: key, model: selectedModel })
     });
 
     const data = await res.json();
     if (res.ok && data.success) {
       resultEl.style.color = '#34d399';
-      resultEl.innerHTML = `✅ <strong>เชื่อมต่อสำเร็จ!</strong> โมเดล <code>${data.model || 'Gemini 2.0'}</code> พร้อมใช้งานสำหรับพนักงานขายหน้าร้าน`;
+      localStorage.setItem('samsung_gemini_api_key', key);
+      localStorage.setItem('samsung_gemini_model', data.model);
+
+      // Populate available models to select if not present
+      if (modelSelect && Array.isArray(data.availableModels)) {
+        const existingValues = Array.from(modelSelect.options).map(o => o.value);
+        data.availableModels.forEach(m => {
+          if (!existingValues.includes(m)) {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.textContent = `⚡ ${m}`;
+            modelSelect.appendChild(opt);
+          }
+        });
+        modelSelect.value = data.model;
+      }
+
+      const modelsSummary = Array.isArray(data.availableModels) && data.availableModels.length > 0
+        ? `<div style="margin-top:6px; font-size:0.8rem; color:#94a3b8;">🔍 โมเดลที่รองรับในคีย์ของคุณ (${data.availableModels.length} รุ่น): <span style="color:#cbd5e1;">${data.availableModels.slice(0, 5).join(', ')}${data.availableModels.length > 5 ? '...' : ''}</span></div>`
+        : '';
+
+      resultEl.innerHTML = `✅ <strong>เชื่อมต่อสำเร็จ!</strong> ใช้งานโมเดล: <code style="color:#38bdf8; font-weight:700;">${data.model}</code> สำหรับพนักงานขายหน้าร้าน${modelsSummary}`;
       if (badge) {
-        badge.textContent = '🟢 พร้อมใช้งาน';
+        badge.textContent = `🟢 พร้อมใช้งาน (${data.model})`;
         badge.style.color = '#34d399';
         badge.style.background = 'rgba(52, 211, 153, 0.1)';
         badge.style.borderColor = 'rgba(52, 211, 153, 0.3)';
