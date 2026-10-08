@@ -122,9 +122,9 @@
                 <!-- Initial Welcome Message -->
                 <div class="assistant-msg-bubble" style="align-self:flex-start; max-width:88%; background:#1e222d; border:1px solid #2a2e39; border-radius:12px 12px 12px 2px; padding:12px 16px; font-size:13.5px; line-height:1.6; color:#e2e8f0;">
                   <div style="font-weight:700; color:#38bdf8; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
-                    <span>🤖</span> ผู้ช่วยประจำสาขา อยุธยา ซิตี้ พาร์ค
+                    <span>🤖</span> AI ผู้ช่วยพนักงานขาย (อยุธยา ซิตี้ พาร์ค)
                   </div>
-                  สวัสดีค่ะ มีอะไรให้ช่วยบริการลูกค้าหน้าร้านไหมคะ? สอบถามสต็อกสินค้าคงเหลือ (ชั้น 1 / ชั้น 2), สิทธิพิเศษและโปรโมชันหน้าร้าน, หรือสเปกทางการได้ทันทีค่ะ
+                  สวัสดีครับทีมงาน! พร้อมช่วยเช็คสต็อกตัวเครื่อง (ชั้น 1 / ชั้น 2), ราคาโปรโมชัน หรือสเปกทางการสำหรับบริการลูกค้าหน้าร้านได้ทันทีครับ
                   <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
                     <button class="quick-chip" onclick="window.StoreAssistantModal.sendQuickQuery('เช็คสต็อก Galaxy S25 Ultra มีสีอะไรบ้าง ชั้น 1 มีของไหม')">📦 เช็คสต็อก S25 Ultra</button>
                     <button class="quick-chip" onclick="window.StoreAssistantModal.sendQuickQuery('โปรโมชันและส่วนลด Galaxy S25 Series ปัจจุบันมีอะไรบ้าง')">🏷️ โปรโมชัน S25 Series</button>
@@ -426,9 +426,9 @@
         container.innerHTML = `
           <div class="assistant-msg-bubble" style="align-self:flex-start; max-width:88%; background:#1e222d; border:1px solid #2a2e39; border-radius:12px 12px 12px 2px; padding:12px 16px; font-size:13.5px; line-height:1.6; color:#e2e8f0;">
             <div style="font-weight:700; color:#38bdf8; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
-              <span>🤖</span> ผู้ช่วยประจำสาขา อยุธยา ซิตี้ พาร์ค
+              <span>🤖</span> AI ผู้ช่วยพนักงานขาย (อยุธยา ซิตี้ พาร์ค)
             </div>
-            ✨ หน้าต่างพร้อมรับลูกค้ารายใหม่แล้วค่ะ! สามารถสอบถามสต็อกคงเหลือ, โปรโมชัน, หรือสเปกทางการได้ทันที
+            ✨ หน้าต่างพร้อมรับลูกค้ารายใหม่แล้วครับ! พิมพ์เช็คสต็อกสินค้า, โปรโมชัน หรือสเปกทางการได้ทันที
             <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
               <button class="quick-chip" onclick="window.StoreAssistantModal.sendQuickQuery('เช็คสต็อก Galaxy S25 Ultra มีสีอะไรบ้าง ชั้น 1 มีของไหม')">📦 เช็คสต็อก S25 Ultra</button>
               <button class="quick-chip" onclick="window.StoreAssistantModal.sendQuickQuery('โปรโมชันและส่วนลด Galaxy S25 Series ปัจจุบันมีอะไรบ้าง')">🏷️ โปรโมชัน S25 Series</button>
