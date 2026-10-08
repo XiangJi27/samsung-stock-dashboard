@@ -29,11 +29,34 @@
     // Helper to get active admin access token
     async getAccessToken() {
       try {
+        // 1. Check AuthService session
+        if (window.AuthService) {
+          if (typeof window.AuthService.getSession === 'function') {
+            const s = window.AuthService.getSession();
+            if (s?.access_token) return s.access_token;
+            if (s?.session?.access_token) return s.session.access_token;
+          }
+          if (window.AuthService.currentUser) {
+            const t = window.AuthService.currentUser.token || window.AuthService.currentUser.access_token;
+            if (t) return t;
+          }
+        }
+        // 2. Check SupabaseAdapter client
         const client = window.SupabaseAdapter?.getClient();
         if (client) {
           const { data } = await client.auth.getSession();
           if (data?.session?.access_token) {
             return data.session.access_token;
+          }
+        }
+        // 3. Check localStorage for Supabase token directly
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && (key.startsWith('sb-') && key.endsWith('-auth-token'))) {
+            try {
+              const val = JSON.parse(localStorage.getItem(key));
+              if (val?.access_token) return val.access_token;
+            } catch (e) {}
           }
         }
       } catch (e) {
@@ -42,28 +65,39 @@
       return null;
     }
 
+    // Safe fetch helper that protects against HTML error responses
+    async safeFetchJson(url, options = {}) {
+      const res = await fetch(url, options);
+      const text = await res.text();
+      let data = null;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        throw new Error(`เซิร์ฟเวอร์ส่งการตอบกลับที่ไม่ถูกต้อง (HTTP ${res.status}): ${text.substring(0, 100)}`);
+      }
+      if (!res.ok) {
+        throw new Error(data?.message || `เกิดข้อผิดพลาดในการดำเนินการ (HTTP ${res.status})`);
+      }
+      return data;
+    }
+
     // ------------------------------------------------------------------------
     // API CLIENT METHODS
     // ------------------------------------------------------------------------
 
     async listMembers() {
       const token = await this.getAccessToken();
-      const res = await fetch('/api/admin/members', {
+      const data = await this.safeFetchJson('/api/admin/members', {
         headers: {
           'Authorization': `Bearer ${token || ''}`
         }
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || 'ไม่สามารถดึงรายชื่อสมาชิกได้');
-      }
       return data.members || [];
     }
 
     async createMember(payload) {
       const token = await this.getAccessToken();
-      const res = await fetch('/api/admin/members', {
+      return await this.safeFetchJson('/api/admin/members', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,17 +105,11 @@
         },
         body: JSON.stringify(payload)
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || 'ไม่สามารถสร้างบัญชีพนักงานได้');
-      }
-      return data;
     }
 
     async updateDisplayName(memberId, displayName) {
       const token = await this.getAccessToken();
-      const res = await fetch(`/api/admin/members/${encodeURIComponent(memberId)}`, {
+      return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -89,17 +117,11 @@
         },
         body: JSON.stringify({ displayName })
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || 'ไม่สามารถแก้ไขชื่อได้');
-      }
-      return data;
     }
 
     async resetPassword(memberId, temporaryPassword, confirmation) {
       const token = await this.getAccessToken();
-      const res = await fetch(`/api/admin/members/${encodeURIComponent(memberId)}/reset-password`, {
+      return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,17 +129,11 @@
         },
         body: JSON.stringify({ temporaryPassword, confirmation })
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || 'ไม่สามารถรีเซ็ตรหัสผ่านได้');
-      }
-      return data;
     }
 
     async suspendMember(memberId, reason) {
       const token = await this.getAccessToken();
-      const res = await fetch(`/api/admin/members/${encodeURIComponent(memberId)}/suspend`, {
+      return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}/suspend`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,17 +141,11 @@
         },
         body: JSON.stringify({ reason })
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || 'ไม่สามารถระงับบัญชีได้');
-      }
-      return data;
     }
 
     async reactivateMember(memberId) {
       const token = await this.getAccessToken();
-      const res = await fetch(`/api/admin/members/${encodeURIComponent(memberId)}/reactivate`, {
+      return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}/reactivate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,12 +153,6 @@
         },
         body: JSON.stringify({})
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.message || 'ไม่สามารถเปิดใช้งานบัญชีได้');
-      }
-      return data;
     }
 
     // ------------------------------------------------------------------------
