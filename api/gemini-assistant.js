@@ -232,6 +232,8 @@ async function verifyModelExecution(apiKey, modelName) {
  */
 async function gatherStoreGroundingContext(query) {
   const result = {
+    devices: [],
+    accessories: [],
     stock: [],
     promos: [],
     specs: [],
@@ -242,33 +244,70 @@ async function gatherStoreGroundingContext(query) {
     const supabaseUrl = (process.env.SUPABASE_URL || SUPABASE_DEFAULT_URL).replace(/\/+$/, '');
     const supabaseKey = (process.env.SUPABASE_SECRET_KEY || SUPABASE_DEFAULT_KEY).trim();
 
-    // Extract keywords from query (e.g. S25, S24, Fold, Flip, A55, A35, A16, Tab, etc.)
+    // Extract keywords from query
     const cleaned = query.replace(/[^\w\sก-๙]/g, ' ');
-    const tokens = cleaned.split(/\s+/).filter(t => t.length >= 2);
-    
-    // Pick the most relevant keyword or default model
-    const searchToken = tokens.find(t => /^(s\d+|a\d+|z\s*fold|z\s*flip|tab|watch|buds|galaxy)/i.test(t)) || tokens[0] || 'S25';
+    const rawTokens = cleaned.split(/\s+/).filter(t => t.length >= 2);
 
-    // 1. Search Stock in Ayutthaya City Park
-    const stockUrl = `${supabaseUrl}/rest/v1/stock_snapshot_items?description=ilike.*${encodeURIComponent(searchToken)}*&select=inventory_pn,description,f1,f2,erp_rrp,category,color&limit=12`;
+    // Identify primary model (e.g. S25, S24, A55, A35, A16, Fold6, Flip6, Tab, Watch, etc.)
+    const modelToken = rawTokens.find(t => /^(s\d+|a\d+|z\s*fold\d*|z\s*flip\d*|tab|watch|buds|galaxy)/i.test(t)) || rawTokens[0] || 'S25';
+    // Identify sub-model modifier (e.g. Ultra, Plus, FE, 5G, LTE, Pro)
+    const subToken = rawTokens.find(t => /^(ultra|plus|\+|fe|5g|lte|pro)/i.test(t) && t.toLowerCase() !== modelToken.toLowerCase());
+
+    // 1. Search Stock in Ayutthaya City Park (Up to 50 items with smart filtering)
+    let stockEndpoint = '';
+    if (modelToken && subToken) {
+      stockEndpoint = `stock_snapshot_items?and=(description.ilike.*${encodeURIComponent(modelToken)}*,description.ilike.*${encodeURIComponent(subToken)}*)&select=inventory_pn,description,f1,f2,erp_rrp,category,color&limit=50`;
+    } else {
+      stockEndpoint = `stock_snapshot_items?description=ilike.*${encodeURIComponent(modelToken)}*&select=inventory_pn,description,f1,f2,erp_rrp,category,color&limit=50`;
+    }
+
+    const stockUrl = `${supabaseUrl}/rest/v1/${stockEndpoint}`;
     const stockData = await httpGetJson(stockUrl, {
       'apikey': supabaseKey,
       'Authorization': `Bearer ${supabaseKey}`
     });
+
     if (Array.isArray(stockData)) {
-      result.stock = stockData.map(item => ({
-        pn: item.inventory_pn,
-        name: item.description,
-        f1: Number(item.f1 || 0),
-        f2: Number(item.f2 || 0),
-        total: Number(item.f1 || 0) + Number(item.f2 || 0),
-        price: item.erp_rrp ? Number(item.erp_rrp).toLocaleString() + ' บาท' : 'ไม่มีระบุ',
-        color: item.color || '-'
-      }));
+      // Deduplicate by inventory_pn
+      const seenPn = new Map();
+      for (const item of stockData) {
+        const pn = item.inventory_pn;
+        if (!pn) continue;
+        if (!seenPn.has(pn)) {
+          seenPn.set(pn, {
+            pn,
+            name: item.description,
+            f1: Number(item.f1 || 0),
+            f2: Number(item.f2 || 0),
+            total: Number(item.f1 || 0) + Number(item.f2 || 0),
+            price: item.erp_rrp ? Number(item.erp_rrp).toLocaleString() + ' บาท' : 'ไม่มีระบุ',
+            category: item.category || '',
+            color: item.color || '-'
+          });
+        }
+      }
+
+      const allItems = Array.from(seenPn.values());
+
+      // Separate into Devices (Smartphones/Tablets) vs Accessories
+      const isDevice = (desc) => {
+        if (/^\[CS\]/i.test(desc)) return false;
+        if (/tempered|glass|film|flipsuit|bag|case|cover|adapter/i.test(desc)) return false;
+        return true;
+      };
+
+      const devices = allItems.filter(item => isDevice(item.name));
+      const accessories = allItems.filter(item => !isDevice(item.name));
+
+      result.devices = devices;
+      result.accessories = accessories;
+      // Prioritize devices first!
+      result.stock = [...devices, ...accessories];
     }
 
     // 2. Search Active Promotions
-    const promoUrl = `${supabaseUrl}/rest/v1/promotion_offers?or=(model_name.ilike.*${encodeURIComponent(searchToken)}*,campaign_name.ilike.*${encodeURIComponent(searchToken)}*)&select=model_name,campaign_name,benefit_summary,final_price,conditions&limit=8`;
+    const promoSearch = modelToken || 'S25';
+    const promoUrl = `${supabaseUrl}/rest/v1/promotion_offers?or=(model_name.ilike.*${encodeURIComponent(promoSearch)}*,campaign_name.ilike.*${encodeURIComponent(promoSearch)}*)&select=model_name,campaign_name,benefit_summary,final_price,conditions&limit=10`;
     const promoData = await httpGetJson(promoUrl, {
       'apikey': supabaseKey,
       'Authorization': `Bearer ${supabaseKey}`
@@ -278,7 +317,7 @@ async function gatherStoreGroundingContext(query) {
     }
 
     // 3. Search Product Specs
-    const specUrl = `${supabaseUrl}/rest/v1/product_specs?or=(official_name.ilike.*${encodeURIComponent(searchToken)}*,model_group.ilike.*${encodeURIComponent(searchToken)}*)&select=official_name,model_group,specs&limit=3`;
+    const specUrl = `${supabaseUrl}/rest/v1/product_specs?or=(official_name.ilike.*${encodeURIComponent(promoSearch)}*,model_group.ilike.*${encodeURIComponent(promoSearch)}*)&select=official_name,model_group,specs&limit=3`;
     const specData = await httpGetJson(specUrl, {
       'apikey': supabaseKey,
       'Authorization': `Bearer ${supabaseKey}`
@@ -303,13 +342,20 @@ async function callGeminiAPI({ apiKey, model, query, history, image, storeContex
 
   let contextText = `\n--- [ข้อมูลภายในสาขา อยุธยา ซิตี้ พาร์ค (ณ เวลาปัจจุบัน)] ---\n`;
 
-  if (storeContext.stock.length > 0) {
-    contextText += `\n📦 รายการสต็อกสินค้าคงเหลือในสาขา:\n`;
-    storeContext.stock.forEach(s => {
-      contextText += `- รุ่น: ${s.name} (P/N: ${s.pn}) | สี: ${s.color} | ราคาตั้ง: ${s.price} | 📍 ชั้น 1 (หน้าร้าน): ${s.f1} เครื่อง | 📍 ชั้น 2 (สต็อกบน): ${s.f2} เครื่อง (รวม: ${s.total} เครื่อง)\n`;
+  if (storeContext.devices && storeContext.devices.length > 0) {
+    contextText += `\n📱 [รายการสมาร์ทโฟน / อุปกรณ์หลักในสต็อกสาขา]:\n`;
+    storeContext.devices.forEach(s => {
+      contextText += `- รุ่น: ${s.name} (P/N: ${s.pn}) | สี: ${s.color} | ราคาตั้ง SRP: ${s.price} | 📍 ชั้น 1 (หน้าร้าน): ${s.f1} เครื่อง | 📍 ชั้น 2 (สต็อกบน): ${s.f2} เครื่อง (รวม: ${s.total} เครื่อง)\n`;
     });
   } else {
-    contextText += `\n📦 รายการสต็อก: ไม่พบข้อมูลสินค้ารุ่นนี้ในระบบสต็อกปัจจุบันของสาขา\n`;
+    contextText += `\n📱 [รายการสมาร์ทโฟนตัวเครื่อง]: ไม่พบสมาร์ทโฟนรุ่นนี้ในสต็อกปัจจุบัน\n`;
+  }
+
+  if (storeContext.accessories && storeContext.accessories.length > 0) {
+    contextText += `\n🛡️ [รายการอุปกรณ์เสริมและฟิล์มกระจกกันรอยตรงรุ่นในสต็อกสาขา]:\n`;
+    storeContext.accessories.forEach(s => {
+      contextText += `- อุปกรณ์เสริม: ${s.name} (P/N: ${s.pn}) | ราคา: ${s.price} | 📍 ชั้น 1: ${s.f1} ชิ้น | 📍 ชั้น 2: ${s.f2} ชิ้น (รวม: ${s.total} ชิ้น)\n`;
+    });
   }
 
   if (storeContext.promos.length > 0) {
@@ -331,10 +377,13 @@ async function callGeminiAPI({ apiKey, model, query, history, image, storeContex
 กฎและข้อปฏิบัติที่ต้องทำตามอย่างเคร่งครัด:
 1. ตอบเป็นภาษาไทยที่สุภาพ เป็นมิตร กระชับ ชัดเจน พร้อมใช้ตอบลูกค้าหน้าร้านได้ทันที
 2. ยึดข้อมูลตามส่วน [ข้อมูลภายในสาขา อยุธยา ซิตี้ พาร์ค] ด้านล่างเป็นหลักก่อนเสมอ
-3. หากลูกค้าถามสต็อก ให้ระบุยอดแยกเป็น "ชั้น 1 (หน้าร้าน)" และ "ชั้น 2 (สต็อกบน)" ทุกครั้ง เพื่อให้พนักงานรู้จุดหยิบของทันที
+3. ลำดับการตอบคำถามเรื่องสต็อกสินค้า:
+   - ให้ตรวจสอบส่วน "📱 [รายการสมาร์ทโฟน / อุปกรณ์หลักในสต็อกสาขา]" ก่อนเสมอ
+   - หากมีตัวเครื่องในสต็อก ให้แจ้งจำนวนสต็อกตัวเครื่อง (แจกแจงแยกสี, ความจุ, ราคา SRP, และยอด ชั้น 1 (หน้าร้าน) / ชั้น 2 (สต็อกบน)) ให้ครบถ้วนเป็นประเด็นหลัก
+   - จากนั้นสามารถแนะนำฟิล์มกระจกหรือเคสกันรอยตรงรุ่นจากส่วน "🛡️ [รายการอุปกรณ์เสริม]" ควบคู่ไปด้วยเพื่อเสนอขายเพิ่มเติม
+   - หากตัวเครื่องไม่มีสต็อกจริงๆ ค่อยแจ้งว่าตัวเครื่องหมด และแนะนำอุปกรณ์เสริมแทน
 4. หากลูกค้าถามโปรโมชัน หรือการผ่อนชำระ ให้แจกแจงส่วนลด ของแถม หรือการผ่อน Samsung Finance+ ให้เข้าใจง่าย
-5. หากสินค้าไม่มีในสต็อกของสาขา ให้ตอบตรงๆ ว่า "ขณะนี้สาขาไม่มีสินค้าในสต็อก" ห้ามแต่งหรือเดาตัวเลขสต็อกเด็ดขาด
-6. ทุกคำตอบต้องจบด้วยการใส่ข้อมูลอ้างอิงชัดเจน ในรูปแบบ:
+5. ทุกคำตอบต้องจบด้วยการใส่ข้อมูลอ้างอิงชัดเจน ในรูปแบบ:
 📌 ข้อมูลอ้างอิง: สต็อกสาขา อยุธยา ซิตี้ พาร์ค, แคมเปญโปรโมชันหน้าร้าน, ข้อมูลสเปกทางการ Samsung Thailand
 
 ${contextText}`;
