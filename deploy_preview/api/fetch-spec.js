@@ -5,7 +5,7 @@
 const https = require('https');
 
 const SUPABASE_DEFAULT_URL = process.env.SUPABASE_URL || 'https://anhxzffcmrihymrptsgd.supabase.co';
-const SUPABASE_DEFAULT_SECRET = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const SUPABASE_DEFAULT_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_9eXmP6Cgb14AWbk8CrBv3A_l0Clj00v';
 
 module.exports = async (req, res) => {
   // CORS Headers
@@ -87,7 +87,7 @@ module.exports = async (req, res) => {
 function querySupabaseSpec(partNumber) {
   return new Promise((resolve) => {
     const supabaseUrl = (process.env.SUPABASE_URL || SUPABASE_DEFAULT_URL).replace(/\/+$/, '');
-    const supabaseKey = process.env.SUPABASE_SECRET_KEY || SUPABASE_DEFAULT_SECRET;
+    const supabaseKey = process.env.SUPABASE_SECRET_KEY || SUPABASE_DEFAULT_KEY;
 
     const url = `${supabaseUrl}/rest/v1/product_specs?part_number=eq.${encodeURIComponent(partNumber)}&select=*`;
     const parsed = new URL(url);
@@ -149,7 +149,7 @@ function querySupabaseSpec(partNumber) {
 function upsertToSupabase(spec, pn, model) {
   return new Promise((resolve) => {
     const supabaseUrl = (process.env.SUPABASE_URL || SUPABASE_DEFAULT_URL).replace(/\/+$/, '');
-    const supabaseKey = process.env.SUPABASE_SECRET_KEY || SUPABASE_DEFAULT_SECRET;
+    const supabaseKey = process.env.SUPABASE_SECRET_KEY || SUPABASE_DEFAULT_KEY;
 
     const partNum = (pn || ('MODEL_' + (spec.modelGroup || model || 'GENERIC').toUpperCase().replace(/[^A-Z0-9]/g, '_'))).trim().toUpperCase();
 
@@ -595,7 +595,7 @@ function generateSamsungSpec(modelName, pn, category) {
   }
 
   // 6. Galaxy A Series
-  if (u.includes('A55') || u.includes('A56') || u.includes('A35') || u.includes('A36') || u.includes('A25') || u.includes('A15') || u.includes('A16') || u.includes('A05') || u.includes('A06')) {
+  if (u.includes('A55') || u.includes('A56') || u.includes('A35') || u.includes('A36') || u.includes('A25') || u.includes('A15') || u.includes('A16') || u.includes('A08') || u.includes('A07') || u.includes('A06') || u.includes('A05')) {
     let aNum = 'A55';
     if (u.includes('A56')) aNum = 'A56';
     else if (u.includes('A36')) aNum = 'A36';
@@ -603,13 +603,15 @@ function generateSamsungSpec(modelName, pn, category) {
     else if (u.includes('A25')) aNum = 'A25';
     else if (u.includes('A16')) aNum = 'A16';
     else if (u.includes('A15')) aNum = 'A15';
+    else if (u.includes('A08')) aNum = 'A08';
+    else if (u.includes('A07')) aNum = 'A07';
     else if (u.includes('A06')) aNum = 'A06';
     else if (u.includes('A05')) aNum = 'A05';
 
-    const is5G = !u.includes('LTE') && (aNum !== 'A05' && aNum !== 'A06');
+    const is5G = !u.includes('LTE') && (aNum !== 'A05' && aNum !== 'A06' && aNum !== 'A07' && aNum !== 'A08');
     return {
       modelGroup: `Galaxy ${aNum} ${is5G ? '5G' : '4G LTE'}`,
-      officialName: `Samsung Galaxy ${aNum} ${is5G ? '5G' : ''} (${pn || 'เครื่องศูนย์ไทย'})`,
+      officialName: `Samsung Galaxy ${aNum} ${is5G ? '5G' : '4G LTE'} (${pn || 'เครื่องศูนย์ไทย'})`,
       source: 'Samsung Thailand Official (samsung.com/th)',
       sourceUrl: `https://www.samsung.com/th/smartphones/galaxy-${aNum.toLowerCase()}/`,
       category: 'SmartPhone',
