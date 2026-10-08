@@ -348,6 +348,62 @@ function renderSettingsView() {
         <div id="specScanResultsContainer" style="font-size: 0.86rem; color: #cbd5e1;"></div>
       </div>
 
+      <!-- Google Gemini AI Assistant Settings Card -->
+      <div class="action-center-card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <h4 class="card-heading" style="margin: 0; display: flex; align-items: center; gap: 8px;">
+            <span>🤖</span> การเชื่อมต่อ Google Gemini AI (ผู้ช่วยอัจฉริยะหน้าร้าน)
+          </h4>
+          <span id="geminiConnectionBadge" style="font-size: 0.76rem; color: #a78bfa; background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.3); padding: 4px 10px; border-radius: 12px;">
+            ${localStorage.getItem('samsung_gemini_api_key') ? '🔑 ตั้งค่าคีย์แล้ว' : '⚪ ยังไม่ได้ตั้งค่า'}
+          </span>
+        </div>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0 0 16px 0; line-height: 1.5;">
+          ระบบผู้ช่วย AI สำหรับพนักงานขายหน้าร้าน (สาขา อยุธยา ซิตี้ พาร์ค) ใช้ Google Gemini 2.0 Flash / Flash-Lite ตอบคำถามลูกค้าเรื่องสต็อก โปรโมชัน และสเปกเครื่องอัตโนมัติ โดยอ้างอิงข้อมูลจริงของสาขา
+        </p>
+
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+          <label style="display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 8px; font-weight: 600;">
+            🔑 Google Gemini API Key:
+          </label>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <input 
+              type="password" 
+              id="geminiApiKeyInput" 
+              value="${localStorage.getItem('samsung_gemini_api_key') || ''}" 
+              placeholder="AIzaSy..." 
+              style="flex: 1; min-width: 240px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; padding: 10px 14px; color: #fff; font-size: 0.9rem; font-family: monospace; outline: none;"
+            />
+            <button 
+              type="button" 
+              id="btnToggleGeminiKeyVisibility" 
+              onclick="window.toggleGeminiKeyVisibility()" 
+              style="background: #1e293b; border: 1px solid #334155; color: #94a3b8; border-radius: 6px; padding: 10px 14px; cursor: pointer;"
+              title="แสดง/ซ่อนคีย์">
+              👁️
+            </button>
+            <button 
+              type="button" 
+              id="btnSaveGeminiKey" 
+              onclick="window.saveGeminiApiKey()" 
+              style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; border: none; border-radius: 6px; padding: 10px 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              💾 บันทึกคีย์
+            </button>
+            <button 
+              type="button" 
+              id="btnTestGeminiKey" 
+              onclick="window.testGeminiApiKey()" 
+              style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 6px; padding: 10px 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              🔌 ทดสอบเชื่อมต่อ
+            </button>
+          </div>
+          <div id="geminiTestResult" style="margin-top: 10px; font-size: 0.85rem; display: none;"></div>
+          <small style="display: block; color: #64748b; margin-top: 8px; font-size: 0.78rem;">
+            * คีย์ API จะถูกเก็บไว้ในเบราว์เซอร์ของสาขาอย่างปลอดภัย และจะส่งต่อไปยังระบบเพื่อยืนยันตัวตนกับ Google AI
+          </small>
+        </div>
+      </div>
+
       <div class="action-center-card">
         <h4 class="card-heading">🚩 คุณสมบัติและฟีเจอร์ระบบ (Feature Flags)</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.82rem;">
@@ -458,4 +514,114 @@ window.runSpecsBatchUpdate = async function() {
 
 window.renderPromotionsView = renderPromotionsView;
 window.renderSettingsView = renderSettingsView;
+
+// Google Gemini API Key Management
+window.toggleGeminiKeyVisibility = function() {
+  const input = document.getElementById('geminiApiKeyInput');
+  const btn = document.getElementById('btnToggleGeminiKeyVisibility');
+  if (!input) return;
+  if (input.type === 'password') {
+    input.type = 'text';
+    if (btn) btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    if (btn) btn.textContent = '👁️';
+  }
+};
+
+window.saveGeminiApiKey = function() {
+  const input = document.getElementById('geminiApiKeyInput');
+  const resultEl = document.getElementById('geminiTestResult');
+  const badge = document.getElementById('geminiConnectionBadge');
+  if (!input) return;
+
+  const key = input.value.trim();
+  if (!key) {
+    localStorage.removeItem('samsung_gemini_api_key');
+    if (resultEl) {
+      resultEl.style.display = 'block';
+      resultEl.style.color = '#fbbf24';
+      resultEl.textContent = '⚠️ ลบคีย์ออกจากระบบแล้ว (จำเป็นต้องระบุคีย์หากต้องการใช้งาน AI)';
+    }
+    if (badge) {
+      badge.textContent = '⚪ ยังไม่ได้ตั้งค่า';
+      badge.style.color = '#94a3b8';
+      badge.style.background = 'rgba(148, 163, 184, 0.1)';
+      badge.style.borderColor = 'rgba(148, 163, 184, 0.3)';
+    }
+    return;
+  }
+
+  localStorage.setItem('samsung_gemini_api_key', key);
+  if (resultEl) {
+    resultEl.style.display = 'block';
+    resultEl.style.color = '#34d399';
+    resultEl.textContent = '💾 บันทึก Google Gemini API Key เรียบร้อยแล้ว!';
+  }
+  if (badge) {
+    badge.textContent = '🔑 ตั้งค่าคีย์แล้ว';
+    badge.style.color = '#a78bfa';
+    badge.style.background = 'rgba(167, 139, 250, 0.1)';
+    badge.style.borderColor = 'rgba(167, 139, 250, 0.3)';
+  }
+};
+
+window.testGeminiApiKey = async function() {
+  const input = document.getElementById('geminiApiKeyInput');
+  const resultEl = document.getElementById('geminiTestResult');
+  const btn = document.getElementById('btnTestGeminiKey');
+  const badge = document.getElementById('geminiConnectionBadge');
+  if (!input || !resultEl) return;
+
+  const key = input.value.trim() || localStorage.getItem('samsung_gemini_api_key') || '';
+  if (!key) {
+    resultEl.style.display = 'block';
+    resultEl.style.color = '#f43f5e';
+    resultEl.textContent = '❌ กรุณากรอก Google Gemini API Key ก่อนทดสอบ';
+    return;
+  }
+
+  const origText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ กำลังทดสอบ...</span>';
+  }
+  resultEl.style.display = 'block';
+  resultEl.style.color = '#38bdf8';
+  resultEl.textContent = '⏳ กำลังทดสอบเชื่อมต่อไปยัง Google Gemini API...';
+
+  try {
+    const res = await fetch('/api/gemini-assistant', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-gemini-key': key
+      },
+      body: JSON.stringify({ ping: true, apiKey: key })
+    });
+
+    const data = await res.json();
+    if (res.ok && data.success) {
+      resultEl.style.color = '#34d399';
+      resultEl.innerHTML = `✅ <strong>เชื่อมต่อสำเร็จ!</strong> โมเดล <code>${data.model || 'Gemini 2.0'}</code> พร้อมใช้งานสำหรับพนักงานขายหน้าร้าน`;
+      if (badge) {
+        badge.textContent = '🟢 พร้อมใช้งาน';
+        badge.style.color = '#34d399';
+        badge.style.background = 'rgba(52, 211, 153, 0.1)';
+        badge.style.borderColor = 'rgba(52, 211, 153, 0.3)';
+      }
+    } else {
+      resultEl.style.color = '#f43f5e';
+      resultEl.innerHTML = `❌ <strong>การเชื่อมต่อขัดข้อง:</strong> ${data.message || data.error || 'Invalid API Key'}`;
+    }
+  } catch (err) {
+    resultEl.style.color = '#f43f5e';
+    resultEl.innerHTML = `❌ <strong>การเชื่อมต่อล้มเหลว:</strong> ${err.message}`;
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  }
+};
 

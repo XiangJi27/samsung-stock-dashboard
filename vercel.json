@@ -41,6 +41,10 @@
     {
       "source": "/api/sheet-proxy",
       "destination": "/api/sheet-proxy"
+    },
+    {
+      "source": "/api/gemini-assistant",
+      "destination": "/api/gemini-assistant"
     }
   ]
 }
