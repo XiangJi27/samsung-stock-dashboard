@@ -590,6 +590,9 @@
 
       // Convert line breaks and simple markdown
       formatted = this.escapeHtml(formatted);
+      formatted = formatted.replace(/\[(.*?)\]\((.*?)\)/g, (match, label, url) => {
+        return `<a href="${url}" onclick="window.PilotAssistantModal?.hide();" style="color:#38bdf8; text-decoration:underline; font-weight:700;">${label}</a>`;
+      });
       formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
       formatted = formatted.replace(/\n\s*-\s*/g, '<br>• ');
@@ -690,7 +693,7 @@
         } else {
           const errDetail = data.message || data.error || 'ไม่สามารถติดต่อ AI ได้';
           if (data.error === 'NO_API_KEY') {
-            this.appendMessageBubble('model', `⚠️ **ยังไม่ได้ตั้งค่า Google Gemini API Key สำหรับสาขา**\n\nหากท่านเป็นผู้ดูแลระบบ (Admin / Store Leader) สามารถเข้าไปบันทึกคีย์ส่วนกลางได้ที่เมนู <a href="#/settings" onclick="window.PilotAssistantModal?.hide()" style="color:#38bdf8; text-decoration:underline; font-weight:700;">⚙️ ตั้งค่าระบบ (#/settings)</a> เพื่อให้ทุกอุปกรณ์และพนักงานทุกคนสามารถใช้งานร่วมกันได้ทันทีครับ`);
+            this.appendMessageBubble('model', `⚠️ **ยังไม่ได้ตั้งค่า Google Gemini API Key สำหรับสาขา**\n\nหากท่านเป็นผู้ดูแลระบบ (Admin / Store Leader) สามารถเข้าไปบันทึกคีย์ส่วนกลางได้ที่เมนู [⚙️ ตั้งค่าระบบ (#/settings)](#/settings)\n\nเพื่อให้ทุกอุปกรณ์และพนักงานทุกคนสามารถใช้งานร่วมกันได้ทันทีครับ`);
           } else {
             this.appendMessageBubble('model', `❌ เกิดข้อผิดพลาด: ${errDetail}`);
           }
