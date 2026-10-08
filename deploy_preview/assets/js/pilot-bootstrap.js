@@ -473,6 +473,10 @@
           } else if (typeof window.initPrototypeStock === 'function') {
             window.initPrototypeStock();
           }
+        } else if (cleanRoute === '/stock-import') {
+          if (window.StockImportController && typeof window.StockImportController.applyRolePermissions === 'function') {
+            window.StockImportController.applyRolePermissions();
+          }
         }
       }
     }

@@ -786,6 +786,97 @@
       if (url2Input && window.GoogleSheetStockSync) {
         url2Input.value = window.GoogleSheetStockSync.getStoredSheetUrl2();
       }
+
+      this.applyRolePermissions();
+    }
+
+    applyRolePermissions() {
+      const isLeader = window.PermissionService?.isStoreLeader?.() || window.PermissionService?.isSystemAdmin?.();
+      const urlInput = document.getElementById('stockGSheetUrlInput');
+      const url2Input = document.getElementById('stockGSheetUrl2Input');
+      const btnSaveUrl = document.getElementById('btnSaveGSheetUrl');
+      const chkAutoPub = document.getElementById('chkStockGSheetAutoPublish');
+      const btnRefreshGSheet = document.getElementById('btnRefreshStockGSheet');
+      const btnConfirm = document.getElementById('btnConfirmStockImport');
+
+      // Staff permissions: Refresh & Confirm Import are ALWAYS active & enabled
+      if (btnRefreshGSheet) {
+        btnRefreshGSheet.disabled = false;
+        btnRefreshGSheet.title = 'ดึงและรีเฟรชข้อมูลสต็อกจาก Google Sheet ล่าสุด';
+      }
+      if (btnConfirm) {
+        btnConfirm.disabled = false;
+        btnConfirm.title = 'บันทึกและยืนยันการนำเข้าสต็อก Snapshot เข้าระบบ';
+      }
+
+      // Restrict URL configuration to Store Leader / Admin
+      if (!isLeader) {
+        if (urlInput) {
+          urlInput.readOnly = true;
+          urlInput.style.opacity = '0.7';
+          urlInput.style.cursor = 'not-allowed';
+          urlInput.style.background = 'rgba(15, 23, 42, 0.5)';
+          urlInput.title = '🔒 เฉพาะผู้จัดการสาขา / Admin เท่านั้นที่สามารถแก้ไขลิงก์ Google Sheet ได้';
+        }
+        if (url2Input) {
+          url2Input.readOnly = true;
+          url2Input.style.opacity = '0.7';
+          url2Input.style.cursor = 'not-allowed';
+          url2Input.style.background = 'rgba(15, 23, 42, 0.5)';
+          url2Input.title = '🔒 เฉพาะผู้จัดการสาขา / Admin เท่านั้นที่สามารถแก้ไขลิงก์ Google Sheet ได้';
+        }
+        if (btnSaveUrl) {
+          btnSaveUrl.disabled = true;
+          btnSaveUrl.style.opacity = '0.4';
+          btnSaveUrl.style.cursor = 'not-allowed';
+          btnSaveUrl.innerHTML = '<span>🔒 บันทึก URL (เฉพาะผู้จัดการ)</span>';
+          btnSaveUrl.title = 'เฉพาะผู้จัดการร้าน (Store Leader) หรือ Admin เท่านั้นที่มีสิทธิ์แก้ไขและบันทึก URL';
+        }
+        if (chkAutoPub) {
+          chkAutoPub.disabled = true;
+          chkAutoPub.style.cursor = 'not-allowed';
+          chkAutoPub.title = 'เฉพาะผู้จัดการร้าน (Store Leader) หรือ Admin เท่านั้น';
+        }
+
+        // Add badge or notice if not already present
+        let notice = document.getElementById('stockGSheetStaffPermNotice');
+        if (!notice && urlInput && urlInput.parentElement && urlInput.parentElement.parentElement) {
+          notice = document.createElement('div');
+          notice.id = 'stockGSheetStaffPermNotice';
+          notice.style.cssText = 'background: rgba(41, 98, 255, 0.12); border: 1px solid rgba(41, 98, 255, 0.35); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; font-size: 0.82rem; color: #90caf9; display: flex; align-items: center; gap: 8px; line-height: 1.4;';
+          notice.innerHTML = '<span style="font-size: 1.1rem;">ℹ️</span> <div><strong>สิทธิ์พนักงานสาขา:</strong> สามารถกด <strong>🔄 รีเฟรชข้อมูลตอนนี้</strong> และ <strong>✓ ยืนยันการนำเข้า (Confirm Import)</strong> ได้ตามปกติ (การแก้ไขลิงก์ Google Sheet สงวนสิทธิ์เฉพาะผู้จัดการสาขา / Admin)</div>';
+          urlInput.parentElement.parentElement.insertBefore(notice, urlInput.parentElement);
+        }
+      } else {
+        if (urlInput) {
+          urlInput.readOnly = false;
+          urlInput.style.opacity = '1';
+          urlInput.style.cursor = 'text';
+          urlInput.style.background = 'rgba(15, 23, 42, 0.9)';
+          urlInput.title = '';
+        }
+        if (url2Input) {
+          url2Input.readOnly = false;
+          url2Input.style.opacity = '1';
+          url2Input.style.cursor = 'text';
+          url2Input.style.background = 'rgba(15, 23, 42, 0.9)';
+          url2Input.title = '';
+        }
+        if (btnSaveUrl) {
+          btnSaveUrl.disabled = false;
+          btnSaveUrl.style.opacity = '1';
+          btnSaveUrl.style.cursor = 'pointer';
+          btnSaveUrl.innerHTML = '<span>💾 บันทึก URL</span>';
+          btnSaveUrl.title = '';
+        }
+        if (chkAutoPub) {
+          chkAutoPub.disabled = false;
+          chkAutoPub.style.cursor = 'pointer';
+          chkAutoPub.title = '';
+        }
+        const notice = document.getElementById('stockGSheetStaffPermNotice');
+        if (notice) notice.remove();
+      }
     }
 
     switchMode(mode, savePref = true) {
@@ -815,6 +906,7 @@
         if (panelA) panelA.classList.add('hidden');
         if (panelB) panelB.classList.remove('hidden');
         this.updateGSheetSyncBadge();
+        this.applyRolePermissions();
       } else {
         if (btnA) {
           btnA.classList.add('active');
@@ -834,6 +926,12 @@
     }
 
     saveGSheetUrl() {
+      const isLeader = window.PermissionService?.isStoreLeader?.() || window.PermissionService?.isSystemAdmin?.();
+      if (!isLeader) {
+        alert('เฉพาะผู้จัดการร้าน (Store Leader) หรือ Admin เท่านั้นที่มีสิทธิ์แก้ไขและบันทึก URL Google Sheet');
+        return;
+      }
+
       const urlInput = document.getElementById('stockGSheetUrlInput');
       const url2Input = document.getElementById('stockGSheetUrl2Input');
       const statusEl = document.getElementById('stockGSheetStatus');
@@ -896,9 +994,12 @@
         return;
       }
 
-      // Sync the input values with stored URLs
-      window.GoogleSheetStockSync.setStoredSheetUrl(currentUrl);
-      window.GoogleSheetStockSync.setStoredSheetUrl2(currentUrl2);
+      // Sync the input values with stored URLs (managers only)
+      const isLeader = window.PermissionService?.isStoreLeader?.() || window.PermissionService?.isSystemAdmin?.();
+      if (isLeader) {
+        window.GoogleSheetStockSync.setStoredSheetUrl(currentUrl);
+        window.GoogleSheetStockSync.setStoredSheetUrl2(currentUrl2);
+      }
 
       if (refreshBtn) refreshBtn.disabled = true;
       if (statusEl) {
