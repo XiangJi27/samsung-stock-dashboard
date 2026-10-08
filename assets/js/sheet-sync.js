@@ -653,7 +653,13 @@
 
     static setStoredSheetUrl(url) {
       try {
-        localStorage.setItem(STORAGE_KEY_URL, String(url || '').trim());
+        const clean = String(url || '').trim();
+        localStorage.setItem(STORAGE_KEY_URL, clean);
+        fetch('/api/branch-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ stockUrls: { f1: clean } })
+        }).catch(() => {});
         return true;
       } catch (e) {
         return false;
@@ -670,7 +676,13 @@
 
     static setStoredSheetUrl2(url) {
       try {
-        localStorage.setItem(STORAGE_KEY_URL2, String(url || '').trim());
+        const clean = String(url || '').trim();
+        localStorage.setItem(STORAGE_KEY_URL2, clean);
+        fetch('/api/branch-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ stockUrls: { f2: clean } })
+        }).catch(() => {});
         return true;
       } catch (e) {
         return false;

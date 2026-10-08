@@ -84,6 +84,21 @@
         if (typeof tabletWearable === 'string') localStorage.setItem(STORAGE_KEYS.URL_TABLET_WEARABLE, tabletWearable.trim());
         if (typeof accessory === 'string') localStorage.setItem(STORAGE_KEYS.URL_ACCESSORY, accessory.trim());
         if (typeof autoApply === 'boolean') localStorage.setItem(STORAGE_KEYS.AUTO_APPLY, autoApply ? 'true' : 'false');
+
+        // Central branch sync
+        fetch('/api/branch-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            promoUrls: {
+              smartphone: smartphone || '',
+              tabletWearable: tabletWearable || '',
+              accessory: accessory || '',
+              autoApply: Boolean(autoApply)
+            }
+          })
+        }).catch(err => console.warn('[PromoGoogleSheetSync] Background central sync error:', err.message));
+
         return true;
       } catch (e) {
         console.error('[PromoGoogleSheetSync] Error saving config:', e);
@@ -511,6 +526,31 @@
       if (lastSyncBadge && config.lastSynced) {
         lastSyncBadge.textContent = `ซิงค์ล่าสุด: ${config.lastSynced}`;
       }
+
+      // Background central sync from server (ensures other devices/browsers inherit URLs)
+      fetch('/api/branch-config')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.promoUrls) {
+            const p = data.promoUrls;
+            if (urlInputSm && p.smartphone && !urlInputSm.value) {
+              urlInputSm.value = p.smartphone;
+              localStorage.setItem(STORAGE_KEYS.URL_SMARTPHONE, p.smartphone);
+            }
+            if (urlInputTab && p.tabletWearable && !urlInputTab.value) {
+              urlInputTab.value = p.tabletWearable;
+              localStorage.setItem(STORAGE_KEYS.URL_TABLET_WEARABLE, p.tabletWearable);
+            }
+            if (urlInputAcc && p.accessory && !urlInputAcc.value) {
+              urlInputAcc.value = p.accessory;
+              localStorage.setItem(STORAGE_KEYS.URL_ACCESSORY, p.accessory);
+            }
+            if (lastSyncBadge && p.lastSync && !lastSyncBadge.textContent.includes(':')) {
+              lastSyncBadge.textContent = `ซิงค์ล่าสุด: ${p.lastSync}`;
+            }
+          }
+        })
+        .catch(() => {});
 
       // Mode Switchers
       const switchMode = (mode) => {
