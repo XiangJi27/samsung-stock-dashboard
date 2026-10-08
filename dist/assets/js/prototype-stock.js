@@ -2342,6 +2342,11 @@
     window.normalizeColorKey = normalizeColorKey;
 
     function updateCategoryCardCounts() {
+      // Zero-Flicker Guard: Do not display old card counts while fresh Google Sheet sync is in flight
+      if (typeof window !== 'undefined' && window.GoogleSheetStockSync && !window.GoogleSheetStockSync._hasCompletedSync && !window.CONFIRMED_LOCAL_SNAPSHOT) {
+        return;
+      }
+
       const counts = {
         ALL: { pns: new Set(), stock: 0 },
         SmartPhone: { pns: new Set(), stock: 0 },
@@ -2508,6 +2513,11 @@
     }
 
     function renderStockList() {
+      // Zero-Flicker Guard: Do not render old rows while fresh Google Sheet sync is in flight
+      if (typeof window !== 'undefined' && window.GoogleSheetStockSync && !window.GoogleSheetStockSync._hasCompletedSync && !window.CONFIRMED_LOCAL_SNAPSHOT) {
+        return;
+      }
+
       const items = filterItems();
       const visibleEl = document.getElementById("visibleCountDisplay");
       const totalEl = document.getElementById("totalCountDisplay");
