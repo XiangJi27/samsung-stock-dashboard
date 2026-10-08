@@ -329,6 +329,19 @@
           this.isLoaded = true;
           this.isLoading = false;
           console.info("[DataLoaderGate] Branch datasets successfully initialized in memory. Total stock items:", window.STOCK_DATABASE ? window.STOCK_DATABASE.length : 0);
+
+          // Cross-Device Google Sheet Auto-Sync:
+          // Seamlessly fetches latest stock from Google Sheet in background for all devices
+          if (typeof window !== 'undefined' && window.GoogleSheetStockSync && typeof window.GoogleSheetStockSync.performLiveSync === 'function') {
+            setTimeout(async () => {
+              try {
+                await window.GoogleSheetStockSync.performLiveSync({ isBackgroundSync: true });
+              } catch (sheetErr) {
+                console.warn('[DataLoaderGate] Background Google Sheet sync skipped:', sheetErr.message);
+              }
+            }, 300);
+          }
+
           return true;
         } catch (err) {
           this.isLoading = false;
@@ -392,6 +405,27 @@
           badgeEl.style.color = "#38bdf8";
           badgeEl.style.borderColor = "rgba(56, 189, 248, 0.3)";
           badgeEl.textContent = "Storage: CENTRAL_DATABASE";
+        }
+        break;
+
+      case "GOOGLE_SHEET_LIVE_SYNC":
+        banner.style.borderColor = "rgba(16, 185, 129, 0.4)";
+        banner.style.background = "rgba(6, 78, 59, 0.45)";
+        if (iconEl) iconEl.textContent = "🟢";
+        if (tagEl) {
+          tagEl.style.color = "#34d399";
+          tagEl.textContent = "ซิงค์สต็อกสดจาก Google Sheet (LIVE_SYNC)";
+        }
+        if (descEl) {
+          const count = meta.recordCount || meta.uniquePn || 410;
+          const grand = meta.grandTotal || 3178;
+          descEl.textContent = `เชื่อมต่อสต็อกสดจาก Google Sheet (Stock1 + Stock2) สำเร็จ • ${count} รายการ (${grand.toLocaleString()} ชิ้น) • ซิงค์ตรงกันทุกอุปกรณ์`;
+        }
+        if (badgeEl) {
+          badgeEl.style.background = "rgba(16, 185, 129, 0.15)";
+          badgeEl.style.color = "#34d399";
+          badgeEl.style.borderColor = "rgba(16, 185, 129, 0.3)";
+          badgeEl.textContent = "Storage: GOOGLE_SHEET_SYNC";
         }
         break;
 

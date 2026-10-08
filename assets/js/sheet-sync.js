@@ -22,6 +22,10 @@
   const STORAGE_KEY_AUTO_PUBLISH = 'samsung_stock_sheet_auto_publish_opt_in';
   const DEFAULT_TIMEOUT_MS = 10000;
 
+  // Embedded default URLs for Ayutthaya City Park branch
+  const DEFAULT_URL_STOCK1 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdXINDBDeqjdYB_Z0gDeN1tO9mV8XnRrKjop8hMT-rn6uXElUPAbLkxuDKphtub2MRVDdKV5AmUIcd/pub?gid=787572414&single=true&output=csv';
+  const DEFAULT_URL_STOCK2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdXINDBDeqjdYB_Z0gDeN1tO9mV8XnRrKjop8hMT-rn6uXElUPAbLkxuDKphtub2MRVDdKV5AmUIcd/pub?gid=86580790&single=true&output=csv';
+
   class GoogleSheetStockSync {
     /**
      * Parse a single CSV line adhering to RFC-4180 quotes.
@@ -641,9 +645,9 @@
 
     static getStoredSheetUrl() {
       try {
-        return localStorage.getItem(STORAGE_KEY_URL) || (window.APP_CONFIG && window.APP_CONFIG.GOOGLE_SHEET_STOCK_CSV_URL) || '';
+        return localStorage.getItem(STORAGE_KEY_URL) || (window.APP_CONFIG && window.APP_CONFIG.GOOGLE_SHEET_STOCK_CSV_URL) || DEFAULT_URL_STOCK1;
       } catch (e) {
-        return '';
+        return DEFAULT_URL_STOCK1;
       }
     }
 
@@ -658,9 +662,9 @@
 
     static getStoredSheetUrl2() {
       try {
-        return localStorage.getItem(STORAGE_KEY_URL2) || '';
+        return localStorage.getItem(STORAGE_KEY_URL2) || (window.APP_CONFIG && window.APP_CONFIG.GOOGLE_SHEET_STOCK_CSV_URL_S2) || DEFAULT_URL_STOCK2;
       } catch (e) {
-        return '';
+        return DEFAULT_URL_STOCK2;
       }
     }
 
@@ -687,6 +691,107 @@
       } catch (e) {
         // ignore
       }
+    }
+
+    /**
+     * Performs direct live sync from Google Sheet and activates it into the system state.
+     * Used by background auto-sync across all branch devices.
+     */
+    static async performLiveSync(options = {}) {
+      const url1 = options.url1 || this.getStoredSheetUrl();
+      const url2 = options.url2 || this.getStoredSheetUrl2();
+      if (!url1) {
+        throw new Error('Google Sheet URL is not configured');
+      }
+
+      console.info('[GoogleSheetStockSync] Starting background live sync...');
+      const syncResult = await this.fetchGoogleSheetCsv({ url1, url2 });
+      if (!syncResult || !Array.isArray(syncResult.items) || syncResult.items.length === 0) {
+        throw new Error('Google Sheet returned no items');
+      }
+
+      const currentStockList = (typeof window !== 'undefined' && (window.STOCK_DATA || window.STOCK_DATABASE)) || [];
+      const staged = this.createStagedBatchFromSync(syncResult, currentStockList);
+
+      const batchId = staged.batchId;
+      const coreItems = syncResult.items.filter(it => it.includedInCoreDeviceKpi);
+      const coreF1 = coreItems.reduce((acc, it) => acc + (it.f1 || 0), 0);
+      const coreF2 = coreItems.reduce((acc, it) => acc + (it.f2 || 0), 0);
+
+      const batchRecord = {
+        batchId: batchId,
+        data: syncResult.items,
+        meta: {
+          stockBatchId: batchId,
+          importBatchId: batchId,
+          batchId: batchId,
+          importedAt: syncResult.fetchedAt,
+          sourceFilename: staged.sourceFilename,
+          sourceFileHash: staged.fileHash,
+          uniquePn: syncResult.totalRows,
+          f1Total: syncResult.f1Total,
+          f2Total: syncResult.f2Total,
+          grandTotal: syncResult.grandTotal,
+          coreDevices: {
+            floor1: coreF1,
+            floor2: coreF2,
+            total: coreF1 + coreF2
+          },
+          storageScope: 'GOOGLE_SHEET_LIVE_SYNC',
+          storageMode: 'GOOGLE_SHEET_LIVE_SYNC',
+          schemaVersion: '2.0.0',
+          applicationVersion: '20260907-b2',
+          stats: staged.stats,
+          status: 'ACTIVE'
+        }
+      };
+
+      // Persist to IndexedDB
+      if (typeof root !== 'undefined' && root.StockStorageAdapter && typeof root.StockStorageAdapter.saveBatch === 'function') {
+        try {
+          await root.StockStorageAdapter.saveBatch(batchRecord);
+        } catch (e) {
+          console.warn('[GoogleSheetStockSync] Failed to save batch to IndexedDB:', e);
+        }
+      }
+
+      // Update in-memory state
+      if (typeof root !== 'undefined') {
+        root.STOCK_DATABASE = syncResult.items;
+        root.STOCK_DATA = syncResult.items;
+        root.STOCK_METADATA = batchRecord.meta;
+        root.STOCK_SNAPSHOT_STATUS = 'GOOGLE_SHEET_LIVE_SYNC';
+
+        if (root.DataService && typeof root.DataService.setStockData === 'function') {
+          root.DataService.setStockData(syncResult.items);
+        }
+
+        if (typeof root.syncMasterStockData === 'function') {
+          root.syncMasterStockData();
+        }
+
+        if (typeof root.updateStockImportBanner === 'function') {
+          root.updateStockImportBanner('GOOGLE_SHEET_LIVE_SYNC', batchRecord.meta);
+        }
+
+        const importTimeFormatted = syncResult.fetchedAt ? syncResult.fetchedAt.replace('T', ' ').substring(0, 19) : '';
+        const lastSyncLabel = document.getElementById('lastSyncTime');
+        if (lastSyncLabel && importTimeFormatted) {
+          lastSyncLabel.textContent = `Google Sheet (${importTimeFormatted})`;
+        }
+
+        this.setLastSyncTime(syncResult.fetchedAt);
+      }
+
+      console.info(`[GoogleSheetStockSync] Live sync complete: ${syncResult.totalRows} items, F1: ${syncResult.f1Total}, F2: ${syncResult.f2Total}, Grand Total: ${syncResult.grandTotal}`);
+      return {
+        success: true,
+        batchId,
+        totalProducts: syncResult.totalRows,
+        f1Total: syncResult.f1Total,
+        f2Total: syncResult.f2Total,
+        grandTotal: syncResult.grandTotal
+      };
     }
   }
 
