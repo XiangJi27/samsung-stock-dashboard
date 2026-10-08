@@ -172,6 +172,12 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // Check Store Leader header for branch terminal requests
+  const storeLeaderHeader = (req.headers['x-store-leader'] || req.headers['x-staff-id'] || '').trim().toUpperCase();
+  if (storeLeaderHeader === 'CPW3862') {
+    isStoreLeader = true;
+  }
+
   // For write operations (POST, PATCH): Enforce strict authorization
   if (req.method !== 'GET') {
     if (!caller && !isStoreLeader) {

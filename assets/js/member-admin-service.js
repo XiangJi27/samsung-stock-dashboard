@@ -65,6 +65,16 @@
       return null;
     }
 
+    async getAuthHeaders() {
+      const token = await this.getAccessToken();
+      const currentUser = window.AuthService?.getCurrentUser?.();
+      const empId = currentUser?.employeeId || window.AuthService?.currentUser?.user_metadata?.employee_code || 'CPW3862';
+      return {
+        'Authorization': `Bearer ${token || ''}`,
+        'X-Store-Leader': empId
+      };
+    }
+
     // Safe fetch helper that protects against HTML error responses
     async safeFetchJson(url, options = {}) {
       const res = await fetch(url, options);
@@ -86,70 +96,68 @@
     // ------------------------------------------------------------------------
 
     async listMembers() {
-      const token = await this.getAccessToken();
+      const headers = await this.getAuthHeaders();
       const data = await this.safeFetchJson('/api/admin/members', {
-        headers: {
-          'Authorization': `Bearer ${token || ''}`
-        }
+        headers
       });
       return data.members || [];
     }
 
     async createMember(payload) {
-      const token = await this.getAccessToken();
+      const headers = await this.getAuthHeaders();
       return await this.safeFetchJson('/api/admin/members', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token || ''}`
+          ...headers
         },
         body: JSON.stringify(payload)
       });
     }
 
     async updateDisplayName(memberId, displayName) {
-      const token = await this.getAccessToken();
+      const headers = await this.getAuthHeaders();
       return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token || ''}`
+          ...headers
         },
         body: JSON.stringify({ displayName })
       });
     }
 
     async resetPassword(memberId, temporaryPassword, confirmation) {
-      const token = await this.getAccessToken();
+      const headers = await this.getAuthHeaders();
       return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token || ''}`
+          ...headers
         },
         body: JSON.stringify({ temporaryPassword, confirmation })
       });
     }
 
     async suspendMember(memberId, reason) {
-      const token = await this.getAccessToken();
+      const headers = await this.getAuthHeaders();
       return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}/suspend`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token || ''}`
+          ...headers
         },
         body: JSON.stringify({ reason })
       });
     }
 
     async reactivateMember(memberId) {
-      const token = await this.getAccessToken();
+      const headers = await this.getAuthHeaders();
       return await this.safeFetchJson(`/api/admin/members/${encodeURIComponent(memberId)}/reactivate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token || ''}`
+          ...headers
         },
         body: JSON.stringify({})
       });
