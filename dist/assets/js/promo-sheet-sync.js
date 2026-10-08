@@ -24,6 +24,7 @@
   };
 
   const DEFAULT_TIMEOUT_MS = 12000;
+  const DEFAULT_URL_SMARTPHONE = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdXINDBDeqjdYB_Z0gDeN1tO9mV8XnRrKjop8hMT-rn6uXElUPAbLkxuDKphtub2MRVDdKV5AmUIcd/pub?gid=545934754&single=true&output=csv';
 
   class PromoGoogleSheetSync {
     constructor() {
@@ -32,30 +33,60 @@
     }
 
     /**
-     * Parse single CSV line adhering to RFC-4180 quotes.
+     * Parse full CSV text into 2D array of rows adhering to RFC-4180 quotes (handles multiline cells).
      */
-    static splitCsvLine(line) {
-      const result = [];
+    static parseCsvToRows(csvText) {
+      if (typeof root !== 'undefined' && root.Papa && typeof root.Papa.parse === 'function') {
+        const parsed = root.Papa.parse(csvText, { skipEmptyLines: true });
+        if (parsed && Array.isArray(parsed.data)) {
+          return parsed.data.map(row => row.map(cell => (cell !== undefined && cell !== null ? String(cell).trim() : '')));
+        }
+      }
+      const rows = [];
+      let row = [];
       let cur = '';
       let inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        const c = line[i];
+      for (let i = 0; i < csvText.length; i++) {
+        const c = csvText[i];
         if (c === '"') {
-          if (inQuotes && line[i + 1] === '"') {
+          if (inQuotes && csvText[i + 1] === '"') {
             cur += '"';
             i++;
           } else {
             inQuotes = !inQuotes;
           }
         } else if (c === ',' && !inQuotes) {
-          result.push(cur.trim());
+          row.push(cur.trim());
           cur = '';
+        } else if ((c === '\r' || c === '\n') && !inQuotes) {
+          if (c === '\r' && csvText[i + 1] === '\n') {
+            i++;
+          }
+          row.push(cur.trim());
+          cur = '';
+          if (row.length > 0 && row.some(cell => cell.length > 0)) {
+            rows.push(row);
+          }
+          row = [];
         } else {
           cur += c;
         }
       }
-      result.push(cur.trim());
-      return result;
+      if (cur.length > 0 || row.length > 0) {
+        row.push(cur.trim());
+        if (row.some(cell => cell.length > 0)) {
+          rows.push(row);
+        }
+      }
+      return rows;
+    }
+
+    /**
+     * Parse single CSV line adhering to RFC-4180 quotes.
+     */
+    static splitCsvLine(line) {
+      const rows = this.parseCsvToRows(line);
+      return rows[0] || [];
     }
 
     /**
@@ -64,14 +95,14 @@
     static getStoredConfig() {
       try {
         return {
-          smartphone: localStorage.getItem(STORAGE_KEYS.URL_SMARTPHONE) || '',
+          smartphone: localStorage.getItem(STORAGE_KEYS.URL_SMARTPHONE) || DEFAULT_URL_SMARTPHONE,
           tabletWearable: localStorage.getItem(STORAGE_KEYS.URL_TABLET_WEARABLE) || '',
           accessory: localStorage.getItem(STORAGE_KEYS.URL_ACCESSORY) || '',
           lastSynced: localStorage.getItem(STORAGE_KEYS.LAST_SYNC) || '',
           autoApply: localStorage.getItem(STORAGE_KEYS.AUTO_APPLY) === 'true'
         };
       } catch (e) {
-        return { smartphone: '', tabletWearable: '', accessory: '', lastSynced: '', autoApply: false };
+        return { smartphone: DEFAULT_URL_SMARTPHONE, tabletWearable: '', accessory: '', lastSynced: '', autoApply: false };
       }
     }
 
@@ -207,19 +238,19 @@
     static parsePromotionCsv(csvText, categoryKey) {
       if (!csvText || typeof csvText !== 'string') return [];
 
-      const lines = csvText.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
-      if (lines.length < 2) return [];
+      const rows = this.parseCsvToRows(csvText);
+      if (!rows || rows.length < 2) return [];
 
       // Find header row in first 15 rows
       let headerIdx = -1;
       let headers = [];
 
-      for (let i = 0; i < Math.min(lines.length, 15); i++) {
-        const cols = this.splitCsvLine(lines[i]);
-        const colsLower = cols.map(c => c.toLowerCase());
+      for (let i = 0; i < Math.min(rows.length, 15); i++) {
+        const cols = rows[i];
+        const colsLower = cols.map(c => (c || '').toLowerCase());
         const hasKeyIndicators = colsLower.some(c => 
           c.includes('model') || c.includes('รุ่น') || c.includes('rrp') || 
-          c.includes('ราคา') || c.includes('sku') || c.includes('p/n') || 
+          c.includes('ราคา') || c.includes('sku') || c.includes('p/n') || c.includes('ความจุ') ||
           c.includes('ส่วนลด') || c.includes('discount') || c.includes('description')
         );
         if (hasKeyIndicators && cols.length >= 3) {
@@ -230,58 +261,59 @@
       }
 
       if (headerIdx === -1) {
-        // Fallback: row 0 as header
         headerIdx = 0;
-        headers = this.splitCsvLine(lines[0]);
+        headers = rows[0] || [];
       }
 
       // Column Index Mappings
       const findCol = (synonyms) => {
         return headers.findIndex(h => {
-          const hl = h.toLowerCase().replace(/[\s\-_]/g, '');
+          const hl = (h || '').toLowerCase().replace(/[\s\-_]/g, '');
           return synonyms.some(syn => hl.includes(syn));
         });
       };
 
-      const pnIdx = findCol(['pn', 'exactpn', 'sku', 'code', 'รหัส']);
-      const catIdx = findCol(['cat', 'หมวด', 'category', 'กลุ่ม']);
-      const modelIdx = findCol(['model', 'รุ่น', 'ชื่อรุ่น', 'description', 'รายการสินค้า', 'item']);
-      const capIdx = findCol(['cap', 'ความจุ', 'memory', 'detail', 'storage', 'ram']);
-      const rrpIdx = findCol(['rrp', 'price99', 'ราคาปกติ', 'ราคาเต็ม', 'price', 'ราคา']);
-      const discIdx = findCol(['discount', 'ส่วนลด', 'ลด', 'stddisc', 'disc', 'ส่วนลดปกติ']);
-      const couponIdx = findCol(['coupon', 'คูปอง', 'code', 'โค้ด']);
-      const tradeUpIdx = findCol(['tradeup', 'trade-up', 'เทริน', 'trade', 'โบนัส']);
-      const netIdx = findCol(['net', 'สุทธิ', 'netprice', 'ราคาสุทธิ', 'ราคาลดแล้ว']);
+      const pnIdx = findCol(['exactpn', 'pn', 'sku', 'code', 'รหัส']);
+      const catIdx = findCol(['category', 'หมวด', 'cat', 'กลุ่ม']);
+      const modelIdx = findCol(['รุ่น', 'model', 'ชื่อรุ่น', 'description', 'รายการสินค้า', 'item', 'รายการ']);
+      const capIdx = findCol(['ความจุ', 'cap', 'memory', 'detail', 'storage', 'ram']);
+      const rrpIdx = findCol(['ราคาปกติ', 'ราคาเต็ม', 'rrp', 'price99', 'price', 'ราคา']);
+      const discIdx = findCol(['ส่วนลดปกติ', 'ส่วนลด', 'discount', 'ลด', 'stddisc', 'disc']);
+      const couponIdx = findCol(['คูปอง', 'coupon', 'code', 'โค้ด']);
+      const tradeUpIdx = findCol(['เทรดอัพ', 'tradeup', 'trade-up', 'เทริน', 'trade', 'โบนัส']);
+      const netIdx = findCol(['ราคาหลังลด', 'สุทธิ', 'net', 'netprice', 'ราคาสุทธิ']);
       const giftIdx = findCol(['gift', 'ของแถม', 'premium', 'แถม']);
-      const remarkIdx = findCol(['remark', 'condition', 'เงื่อนไข', 'หมายเหตุ', 'terms']);
+      const remarkIdx = findCol(['remarks', 'remark', 'โปรเพิ่มเติม', 'condition', 'เงื่อนไข', 'หมายเหตุ', 'terms']);
+
+      const getCol = (cols, idx) => (idx >= 0 && Array.isArray(cols) && cols[idx] !== undefined && cols[idx] !== null) ? String(cols[idx]).trim() : '';
 
       const variants = [];
       let currentCategory = categoryKey === 'SMARTPHONE' ? 'SmartPhone' : (categoryKey === 'TABLET_WEARABLE' ? 'Tablet' : 'Accessory');
+      let currentModelName = '';
 
-      for (let r = headerIdx + 1; r < lines.length; r++) {
-        const cols = this.splitCsvLine(lines[r]);
-        if (cols.length === 0 || cols.every(c => c === '')) continue;
+      for (let r = headerIdx + 1; r < rows.length; r++) {
+        const cols = rows[r];
+        if (!cols || cols.length === 0 || cols.every(c => !c || c.trim() === '')) continue;
 
-        const rawCat = catIdx >= 0 ? cols[catIdx] : '';
-        if (rawCat && rawCat.trim().length > 1) {
-          currentCategory = rawCat.trim();
+        const rawCat = getCol(cols, catIdx);
+        if (rawCat && rawCat.length > 1) {
+          currentCategory = rawCat;
         }
 
-        const rawModel = modelIdx >= 0 ? cols[modelIdx] : (cols[1] || cols[0] || '');
-        if (!rawModel || rawModel.trim() === '' || rawModel.toLowerCase() === 'total' || rawModel.toLowerCase() === 'รวม') {
-          continue;
+        const rawModel = getCol(cols, modelIdx);
+        if (rawModel && rawModel.length > 0 && rawModel.toLowerCase() !== 'total' && rawModel.toLowerCase() !== 'รวม') {
+          currentModelName = rawModel.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim();
         }
 
-        const modelName = rawModel.trim();
-        const pnVal = pnIdx >= 0 ? cols[pnIdx].trim() : '';
-        const capVal = capIdx >= 0 ? cols[capIdx].trim() : '';
-        const rawRrp = rrpIdx >= 0 ? cols[rrpIdx] : '';
-        const rawDisc = discIdx >= 0 ? cols[discIdx] : '';
-        const rawCoupon = couponIdx >= 0 ? cols[couponIdx] : '';
-        const rawTradeUp = tradeUpIdx >= 0 ? cols[tradeUpIdx] : '';
-        const rawNet = netIdx >= 0 ? cols[netIdx] : '';
-        const rawGift = giftIdx >= 0 ? cols[giftIdx] : '';
-        const rawRemark = remarkIdx >= 0 ? cols[remarkIdx] : '';
+        const capVal = getCol(cols, capIdx);
+        const rawRrp = getCol(cols, rrpIdx);
+        const rawDisc = getCol(cols, discIdx);
+        const rawCoupon = getCol(cols, couponIdx);
+        const rawTradeUp = getCol(cols, tradeUpIdx);
+        const rawNet = getCol(cols, netIdx);
+        const rawGift = getCol(cols, giftIdx);
+        const rawRemark = getCol(cols, remarkIdx);
+        const rawPn = getCol(cols, pnIdx);
 
         // Check for error values in formulas
         const hasFormulaError = [rawRrp, rawDisc, rawNet].some(v => String(v).startsWith('#') || String(v).includes('ERROR'));
@@ -291,9 +323,13 @@
         let tradeUpBonus = this.cleanNumber(rawTradeUp);
         let netPrice = this.cleanNumber(rawNet);
 
-        // If net is not provided, calculate net = rrp - discount
+        // If row doesn't have model and doesn't have prices or capacity, skip
+        if (!currentModelName && !rawModel) continue;
+        if (rrp <= 0 && discount <= 0 && !capVal) continue;
+
+        // If net is not provided, calculate net = rrp - discount - tradeUpBonus
         if (netPrice <= 0 && rrp > 0) {
-          netPrice = Math.max(0, rrp - discount);
+          netPrice = Math.max(0, rrp - discount - tradeUpBonus);
         }
         // If discount is not provided, calculate discount = rrp - net
         if (discount <= 0 && rrp > 0 && netPrice > 0 && netPrice < rrp) {
@@ -303,17 +339,20 @@
         // Coupon cleaning
         let coupon = rawCoupon.replace(/[\n\r]/g, '').replace('คูปอง', '').trim() || (discount > 0 ? '01' : '-');
 
+        const activeModel = currentModelName || rawModel || 'Samsung Device';
+        const fullModelTitle = activeModel + (capVal ? ` (${capVal})` : '');
+
         // Target Product Type
         let productCodeType = 'STANDARD_SM';
         if (categoryKey === 'TABLET_WEARABLE') {
-          productCodeType = modelName.toLowerCase().includes('watch') || modelName.toLowerCase().includes('fit') ? 'STANDARD_WATCH' : (modelName.toLowerCase().includes('buds') ? 'STANDARD_AUDIO' : 'STANDARD_TABLET');
+          productCodeType = activeModel.toLowerCase().includes('watch') || activeModel.toLowerCase().includes('fit') ? 'STANDARD_WATCH' : (activeModel.toLowerCase().includes('buds') ? 'STANDARD_AUDIO' : 'STANDARD_TABLET');
         } else if (categoryKey === 'ACCESSORY') {
           productCodeType = 'STANDARD_ACCESSORY';
-        } else if (pnVal.startsWith('F-')) {
+        } else if (rawPn && rawPn.startsWith('F-')) {
           productCodeType = 'PASS_F';
         }
 
-        const draftRowId = `GSHEET-${categoryKey}-${r}-${pnVal || modelName.replace(/\s+/g, '_')}`;
+        const draftRowId = `GSHEET-${categoryKey}-${r}-${(rawPn || activeModel).replace(/\s+/g, '_')}`;
 
         // Build Primary Promotion Variant
         const variant = {
@@ -323,9 +362,10 @@
           sourceCategory: categoryKey,
           sourceRow: r,
           category: currentCategory,
-          model: modelName,
+          productName: fullModelTitle,
+          model: activeModel,
           capacity: capVal,
-          pn: pnVal || null,
+          pn: rawPn || null,
           productCodeType: productCodeType,
           saleMode: 'NORMAL',
           rrp: rrp,
