@@ -2174,8 +2174,11 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           if (v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS") distinctModes.add("SF_PLUS");
           if (v.saleMode === "STUDENT") distinctModes.add("STUDENT");
           if (v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0) distinctModes.add("TRADE_UP");
-          if (v.saleMode === "BUNDLE" || v.bundleEligible) distinctModes.add("BUNDLE");
+          if (v.saleMode === "GIFT" || v.gift || v.saleMode === "BUNDLE" || v.bundleEligible) distinctModes.add("GIFT");
         });
+        if (item && (item.gift || item.category === "SmartPhone" || item.category === "Tablet")) {
+          distinctModes.add("GIFT");
+        }
         if (distinctModes.size === 0) distinctModes.add("NORMAL");
         const formCount = distinctModes.size;
         const badgeText = formCount > 1 ? `มีโปร ${formCount} รูปแบบ` : "มีโปรโมชั่น";
@@ -2925,16 +2928,20 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
           { key: "SF_PLUS", label: "Samsung Finance+" },
           { key: "STUDENT", label: "โปรนักศึกษา" },
           { key: "TRADE_UP", label: "Trade Up" },
-          { key: "BUNDLE", label: "ซื้อพ่วง" }
+          { key: "GIFT", label: "ของแถม" }
         ];
 
         function hasPromoForMode(modeKey) {
+          if (modeKey === "GIFT" || modeKey === "BUNDLE") {
+            const hasExplicitGift = Boolean((promo.variants && promo.variants.some(v => v.gift)) || item.gift);
+            const isDeviceOrHasPrice = (srp && srp > 0) || (item && (item.category === 'SmartPhone' || item.category === 'Tablet'));
+            return hasExplicitGift || isDeviceOrHasPrice;
+          }
           if (!promo.variants || promo.variants.length === 0) return false;
           if (modeKey === "NORMAL") return promo.variants.some(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
           if (modeKey === "SF_PLUS") return promo.variants.some(v => v.saleMode === "SF_PLUS" || v.paymentCondition === "SF_PLUS");
           if (modeKey === "STUDENT") return promo.variants.some(v => v.saleMode === "STUDENT");
           if (modeKey === "TRADE_UP") return promo.variants.some(v => v.saleMode === "TRADE_UP" || v.tradeUpDiscount > 0 || v.tradeUpBonusAmount > 0);
-          if (modeKey === "BUNDLE") return promo.variants.some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
           return false;
         }
 
@@ -3418,6 +3425,9 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
     }
 
     function renderDrawerModeDetails(variants, selectedMode, srp, currentItem) {
+      if (selectedMode === "BUNDLE") {
+        selectedMode = "GIFT";
+      }
       currentDrawerMode = selectedMode;
       const item = currentItem || currentDrawerItem || {};
       const modelName = String(item.model || "").trim();
@@ -3448,6 +3458,40 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
 
       // If RRP is missing or <= 0, fail closed
       if (!Number.isFinite(rrp) || rrp <= 0) {
+        if (selectedMode === "GIFT" || selectedMode === "BUNDLE") {
+          const explicitGift = (item && item.gift) || (variants || []).find(v => v.gift)?.gift;
+          if (explicitGift) {
+            return `
+              <div class="price-data-warning" style="margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                  <span style="font-size: 1.2rem;">⚠️</span>
+                  <strong style="font-size: 0.95rem; color: #fbbf24;">ราคาเครื่องยังรอการยืนยันจากสาขา</strong>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                  สินค้ารายการนี้ยังไม่ระบุราคาปกติ แต่มีของแถมพิเศษประจำรุ่นตามแคมเปญ
+                </div>
+              </div>
+              <div style="margin-bottom: 14px; padding: 12px 14px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.05)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                  <span style="font-size: 1.1rem;">🌟</span>
+                  <strong style="color: #fbbf24; font-size: 0.92rem;">ของแถมพิเศษเฉพาะรุ่นตามแคมเปญ Samsung</strong>
+                  <span class="badge-pn-pill" style="border-color: #f59e0b; color: #fbbf24; font-size: 0.7rem; padding: 1px 6px;">Exclusive</span>
+                </div>
+                <div style="font-size: 0.92rem; color: #fff; font-weight: 600; line-height: 1.5; padding-left: 24px;">
+                  ${explicitGift}
+                </div>
+              </div>
+              <div class="promotion-conditions" style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(148, 163, 184, 0.15);">
+                <h4 style="margin: 0 0 6px 0; font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">เงื่อนไขการรับของแถม</h4>
+                <ul style="margin: 0; padding-left: 18px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                  <li><strong>การเบิกจ่าย:</strong> เบิกจ่ายของแถมจากคลังสต็อกหน้าร้าน ชั้น 1 อยุธยา ซิตี้ พาร์ค</li>
+                  <li><strong>ของแถมตามเกณฑ์ราคา:</strong> จะคำนวณเพิ่มเติมเมื่อเปิดบิลและยืนยันราคาเครื่องสุทธิ</li>
+                </ul>
+              </div>
+              ${renderTechDetails("ของแถม")}
+            `;
+          }
+        }
         return renderPriceDataWarning("สินค้ารายการนี้ยังไม่มีราคาขายมาตรฐาน (RRP)");
       }
 
@@ -3952,81 +3996,186 @@ window.specializeMemoryForVariant = specializeMemoryForVariant;
 
       // =============================================================
       // =============================================================
-      // 5. ซื้อพ่วง (BUNDLE)
+      // 5. ของแถม (GIFT / PREMIUM)
       // =============================================================
-      if (selectedMode === "BUNDLE") {
-        const hasBundlePromo = (variants || []).some(v => v.saleMode === "BUNDLE" || v.bundleEligible);
-        if (!hasBundlePromo) {
-          return `
-            <section class="promotion-price-card" style="border-color: #334155;">
-              <header class="promotion-card-header">
-                <span class="price-tier-badge" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid #475569;">
-                  🎁 โปรโมชั่นซื้อพ่วง (Bundle)
-                </span>
-                <span class="badge-pn-pill" style="border-color: #475569; color: #94a3b8;">ไม่มีโปร</span>
-              </header>
-              <div style="padding: 24px 16px; text-align: center; color: var(--text-muted);">
-                <div style="font-size: 1.8rem; margin-bottom: 8px;">📦</div>
-                <div style="font-size: 0.95rem; font-weight: 600; color: #cbd5e1;">ไม่มีโปรโมชั่นซื้อพ่วงสำหรับสินค้านี้</div>
-                <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">สินค้ารายการนี้ไม่มีรายการส่งเสริมการขายแบบซื้อพ่วงในปัจจุบัน</div>
-              </div>
-              ${renderTechDetails("ซื้อพ่วง")}
-            </section>
-          `;
+      if (selectedMode === "GIFT" || selectedMode === "BUNDLE") {
+        const normalVariant = (variants || []).find(v => v.saleMode === "NORMAL" || v.saleMode === "STANDARD_PAYMENT" || v.standardDiscount > 0);
+        const stdDiscount = normalVariant ? Number(normalVariant.discountValue || normalVariant.discount || normalVariant.standardDiscount || 0) : 0;
+        const discountedPrice = (rrp && rrp > 0) ? Math.max(0, rrp - stdDiscount) : 0;
+        const explicitGift = (item && item.gift) || (variants || []).find(v => v.gift)?.gift;
+
+        let tierTitle = "";
+        let tierBadge = "";
+        let tierBadgeColor = "";
+        let tierBg = "";
+        let tierBorder = "";
+        let giftList = [];
+        let estTotalValue = 0;
+
+        if (discountedPrice >= 35000) {
+          tierTitle = "เกณฑ์ของแถมระดับ Flagship / Ultra (ราคาเครื่องลดแล้ว ฿35,000 ขึ้นไป)";
+          tierBadge = "🌟 Flagship Tier (฿35,000+)";
+          tierBadgeColor = "#f59e0b";
+          tierBg = "rgba(245, 158, 11, 0.08)";
+          tierBorder = "rgba(245, 158, 11, 0.35)";
+          estTotalValue = 5460;
+          giftList = [
+            { name: "กระเป๋าเดินทางล้อลากพรีเมียม 20 นิ้ว (Luggage 20\") หรือ Fashion Travel Backpack", value: 2590, icon: "🧳", note: "พรีเมียมลิขสิทธิ์แท้ ดีไซน์หรูหรา ล้อลาก 360 องศา" },
+            { name: "Samsung Adapter 45W Fast Charge แท้ (พร้อมสายชาร์จ 5A)", value: 1290, icon: "⚡", note: "หัวชาร์จไวของแท้ 45W ประกันศูนย์ Samsung" },
+            { name: "Stand Wireless Speaker PK05 ลำโพงบลูทูธไร้สายพรีเมียม", value: 1290, icon: "🔊", note: "เสียงสเตอริโอคุณภาพสูง พร้อมแท่นวางมือถือในตัว" },
+            { name: "Boxset Premium Care: ฟิล์มกระจกนิรภัย 9H + เคสกันกระแทกแท้ + ย้ายข้อมูลฟรี", value: 290, icon: "🛡️", note: "บริการติดฟิล์มและตั้งค่าพร้อมใช้งานทันที ณ จุดขาย" }
+          ];
+        } else if (discountedPrice >= 20000) {
+          tierTitle = "เกณฑ์ของแถมระดับ High-End (ราคาเครื่องลดแล้ว ฿20,000 – ฿34,999)";
+          tierBadge = "✨ High-End Tier (฿20,000 - ฿34,999)";
+          tierBadgeColor = "#38bdf8";
+          tierBg = "rgba(56, 189, 248, 0.08)";
+          tierBorder = "rgba(56, 189, 248, 0.35)";
+          estTotalValue = 3260;
+          giftList = [
+            { name: "กระเป๋าเป้ Fashion Backpack Phoenix หรือ D-Power M22 Speaker Bluetooth", value: 1590, icon: "🎒", note: "ของแถมพรีเมียมลิขสิทธิ์ เลือกได้อย่างใดอย่างหนึ่ง" },
+            { name: "Samsung Adapter 25W Fast Charge แท้ (Super Fast Charging)", value: 690, icon: "⚡", note: "หัวชาร์จแท้ประกันศูนย์ Samsung" },
+            { name: "กระบอกน้ำ Double Wall Stainless Steel Tumbler 600ml", value: 690, icon: "🥤", note: "สแตนเลสฟู้ดเกรด เก็บร้อน-เย็น 24 ชม." },
+            { name: "ฟิล์มกระจกกันรอยนิรภัย 9H + เคสใสกันกระแทกอย่างดี + บริการย้ายข้อมูลฟรี", value: 290, icon: "🛡️", note: "พร้อมบริการโอนย้ายข้อมูล Smart Switch ครบถ้วน" }
+          ];
+        } else if (discountedPrice >= 10000) {
+          tierTitle = "เกณฑ์ของแถมระดับ Mid-Range (ราคาเครื่องลดแล้ว ฿10,000 – ฿19,999)";
+          tierBadge = "🔷 Mid-Range Tier (฿10,000 - ฿19,999)";
+          tierBadgeColor = "#a855f7";
+          tierBg = "rgba(168, 85, 247, 0.08)";
+          tierBorder = "rgba(168, 85, 247, 0.35)";
+          estTotalValue = 2360;
+          giftList = [
+            { name: "กระเป๋าคาดอกสะพายข้าง Sling Bag Phoenix", value: 890, icon: "👜", note: "กระเป๋ากันละอองน้ำ สไตล์สปอร์ตพรีเมียม" },
+            { name: "Samsung Adapter 25W Fast Charge แท้", value: 690, icon: "⚡", note: "หัวชาร์จแท้ Super Fast Charging" },
+            { name: "Phone Stand First Class NO V168 Phoenix (ขาตั้งมือถืออลูมิเนียมพับได้)", value: 490, icon: "📱", note: "ปรับมุมได้ แข็งแรง พกพาสะดวก" },
+            { name: "Small Talk TC-04 Type-C หรือ Fast Power Bank สำรองพกพา", value: 290, icon: "🎧", note: "หูฟัง Type-C หรือแบตสำรองพร้อมสาย" }
+          ];
+        } else if (discountedPrice > 0) {
+          tierTitle = "เกณฑ์ของแถมระดับ Entry / บัดเจ็ท (ราคาเครื่องลดแล้วต่ำกว่า ฿10,000)";
+          tierBadge = "🔹 Entry Tier (ต่ำกว่า ฿10,000)";
+          tierBadgeColor = "#10b981";
+          tierBg = "rgba(16, 185, 129, 0.08)";
+          tierBorder = "rgba(16, 185, 129, 0.35)";
+          estTotalValue = 1330;
+          giftList = [
+            { name: "Samsung Premium Tote Bag (กระเป๋าผ้าแคนวาสพรีเมียม)", value: 390, icon: "🛍️", note: "ผ้าแคนวาสหนาพิเศษ จุของได้เยอะ" },
+            { name: "Fast Charge Type-C Data Cable 3A / หัวชาร์จ Adapter ชาร์จเร็ว", value: 350, icon: "⚡", note: "สายชาร์จทองแดงแท้ ชาร์จไว ถ่ายโอนข้อมูลเร็ว" },
+            { name: "ฟิล์มกระจกกันรอยหน้าจอคุณภาพสูง + เคสใสกันกระแทก", value: 300, icon: "📱", note: "ป้องกันรอยขีดข่วนและการตกกระแทก" },
+            { name: "บริการโอนย้ายข้อมูล Smart Switch + ตั้งค่าเริ่มต้นเครื่องใหม่ฟรี", value: 290, icon: "🛠️", note: "บริการดูแลหลังการขายหน้าร้านครบวงจร" }
+          ];
+        } else {
+          tierTitle = "ของแถมตามเงื่อนไขแคมเปญหน้าร้าน";
+          tierBadge = "🎁 ของแถมมาตรฐาน";
+          tierBadgeColor = "#94a3b8";
+          tierBg = "rgba(148, 163, 184, 0.08)";
+          tierBorder = "rgba(148, 163, 184, 0.35)";
+          estTotalValue = 0;
+          giftList = [];
         }
 
         return `
-          <section class="promotion-price-card" style="border-color: rgba(56, 189, 248, 0.35);">
+          <section class="promotion-price-card" style="border-color: ${tierBorder};">
             <header class="promotion-card-header">
-              <span class="price-tier-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3);">
-                🎁 โปรโมชั่นซื้อพ่วง (Bundle)
+              <span class="price-tier-badge" style="background: ${tierBg}; color: ${tierBadgeColor}; border: 1px solid ${tierBorder}; font-weight: 700;">
+                🎁 รายการของแถมประจำเครื่อง (Free Gifts & Premiums)
+              </span>
+              <span class="badge-pn-pill" style="border-color: ${tierBadgeColor}; color: ${tierBadgeColor}; font-weight: 600;">
+                ${tierBadge}
               </span>
             </header>
 
-            <div style="padding: 10px 12px; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 12px;">
-              <div style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase;">สินค้าหลัก</div>
-              <strong style="color: #fff; font-size: 0.95rem;">${modelName || item.model}</strong>
-              <div style="font-size: 0.78rem; font-family: monospace; color: #94a3b8; margin-top: 2px;">
-                P/N สินค้าหลัก: ${item.pn || '-'}
+            <!-- Price & Tier Reference Strip -->
+            <div style="padding: 12px 14px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+                <span style="font-size: 0.78rem; color: var(--text-muted);">ราคาปกติเครื่อง (RRP)</span>
+                <span style="font-size: 0.88rem; color: var(--text-muted); text-decoration: ${stdDiscount > 0 ? 'line-through' : 'none'};">
+                  ${rrp ? `฿${rrp.toLocaleString('th-TH')}` : '-'}
+                </span>
+              </div>
+              ${stdDiscount > 0 ? `
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+                  <span style="font-size: 0.78rem; color: var(--emerald);">ส่วนลดโปรโมชั่นเครื่อง</span>
+                  <strong style="font-size: 0.88rem; color: var(--emerald);">-฿${stdDiscount.toLocaleString('th-TH')}</strong>
+                </div>
+              ` : ''}
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 6px; border-top: 1px dashed rgba(255,255,255,0.1);">
+                <div>
+                  <span style="font-size: 0.82rem; color: #fff; font-weight: 700;">ราคาเครื่องที่ลดแล้ว (Net Price)</span>
+                  <div style="font-size: 0.72rem; color: var(--cyan);">* เกณฑ์อ้างอิงของแถมประจำเครื่อง</div>
+                </div>
+                <strong style="font-size: 1.2rem; color: var(--cyan); font-weight: 800;">
+                  ${discountedPrice > 0 ? `฿${discountedPrice.toLocaleString('th-TH')}` : (rrp ? `฿${rrp.toLocaleString('th-TH')}` : 'ราคาเปิดตัว')}
+                </strong>
               </div>
             </div>
 
-            <div style="padding: 10px 12px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; margin-bottom: 12px;">
-              <div style="font-size: 0.76rem; color: var(--cyan); text-transform: uppercase; font-weight: 600;">สินค้าพ่วงที่ร่วมรายการ</div>
-              <strong style="color: #fff; font-size: 0.95rem;">Galaxy Buds / Watch / อุปกรณ์เสริมที่ร่วมรายการ</strong>
+            ${explicitGift ? `
+              <!-- Explicit Campaign Gift Banner -->
+              <div style="margin-bottom: 14px; padding: 12px 14px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.05)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                  <span style="font-size: 1.1rem;">🌟</span>
+                  <strong style="color: #fbbf24; font-size: 0.92rem;">ของแถมพิเศษเฉพาะรุ่นตามแคมเปญ Samsung</strong>
+                  <span class="badge-pn-pill" style="border-color: #f59e0b; color: #fbbf24; font-size: 0.7rem; padding: 1px 6px;">Exclusive</span>
+                </div>
+                <div style="font-size: 0.92rem; color: #fff; font-weight: 600; line-height: 1.5; padding-left: 24px;">
+                  ${explicitGift}
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- Gift List by Price Tier -->
+            <div style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div style="font-size: 0.88rem; font-weight: 700; color: #e2e8f0;">
+                  🎁 รายการของแถมที่ได้รับตามระดับราคา:
+                </div>
+                ${estTotalValue > 0 ? `
+                  <span style="font-size: 0.76rem; background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 600;">
+                    มูลค่ารวมประมาณ ฿${estTotalValue.toLocaleString('th-TH')}
+                  </span>
+                ` : ''}
+              </div>
+
+              ${giftList.length > 0 ? `
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  ${giftList.map((g, idx) => `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 10px 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px;">
+                      <div style="display: flex; align-items: flex-start; gap: 10px;">
+                        <span style="font-size: 1.3rem; line-height: 1;">${g.icon}</span>
+                        <div>
+                          <div style="font-size: 0.88rem; font-weight: 600; color: #f1f5f9;">${idx + 1}. ${g.name}</div>
+                          <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">${g.note}</div>
+                        </div>
+                      </div>
+                      <div style="text-align: right; white-space: nowrap;">
+                        <span style="font-size: 0.82rem; font-weight: 600; color: ${tierBadgeColor};">฿${g.value.toLocaleString('th-TH')}</span>
+                        <div style="font-size: 0.72rem; color: #10b981; font-weight: 600;">ฟรี</div>
+                      </div>
+                    </div>
+                  `).join("")}
+                </div>
+              ` : `
+                <div style="padding: 20px 14px; text-align: center; color: var(--text-muted); background: rgba(255,255,255,0.02); border-radius: 8px;">
+                  <div style="font-size: 1.5rem; margin-bottom: 6px;">📦</div>
+                  <div style="font-size: 0.88rem; color: #cbd5e1;">สินค้ารายการนี้เป็นอุปกรณ์เสริมหรือชิ้นส่วนย่อย</div>
+                  <div style="font-size: 0.76rem; color: #64748b; margin-top: 4px;">ของแถมพรีเมียมตามเกณฑ์ราคาจะมอบให้สำหรับการซื้อสมาร์ทโฟนหรือแท็บเล็ตหลัก</div>
+                </div>
+              `}
             </div>
 
-            <div class="price-row">
-              <span class="price-row__label">ราคาปกติสินค้าพ่วง</span>
-              <strong class="price-row__value" style="text-decoration: line-through; color: var(--text-muted);">
-                ฿5,990
-              </strong>
-            </div>
-
-            <div class="price-row price-row--discount">
-              <span class="price-row__label" style="color: var(--cyan);">ส่วนลดเมื่อซื้อพร้อมเครื่อง</span>
-              <strong class="price-row__value" style="color: var(--cyan);">
-                -฿3,000
-              </strong>
-            </div>
-
-            <div class="price-row price-row--total">
-              <span class="price-row__label">ราคาพิเศษสินค้าพ่วง</span>
-              <strong class="price-row__value" style="color: #38bdf8;">
-                ฿2,990
-              </strong>
-            </div>
-
-            <div class="promotion-conditions">
-              <h4>เงื่อนไข</h4>
-              <ul>
-                <li>ต้องซื้อพร้อมสินค้าหลักในบิลเดียวกัน</li>
-                <li>เลือกได้เฉพาะ P/N สินค้าพ่วงที่ร่วมรายการ</li>
-                <li><strong>แยก P/N อย่างเคร่งครัด:</strong> P/N สินค้าพ่วง (เช่น หูฟัง, เคส) ไม่สามารถนำมาเป็น P/N ตัวเครื่องโทรศัพท์ได้</li>
+            <!-- Conditions & Claiming Details -->
+            <div class="promotion-conditions" style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(148, 163, 184, 0.15);">
+              <h4 style="margin: 0 0 6px 0; font-size: 0.82rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">เงื่อนไขการรับของแถม</h4>
+              <ul style="margin: 0; padding-left: 18px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                <li><strong>เกณฑ์ราคา:</strong> อ้างอิงเซ็ตของแถมจากราคาเครื่องสุทธิหลังหักส่วนลด (Net Price) ณ วันที่สั่งซื้อ</li>
+                <li><strong>การเบิกจ่าย:</strong> ของแถมจัดเซ็ตและเบิกจ่ายจากสต็อกหน้าร้าน ชั้น 1 (Floor 1 Stock) สาขาอยุธยา ซิตี้ พาร์ค</li>
+                <li><strong>สิทธิ์ตามแคมเปญ:</strong> ของแถมพิเศษประจำรุ่นสามารถรับควบคู่กับเซ็ตของแถมตามเกณฑ์ราคาได้ตามเงื่อนไขที่กำหนด</li>
+                <li><strong>การสงวนสิทธิ์:</strong> ของแถมมีจำนวนจำกัด ไม่สามารถเปลี่ยนเป็นเงินสดหรือส่วนลดเพิ่มเติมได้ หากของแถมรายการใดหมด ทางสาขาขอสงวนสิทธิ์ทดแทนด้วยของแถมมูลค่าเทียบเท่า</li>
               </ul>
             </div>
 
-            ${renderTechDetails("ซื้อพ่วง")}
+            ${renderTechDetails("ของแถม")}
           </section>
         `;
       }

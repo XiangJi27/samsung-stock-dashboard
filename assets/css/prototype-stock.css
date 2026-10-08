@@ -1014,10 +1014,14 @@
       color: #67e8f9;
     }
 
-    /* ซื้อพ่วง (BUNDLE) อยู่แถวสุดท้ายและเต็มความกว้าง */
+    /* ซื้อพ่วง / ของแถม (GIFT / BUNDLE) อยู่แถวสุดท้ายและเต็มความกว้าง */
+    .sale-mode-tab[data-mode="GIFT"],
+    .sale-mode-tab[data-mode="PREMIUM"],
     .sale-mode-tab[data-mode="BUNDLE"],
     .sale-mode-tab[data-mode="BUNDLE_PURCHASE"],
     .sale-mode-tab[data-mode="BUNDLE_OFFER"],
+    .promotion-path-tab[data-mode="GIFT"],
+    .promotion-path-tab[data-mode="PREMIUM"],
     .promotion-path-tab[data-mode="BUNDLE"],
     .promotion-path-tab[data-mode="BUNDLE_PURCHASE"],
     .promotion-path-tab[data-mode="BUNDLE_OFFER"] {
@@ -1030,9 +1034,13 @@
       .promotion-path-tabs {
         grid-template-columns: repeat(5, minmax(0, 1fr));
       }
+      .sale-mode-tab[data-mode="GIFT"],
+      .sale-mode-tab[data-mode="PREMIUM"],
       .sale-mode-tab[data-mode="BUNDLE"],
       .sale-mode-tab[data-mode="BUNDLE_PURCHASE"],
       .sale-mode-tab[data-mode="BUNDLE_OFFER"],
+      .promotion-path-tab[data-mode="GIFT"],
+      .promotion-path-tab[data-mode="PREMIUM"],
       .promotion-path-tab[data-mode="BUNDLE"],
       .promotion-path-tab[data-mode="BUNDLE_PURCHASE"],
       .promotion-path-tab[data-mode="BUNDLE_OFFER"] {
@@ -1057,9 +1065,13 @@
         max-width: none !important;
         white-space: normal !important;
       }
+      .sale-mode-tab[data-mode="GIFT"],
+      .sale-mode-tab[data-mode="PREMIUM"],
       .sale-mode-tab[data-mode="BUNDLE"],
       .sale-mode-tab[data-mode="BUNDLE_PURCHASE"],
       .sale-mode-tab[data-mode="BUNDLE_OFFER"],
+      .promotion-path-tab[data-mode="GIFT"],
+      .promotion-path-tab[data-mode="PREMIUM"],
       .promotion-path-tab[data-mode="BUNDLE"],
       .promotion-path-tab[data-mode="BUNDLE_PURCHASE"],
       .promotion-path-tab[data-mode="BUNDLE_OFFER"] {
