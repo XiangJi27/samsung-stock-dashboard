@@ -431,6 +431,26 @@ function renderSettingsView() {
       </div>
     </div>
   `;
+
+  // Asynchronously check central branch Gemini API status from server
+  fetch('/api/gemini-assistant')
+    .then(r => r.json())
+    .then(statusData => {
+      if (statusData && statusData.configured) {
+        const badge = document.getElementById('geminiConnectionBadge');
+        const input = document.getElementById('geminiApiKeyInput');
+        if (badge && !localStorage.getItem('samsung_gemini_api_key')) {
+          badge.textContent = '🔑 คีย์ส่วนกลางพร้อมใช้งานทั้งสาขา';
+          badge.style.color = '#34d399';
+          badge.style.background = 'rgba(52, 211, 153, 0.1)';
+          badge.style.borderColor = 'rgba(52, 211, 153, 0.3)';
+        }
+        if (input && !input.value) {
+          input.placeholder = '••••••••••••••••••••••••••••••••••••••••••••••••••••• (บันทึกไว้ในระบบกลางแล้ว)';
+        }
+      }
+    })
+    .catch(() => {});
 }
 
 // Global Spec Audit & Update handlers for Settings View
@@ -543,45 +563,99 @@ window.toggleGeminiKeyVisibility = function() {
   }
 };
 
-window.saveGeminiApiKey = function() {
+window.saveGeminiApiKey = async function() {
   const input = document.getElementById('geminiApiKeyInput');
   const resultEl = document.getElementById('geminiTestResult');
   const badge = document.getElementById('geminiConnectionBadge');
+  const btn = document.getElementById('btnSaveGeminiKey');
+  const modelSelect = document.getElementById('geminiModelSelect');
   if (!input) return;
 
   const key = input.value.trim();
+  const selectedModel = modelSelect?.value || 'auto';
+
   if (!key) {
     localStorage.removeItem('samsung_gemini_api_key');
     if (resultEl) {
       resultEl.style.display = 'block';
       resultEl.style.color = '#fbbf24';
-      resultEl.textContent = '⚠️ ลบคีย์ออกจากระบบแล้ว (จำเป็นต้องระบุคีย์หากต้องการใช้งาน AI)';
+      resultEl.textContent = '⏳ กำลังลบคีย์ออกจากระบบกลาง...';
     }
-    if (badge) {
-      badge.textContent = '⚪ ยังไม่ได้ตั้งค่า';
-      badge.style.color = '#94a3b8';
-      badge.style.background = 'rgba(148, 163, 184, 0.1)';
-      badge.style.borderColor = 'rgba(148, 163, 184, 0.3)';
+    try {
+      await fetch('/api/gemini-assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ delete_settings: true })
+      });
+      if (resultEl) {
+        resultEl.textContent = '⚠️ ลบคีย์ออกจากระบบแล้ว (จำเป็นต้องระบุคีย์หากต้องการใช้งาน AI)';
+      }
+      if (badge) {
+        badge.textContent = '⚪ ยังไม่ได้ตั้งค่า';
+        badge.style.color = '#94a3b8';
+        badge.style.background = 'rgba(148, 163, 184, 0.1)';
+        badge.style.borderColor = 'rgba(148, 163, 184, 0.3)';
+      }
+    } catch (e) {
+      if (resultEl) resultEl.textContent = 'ลบคีย์ในเบราว์เซอร์แล้ว';
     }
     return;
   }
 
+  // Save to local storage
   localStorage.setItem('samsung_gemini_api_key', key);
-  const modelSelect = document.getElementById('geminiModelSelect');
-  if (modelSelect && modelSelect.value) {
-    localStorage.setItem('samsung_gemini_model', modelSelect.value);
-  }
+  localStorage.setItem('samsung_gemini_model', selectedModel);
 
+  // Sync to branch database
+  const origText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳ กำลังบันทึก...</span>';
+  }
   if (resultEl) {
     resultEl.style.display = 'block';
-    resultEl.style.color = '#34d399';
-    resultEl.textContent = '💾 บันทึก Google Gemini API Key และค่าโมเดลเรียบร้อยแล้ว!';
+    resultEl.style.color = '#38bdf8';
+    resultEl.textContent = '⏳ กำลังตรวจสอบและบันทึกคีย์ลงฐานข้อมูลส่วนกลางของสาขา...';
   }
-  if (badge) {
-    badge.textContent = '🔑 ตั้งค่าคีย์แล้ว';
-    badge.style.color = '#a78bfa';
-    badge.style.background = 'rgba(167, 139, 250, 0.1)';
-    badge.style.borderColor = 'rgba(167, 139, 250, 0.3)';
+
+  try {
+    const res = await fetch('/api/gemini-assistant', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        save_settings: true,
+        apiKey: key,
+        model: selectedModel
+      })
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      if (resultEl) {
+        resultEl.style.color = '#34d399';
+        resultEl.innerHTML = `💾 <strong>บันทึกสำเร็จ!</strong> คีย์ส่วนกลางพร้อมใช้งานสำหรับทุกอุปกรณ์และพนักงานทุกคนในสาขา (${data.model || selectedModel})`;
+      }
+      if (badge) {
+        badge.textContent = '🔑 คีย์ส่วนกลางพร้อมใช้งาน';
+        badge.style.color = '#34d399';
+        badge.style.background = 'rgba(52, 211, 153, 0.1)';
+        badge.style.borderColor = 'rgba(52, 211, 153, 0.3)';
+      }
+    } else {
+      if (resultEl) {
+        resultEl.style.color = '#f43f5e';
+        resultEl.textContent = `❌ บันทึกล้มเหลว: ${data.message || data.error || 'ไม่สามารถบันทึกได้'}`;
+      }
+    }
+  } catch (err) {
+    if (resultEl) {
+      resultEl.style.color = '#fbbf24';
+      resultEl.textContent = `💾 บันทึกในเบราว์เซอร์นี้แล้ว (การซิงค์ส่วนกลางขัดข้อง: ${err.message})`;
+    }
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
   }
 };
 
@@ -627,6 +701,13 @@ window.testGeminiApiKey = async function() {
       resultEl.style.color = '#34d399';
       localStorage.setItem('samsung_gemini_api_key', key);
       localStorage.setItem('samsung_gemini_model', data.model);
+
+      // Auto sync key to central branch database on successful test
+      fetch('/api/gemini-assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ save_settings: true, apiKey: key, model: data.model })
+      }).catch(() => {});
 
       // Populate available models to select if not present
       if (modelSelect && Array.isArray(data.availableModels)) {

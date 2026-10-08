@@ -8,6 +8,68 @@ const SUPABASE_DEFAULT_URL = process.env.SUPABASE_URL || 'https://anhxzffcmrihym
 const fallbackSecret = Buffer.from('c2Jfc2VjcmV0X2RZaVdFMTFjdHEteGZPdE5yWENxbGdfM193YVNkaU4=', 'base64').toString('utf8');
 const SUPABASE_DEFAULT_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || fallbackSecret;
 
+const STORE_LEADER_USER_ID = 'bdff6d16-b8d1-4988-89b5-ece63988cba9';
+
+async function getBranchGeminiConfig() {
+  try {
+    const url = `${SUPABASE_DEFAULT_URL}/auth/v1/admin/users/${STORE_LEADER_USER_ID}`;
+    const res = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_DEFAULT_KEY,
+        'Authorization': `Bearer ${SUPABASE_DEFAULT_KEY}`
+      }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const meta = data.user_metadata || {};
+      const key = (meta.branch_gemini_key || '').trim();
+      return {
+        apiKey: key || null,
+        model: meta.branch_gemini_model || 'gemini-2.0-flash',
+        configured: Boolean(key)
+      };
+    }
+  } catch (err) {
+    console.error('[gemini-assistant] getBranchGeminiConfig error:', err.message);
+  }
+  return null;
+}
+
+async function setBranchGeminiConfig(newApiKey, newModel) {
+  try {
+    const getUrl = `${SUPABASE_DEFAULT_URL}/auth/v1/admin/users/${STORE_LEADER_USER_ID}`;
+    const getRes = await fetch(getUrl, {
+      headers: {
+        'apikey': SUPABASE_DEFAULT_KEY,
+        'Authorization': `Bearer ${SUPABASE_DEFAULT_KEY}`
+      }
+    });
+    if (!getRes.ok) throw new Error('Cannot load store leader user');
+    const getUser = await getRes.json();
+    const cleanKey = (newApiKey || '').trim();
+    const updatedMeta = {
+      ...(getUser.user_metadata || {}),
+      branch_gemini_key: cleanKey || null,
+      branch_gemini_model: (newModel || '').trim() || 'gemini-2.0-flash',
+      branch_gemini_configured: Boolean(cleanKey)
+    };
+
+    const putRes = await fetch(getUrl, {
+      method: 'PUT',
+      headers: {
+        'apikey': SUPABASE_DEFAULT_KEY,
+        'Authorization': `Bearer ${SUPABASE_DEFAULT_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user_metadata: updatedMeta })
+    });
+    return putRes.ok;
+  } catch (err) {
+    console.error('[gemini-assistant] setBranchGeminiConfig error:', err.message);
+    return false;
+  }
+}
+
 module.exports = async (req, res) => {
   // CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -23,23 +85,101 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
 
+  // GET: Return configuration status for any device or browser
+  if (req.method === 'GET') {
+    const central = await getBranchGeminiConfig();
+    const hasEnv = !!(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY.trim());
+    const isConfigured = !!(central?.apiKey || hasEnv);
+    return res.status(200).json({
+      success: true,
+      configured: isConfigured,
+      model: central?.model || 'gemini-2.0-flash',
+      source: central?.apiKey ? 'branch_database' : (hasEnv ? 'server_env' : 'none')
+    });
+  }
+
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST is supported' });
+    return res.status(405).json({ error: 'Only GET and POST are supported' });
   }
 
   try {
     const body = req.body || {};
-    const apiKey = (
+
+    // 1. Action: Save Central Branch Settings
+    if (body.save_settings || body.action === 'save_settings') {
+      const keyToSave = (body.apiKey || '').trim();
+      const modelToSave = (body.model || 'gemini-2.0-flash').trim();
+
+      if (!keyToSave) {
+        await setBranchGeminiConfig('', '');
+        return res.status(200).json({
+          success: true,
+          configured: false,
+          message: 'ลบ Google Gemini API Key ส่วนกลางของสาขาเรียบร้อยแล้ว'
+        });
+      }
+
+      // Verify key first with Google Generative Language API
+      const testDiscovery = await discoverAvailableModels(keyToSave);
+      if (!testDiscovery.success) {
+        return res.status(400).json({
+          error: 'INVALID_API_KEY',
+          message: `ไม่สามารถบันทึกได้เนื่องจาก API Key ไม่ถูกต้อง: ${testDiscovery.error}`
+        });
+      }
+
+      const saveOk = await setBranchGeminiConfig(keyToSave, modelToSave);
+      if (!saveOk) {
+        return res.status(500).json({
+          error: 'PERSISTENCE_FAILED',
+          message: 'ไม่สามารถบันทึกลงฐานข้อมูลส่วนกลางของสาขาได้ กรุณาลองใหม่อีกครั้ง'
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        configured: true,
+        model: modelToSave,
+        availableModels: testDiscovery.models,
+        message: '💾 บันทึก Google Gemini API Key ส่วนกลางสำหรับสาขาเรียบร้อยแล้ว! ทุกอุปกรณ์และพนักงานทุกคนสามารถใช้งานร่วมกันได้ทันที'
+      });
+    }
+
+    // 2. Action: Delete Central Branch Settings
+    if (body.delete_settings || body.action === 'delete_settings') {
+      await setBranchGeminiConfig('', '');
+      return res.status(200).json({
+        success: true,
+        configured: false,
+        message: 'ลบ Google Gemini API Key ส่วนกลางของสาขาเรียบร้อยแล้ว'
+      });
+    }
+
+    // 3. Resolve API Key for Assistant Query / Ping
+    let apiKey = (
       req.headers['x-gemini-key'] ||
       body.apiKey ||
       process.env.GEMINI_API_KEY ||
       ''
     ).trim();
 
+    // Central branch fallback if client didn't supply local key
+    let usingCentralConfig = false;
+    if (!apiKey) {
+      const central = await getBranchGeminiConfig();
+      if (central && central.apiKey) {
+        apiKey = central.apiKey.trim();
+        usingCentralConfig = true;
+        if ((!body.model || body.model === 'auto') && central.model) {
+          body.model = central.model;
+        }
+      }
+    }
+
     if (!apiKey) {
       return res.status(400).json({
         error: 'NO_API_KEY',
-        message: 'กรุณาระบุ Google Gemini API Key ในหน้าตั้งค่าระบบ (#/settings) ก่อนเริ่มใช้งาน'
+        message: 'สาขายังไม่ได้ตั้งค่า Google Gemini API Key กรุณาให้ผู้ดูแลระบบ (Admin) เข้าไปที่เมนู "ตั้งค่าระบบ" (#/settings) เพื่อระบุคีย์สำหรับสาขา'
       });
     }
 

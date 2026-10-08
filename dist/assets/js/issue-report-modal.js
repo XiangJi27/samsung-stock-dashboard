@@ -622,13 +622,8 @@
 
       if (!query && !imageToSend) return;
 
+      // Optional client key override from localStorage (if empty, server uses branch central key)
       const apiKey = localStorage.getItem('samsung_gemini_api_key') || '';
-      if (!apiKey) {
-        alert('⚠️ ยังไม่ได้ตั้งค่า Google Gemini API Key\nกรุณาไปที่เมนู "ตั้งค่าระบบ" (#/settings) เพื่อระบุคีย์ก่อนใช้งาน');
-        if (window.AppRouter) window.AppRouter.navigate('/settings');
-        this.hide();
-        return;
-      }
 
       // Append user bubble
       this.appendMessageBubble('user', query, imageToSend);
@@ -693,7 +688,12 @@
           this.saveActiveMessages();
           this.updateCounter();
         } else {
-          this.appendMessageBubble('model', `❌ เกิดข้อผิดพลาด: ${data.message || data.error || 'ไม่สามารถติดต่อ AI ได้'}`);
+          const errDetail = data.message || data.error || 'ไม่สามารถติดต่อ AI ได้';
+          if (data.error === 'NO_API_KEY') {
+            this.appendMessageBubble('model', `⚠️ **ยังไม่ได้ตั้งค่า Google Gemini API Key สำหรับสาขา**\n\nหากท่านเป็นผู้ดูแลระบบ (Admin / Store Leader) สามารถเข้าไปบันทึกคีย์ส่วนกลางได้ที่เมนู <a href="#/settings" onclick="window.PilotAssistantModal?.hide()" style="color:#38bdf8; text-decoration:underline; font-weight:700;">⚙️ ตั้งค่าระบบ (#/settings)</a> เพื่อให้ทุกอุปกรณ์และพนักงานทุกคนสามารถใช้งานร่วมกันได้ทันทีครับ`);
+          } else {
+            this.appendMessageBubble('model', `❌ เกิดข้อผิดพลาด: ${errDetail}`);
+          }
         }
       } catch (err) {
         typingBubble.remove();
