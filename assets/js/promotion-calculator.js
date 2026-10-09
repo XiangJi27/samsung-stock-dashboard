@@ -634,10 +634,17 @@
       [/\bA27\b/, 'A27_BASE'],
 
       // Separate A07 LTE / 4G from A07 5G strictly
+      [/\bA07S\b|\bA07\s*S\b/, 'A07S'],
       [/\bA07\s*(?:LTE|4G)\b/, 'A07_LTE'],
       [/\bA07\s*5G\b/, 'A07_5G'],
       [/\bA07\b/, 'A07_BASE'],
 
+      // A08 LTE / 5G / BASE
+      [/\bA08\s*(?:LTE|4G)\b/, 'A08_LTE'],
+      [/\bA08\s*5G\b/, 'A08_5G'],
+      [/\bA08\b/, 'A08_BASE'],
+
+      [/\bA17\s*(?:LTE|4G)\b/, 'A17_LTE'],
       [/\bA17\s*5G\b/, 'A17_5G'],
       [/\bA17\b/, 'A17_5G'],
       [/\bA26\s*5G\b/, 'A26_5G'],
@@ -670,9 +677,11 @@
    * Extracts canonical storage (32GB, 64GB, 128GB, 256GB, 512GB, 1TB, 2TB)
    */
   function normalizeCapacity(value) {
-    const text = String(value || '')
+    let text = String(value || '')
       .toUpperCase()
       .replace(/\s+/g, '');
+
+    if (text.includes('1218GB')) text = text.replace('1218GB', '128GB');
 
     const match = text.match(/(?:\d+\/)?(32GB|64GB|128GB|256GB|512GB|1TB|2TB)\b/);
     return match ? match[1] : null;

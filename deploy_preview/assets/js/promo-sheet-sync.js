@@ -420,6 +420,90 @@
     }
 
     /**
+     * Resolve and bind candidate P/Ns from active branch stock database.
+     */
+    static resolveStockCandidates(variants, categoryKey) {
+      if (!Array.isArray(variants) || variants.length === 0) return variants;
+
+      const stockData = (typeof window !== 'undefined' && (
+        (Array.isArray(window.STOCK_DATABASE) && window.STOCK_DATABASE.length > 0 ? window.STOCK_DATABASE : null) ||
+        (Array.isArray(window.STOCK_DATA) && window.STOCK_DATA.length > 0 ? window.STOCK_DATA : null) ||
+        (Array.isArray(window.LATEST_STOCK_SNAPSHOT) && window.LATEST_STOCK_SNAPSHOT.length > 0 ? window.LATEST_STOCK_SNAPSHOT : null) ||
+        []
+      )) || [];
+      if (!stockData || stockData.length === 0) return variants;
+
+      variants.forEach(variant => {
+        // If variant already has an exact P/N from sheet
+        if (variant.pn && variant.pn.length > 3) {
+          variant.confirmedPns = [variant.pn];
+          variant.candidatePn = [variant.pn];
+          variant.candidatePns = [variant.pn];
+          variant.candidateCount = 1;
+          variant.productMatchStatus = 'SOURCE_EXACT_PN';
+          return;
+        }
+
+        const candidateList = [];
+        stockData.forEach(s => {
+          if (categoryKey === 'SMARTPHONE') {
+            const isItemPhone = (
+              (s.category && s.category.toLowerCase() === 'smartphone') ||
+              (s.canonicalCategory && s.canonicalCategory.toLowerCase() === 'smartphone') ||
+              (s.category1 && s.category1.toUpperCase().includes('SMART PHONE'))
+            );
+            if (!isItemPhone) return;
+          } else if (categoryKey === 'TABLET_WEARABLE') {
+            const isItemTabOrWear = (
+              (s.category && ['tablet', 'watch', 'buds'].includes(s.category.toLowerCase())) ||
+              (s.category1 && (s.category1.toUpperCase().includes('TABLET') || s.category1.toUpperCase().includes('WATCH') || s.category1.toUpperCase().includes('BUDS')))
+            );
+            if (!isItemTabOrWear) return;
+          }
+
+          // Semantic matching via PromotionCalculator
+          if (typeof window !== 'undefined' && window.PromotionCalculator && typeof window.PromotionCalculator.validatePromotionTarget === 'function') {
+            const semCheck = window.PromotionCalculator.validatePromotionTarget(
+              { model: variant.model, capacity: variant.capacity },
+              { category: s.category || s.canonicalCategory || s.category1, description: s.model || s.description, capacity: s.capacity }
+            );
+            if (semCheck.allowed && !candidateList.includes(s.pn)) {
+              candidateList.push(s.pn);
+            }
+          } else {
+            // Basic matching fallback
+            const mClean = (variant.model || '').toLowerCase().replace(/[\s\-_/]/g, '');
+            const sClean = (s.model || s.description || '').toLowerCase().replace(/[\s\-_/]/g, '');
+            if (mClean && sClean.includes(mClean) && !candidateList.includes(s.pn)) {
+              candidateList.push(s.pn);
+            }
+          }
+        });
+
+        if (candidateList.length > 0) {
+          variant.candidatePn = candidateList;
+          variant.candidatePns = candidateList;
+          variant.candidateCount = candidateList.length;
+          variant.selectedPns = [...candidateList];
+          variant.confirmedPns = [...candidateList]; // Pre-confirm all matching branch stock colors
+          variant.productMatchStatus = candidateList.length === 1 ? 'UNIQUE_MODEL_CAPACITY_CANDIDATE' : 'MULTIPLE_PN_CANDIDATES';
+          variant.productCodeType = candidateList[0].startsWith('F-') ? 'PASS_F' : 'STANDARD_SM';
+          variant.reasonText = `จับคู่กับสต็อกสาขาสำเร็จ (${candidateList.length} สี/รหัส)`;
+        } else {
+          variant.candidatePn = [];
+          variant.candidatePns = [];
+          variant.candidateCount = 0;
+          variant.selectedPns = [];
+          variant.confirmedPns = [];
+          variant.productMatchStatus = 'NO_BRANCH_STOCK';
+          variant.reasonText = 'ไม่มีสต็อกตัวเครื่องจริงในสาขาขณะนี้ (สต็อก 0 ชิ้น)';
+        }
+      });
+
+      return variants;
+    }
+
+    /**
      * Sync single category by key: 'SMARTPHONE', 'TABLET_WEARABLE', or 'ACCESSORY'.
      */
     static async syncCategory(categoryKey) {
@@ -444,7 +528,8 @@
 
       const targetUrl = this.normalizeSheetUrl(rawUrl, defaultTab);
       const csvText = await this.fetchCsvWithFallback(targetUrl);
-      const variants = this.parsePromotionCsv(csvText, categoryKey);
+      const rawVariants = this.parsePromotionCsv(csvText, categoryKey);
+      const variants = this.resolveStockCandidates(rawVariants, categoryKey);
 
       return {
         categoryKey,

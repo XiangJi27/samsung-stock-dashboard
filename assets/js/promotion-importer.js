@@ -2375,14 +2375,17 @@
 
           // 4. PN Not Found / No Smartphone Candidates
           if ((item.validationFlags && item.validationFlags.includes('PN_NOT_FOUND')) || !item.candidatePn || item.candidatePn.length === 0) {
+            const isLiveGSheet = item.sourceType === 'GOOGLE_SHEET_LIVE_SYNC' || item.productMatchStatus === 'NO_BRANCH_STOCK';
             return `
-              <div class="pn-not-found-box" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 8px 10px;">
-                <div style="font-size: 0.78rem; color: #fca5a5; font-weight: 700; display: flex; align-items: center; gap: 5px;">
-                  <span>🚫 ไม่พบ P/N ตัวเครื่อง ${item.model} ${item.capacity ? '(' + item.capacity + ')' : ''}</span>
+              <div class="pn-not-found-box" style="background: ${isLiveGSheet ? 'rgba(245, 158, 11, 0.12)' : 'rgba(239, 68, 68, 0.12)'}; border: 1px solid ${isLiveGSheet ? 'rgba(245, 158, 11, 0.35)' : 'rgba(239, 68, 68, 0.35)'}; border-radius: 8px; padding: 8px 10px;">
+                <div style="font-size: 0.78rem; color: ${isLiveGSheet ? '#fde68a' : '#fca5a5'}; font-weight: 700; display: flex; align-items: center; gap: 5px;">
+                  <span>${isLiveGSheet ? '📦 ไม่มีสต็อกตัวเครื่องในสาขา' : '🚫 ไม่พบ P/N ตัวเครื่อง'} ${item.model} ${item.capacity ? '(' + item.capacity + ')' : ''}</span>
                 </div>
                 <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4;">
-                  สถานะ: <strong style="color: #fbbf24;">REVIEW_REQUIRED</strong> (ไม่มีสต็อกตัวเครื่องในระบบสาขา)<br/>
-                  <span style="color: #f87171; font-weight: 600;">⛔ ห้ามจับคู่กับอุปกรณ์เสริม • ปิดปุ่มยืนยันและระงับการบันทึก Draft แบบ Fail-Closed</span>
+                  สถานะ: <strong style="color: #fbbf24;">สต็อกสาขาปัจจุบัน 0 ชิ้น</strong> (ไม่มีตัวเครื่องบนชั้นวางในขณะนี้)<br/>
+                  ${isLiveGSheet 
+                    ? `<span style="color: #38bdf8;">✓ ผ่านเกณฑ์ราคาโปรโมชั่น • บันทึกเป็น Model-Level Promo ล่วงหน้า รอรับเครื่องเข้าสาขา</span>` 
+                    : `<span style="color: #f87171; font-weight: 600;">⛔ ห้ามจับคู่กับอุปกรณ์เสริม • ปิดปุ่มยืนยันและระงับการบันทึก Draft แบบ Fail-Closed</span>`}
                 </div>
                 ${item.saleMode === 'TRADE_UP' ? `
                   <div style="font-size: 0.66rem; color: #fbbf24; margin-top: 4px; border-top: 1px dashed rgba(251, 191, 36, 0.3); padding-top: 3px;">
