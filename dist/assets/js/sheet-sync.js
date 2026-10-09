@@ -55,6 +55,58 @@
     }
 
     /**
+     * Parse full CSV text into 2D array of rows adhering to RFC-4180 quotes (handles multiline cells).
+     */
+    static parseCsvToRows(csvText) {
+      const papaInstance = (typeof root !== 'undefined' && root.Papa) ? root.Papa : (typeof window !== 'undefined' && window.Papa ? window.Papa : (typeof Papa !== 'undefined' ? Papa : null));
+      if (papaInstance && typeof papaInstance.parse === 'function') {
+        const parsed = papaInstance.parse(csvText, { skipEmptyLines: true });
+        if (parsed && Array.isArray(parsed.data)) {
+          return parsed.data
+            .filter(row => Array.isArray(row))
+            .map(row => row.map(cell => (cell !== undefined && cell !== null ? String(cell).trim() : '')));
+        }
+      }
+      const rows = [];
+      let row = [];
+      let cur = '';
+      let inQuotes = false;
+      for (let i = 0; i < csvText.length; i++) {
+        const c = csvText[i];
+        if (c === '"') {
+          if (inQuotes && csvText[i + 1] === '"') {
+            cur += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (c === ',' && !inQuotes) {
+          row.push(cur.trim());
+          cur = '';
+        } else if ((c === '\r' || c === '\n') && !inQuotes) {
+          if (c === '\r' && csvText[i + 1] === '\n') {
+            i++;
+          }
+          row.push(cur.trim());
+          cur = '';
+          if (row.length > 0 && row.some(cell => cell.length > 0)) {
+            rows.push(row);
+          }
+          row = [];
+        } else {
+          cur += c;
+        }
+      }
+      if (cur.length > 0 || row.length > 0) {
+        row.push(cur.trim());
+        if (row.some(cell => cell.length > 0)) {
+          rows.push(row);
+        }
+      }
+      return rows;
+    }
+
+    /**
      * Unified Device Classifier matching Ayutthaya City Park Branch Inventory Rules:
      * - Smartphone: 237 (Cat1 'Smart Phones' or SM-S, SM-A, SM-F, F-A, F-N, F-S)
      * - Tablet: 43 (Cat1 'Computer and Tablet' + Tab BOM keyboard covers F-X)
@@ -135,25 +187,31 @@
         throw err;
       }
 
-      const lines = csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
+      const parsedRows = this.parseCsvToRows(csvText);
+      if (!parsedRows || parsedRows.length === 0) {
+        const err = new Error(`ไม่พบข้อมูลในชีต ${sheetLabel} (เนื้อหาว่างเปล่า)`);
+        err.code = 'SHEET_EMPTY_ERROR';
+        throw err;
+      }
+
       let headerRowIdx = -1;
       let headers = [];
 
-      for (let r = 0; r < Math.min(15, lines.length); r++) {
-        const rawCols = this.splitCsvLine(lines[r]).map(c => c.replace(/^"|"$/g, '').trim().toUpperCase());
+      for (let r = 0; r < Math.min(15, parsedRows.length); r++) {
+        const rawCols = parsedRows[r].map(c => c.replace(/^"|"$/g, '').trim().toUpperCase());
         if (rawCols.includes('P/N') && (rawCols.includes('ON HAND') || rawCols.includes('ONHAND') || rawCols.includes('F1') || rawCols.includes('CAT1') || rawCols.includes('STOCK1'))) {
           headerRowIdx = r;
-          headers = this.splitCsvLine(lines[r]).map(c => c.replace(/^"|"$/g, '').trim());
+          headers = parsedRows[r].map(c => c.replace(/^"|"$/g, '').trim());
           break;
         }
       }
 
       if (headerRowIdx === -1) {
         // Fallback: try checking line 0 if it has P/N or PN
-        const firstCols = this.splitCsvLine(lines[0]).map(c => c.replace(/^"|"$/g, '').trim().toUpperCase());
+        const firstCols = parsedRows[0].map(c => c.replace(/^"|"$/g, '').trim().toUpperCase());
         if (firstCols.some(c => c === 'P/N' || c === 'PN' || c === 'PART NUMBER')) {
           headerRowIdx = 0;
-          headers = this.splitCsvLine(lines[0]).map(c => c.replace(/^"|"$/g, '').trim());
+          headers = parsedRows[0].map(c => c.replace(/^"|"$/g, '').trim());
         } else {
           const err = new Error(`ไม่พบแถวหัวตาราง (Header) ที่มีคอลัมน์ P/N ในชีต ${sheetLabel}`);
           err.code = 'SHEET_STRUCTURE_MISMATCH';
@@ -191,8 +249,8 @@
       const duplicatePns = new Set();
       const warnings = [];
 
-      for (let r = headerRowIdx + 1; r < lines.length; r++) {
-        const cols = this.splitCsvLine(lines[r]).map(c => c.replace(/^"|"$/g, '').trim());
+      for (let r = headerRowIdx + 1; r < parsedRows.length; r++) {
+        const cols = parsedRows[r].map(c => c.replace(/^"|"$/g, '').trim());
         if (!cols || cols.length <= colMap['pn']) continue;
         const rawPn = cols[colMap['pn']];
         if (!rawPn) continue;

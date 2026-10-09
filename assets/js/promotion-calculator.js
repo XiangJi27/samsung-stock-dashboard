@@ -8,6 +8,18 @@
   'use strict';
 
   /**
+   * Helper to parse numbers safely even if formatted with thousand commas (e.g. "30,000")
+   */
+  function parseCleanNumber(val, defaultVal = null) {
+    if (val === null || val === undefined || val === '') return defaultVal;
+    if (typeof val === 'number') return Number.isFinite(val) ? val : defaultVal;
+    const cleaned = String(val).replace(/,/g, '').trim();
+    if (cleaned === '') return defaultVal;
+    const n = Number(cleaned);
+    return Number.isFinite(n) ? n : defaultVal;
+  }
+
+  /**
    * Safe Promotion Price Calculator & Validation Guard
    * Enforces: RRP > 0, Discount >= 0, Discount <= RRP, Net = RRP - Discount (Net >= 0).
    * Never allows negative price or RRP=0.
@@ -16,8 +28,8 @@
     const rawPrice = params ? (params.regularPrice !== undefined ? params.regularPrice : params.rrp) : null;
     const rawDiscount = params ? (params.discountAmount !== undefined ? params.discountAmount : params.discount) : null;
 
-    const price = (rawPrice === null || rawPrice === undefined || rawPrice === "") ? null : Number(rawPrice);
-    const discount = (rawDiscount === null || rawDiscount === undefined || rawDiscount === "") ? 0 : Number(rawDiscount);
+    const price = parseCleanNumber(rawPrice, null);
+    const discount = parseCleanNumber(rawDiscount, 0);
 
     if (!Number.isFinite(price) || price <= 0) {
       return {
@@ -53,9 +65,9 @@
    */
   function calculatePromotionPrices(params) {
     const rawPrice = params ? (params.regularPrice !== undefined ? params.regularPrice : params.rrp) : null;
-    const price = (rawPrice === null || rawPrice === undefined || rawPrice === "") ? null : Number(rawPrice);
-    const standardDiscount = Number(params?.standardDiscount || 0);
-    const tradeUpBonus = Number(params?.tradeUpDiscount || params?.tradeUpBonusAmount || 0);
+    const price = parseCleanNumber(rawPrice, null);
+    const standardDiscount = parseCleanNumber(params?.standardDiscount, 0);
+    const tradeUpBonus = parseCleanNumber(params?.tradeUpDiscount || params?.tradeUpBonusAmount, 0);
 
     if (!Number.isFinite(price) || price <= 0) {
       return {
@@ -92,7 +104,7 @@
    * Option B: NON_SF_PLUS (Coupon 02, 256GB: 6,000 THB, 128GB: 5,000 THB, no Trade Up)
    */
   function calculateS25FePromotion(params) {
-    const regularPrice = Number(params.regularPrice || 0);
+    const regularPrice = parseCleanNumber(params.regularPrice, 0);
     const capacity = String(params.capacity || '').trim().toUpperCase();
     const paymentCondition = params.paymentCondition; // "SF_PLUS" or "NON_SF_PLUS"
 
@@ -151,7 +163,7 @@
    * Option B: NON_SF_PLUS (Coupon 01, 2,000 THB discount, netPrice = regularPrice - 2,000)
    */
   function calculateA57Promotion(params) {
-    const regularPrice = Number(params.regularPrice || 0);
+    const regularPrice = parseCleanNumber(params.regularPrice, 0);
     const capacity = String(params.capacity || '').trim();
     const paymentCondition = params.paymentCondition; // "SF_PLUS" or "NON_SF_PLUS"
 
